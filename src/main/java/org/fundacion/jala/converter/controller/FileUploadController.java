@@ -6,9 +6,9 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  */
-package org.fundacion.jala.converter.Controller;
+package org.fundacion.jala.converter.controller;
 
-import org.fundacion.jala.converter.Service.FileUploadService;
+import org.fundacion.jala.converter.service.FileUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
