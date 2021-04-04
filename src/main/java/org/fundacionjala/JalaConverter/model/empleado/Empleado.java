@@ -1,10 +1,7 @@
 package org.fundacionjala.JalaConverter.model.empleado;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 
@@ -23,6 +20,9 @@ public class Empleado implements Serializable {
     @Column(name = "NOMBRE")
     private String nombre;
 
+    @OneToOne
+    @JoinColumn(name = "ID_DIRECCION")
+    private Direccion direccion;
 
     public Empleado() {
 
@@ -58,12 +58,21 @@ public class Empleado implements Serializable {
         this.nombre = nombre;
     }
 
+    public Direccion getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(Direccion direccion) {
+        this.direccion = direccion;
+    }
+
     @Override
     public String toString() {
         return "Empleado{" +
                 "codigo=" + codigo +
                 ", apellidos='" + apellidos + '\'' +
                 ", nombre='" + nombre + '\'' +
+                ", direccion=" + direccion + '\'' +
                 '}';
     }
 }

@@ -1,5 +1,6 @@
 package org.fundacionjala.JalaConverter.model;
 
+import org.fundacionjala.JalaConverter.model.empleado.Direccion;
 import org.fundacionjala.JalaConverter.model.empleado.Empleado;
 
 import javax.persistence.EntityManager;
@@ -14,25 +15,36 @@ public class Main {
     @SuppressWarnings("unchecked")
     public static void main(String [] args) {
 
+
+        EntityManager manager = emf.createEntityManager();
+        Empleado empleado1 = new Empleado(10, "Perez", "pepito");
+        Direccion direccion1 = new Direccion(101, "Calle falsa", "springfield", "springfield", "EEUU");
+        empleado1.setDireccion(direccion1);
+        manager.getTransaction().begin();
+        manager.persist(empleado1);
+        manager.persist(direccion1);
+        manager.getTransaction().commit();
+        manager.close();
+
         /**
          * otra forma de modificar
          */
-        EntityManager manager = emf.createEntityManager();
-        Empleado empleado1 = new Empleado(10, "Perez", "pepito");
-        manager.getTransaction().begin();
-        manager.persist(empleado1);
-        manager.getTransaction().commit();
-        manager.close();
-
-        imprimirTodo();
-
-        manager = emf.createEntityManager();
-        manager.getTransaction().begin();
-        empleado1 = manager.merge(empleado1);
-        empleado1.setNombre("nuevo");
-        manager.remove(empleado1);
-        manager.getTransaction().commit();
-        manager.close();
+//        EntityManager manager = emf.createEntityManager();
+//        Empleado empleado1 = new Empleado(10, "Perez", "pepito");
+//        manager.getTransaction().begin();
+//        manager.persist(empleado1);
+//        manager.getTransaction().commit();
+//        manager.close();
+//
+//        imprimirTodo();
+//
+//        manager = emf.createEntityManager();
+//        manager.getTransaction().begin();
+//        empleado1 = manager.merge(empleado1);
+//        empleado1.setNombre("nuevo");
+//        manager.remove(empleado1);
+//        manager.getTransaction().commit();
+//        manager.close();
 
 
 
