@@ -17,21 +17,21 @@ public class Main {
         /**
          * otra forma de modificar
          */
-//        EntityManager manager = emf.createEntityManager();
-//        Empleado empleado1 = new Empleado(10, "Perez", "pepito");
-//        manager.getTransaction().begin();
-//        manager.persist(empleado1);
-//        manager.getTransaction().commit();
-//        manager.close();
-//
-//        imprimirTodo();
-//
-//        manager = emf.createEntityManager();
-//        manager.getTransaction().begin();
-//        empleado1 = manager.merge(empleado1);
-//        empleado1.setNombre("nuevo");
-//        manager.getTransaction().commit();
-//        manager.close();
+        EntityManager manager = emf.createEntityManager();
+        Empleado empleado1 = new Empleado(10, "Perez", "pepito");
+        manager.getTransaction().begin();
+        manager.persist(empleado1);
+        manager.getTransaction().commit();
+        manager.close();
+
+        imprimirTodo();
+
+        manager = emf.createEntityManager();
+        manager.getTransaction().begin();
+        empleado1 = manager.merge(empleado1);
+        empleado1.setNombre("nuevo");
+        manager.getTransaction().commit();
+        manager.close();
 
 
 
