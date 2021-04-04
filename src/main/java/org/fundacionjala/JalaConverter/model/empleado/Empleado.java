@@ -63,7 +63,7 @@ public class Empleado implements Serializable {
         return "Empleado{" +
                 "codigo=" + codigo +
                 ", apellidos='" + apellidos + '\'' +
-                ", nombre='" + nombre +
+                ", nombre='" + nombre + '\'' +
                 '}';
     }
 }
