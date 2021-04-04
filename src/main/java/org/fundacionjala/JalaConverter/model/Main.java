@@ -30,6 +30,7 @@ public class Main {
         manager.getTransaction().begin();
         empleado1 = manager.merge(empleado1);
         empleado1.setNombre("nuevo");
+        manager.remove(empleado1);
         manager.getTransaction().commit();
         manager.close();
 
