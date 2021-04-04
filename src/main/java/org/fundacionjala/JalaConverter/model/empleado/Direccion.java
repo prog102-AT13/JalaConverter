@@ -1,9 +1,6 @@
 package org.fundacionjala.JalaConverter.model.empleado;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "DIRECCION")
@@ -20,6 +17,8 @@ public class Direccion {
     private String provincia;
     @Column(name = "PAIS")
     private String pais;
+    @OneToOne(mappedBy = "direccion", fetch = FetchType.LAZY)
+    private Empleado empleado;
 
     public Direccion() {
 
@@ -73,6 +72,14 @@ public class Direccion {
         this.pais = pais;
     }
 
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
+    }
+
     @Override
     public String toString() {
         return "Direccion{" +
@@ -81,6 +88,7 @@ public class Direccion {
                 ", localidad='" + localidad + '\'' +
                 ", provincia='" + provincia + '\'' +
                 ", pais='" + pais + '\'' +
+                ", codempleado='" + empleado.getCodigo() + '\'' +
                 '}';
     }
 }
