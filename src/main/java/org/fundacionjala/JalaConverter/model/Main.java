@@ -18,11 +18,9 @@ public class Main {
 
         EntityManager manager = emf.createEntityManager();
         Empleado empleado1 = new Empleado(10, "Perez", "pepito");
-        Direccion direccion1 = new Direccion(101, "Calle falsa", "springfield", "springfield", "EEUU");
-        empleado1.setDireccion(direccion1);
         manager.getTransaction().begin();
+        empleado1.setDireccion(new Direccion(101, "Calle falsa", "springfield", "springfield", "EEUU"));
         manager.persist(empleado1);
-        manager.persist(direccion1);
         manager.getTransaction().commit();
         manager.close();
 

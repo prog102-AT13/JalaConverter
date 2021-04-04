@@ -20,7 +20,7 @@ public class Empleado implements Serializable {
     @Column(name = "NOMBRE")
     private String nombre;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "ID_DIRECCION")
     private Direccion direccion;
 
