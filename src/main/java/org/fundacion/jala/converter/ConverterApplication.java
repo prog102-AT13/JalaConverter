@@ -7,12 +7,12 @@ import org.apache.logging.log4j.LogManager;
 
 @SpringBootApplication
 public class ConverterApplication {
-	private static final Logger logger = LogManager.getLogger();
+    private static final Logger logger = LogManager.getLogger();
 
-	public static void main(String[] args) {
-		logger.error("start");
-		SpringApplication.run(ConverterApplication.class, args);
-		logger.info("finish");
-	}
+    public static void main(String[] args) {
+        logger.info("start");
+        SpringApplication.run(ConverterApplication.class, args);
+        logger.info("finish");
+    }
 
 }
