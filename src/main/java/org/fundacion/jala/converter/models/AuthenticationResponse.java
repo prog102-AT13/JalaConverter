@@ -6,16 +6,16 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  */
-package org.fundacion.jala.converter;
+package org.fundacion.jala.converter.models;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+public class AuthenticationResponse {
+    private final String jwt;
 
-@SpringBootApplication
-public class ConverterApplication {
+    public AuthenticationResponse(String jwt) {
+        this.jwt = jwt;
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(ConverterApplication.class, args);
-	}
-
+    public String getJwt() {
+        return jwt;
+    }
 }

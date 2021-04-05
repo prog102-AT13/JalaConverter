@@ -1,7 +1,16 @@
+/**
+ * Copyright (c) 2021 Fundacion Jala.
+ *
+ * This software is the confidential and proprietary information of Fundacion Jala
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with Fundacion Jala
+ */
 package org.fundacion.jala.converter.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
@@ -14,7 +23,9 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .select().apis(RequestHandlerSelectors.basePackage("org.fundacion.jala.converter"))
+                .select()
+//                .paths(PathSelectors.ant("/api/*"))
+                .apis(RequestHandlerSelectors.basePackage("org.fundacion.jala.converter"))
                 .build()
                 .apiInfo(apiDetails());
     }
@@ -23,12 +34,12 @@ public class SwaggerConfig {
         return new ApiInfo(
                 "Jala Converter",
                 "Application that provides the following services:\n" +
-                        "Convert audio files.\n" +
-                        "Convert video files.\n" +
-                        "Extract metadata from files.\n" +
-                        "Extract text from images.\n" +
-                        "Compiles python projects.\n" +
-                        "Compiles java projects.",
+                        "\t• Convert audio files.\n" +
+                        "\t• Convert video files.\n" +
+                        "\t• Extract metadata from files.\n" +
+                        "\t• Extract text from images.\n" +
+                        "\t• Compile python projects.\n" +
+                        "\t• Compile java projects.",
                 "1.0.0",
                 "localhost:8080/termsofservice",
                 new springfox.documentation.service.Contact("Team AT13", "https://www.fundacionjala.org", "AT13@fundacion-jala.org"),
