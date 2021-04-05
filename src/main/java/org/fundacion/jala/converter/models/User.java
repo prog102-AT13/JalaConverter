@@ -87,6 +87,23 @@ public class User {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id &&
+                Objects.equals(name, user.name) &&
+                Objects.equals(pasword, user.pasword) &&
+                Objects.equals(token, user.token) &&
+                Objects.equals(projects, user.projects);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, pasword, token, projects);
+    }
+
+    @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
