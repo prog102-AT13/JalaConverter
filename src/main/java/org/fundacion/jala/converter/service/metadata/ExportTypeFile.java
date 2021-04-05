@@ -13,7 +13,7 @@ public class ExportTypeFile {
     private String nameFileExport;
     private String nameFileCompleteToExport;
 
-    ExportTypeFile(final String nameFileComplete, final String nameExport, final TypeFileExport typeExport) {
+    public ExportTypeFile(final String nameFileComplete, final String nameExport, final TypeFileExport typeExport) {
         this.nameFileComplete = nameFileComplete;
         buildFileName(nameExport);
         buildFileType(typeExport);
@@ -38,7 +38,7 @@ public class ExportTypeFile {
             setDefaultNameFileWithoutTypeOfFile();
             return;
         }
-        if (nameExport == "Default") {
+        if (nameExport == "Default" || nameExport == "") {
             setDefaultNameFileWithTypeOfFile();
             return;
         }

@@ -6,7 +6,10 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  */
-package org.fundacion.jala.converter.service.metadata;
+package org.fundacion.jala.converter.service;
+
+import org.fundacion.jala.converter.service.metadata.ExportTypeFile;
+import org.fundacion.jala.converter.service.metadata.TypeFileExport;
 
 import java.io.File;
 import java.io.IOException;
