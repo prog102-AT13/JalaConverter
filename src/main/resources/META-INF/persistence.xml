@@ -10,6 +10,8 @@
         <!--Aqui se representara las clases-->
         <class>org.fundacionjala.JalaConverter.model.empleado.Empleado</class>
         <class>org.fundacionjala.JalaConverter.model.empleado.Direccion</class>
+        <class>org.fundacionjala.JalaConverter.model.empleado.Autor</class>
+        <class>org.fundacionjala.JalaConverter.model.empleado.Libros</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />

@@ -8,12 +8,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
-public class Main {
+public class EmpleadoDB {
 
-    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("modelPersistence");;
+    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("modelPersistence");
 
     @SuppressWarnings("unchecked")
-    public static void main(String [] args) {
+    public static void main(String[] args) {
 
 
         EntityManager manager = emf.createEntityManager();
@@ -43,7 +43,6 @@ public class Main {
 //        manager.remove(empleado1);
 //        manager.getTransaction().commit();
 //        manager.close();
-
 
 
         /**
