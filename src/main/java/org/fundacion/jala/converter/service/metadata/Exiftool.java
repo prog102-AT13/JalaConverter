@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Exiftool {
-    final static String ADDRESS = "cd src\\main\\java\\org\\fundacionjala\\JalaConverter\\Metadata\\ExiftoolApp/ ";
+    final static String ADDRESS = "cd src\\main\\java\\org\\fundacion\\jala\\converter\\service\\metadata\\exiftoolApp/ ";
     private String exportFile = "";
     private File file;
     private String nameFileComplete;
