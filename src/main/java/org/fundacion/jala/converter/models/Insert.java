@@ -15,7 +15,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
-public class Insert {
+public final class Insert {
+
+    private Insert() { }
 
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jalaPersistence");
 
