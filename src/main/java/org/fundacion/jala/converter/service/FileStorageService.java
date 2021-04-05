@@ -25,12 +25,18 @@ public class FileStorageService {
     public static final String ARCHIVE = "archive";
     public static final String STORAGE = "storage";
     public static final String OUTPUT = "output";
+    /**
+     * Uploads a file to designed storage path
+     */
     public String uploadFile(MultipartFile file) throws IllegalStateException, IOException {
         String filename = file.getOriginalFilename();
         String storageDir = PATH + File.separator + ARCHIVE + File.separator + STORAGE + File.separator + filename;
         file.transferTo(new File(storageDir));
         return storageDir;
     }
+    /**
+     * Returns a resource from given filename
+     */
     public Resource downloadFile(String fileName) {
         Path path = Paths.get(getOutputPath(fileName));
         Resource resource;
@@ -41,11 +47,14 @@ public class FileStorageService {
         }
         if (resource.exists()) {
             return resource;
-        }
-        else {
+        } else {
             throw new RuntimeException("File doesn't exist");
         }
     }
+
+    /**
+     * Returns the designed output path
+     */
     public static String getOutputPath(String filename) {
         return PATH + File.separator + ARCHIVE + File.separator + OUTPUT + File.separator + filename;
     }

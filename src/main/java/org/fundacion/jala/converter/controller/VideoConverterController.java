@@ -10,19 +10,20 @@ package org.fundacion.jala.converter.controller;
 
 import org.fundacion.jala.converter.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("/api")
 public class VideoConverterController {
     @Autowired
     FileStorageService fileStorageService;
+
+    /**
+     * Endpoint for convertVideo
+     */
     @PostMapping("/convertVideo")
     public String uploadFile(@RequestParam("file") MultipartFile file) throws IllegalStateException, IOException {
         String filename = file.getOriginalFilename();
