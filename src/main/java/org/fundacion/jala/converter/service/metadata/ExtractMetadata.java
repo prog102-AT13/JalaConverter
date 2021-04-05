@@ -11,7 +11,7 @@ package org.fundacion.jala.converter.service.metadata;
 import java.io.File;
 import java.io.IOException;
 
-public class Exiftool {
+public class ExtractMetadata {
     final static String ADDRESS = "cd src\\main\\java\\org\\fundacion\\jala\\converter\\service\\metadata\\exiftoolApp/ ";
     private String exportFile = "";
     private File file;
@@ -19,14 +19,22 @@ public class Exiftool {
     private String moreInformation = " ";
     private ExportTypeFile exportTypeFile;
 
-    Exiftool(File file, String nameExport, TypeFileExport typeFileExport, boolean moreInfo) {
-        this.file = file;
+    ExtractMetadata(ObjectMetadata extractMetadata) {
+        this.file = extractMetadata.getFile();
         this.nameFileComplete = file.getName();
-        if (moreInfo) setMoreInformation();
-        exportTypeFile = new ExportTypeFile(nameFileComplete, nameExport, typeFileExport);
+        if (extractMetadata.getMoreInfo()) setMoreInformation();
+        exportTypeFile = new ExportTypeFile(nameFileComplete, extractMetadata.getNameExport(), extractMetadata.getTypeFileExport());
         exportFile = exportTypeFile.getNameFileCompleteToExport();
         executionExiftool();
-        System.out.println("Entro");
+    }
+
+    ExtractMetadata(File file){
+        this.file = file;
+        this.nameFileComplete = file.getName();
+        setMoreInformation();
+        exportTypeFile = new ExportTypeFile(nameFileComplete, "Default", TypeFileExport.XMP);
+        exportFile = exportTypeFile.getNameFileCompleteToExport();
+        executionExiftool();
     }
 
     /**
