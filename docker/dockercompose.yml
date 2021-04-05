@@ -1,0 +1,19 @@
+# version de docker compose que utilizaremos para compilar este archivo
+version: '3.1'
+# servicios=contenedores que crearemos con docker compose
+services:
+ # primer servicio=contenedor
+ db:
+   # nombre del contenedor
+   container_name: micontenedormysql
+   # imagen que usaremos
+   image: mysql
+   # reinicia el contenedor si algo sale mal
+   restart: always
+   # puertos
+   ports:
+     - 9090:3306
+   # variables de entorno
+   environment:
+     MYSQL_ROOT_PASSWORD: root
+     MYSQL_DATABASE: jalaconverter

@@ -1,3 +1,13 @@
+
+/**
+ * Copyright (c) 2021 Fundacion Jala.
+ *
+ * This software is the confidential and proprietary information of Fundacion Jala
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with Fundacion Jala
+ */
+
 package org.fundacion.jala.converter.models;
 
 import javax.persistence.*;
@@ -74,23 +84,6 @@ public class User {
 
     public void setProjects(List<Project> projects) {
         this.projects = projects;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id == user.id &&
-                Objects.equals(name, user.name) &&
-                Objects.equals(pasword, user.pasword) &&
-                Objects.equals(token, user.token) &&
-                Objects.equals(projects, user.projects);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, pasword, token, projects);
     }
 
     @Override
