@@ -5,17 +5,17 @@
              http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
              version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
 
-    <persistence-unit name="modelPersistence">
+    <persistence-unit name="jalaPersistence">
 
         <!--Aqui se representara las clases-->
         <class>org.fundacionjala.JalaConverter.model.empleado.Empleado</class>
         <class>org.fundacionjala.JalaConverter.model.empleado.Direccion</class>
-        <class>org.fundacionjala.JalaConverter.model.empleado.Autor</class>
-        <class>org.fundacionjala.JalaConverter.model.empleado.Libros</class>
+        <class>org.fundacion.jala.converter.models.User</class>
+        <class>org.fundacion.jala.converter.models.Project</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:9090/jpadb" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:9090/jalaconverter" />
             <property name="javax.persistence.jdbc.user" value="root" />
             <property name="javax.persistence.jdbc.password" value="root" />
 
