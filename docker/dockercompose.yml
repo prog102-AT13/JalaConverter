@@ -7,22 +7,22 @@
 #license agreement you entered into with Fundacion Jala
 ##
 
-# version de docker compose que utilizaremos para compilar este archivo
+# version docker for compile
 version: '3.1'
-# servicios=contenedores que crearemos con docker compose
+# services = containers that we will create with docker compose
 services:
- # primer servicio=contenedor
+ # first service for our container
  db:
-   # nombre del contenedor
+   # name of container
    container_name: micontenedormysql
-   # imagen que usaremos
+   # dockee image that we use
    image: mysql
-   # reinicia el contenedor si algo sale mal
+   # restar the container
    restart: always
-   # puertos
+   # ports
    ports:
      - 9090:3306
-   # variables de entorno
+   # environment
    environment:
      MYSQL_ROOT_PASSWORD: root
      MYSQL_DATABASE: jalaconverter
