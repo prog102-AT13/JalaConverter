@@ -10,8 +10,7 @@
 
 package org.fundacion.jala.converter.models;
 
-import static org.fundacion.jala.converter.models.Insert.imprimirDatos;
-import static org.fundacion.jala.converter.models.Insert.insertDatos;
+import static org.fundacion.jala.converter.models.Insert.insertData;
 
 public final class Create {
 
@@ -19,9 +18,8 @@ public final class Create {
 
     public static void main(final String[] args) {
 
-        insertDatos(1, "Pablo Perez", "pasword1", "token1", 0, "Project1", "/folder1/folder2/", "movie");
-        insertDatos(2, "Elena Gomez", "pasword2", "token2", 1, "Project1", "/folder1/folder2/", "movie");
-        imprimirDatos();
+        insertData(1, "Pablo Perez", "pasword1", "token1", 0, "Project1", "/folder1/folder2/", "movie");
+        insertData(2, "Elena Gomez", "pasword2", "token2", 1, "Project1", "/folder1/folder2/", "movie");
 
     }
 }

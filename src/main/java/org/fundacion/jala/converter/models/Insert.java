@@ -13,7 +13,6 @@ package org.fundacion.jala.converter.models;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.util.List;
 
 public final class Insert {
 
@@ -21,7 +20,18 @@ public final class Insert {
 
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jalaPersistence");
 
-    public static void insertDatos(
+    /**
+     * this method is for to insert dates for database
+     * @param userId
+     * @param userName
+     * @param pasword
+     * @param token
+     * @param projectId
+     * @param projectName
+     * @param pathProject
+     * @param type
+     */
+    public static void insertData(
             final int userId,
             final String userName,
             final String pasword,
@@ -33,14 +43,12 @@ public final class Insert {
     ) {
         EntityManager manager = emf.createEntityManager();
         manager.getTransaction().begin();
-
         User user = new User();
         user.setId(userId);
         user.setName(userName);
         user.setPasword(pasword);
         user.setToken(token);
         manager.persist(user);
-
         Project project = new Project();
         project.setId(projectId);
         project.setTitle(projectName);
@@ -48,26 +56,7 @@ public final class Insert {
         project.setType(type);
         project.setUser(user);
         manager.persist(project);
-
         manager.getTransaction().commit();
-        manager.close();
-    }
-
-    public static void imprimirDatos() {
-        EntityManager manager = emf.createEntityManager();
-
-        User user = manager.find(User.class, 1);
-
-        List<Project> projects = user.getProjects();
-
-        System.out.println("--------------------------------------");
-        for (Project project: projects) {
-            System.out.println("* " + project.toString());
-        }
-
-        System.out.println("--------------------------------------");
-        System.out.println(user.toString());
-
         manager.close();
     }
 }
