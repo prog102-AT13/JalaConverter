@@ -52,7 +52,7 @@ public class Project {
     }
 
     /**
-     * Obtains Id of the project
+     * Obtain Id of the project
      * @return id of the project
      */
     public int getId() {
@@ -60,7 +60,7 @@ public class Project {
     }
 
     /**
-     * Sets new id of the project
+     * Set new id of the project
      * @param newId
      */
     public void setId(final int newId) {
@@ -68,7 +68,7 @@ public class Project {
     }
 
     /**
-     * Obtains title of the projetc
+     * Obtain title of the projetc
      * @return title of the project
      */
     public String getTitle() {
@@ -76,7 +76,7 @@ public class Project {
     }
 
     /**
-     * Sets new title of the project
+     * Set new title of the project
      * @param newTitle
      */
     public void setTitle(final String newTitle) {
@@ -84,7 +84,7 @@ public class Project {
     }
 
     /**
-     * Obtains the user that realized the project
+     * Obtain the user that realized the project
      * @return user
      */
     public User getUser() {
@@ -92,7 +92,7 @@ public class Project {
     }
 
     /**
-     * Sets User of the project
+     * Set User of the project
      * @param newUser
      */
     public void setUser(final User newUser) {
@@ -100,7 +100,7 @@ public class Project {
     }
 
     /**
-     * Gets path of the project where the project is saved
+     * Get path of the project where the project is saved
      * @return path
      */
     public String getPath() {
@@ -108,7 +108,7 @@ public class Project {
     }
 
     /**
-     * Sets new path of the project
+     * Set new path of the project
      * @param newPath
      */
     public void setPath(final String newPath) {
@@ -116,7 +116,7 @@ public class Project {
     }
 
     /**
-     * Obtains type of the project
+     * Obtain type of the project
      * @return
      */
     public String getType() {
@@ -124,7 +124,7 @@ public class Project {
     }
 
     /**
-     * Sets new path of the project
+     * Set new path of the project
      * @param newType
      */
     public void setType(final String newType) {
@@ -132,7 +132,7 @@ public class Project {
     }
 
     /**
-     * Obtains all dates of the project
+     * Obtain all date of the project
      * @return String of the dates
      */
     @Override

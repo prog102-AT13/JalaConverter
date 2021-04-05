@@ -31,8 +31,8 @@ public class User {
     @Column(name = "NAME")
     private String name;
 
-    @Column(name = "PASWORD")
-    private String pasword;
+    @Column(name = "PASSWORD")
+    private String password;
 
     @Column(name = "TOKEN")
     private String token;
@@ -44,15 +44,15 @@ public class User {
 
     }
 
-    public User(final int newId, final String newName, final String newPasword, final String newToken) {
+    public User(final int newId, final String newName, final String newPassword, final String newToken) {
         this.id = newId;
         this.name = newName;
-        this.pasword = newPasword;
+        this.password = newPassword;
         this.token = newToken;
     }
 
     /**
-     * Obtains Ids of the User
+     * Obtain Ids of the User
      * @return id of the user
      */
     public int getId() {
@@ -60,7 +60,7 @@ public class User {
     }
 
     /**
-     * Sets new Id of the User
+     * Set new Id of the User
      * @param newId
      */
     public void setId(final int newId) {
@@ -68,7 +68,7 @@ public class User {
     }
 
     /**
-     * Obtains Name of the User
+     * Obtain Name of the User
      * @return name of the user
      */
     public String getName() {
@@ -76,7 +76,7 @@ public class User {
     }
 
     /**
-     * Sets new name of the user
+     * Set new name of the user
      * @param newName
      */
     public void setName(final String newName) {
@@ -84,23 +84,23 @@ public class User {
     }
 
     /**
-     * Obtains pasword of the User
+     * Obtain pasword of the User
      * @return pasword of the user
      */
-    public String getPasword() {
-        return pasword;
+    public String getPassword() {
+        return password;
     }
 
     /**
-     * Sets new pasword of the User
+     * Set new pasword of the User
      * @param newPasword
      */
-    public void setPasword(final String newPasword) {
-        this.pasword = newPasword;
+    public void setPassword(final String newPasword) {
+        this.password = newPasword;
     }
 
     /**
-     * Obtains token of the user
+     * Obtain token of the user
      * @return code token of the user
      */
     public String getToken() {
@@ -108,7 +108,7 @@ public class User {
     }
 
     /**
-     * Sets new token of the User
+     * Set new token of the User
      * @param newToken
      */
     public void setToken(final String newToken) {
@@ -116,7 +116,7 @@ public class User {
     }
 
     /**
-     * Obtains all the projects that realized the user
+     * Obtain all the projects that realized the user
      * @return all the projects of the user
      */
     public List<Project> getProjects() {
@@ -132,14 +132,14 @@ public class User {
     }
 
     /**
-     * Obtains all dates of the user
+     * Obtain all date of the user
      * @return String of the dates
      */
     @Override
     public String toString() {
         return "User{" + "id=" + id
                 + ", name='" + name + '\''
-                + ", pasword='" + pasword + '\''
+                + ", pasword='" + password + '\''
                 + ", token='" + token + '\''
                 + ", projects=" + projects
                 + '}';

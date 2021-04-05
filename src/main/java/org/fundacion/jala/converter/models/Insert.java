@@ -46,7 +46,7 @@ public final class Insert {
         User user = new User();
         user.setId(userId);
         user.setName(userName);
-        user.setPasword(pasword);
+        user.setPassword(pasword);
         user.setToken(token);
         manager.persist(user);
         Project project = new Project();
