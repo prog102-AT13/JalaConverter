@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  */
-package org.fundacion.jala.converter.pythoncompiler;
+package org.fundacion.jala.converter.service.pythoncompiler;
 
 public enum Python {
     V2("python"), V3("python3");
@@ -17,6 +17,9 @@ public enum Python {
         this.version = version;
     }
 
+    /**
+     * Returns the execution command according to the version
+     */
     public String getVersion() {
         return version;
     }

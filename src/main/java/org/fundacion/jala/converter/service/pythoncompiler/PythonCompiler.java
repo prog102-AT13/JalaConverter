@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  */
-package org.fundacion.jala.converter.pythoncompiler;
+package org.fundacion.jala.converter.service.pythoncompiler;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,14 +14,17 @@ import java.io.InputStreamReader;
 
 public class PythonCompiler {
 
+    /**
+     * Returns the result of execution in console
+     */
     public String compiler(Python compilerVersion, String filePath) {
         try {
             String command = compilerVersion.getVersion() + " " + filePath;
             Process process = Runtime.getRuntime().exec(command);
-            BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            BufferedReader bufferedReaderr = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String resultOfExecution = null;
             String result = "";
-            while((resultOfExecution = br.readLine()) != null){
+            while((resultOfExecution = bufferedReaderr.readLine()) != null) {
                 result += resultOfExecution + "\n";
             }
             return result;
