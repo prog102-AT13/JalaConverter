@@ -10,10 +10,15 @@
 
 package org.fundacion.jala.converter.models;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "USERS")
@@ -39,78 +44,104 @@ public class User {
 
     }
 
-    public User(int id, String name, String pasword, String token) {
-        this.id = id;
-        this.name = name;
-        this.pasword = pasword;
-        this.token = token;
+    public User(final int newId, final String newName, final String newPasword, final String newToken) {
+        this.id = newId;
+        this.name = newName;
+        this.pasword = newPasword;
+        this.token = newToken;
     }
 
+    /**
+     * obtains Ids of the User
+     * @return id of the user
+     */
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    /**
+     * sets new Id of the User
+     * @param newId
+     */
+    public void setId(final int newId) {
+        this.id = newId;
     }
 
+    /**
+     * Obtains Name of the User
+     * @return name of the user
+     */
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    /**
+     * sets new name of the user
+     * @param newName
+     */
+    public void setName(final String newName) {
+        this.name = newName;
     }
 
+    /**
+     * Obtains pasword of the User
+     * @return pasword of the user
+     */
     public String getPasword() {
         return pasword;
     }
 
-    public void setPasword(String pasword) {
-        this.pasword = pasword;
+    /**
+     * sets new pasword of the User
+     * @param newPasword
+     */
+    public void setPasword(final String newPasword) {
+        this.pasword = newPasword;
     }
 
+    /**
+     * Obtains token of the user
+     * @return code token of the user
+     */
     public String getToken() {
         return token;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    /**
+     * sets new token of the User
+     * @param newToken
+     */
+    public void setToken(final String newToken) {
+        this.token = newToken;
     }
 
+    /**
+     * Obtains all the projects that realized the user
+     * @return all the projects of the user
+     */
     public List<Project> getProjects() {
         return projects;
     }
 
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
+    /**
+     * Set projects of the user
+     * @param newProjects
+     */
+    public void setProjects(final List<Project> newProjects) {
+        this.projects = newProjects;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id == user.id &&
-                Objects.equals(name, user.name) &&
-                Objects.equals(pasword, user.pasword) &&
-                Objects.equals(token, user.token) &&
-                Objects.equals(projects, user.projects);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, pasword, token, projects);
-    }
-
+    /**
+     * Obtains all dates of the user
+     * @return String of the dates
+     */
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", pasword='" + pasword + '\'' +
-                ", token='" + token + '\'' +
-                ", projects=" + projects +
-                '}';
+        return "User{" + "id=" + id
+                + ", name='" + name + '\''
+                + ", pasword='" + pasword + '\''
+                + ", token='" + token + '\''
+                + ", projects=" + projects
+                + '}';
     }
 }

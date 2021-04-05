@@ -10,16 +10,17 @@
 
 package org.fundacion.jala.converter.models;
 
-import static org.fundacion.jala.converter.models.InsertDates.imprimirDatos;
-import static org.fundacion.jala.converter.models.InsertDates.insertDatos;
+import static org.fundacion.jala.converter.models.Insert.imprimirDatos;
+import static org.fundacion.jala.converter.models.Insert.insertDatos;
 
-public class Create {
+public final class Create {
 
-    public static void main(String[] args) {
+    private Create() { }
 
-        insertDatos(1, "Pablo Perez", "pasword1", "token1", 1, "Project1", "/folder1/folder2/", "movie");
-        insertDatos(2, "Elena Gomez", "pasword2", "token2", 3, "Project1", "/folder1/folder2/", "movie");
-        insertDatos(3, "Miguel Lopez", "pasword3", "token3", 2, "project2", "/folder/folder2/", "movie");
+    public static void main(final String[] args) {
+
+        insertDatos(1, "Pablo Perez", "pasword1", "token1", 0, "Project1", "/folder1/folder2/", "movie");
+        insertDatos(2, "Elena Gomez", "pasword2", "token2", 1, "Project1", "/folder1/folder2/", "movie");
         imprimirDatos();
 
     }

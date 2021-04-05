@@ -10,8 +10,13 @@
 
 package org.fundacion.jala.converter.models;
 
-import javax.persistence.*;
-import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Table(name = "PROJECT")
@@ -21,8 +26,8 @@ public class Project {
     @Column(name = "PROJECT_ID")
     private int id;
 
-    @Column(name = "TITULO")
-    private String titulo;
+    @Column(name = "TITLE")
+    private String title;
 
     @Column(name = "PATH")
     private String path;
@@ -38,61 +43,104 @@ public class Project {
 
     }
 
-    public Project(int id, String titulo, String path, String type, User user) {
-        this.id = id;
-        this.titulo = titulo;
-        this.path = path;
-        this.type = type;
-        this.user = user;
+    public Project(final int newId, final String newTitle, final String newPath, final String newType, final User newUser) {
+        this.id = newId;
+        this.title = newTitle;
+        this.path = newPath;
+        this.type = newType;
+        this.user = newUser;
     }
 
+    /**
+     * Obtains Id of the project
+     * @return id of the project
+     */
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    /**
+     * Sets new id of the project
+     * @param newId
+     */
+    public void setId(final int newId) {
+        this.id = newId;
     }
 
-    public String getTitulo() {
-        return titulo;
+    /**
+     * obtains title of the projetc
+     * @return title of the project
+     */
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    /**
+     * Sets new title of the project
+     * @param newTitle
+     */
+    public void setTitle(final String newTitle) {
+        this.title = newTitle;
     }
 
+    /**
+     * Obtains the user that realized the project
+     * @return user
+     */
     public User getUser() {
         return user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    /**
+     * sets User of the project
+     * @param newUser
+     */
+    public void setUser(final User newUser) {
+        this.user = newUser;
     }
 
+    /**
+     * gets path of the project where the project is saved
+     * @return path
+     */
     public String getPath() {
         return path;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    /**
+     * sets new path of the project
+     * @param newPath
+     */
+    public void setPath(final String newPath) {
+        this.path = newPath;
     }
 
+    /**
+     * Obtains type of the project
+     * @return
+     */
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    /**
+     * sets new path of the project
+     * @param newType
+     */
+    public void setType(final String newType) {
+        this.type = newType;
     }
 
+    /**
+     * Obtains all dates of the project
+     * @return String of the dates
+     */
     @Override
     public String toString() {
-        return "Project{" +
-                "id=" + id +
-                ", titulo='" + titulo + '\'' +
-                ", path='" + path + '\'' +
-                ", type='" + type + '\'' +
-                '}';
+        return "Project{" + "id=" + id
+                + ", titulo='" + title + '\''
+                + ", path='" + path + '\''
+                + ", type='" + type + '\''
+                + '}';
     }
 }
