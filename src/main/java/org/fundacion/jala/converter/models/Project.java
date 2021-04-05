@@ -68,7 +68,7 @@ public class Project {
     }
 
     /**
-     * obtains title of the projetc
+     * Obtains title of the projetc
      * @return title of the project
      */
     public String getTitle() {
@@ -92,7 +92,7 @@ public class Project {
     }
 
     /**
-     * sets User of the project
+     * Sets User of the project
      * @param newUser
      */
     public void setUser(final User newUser) {
@@ -100,7 +100,7 @@ public class Project {
     }
 
     /**
-     * gets path of the project where the project is saved
+     * Gets path of the project where the project is saved
      * @return path
      */
     public String getPath() {
@@ -108,7 +108,7 @@ public class Project {
     }
 
     /**
-     * sets new path of the project
+     * Sets new path of the project
      * @param newPath
      */
     public void setPath(final String newPath) {
@@ -124,7 +124,7 @@ public class Project {
     }
 
     /**
-     * sets new path of the project
+     * Sets new path of the project
      * @param newType
      */
     public void setType(final String newType) {

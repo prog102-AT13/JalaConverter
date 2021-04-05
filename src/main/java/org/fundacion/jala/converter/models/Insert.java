@@ -21,7 +21,7 @@ public final class Insert {
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jalaPersistence");
 
     /**
-     * this method is for to insert dates for database
+     * This method is for to insert dates for database
      * @param userId
      * @param userName
      * @param pasword

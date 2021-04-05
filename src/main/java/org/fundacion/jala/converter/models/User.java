@@ -52,7 +52,7 @@ public class User {
     }
 
     /**
-     * obtains Ids of the User
+     * Obtains Ids of the User
      * @return id of the user
      */
     public int getId() {
@@ -60,7 +60,7 @@ public class User {
     }
 
     /**
-     * sets new Id of the User
+     * Sets new Id of the User
      * @param newId
      */
     public void setId(final int newId) {
@@ -76,7 +76,7 @@ public class User {
     }
 
     /**
-     * sets new name of the user
+     * Sets new name of the user
      * @param newName
      */
     public void setName(final String newName) {
@@ -92,7 +92,7 @@ public class User {
     }
 
     /**
-     * sets new pasword of the User
+     * Sets new pasword of the User
      * @param newPasword
      */
     public void setPasword(final String newPasword) {
@@ -108,7 +108,7 @@ public class User {
     }
 
     /**
-     * sets new token of the User
+     * Sets new token of the User
      * @param newToken
      */
     public void setToken(final String newToken) {

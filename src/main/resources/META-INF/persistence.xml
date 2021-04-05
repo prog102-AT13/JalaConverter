@@ -7,9 +7,7 @@
 
     <persistence-unit name="jalaPersistence">
 
-        <!--Aqui se representara las clases-->
-        <class>org.fundacionjala.JalaConverter.model.empleado.Empleado</class>
-        <class>org.fundacionjala.JalaConverter.model.empleado.Direccion</class>
+        <!--Here represent the class for the Entities-->
         <class>org.fundacion.jala.converter.models.User</class>
         <class>org.fundacion.jala.converter.models.Project</class>
 
