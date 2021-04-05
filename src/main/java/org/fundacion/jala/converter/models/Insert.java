@@ -21,7 +21,16 @@ public final class Insert {
 
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jalaPersistence");
 
-    public static void insertDatos(final int userId, final String userName, final String pasword, final String token, final int projectId, final String projectName, final String pathProject, final String type) {
+    public static void insertDatos(
+            final int userId,
+            final String userName,
+            final String pasword,
+            final String token,
+            final int projectId,
+            final String projectName,
+            final String pathProject,
+            final String type
+    ) {
         EntityManager manager = emf.createEntityManager();
         manager.getTransaction().begin();
 
