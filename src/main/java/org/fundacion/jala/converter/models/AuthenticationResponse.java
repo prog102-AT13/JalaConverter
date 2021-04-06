@@ -11,8 +11,8 @@ package org.fundacion.jala.converter.models;
 public class AuthenticationResponse {
     private final String jwt;
 
-    public AuthenticationResponse(String jwt) {
-        this.jwt = jwt;
+    public AuthenticationResponse(final String jsonWebToken) {
+        this.jwt = jsonWebToken;
     }
 
     /**

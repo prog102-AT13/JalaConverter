@@ -12,12 +12,9 @@ public class AuthenticationRequest {
     private String username;
     private String password;
 
-    public AuthenticationRequest() {
-    }
-
-    public AuthenticationRequest(String username, String password) {
-        this.username = username;
-        this.password = password;
+    public AuthenticationRequest(final String newUsername, final String newPassword) {
+        this.username = newUsername;
+        this.password = newPassword;
     }
 
     /**
@@ -30,10 +27,10 @@ public class AuthenticationRequest {
 
     /**
      * Sets the username
-     * @param username to set the new value
+     * @param newUsername to set the new value
      */
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(final String newUsername) {
+        this.username = newUsername;
     }
 
     /**
@@ -46,9 +43,9 @@ public class AuthenticationRequest {
 
     /**
      * Sets the password
-     * @param password to set new value
+     * @param newPassword to set new value
      */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(final String newPassword) {
+        this.password = newPassword;
     }
 }

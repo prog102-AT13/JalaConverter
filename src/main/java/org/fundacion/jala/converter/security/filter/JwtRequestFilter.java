@@ -26,7 +26,7 @@ import java.io.IOException;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
-    private final int BEARER_LENGTH = 7;
+    private static final int BEARER_LENGTH = 7;
     @Autowired
     private MyUserDetailsService userDetailsService;
 

@@ -21,7 +21,8 @@ import java.util.function.Function;
 
 @Service
 public class JwtUtil {
-    private final String SECRET_KEY = "secret";
+    private static final String SECRET_KEY = "secret";
+    private static final int EXPIRATION_TIME = 1000 * 60 * 60 * 10;
 
     /**
      * Gets username from token
@@ -88,7 +89,6 @@ public class JwtUtil {
      * @return string with the token
      */
     private String createToken(final Map<String, Object> claims, final String subject) {
-        int EXPIRATION_TIME = 1000 * 60 * 60 * 10;
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();

@@ -8,6 +8,8 @@
  */
 package org.fundacion.jala.converter.controller;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.models.AuthenticationRequest;
 import org.fundacion.jala.converter.models.AuthenticationResponse;
 import org.fundacion.jala.converter.security.util.JwtUtil;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AuthController {
+    private Logger authLogger = LogManager.getLogger();
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -43,10 +46,12 @@ public class AuthController {
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody final AuthenticationRequest authenticationRequest) throws Exception {
         try {
+            authLogger.info("Start.");
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword())
             );
         } catch (BadCredentialsException e) {
+            authLogger.error("Error. " + e.getLocalizedMessage());
             throw new Exception("Incorrect username or password", e);
         }
 
