@@ -8,3 +8,9 @@
 [DEBUG] 2021-04-05 18:56:38.617 [Test worker] ConverterApplicationTests - Running with Spring Boot v2.4.4, Spring v5.3.5
 [INFO ] 2021-04-05 18:56:38.639 [Test worker] ConverterApplicationTests - No active profile set, falling back to default profiles: default
 [INFO ] 2021-04-05 18:56:43.924 [Test worker] ConverterApplicationTests - Started ConverterApplicationTests in 5.799 seconds (JVM running for 9.799)
+[INFO ] 2021-04-05 21:10:32.856 [main] ConverterApplication - start
+[INFO ] 2021-04-05 21:10:37.343 [main] ConverterApplication - finish
+[INFO ] 2021-04-05 21:12:36.164 [http-nio-8080-exec-6] ExtractTextController - start
+[INFO ] 2021-04-05 21:12:36.957 [http-nio-8080-exec-6] ExtractTextController - finish
+[INFO ] 2021-04-05 21:12:44.861 [http-nio-8080-exec-7] ExtractTextController - start
+[INFO ] 2021-04-05 21:12:44.917 [http-nio-8080-exec-7] ExtractTextController - finish
