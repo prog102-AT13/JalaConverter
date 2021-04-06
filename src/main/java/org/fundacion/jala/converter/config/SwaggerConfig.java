@@ -28,7 +28,7 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-//                .paths(PathSelectors.ant("/api/*"))
+                .paths(PathSelectors.ant("/api/*"))
                 .apis(RequestHandlerSelectors.basePackage("org.fundacion.jala.converter"))
                 .build()
                 .apiInfo(apiDetails());

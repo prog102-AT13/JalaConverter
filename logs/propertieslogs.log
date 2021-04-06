@@ -1,0 +1,16 @@
+[ERROR] 2021-04-05 18:55:20.584 [main] ConverterApplication - start
+[INFO ] 2021-04-05 18:55:21.827 [main] ConverterApplication - Starting ConverterApplication using Java 11.0.10 on DESKTOP-TKQAIUV with PID 9616 (C:\Users\Jorge Caceres\Documents\Jala\Prog 102\Proyecto final\JalaConverter\build\classes\java\main started by Jorge Caceres in C:\Users\Jorge Caceres\Documents\Jala\Prog 102\Proyecto final\JalaConverter)
+[DEBUG] 2021-04-05 18:55:21.835 [main] ConverterApplication - Running with Spring Boot v2.4.4, Spring v5.3.5
+[INFO ] 2021-04-05 18:55:21.836 [main] ConverterApplication - No active profile set, falling back to default profiles: default
+[INFO ] 2021-04-05 18:55:27.191 [main] ConverterApplication - Started ConverterApplication in 6.436 seconds (JVM running for 8.129)
+[INFO ] 2021-04-05 18:55:27.319 [main] ConverterApplication - finish
+[INFO ] 2021-04-05 18:56:38.607 [Test worker] ConverterApplicationTests - Starting ConverterApplicationTests using Java 11.0.10 on DESKTOP-TKQAIUV with PID 5720 (started by Jorge Caceres in C:\Users\Jorge Caceres\Documents\Jala\Prog 102\Proyecto final\JalaConverter)
+[DEBUG] 2021-04-05 18:56:38.617 [Test worker] ConverterApplicationTests - Running with Spring Boot v2.4.4, Spring v5.3.5
+[INFO ] 2021-04-05 18:56:38.639 [Test worker] ConverterApplicationTests - No active profile set, falling back to default profiles: default
+[INFO ] 2021-04-05 18:56:43.924 [Test worker] ConverterApplicationTests - Started ConverterApplicationTests in 5.799 seconds (JVM running for 9.799)
+[INFO ] 2021-04-05 21:10:32.856 [main] ConverterApplication - start
+[INFO ] 2021-04-05 21:10:37.343 [main] ConverterApplication - finish
+[INFO ] 2021-04-05 21:12:36.164 [http-nio-8080-exec-6] ExtractTextController - start
+[INFO ] 2021-04-05 21:12:36.957 [http-nio-8080-exec-6] ExtractTextController - finish
+[INFO ] 2021-04-05 21:12:44.861 [http-nio-8080-exec-7] ExtractTextController - start
+[INFO ] 2021-04-05 21:12:44.917 [http-nio-8080-exec-7] ExtractTextController - finish
