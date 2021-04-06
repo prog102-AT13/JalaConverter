@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  */
-package org.fundacion.jala.converter.sevice;
+package org.fundacion.jala.converter.service;
 
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
@@ -77,6 +77,9 @@ public class ExtractText {
         System.out.println("finished");
     }
 
+    /**
+     * Safe extracted text on a file .txt
+     */
     private void safeInfo(final String name, final String text) {
         File file;
         FileWriter fileWriter;
