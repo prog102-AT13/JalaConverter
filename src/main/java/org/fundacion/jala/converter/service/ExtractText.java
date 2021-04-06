@@ -7,9 +7,10 @@
  * license agreement you entered into with Fundacion Jala
  */
 package org.fundacion.jala.converter.service;
-
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -21,6 +22,7 @@ public class ExtractText {
     private String language;
     private String pathFile;
     private String nameOutputFile;
+    private static final Logger LOGGER = LogManager.getLogger();
 
     public ExtractText(final String language, final String pathFile) {
         this.language = language;
@@ -61,31 +63,37 @@ public class ExtractText {
      *  extract text for a image
      */
     public void extractText() {
+        LOGGER.info("start");
         System.out.println("Loaded");
         Tesseract tesseract = new Tesseract();
         tesseract.setDatapath(System.getProperty("user.dir") + "\\tessdata");
         tesseract.setLanguage(this.getLanguage());
         try {
+            LOGGER.info("Execute Try");
             String text =  tesseract.doOCR(new File(this.getPathFile()));
             if (this.getNameOutputFile() != null) {
                 safeInfo(this.getNameOutputFile(), text);
             }
             System.out.println(text);
         } catch (TesseractException e) {
+            LOGGER.error("Execute Tesseract Exception");
             e.printStackTrace();
         }
         System.out.println("finished");
+        LOGGER.info("finish");
     }
 
     /**
      * Safe extracted text on a file .txt
      */
     private void safeInfo(final String name, final String text) {
+        LOGGER.info("start");
         File file;
         FileWriter fileWriter;
         BufferedWriter bufferedWriter;
         PrintWriter printWriter;
         try {
+            LOGGER.info("Execute Try");
             file = new File(System.getProperty("user.dir") + "\\archive\\" + name + ".txt");
             fileWriter =  new FileWriter(file);
             bufferedWriter = new BufferedWriter(fileWriter);
@@ -94,8 +102,10 @@ public class ExtractText {
             printWriter.close();
             bufferedWriter.close();
         } catch (Exception e) {
+            LOGGER.error("Execute Exception to Safe text in a file");
             e.printStackTrace();
         }
+        LOGGER.info("finish");
     }
 }
 
