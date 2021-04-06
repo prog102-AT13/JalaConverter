@@ -35,10 +35,10 @@ public class AuthController {
     private JwtUtil jwtTokenUtil;
 
     /**
-     *
-     * @param authenticationRequest
-     * @return
-     * @throws Exception
+     * Create an authentication response with the token
+     * @param authenticationRequest a request to authenticate
+     * @return response entity with the token
+     * @throws Exception when not found
      */
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody final AuthenticationRequest authenticationRequest) throws Exception {

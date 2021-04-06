@@ -34,12 +34,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private JwtUtil jwtUtil;
 
     /**
-     *
-     * @param request
-     * @param response
-     * @param filterChain
-     * @throws ServletException
-     * @throws IOException
+     * Makes an internal filter of the request
+     * @param request a http servlet request
+     * @param response a http servlet response
+     * @param filterChain the web chain filters
+     * @throws ServletException when the servlet has difficulties
+     * @throws IOException when problems on inputs and outputs
      */
     @Override
     protected void doFilterInternal(final HttpServletRequest request,
