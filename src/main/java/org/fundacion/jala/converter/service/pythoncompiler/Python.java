@@ -18,7 +18,7 @@ public enum Python {
     }
 
     /**
-     * Returns the execution command according to the version
+     * @return the execution command according to the version
      */
     public String getVersion() {
         return version;

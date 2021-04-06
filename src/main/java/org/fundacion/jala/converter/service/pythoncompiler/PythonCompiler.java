@@ -15,10 +15,9 @@ import java.io.InputStreamReader;
 public class PythonCompiler {
 
     /**
-     *
      * @param compilerVersion has command according version
      * @param filePath represents what file we want to compile
-     * @return Returns the result of execution in console
+     * @return the result of execution in console
      */
     public String compiler(Python compilerVersion, String filePath) {
         try {
