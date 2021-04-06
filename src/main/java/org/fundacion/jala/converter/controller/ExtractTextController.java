@@ -30,7 +30,6 @@ public class ExtractTextController {
     private static final Logger LOGGER = LogManager.getLogger();
     @Autowired
     private FileStorageService fileStorageService;
-
     /**
      * Endpoint for extract text
      */
@@ -46,7 +45,6 @@ public class ExtractTextController {
         LOGGER.info("finish");
         return downloadLink;
     }
-
     /**
      * Endpoint for extract text
      */
@@ -58,7 +56,6 @@ public class ExtractTextController {
         LOGGER.info("finish");
         return ResponseEntity.ok("Extract Complete");
     }
-
     /**
      * Endpoint for extract text
      */

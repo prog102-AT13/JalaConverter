@@ -76,7 +76,7 @@ public class ExtractText {
             }
             System.out.println(text);
         } catch (TesseractException e) {
-            LOGGER.error("Execute Tesseract Exception");
+            LOGGER.error("Execute Tesseract Exception" + e.getLocalizedMessage());
             e.printStackTrace();
         }
         System.out.println("finished");
@@ -85,6 +85,8 @@ public class ExtractText {
 
     /**
      * Safe extracted text on a file .txt
+     * @param name String with the name with which the file will be created
+     * @param text String containing the text extracted from the image
      */
     private void safeInfo(final String name, final String text) {
         LOGGER.info("start");
