@@ -19,12 +19,8 @@ public class ConverterApplication {
     private static final Logger logger = LogManager.getLogger();
 
 	public static void main(String[] args) {
-//		SpringApplication.run(ConverterApplication.class, args);
-		AudioConverter audio = new AudioConverter();
-		audio.setFormat("mp3");
-		audio.setBitrate("120");
-		audio.setVolume("1");
-		audio.setHz("49");//20,44,48
-		audio.audioConverter("/c/Users/Edson/Desktop/Edson/01. Jala/03. Prog102/Practicas/archive/storage/Moana.mp4");
+		logger.info("start");
+		SpringApplication.run(ConverterApplication.class, args);
+		logger.info("finish");
 	}
 }
