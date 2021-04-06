@@ -19,7 +19,7 @@ public class PythonCompiler {
      * @param filePath represents what file we want to compile
      * @return the result of execution in console
      */
-    public String compiler(Python compilerVersion, String filePath) {
+    public String compiler(final Python compilerVersion, final String filePath) {
         try {
             String command = compilerVersion.getVersion() + " " + filePath;
             Process process = Runtime.getRuntime().exec(command);
