@@ -20,6 +20,10 @@ import java.util.Collections;
 
 @Configuration
 public class SwaggerConfig {
+    /**
+     * Creates a Docket
+     * @return a Docket with Swagger configuration
+     */
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -30,6 +34,10 @@ public class SwaggerConfig {
                 .apiInfo(apiDetails());
     }
 
+    /**
+     * Customizes the API Information
+     * @return the ApiInfo with the customization values
+     */
     private ApiInfo apiDetails() {
         return new ApiInfo(
                 "Jala Converter",
@@ -41,10 +49,10 @@ public class SwaggerConfig {
                         "\t• Compile python projects.\n" +
                         "\t• Compile java projects.",
                 "1.0.0",
-                "localhost:8080/termsofservice",
+                "localhost:8080/api/termsofservice",
                 new springfox.documentation.service.Contact("Team AT13", "https://www.fundacionjala.org", "AT13@fundacion-jala.org"),
                 "API license",
-                "localhost:8080/license",
+                "localhost:8080/api/license",
                 Collections.emptyList());
     }
 }

@@ -31,13 +31,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
+    /**
+     * Enables memory based authentication
+     * @param auth Authentication manager specified
+     * @throws Exception when not found
+     */
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(myUserDetailsService);
     }
 
+    /**
+     * Disables security on /authenticate and set a filter to the jwtRequest
+     * @param http to configure web based security
+     * @throws Exception when not found
+     */
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(final HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests().antMatchers("/authenticate").permitAll()
                 .anyRequest().authenticated()
@@ -46,19 +56,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
+    /**
+     * Makes the configuration ignore security on swagger endpoints
+     * @param web to create a filter chain
+     * @throws Exception when not found
+     */
     @Override
-    public void configure(WebSecurity web) throws Exception {
+    public void configure(final WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui",
                 "/swagger-resources/**", "/configuration/security",
                 "/swagger-ui/**", "/webjars/**");
     }
 
+    /**
+     * Exposes AuthenticationManager as a Bean
+     * @return AuthenticationManager
+     * @throws Exception when not found
+     */
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
+    /**
+     * Encodes the password
+     * return password encoded with BCrypt
+     */
     @Bean
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();

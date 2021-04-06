@@ -18,8 +18,14 @@ import java.util.ArrayList;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService {
+    /**
+     * Gets user details with the username
+     * @param username to locate the user
+     * @return User Details
+     * @throws UsernameNotFoundException when user not found or has not granted authority
+     */
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
         return new User("at13",
                 "$2y$12$8X0nbPBTLcnai9uc7IlsP.2c9ZXrbk80v.7YH4dt2NykMB3qdbLTa",
                 new ArrayList<>());

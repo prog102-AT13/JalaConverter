@@ -20,18 +20,34 @@ public class AuthenticationRequest {
         this.password = password;
     }
 
+    /**
+     * Gets the username
+     * @return username
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * Sets the username
+     * @param username to set the new value
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * Gets the password
+     * @return password
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Sets the password
+     * @param password to set new value
+     */
     public void setPassword(String password) {
         this.password = password;
     }

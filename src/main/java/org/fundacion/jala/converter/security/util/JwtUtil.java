@@ -21,41 +21,86 @@ import java.util.function.Function;
 
 @Service
 public class JwtUtil {
-    private String SECRET_KEY = "secret";
+    private final String SECRET_KEY = "secret";
 
-    public String extractUsername(String token) {
+    /**
+     * Gets username from token
+     * @param token a string with the token
+     * @return username
+     */
+    public String extractUsername(final String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
-    public Date extractExpiration(String token) {
+    /**
+     * Gets expiration date from token
+     * @param token a string with the token
+     * @return expiration date
+     */
+    public Date extractExpiration(final String token) {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+    /**
+     * Extracts all the claims
+     * @param token a string with the token
+     * @param claimsResolver context information about an authorization request
+     * @param <T> generic class
+     * @return all the claims
+     */
+    public <T> T extractClaim(final String token, final Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
-    private Claims extractAllClaims(String token) {
+    /**
+     * Gets all the claims from a token
+     * @param token a string with the token
+     * @return the claims
+     */
+    private Claims extractAllClaims(final String token) {
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
     }
 
-    private Boolean isTokenExpired(String token) {
+    /**
+     * Checks if the token is still valid
+     * @param token a string with the token
+     * @return a boolean with the result
+     */
+    private Boolean isTokenExpired(final String token) {
         return extractExpiration(token).before(new Date());
     }
 
-    public String generateToken(UserDetails userDetails) {
+    /**
+     * Generates the token
+     * @param userDetails the users information
+     * @return a token
+     */
+    public String generateToken(final UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         return createToken(claims, userDetails.getUsername());
     }
 
-    private String createToken(Map<String, Object> claims, String subject) {
+    /**
+     * Creates a token
+     * @param claims pieces of information asserted about a subject
+     * @param subject the user
+     * @return string with the token
+     */
+    private String createToken(final Map<String, Object> claims, final String subject) {
+        int EXPIRATION_TIME = 1000 * 60 * 60 * 10;
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails) {
+    /**
+     * Checks if the username matches the token and the token has not expired
+     * @param token a string with the token
+     * @param userDetails the users information
+     * @return a boolean with the result
+     */
+    public Boolean validateToken(final String token, final UserDetails userDetails) {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
