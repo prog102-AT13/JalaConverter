@@ -1,3 +1,12 @@
+/**
+ * Copyright (c) 2021 Fundacion Jala.
+ * <p>
+ * This software is the confidential and proprietary information of Fundacion Jala
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with Fundacion Jala
+ */
+
 package org.fundacion.jala.converter.service;
 
 import java.io.BufferedReader;
@@ -8,6 +17,10 @@ import java.util.ArrayList;
 public class RunCommand {
     private ArrayList<String> resultCommand = new ArrayList<String>();
 
+    /**
+     * Run command by cmd or bash
+     * @param command
+     */
     public void run(final String command) {
         ProcessBuilder processBuilder = new ProcessBuilder();
 
@@ -27,8 +40,8 @@ public class RunCommand {
             int exitVal = process.waitFor();
             if (exitVal == 0) {
                 System.out.println("Success!");
-//                System.out.println(output);
-//                System.exit(0);
+                System.out.println(resultCommand);
+                resultCommand.clear();
             } else {
                 System.out.println("Fail!");
             }

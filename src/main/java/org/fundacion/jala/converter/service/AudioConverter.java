@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- *
+ * <p>
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -8,10 +8,6 @@
  */
 
 package org.fundacion.jala.converter.service;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 public final class AudioConverter {
     private String format = "";
@@ -19,73 +15,96 @@ public final class AudioConverter {
     private String hz = "";
     private String volume = "";
     private RunCommand runCommand = new RunCommand();
+    private final int ONE_HUNDRED = 1000;
 
-    public String audioConverter(final String file) {
-        String ffmpeg = "ffmpeg -i";
+    /**
+     * Create command for audio converter
+     * @param pathFile
+     */
+    public void audioConverter(final String pathFile) {
+        String adaptedPath = "'" + pathFile + "'";
+        String ffmpeg = "ffmpeg -i ";
         String bitrate = formatBitrate();
         String hz = formatHz();
         String volume = formatVolume();
-        String output = file.substring((file.lastIndexOf("/") + 1),file.lastIndexOf(".")+1) + this.format;
+        String output = adaptedPath.substring((adaptedPath.lastIndexOf("/") + 1), adaptedPath.lastIndexOf(".") + 1) + getFormat() + "'";
+        String pathOutput = adaptedPath.substring(0, (adaptedPath.lastIndexOf("storage"))) + "output/";
         String overwrite = " -y";
-        String command = ffmpeg + file + bitrate + hz + volume + file + output + overwrite;
-        runCommand.run(command);
+        String command = ffmpeg + adaptedPath + bitrate + hz + volume + pathOutput + output + overwrite;
         System.out.println(command);
-        return command;
+        runCommand.run(command);
     }
 
-    public String formatVolume(){
-        if(!getBitrate().equals("")) {
+    /**
+     * Create parameter for volume
+     * @return
+     */
+    private String formatVolume() {
+        if (!getVolume().equals("") && !getVolume().equals("1")) {
             return " -filter:a 'volume=" + getVolume() + "' ";
         }
         return "";
     }
 
-    public String formatHz(){
-        if(!getBitrate().equals("")) {
-            return " -ar " + (Integer.parseInt(getHz()) * 1000) + " ";
+    /**
+     * Create parameter for Hz
+     * @return
+     */
+    private String formatHz() {
+        if (!getHz().equals("")) {
+            if (getHz().equals("20")){
+                return " -ar 22050 ";
+            }
+            if (getHz().equals("44")){
+                return " -ar 44100 ";
+            }
+            if (getHz().equals("48")){
+                return " -ar 48000 ";
+            }
         }
         return "";
     }
 
-    public String formatBitrate() {
-        if(!getBitrate().equals("")) {
-            return " -ab " + (Integer.parseInt(getBitrate()) * 1000) + " ";
+    /**
+     * Create parameter for bitrate
+     * @return
+     */
+    private String formatBitrate() {
+        if (!getBitrate().equals("")) {
+            return " -ab " + (Integer.parseInt(getBitrate()) * ONE_HUNDRED) + " ";
         }
         return "";
     }
 
-    public String getFormat() {
+    private String getFormat() {
         return format;
     }
 
-    public void setFormat(String format) {
-        this.format = format;
+    public void setFormat(final String newFormat) {
+        this.format = newFormat;
     }
-
 
     public String getBitrate() {
         return bitrate;
     }
 
-    public void setBitrate(String bitrate) {
-        this.bitrate = bitrate;
+    public void setBitrate(final String newBitrate) {
+        this.bitrate = newBitrate;
     }
-
 
     public String getVolume() {
         return volume;
     }
 
-    public void setVolume(String volume) {
-        this.volume = volume;
+    public void setVolume(final String newVolume) {
+        this.volume = newVolume;
     }
 
     public String getHz() {
         return hz;
     }
 
-    public void setHz(String hz) {
-        this.hz = hz;
+    public void setHz(final String newHz) {
+        this.hz = newHz;
     }
-
 }
