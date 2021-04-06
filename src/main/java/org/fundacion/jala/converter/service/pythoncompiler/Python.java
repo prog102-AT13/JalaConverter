@@ -13,8 +13,8 @@ public enum Python {
 
     private String version;
 
-    private Python (final String versionP){
-        this.version = versionP;
+    private Python (final String versionCommand){
+        this.version = versionCommand;
     }
 
     /**
