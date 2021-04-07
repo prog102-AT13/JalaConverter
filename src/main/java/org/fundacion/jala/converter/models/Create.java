@@ -9,7 +9,6 @@
  */
 
 package org.fundacion.jala.converter.models;
-
 import static org.fundacion.jala.converter.models.Insert.insertData;
 
 public final class Create {
