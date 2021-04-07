@@ -30,7 +30,8 @@ public class PythonCompilerController {
      * Endpoint for compile python
      */
     @PostMapping("/compilePython")
-    public String uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("version") String version) throws IllegalStateException, IOException {
+    public String uploadFile(final @RequestParam("file") MultipartFile file,
+                             final @RequestParam("version") String version) throws IllegalStateException, IOException {
         LOGGER.info("start");
         String filename = file.getOriginalFilename();
         String storagePath = fileStorageService.uploadFile(file);
@@ -43,7 +44,7 @@ public class PythonCompilerController {
      * Endpoint for proving compile python
      */
     @GetMapping("/compilePython2")
-    public String uploadFile2(){
+    public String uploadFile2() {
         PythonCompiler pythonCompiler = new PythonCompiler();
         return pythonCompiler.compiler(Python.V3, System.getProperty("user.dir") + "/archive/helloworld.py");
     }
