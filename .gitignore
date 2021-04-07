@@ -1,6 +1,8 @@
 HELP.md
 .gradle
 build/
+archive/output
+archive/storage
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
@@ -35,3 +37,12 @@ out/
 
 ### VS Code ###
 .vscode/
+.gradle/
+build/
+.classpath
+.project
+.settings/
+bin/
+.idea/
+.vscode/
+*.class

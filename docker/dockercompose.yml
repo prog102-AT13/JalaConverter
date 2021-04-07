@@ -1,0 +1,28 @@
+###
+#Copyright (c) 2021 Fundacion Jala.
+#
+#This software is the confidential and proprietary information of Fundacion Jala
+#("Confidential Information"). You shall not disclose such Confidential
+#Information and shall use it only in accordance with the terms of the
+#license agreement you entered into with Fundacion Jala
+##
+
+# Version docker for compile
+version: '3.1'
+# Services = containers that we will create with docker compose
+services:
+ # First service for our container
+ db:
+   # Name of container
+   container_name: micontenedormysql
+   # Docker image that we use
+   image: mysql
+   # Restar the container
+   restart: always
+   # Ports
+   ports:
+     - 9090:3306
+   # Environment
+   environment:
+     MYSQL_ROOT_PASSWORD: root
+     MYSQL_DATABASE: jalaconverter
