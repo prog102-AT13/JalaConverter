@@ -7,6 +7,8 @@
  */
 package org.fundacion.jala.converter;
 
+import org.fundacion.jala.converter.service.videoclasses.Converter;
+import org.fundacion.jala.converter.service.videoclasses.VideoParameter;
 import org.fundacion.jala.converter.view.MainInterface;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

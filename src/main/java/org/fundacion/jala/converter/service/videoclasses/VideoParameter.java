@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class VideoParameter {
-    private String inputPath;
     private String outputFormat;
     private String resolution;
     private boolean tumbnail;
@@ -21,14 +20,6 @@ public class VideoParameter {
     private int height;
     private boolean audio;
     private boolean metaData;
-
-    /**
-     * Sets the name of the input video
-     * @param newInputPath String with the input path
-     */
-    public void setInputPath(final String newInputPath) {
-        this.inputPath = newInputPath;
-    }
 
     /**
      * Sets the name of the output video
@@ -92,14 +83,6 @@ public class VideoParameter {
      */
     public void setMetaData(final boolean newMetaData) {
         this.metaData = newMetaData;
-    }
-
-    /**
-     * Gets the name of the input video
-     * @return inputPath
-     */
-    public String getInputPath() {
-        return inputPath;
     }
 
     /**

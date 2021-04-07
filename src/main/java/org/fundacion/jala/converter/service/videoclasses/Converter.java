@@ -29,14 +29,14 @@ public class Converter {
      * @param pathFile string with the input path
      */
     public void convertVideo(final String pathFile) {
-        String adaptPath = pathFile;
+        String adaptPath = "\"" + pathFile + "\"";
         format = parameter.getOutputFormat();
         output = adaptPath.substring((adaptPath.lastIndexOf("\\") + 1), adaptPath.lastIndexOf(".") + 1) + format;
         setOutputFileName(output);
         pathOutput = adaptPath.substring(0, (adaptPath.lastIndexOf("storage"))) + "output\\";
         String fCommand = startFirstCommand + adaptPath + " ";
         String parameters = changeResolution() + changeFrameRate() + removeAudio();
-        String theCommand = fCommand + parameters + pathOutput + output + generateATumbnail() + " -y";
+        String theCommand = fCommand + parameters + pathOutput + output  + "\"" + generateATumbnail() + " -y";
         System.out.println(theCommand);
         try {
             Process petition = Runtime.getRuntime().exec("cmd /c " + theCommand);
@@ -77,8 +77,9 @@ public class Converter {
      */
     private void generateMetaDataJsonFormat() {
         String startCommand = "ffprobe -v quiet -print_format json -show_format -show_streams ";
-        String outputCommand = pathOutput + output + " > " + pathOutput + output + ".json";
+        String outputCommand = pathOutput + output + "\"" + " > " + pathOutput + output + ".json\"";
         String jsonCommand = startCommand + outputCommand;
+        System.out.println(jsonCommand);
         try {
             Process petition = Runtime.getRuntime().exec("cmd /c" + jsonCommand);
         } catch (Exception e) {
@@ -94,7 +95,7 @@ public class Converter {
         boolean tumbnail = parameter.hasTumbnail();
         String tumbnailCommand;
         if (tumbnail) {
-            tumbnailCommand = " -ss 00:00:01 -vframes 1 " + pathOutput + "VideoTumbnail.png";
+            tumbnailCommand = " -ss 00:00:01 -vframes 1 " + pathOutput + "VideoTumbnail.png\"";
             return tumbnailCommand;
         }
         return "";

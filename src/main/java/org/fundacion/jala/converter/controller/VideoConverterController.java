@@ -33,7 +33,6 @@ public class VideoConverterController {
      */
     @PostMapping("/convertVideo")
     public String uploadFile(@RequestParam("file") MultipartFile file,
-                             @RequestParam("inputpath") String inputPath,
                              @RequestParam("outputformat") String outputFormat,
                              @RequestParam("resolution") String resolution,
                              @RequestParam("tumbnail") boolean tumbnail,
@@ -41,10 +40,10 @@ public class VideoConverterController {
                              @RequestParam("width") int width,
                              @RequestParam("height") int height,
                              @RequestParam("audio") boolean audio,
-                             @RequestParam("metadata") boolean metaData) throws IllegalStateException, IOException {
+                             @RequestParam("metadata") boolean metaData
+    ) throws IllegalStateException, IOException {
         String filename = file.getOriginalFilename();
         String storagePath = fileStorageService.uploadFile(file);
-        videoParameter.setInputPath(inputPath);
         videoParameter.setOutputFormat(outputFormat);
         videoParameter.setResolution(resolution);
         videoParameter.setTumbnail(tumbnail);
