@@ -8,6 +8,8 @@
  */
 package org.fundacion.jala.converter.service;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.service.metadata.ExportTypeFile;
 import org.fundacion.jala.converter.service.metadata.TypeFileExport;
 
@@ -22,16 +24,17 @@ public class ExtractMetadata {
     private File fileToExtract;
     private String moreInformation = " ";
     private ExportTypeFile exportTypeFile;
+    private static final Logger LOGGER = LogManager.getLogger();
 
     public ExtractMetadata(ObjectMetadata extractMetadata) {
         this.fileToExtract = extractMetadata.getFileToExtract();
         if (extractMetadata.getMoreInfo()) setMoreInformation();
-        exportTypeFile = new ExportTypeFile(fileToExtract.getName(), extractMetadata.getNameExport(), extractMetadata.getTypeFileExport(),extractMetadata.getFileToExport());
+        exportTypeFile = new ExportTypeFile(fileToExtract.getName(), extractMetadata.getNameExport(), extractMetadata.getTypeFileExport(), extractMetadata.getFileToExport());
         exportFile = exportTypeFile.getNameFileCompleteToExport();
         extractMetadata();
     }
 
-    public ExtractMetadata(final File fileExtract, final File fileExport ) {
+    public ExtractMetadata(final File fileExtract, final File fileExport) {
         this.fileToExtract = fileExtract;
         setMoreInformation();
         exportTypeFile = new ExportTypeFile(fileToExtract.getName(), "Default", TypeFileExport.TXT, fileExport);
@@ -43,9 +46,10 @@ public class ExtractMetadata {
      * Code assembly in order to run in Exiftool.
      */
     public void extractMetadata() {
+        LOGGER.info("start");
         try {
-            String command = "cmd /c " + addressExiftool+ " && exiftool.exe " + "\"" +  fileToExtract.getAbsolutePath() + "\"" + moreInformation + exportFile;
-            //String command = "cmd /c " + "dir";
+            LOGGER.info("Execute Try");
+            String command = "cmd /c " + addressExiftool + " && exiftool.exe " + "\"" + fileToExtract.getAbsolutePath() + "\"" + moreInformation + exportFile;
             Process process = Runtime.getRuntime().exec(command);
 
             System.out.println(command);
@@ -55,10 +59,12 @@ public class ExtractMetadata {
                 System.out.println(resultOfExecution);
                 System.out.println("Success");
             }
-            } catch (IOException e){
-                System.out.println("Fail");
-            }
+        } catch (IOException e) {
+            LOGGER.error("Execute Exception to Safe text in a file");
+            e.printStackTrace();
         }
+        LOGGER.info("finish");
+    }
 
     /**
      * The method permit Exiftool get more information about metadata of file.
