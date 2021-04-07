@@ -14,3 +14,101 @@
 [INFO ] 2021-04-05 21:12:36.957 [http-nio-8080-exec-6] ExtractTextController - finish
 [INFO ] 2021-04-05 21:12:44.861 [http-nio-8080-exec-7] ExtractTextController - start
 [INFO ] 2021-04-05 21:12:44.917 [http-nio-8080-exec-7] ExtractTextController - finish
+[INFO ] 2021-04-06 16:49:51.682 [main] ConverterApplication - start
+[INFO ] 2021-04-06 16:49:58.608 [main] ConverterApplication - finish
+[INFO ] 2021-04-06 23:33:28.961 [main] ConverterApplication - start
+[INFO ] 2021-04-06 23:33:41.766 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 11:07:22.526 [main] ConverterApplication - start
+[INFO ] 2021-04-07 11:07:32.769 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 11:08:19.836 [main] ConverterApplication - start
+[INFO ] 2021-04-07 11:08:29.438 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 11:17:34.558 [http-nio-8080-exec-6] AuthController - Start.
+[INFO ] 2021-04-07 11:20:25.095 [http-nio-8080-exec-8] ExtractTextController - start
+[INFO ] 2021-04-07 11:20:25.097 [http-nio-8080-exec-8] ExtractText - start
+[INFO ] 2021-04-07 11:20:25.110 [http-nio-8080-exec-8] ExtractText - Execute Try
+[INFO ] 2021-04-07 11:20:26.867 [http-nio-8080-exec-8] ExtractText - start
+[INFO ] 2021-04-07 11:20:26.867 [http-nio-8080-exec-8] ExtractText - Execute Try
+[INFO ] 2021-04-07 11:20:26.880 [http-nio-8080-exec-8] ExtractText - finish
+[INFO ] 2021-04-07 11:20:26.881 [http-nio-8080-exec-8] ExtractText - finish
+[INFO ] 2021-04-07 11:20:26.881 [http-nio-8080-exec-8] ExtractTextController - finish
+[INFO ] 2021-04-07 11:30:02.528 [main] JavaCompiler - start
+[INFO ] 2021-04-07 11:30:02.535 [main] JavaCompiler - Execute Try
+[INFO ] 2021-04-07 11:30:05.481 [main] JavaCompiler - finish
+[INFO ] 2021-04-07 12:00:07.861 [main] ConverterApplication - start
+[INFO ] 2021-04-07 12:00:16.273 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 12:07:43.395 [main] ConverterApplication - start
+[INFO ] 2021-04-07 12:07:51.806 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 12:07:54.561 [http-nio-8080-exec-1] JavaCompiler - start
+[INFO ] 2021-04-07 12:07:54.562 [http-nio-8080-exec-1] JavaCompiler - Execute Try
+[INFO ] 2021-04-07 12:07:57.266 [http-nio-8080-exec-1] JavaCompiler - finish
+[INFO ] 2021-04-07 12:08:52.625 [http-nio-8080-exec-3] JavaCompiler - start
+[INFO ] 2021-04-07 12:08:52.626 [http-nio-8080-exec-3] JavaCompiler - Execute Try
+[INFO ] 2021-04-07 12:08:54.462 [http-nio-8080-exec-3] JavaCompiler - finish
+[INFO ] 2021-04-07 12:12:37.034 [http-nio-8080-exec-6] JavaCompiler - start
+[INFO ] 2021-04-07 12:12:37.034 [http-nio-8080-exec-6] JavaCompiler - Execute Try
+[INFO ] 2021-04-07 12:12:38.981 [http-nio-8080-exec-6] JavaCompiler - finish
+[INFO ] 2021-04-07 12:13:07.024 [http-nio-8080-exec-7] JavaCompiler - start
+[INFO ] 2021-04-07 12:13:07.024 [http-nio-8080-exec-7] JavaCompiler - Execute Try
+[INFO ] 2021-04-07 12:13:08.982 [http-nio-8080-exec-7] JavaCompiler - finish
+[INFO ] 2021-04-07 12:15:34.312 [http-nio-8080-exec-10] JavaCompiler - start
+[INFO ] 2021-04-07 12:15:34.312 [http-nio-8080-exec-10] JavaCompiler - Execute Try
+[INFO ] 2021-04-07 12:15:36.249 [http-nio-8080-exec-10] JavaCompiler - finish
+[INFO ] 2021-04-07 12:34:24.149 [main] ConverterApplication - start
+[INFO ] 2021-04-07 12:35:19.037 [main] ConverterApplication - start
+[INFO ] 2021-04-07 12:35:34.961 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 12:52:02.510 [main] ConverterApplication - start
+[INFO ] 2021-04-07 12:52:17.807 [main] ConverterApplication - start
+[INFO ] 2021-04-07 12:52:26.582 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 12:54:19.040 [main] ConverterApplication - start
+[INFO ] 2021-04-07 12:54:28.328 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 13:12:18.059 [main] ConverterApplication - start
+[INFO ] 2021-04-07 13:12:27.214 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 15:14:43.259 [main] ConverterApplication - start
+[INFO ] 2021-04-07 15:19:05.121 [main] ConverterApplication - start
+[INFO ] 2021-04-07 15:19:40.337 [main] ConverterApplication - start
+[INFO ] 2021-04-07 15:20:18.641 [main] ConverterApplication - start
+[INFO ] 2021-04-07 15:20:23.896 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 15:21:36.685 [main] ConverterApplication - start
+[INFO ] 2021-04-07 15:21:41.846 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 15:22:29.574 [main] ConverterApplication - start
+[INFO ] 2021-04-07 15:22:34.743 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 15:32:43.168 [main] ConverterApplication - start
+[INFO ] 2021-04-07 15:32:48.317 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 15:34:06.139 [main] ConverterApplication - start
+[INFO ] 2021-04-07 15:34:11.406 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 15:35:06.763 [main] ConverterApplication - start
+[INFO ] 2021-04-07 15:35:11.962 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 15:35:24.657 [main] ConverterApplication - start
+[INFO ] 2021-04-07 15:35:29.782 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 15:37:27.146 [main] ConverterApplication - start
+[INFO ] 2021-04-07 15:37:32.335 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 15:38:27.970 [main] ConverterApplication - start
+[INFO ] 2021-04-07 15:38:33.166 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 15:39:06.799 [main] ConverterApplication - start
+[INFO ] 2021-04-07 15:39:12.028 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 15:40:01.643 [main] ConverterApplication - start
+[INFO ] 2021-04-07 15:40:06.831 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 15:55:49.836 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 16:20:49.380 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 16:29:25.112 [main] ConverterApplication - start
+[INFO ] 2021-04-07 16:29:31.999 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 16:30:12.462 [http-nio-8080-exec-2] RunCommand - start
+[INFO ] 2021-04-07 16:30:12.462 [http-nio-8080-exec-2] RunCommand - Execute Try
+[INFO ] 2021-04-07 16:30:13.849 [http-nio-8080-exec-2] RunCommand - finish
+[INFO ] 2021-04-07 16:30:47.760 [http-nio-8080-exec-3] RunCommand - start
+[INFO ] 2021-04-07 16:30:47.760 [http-nio-8080-exec-3] RunCommand - Execute Try
+[INFO ] 2021-04-07 16:30:48.342 [http-nio-8080-exec-3] RunCommand - finish
+[INFO ] 2021-04-07 16:31:07.015 [http-nio-8080-exec-4] RunCommand - start
+[INFO ] 2021-04-07 16:31:07.016 [http-nio-8080-exec-4] RunCommand - Execute Try
+[INFO ] 2021-04-07 16:31:07.525 [http-nio-8080-exec-4] RunCommand - finish
+[INFO ] 2021-04-07 16:31:22.889 [http-nio-8080-exec-5] RunCommand - start
+[INFO ] 2021-04-07 16:31:22.889 [http-nio-8080-exec-5] RunCommand - Execute Try
+[INFO ] 2021-04-07 16:31:23.381 [http-nio-8080-exec-5] RunCommand - finish
+[INFO ] 2021-04-07 16:34:49.736 [main] ConverterApplication - start
+[INFO ] 2021-04-07 16:34:56.715 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 16:35:15.015 [http-nio-8080-exec-1] RunCommand - start
+[INFO ] 2021-04-07 16:35:15.015 [http-nio-8080-exec-1] RunCommand - Execute Try
+[INFO ] 2021-04-07 16:35:15.679 [http-nio-8080-exec-1] RunCommand - finish
+[INFO ] 2021-04-07 16:36:23.361 [http-nio-8080-exec-5] RunCommand - start
+[INFO ] 2021-04-07 16:36:23.362 [http-nio-8080-exec-5] RunCommand - Execute Try
+[INFO ] 2021-04-07 16:36:27.729 [http-nio-8080-exec-5] RunCommand - finish

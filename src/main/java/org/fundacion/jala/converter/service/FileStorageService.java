@@ -30,7 +30,7 @@ public class FileStorageService {
      */
     public String uploadFile(MultipartFile file) throws IllegalStateException, IOException {
         String filename = file.getOriginalFilename();
-        String storageDir = PATH + File.separator + ARCHIVE + File.separator + STORAGE + File.separator + filename;
+        String storageDir = PATH + File.separator + ARCHIVE + File.separator + filename;
         file.transferTo(new File(storageDir));
         return storageDir;
     }
@@ -38,7 +38,7 @@ public class FileStorageService {
      * Returns a resource from given filename
      */
     public Resource downloadFile(String fileName) {
-        Path path = Paths.get(getOutputPath(fileName));
+        Path path = Paths.get(getArchivePath(fileName));
         Resource resource;
         try {
             resource = new UrlResource(path.toUri());
@@ -57,5 +57,11 @@ public class FileStorageService {
      */
     public static String getOutputPath(String filename) {
         return PATH + File.separator + ARCHIVE + File.separator + OUTPUT + File.separator + filename;
+    }
+    /**
+     * Returns archive path
+     */
+    public String getArchivePath(String filename) {
+        return PATH + File.separator + ARCHIVE + File.separator + filename;
     }
 }
