@@ -29,7 +29,7 @@ public final class AudioConverter {
      * @param pathFile
      */
     public void audioConverter(final String pathFile) {
-        String relativePath = "cd archive/ && cd storage/ && ";
+        String relativePath = "cd archive/ && ";
         String ffmpeg = "ffmpeg -i ";
         String bitrate = formatBitrate();
         String hz = formatHz();
