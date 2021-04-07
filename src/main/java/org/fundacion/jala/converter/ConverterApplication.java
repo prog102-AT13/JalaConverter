@@ -20,14 +20,14 @@ import javax.swing.SwingUtilities;
 public class ConverterApplication {
     private static final Logger LOGGER = LogManager.getLogger();
 
-	public static void main(String[] args) {
-		MainInterface main = new MainInterface();
-		logger.info("start");
-		SpringApplication.run(ConverterApplication.class, args);
-		System.setProperty("java.awt.headless", "false");
-		SwingUtilities.invokeLater(()-> {
-			main.initInterface();
-		});
-		logger.info("finish");
-	}
+    public static void main(final String[] args) {
+        MainInterface main = new MainInterface();
+        LOGGER.info("start");
+        SpringApplication.run(ConverterApplication.class, args);
+        System.setProperty("java.awt.headless", "false");
+        SwingUtilities.invokeLater(() -> {
+            main.initInterface();
+        });
+        LOGGER.info("finish");
+    }
 }
