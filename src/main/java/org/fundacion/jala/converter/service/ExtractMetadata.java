@@ -15,38 +15,37 @@ import java.io.File;
 import java.io.IOException;
 
 public class ExtractMetadata {
-    final static String ADDRESS = "cd src\\main\\java\\org\\fundacion\\jala\\converter\\service\\metadata\\exiftoolApp/ ";
+   // final static String ADDRESS = "cd src\\main\\java\\org\\fundacion\\jala\\converter\\service\\metadata\\exiftoolApp/ "
+    private final String addressExiftool = "cd thirdparty\\windows\\exiftool\\12.2.2_exiftool/ ";
     private String exportFile = "";
     private File file;
-    private String nameFileComplete;
     private String moreInformation = " ";
     private ExportTypeFile exportTypeFile;
 
-    ExtractMetadata(ObjectMetadata extractMetadata) {
+    public ExtractMetadata(ObjectMetadata extractMetadata) {
         this.file = extractMetadata.getFile();
-        this.nameFileComplete = file.getName();
         if (extractMetadata.getMoreInfo()) setMoreInformation();
-        exportTypeFile = new ExportTypeFile(nameFileComplete, extractMetadata.getNameExport(), extractMetadata.getTypeFileExport());
+        exportTypeFile = new ExportTypeFile(file.getName(), extractMetadata.getNameExport(), extractMetadata.getTypeFileExport());
         exportFile = exportTypeFile.getNameFileCompleteToExport();
-        executionExiftool();
+        extractMetadata();
     }
 
-    ExtractMetadata(File file){
+    public ExtractMetadata(File file) {
         this.file = file;
-        this.nameFileComplete = file.getName();
         setMoreInformation();
-        exportTypeFile = new ExportTypeFile(nameFileComplete, "Default", TypeFileExport.XMP);
+        exportTypeFile = new ExportTypeFile(file.getName(), "Default", TypeFileExport.XMP);
         exportFile = exportTypeFile.getNameFileCompleteToExport();
-        executionExiftool();
+        extractMetadata();
     }
 
     /**
      * Code assembly in order to run in Exiftool.
      */
-    public void executionExiftool() {
+    public void extractMetadata() {
         try {
-            String command = "cmd /c " + ADDRESS + " && exiftool.exe " + "\"" + nameFileComplete + "\"" + moreInformation + exportFile;
+            String command = "cmd /c " + addressExiftool + " && exiftool.exe " + "\"" + file + "\"" + moreInformation + exportFile;
             Process process = Runtime.getRuntime().exec(command);
+            System.out.println(command);
             System.out.println("Success");
         } catch (IOException e) {
             System.out.println("Fail");

@@ -9,6 +9,7 @@
 package org.fundacion.jala.converter.service.metadata;
 
 public class ExportTypeFile {
+    private final String addressExportFile = "\\archive\\";
     private String nameFileComplete;
     private String nameFileExport;
     private String nameFileCompleteToExport;
@@ -111,7 +112,7 @@ public class ExportTypeFile {
      * set exportFileXMP.
      */
     private void exportFileXMP() {
-        nameFileCompleteToExport = " -X > " + "\"" + nameFileExport + ".xmp" + "\"";
+        nameFileCompleteToExport = " -X > " +addressExportFile+ "\"" + nameFileExport + ".xmp" + "\"";
     }
 }
 
