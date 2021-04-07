@@ -46,3 +46,4 @@ bin/
 .idea/
 .vscode/
 *.class
+logs/propertieslogs.log
