@@ -34,16 +34,22 @@ public class ExtractMetadataController {
      * Endpoint for extract metadata
      */
     @PostMapping("/extractMetadata")
-    public String uploadFile(@RequestParam("file") MultipartFile file) throws IllegalStateException, IOException {
+    public String uploadFile(@RequestParam("fileToExtract") String fileToExtract,
+                             @RequestParam("fileToExport") String fileToExport) throws IllegalStateException, IOException {
         LOGGER.info("start");
-        String filename = file.getOriginalFilename();
-        String storagePath = fileStorageService.uploadFile(file);
+        ExtractMetadata extractMetadata = new ExtractMetadata(new File(fileToExtract), new File(fileToExport));
+        extractMetadata.extractMetadata();
+
+        File file=new File(fileToExtract);
+        String filename = file.getName();
+        String storagePath = filename;
         String outputPath = FileStorageService.getOutputPath(filename);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         String downloadLink = baseUrl + "/api/download/" + filename;
         LOGGER.info("finish");
         return downloadLink;
     }
+
 
     /**
      * Endpoint for extract metadata
