@@ -1,6 +1,5 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- * <p>
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -17,8 +16,8 @@ public class Converter {
     private static final int WAIT_TIME = 5000;
     private static final int INIT_NUMBER = 20;
 
-    public Converter(final VideoParameter vParameter) {
-        this.parameter = vParameter;
+    public Converter(final VideoParameter videoParameter) {
+        this.parameter = videoParameter;
     }
 
     /**
@@ -56,10 +55,13 @@ public class Converter {
     private String changeResolution() {
         int width = parameter.getWidth();
         int height = parameter.getHeight();
+        String scale;
+        String aspectRatio;
+        String resolutionCommand;
         if (width > 0 && height > 0) {
-            String scale = width + ":" + height;
-            String acpectRatio = ":force_original_aspect_ratio=decrease,pad=";
-            String resolutionCommand = "-vf \"scale=" + scale + acpectRatio + scale + ":-1:-1:color=white\"";
+            scale = width + ":" + height;
+            aspectRatio = ":force_original_aspect_ratio=decrease,pad=";
+            resolutionCommand = "-vf \"scale=" + scale + aspectRatio + scale + ":-1:-1:color=white\"";
             return resolutionCommand;
         }
         return "";
@@ -85,8 +87,9 @@ public class Converter {
      */
     private String generateATumbnail() {
         boolean tumbnail = parameter.hasTumbnail();
+        String tumbnailCommand;
         if (tumbnail) {
-            String tumbnailCommand = " -ss 00:00:01 -vframes 1 " + pathOutput + "VideoTumbnail.png";
+            tumbnailCommand = " -ss 00:00:01 -vframes 1 " + pathOutput + "VideoTumbnail.png";
             return tumbnailCommand;
         }
         return "";
@@ -98,8 +101,9 @@ public class Converter {
      */
     private String removeAudio() {
         boolean audio = parameter.hasAudio();
+        String audioCommand;
         if (audio) {
-            String audioCommand = "-an ";
+            audioCommand = "-an ";
             return audioCommand;
         }
         return "";
@@ -111,8 +115,9 @@ public class Converter {
      */
     private String changeFrameRate() {
         int frameRate = parameter.getFrameRate();
+        String frameCommand;
         if (frameRate > INIT_NUMBER) {
-            String frameCommand = " -r " + frameRate + " -y ";
+            frameCommand = " -r " + frameRate + " -y ";
             return frameCommand;
         }
         return "";

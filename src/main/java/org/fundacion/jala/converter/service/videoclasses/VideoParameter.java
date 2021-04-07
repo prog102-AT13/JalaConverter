@@ -1,6 +1,5 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- * <p>
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -94,6 +93,7 @@ public class VideoParameter {
 
     /**
      * Gets the name of the input video
+     * @return inputPath
      */
     public String getInputPath() {
         return inputPath;
@@ -101,6 +101,7 @@ public class VideoParameter {
 
     /**
      * Gets the name of the output video
+     * @return outputFormat
      */
     public String getOutputFormat() {
         return outputFormat;
@@ -108,6 +109,7 @@ public class VideoParameter {
 
     /**
      * Gets the resolution of the output video
+     * @return resolution
      */
     public String getResolution() {
         return resolution;
@@ -115,6 +117,7 @@ public class VideoParameter {
 
     /**
      * Gets the width of the output video
+     * @return width
      */
     public int getWidth() {
         return width;
@@ -122,6 +125,7 @@ public class VideoParameter {
 
     /**
      * Gets the height of the output video
+     * @return height
      */
     public int getHeight() {
         return height;
@@ -129,6 +133,7 @@ public class VideoParameter {
 
     /**
      * Gets the audio of the output video
+     * @return audio
      */
     public boolean hasAudio() {
         return audio;
@@ -136,6 +141,7 @@ public class VideoParameter {
 
     /**
      * Gets the frame rate of the output video
+     * @return frame rate
      */
     public int getFrameRate() {
         return frameRate;
@@ -143,6 +149,7 @@ public class VideoParameter {
 
     /**
      * Gets the tumbnail of the output video
+     * @return tumbnail
      */
     public boolean hasTumbnail() {
         return tumbnail;
@@ -150,6 +157,7 @@ public class VideoParameter {
 
     /**
      * Gets the metadata of the output video
+     * @return metaData
      */
     public boolean hasMetaData() {
         return metaData;
