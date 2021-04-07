@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.fundacion.jala.converter.service.ExtractText;
@@ -35,36 +33,18 @@ public class ExtractTextController {
      */
     @PostMapping("/extractText")
     public String uploadFile(final @RequestParam("file")MultipartFile file,
-                             final @RequestParam("language") String language) throws IllegalStateException, IOException {
+                             final @RequestParam("language") String language,
+                             final @RequestParam("nameOutput") String nameOutput) throws IllegalStateException, IOException {
         LOGGER.info("start");
         String filename = file.getOriginalFilename();
         String storagePath = fileStorageService.uploadFile(file);
+        ExtractText extractText = new ExtractText(language, storagePath, nameOutput);
+        extractText.extractText();
         String outputPath = FileStorageService.getOutputPath(filename);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-        String downloadLink = baseUrl + "/api/download/" +  filename;
+        String outFilename = nameOutput + ".txt";
+        String downloadLink = baseUrl + "/api/download/" + outFilename;
         LOGGER.info("finish");
         return downloadLink;
-    }
-    /**
-     * Endpoint for extract text
-     */
-    @GetMapping("/text")
-    public ResponseEntity<String> extractText() {
-        LOGGER.info("start");
-        ExtractText extractText1 = new ExtractText("eng", "images/img1.jpg");
-        extractText1.extractText();
-        LOGGER.info("finish");
-        return ResponseEntity.ok("Extract Complete");
-    }
-    /**
-     * Endpoint for extract text
-     */
-    @GetMapping("/textInFile")
-    public ResponseEntity<String> extractTextInFile() {
-        LOGGER.info("start");
-        ExtractText extractText2 = new ExtractText("eng", "images/img1.png", "nombre");
-        extractText2.extractText();
-        LOGGER.info("finish");
-        return ResponseEntity.ok("Extract text and generate file Complete");
     }
 }
