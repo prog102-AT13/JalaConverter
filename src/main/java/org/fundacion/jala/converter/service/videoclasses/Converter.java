@@ -33,7 +33,7 @@ public class Converter {
         format = parameter.getOutputFormat();
         output = adaptPath.substring((adaptPath.lastIndexOf("\\") + 1), adaptPath.lastIndexOf(".") + 1) + format;
         setOutputFileName(output);
-        pathOutput = adaptPath.substring(0, (adaptPath.lastIndexOf("storage"))) + "storage\\";
+        pathOutput = adaptPath.substring(0, (adaptPath.lastIndexOf("archive"))) + "archive\\";
         String fCommand = startFirstCommand + adaptPath + " ";
         String parameters = changeResolution() + changeFrameRate() + removeAudio();
         String theCommand = fCommand + parameters + pathOutput + output  + "\"" + generateATumbnail() + " -y";
