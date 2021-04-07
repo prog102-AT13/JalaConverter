@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- *
+ * <p>
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -8,31 +8,48 @@
  */
 package org.fundacion.jala.converter.service.videoclasses;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
 public class Converter {
     private String startFirstCommand = "ffmpeg -i ";
-    private String inputNameFixed = "";
-    private String outputNameFixed = "";
     private VideoParameter parameter;
+    private String format;
+    private String output;
+    private String pathOutput;
     private static final int INIT_NUMBER = 20;
 
     public Converter(final VideoParameter vParameter) {
         this.parameter = vParameter;
-        fixInputName();
-        fixOutputName();
     }
 
     /**
-     * Adds quotes to the input video name
+     * Converts the input video
      */
-    private void fixInputName() {
-        inputNameFixed = "\"" + parameter.getInputName() + "\"";
-    }
+    public void convertVideo(final String pathFile) {
+        String adaptPath = "'" + pathFile + "'";
+        format = parameter.getOutputFormat();
+        output = adaptPath.substring((adaptPath.lastIndexOf("/") + 1), adaptPath.lastIndexOf(".") + 1) + format + "'";
+        pathOutput = adaptPath.substring(0, (adaptPath.lastIndexOf("storage"))) + "output/";
 
-    /**
-     * Adds quotes to the output video name
-     */
-    private void fixOutputName() {
-        outputNameFixed = "\"" + parameter.getOutputName() + "\"";
+        String fCommand = startFirstCommand + adaptPath + " ";
+        String parameters = changeResolution() + changeFrameRate() + removeAudio();
+        String theCommand = fCommand + parameters + pathOutput + output + generateATumbnail() + " -y";
+
+        System.out.println(theCommand);
+        run(theCommand);
+//        try {
+//            Process petition = Runtime.getRuntime().exec("cmd /c" + theCommand);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+//        if (parameter.hasMetaData()) {
+//            generateMetaDataJsonFormat();
+//        }
+
     }
 
     /**
@@ -55,12 +72,11 @@ public class Converter {
      * Generates a json with the output video metadata
      */
     private void generateMetaDataJsonFormat() {
-        String finalDir = parameter.getDirection();
         String startCommand = "ffprobe -v quiet -print_format json -show_format -show_streams ";
-        String outputCommand = outputNameFixed + " > " + outputNameFixed + ".json";
+        String outputCommand = pathOutput + output + " > " + pathOutput + output + ".json";
         String jsonCommand = startCommand + outputCommand;
         try {
-            Process petition = Runtime.getRuntime().exec("cmd /c" + finalDir + jsonCommand);
+            Process petition = Runtime.getRuntime().exec("cmd /c" + jsonCommand);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -73,7 +89,7 @@ public class Converter {
     private String generateATumbnail() {
         boolean tumbnail = parameter.hasTumbnail();
         if (tumbnail) {
-            String tumbnailCommand = " -ss 00:00:01 -vframes 1 VideoTumbnail.png";
+            String tumbnailCommand = " -ss 00:00:01 -vframes 1" + pathOutput + "VideoTumbnail.png";
             return tumbnailCommand;
         }
         return "";
@@ -86,7 +102,7 @@ public class Converter {
     private String removeAudio() {
         boolean audio = parameter.hasAudio();
         if (audio) {
-            String audioCommand = "-an";
+            String audioCommand = "-an ";
             return audioCommand;
         }
         return "";
@@ -94,35 +110,47 @@ public class Converter {
 
     /**
      * Changes the input video frame rate
-     * @return
+     * @return frame command
      */
     private String changeFrameRate() {
         int frameRate = parameter.getFrameRate();
         if (frameRate > INIT_NUMBER) {
-            String frameCommand = " -filter:v fps=" + frameRate + " ";
+            String frameCommand = " -r " + frameRate + " -y ";
             return frameCommand;
         }
         return "";
     }
 
+    private ArrayList<String> resultCommand = new ArrayList<String>();
     /**
-     * Converts the input video
+     * Run command by cmd or bash
+     * @param command
      */
-    public void convertVideo() {
-        String dir = parameter.getDirection();
-        String fCommand = startFirstCommand + inputNameFixed + " ";
-        String parameters = changeResolution() + changeFrameRate() + removeAudio();
-        String theCommand = fCommand + parameters + outputNameFixed + generateATumbnail();
-
+    public void run(final String command) {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        processBuilder.command("bash", "-c", command);
         try {
-            Process petition = Runtime.getRuntime().exec("cmd /c" + dir + theCommand);
-        } catch (Exception e) {
+            Process process = processBuilder.start();
+            StringBuilder output2 = new StringBuilder();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                output2.append(line + "\n");
+                resultCommand.add(line);
+            }
+            int exitVal = process.waitFor();
+            if (exitVal == 0) {
+                System.out.println("Success!");
+                System.out.println(resultCommand);
+                resultCommand.clear();
+            } else {
+                System.out.println("Fail!");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        if (parameter.hasMetaData()) {
-            generateMetaDataJsonFormat();
-        }
-        System.out.println(theCommand);
     }
+
 }

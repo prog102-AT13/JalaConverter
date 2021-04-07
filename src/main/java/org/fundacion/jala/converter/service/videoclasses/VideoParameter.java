@@ -9,9 +9,8 @@
 package org.fundacion.jala.converter.service.videoclasses;
 
 public class VideoParameter {
-    private String direction;
-    private String inputName;
-    private String outputName;
+    private String inputPath;
+    private String outputFormat;
     private String resolution;
     private boolean tumbnail;
     private static final int FRAME_R_DEFAULT = 30;
@@ -22,24 +21,17 @@ public class VideoParameter {
     private boolean metaData;
 
     /**
-     * Sets the direction of the input video
-     */
-    public void setDirection(final String newDirection) {
-        this.direction = newDirection;
-    }
-
-    /**
      * Sets the name of the input video
      */
-    public void setInputName(final String newInputName) {
-        this.inputName = newInputName;
+    public void setInputName(final String newInputPath) {
+        this.inputPath = newInputPath;
     }
 
     /**
      * Sets the name of the output video
      */
-    public void setOutputName(final String newOutputName) {
-        this.outputName = newOutputName;
+    public void setOutputFormat(final String newOutputFormat) {
+        this.outputFormat = newOutputFormat;
     }
 
     /**
@@ -92,24 +84,17 @@ public class VideoParameter {
     }
 
     /**
-     * Gets the direction of the input video
-     */
-    public String getDirection() {
-        return direction;
-    }
-
-    /**
      * Gets the name of the input video
      */
-    public String getInputName() {
-        return inputName;
+    public String getInputPath() {
+        return inputPath;
     }
 
     /**
      * Gets the name of the output video
      */
-    public String getOutputName() {
-        return outputName;
+    public String getOutputFormat() {
+        return outputFormat;
     }
 
     /**
