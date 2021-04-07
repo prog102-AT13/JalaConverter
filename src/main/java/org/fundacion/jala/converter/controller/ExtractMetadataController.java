@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- * <p>
+ * <
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -51,10 +51,8 @@ public class ExtractMetadataController {
     @GetMapping("/metadata")
     public ResponseEntity<String> extractMetadataDefaultName() {
         LOGGER.info("start");
-
         File fileToExtract = new File("C:\\Users\\ASUS\\Desktop\\AT Materias\\Prog102\\prog102-AT13-JalaConverter\\JalaConverter\\Images\\img7.jpg");
         File fileToExport = new File("C:\\Users\\ASUS\\Desktop\\AT Materias\\Prog102\\prog102-AT13-JalaConverter\\JalaConverter\\archive");
-
         ExtractMetadata extractMetadata = new ExtractMetadata(fileToExtract, fileToExport);
         extractMetadata.extractMetadata();
         LOGGER.info("finish");
@@ -67,10 +65,8 @@ public class ExtractMetadataController {
     @GetMapping("/metadataMoreOption")
     public ResponseEntity<String> extractMetadata() {
         LOGGER.info("start");
-
         File fileToExtract = new File("C:\\Users\\ASUS\\Desktop\\AT Materias\\Prog102\\prog102-AT13-JalaConverter\\JalaConverter\\Images\\img7.jpg");
         File fileToExport = new File("C:\\Users\\ASUS\\Desktop\\AT Materias\\Prog102\\prog102-AT13-JalaConverter\\JalaConverter\\archive");
-
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setFileToExtract(fileToExtract);
         objectMetadata.setFileToExport(fileToExport);

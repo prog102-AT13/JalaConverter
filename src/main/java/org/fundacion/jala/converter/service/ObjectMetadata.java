@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- * <p>
+ *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -9,7 +9,6 @@
 package org.fundacion.jala.converter.service;
 
 import org.fundacion.jala.converter.service.metadata.TypeFileExport;
-
 import java.io.File;
 
 public class ObjectMetadata {
@@ -20,7 +19,7 @@ public class ObjectMetadata {
     private boolean moreInfo = false;
 
     /**
-     *
+     * Get path of file to extract.
      * @return path of file which the metadata is extracted.
      */
     public File getFileToExtract() {
@@ -28,6 +27,7 @@ public class ObjectMetadata {
     }
 
     /**
+     * Set path of file to extract.
      * @param file is path of file which the metadata is extracted.
      */
     public void setFileToExtract(final File file) {
@@ -35,6 +35,7 @@ public class ObjectMetadata {
     }
 
     /**
+     * Get path of file to extract.
      * @return path of file which the metadata is exported.
      */
     public File getFileToExport() {
@@ -42,6 +43,7 @@ public class ObjectMetadata {
     }
 
     /**
+     * Set path of file to extract.
      * @param file is path of file which the metadata is exported.
      */
     public void setFileToExport(final File file) {
@@ -49,6 +51,7 @@ public class ObjectMetadata {
     }
 
     /**
+     * Get name of file which the metadata is extracted.
      * @return name of file which the metadata is extracted.
      */
     public String getNameExport() {
@@ -56,6 +59,7 @@ public class ObjectMetadata {
     }
 
     /**
+     * Set name of file which the metadata is extracted.
      * @param nameExport is name of file which the metadata is extracted.
      */
     public void setNameExport(String nameExport) {
@@ -63,6 +67,7 @@ public class ObjectMetadata {
     }
 
     /**
+     * Get type of file which the metadata is extracted.
      * @return type of file which the metadata is extracted.
      */
     public TypeFileExport getTypeFileExport() {
@@ -70,6 +75,7 @@ public class ObjectMetadata {
     }
 
     /**
+     * Set type of file which the metadata is extracted.
      * @param typeFileExport is type of file which the metadata is extracted.
      */
     public void setTypeFileExport(TypeFileExport typeFileExport) {
@@ -77,6 +83,7 @@ public class ObjectMetadata {
     }
 
     /**
+     * if The file metadata has more information than usual.
      * @return moreInfo of file which the metadata is extracted.
      */
     public boolean getMoreInfo() {
@@ -84,6 +91,7 @@ public class ObjectMetadata {
     }
 
     /**
+     * Set the file metadata has more information than usual.
      * @param moreInfo of file which the metadata is extracted.
      */
     public void setMoreInfo(boolean moreInfo) {
