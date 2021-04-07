@@ -12,10 +12,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.service.metadata.ExportTypeFile;
 import org.fundacion.jala.converter.service.metadata.TypeFileExport;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
+
 
 public class ExtractMetadata {
     private final String addressExiftool = "cd thirdparty\\windows\\exiftool\\12.2.2_exiftool/";
@@ -50,14 +49,6 @@ public class ExtractMetadata {
             LOGGER.info("Execute Try");
             String command = "cmd /c " + addressExiftool + " && exiftool.exe " + "\"" + fileToExtract.getAbsolutePath() + "\"" + moreInformation + exportFile;
             Process process = Runtime.getRuntime().exec(command);
-
-            System.out.println(command);
-            BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String resultOfExecution = null;
-            while ((resultOfExecution = br.readLine()) != null) {
-                System.out.println(resultOfExecution);
-                System.out.println("Success");
-            }
         } catch (IOException e) {
             LOGGER.error("Execute Exception to Safe text in a file");
             e.printStackTrace();
