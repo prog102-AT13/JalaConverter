@@ -11,12 +11,14 @@ package org.fundacion.jala.converter.service;
 import org.fundacion.jala.converter.service.metadata.ExportTypeFile;
 import org.fundacion.jala.converter.service.metadata.TypeFileExport;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class ExtractMetadata {
    // final static String ADDRESS = "cd src\\main\\java\\org\\fundacion\\jala\\converter\\service\\metadata\\exiftoolApp/ "
-    private final String addressExiftool = "cd thirdparty\\windows\\exiftool\\12.2.2_exiftool/ ";
+    private final String addressExiftool = "cd thirdparty\\window\\exiftool\\12.2.2_exiftool/";
     private String exportFile = "";
     private File file;
     private String moreInformation = " ";
@@ -33,7 +35,7 @@ public class ExtractMetadata {
     public ExtractMetadata(File file) {
         this.file = file;
         setMoreInformation();
-        exportTypeFile = new ExportTypeFile(file.getName(), "Default", TypeFileExport.XMP);
+        exportTypeFile = new ExportTypeFile(file.getName(), "Default", TypeFileExport.TXT);
         exportFile = exportTypeFile.getNameFileCompleteToExport();
         extractMetadata();
     }
@@ -43,14 +45,22 @@ public class ExtractMetadata {
      */
     public void extractMetadata() {
         try {
-            String command = "cmd /c " + addressExiftool + " && exiftool.exe " + "\"" + file + "\"" + moreInformation + exportFile;
+            String command = "cmd /c " + addressExiftool+ " && exiftool.exe " + "\"" +  file.getAbsolutePath() + "\"" + moreInformation + exportFile;
+            //String command = "cmd /c " + "dir";
             Process process = Runtime.getRuntime().exec(command);
+
             System.out.println(command);
-            System.out.println("Success");
-        } catch (IOException e) {
-            System.out.println("Fail");
+            BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String resultOfExecution = null;
+            while ((resultOfExecution = br.readLine()) != null) {
+                System.out.println(resultOfExecution);
+                System.out.println("Success");
+            }
+            } catch (IOException e){
+                System.out.println("Fail");
+            }
         }
-    }
+
 
     /**
      * The method permit Exiftool get more information about metadata of file.

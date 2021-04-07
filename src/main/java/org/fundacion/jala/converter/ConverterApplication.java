@@ -37,7 +37,7 @@ public class ConverterApplication {
 //        ExtractMetadata extractMetadata = new ExtractMetadata(objectMetadata);
 //        extractMetadata.extractMetadata();
 
-        File file=new File("images/img7.jpg");
+        File file=new File("C:\\Users\\ASUS\\Desktop\\AT Materias\\Prog102\\prog102-AT13-JalaConverter\\JalaConverter\\Images\\img7.jpg");
         ExtractMetadata extractMetadata = new ExtractMetadata(file);
         extractMetadata.extractMetadata();
     }
