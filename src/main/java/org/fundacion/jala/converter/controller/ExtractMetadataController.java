@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- *
+ * <p>
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -40,7 +40,7 @@ public class ExtractMetadataController {
         String storagePath = fileStorageService.uploadFile(file);
         String outputPath = FileStorageService.getOutputPath(filename);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-        String downloadLink = baseUrl + "/api/download/" +  filename;
+        String downloadLink = baseUrl + "/api/download/" + filename;
         LOGGER.info("finish");
         return downloadLink;
     }
@@ -50,10 +50,12 @@ public class ExtractMetadataController {
      */
     @GetMapping("/metadata")
     public ResponseEntity<String> extractMetadataDefaultName() {
-
         LOGGER.info("start");
-        File file=new File("Images/img7.jpg");
-        ExtractMetadata extractMetadata = new ExtractMetadata(file);
+
+        File fileToExtract = new File("C:\\Users\\ASUS\\Desktop\\AT Materias\\Prog102\\prog102-AT13-JalaConverter\\JalaConverter\\Images\\img7.jpg");
+        File fileToExport = new File("C:\\Users\\ASUS\\Desktop\\AT Materias\\Prog102\\prog102-AT13-JalaConverter\\JalaConverter\\archive");
+
+        ExtractMetadata extractMetadata = new ExtractMetadata(fileToExtract, fileToExport);
         extractMetadata.extractMetadata();
         LOGGER.info("finish");
         return ResponseEntity.ok("Extract metadata Complete");
@@ -65,9 +67,13 @@ public class ExtractMetadataController {
     @GetMapping("/metadataMoreOption")
     public ResponseEntity<String> extractMetadata() {
         LOGGER.info("start");
-        File file=new File("Images/img7.jpg");
-        ObjectMetadata objectMetadata=new ObjectMetadata();
-        objectMetadata.setFile(file);
+
+        File fileToExtract = new File("C:\\Users\\ASUS\\Desktop\\AT Materias\\Prog102\\prog102-AT13-JalaConverter\\JalaConverter\\Images\\img7.jpg");
+        File fileToExport = new File("C:\\Users\\ASUS\\Desktop\\AT Materias\\Prog102\\prog102-AT13-JalaConverter\\JalaConverter\\archive");
+
+        ObjectMetadata objectMetadata = new ObjectMetadata();
+        objectMetadata.setFileToExtract(fileToExtract);
+        objectMetadata.setFileToExport(fileToExport);
         objectMetadata.setMoreInfo(true);
         objectMetadata.setNameExport("ImangenTest");
         objectMetadata.setTypeFileExport(TypeFileExport.TXT);

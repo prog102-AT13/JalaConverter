@@ -8,14 +8,17 @@
  */
 package org.fundacion.jala.converter.service.metadata;
 
+import java.io.File;
+
 public class ExportTypeFile {
-    private final String addressExportFile = "D:\\";
+    private File addressExportFile;
     private String nameFileComplete;
     private String nameFileExport;
     private String nameFileCompleteToExport;
 
-    public ExportTypeFile(final String nameFileComplete, final String nameExport, final TypeFileExport typeExport) {
+    public ExportTypeFile(final String nameFileComplete, final String nameExport, final TypeFileExport typeExport, final File addressFileExport) {
         this.nameFileComplete = nameFileComplete;
+        this.addressExportFile = addressFileExport;
         buildFileName(nameExport);
         buildFileType(typeExport);
     }
@@ -35,10 +38,6 @@ public class ExportTypeFile {
      * @param nameExport define name of file which it is exported.
      */
     private void buildFileName(final String nameExport) {
-        if (nameExport == "NameWithoutType") {
-            setDefaultNameFileWithoutTypeOfFile();
-            return;
-        }
         if (nameExport == "Default" || nameExport == "") {
             setDefaultNameFileWithTypeOfFile();
             return;
@@ -55,22 +54,6 @@ public class ExportTypeFile {
         if (typeExport == TypeFileExport.TXT) exportFileTxt();
         if (typeExport == TypeFileExport.HTML) exportFileHtml();
         if (typeExport == TypeFileExport.XMP) exportFileXMP();
-    }
-
-    /**
-     * Defines name that the file are exported.
-     * set nameFileExport.
-     * e.g. DragonBall.mp4 --> DragonBall.xmp
-     */
-    private void setDefaultNameFileWithoutTypeOfFile() {
-        char[] spellName = nameFileComplete.toCharArray();
-        String name = "";
-        boolean write = false;
-        for (int i = spellName.length - 1; i >= 0; i--) {
-            if (spellName[i] == '.' && !write) write = true;
-            else if (write) name = spellName[i] + name;
-        }
-        nameFileExport = name;
     }
 
     /**
@@ -96,8 +79,7 @@ public class ExportTypeFile {
      * set nameFileCompleteToExport.
      */
     private void exportFileTxt() {
-        nameFileCompleteToExport = " > " + addressExportFile + nameFileExport + ".txt" + "\"";
-        //nameFileCompleteToExport = " > "  + nameFileExport + ".txt" + "\"";
+        nameFileCompleteToExport = " > " + "\"" + addressExportFile.getAbsolutePath() + "\\" + nameFileExport + ".txt" + "\"";
     }
 
     /**
@@ -105,7 +87,7 @@ public class ExportTypeFile {
      * set nameFileCompleteToExport.
      */
     private void exportFileHtml() {
-        nameFileCompleteToExport = " -h > " + "\"" + nameFileExport + ".html" + "\"";
+        nameFileCompleteToExport = " -h > " + "\"" + addressExportFile.getAbsolutePath() + "\\" + nameFileExport + ".html" + "\"";
     }
 
     /**
@@ -113,7 +95,7 @@ public class ExportTypeFile {
      * set exportFileXMP.
      */
     private void exportFileXMP() {
-        nameFileCompleteToExport = " -X > " + "\"" + nameFileExport + ".xmp" + "\"";
+        nameFileCompleteToExport = " -X > " + "\"" + addressExportFile.getAbsolutePath() + "\\" + nameFileExport + ".xmp" + "\"";
     }
 }
 
