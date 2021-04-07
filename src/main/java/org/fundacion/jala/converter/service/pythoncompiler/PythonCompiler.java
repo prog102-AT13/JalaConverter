@@ -31,7 +31,7 @@ public class PythonCompiler {
             BufferedReader bufferedReaderr = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String resultOfExecution = null;
             String result = "";
-            while((resultOfExecution = bufferedReaderr.readLine()) != null) {
+            while ((resultOfExecution = bufferedReaderr.readLine()) != null) {
                 result += resultOfExecution + "\n";
             }
             LOGGER.info("finish");
