@@ -9,7 +9,9 @@
 package org.fundacion.jala.converter.service.pythoncompiler;
 
 public enum Python {
-    V2("python"), V3("python3");
+
+    V2(System.getProperty("user.dir") + "/thirdparty/python3/python.exe"),
+    V3(System.getProperty("user.dir") + "/thirdparty/python3/python.exe");
 
     private String version;
 
