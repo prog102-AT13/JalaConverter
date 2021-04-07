@@ -30,7 +30,7 @@ public class FileStorageService {
      */
     public String uploadFile(MultipartFile file) throws IllegalStateException, IOException {
         String filename = file.getOriginalFilename();
-        String storageDir = PATH + File.separator + ARCHIVE + File.separator + STORAGE + File.separator + filename;
+        String storageDir = PATH + File.separator + ARCHIVE + File.separator + filename;
         file.transferTo(new File(storageDir));
         return storageDir;
     }
