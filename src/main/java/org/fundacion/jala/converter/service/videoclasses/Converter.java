@@ -8,11 +8,6 @@
  */
 package org.fundacion.jala.converter.service.videoclasses;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-
 public class Converter {
     private String startFirstCommand = "ffmpeg -i ";
     private VideoParameter parameter;
@@ -27,28 +22,28 @@ public class Converter {
 
     /**
      * Converts the input video
+     * @param pathFile string with the input path
      */
     public void convertVideo(final String pathFile) {
-        String adaptPath = "'" + pathFile + "'";
+        String adaptPath = pathFile;
         format = parameter.getOutputFormat();
-        output = adaptPath.substring((adaptPath.lastIndexOf("/") + 1), adaptPath.lastIndexOf(".") + 1) + format + "'";
-        pathOutput = adaptPath.substring(0, (adaptPath.lastIndexOf("storage"))) + "output/";
+        output = adaptPath.substring((adaptPath.lastIndexOf("\\") + 1), adaptPath.lastIndexOf(".") + 1) + format;
+        pathOutput = adaptPath.substring(0, (adaptPath.lastIndexOf("storage"))) + "output\\";
 
         String fCommand = startFirstCommand + adaptPath + " ";
         String parameters = changeResolution() + changeFrameRate() + removeAudio();
-        String theCommand = fCommand + parameters + pathOutput + output + generateATumbnail() + " -y";
+        String theCommand = fCommand + parameters + pathOutput + output + generateATumbnail();
 
         System.out.println(theCommand);
-        run(theCommand);
-//        try {
-//            Process petition = Runtime.getRuntime().exec("cmd /c" + theCommand);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        try {
+            Process petition = Runtime.getRuntime().exec("cmd /c " + theCommand);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-//        if (parameter.hasMetaData()) {
-//            generateMetaDataJsonFormat();
-//        }
+        if (parameter.hasMetaData()) {
+            generateMetaDataJsonFormat();
+        }
 
     }
 
@@ -89,7 +84,7 @@ public class Converter {
     private String generateATumbnail() {
         boolean tumbnail = parameter.hasTumbnail();
         if (tumbnail) {
-            String tumbnailCommand = " -ss 00:00:01 -vframes 1" + pathOutput + "VideoTumbnail.png";
+            String tumbnailCommand = " -ss 00:00:01 -vframes 1 " +  pathOutput + "VideoTumbnail.png";
             return tumbnailCommand;
         }
         return "";
@@ -119,38 +114,6 @@ public class Converter {
             return frameCommand;
         }
         return "";
-    }
-
-    private ArrayList<String> resultCommand = new ArrayList<String>();
-    /**
-     * Run command by cmd or bash
-     * @param command
-     */
-    public void run(final String command) {
-        ProcessBuilder processBuilder = new ProcessBuilder();
-        processBuilder.command("bash", "-c", command);
-        try {
-            Process process = processBuilder.start();
-            StringBuilder output2 = new StringBuilder();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                output2.append(line + "\n");
-                resultCommand.add(line);
-            }
-            int exitVal = process.waitFor();
-            if (exitVal == 0) {
-                System.out.println("Success!");
-                System.out.println(resultCommand);
-                resultCommand.clear();
-            } else {
-                System.out.println("Fail!");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
 }

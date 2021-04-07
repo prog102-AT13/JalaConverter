@@ -24,15 +24,15 @@ public class ConverterApplication {
         LOGGER.info("start");
 //        SpringApplication.run(ConverterApplication.class, args);
         VideoParameter parameter = new VideoParameter();
-        parameter.setOutputFormat("avi");
+        parameter.setOutputFormat("mpeg");
         parameter.setWidth(1280);
         parameter.setHeight(720);
-        parameter.setFrameRate(60);
+        parameter.setFrameRate(30);
         parameter.setMetaData(false);
         parameter.setTumbnail(true);
         parameter.setAudio(true);
         Converter converter = new Converter(parameter);
-        converter.convertVideo("/C/Jala/Progra102/Proy/JalaConverter/archive/storage/aguinaldo.mp4");
+        converter.convertVideo("C:\\Jala\\Progra102\\Proy\\JalaConverter\\archive\\storage\\aguinaldo.mp4");
         LOGGER.info("finish");
     }
 
