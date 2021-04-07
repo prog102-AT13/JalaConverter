@@ -43,7 +43,7 @@ public class VideoConverterInterface extends JPanel implements ActionListener{
         settings = new OutputSettings();
         settings.setAlignmentX(LEFT_ALIGNMENT);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBorder(new EmptyBorder(50, 50, 50, 0));
+        setBorder(new EmptyBorder(50, 50, 100, 70));
         add(videoTitle.getTextLabel());
         add(file);
         add(menuConverterType);

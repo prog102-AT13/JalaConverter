@@ -34,7 +34,7 @@ public class MetaDataInterface extends JPanel implements ActionListener {
         convertMetaData.setAlignmentX(CENTER_ALIGNMENT);
         convertMetaData.addActionListener(this::actionPerformed);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBorder(new EmptyBorder(20, 0, 20, 0));
+        setBorder(new EmptyBorder(20, 0, 100, 0));
         add(file);
         add(exportInfo);
         add(outputInfo);

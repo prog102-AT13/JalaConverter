@@ -22,7 +22,6 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 
 public class MainInterface extends JFrame{
     private ImageIcon compilerIcon;
@@ -38,12 +37,10 @@ public class MainInterface extends JFrame{
      * Initialize all the graphics components in the
      * main Frame
      */
-    public void initMainInterface() {
+    public void initInterface(){
         compilerJP = new CompilerInterface();
         video = new VideoConverterInterface();
         converterJP = new JPanel();
-        compilerIcon = new ImageIcon("src/Images/IconCompiler-02.png");
-        converterIcon = new ImageIcon("src/Images/IconConverter-03.png");
         titleTxt = new JLabelStyle("Jala Converter Project v1.0", "h2", 0, 0, 90);
         metaData =  new MetaDataInterface();
         audio = new AudioConverterInterface();
@@ -51,16 +48,8 @@ public class MainInterface extends JFrame{
         JTabbedPane mainTabPanel = new JTabbedPane();
         mainTabPanel.add("Compiler", compilerJP);
         mainTabPanel.add("Video Converter", video);
-        //mainTabPanel.add("Audio Converter", audio);
+        mainTabPanel.add("Audio Converter", audio);
         mainTabPanel.add("Meta Data", metaData);
-        mainTabPanel.setIconAt(0, compilerIcon);
-        mainTabPanel.setIconAt(1, converterIcon);
-        mainTabPanel.setIconAt(2, converterIcon);
-        mainTabPanel.setIconAt(3, converterIcon);
-        mainTabPanel.setBackgroundAt(0, Color.DARK_GRAY);
-        mainTabPanel.setBackgroundAt(1, Color.DARK_GRAY);
-        mainTabPanel.setBackgroundAt(2, Color.DARK_GRAY);
-        mainTabPanel.setBackgroundAt(3, Color.DARK_GRAY);
 
         setLayout(new BorderLayout());
         add(titleTxt.getTextLabel(), BorderLayout.NORTH);
