@@ -18,3 +18,38 @@
 [INFO ] 2021-04-06 16:49:58.608 [main] ConverterApplication - finish
 [INFO ] 2021-04-06 23:33:28.961 [main] ConverterApplication - start
 [INFO ] 2021-04-06 23:33:41.766 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 11:07:22.526 [main] ConverterApplication - start
+[INFO ] 2021-04-07 11:07:32.769 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 11:08:19.836 [main] ConverterApplication - start
+[INFO ] 2021-04-07 11:08:29.438 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 11:17:34.558 [http-nio-8080-exec-6] AuthController - Start.
+[INFO ] 2021-04-07 11:20:25.095 [http-nio-8080-exec-8] ExtractTextController - start
+[INFO ] 2021-04-07 11:20:25.097 [http-nio-8080-exec-8] ExtractText - start
+[INFO ] 2021-04-07 11:20:25.110 [http-nio-8080-exec-8] ExtractText - Execute Try
+[INFO ] 2021-04-07 11:20:26.867 [http-nio-8080-exec-8] ExtractText - start
+[INFO ] 2021-04-07 11:20:26.867 [http-nio-8080-exec-8] ExtractText - Execute Try
+[INFO ] 2021-04-07 11:20:26.880 [http-nio-8080-exec-8] ExtractText - finish
+[INFO ] 2021-04-07 11:20:26.881 [http-nio-8080-exec-8] ExtractText - finish
+[INFO ] 2021-04-07 11:20:26.881 [http-nio-8080-exec-8] ExtractTextController - finish
+[INFO ] 2021-04-07 11:30:02.528 [main] JavaCompiler - start
+[INFO ] 2021-04-07 11:30:02.535 [main] JavaCompiler - Execute Try
+[INFO ] 2021-04-07 11:30:05.481 [main] JavaCompiler - finish
+[INFO ] 2021-04-07 12:00:07.861 [main] ConverterApplication - start
+[INFO ] 2021-04-07 12:00:16.273 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 12:07:43.395 [main] ConverterApplication - start
+[INFO ] 2021-04-07 12:07:51.806 [main] ConverterApplication - finish
+[INFO ] 2021-04-07 12:07:54.561 [http-nio-8080-exec-1] JavaCompiler - start
+[INFO ] 2021-04-07 12:07:54.562 [http-nio-8080-exec-1] JavaCompiler - Execute Try
+[INFO ] 2021-04-07 12:07:57.266 [http-nio-8080-exec-1] JavaCompiler - finish
+[INFO ] 2021-04-07 12:08:52.625 [http-nio-8080-exec-3] JavaCompiler - start
+[INFO ] 2021-04-07 12:08:52.626 [http-nio-8080-exec-3] JavaCompiler - Execute Try
+[INFO ] 2021-04-07 12:08:54.462 [http-nio-8080-exec-3] JavaCompiler - finish
+[INFO ] 2021-04-07 12:12:37.034 [http-nio-8080-exec-6] JavaCompiler - start
+[INFO ] 2021-04-07 12:12:37.034 [http-nio-8080-exec-6] JavaCompiler - Execute Try
+[INFO ] 2021-04-07 12:12:38.981 [http-nio-8080-exec-6] JavaCompiler - finish
+[INFO ] 2021-04-07 12:13:07.024 [http-nio-8080-exec-7] JavaCompiler - start
+[INFO ] 2021-04-07 12:13:07.024 [http-nio-8080-exec-7] JavaCompiler - Execute Try
+[INFO ] 2021-04-07 12:13:08.982 [http-nio-8080-exec-7] JavaCompiler - finish
+[INFO ] 2021-04-07 12:15:34.312 [http-nio-8080-exec-10] JavaCompiler - start
+[INFO ] 2021-04-07 12:15:34.312 [http-nio-8080-exec-10] JavaCompiler - Execute Try
+[INFO ] 2021-04-07 12:15:36.249 [http-nio-8080-exec-10] JavaCompiler - finish
