@@ -22,7 +22,7 @@ public class CompilerInterface extends JPanel {
     /**
      * Initilize the graphics elements of the Main Compiler Interface.
      */
-    CompilerInterface() {
+    public CompilerInterface() {
         buttonsCompiler = new CompilerButtons();
         consoleOutput = new Console();
         langButtons = new LanguageButtons();

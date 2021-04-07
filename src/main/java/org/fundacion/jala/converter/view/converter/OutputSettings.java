@@ -19,7 +19,7 @@ import java.awt.Font;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
-public class OutputSettings extends JPanel{
+class OutputSettings extends JPanel{
     private JComboBox resolutionSelect;
     private JComboBox framesSelect;
     private JCheckBox optionCSound;
@@ -28,7 +28,7 @@ public class OutputSettings extends JPanel{
     /**
      * Initialize the graphic elements for output settings configurations.
      */
-    OutputSettings() {
+    protected OutputSettings() {
         JLabelStyle resolutionLabel = new JLabelStyle("Select resolution: ", "h3", 2, 70, 30);
         JLabelStyle frameLabel = new JLabelStyle("Select frame: ", "h3", 2, 70, 30);
         resolutionSelect = new JComboBox();

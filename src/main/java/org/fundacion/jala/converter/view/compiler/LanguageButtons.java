@@ -17,7 +17,7 @@ import javax.swing.BoxLayout;
 import java.awt.Dimension;
 import java.awt.Component;
 
-public class LanguageButtons extends JPanel {
+class LanguageButtons extends JPanel {
     private JButton cPlusPlus;
     private JButton java;
     private JButton python;
@@ -25,7 +25,7 @@ public class LanguageButtons extends JPanel {
     /**
      * Initialize the graphics elements for language buttons.
      */
-    public LanguageButtons() {
+    protected LanguageButtons() {
         ImageIcon javaIcon = new ImageIcon("src/Images/JavaIcon.png");
         ImageIcon pythonIcon = new ImageIcon("src/Images/PythonIcon.png");
         ImageIcon cIcon = new ImageIcon("src/Images/CIcon.png");

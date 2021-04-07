@@ -18,13 +18,13 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FlowLayout;
 
-public class ConverterTypeSelect extends JPanel{
+class ConverterTypeSelect extends JPanel{
     private JComboBox convertTo;
 
     /**
      * Initialize the graphic elements for SelectComboox for convert type.
      */
-    ConverterTypeSelect() {
+    protected ConverterTypeSelect() {
         JLabelStyle labelConvertTo = new JLabelStyle("Convert to: ", "h3", 2, 70, 30);
         convertTo = new JComboBox();
         convertTo.setPreferredSize(new Dimension(100, 30));

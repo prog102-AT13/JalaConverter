@@ -28,7 +28,6 @@ import java.io.File;
 class CompilerButtons extends JPanel implements ActionListener {
     private JButton runCode;
     private JButton clearConsole;
-    private JLabelStyle consoleTitle;
     private JButton selectFile;
     String pathFile;
 
@@ -58,6 +57,10 @@ class CompilerButtons extends JPanel implements ActionListener {
         add(clearConsole);
     }
 
+    /**
+     * Action of JButton to select a file.
+     * @param e event of the JButton.
+     */
     @Override
     public void actionPerformed(final ActionEvent e) {
         JFileChooser fileChooser = new JFileChooser();

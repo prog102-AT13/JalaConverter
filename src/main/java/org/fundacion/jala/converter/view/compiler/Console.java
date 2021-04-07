@@ -17,13 +17,13 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Color;
 
-public class Console extends JPanel {
+class Console extends JPanel {
     private JTextArea console;
 
     /**
      * Initialize the graphic elements of Console.
      */
-    Console() {
+    protected Console() {
         console = new JTextArea();
         console.setBackground(Color.black);
         console.setForeground(Color.white);

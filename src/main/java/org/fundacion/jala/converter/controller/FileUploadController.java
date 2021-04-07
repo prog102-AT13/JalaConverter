@@ -24,7 +24,7 @@ public class FileUploadController {
     @Autowired
     FileUploadService fileUploadService;
     @PostMapping("/upload")
-    public String uploadFile(@RequestParam("file")MultipartFile file, @RequestParam("metadata") boolean metadata) throws IllegalStateException, IOException {
+    public String uploadFile(@RequestParam("file")MultipartFile file, @RequestParam("metadataCLASS") boolean metadata) throws IllegalStateException, IOException {
         //fileUploadService.uploadFile(file);
         file.transferTo(new File("G:\\Files\\VideoUploads\\" + file.getOriginalFilename()));
         return "uploaded";

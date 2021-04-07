@@ -20,7 +20,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-public class SelectFile extends JPanel implements ActionListener {
+class SelectFile extends JPanel implements ActionListener {
     private JButton selectFile;
     private JTextField textFile;
     private JFileChooser fileChooser;
@@ -29,7 +29,7 @@ public class SelectFile extends JPanel implements ActionListener {
     /**
      * Initialize the graphic components for Selecting file display.
      */
-    SelectFile() {
+    protected SelectFile() {
         selectFile = new JButton("Open File");
         selectFile.addActionListener(this);
         int textFieldHeight = 30;

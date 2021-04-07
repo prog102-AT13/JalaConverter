@@ -22,7 +22,7 @@ import java.awt.event.ActionListener;
 
 import java.io.File;
 
-public class SelectFile extends JPanel implements ActionListener {
+class SelectFile extends JPanel implements ActionListener {
     private JButton fileButton;
     private String fileOriginPath;
     private JFileChooser fileChooser;
@@ -31,7 +31,7 @@ public class SelectFile extends JPanel implements ActionListener {
     /**
      * Initialize the graphic components to select a file.
      */
-    SelectFile() {
+    protected SelectFile() {
         fileButton = new JButton("Select a File");
         fileButton.addActionListener(this::actionPerformed);
         fileButton.setFont(new Font("Barlow", 0, 12));
@@ -69,7 +69,7 @@ public class SelectFile extends JPanel implements ActionListener {
      * when selected.
      * @return String fileOriginPath.
      */
-    public String getOriginFilePath() {
+    protected String getOriginFilePath() {
         return fileOriginPath;
     }
 }
