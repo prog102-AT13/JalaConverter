@@ -8,9 +8,6 @@
  */
 package org.fundacion.jala.converter;
 
-import org.fundacion.jala.converter.service.videoclasses.Converter;
-import org.fundacion.jala.converter.service.videoclasses.VideoParameter;
-import org.fundacion.jala.converter.service.AudioConverter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.apache.logging.log4j.Logger;
@@ -22,18 +19,7 @@ public class ConverterApplication {
 
     public static void main(final String[] args) {
         LOGGER.info("start");
-//        SpringApplication.run(ConverterApplication.class, args);
-        VideoParameter parameter = new VideoParameter();
-        parameter.setOutputFormat("mpeg");
-        parameter.setWidth(1280);
-        parameter.setHeight(720);
-        parameter.setFrameRate(30);
-        parameter.setMetaData(false);
-        parameter.setTumbnail(true);
-        parameter.setAudio(true);
-        Converter converter = new Converter(parameter);
-        converter.convertVideo("C:\\Jala\\Progra102\\Proy\\JalaConverter\\archive\\storage\\aguinaldo.mp4");
+        SpringApplication.run(ConverterApplication.class, args);
         LOGGER.info("finish");
     }
-
 }

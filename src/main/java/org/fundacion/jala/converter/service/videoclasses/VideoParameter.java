@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- *
+ * <p>
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -22,13 +22,15 @@ public class VideoParameter {
 
     /**
      * Sets the name of the input video
+     * @param newInputPath String with the input path
      */
-    public void setInputName(final String newInputPath) {
+    public void setInputPath(final String newInputPath) {
         this.inputPath = newInputPath;
     }
 
     /**
      * Sets the name of the output video
+     * @param newOutputFormat String with the output format
      */
     public void setOutputFormat(final String newOutputFormat) {
         this.outputFormat = newOutputFormat;
@@ -36,6 +38,7 @@ public class VideoParameter {
 
     /**
      * Sets the resolution of the output video
+     * @param newResolution String with the video resolution
      */
     public void setResolution(final String newResolution) {
         this.resolution = newResolution;
@@ -43,6 +46,7 @@ public class VideoParameter {
 
     /**
      * Sets the width of the output video
+     * @param newWidth int with the video width
      */
     public void setWidth(final int newWidth) {
         this.width = newWidth;
@@ -50,6 +54,7 @@ public class VideoParameter {
 
     /**
      * Sets the height of the output video
+     * @param newHeight int with the video height
      */
     public void setHeight(final int newHeight) {
         this.height = newHeight;
@@ -57,6 +62,7 @@ public class VideoParameter {
 
     /**
      * Sets the audio of the output video
+     * @param newAudio boolean that indicates if the video has to have audio or not
      */
     public void setAudio(final boolean newAudio) {
         this.audio = newAudio;
@@ -64,6 +70,7 @@ public class VideoParameter {
 
     /**
      * Sets the frame rate of the output video
+     * @param newFrameRate int with the video frame rate
      */
     public void setFrameRate(final int newFrameRate) {
         this.frameRate = newFrameRate;
@@ -71,6 +78,7 @@ public class VideoParameter {
 
     /**
      * Sets the tumbnail of the output video
+     * @param newTumbnail boolean that indicates if the video has to have tumbnail
      */
     public void setTumbnail(final boolean newTumbnail) {
         this.tumbnail = newTumbnail;
@@ -78,6 +86,7 @@ public class VideoParameter {
 
     /**
      * Sets the width of the output video
+     * @param newMetaData boolean that indicates if the video has to have metadata file
      */
     public void setMetaData(final boolean newMetaData) {
         this.metaData = newMetaData;

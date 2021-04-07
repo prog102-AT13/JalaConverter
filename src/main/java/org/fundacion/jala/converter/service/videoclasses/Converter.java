@@ -14,6 +14,7 @@ public class Converter {
     private String format;
     private String output;
     private String pathOutput;
+    private static final int WAIT_TIME = 5000;
     private static final int INIT_NUMBER = 20;
 
     public Converter(final VideoParameter vParameter) {
@@ -29,22 +30,23 @@ public class Converter {
         format = parameter.getOutputFormat();
         output = adaptPath.substring((adaptPath.lastIndexOf("\\") + 1), adaptPath.lastIndexOf(".") + 1) + format;
         pathOutput = adaptPath.substring(0, (adaptPath.lastIndexOf("storage"))) + "output\\";
-
         String fCommand = startFirstCommand + adaptPath + " ";
         String parameters = changeResolution() + changeFrameRate() + removeAudio();
-        String theCommand = fCommand + parameters + pathOutput + output + generateATumbnail();
-
+        String theCommand = fCommand + parameters + pathOutput + output + generateATumbnail() + " -y";
         System.out.println(theCommand);
         try {
             Process petition = Runtime.getRuntime().exec("cmd /c " + theCommand);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        if (parameter.hasMetaData()) {
-            generateMetaDataJsonFormat();
+        try {
+            Thread.sleep(WAIT_TIME);
+            if (parameter.hasMetaData()) {
+                generateMetaDataJsonFormat();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-
     }
 
     /**
@@ -64,7 +66,7 @@ public class Converter {
     }
 
     /**
-     * Generates a json with the output video metadata
+     * Generates a json file with the output video metadata
      */
     private void generateMetaDataJsonFormat() {
         String startCommand = "ffprobe -v quiet -print_format json -show_format -show_streams ";
@@ -84,7 +86,7 @@ public class Converter {
     private String generateATumbnail() {
         boolean tumbnail = parameter.hasTumbnail();
         if (tumbnail) {
-            String tumbnailCommand = " -ss 00:00:01 -vframes 1 " +  pathOutput + "VideoTumbnail.png";
+            String tumbnailCommand = " -ss 00:00:01 -vframes 1 " + pathOutput + "VideoTumbnail.png";
             return tumbnailCommand;
         }
         return "";
@@ -115,5 +117,4 @@ public class Converter {
         }
         return "";
     }
-
 }
