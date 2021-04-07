@@ -8,18 +8,26 @@
  */
 package org.fundacion.jala.converter;
 
+import org.fundacion.jala.converter.view.MainInterface;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+
+import javax.swing.SwingUtilities;
 
 @SpringBootApplication
 public class ConverterApplication {
     private static final Logger logger = LogManager.getLogger();
 
 	public static void main(String[] args) {
+		MainInterface main = new MainInterface();
 		logger.info("start");
 		SpringApplication.run(ConverterApplication.class, args);
+		System.setProperty("java.awt.headless", "false");
+		SwingUtilities.invokeLater(()-> {
+			main.initInterface();
+		});
 		logger.info("finish");
 	}
 }
