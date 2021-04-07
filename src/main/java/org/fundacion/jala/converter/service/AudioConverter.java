@@ -16,6 +16,9 @@ public final class AudioConverter {
     private String volume = "";
     private RunCommand runCommand = new RunCommand();
     private final int ONE_HUNDRED = 1000;
+    private final String K20_HERTZ = "20";
+    private final String K44_HERTZ = "44";
+    private final String K48_HERTZ = "48";
 
     /**
      * Create command for audio converter
@@ -37,7 +40,7 @@ public final class AudioConverter {
 
     /**
      * Create parameter for volume
-     * @return
+     * @return a string with format for volume
      */
     private String formatVolume() {
         if (!getVolume().equals("") && !getVolume().equals("1")) {
@@ -48,17 +51,17 @@ public final class AudioConverter {
 
     /**
      * Create parameter for Hz
-     * @return
+     * @return a string with format for hz
      */
     private String formatHz() {
         if (!getHz().equals("")) {
-            if (getHz().equals("20")){
+            if (getHz().equals(K20_HERTZ)){
                 return " -ar 22050 ";
             }
-            if (getHz().equals("44")){
+            if (getHz().equals(K44_HERTZ)){
                 return " -ar 44100 ";
             }
-            if (getHz().equals("48")){
+            if (getHz().equals(K48_HERTZ)){
                 return " -ar 48000 ";
             }
         }
@@ -67,7 +70,7 @@ public final class AudioConverter {
 
     /**
      * Create parameter for bitrate
-     * @return
+     * @return a string with format for bitrate
      */
     private String formatBitrate() {
         if (!getBitrate().equals("")) {
@@ -76,34 +79,63 @@ public final class AudioConverter {
         return "";
     }
 
+    /**
+     * Obtain format of audio converter
+     * @return a string of format of audio converter
+     */
     private String getFormat() {
         return format;
     }
 
+    /**
+     * Set new format of the audio converter
+     * @param newFormat
+     */
     public void setFormat(final String newFormat) {
         this.format = newFormat;
     }
-
+    /**
+     * Obtain bitrate of audio converter
+     * @return a string of bitrate of audio converter
+     */
     public String getBitrate() {
         return bitrate;
     }
 
+    /**
+     * Set new bitrate of the audio converter
+     * @param newBitrate
+     */
     public void setBitrate(final String newBitrate) {
         this.bitrate = newBitrate;
     }
-
+    /**
+     * Obtain volume of audio converter
+     * @return a string of volume of audio converter
+     */
     public String getVolume() {
         return volume;
     }
 
+    /**
+     * Set new volume of the audio converter
+     * @param newVolume
+     */
     public void setVolume(final String newVolume) {
         this.volume = newVolume;
     }
-
+    /**
+     * Obtain hz of audio converter
+     * @return a string of hz of audio converter
+     */
     public String getHz() {
         return hz;
     }
 
+    /**
+     * Set new Hz of the audio converter
+     * @param newHz
+     */
     public void setHz(final String newHz) {
         this.hz = newHz;
     }
