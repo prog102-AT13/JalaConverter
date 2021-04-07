@@ -9,12 +9,16 @@
 
 package org.fundacion.jala.converter.service;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class RunCommand {
+    private static final Logger LOGGER = LogManager.getLogger();
     private ArrayList<String> resultCommand = new ArrayList<String>();
 
     /**
@@ -25,8 +29,9 @@ public class RunCommand {
         ProcessBuilder processBuilder = new ProcessBuilder();
 
         processBuilder.command("bash", "-c", command);
-
+        LOGGER.info("start");
         try {
+            LOGGER.info("Execute Try");
             Process process = processBuilder.start();
             StringBuilder output = new StringBuilder();
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -45,10 +50,12 @@ public class RunCommand {
             } else {
                 System.out.println("Fail!");
             }
-
+            LOGGER.info("finish");
         } catch (IOException e) {
+            LOGGER.error("Execute Exception" + e.getLocalizedMessage());
             e.printStackTrace();
         } catch (InterruptedException e) {
+            LOGGER.error("Execute Exception" + e.getLocalizedMessage());
             e.printStackTrace();
         }
     }
