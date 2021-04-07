@@ -39,7 +39,6 @@ public class ExtractMetadataController {
         LOGGER.info("start");
         ExtractMetadata extractMetadata = new ExtractMetadata(new File(fileToExtract), new File(fileToExport));
         extractMetadata.extractMetadata();
-
         File file = new File(fileToExtract);
         String filename = file.getName();
         String storagePath = filename;
@@ -64,11 +63,8 @@ public class ExtractMetadataController {
         objectMetadata.setFileToExport(new File(fileToExport));
         objectMetadata.setMoreInfo(isMoreInfo);
         objectMetadata.setNameExport(nameExport);
-
         ExtractMetadata extractMetadata = new ExtractMetadata(objectMetadata);
-
         extractMetadata.extractMetadata();
-
         File file = new File(fileToExtract);
         String filename = file.getName();
         String storagePath = filename;

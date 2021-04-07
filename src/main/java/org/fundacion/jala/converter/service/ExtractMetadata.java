@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class ExtractMetadata {
-    private final String addressExiftool = "cd thirdparty\\window\\exiftool\\12.2.2_exiftool/";
+    private final String addressExiftool = "cd thirdparty\\windows\\exiftool\\12.2.2_exiftool/";
     private String exportFile = "";
     private File fileToExtract;
     private String moreInformation = " ";
