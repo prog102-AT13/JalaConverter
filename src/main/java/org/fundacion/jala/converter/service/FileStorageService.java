@@ -38,7 +38,7 @@ public class FileStorageService {
      * Returns a resource from given filename
      */
     public Resource downloadFile(String fileName) {
-        Path path = Paths.get(getOutputPath(fileName));
+        Path path = Paths.get(getArchivePath(fileName));
         Resource resource;
         try {
             resource = new UrlResource(path.toUri());
@@ -57,5 +57,11 @@ public class FileStorageService {
      */
     public static String getOutputPath(String filename) {
         return PATH + File.separator + ARCHIVE + File.separator + OUTPUT + File.separator + filename;
+    }
+    /**
+     * Returns archive path
+     */
+    public String getArchivePath(String filename) {
+        return PATH + File.separator + ARCHIVE + File.separator + filename;
     }
 }
