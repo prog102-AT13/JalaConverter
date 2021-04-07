@@ -7,12 +7,16 @@
  */
 package org.fundacion.jala.converter.service.videoclasses;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class Converter {
     private String startFirstCommand = "ffmpeg -i ";
     private VideoParameter parameter;
     private String format;
     private String output;
     private String pathOutput;
+    private String outputFileName;
     private static final int WAIT_TIME = 5000;
     private static final int INIT_NUMBER = 20;
 
@@ -28,6 +32,7 @@ public class Converter {
         String adaptPath = pathFile;
         format = parameter.getOutputFormat();
         output = adaptPath.substring((adaptPath.lastIndexOf("\\") + 1), adaptPath.lastIndexOf(".") + 1) + format;
+        setOutputFileName(output);
         pathOutput = adaptPath.substring(0, (adaptPath.lastIndexOf("storage"))) + "output\\";
         String fCommand = startFirstCommand + adaptPath + " ";
         String parameters = changeResolution() + changeFrameRate() + removeAudio();
@@ -121,5 +126,21 @@ public class Converter {
             return frameCommand;
         }
         return "";
+    }
+
+    /**
+     * Sets the output file name
+     * @param newOutputFileName String with the output file name
+     */
+    public void setOutputFileName(final String newOutputFileName) {
+        this.outputFileName = newOutputFileName;
+    }
+
+    /**
+     * Gets the output file name
+     * @return outputFileName
+     */
+    public String getOutputFileName() {
+        return outputFileName;
     }
 }

@@ -7,6 +7,9 @@
  */
 package org.fundacion.jala.converter.service.videoclasses;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class VideoParameter {
     private String inputPath;
     private String outputFormat;
