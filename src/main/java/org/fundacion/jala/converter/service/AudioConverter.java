@@ -25,15 +25,15 @@ public final class AudioConverter {
      * @param pathFile
      */
     public void audioConverter(final String pathFile) {
-        String adaptedPath = "'" + pathFile + "'";
+        String relativePath = "cd archive/ && ";
         String ffmpeg = "ffmpeg -i ";
         String bitrate = formatBitrate();
         String hz = formatHz();
         String volume = formatVolume();
-        String output = adaptedPath.substring((adaptedPath.lastIndexOf("/") + 1), adaptedPath.lastIndexOf(".") + 1) + getFormat() + "'";
-        String pathOutput = adaptedPath.substring(0, (adaptedPath.lastIndexOf("storage"))) + "output/";
+        String input = pathFile.substring(pathFile.lastIndexOf("/") + 1);
+        String output = pathFile.substring((pathFile.lastIndexOf("/") + 1), pathFile.lastIndexOf(".") + 1) + getFormat();
         String overwrite = " -y";
-        String command = ffmpeg + adaptedPath + bitrate + hz + volume + pathOutput + output + overwrite;
+        String command = relativePath + ffmpeg + input + bitrate + hz + volume + output + overwrite;
         System.out.println(command);
         runCommand.run(command);
     }
