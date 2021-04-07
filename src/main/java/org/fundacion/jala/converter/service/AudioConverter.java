@@ -9,11 +9,15 @@
 
 package org.fundacion.jala.converter.service;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public final class AudioConverter {
     private String format = "";
     private String bitrate = "";
     private String hz = "";
     private String volume = "";
+    private String outputFileName = "";
     private RunCommand runCommand = new RunCommand();
     private final int ONE_HUNDRED = 1000;
     private final String K20_HERTZ = "20";
@@ -25,17 +29,31 @@ public final class AudioConverter {
      * @param pathFile
      */
     public void audioConverter(final String pathFile) {
-        String adaptedPath = "'" + pathFile + "'";
+        String relativePath = "cd archive/ && cd storage/ && ";
         String ffmpeg = "ffmpeg -i ";
         String bitrate = formatBitrate();
         String hz = formatHz();
         String volume = formatVolume();
-        String output = adaptedPath.substring((adaptedPath.lastIndexOf("/") + 1), adaptedPath.lastIndexOf(".") + 1) + getFormat() + "'";
-        String pathOutput = adaptedPath.substring(0, (adaptedPath.lastIndexOf("storage"))) + "output/";
+        String input = pathFile.substring(pathFile.lastIndexOf("\\") + 1);
+        setOutputFileName(pathFile.substring((pathFile.lastIndexOf("\\") + 1), pathFile.lastIndexOf(".") + 1) + getFormat());
         String overwrite = " -y";
-        String command = ffmpeg + adaptedPath + bitrate + hz + volume + pathOutput + output + overwrite;
+        String command = relativePath + ffmpeg + input + bitrate + hz + volume + getOutputFileName() + overwrite;
         System.out.println(command);
         runCommand.run(command);
+    }
+    /**
+     * Set new outputFileName of the audio converter
+     * @param newOutputFileName
+     */
+    public void setOutputFileName(final String newOutputFileName) {
+        this.outputFileName = newOutputFileName;
+    }
+    /**
+     * This is name the output filename
+     * @return a string of output filename
+     */
+    public String getOutputFileName() {
+        return this.outputFileName;
     }
 
     /**
