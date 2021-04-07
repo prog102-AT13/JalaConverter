@@ -35,6 +35,7 @@ public class PythonCompilerController {
         LOGGER.info("start");
         String filename = file.getOriginalFilename();
         String storagePath = fileStorageService.uploadFile(file);
+        storagePath = "\"" + storagePath + "\"";
         PythonCompiler pythonCompiler = new PythonCompiler();
         LOGGER.info("finish");
         return pythonCompiler.compiler(Python.V3, storagePath);
