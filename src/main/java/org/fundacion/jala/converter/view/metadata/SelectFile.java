@@ -14,8 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JFileChooser;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -31,15 +30,16 @@ class SelectFile extends JPanel implements ActionListener {
      */
     protected SelectFile() {
         selectFile = new JButton("Open File");
+        selectFile.setFont(new Font("Barlow", 0, 11));
         selectFile.addActionListener(this);
         int textFieldHeight = 30;
         int textFieldWidth = 350;
         textFile = new JTextField();
+        textFile.setFont(new Font("Barlow", 0, 11));
         textFile.setPreferredSize(new Dimension(textFieldWidth, textFieldHeight));
         textFile.setEnabled(false);
-
-        int marginHeight = 30;
-        int marginWidth = 10;
+        final int marginHeight = 30;
+        final int marginWidth = 10;
         setLayout(new FlowLayout(FlowLayout.LEFT, marginHeight, marginWidth));
         add(selectFile);
         add(textFile);

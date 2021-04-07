@@ -27,10 +27,8 @@ public class CompilerInterface extends JPanel {
         consoleOutput = new Console();
         langButtons = new LanguageButtons();
         codeArea = new CodeTextArea();
-
         setLayout(new GridBagLayout());
         GridBagConstraints panelConstraint = new GridBagConstraints();
-
         panelConstraint.gridx = 0;
         panelConstraint.gridy = 1;
         panelConstraint.gridheight = 3;
@@ -38,20 +36,17 @@ public class CompilerInterface extends JPanel {
         panelConstraint.weighty = 1;
         panelConstraint.fill = GridBagConstraints.BOTH;
         add(langButtons, panelConstraint);
-
         panelConstraint.gridx = 1;
         panelConstraint.gridy = 1;
         panelConstraint.gridheight = 2;
         panelConstraint.gridwidth = 4;
         add(codeArea, panelConstraint);
-
         panelConstraint.gridx = 3;
         panelConstraint.gridy = 7;
         panelConstraint.gridheight = 1;
         panelConstraint.gridwidth = 2;
         panelConstraint.weighty = 0;
         add(buttonsCompiler, panelConstraint);
-
         panelConstraint.gridx = 1;
         panelConstraint.gridy = 8;
         panelConstraint.gridheight = 2;

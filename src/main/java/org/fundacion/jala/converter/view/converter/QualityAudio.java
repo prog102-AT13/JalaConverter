@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.*;
 import java.util.Hashtable;
 
 class QualityAudio extends JPanel implements ChangeListener {
@@ -24,11 +25,18 @@ class QualityAudio extends JPanel implements ChangeListener {
         qualitySlider.setMinorTickSpacing(64);
         qualitySlider.addChangeListener(this::stateChanged);
         Hashtable positionJSlide = new Hashtable();
-        positionJSlide.put(64, new JLabel("64"));
-        positionJSlide.put(128, new JLabel("128"));
-        positionJSlide.put(192, new JLabel("192"));
-        positionJSlide.put(256, new JLabel("256"));
-        positionJSlide.put(320, new JLabel("320"));
+        JLabel labelSlide = new JLabel();
+        labelSlide.setFont(new Font("Barlow", 0, 11));
+        labelSlide.setText("64");
+        positionJSlide.put(64, labelSlide);
+        labelSlide.setText("128");
+        positionJSlide.put(128, labelSlide);
+        labelSlide.setText("192");
+        positionJSlide.put(192, labelSlide);
+        labelSlide.setText("256");
+        positionJSlide.put(256, labelSlide);
+        labelSlide.setText("320");
+        positionJSlide.put(320, labelSlide);
         qualitySlider.setLabelTable(positionJSlide);
         qualitySlider.setAlignmentX(LEFT_ALIGNMENT);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -33,6 +34,7 @@ public class MetaDataInterface extends JPanel implements ActionListener {
         convertMetaData = new JButton("Convert");
         convertMetaData.setAlignmentX(CENTER_ALIGNMENT);
         convertMetaData.addActionListener(this::actionPerformed);
+        convertMetaData.setFont(new Font("Barlow", 0, 11));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(new EmptyBorder(20, 0, 100, 0));
         add(file);

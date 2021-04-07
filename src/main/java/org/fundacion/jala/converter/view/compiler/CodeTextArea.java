@@ -30,15 +30,12 @@ class CodeTextArea extends JPanel {
     protected CodeTextArea() {
         codeArea = new JTextArea();
         codeArea.setBorder(new EmptyBorder(5, 10, 0, 10));
-
         lineCode =  new JTextArea("1");
         lineCode.setBorder(new EmptyBorder(5, 10, 0, 10));
         lineCode.setBackground(Color.darkGray);
         lineCode.setForeground(Color.white);
-
         JScrollPane textCodeArea = new JScrollPane();
         textCodeArea.setBorder(new EmptyBorder(0, 0, 0, 0));
-
         codeArea.getDocument().addDocumentListener(new DocumentListener() {
             public String getText() {
                 int caretPosition = codeArea.getDocument().getLength();

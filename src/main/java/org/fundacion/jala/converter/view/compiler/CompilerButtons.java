@@ -41,16 +41,13 @@ class CompilerButtons extends JPanel implements ActionListener {
         runCode.setIcon(new ImageIcon(runIcon.getImage().getScaledInstance(10, 10,  30)));
         runCode.setPreferredSize(new Dimension(80, 20));
         runCode.setFont(new Font("Barlow", 0, 11));
-
         clearConsole = new JButton("Clear");
         clearConsole.setPreferredSize(new Dimension(80, 20));
         clearConsole.setFont(new Font("Barlow", 0,  11));
-
         selectFile = new JButton("Open File");
         selectFile.setPreferredSize(new Dimension(80, 20));
         selectFile.setFont(new Font("Barlow", 0,  11));
         selectFile.addActionListener(this);
-
         setLayout(new FlowLayout(FlowLayout.RIGHT, 15, 15));
         add(selectFile);
         add(runCode);

@@ -51,7 +51,6 @@ class OutputSettings extends JPanel{
         add(framesSelect);
         add(optionCSound);
         add(thumbnailOption);
-
     }
 
     /**
