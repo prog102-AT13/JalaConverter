@@ -52,18 +52,19 @@ public class PythonCompiler {
         LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");
-            String fileName = "file_to_compile.py";
-            String path = "\"" + System.getProperty("user.dir") + "/" + fileName + "\"";
-            File file = new File(fileName);
+            String fileName = "filetocompile.py";
+            String path = "/archive/storage/" + fileName;
+            File file = new File(System.getProperty("user.dir") + path);
             if (!file.exists()) {
                 file.createNewFile();
             }
+
             FileWriter fileWriter = new FileWriter(file);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(code);
             bufferedWriter.close();
             LOGGER.info("finish");
-            return path;
+            return file.getAbsolutePath();
         } catch (Exception exception) {
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
             return exception.getMessage();
