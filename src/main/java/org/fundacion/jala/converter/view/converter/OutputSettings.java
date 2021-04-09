@@ -18,8 +18,7 @@ import java.util.ArrayList;
 
 class OutputSettings extends JPanel {
     private JComboBox<ResolutionVideo> resolutionComboBox;
-
-    private JComboBox framesSelect;
+    private JComboBox<FrameVideo> framesSelect;
     private JCheckBox optionCSound;
     private JCheckBox thumbnailOption;
 
@@ -29,19 +28,13 @@ class OutputSettings extends JPanel {
     protected OutputSettings() {
         JLabelStyle resolutionLabel = new JLabelStyle("Select resolution: ", "h3", 2, 70, 30);
         JLabelStyle frameLabel = new JLabelStyle("Select frame: ", "h3", 2, 70, 30);
-
-        //resolutionComboBox = new JComboBox<ResolutionVideo>(setResolutionSelect());
         setResolutionSelect();
-
-
         resolutionComboBox.setFont(new Font("Barlow", 0, 12));
         resolutionComboBox.setPreferredSize(new Dimension(70, 30));
-
-
-        framesSelect = new JComboBox();
+        setFrameSelect();
         framesSelect.setFont(new Font("Barlow", 0, 12));
         framesSelect.setPreferredSize(new Dimension(70, 30));
-        setFrameSelect();
+
         optionCSound = new JCheckBox("With audio");
         optionCSound.setFont(new Font("Barlow", 0, 12));
         optionCSound.setSelected(true);
@@ -79,13 +72,14 @@ class OutputSettings extends JPanel {
      * for video converter.
      */
     protected void setFrameSelect() {
-        framesSelect.addItem("Original frame");
-        framesSelect.addItem("21F");
-        framesSelect.addItem("24F");
-        framesSelect.addItem("27F");
-        framesSelect.addItem("29,9F");
-        framesSelect.addItem("30F");
-        framesSelect.addItem("60F");
+        framesSelect=new JComboBox<FrameVideo>(
+                new FrameVideo[]{
+                        new FrameVideo(21),
+                        new FrameVideo(24),
+                        new FrameVideo(27),
+                        new FrameVideo(29.9),
+                        new FrameVideo(30),
+                        new FrameVideo(60)});
     }
 
     /**
@@ -106,8 +100,8 @@ class OutputSettings extends JPanel {
      * @return int, Height selected of Resolution.
      */
     protected int getHeightResolution() {
-        ResolutionVideo item = (ResolutionVideo) resolutionComboBox.getSelectedItem();
-        return item.getHeight();
+        ResolutionVideo resolutionVideo = (ResolutionVideo) resolutionComboBox.getSelectedItem();
+        return resolutionVideo.getHeight();
     }
 
     /**
@@ -116,8 +110,9 @@ class OutputSettings extends JPanel {
      *
      * @return String, option selected of Frame.
      */
-    protected String getFrame() {
-        return framesSelect.getSelectedItem().toString();
+    protected double getFrame() {
+        FrameVideo frameVideo=(FrameVideo)framesSelect.getSelectedItem();
+        return frameVideo.getFrame();
     }
 
     /**
