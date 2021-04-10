@@ -34,7 +34,7 @@ public class ZipService {
      * @param outputPath the destination's direction
      * @throws IOException when invalid path is given
      */
-    public static void zipFile(String filePath, String outputPath) throws IOException {
+    public static void zipFile(final String filePath, final String outputPath) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(outputPath);
         ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream);
         zipProcess(filePath, zipOutputStream);
@@ -48,7 +48,7 @@ public class ZipService {
      * @param outputPath the destination's direction
      * @throws IOException when invalid path is given
      */
-    public static void zipFiles(ArrayList<String> filesPaths, String outputPath) throws IOException {
+    public static void zipFiles(final ArrayList<String> filesPaths, final String outputPath) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(outputPath);
         ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream);
         for (String filePath : filesPaths) {
