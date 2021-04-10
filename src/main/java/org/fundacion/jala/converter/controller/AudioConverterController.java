@@ -9,12 +9,14 @@
 package org.fundacion.jala.converter.controller;
 
 import org.fundacion.jala.converter.service.AudioConverter;
+import org.fundacion.jala.converter.service.ExtractMetadata;
 import org.fundacion.jala.converter.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.io.File;
 import java.io.IOException;
 
 @RestController
@@ -33,7 +35,8 @@ public class AudioConverterController {
                              @RequestParam("format") String format,
                              @RequestParam("bitrate") String bitrate,
                              @RequestParam("volume") String volume,
-                             @RequestParam("hz") String hz) throws IllegalStateException, IOException {
+                             @RequestParam("hz") String hz,
+                             @RequestParam("metadata") String metadata) throws IllegalStateException, IOException {
         String filename = file.getOriginalFilename();
         String storagePath = fileStorageService.uploadFile(file);
         AudioConverter audio = new AudioConverter();
@@ -45,6 +48,10 @@ public class AudioConverterController {
         audio.audioConverter(storagePath);
         String outputFilename = audio.getOutputFileName();
         String outputPath = FileStorageService.getOutputPath(filename);
+        if (metadata.equals("true")) {
+            ExtractMetadata extractMetadata = new ExtractMetadata(new File("C:\\Ray\\JalaConverter\\archive\\aguinaldo.mp3"), new File("C:\\Ray\\JalaConverter\\archive\\"));
+            extractMetadata.extractMetadata();
+        }
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         String downloadLink = baseUrl + "/api/download/" + outputFilename;
         return downloadLink;
