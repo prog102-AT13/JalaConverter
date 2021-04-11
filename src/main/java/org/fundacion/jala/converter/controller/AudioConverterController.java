@@ -36,6 +36,7 @@ public class AudioConverterController {
                              @RequestParam("bitrate") String bitrate,
                              @RequestParam("volume") String volume,
                              @RequestParam("hz") String hz,
+                             @RequestParam("audiochannel") String audioChannel,
                              @RequestParam("metadata") String metadata) throws IllegalStateException, IOException {
         String filename = file.getOriginalFilename();
         String storagePath = fileStorageService.uploadFile(file);
@@ -44,6 +45,7 @@ public class AudioConverterController {
         audio.setBitrate(bitrate);
         audio.setVolume(volume);
         audio.setHz(hz);
+        audio.setAudioChannels(audioChannel);
         System.out.println(filename);
         audio.audioConverter(storagePath);
         String outputFilename = audio.getOutputFileName();
