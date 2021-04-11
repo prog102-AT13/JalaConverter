@@ -37,6 +37,6 @@ public class ResolutionVideo {
 
     @Override
     public String toString() {
-        return  height+"X"+width+"     "+name;
+        return  width+"X"+height+"     "+name;
     }
 }

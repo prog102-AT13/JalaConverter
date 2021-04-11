@@ -2,9 +2,9 @@ package org.fundacion.jala.converter.view.converter;
 
 public class FrameVideo {
     private String name="F";
-    private double frame;
+    private int frame;
 
-    public FrameVideo(double frame) {
+    public FrameVideo(int frame) {
         this.name = name;
         this.frame = frame;
     }
@@ -17,7 +17,7 @@ public class FrameVideo {
         this.name = name;
     }
 
-    public double getFrame() {
+    public int getFrame() {
         return frame;
     }
 

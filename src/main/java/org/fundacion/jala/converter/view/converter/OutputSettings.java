@@ -77,7 +77,7 @@ class OutputSettings extends JPanel {
                         new FrameVideo(21),
                         new FrameVideo(24),
                         new FrameVideo(27),
-                        new FrameVideo(29.9),
+                        new FrameVideo(29),
                         new FrameVideo(30),
                         new FrameVideo(60)});
     }
@@ -110,7 +110,7 @@ class OutputSettings extends JPanel {
      *
      * @return String, option selected of Frame.
      */
-    protected double getFrame() {
+    protected int getFrame() {
         FrameVideo frameVideo=(FrameVideo)framesSelect.getSelectedItem();
         return frameVideo.getFrame();
     }
