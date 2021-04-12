@@ -43,9 +43,12 @@ public class PythonCompilerController {
     /**
      * Endpoint for proving compile python
      */
-    @GetMapping("/compilePython2")
-    public String uploadFile2() {
+    @PostMapping("/compilePython2")
+    public String uploadFile2(final @RequestParam("code") String code) throws IllegalStateException, IOException {
+        LOGGER.info("start");
         PythonCompiler pythonCompiler = new PythonCompiler();
-        return pythonCompiler.compiler(Python.V3, System.getProperty("user.dir") + "/archive/helloworld.py");
+        String filePath = pythonCompiler.makePythonFile(code);
+        LOGGER.info("finish");
+        return pythonCompiler.compiler(Python.V3, filePath);
     }
 }
