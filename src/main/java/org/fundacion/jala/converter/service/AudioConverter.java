@@ -33,6 +33,17 @@ public final class AudioConverter {
     private final String SIX_POINT_ONE_CHANNEL = "7";
     private final String SEVEN_POINT_ONE_CHANNEL = "8";
 
+    public AudioConverter() {
+    }
+
+    public AudioConverter(String format, String bitrate, String hz, String volume, String audioChannels) {
+        this.format = format;
+        this.bitrate = bitrate;
+        this.hz = hz;
+        this.volume = volume;
+        this.audioChannels = audioChannels;
+    }
+
     /**
      * Create command for audio converter
      * @param pathFile

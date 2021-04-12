@@ -40,18 +40,13 @@ public class AudioConverterController {
                              @RequestParam("metadata") String metadata) throws IllegalStateException, IOException {
         String filename = file.getOriginalFilename();
         String storagePath = fileStorageService.uploadFile(file);
-        AudioConverter audio = new AudioConverter();
-        audio.setFormat(format);
-        audio.setBitrate(bitrate);
-        audio.setVolume(volume);
-        audio.setHz(hz);
-        audio.setAudioChannels(audioChannel);
-        System.out.println(filename);
+        AudioConverter audio = new AudioConverter(format, bitrate, hz, volume, audioChannel);
         audio.audioConverter(storagePath);
         String outputFilename = audio.getOutputFileName();
-        String outputPath = FileStorageService.getOutputPath(filename);
+        String outputPath = fileStorageService.getOutputPath(outputFilename);
+        String outputPathWithoutFileName = fileStorageService.getOutputPathWithoutFileName(outputFilename);
         if (metadata.equals("true")) {
-            ExtractMetadata extractMetadata = new ExtractMetadata(new File("C:\\Ray\\JalaConverter\\archive\\aguinaldo.mp3"), new File("C:\\Ray\\JalaConverter\\archive\\"));
+            ExtractMetadata extractMetadata = new ExtractMetadata(new File(outputPath), new File(outputPathWithoutFileName));
             extractMetadata.extractMetadata();
         }
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
