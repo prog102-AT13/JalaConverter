@@ -66,7 +66,7 @@ public class ExtractText {
         LOGGER.info("start");
         System.out.println("Loaded");
         Tesseract tesseract = new Tesseract();
-        tesseract.setDatapath(System.getProperty("user.dir") + "\\tessdata");
+        tesseract.setDatapath(System.getProperty("user.dir") + "\\thirdparty\\tessdata");
         tesseract.setLanguage(this.getLanguage());
         try {
             LOGGER.info("Execute Try");
