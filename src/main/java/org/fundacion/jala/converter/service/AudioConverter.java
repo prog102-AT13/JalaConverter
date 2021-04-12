@@ -36,7 +36,7 @@ public final class AudioConverter {
     public AudioConverter() {
     }
 
-    public AudioConverter(String format, String bitrate, String hz, String volume, String audioChannels) {
+    public AudioConverter(final String format, final String bitrate, final String hz, final String volume, final String audioChannels) {
         this.format = format;
         this.bitrate = bitrate;
         this.hz = hz;

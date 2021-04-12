@@ -15,7 +15,6 @@ import org.fundacion.jala.converter.service.metadata.TypeFileExport;
 import java.io.File;
 import java.io.IOException;
 
-
 public class ExtractMetadata {
     private final String addressExiftool = "cd thirdparty\\windows\\exiftool\\12.2.2_exiftool/";
     private String exportFile = "";
