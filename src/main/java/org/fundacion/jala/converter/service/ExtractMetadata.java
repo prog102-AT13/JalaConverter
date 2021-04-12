@@ -63,4 +63,19 @@ public class ExtractMetadata {
     private void setMoreInformation() {
         this.moreInformation = " -api largefilesupport=1 -" + "ee";
     }
+
+    /**
+     * Extracts metadata
+     * @param metadata a String with metadata request
+     * @param outputFileName the new file's name
+     * @param fileStorageService object to create the path
+     */
+    public static void extractMetadata(final String metadata, final String outputFileName, final FileStorageService fileStorageService) {
+        String outputPath = fileStorageService.getOutputPath(outputFileName);
+        String outputPathWithoutFileName = fileStorageService.getOutputPathWithoutFileName(outputFileName);
+        if (metadata.equals("true")) {
+            ExtractMetadata extractMetadata = new ExtractMetadata(new File(outputPath), new File(outputPathWithoutFileName));
+            extractMetadata.extractMetadata();
+        }
+    }
 }

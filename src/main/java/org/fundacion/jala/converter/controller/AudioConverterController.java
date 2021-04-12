@@ -19,6 +19,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.File;
 import java.io.IOException;
 
+import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetadata;
+
 @RestController
 @RequestMapping("/api")
 public class AudioConverterController {
@@ -43,12 +45,7 @@ public class AudioConverterController {
         AudioConverter audio = new AudioConverter(format, bitrate, hz, volume, audioChannel);
         audio.audioConverter(storagePath);
         String outputFilename = audio.getOutputFileName();
-        String outputPath = fileStorageService.getOutputPath(outputFilename);
-        String outputPathWithoutFileName = fileStorageService.getOutputPathWithoutFileName(outputFilename);
-        if (metadata.equals("true")) {
-            ExtractMetadata extractMetadata = new ExtractMetadata(new File(outputPath), new File(outputPathWithoutFileName));
-            extractMetadata.extractMetadata();
-        }
+        extractMetadata(metadata, outputFilename, fileStorageService);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         String downloadLink = baseUrl + "/api/download/" + outputFilename;
         return downloadLink;
