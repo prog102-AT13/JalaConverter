@@ -36,7 +36,7 @@ public class Converter {
         pathOutput = adaptPath.substring(0, (adaptPath.lastIndexOf("archive"))) + "archive\\";
         String fCommand = startFirstCommand + adaptPath + " ";
         String parameters = changeResolution() + changeFrameRate() + removeAudio();
-        String theCommand = fCommand + parameters + pathOutput + output  + "\"" + generateATumbnail() + " -y";
+        String theCommand = fCommand + parameters + pathOutput + output  + "\"" + " -y";
         System.out.println(theCommand);
         try {
             Process petition = Runtime.getRuntime().exec("cmd /c " + theCommand);
@@ -48,6 +48,7 @@ public class Converter {
             if (parameter.hasMetaData()) {
                 generateMetaDataJsonFormat();
             }
+            generateATumbnail();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -91,17 +92,16 @@ public class Converter {
      * Generates a input video tumbnail
      * @return tumbnail command
      */
-    private String generateATumbnail() {
-        boolean tumbnail = parameter.hasTumbnail();
-        String tumbnailCommand;
+    private void generateATumbnail() {
         String name = getOutputFileName().substring(0, getOutputFileName().lastIndexOf("."));
-        System.out.println("hola" + getOutputFileName() + "name is" + name);
-        if (tumbnail) {
-//            tumbnailCommand = " -ss 00:00:01 -vframes 1 -s 128x128 " + pathOutput + "VideoTumbnail.png\"";
-            tumbnailCommand = " -ss 00:00:01 -vframes 1 -s 128x128 " + pathOutput + name + ".png\"";
-            return tumbnailCommand;
+        String startCommand = "ffmpeg -i ";
+        String outputCommand = pathOutput + output + "\"" + " -ss 00:00:01 -vframes 1 -s 128x128 " + pathOutput + name + ".png\"";
+        String tumbnailCommand = startCommand + outputCommand;
+        try {
+            Process petition = Runtime.getRuntime().exec("cmd /c" + tumbnailCommand);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return "";
     }
 
     /**
