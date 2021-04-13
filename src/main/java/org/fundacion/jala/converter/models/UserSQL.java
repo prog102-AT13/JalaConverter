@@ -46,4 +46,15 @@ public class UserSQL {
         manager.getTransaction().commit();
         manager.close();
     }
+
+    public static User findUserById(final int userId) {
+        EntityManager manager = emf.createEntityManager();
+        User userResult;
+        manager.getTransaction().begin();
+        User user = manager.find(User.class, userId);
+        userResult = user;
+        manager.getTransaction().commit();
+        manager.close();
+        return userResult;
+    }
 }

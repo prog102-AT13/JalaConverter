@@ -26,4 +26,23 @@ public class ProjectSQL {
         manager.getTransaction().commit();
         manager.close();
     }
+    public static void editProjectData(final int projectId, final String projectName, final String pathProject, final String type, final User user) {
+        EntityManager manager = emf.createEntityManager();
+        manager.getTransaction().begin();
+        User editProject = manager.find(User.class, projectId);
+        editProject.setName(projectName);
+        editProject.setPassword(pathProject);
+        editProject.setToken(type);
+        manager.getTransaction().commit();
+        manager.close();
+    }
+
+    public static void deleteProject(final int projectId) {
+        EntityManager manager = emf.createEntityManager();
+        manager.getTransaction().begin();
+        User deleteProject = manager.find(User.class, projectId);
+        manager.remove(deleteProject);
+        manager.getTransaction().commit();
+        manager.close();
+    }
 }
