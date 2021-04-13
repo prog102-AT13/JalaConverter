@@ -27,12 +27,23 @@ public class UserSQL {
         return user;
     }
 
-//    public static void editUserData(final User user) {
-//        EntityManager manager = emf.createEntityManager();
-//        manager.getTransaction().begin();
-//        User editUset = manager.find(User.class, user.getId());
-//        editUset.setName("NuevoNombre");
-//        manager.getTransaction().commit();
-//        manager.close();
-//    }
+    public static void editUserData(final int userId, final String userName, final String password, final String token) {
+        EntityManager manager = emf.createEntityManager();
+        manager.getTransaction().begin();
+        User editUser = manager.find(User.class, userId);
+        editUser.setName(userName);
+        editUser.setPassword(password);
+        editUser.setToken(token);
+        manager.getTransaction().commit();
+        manager.close();
+    }
+
+    public static void deleteUser(final int userId) {
+        EntityManager manager = emf.createEntityManager();
+        manager.getTransaction().begin();
+        User deleteUser = manager.find(User.class, userId);
+        manager.remove(deleteUser);
+        manager.getTransaction().commit();
+        manager.close();
+    }
 }

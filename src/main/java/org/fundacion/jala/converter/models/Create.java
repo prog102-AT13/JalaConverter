@@ -12,7 +12,8 @@ package org.fundacion.jala.converter.models;
 
 
 import static org.fundacion.jala.converter.models.ProjectSQL.insertProjectData;
-//import static org.fundacion.jala.converter.models.UserSQL.editUserData;
+import static org.fundacion.jala.converter.models.UserSQL.editUserData;
+import static org.fundacion.jala.converter.models.UserSQL.deleteUser;
 import static org.fundacion.jala.converter.models.UserSQL.insertUserData;
 
 public final class Create {
@@ -20,16 +21,19 @@ public final class Create {
     private Create() { }
 
     public static void main(final String[] args) {
-
-//        insertUserData("Pablo Perez", "pasword1", "token1");
-//        insertUserData("Elena Gomez", "pasword2", "token2");
-//        insertUserData("Pablo pablo", "pasword1", "token1");
-//        insertUserData("Elena elena", "pasword2", "token2");
-//        insertUserData("Edson edson", "pasword1", "token1");
-//        insertUserData("Cristian cristian", "pasword2", "token2");
-//        insertUserData("Edson", "pasword1", "token1");
-        User user = insertUserData("edsonsito", "pasword2", "token2");
-       // editUserData(user);
+        User user1;
+        User user2;
+//        insertUserData("Pablo Perez", "password1", "token1");
+//        insertUserData("Elena Gomez", "password2", "token2");
+//        insertUserData("Pablo pablo", "password1", "token1");
+//        insertUserData("Elena elena", "password2", "token2");
+//        insertUserData("Edson edson", "password1", "token1");
+//        insertUserData("Cristian cristian", "password2", "token2");
+//        insertUserData("Edson", "password1", "token1");
+//        user1 = insertUserData("cris", "password2", "token2");
+//        user2 = insertUserData("ed", "password2", "token2");
+//        editUserData(19, "Cristi", "123456", "tokeeen");
+        deleteUser(46);
 
 //        insertProjectData("ProyectoCafecito", "/proyecto/users/", "pequeño", user);
 
