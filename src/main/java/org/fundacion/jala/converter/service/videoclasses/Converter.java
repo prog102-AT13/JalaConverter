@@ -95,7 +95,7 @@ public class Converter {
         boolean tumbnail = parameter.hasTumbnail();
         String tumbnailCommand;
         if (tumbnail) {
-            tumbnailCommand = " -ss 00:00:01 -vframes 1 " + pathOutput + "VideoTumbnail.png\"";
+            tumbnailCommand = " -ss 00:00:01 -vframes 1 -s 128x128 " + pathOutput + "VideoTumbnail.png\"";
             return tumbnailCommand;
         }
         return "";
