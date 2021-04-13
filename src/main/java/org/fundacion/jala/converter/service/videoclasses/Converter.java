@@ -94,8 +94,11 @@ public class Converter {
     private String generateATumbnail() {
         boolean tumbnail = parameter.hasTumbnail();
         String tumbnailCommand;
+        String name = getOutputFileName().substring(0, getOutputFileName().lastIndexOf("."));
+        System.out.println("hola" + getOutputFileName() + "name is" + name);
         if (tumbnail) {
-            tumbnailCommand = " -ss 00:00:01 -vframes 1 -s 128x128 " + pathOutput + "VideoTumbnail.png\"";
+//            tumbnailCommand = " -ss 00:00:01 -vframes 1 -s 128x128 " + pathOutput + "VideoTumbnail.png\"";
+            tumbnailCommand = " -ss 00:00:01 -vframes 1 -s 128x128 " + pathOutput + name + ".png\"";
             return tumbnailCommand;
         }
         return "";
