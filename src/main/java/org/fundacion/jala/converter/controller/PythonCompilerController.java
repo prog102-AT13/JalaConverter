@@ -12,11 +12,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.service.FileStorageService;
 import org.fundacion.jala.converter.service.pythoncompiler.Python;
-import org.fundacion.jala.converter.service.pythoncompiler.PythonCompiler;
+import org.fundacion.jala.converter.service.pythoncompiler.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
 
 @RestController
@@ -24,7 +23,7 @@ import java.io.IOException;
 public class PythonCompilerController {
     private static final Logger LOGGER = LogManager.getLogger();
     @Autowired
-    FileStorageService fileStorageService;
+    private FileStorageService fileStorageService;
 
     /**
      * Endpoint for compile python
@@ -44,9 +43,12 @@ public class PythonCompilerController {
     /**
      * Endpoint for proving compile python
      */
-    @GetMapping("/compilePython2")
-    public String uploadFile2() {
+    @PostMapping("/compilePython2")
+    public String uploadFile2(final @RequestParam("code") String code) throws IllegalStateException, IOException {
+        LOGGER.info("start");
         PythonCompiler pythonCompiler = new PythonCompiler();
-        return pythonCompiler.compiler(Python.V3, System.getProperty("user.dir") + "/archive/helloworld.py");
+        String filePath = pythonCompiler.makePythonFile(code);
+        LOGGER.info("finish");
+        return pythonCompiler.compiler(Python.V3, filePath);
     }
 }

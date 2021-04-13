@@ -10,12 +10,15 @@
 
 package org.fundacion.jala.converter.models;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.OneToMany;
+import javax.persistence.GenerationType;
+import javax.persistence.CascadeType;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +28,7 @@ import java.util.List;
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "USER_ID")
     private int id;
 
@@ -44,15 +48,14 @@ public class User {
 
     }
 
-    public User(final int newId, final String newName, final String newPassword, final String newToken) {
-        this.id = newId;
+    public User(final String newName, final String newPassword, final String newToken) {
         this.name = newName;
         this.password = newPassword;
         this.token = newToken;
     }
 
     /**
-     * Obtain Ids of the User
+     * Obtains Ids of the User
      * @return id of the user
      */
     public int getId() {
@@ -60,15 +63,15 @@ public class User {
     }
 
     /**
-     * Set new Id of the User
-     * @param newId
+     * Sets new Id of the User
+     * @param newId int with the new id
      */
     public void setId(final int newId) {
         this.id = newId;
     }
 
     /**
-     * Obtain Name of the User
+     * Obtains Name of the User
      * @return name of the user
      */
     public String getName() {
@@ -76,31 +79,31 @@ public class User {
     }
 
     /**
-     * Set new name of the user
-     * @param newName
+     * Sets new name of the user
+     * @param newName String with the new name
      */
     public void setName(final String newName) {
         this.name = newName;
     }
 
     /**
-     * Obtain pasword of the User
-     * @return pasword of the user
+     * Obtains password of the User
+     * @return password of the user
      */
     public String getPassword() {
         return password;
     }
 
     /**
-     * Set new pasword of the User
-     * @param newPasword
+     * Sets new password of the User
+     * @param newPassword String with the password
      */
-    public void setPassword(final String newPasword) {
-        this.password = newPasword;
+    public void setPassword(final String newPassword) {
+        this.password = newPassword;
     }
 
     /**
-     * Obtain token of the user
+     * Obtains token of the user
      * @return code token of the user
      */
     public String getToken() {
@@ -108,15 +111,15 @@ public class User {
     }
 
     /**
-     * Set new token of the User
-     * @param newToken
+     * Sets new token of the User
+     * @param newToken String with the token
      */
     public void setToken(final String newToken) {
         this.token = newToken;
     }
 
     /**
-     * Obtain all the projects that realized the user
+     * Obtains all the projects that realized the user
      * @return all the projects of the user
      */
     public List<Project> getProjects() {
@@ -124,15 +127,15 @@ public class User {
     }
 
     /**
-     * Set projects of the user
-     * @param newProjects
+     * Sets projects of the user
+     * @param newProjects a list of projects
      */
     public void setProjects(final List<Project> newProjects) {
         this.projects = newProjects;
     }
 
     /**
-     * Obtain all date of the user
+     * Obtains all date of the user
      * @return String of the dates
      */
     @Override
