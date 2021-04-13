@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
-import static org.fundacion.jala.converter.models.Insert.insertData;
+//import static org.fundacion.jalaconverter.models.Insert.insertData;
 
 
 @RestController
@@ -40,7 +40,7 @@ public class AudioConverterController {
         String storagePath = fileStorageService.uploadFile(file);
         System.out.println(filename);
         //--------------------------------
-        insertData(Integer.parseInt(format), volume, hz, volume, Integer.parseInt(bitrate), volume, volume, volume);
+//        insertData(Integer.parseInt(format), volume, hz, volume, Integer.parseInt(bitrate), volume, volume, volume);
 //        insertData(10, "Pablo Perez", "pasword1", "token1", 7, "Project1", "/folder1/folder2/", "movie");
 
         //--------------------------------

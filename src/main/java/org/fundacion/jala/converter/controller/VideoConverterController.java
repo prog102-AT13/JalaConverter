@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
-import static org.fundacion.jala.converter.models.Insert.insertData;
+//import static org.fundacion.jala.converter.models.Insert.insertData;
 
 @RestController
 @RequestMapping("/api")
@@ -57,7 +57,7 @@ public class VideoConverterController {
 
         //--------------------------------
 //        insertData(Integer.parseInt(audio), outputFormat, resolution, tumbnail, Integer.parseInt(metaData), width, frameRate, height);
-        insertData(7, "Pablo Perez", "pasword1", "token1", 4, "Project1", "/folder1/folder2/", "movie");
+//        insertData(7, "Pablo Perez", "pasword1", "token1", 4, "Project1", "/folder1/folder2/", "movie");
 
         //--------------------------------
 

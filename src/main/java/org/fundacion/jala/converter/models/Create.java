@@ -35,7 +35,7 @@ public final class Create {
 //        editUserData(19, "Cristi", "123456", "tokeeen");
         deleteUser(46);
 
-        insertProjectData("ProyectoCafecito", "/proyecto/users/", "pequeño", user);
+//        insertProjectData("ProyectoCafecito", "/proyecto/users/", "pequeño", user);
 
 
     }

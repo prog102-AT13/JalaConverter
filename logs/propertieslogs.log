@@ -137,3 +137,6 @@
 [INFO ] 2021-04-12 18:11:57.703 [main] ConverterApplication - finish
 [INFO ] 2021-04-12 18:17:05.892 [main] ConverterApplication - start
 [INFO ] 2021-04-12 18:17:13.735 [main] ConverterApplication - finish
+[INFO ] 2021-04-13 16:02:55.559 [main] ConverterApplication - start
+[INFO ] 2021-04-13 16:03:03.820 [main] ConverterApplication - finish
+[INFO ] 2021-04-13 16:03:09.726 [http-nio-8080-exec-2] AuthController - Start.

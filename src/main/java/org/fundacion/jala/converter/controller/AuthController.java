@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import static org.fundacion.jala.converter.models.UserSQL.editUserData;
 
 @RestController
 public class AuthController {
@@ -59,7 +60,7 @@ public class AuthController {
                 .loadUserByUsername(authenticationRequest.getUsername());
 
         final String jwt = jwtTokenUtil.generateToken(userDetails);
-
+        editUserData(2,"at13","$2y$12$8X0nbPBTLcnai9uc7IlsP.2c9ZXrbk80v.7YH4dt2NykMB3qdbLTa",jwt);
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 }
