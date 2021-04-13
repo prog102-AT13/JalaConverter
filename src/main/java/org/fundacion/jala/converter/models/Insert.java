@@ -52,7 +52,7 @@ public final class Insert {
         Project project = new Project();
         project.setTitle(projectName);
         project.setPath(pathProject);
-        project.setType(type);
+        project.setChecksum(type);
         project.setUser(user);
         manager.persist(project);
         manager.getTransaction().commit();

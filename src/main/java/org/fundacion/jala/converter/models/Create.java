@@ -21,8 +21,18 @@ public final class Create {
 
     public static void main(final String[] args) {
 
-        insertData(9, "Pablo Perez", "pasword1", "token1", 7, "Project1", "/folder1/folder2/", "movie");
-//        insertData(6, "Elena Gomez", "pasword2", "token2", 3, "Project1", "/folder1/folder2/", "movie");
+//        insertUserData("Pablo Perez", "pasword1", "token1");
+//        insertUserData("Elena Gomez", "pasword2", "token2");
+//        insertUserData("Pablo pablo", "pasword1", "token1");
+//        insertUserData("Elena elena", "pasword2", "token2");
+//        insertUserData("Edson edson", "pasword1", "token1");
+//        insertUserData("Cristian cristian", "pasword2", "token2");
+//        insertUserData("Edson", "pasword1", "token1");
+        User user = insertUserData("edson", "pasword2", "token2");
+       // editUserData(user);
+
+        insertProjectData("ProyectoCafecito", "/proyecto/users/", "pequeño", user);
+
 
     }
 }
