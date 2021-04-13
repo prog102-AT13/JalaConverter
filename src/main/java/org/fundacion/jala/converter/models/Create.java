@@ -10,7 +10,10 @@
 
 package org.fundacion.jala.converter.models;
 
-import static org.fundacion.jala.converter.models.Insert.insertData;
+
+import static org.fundacion.jala.converter.models.ProjectSQL.insertProjectData;
+//import static org.fundacion.jala.converter.models.UserSQL.editUserData;
+import static org.fundacion.jala.converter.models.UserSQL.insertUserData;
 
 public final class Create {
 
@@ -18,8 +21,18 @@ public final class Create {
 
     public static void main(final String[] args) {
 
-        insertData(1, "Pablo Perez", "pasword1", "token1", 0, "Project1", "/folder1/folder2/", "movie");
-        insertData(2, "Elena Gomez", "pasword2", "token2", 1, "Project1", "/folder1/folder2/", "movie");
+//        insertUserData("Pablo Perez", "pasword1", "token1");
+//        insertUserData("Elena Gomez", "pasword2", "token2");
+//        insertUserData("Pablo pablo", "pasword1", "token1");
+//        insertUserData("Elena elena", "pasword2", "token2");
+//        insertUserData("Edson edson", "pasword1", "token1");
+//        insertUserData("Cristian cristian", "pasword2", "token2");
+//        insertUserData("Edson", "pasword1", "token1");
+        User user = insertUserData("edsonsito", "pasword2", "token2");
+       // editUserData(user);
+
+//        insertProjectData("ProyectoCafecito", "/proyecto/users/", "pequeño", user);
+
 
     }
 }

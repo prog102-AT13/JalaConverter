@@ -17,7 +17,7 @@ services:
    container_name: micontenedormysql
    # Docker image that we use
    image: mysql
-   # Restar the container
+   # Restart the container
    restart: always
    # Ports
    ports:
