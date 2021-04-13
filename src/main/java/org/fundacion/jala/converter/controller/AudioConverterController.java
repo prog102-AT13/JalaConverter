@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
+import static org.fundacion.jala.converter.models.Insert.insertData;
 
 @RestController
 @RequestMapping("/api")
@@ -36,17 +37,23 @@ public class AudioConverterController {
                              @RequestParam("hz") String hz) throws IllegalStateException, IOException {
         String filename = file.getOriginalFilename();
         String storagePath = fileStorageService.uploadFile(file);
-        AudioConverter audio = new AudioConverter();
-        audio.setFormat(format);
-        audio.setBitrate(bitrate);
-        audio.setVolume(volume);
-        audio.setHz(hz);
         System.out.println(filename);
-        audio.audioConverter(storagePath);
-        String outputFilename = audio.getOutputFileName();
+        //--------------------------------
+        insertData(Integer.parseInt(format), volume, hz, volume, Integer.parseInt(bitrate), volume, volume, volume);
+//        insertData(10, "Pablo Perez", "pasword1", "token1", 7, "Project1", "/folder1/folder2/", "movie");
+
+        //--------------------------------
+//        AudioConverter audio = new AudioConverter();
+//        audio.setFormat(format);
+//        audio.setBitrate(bitrate);
+//        audio.setVolume(volume);
+//        audio.setHz(hz);
+//        System.out.println(filename);
+//        audio.audioConverter(storagePath);
+//        String outputFilename = audio.getOutputFileName();
         String outputPath = FileStorageService.getOutputPath(filename);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-        String downloadLink = baseUrl + "/api/download/" + outputFilename;
+        String downloadLink = baseUrl + "/api/download/" + "outputFilename";
         return downloadLink;
     }
 }

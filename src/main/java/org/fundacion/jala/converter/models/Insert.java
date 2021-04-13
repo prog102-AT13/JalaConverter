@@ -49,6 +49,9 @@ public final class Insert {
         user.setPassword(pasword);
         user.setToken(token);
         manager.persist(user);
+
+
+
         Project project = new Project();
         project.setId(projectId);
         project.setTitle(projectName);
@@ -56,6 +59,7 @@ public final class Insert {
         project.setType(type);
         project.setUser(user);
         manager.persist(project);
+
         manager.getTransaction().commit();
         manager.close();
     }
