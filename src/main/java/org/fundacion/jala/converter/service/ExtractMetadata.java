@@ -15,7 +15,6 @@ import org.fundacion.jala.converter.service.metadata.TypeFileExport;
 import java.io.File;
 import java.io.IOException;
 
-
 public class ExtractMetadata {
     private final String addressExiftool = "cd thirdparty\\windows\\exiftool\\12.2.2_exiftool/";
     private String exportFile = "";
@@ -62,5 +61,20 @@ public class ExtractMetadata {
      */
     private void setMoreInformation() {
         this.moreInformation = " -api largefilesupport=1 -" + "ee";
+    }
+
+    /**
+     * Extracts metadata
+     * @param metadata a String with metadata request
+     * @param outputFileName the new file's name
+     * @param fileStorageService object to create the path
+     */
+    public static void extractMetadata(final String metadata, final String outputFileName, final FileStorageService fileStorageService) {
+        String outputPath = fileStorageService.getOutputPath(outputFileName);
+        String outputPathWithoutFileName = fileStorageService.getOutputPathWithoutFileName(outputFileName);
+        if (metadata.equals("true")) {
+            ExtractMetadata extractMetadata = new ExtractMetadata(new File(outputPath), new File(outputPathWithoutFileName));
+            extractMetadata.extractMetadata();
+        }
     }
 }

@@ -56,7 +56,13 @@ public class FileStorageService {
      * Returns the designed output path
      */
     public static String getOutputPath(String filename) {
-        return PATH + File.separator + ARCHIVE + File.separator + OUTPUT + File.separator + filename;
+        return PATH + File.separator + ARCHIVE + File.separator + File.separator + filename;
+    }
+    /**
+     * Returns the designed output path without the file's name
+     */
+    public static String getOutputPathWithoutFileName(String filename) {
+        return PATH + File.separator + ARCHIVE + File.separator + File.separator;
     }
     /**
      * Returns archive path
