@@ -36,12 +36,12 @@ public class ChecksumService {
     /**
      * Verifies if two file's have the same checksum
      * @param firstFilePath first file's path
-     * @param secondFilePath second file's path
+     * @param checksum a String with the checksum
      * @return a Boolean with the response
      * @throws IOException when invalid path
      * @throws NoSuchAlgorithmException when invalid algorithm provided
      */
-    private static Boolean repeatedChecksum(final String firstFilePath, final String secondFilePath) throws IOException, NoSuchAlgorithmException {
-        return (getFileChecksum(firstFilePath).equals(getFileChecksum(secondFilePath)));
+    private static Boolean repeatedChecksum(final String firstFilePath, final String checksum) throws IOException, NoSuchAlgorithmException {
+        return (checksum.equals(getFileChecksum(firstFilePath)));
     }
 }
