@@ -34,7 +34,6 @@ class OutputSettings extends JPanel {
         setFrameSelect();
         framesSelect.setFont(new Font("Barlow", 0, 12));
         framesSelect.setPreferredSize(new Dimension(70, 30));
-
         optionCSound = new JCheckBox("With audio");
         optionCSound.setFont(new Font("Barlow", 0, 12));
         optionCSound.setSelected(true);

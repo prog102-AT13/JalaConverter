@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- *
+ * <p>
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -21,6 +21,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
     private SelectFile file;
     private ConvertTypeSelectAudio audioSelect;
     private QualityAudio quality;
+    private OutputSettingsAudio settings;
 
     /**
      * Initialize of graphics elements for Audio converter interface.
@@ -42,11 +43,14 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         quality.setAlignmentX(LEFT_ALIGNMENT);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(new EmptyBorder(40, 40, 100, 0));
+        settings = new OutputSettingsAudio();
+        settings.setAlignmentX(LEFT_ALIGNMENT);
         add(audioTitle.getTextLabel());
         add(file);
         add(audioSettings.getTextLabel());
         add(audioSelect);
         add(quality);
+        add(settings);
         add(convertAudio);
     }
 
@@ -62,6 +66,14 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
                 + "\nConvert to: "
                 + audioSelect.getConvertTo()
                 + "\nQuality: "
-                + quality.getQualityAudio());
+                + quality.getQualityAudio()
+                + "\nVolume: "
+                + settings.getVolume()
+                + "\nAudio Channel: "
+                + settings.getAudioChannel()
+                + "\nHz: "
+                + settings.getHz()
+                + "\nwith metadata: "
+                + settings.isMetadata());
     }
 }
