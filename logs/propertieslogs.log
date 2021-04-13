@@ -126,3 +126,14 @@
 [INFO ] 2021-04-07 17:22:07.399 [http-nio-8080-exec-1] ExtractTextController - finish
 [INFO ] 2021-04-07 17:23:16.730 [main] ConverterApplication - start
 [INFO ] 2021-04-07 17:23:25.004 [main] ConverterApplication - finish
+[INFO ] 2021-04-12 18:03:46.485 [main] ConverterApplication - start
+[INFO ] 2021-04-12 18:03:57.629 [main] ConverterApplication - finish
+[INFO ] 2021-04-12 18:05:15.892 [main] ConverterApplication - start
+[INFO ] 2021-04-12 18:05:25.670 [main] ConverterApplication - finish
+[INFO ] 2021-04-12 18:07:54.152 [http-nio-8080-exec-9] AuthController - Start.
+[INFO ] 2021-04-12 18:10:18.753 [main] ConverterApplication - start
+[INFO ] 2021-04-12 18:10:27.566 [main] ConverterApplication - finish
+[INFO ] 2021-04-12 18:11:49.994 [main] ConverterApplication - start
+[INFO ] 2021-04-12 18:11:57.703 [main] ConverterApplication - finish
+[INFO ] 2021-04-12 18:17:05.892 [main] ConverterApplication - start
+[INFO ] 2021-04-12 18:17:13.735 [main] ConverterApplication - finish

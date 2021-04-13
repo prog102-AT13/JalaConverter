@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
+import static org.fundacion.jala.converter.models.Insert.insertData;
 
 @RestController
 @RequestMapping("/api")
@@ -35,27 +36,37 @@ public class VideoConverterController {
     public String uploadFile(@RequestParam("file") MultipartFile file,
                              @RequestParam("outputformat") String outputFormat,
                              @RequestParam("resolution") String resolution,
-                             @RequestParam("tumbnail") boolean tumbnail,
-                             @RequestParam("framerate") int frameRate,
-                             @RequestParam("width") int width,
-                             @RequestParam("height") int height,
-                             @RequestParam("audio") boolean audio,
-                             @RequestParam("metadata") boolean metaData
+                             @RequestParam("tumbnail") String tumbnail,
+                             @RequestParam("framerate") String frameRate,
+                             @RequestParam("width") String width,
+                             @RequestParam("height") String height,
+                             @RequestParam("audio") String audio,
+                             @RequestParam("metadata") String metaData
     ) throws IllegalStateException, IOException {
         String filename = file.getOriginalFilename();
         String storagePath = fileStorageService.uploadFile(file);
-        videoParameter.setOutputFormat(outputFormat);
-        videoParameter.setResolution(resolution);
-        videoParameter.setTumbnail(tumbnail);
-        videoParameter.setFrameRate(frameRate);
-        videoParameter.setWidth(width);
-        videoParameter.setHeight(height);
-        videoParameter.setAudio(audio);
-        videoParameter.setMetaData(metaData);
-        converter.convertVideo(storagePath);
+//        videoParameter.setOutputFormat(outputFormat);
+//        videoParameter.setResolution(resolution);
+//        videoParameter.setTumbnail(tumbnail);
+//        videoParameter.setFrameRate(frameRate);
+//        videoParameter.setWidth(width);
+//        videoParameter.setHeight(height);
+//        videoParameter.setAudio(audio);
+//        videoParameter.setMetaData(metaData);
+//        converter.convertVideo(storagePath);
+
+        //--------------------------------
+//        insertData(Integer.parseInt(audio), outputFormat, resolution, tumbnail, Integer.parseInt(metaData), width, frameRate, height);
+        insertData(7, "Pablo Perez", "pasword1", "token1", 4, "Project1", "/folder1/folder2/", "movie");
+
+        //--------------------------------
+
+
+
+
         String outputPath = FileStorageService.getOutputPath(filename);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-        String downloadLink = baseUrl + "/api/download/" + converter.getOutputFileName();
+        String downloadLink = baseUrl + "/api/download/" + "converter.getOutputFileName()";
         return downloadLink;
     }
 }
