@@ -7,6 +7,8 @@
  */
 package org.fundacion.jala.converter.service.videoclasses;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,6 +21,7 @@ public class Converter {
     private String outputFileName;
     private static final int WAIT_TIME = 5000;
     private static final int INIT_NUMBER = 20;
+    private static final Logger LOGGER = LogManager.getLogger();
 
     public Converter(final VideoParameter videoParameter) {
         this.parameter = videoParameter;
@@ -39,15 +42,21 @@ public class Converter {
         String theCommand = fCommand + parameters + pathOutput + output  + "\"" + " -y";
         System.out.println(theCommand);
         try {
+            LOGGER.info("Execute Try");
             Process petition = Runtime.getRuntime().exec("cmd /c " + theCommand);
-        } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.info("finish");
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
         }
         try {
+            LOGGER.info("Execute Try");
             Thread.sleep(WAIT_TIME);
             generateATumbnail();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            LOGGER.info("finish");
+        } catch (InterruptedException exception) {
+            exception.printStackTrace();
+            LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
         }
     }
 
@@ -72,7 +81,6 @@ public class Converter {
 
     /**
      * Generates a input video tumbnail
-     * @return tumbnail command
      */
     private void generateATumbnail() {
         String name = getOutputFileName().substring(0, getOutputFileName().lastIndexOf("."));
