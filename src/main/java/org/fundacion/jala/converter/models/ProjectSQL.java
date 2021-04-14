@@ -18,20 +18,20 @@ public class ProjectSQL {
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jalaPersistence");
 
     /**
-     * Inserts projects in the db
-     * @param projectName String with the project name
-     * @param pathProject String with the path of the project
-     * @param type String with the type of the project
-     * @param user a User
+     * This method is for to insert dates for database
+     * @param projectName name the archive
+     * @param pathProject path the archive
+     * @param checksum string checksum of the archive
      */
-    public static void insertProjectData(final String projectName, final String pathProject, final String type, final User user) {
+    public static void insertProjectData(final String projectName, final String pathProject, final String checksum, final int userId) {
         EntityManager manager = emf.createEntityManager();
         manager.getTransaction().begin();
+        User editUser = manager.find(User.class, userId);
         Project project = new Project();
         project.setTitle(projectName);
         project.setPath(pathProject);
-        project.setType(type);
-        project.setUser(user);
+        project.setChecksum(checksum);
+        project.setUser(editUser);
         manager.persist(project);
         manager.getTransaction().commit();
         manager.close();

@@ -17,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
-
 import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetadata;
 
 @RestController
@@ -58,7 +57,7 @@ public class VideoConverterController {
         String outputFilename = converter.getOutputFileName();
         extractMetadata(metadata, outputFilename, fileStorageService);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-        String downloadLink = baseUrl + "/api/download/" + converter.getOutputFileName();
+        String downloadLink = baseUrl + "/api/download/" + "converter.getOutputFileName()";
         return downloadLink;
     }
 }

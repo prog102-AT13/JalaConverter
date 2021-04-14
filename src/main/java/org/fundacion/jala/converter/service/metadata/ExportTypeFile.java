@@ -55,14 +55,20 @@ public class ExportTypeFile {
         if (typeExport == TypeFileExport.HTML) exportFileHtml();
         if (typeExport == TypeFileExport.XMP) exportFileXMP();
     }
-
     /**
      * Defines name that the file are exported.
      * set nameFileExport.
-     * e.g. DragonBall.mp4 --> DragonBall.mp4.xmp
+     * e.g. DragonBall.mp4 --> DragonBall.xmp
      */
     private void setDefaultNameFileWithTypeOfFile() {
-        nameFileExport = nameFileComplete;
+        char[] spellName = nameFileComplete.toCharArray();
+        String name = "";
+        boolean write = false;
+        for (int i = spellName.length - 1; i >= 0; i--) {
+            if (spellName[i] == '.' && !write) write = true;
+            else if (write) name = spellName[i] + name;
+        }
+        nameFileExport = name;
     }
 
     /**

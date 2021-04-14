@@ -34,8 +34,8 @@ public class Project {
     @Column(name = "PATH")
     private String path;
 
-    @Column(name = "TYPE")
-    private String type;
+    @Column(name = "CHECKSUM")
+    private String checksum;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
@@ -45,10 +45,10 @@ public class Project {
 
     }
 
-    public Project(final String newTitle, final String newPath, final String newType, final User newUser) {
+    public Project(final String newTitle, final String newPath, final String newChecksum, final User newUser) {
         this.title = newTitle;
         this.path = newPath;
-        this.type = newType;
+        this.checksum = newChecksum;
         this.user = newUser;
     }
 
@@ -118,18 +118,18 @@ public class Project {
 
     /**
      * Obtains type of the project
-     * @return
+     * @return a string of checksum
      */
-    public String getType() {
-        return type;
+    public String getChecksum() {
+        return checksum;
     }
 
     /**
      * Sets new path of the project
-     * @param newType String with the new type
+     * @param newChecksum String with the new type
      */
-    public void setType(final String newType) {
-        this.type = newType;
+    public void setChecksum(final String newChecksum) {
+        this.checksum = newChecksum;
     }
 
     /**
@@ -141,7 +141,7 @@ public class Project {
         return "Project{" + "id=" + id
                 + ", titulo='" + title + '\''
                 + ", path='" + path + '\''
-                + ", type='" + type + '\''
+                + ", type='" + checksum + '\''
                 + '}';
     }
 }
