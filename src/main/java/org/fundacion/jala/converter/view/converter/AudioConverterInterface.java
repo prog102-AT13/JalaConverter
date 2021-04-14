@@ -9,6 +9,8 @@
 
 package org.fundacion.jala.converter.view.converter;
 
+import org.fundacion.jala.converter.view.controllers.ClientRequest;
+import org.fundacion.jala.converter.view.Models.AudioRequestForm;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
 
 import javax.swing.JPanel;
@@ -19,12 +21,14 @@ import java.awt.Font;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class AudioConverterInterface extends JPanel implements ActionListener {
     private SelectFile file;
     private ConvertTypeSelectAudio audioSelect;
     private QualityAudio quality;
     private OutputSettingsAudio settings;
+    private ClientRequest clientRequest = new ClientRequest();
 
     /**
      * Initialize of graphics elements for Audio converter interface.
@@ -63,7 +67,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
      * @param e event of the JButton.
      */
     @Override
-    public void actionPerformed(final ActionEvent e) {
+    public void actionPerformed(final ActionEvent e)  {
         JOptionPane.showMessageDialog(this, "File Path: "
                 + file.getOriginFilePath()
                 + "\nConvert to: "
@@ -78,5 +82,38 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
                 + settings.getHz()
                 + "\nwith metadata: "
                 + settings.isMetadata());
+        try {
+            callRequest();
+        } catch (Exception r) {
+
+        }
+
+    }
+    private void callRequest() throws IOException{
+        String storagePath=file.getOriginFilePath();
+        String format=audioSelect.getConvertTo();
+        String[] s=quality.getQualityAudio().split(" ");
+        String bitrate=s[0];
+        String volume=settings.getVolume();
+        String hz=settings.getHz();
+        String audiochannel = settings.getAudioChannel();
+        boolean metadata = settings.isMetadata();
+        AudioRequestForm audioRequestForm=new AudioRequestForm();
+        audioRequestForm.addFilepath(storagePath);
+        audioRequestForm.addFormat(format);
+        audioRequestForm.addBitrate(bitrate);
+        audioRequestForm.addVolume(volume);
+        audioRequestForm.addHz(hz);
+        audioRequestForm.addAudiochannel(audiochannel);
+        audioRequestForm.addMetadata(String.valueOf(metadata));
+
+        clientRequest.executeRequest(audioRequestForm);
+        try {
+            String result= clientRequest.executeRequest(audioRequestForm);
+            System.out.println(result);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
