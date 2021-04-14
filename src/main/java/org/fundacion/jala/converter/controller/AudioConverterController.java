@@ -9,6 +9,7 @@
 package org.fundacion.jala.converter.controller;
 
 import org.fundacion.jala.converter.models.Project;
+import org.fundacion.jala.converter.models.parameter.AudioParameter;
 import org.fundacion.jala.converter.service.AudioConverter;
 import org.fundacion.jala.converter.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +37,9 @@ import static org.fundacion.jala.converter.service.ZipService.*;
 @RequestMapping("/api")
 public class AudioConverterController {
     @Autowired
-    FileStorageService fileStorageService;
+    private FileStorageService fileStorageService;
     @Autowired
-    AudioConverter audioConverter;
+    private AudioConverter audioConverter;
 
     /**
      * Endpoint for audio converter
@@ -78,7 +79,7 @@ public class AudioConverterController {
                 e.printStackTrace();
             }
         }
-        audioConverter = new AudioConverter(format, bitrate, hz, volume, audioChannel);
+        audioConverter = new AudioConverter(new AudioParameter(storagePath, format, bitrate, hz, volume, audioChannel));
         audioConverter.audioConverter(storagePath);
         String outputFilename = audioConverter.getOutputFileName();
         String outputPath = FileStorageService.getOutputPath(filename);

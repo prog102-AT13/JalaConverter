@@ -19,6 +19,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
 //import static org.fundacion.jala.converter.models.Insert.insertData;
 
+import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetadata;
+
 @RestController
 @RequestMapping("/api")
 public class VideoConverterController {
@@ -36,25 +38,26 @@ public class VideoConverterController {
     public String uploadFile(@RequestParam("file") MultipartFile file,
                              @RequestParam("outputformat") String outputFormat,
                              @RequestParam("resolution") String resolution,
-                             @RequestParam("tumbnail") String tumbnail,
-                             @RequestParam("framerate") String frameRate,
-                             @RequestParam("width") String width,
-                             @RequestParam("height") String height,
-                             @RequestParam("audio") String audio,
-                             @RequestParam("metadata") String metaData
+                             @RequestParam("thumbnail") boolean thumbnail,
+                             @RequestParam("framerate") int frameRate,
+                             @RequestParam("width") int width,
+                             @RequestParam("height") int height,
+                             @RequestParam("audio") boolean audio,
+                             @RequestParam("metadata") String metadata
     ) throws IllegalStateException, IOException {
         String filename = file.getOriginalFilename();
         String storagePath = fileStorageService.uploadFile(file);
         videoParameter.setOutputFormat(outputFormat);
         videoParameter.setResolution(resolution);
-//        videoParameter.setTumbnail(tumbnail);
-//        videoParameter.setFrameRate(frameRate);
-//        videoParameter.setWidth(width);
-//        videoParameter.setHeight(height);
-//        videoParameter.setAudio(audio);
-//        videoParameter.setMetaData(metaData);
+        videoParameter.setThumbnail(thumbnail);
+        videoParameter.setFrameRate(frameRate);
+        videoParameter.setWidth(width);
+        videoParameter.setHeight(height);
+        videoParameter.setAudio(audio);
         converter.convertVideo(storagePath);
         String outputPath = FileStorageService.getOutputPath(filename);
+        String outputFilename = converter.getOutputFileName();
+        extractMetadata(metadata, outputFilename, fileStorageService);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         String downloadLink = baseUrl + "/api/download/" + "converter.getOutputFileName()";
         return downloadLink;

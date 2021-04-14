@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) 2021 Fundacion Jala.
+ *
+ * This software is the confidential and proprietary information of Fundacion Jala
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with Fundacion Jala
+ */
 package org.fundacion.jala.converter.models;
 
 import javax.persistence.EntityManager;
@@ -6,9 +14,9 @@ import javax.persistence.Persistence;
 import java.util.List;
 
 public class ProjectSQL {
-    public ProjectSQL() {
-    }
+
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jalaPersistence");
+
     /**
      * This method is for to insert dates for database
      * @param projectName
@@ -28,6 +36,15 @@ public class ProjectSQL {
         manager.getTransaction().commit();
         manager.close();
     }
+
+    /**
+     * Edits the data of the project
+     * @param projectId int with the project id
+     * @param projectName String with the name of the project
+     * @param pathProject String with the path of the project
+     * @param type String with the type og¿f the project
+     * @param user a User
+     */
     public static void editProjectData(final int projectId, final String projectName, final String pathProject, final String type, final User user) {
         EntityManager manager = emf.createEntityManager();
         manager.getTransaction().begin();
@@ -39,6 +56,10 @@ public class ProjectSQL {
         manager.close();
     }
 
+    /**
+     * Deletes a project
+     * @param projectId int with the project id
+     */
     public static void deleteProject(final int projectId) {
         EntityManager manager = emf.createEntityManager();
         manager.getTransaction().begin();
@@ -48,14 +69,15 @@ public class ProjectSQL {
         manager.close();
     }
 
+    /**
+     * Lists the project in the db
+     * @return a list of projects
+     */
     @SuppressWarnings("unchecked")
     public static List<Project> listProject() {
         EntityManager manager = emf.createEntityManager();
         manager.getTransaction().begin();
         List<Project> projectList = manager.createQuery("from Project", Project.class).getResultList();
-//        System.out.println("----------------------------------------------");
-//        System.out.println(projectList);
-//        System.out.println("----------------------------------------------");
         manager.getTransaction().commit();
         manager.close();
         return projectList;

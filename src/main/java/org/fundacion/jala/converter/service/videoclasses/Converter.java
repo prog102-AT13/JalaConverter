@@ -7,6 +7,8 @@
  */
 package org.fundacion.jala.converter.service.videoclasses;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,6 +21,7 @@ public class Converter {
     private String outputFileName;
     private static final int WAIT_TIME = 5000;
     private static final int INIT_NUMBER = 20;
+    private static final Logger LOGGER = LogManager.getLogger();
 
     public Converter(final VideoParameter videoParameter) {
         this.parameter = videoParameter;
@@ -34,22 +37,26 @@ public class Converter {
         output = adaptPath.substring((adaptPath.lastIndexOf("\\") + 1), adaptPath.lastIndexOf(".") + 1) + format;
         setOutputFileName(output);
         pathOutput = adaptPath.substring(0, (adaptPath.lastIndexOf("archive"))) + "archive\\";
-        String fCommand = startFirstCommand + adaptPath + " ";
+        String ffmpegCommand = startFirstCommand + adaptPath + " ";
         String parameters = changeResolution() + changeFrameRate() + removeAudio();
-        String theCommand = fCommand + parameters + pathOutput + output  + "\"" + generateATumbnail() + " -y";
+        String theCommand = ffmpegCommand + parameters + pathOutput + output  + "\"" + " -y";
         System.out.println(theCommand);
         try {
+            LOGGER.info("Execute Try");
             Process petition = Runtime.getRuntime().exec("cmd /c " + theCommand);
-        } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.info("finish");
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
         }
         try {
+            LOGGER.info("Execute Try");
             Thread.sleep(WAIT_TIME);
-            if (parameter.hasMetaData()) {
-                generateMetaDataJsonFormat();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            generateAThumbnail();
+            LOGGER.info("finish");
+        } catch (InterruptedException exception) {
+            exception.printStackTrace();
+            LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
         }
     }
 
@@ -73,32 +80,21 @@ public class Converter {
     }
 
     /**
-     * Generates a json file with the output video metadata
+     * Generates a input video thumbnail
      */
-    private void generateMetaDataJsonFormat() {
-        String startCommand = "ffprobe -v quiet -print_format json -show_format -show_streams ";
-        String outputCommand = pathOutput + output + "\"" + " > " + pathOutput + output + ".json\"";
-        String jsonCommand = startCommand + outputCommand;
-        System.out.println(jsonCommand);
+    private void generateAThumbnail() {
+        String name = getOutputFileName().substring(0, getOutputFileName().lastIndexOf("."));
+        String startCommand = "ffmpeg -i ";
+        String outputCommand = pathOutput + output + "\"" + " -ss 00:00:01 -vframes 1 -s 128x128 " + pathOutput + name + ".png\"";
+        String thumbnailCommand = startCommand + outputCommand;
         try {
-            Process petition = Runtime.getRuntime().exec("cmd /c" + jsonCommand);
-        } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.info("Execute Try");
+            Process petition = Runtime.getRuntime().exec("cmd /c" + thumbnailCommand);
+            LOGGER.info("finish");
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
         }
-    }
-
-    /**
-     * Generates a input video tumbnail
-     * @return tumbnail command
-     */
-    private String generateATumbnail() {
-        boolean tumbnail = parameter.hasTumbnail();
-        String tumbnailCommand;
-        if (tumbnail) {
-            tumbnailCommand = " -ss 00:00:01 -vframes 1 " + pathOutput + "VideoTumbnail.png\"";
-            return tumbnailCommand;
-        }
-        return "";
     }
 
     /**
