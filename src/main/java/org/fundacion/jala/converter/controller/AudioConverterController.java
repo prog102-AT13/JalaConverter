@@ -11,11 +11,16 @@ package org.fundacion.jala.converter.controller;
 import org.fundacion.jala.converter.service.AudioConverter;
 import org.fundacion.jala.converter.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
+
+import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetadata;
 
 @RestController
 @RequestMapping("/api")
@@ -33,18 +38,15 @@ public class AudioConverterController {
                              @RequestParam("format") String format,
                              @RequestParam("bitrate") String bitrate,
                              @RequestParam("volume") String volume,
-                             @RequestParam("hz") String hz) throws IllegalStateException, IOException {
+                             @RequestParam("hz") String hz,
+                             @RequestParam("audiochannel") String audioChannel,
+                             @RequestParam("metadata") String metadata) throws IllegalStateException, IOException {
         String filename = file.getOriginalFilename();
         String storagePath = fileStorageService.uploadFile(file);
-        AudioConverter audio = new AudioConverter();
-        audio.setFormat(format);
-        audio.setBitrate(bitrate);
-        audio.setVolume(volume);
-        audio.setHz(hz);
-        System.out.println(filename);
-        audio.audioConverter(storagePath);
-        String outputFilename = audio.getOutputFileName();
-        String outputPath = FileStorageService.getOutputPath(filename);
+        audioConverter = new AudioConverter(format, bitrate, hz, volume, audioChannel);
+        audioConverter.audioConverter(storagePath);
+        String outputFilename = audioConverter.getOutputFileName();
+        extractMetadata(metadata, outputFilename, fileStorageService);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         String downloadLink = baseUrl + "/api/download/" + outputFilename;
         return downloadLink;
