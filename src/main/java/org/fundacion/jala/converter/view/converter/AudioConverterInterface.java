@@ -11,9 +11,12 @@ package org.fundacion.jala.converter.view.converter;
 
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.BoxLayout;
+import javax.swing.JOptionPane;
+import java.awt.Font;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,6 +24,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
     private SelectFile file;
     private ConvertTypeSelectAudio audioSelect;
     private QualityAudio quality;
+    private OutputSettingsAudio settings;
 
     /**
      * Initialize of graphics elements for Audio converter interface.
@@ -42,11 +46,14 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         quality.setAlignmentX(LEFT_ALIGNMENT);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(new EmptyBorder(40, 40, 100, 0));
+        settings = new OutputSettingsAudio();
+        settings.setAlignmentX(LEFT_ALIGNMENT);
         add(audioTitle.getTextLabel());
         add(file);
         add(audioSettings.getTextLabel());
         add(audioSelect);
         add(quality);
+        add(settings);
         add(convertAudio);
     }
 
@@ -62,6 +69,14 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
                 + "\nConvert to: "
                 + audioSelect.getConvertTo()
                 + "\nQuality: "
-                + quality.getQualityAudio());
+                + quality.getQualityAudio()
+                + "\nVolume: "
+                + settings.getVolume()
+                + "\nAudio Channel: "
+                + settings.getAudioChannel()
+                + "\nHz: "
+                + settings.getHz()
+                + "\nwith metadata: "
+                + settings.isMetadata());
     }
 }
