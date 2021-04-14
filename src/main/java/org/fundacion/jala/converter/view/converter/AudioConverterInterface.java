@@ -9,6 +9,7 @@
 
 package org.fundacion.jala.converter.view.converter;
 
+import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
 
 import javax.swing.*;
@@ -16,6 +17,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 public class AudioConverterInterface extends JPanel implements ActionListener {
     private SelectFile file;
@@ -57,11 +60,19 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
      */
     @Override
     public void actionPerformed(final ActionEvent e) {
-        JOptionPane.showMessageDialog(this, "File Path: "
-                + file.getOriginFilePath()
-                + "\nConvert to: "
-                + audioSelect.getConvertTo()
-                + "\nQuality: "
-                + quality.getQualityAudio());
+        try {
+            JOptionPane.showMessageDialog(this, "File Path: "
+                    + file.getOriginFilePath()
+                    + "\nConvert to: "
+                    + audioSelect.getConvertTo()
+                    + "\nQuality: "
+                    + quality.getQualityAudio()
+                    + "\nChecksum: "
+                    + getFileChecksum(file.getOriginFilePath()));
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
+            noSuchAlgorithmException.printStackTrace();
+        }
     }
 }
