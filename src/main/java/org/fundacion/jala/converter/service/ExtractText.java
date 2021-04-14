@@ -7,10 +7,12 @@
  * license agreement you entered into with Fundacion Jala
  */
 package org.fundacion.jala.converter.service;
+
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.models.parameter.ExtractTextParameter;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -23,7 +25,11 @@ public class ExtractText {
     private String pathFile;
     private String nameOutputFile;
     private static final Logger LOGGER = LogManager.getLogger();
-
+    public  ExtractText(final ExtractTextParameter extractTextParameter){
+        this.language = extractTextParameter.getLanguage();
+        this.pathFile = extractTextParameter.getFilePath();
+        this.nameOutputFile = extractTextParameter.getResultFile();
+    }
     public ExtractText(final String language, final String pathFile) {
         this.language = language;
         this.pathFile = pathFile;
