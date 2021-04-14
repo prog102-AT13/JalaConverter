@@ -38,7 +38,6 @@ public class JavaCompiler {
             }
             LOGGER.info("finish");
             return result;
-//            return command;
         } catch (IOException exception) {
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
             return exception.getMessage();

@@ -21,6 +21,7 @@ public enum JavaVersion {
     }
 
     /**
+     * Gets the compiler command according to the version
      * @return the compiler command according to the version
      */
     public String getCompiler() {
@@ -28,6 +29,7 @@ public enum JavaVersion {
     }
 
     /**
+     * Gets the executor command according to the version
      * @return the executor command according to the version
      */
     public String getExecutor() {
