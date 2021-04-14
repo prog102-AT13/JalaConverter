@@ -42,13 +42,9 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         audioTitle.setAlignmentX(LEFT_ALIGNMENT);
         audioSettings.setAlignmentX(LEFT_ALIGNMENT);
         JButton convertAudio = new JButton("Convert");
-        JButton dowloadAudio = new JButton("Descarga");
         convertAudio.setAlignmentX(LEFT_ALIGNMENT);
         convertAudio.setFont(new Font("Barlow", 0, 12));
         convertAudio.addActionListener(this::actionPerformed);
-        dowloadAudio.setAlignmentX(LEFT_ALIGNMENT);
-        dowloadAudio.setFont(new Font("Barlow", 0, 12));
-        dowloadAudio.addActionListener(this::actionPerformed2);
         file = new SelectFile();
         file.setAlignmentX(LEFT_ALIGNMENT);
         audioSelect = new ConvertTypeSelectAudio();
@@ -66,7 +62,6 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         add(quality);
         add(settings);
         add(convertAudio);
-        add(dowloadAudio);
     }
 
     /**
@@ -127,14 +122,5 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Action of JButton convert, send information for metadataCLASS conversion.
-     * Show a Dialog with the information.
-     * @param e event of the JButton.
-     */
-    public void actionPerformed2(final ActionEvent e)  {
-        System.out.println("Descargar");
     }
 }
