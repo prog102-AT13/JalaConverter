@@ -10,6 +10,9 @@
 package org.fundacion.jala.converter.view.converter;
 
 import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;
+
+import org.fundacion.jala.converter.view.converter.http.ConRequest;
+import org.fundacion.jala.converter.view.converter.http.LoginRequest;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
 
 import javax.swing.*;
@@ -60,19 +63,26 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
      */
     @Override
     public void actionPerformed(final ActionEvent e) {
-        try {
-            JOptionPane.showMessageDialog(this, "File Path: "
-                    + file.getOriginFilePath()
-                    + "\nConvert to: "
-                    + audioSelect.getConvertTo()
-                    + "\nQuality: "
-                    + quality.getQualityAudio()
-                    + "\nChecksum: "
-                    + getFileChecksum(file.getOriginFilePath()));
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
-            noSuchAlgorithmException.printStackTrace();
-        }
+        String urlEndPoint = "http://localhost:8080/api/convertAudio";
+        LoginRequest loginRequest = new LoginRequest("at13", "jalasoft");
+        System.out.println(loginRequest.getTokenUser());
+        ConRequest conRequest = new ConRequest();
+        conRequest.sendConRequest(urlEndPoint);
+
+        System.out.println("click boton");
+//        try {
+//            JOptionPane.showMessageDialog(this, "File Path: "
+//                    + file.getOriginFilePath()
+//                    + "\nConvert to: "
+//                    + audioSelect.getConvertTo()
+//                    + "\nQuality: "
+//                    + quality.getQualityAudio()
+//                    + "\nChecksum: "
+//                    + getFileChecksum(file.getOriginFilePath()));
+//        } catch (IOException ioException) {
+//            ioException.printStackTrace();
+//        } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
+//            noSuchAlgorithmException.printStackTrace();
+//        }
     }
 }
