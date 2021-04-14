@@ -17,9 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
 
-import static org.fundacion.jala.converter.models.Insert.insertProjectData;
-//import static org.fundacion.jalaconverter.models.Insert.insertData;
-
+import static org.fundacion.jala.converter.models.ProjectSQL.insertProjectData;
 
 @RestController
 @RequestMapping("/api")
@@ -37,11 +35,21 @@ public class AudioConverterController {
                              @RequestParam("format") String format,
                              @RequestParam("bitrate") String bitrate,
                              @RequestParam("volume") String volume,
-                             @RequestParam("hz") String hz) throws IllegalStateException, IOException {
-        String filename = file.getOriginalFilename();
-        String storagePath = fileStorageService.uploadFile(file);
-        System.out.println("aqui1------- "+filename);
-        System.out.println("aqui2------- "+storagePath);
+                             @RequestParam("hz") String hz,
+                             @RequestParam("checksum") String checksum) throws IllegalStateException, IOException {
+        System.out.println("here check checksum before upload");
+        boolean exist = false;
+        String filename;
+        String storagePath;
+
+        if (exist) {
+            filename = file.getOriginalFilename();
+            storagePath = fileStorageService.uploadFile(file);
+            System.out.println("aqui1------- " + filename);
+            System.out.println("aqui2------- " + storagePath);
+        }else{
+
+        }
         AudioConverter audio = new AudioConverter();
         audio.setFormat(format);
         audio.setBitrate(bitrate);
@@ -51,13 +59,13 @@ public class AudioConverterController {
         audio.audioConverter(storagePath);
         String outputFilename = audio.getOutputFileName();
         String outputPath = FileStorageService.getOutputPath(filename);
-        System.out.println("aqui3------- "+outputFilename);
-        System.out.println("aqui4------- "+outputPath);
+        System.out.println("aqui3------- " + outputFilename);
+        System.out.println("aqui4------- " + outputPath);
         //DB
-        String pathFile =  storagePath.substring(storagePath.lastIndexOf("\\") + 1);
-        System.out.println("aqui5------- "+pathFile);
+        String pathFile = storagePath.substring(0, storagePath.lastIndexOf("\\") + 1);
+        System.out.println("aqui5------- " + pathFile);
 
-        insertProjectData(outputFilename, pathFile, "este sera el checksum",2);
+        insertProjectData(outputFilename, pathFile, checksum, 2);
 
         //
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();

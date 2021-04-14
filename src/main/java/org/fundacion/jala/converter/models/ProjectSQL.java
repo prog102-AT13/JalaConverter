@@ -3,6 +3,7 @@ package org.fundacion.jala.converter.models;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class ProjectSQL {
     public ProjectSQL() {
@@ -14,14 +15,15 @@ public class ProjectSQL {
      * @param pathProject
      * @param checksum
      */
-    public static void insertProjectData(final String projectName, final String pathProject, final String checksum, final User user) {
+    public static void insertProjectData(final String projectName, final String pathProject, final String checksum, final int userId) {
         EntityManager manager = emf.createEntityManager();
         manager.getTransaction().begin();
+        User editUser = manager.find(User.class, userId);
         Project project = new Project();
         project.setTitle(projectName);
         project.setPath(pathProject);
         project.setChecksum(checksum);
-        project.setUser(user);
+        project.setUser(editUser);
         manager.persist(project);
         manager.getTransaction().commit();
         manager.close();

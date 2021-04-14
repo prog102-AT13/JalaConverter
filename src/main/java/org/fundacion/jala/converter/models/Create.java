@@ -14,6 +14,7 @@ package org.fundacion.jala.converter.models;
 //import static org.fundacion.jala.converter.models.ProjectSQL.insertProjectData;
 //import static org.fundacion.jala.converter.models.UserSQL.editUserData;
 
+import static org.fundacion.jala.converter.models.ProjectSQL.insertProjectData;
 import static org.fundacion.jala.converter.models.UserSQL.*;//import static org.fundacion.jala.converter.models.UserSQL.insertUserData;
 
 public final class Create {
@@ -34,8 +35,9 @@ public final class Create {
 //        user2 = insertUserData("ed", "password2", "token2");
 //        editUserData(19, "Cristi", "123456", "tokeeen");
 //        deleteUser(46);
+        insertProjectData("filemio", "pathno", "este sera el checksum",2);
 
-        System.out.println(findUserById(29).getName());
+//        System.out.println(findUserById(29).getName());
 
 //        insertProjectData("ProyectoCafecito", "/proyecto/users/", "pequeño", user);
 
