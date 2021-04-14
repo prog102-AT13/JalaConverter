@@ -12,7 +12,10 @@ import org.fundacion.jala.converter.models.Project;
 import org.fundacion.jala.converter.service.AudioConverter;
 import org.fundacion.jala.converter.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -22,6 +25,8 @@ import java.util.stream.Collectors;
 
 import static org.fundacion.jala.converter.models.ProjectSQL.insertProjectData;
 import static org.fundacion.jala.converter.models.ProjectSQL.listProject;
+
+import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetadata;
 
 @RestController
 @RequestMapping("/api")
