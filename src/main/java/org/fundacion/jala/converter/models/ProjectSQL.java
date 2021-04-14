@@ -3,6 +3,7 @@ package org.fundacion.jala.converter.models;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class ProjectSQL {
     public ProjectSQL() {
@@ -40,9 +41,22 @@ public class ProjectSQL {
     public static void deleteProject(final int projectId) {
         EntityManager manager = emf.createEntityManager();
         manager.getTransaction().begin();
-        User deleteProject = manager.find(User.class, projectId);
+        Project deleteProject = manager.find(Project.class, projectId);
         manager.remove(deleteProject);
         manager.getTransaction().commit();
         manager.close();
+    }
+
+    @SuppressWarnings("unchecked")
+    public static List<Project> listProject() {
+        EntityManager manager = emf.createEntityManager();
+        manager.getTransaction().begin();
+        List<Project> projectList = manager.createQuery("from Project", Project.class).getResultList();
+        System.out.println("----------------------------------------------");
+        System.out.println(projectList);
+        System.out.println("----------------------------------------------");
+        manager.getTransaction().commit();
+        manager.close();
+        return projectList;
     }
 }

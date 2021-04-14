@@ -11,10 +11,8 @@
 package org.fundacion.jala.converter.models;
 
 
-//import static org.fundacion.jala.converter.models.ProjectSQL.insertProjectData;
-//import static org.fundacion.jala.converter.models.UserSQL.editUserData;
-
-import static org.fundacion.jala.converter.models.UserSQL.*;//import static org.fundacion.jala.converter.models.UserSQL.insertUserData;
+import static org.fundacion.jala.converter.models.ProjectSQL.*;
+import static org.fundacion.jala.converter.models.UserSQL.*;
 
 public final class Create {
 
@@ -33,9 +31,10 @@ public final class Create {
 //        user1 = insertUserData("cris", "password2", "token2");
 //        user2 = insertUserData("ed", "password2", "token2");
 //        editUserData(19, "Cristi", "123456", "tokeeen");
-//        deleteUser(46);
+//        deleteProject(28);
+        listProject();
 
-        System.out.println(findUserById(29).getName());
+        //System.out.println(findUserById(29).getPassword());
 
         insertProjectData("ProyectoCafecito", "/proyecto/users/", "pequeño", user);
 
