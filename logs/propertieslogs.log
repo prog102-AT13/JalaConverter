@@ -126,3 +126,19 @@
 [INFO ] 2021-04-07 17:22:07.399 [http-nio-8080-exec-1] ExtractTextController - finish
 [INFO ] 2021-04-07 17:23:16.730 [main] ConverterApplication - start
 [INFO ] 2021-04-07 17:23:25.004 [main] ConverterApplication - finish
+[INFO ] 2021-04-13 15:58:12.639 [main] ConverterApplication - start
+[INFO ] 2021-04-13 15:58:14.483 [main] ConverterApplication - finish
+[INFO ] 2021-04-13 17:51:01.360 [main] ConverterApplication - start
+[INFO ] 2021-04-13 17:51:03.324 [main] ConverterApplication - finish
+[INFO ] 2021-04-13 17:51:28.913 [http-nio-8080-exec-1] ExtractTextController - start
+[INFO ] 2021-04-13 17:51:28.915 [http-nio-8080-exec-1] ExtractText - start
+[INFO ] 2021-04-13 17:51:28.917 [http-nio-8080-exec-1] ExtractText - Execute Try
+[INFO ] 2021-04-13 17:51:29.261 [http-nio-8080-exec-1] ExtractText - start
+[INFO ] 2021-04-13 17:51:29.261 [http-nio-8080-exec-1] ExtractText - Execute Try
+[INFO ] 2021-04-13 17:51:29.265 [http-nio-8080-exec-1] ExtractText - finish
+[INFO ] 2021-04-13 17:51:29.265 [http-nio-8080-exec-1] ExtractText - finish
+[INFO ] 2021-04-13 17:51:29.271 [http-nio-8080-exec-1] ExtractTextController - finish
+[INFO ] 2021-04-13 22:51:40.358 [main] ConverterApplication - start
+[INFO ] 2021-04-13 22:51:42.307 [main] ConverterApplication - finish
+[INFO ] 2021-04-13 23:05:09.208 [main] ConverterApplication - start
+[INFO ] 2021-04-13 23:05:11.327 [main] ConverterApplication - finish
