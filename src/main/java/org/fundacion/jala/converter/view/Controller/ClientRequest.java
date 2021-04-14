@@ -21,6 +21,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.fundacion.jala.converter.view.Models.IrequestForm;
+import org.fundacion.jala.converter.view.Models.Parameter;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -37,13 +38,15 @@ public class ClientRequest {
     private HttpPost httpPost;
     private MultipartEntityBuilder builder;
     private HttpEntity multipart;
+    private IrequestForm requestForm;
 
     /**
      * Http client creates a request given an url endpoint
      * @param url
      */
-    public ClientRequest(String url) {
+    public ClientRequest(String url, IrequestForm requestForm) {
         sURL = url;
+        this.requestForm = requestForm;
         httpClient = HttpClients.createDefault();
     }
 
@@ -56,7 +59,8 @@ public class ClientRequest {
     public String executeRequest(IrequestForm requestForm) throws ClientProtocolException, IOException {
         httpPost = new HttpPost(sURL);
         builder = MultipartEntityBuilder.create();
-        HttpEntity multipart = builder.build();
+        multipart = builder.build();
+        addBodyFields();
         httpPost.setEntity(multipart);
         httpPost.setHeader("Authorization", "Bearer " + authGetToken());
         CloseableHttpResponse response = httpClient.execute(httpPost);
@@ -89,7 +93,7 @@ public class ClientRequest {
      * @param key
      * @param value
      */
-    public void addTextField (String key, String value) {
+    public void addTextBody(String key, String value) {
         builder.addTextBody(key, value, ContentType.TEXT_PLAIN);
     }
 
@@ -109,6 +113,16 @@ public class ClientRequest {
             );
         } catch (Exception e) {
 
+        }
+    }
+    public void addBodyFields() {
+        requestForm.getBodyParameters().stream().forEach(value -> addBodyField(value));
+    }
+    public void addBodyField(Parameter parameter) {
+        if (!parameter.isFile()) {
+            addTextBody(parameter.getKey(), parameter.getValue());
+        } else {
+            addFileBody(parameter.getKey(), parameter.getValue());
         }
     }
 }

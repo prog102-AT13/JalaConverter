@@ -12,11 +12,11 @@ package org.fundacion.jala.converter.view.Models;
  */
 
 public class AudioRequestForm implements IrequestForm{
-    private final String file = "file";
-    private final String format = "format";
-    private final String bitrate = "bitrate";
-    private final String volume = "volume";
-    private final String hz = "hz";
+    private final String FILE = "file";
+    private final String FORMAT = "format";
+    private final String BITRATE = "bitrate";
+    private final String VOLUME = "volume";
+    private final String HZ = "hz";
 
     private String filepathValue;
     private String formatValue;
@@ -26,57 +26,48 @@ public class AudioRequestForm implements IrequestForm{
 
     /**
      * Audio Request Form stores parameters for an audio request
+     */
+    public AudioRequestForm() {
+        
+    }
+
+    /**
+     * Add filepath parameter
      * @param filepathValue
+     */
+    public void addFilepath(String filepathValue) {
+        addParameters(new Parameter(FILE, filepathValue, true));
+    }
+
+    /**
+     * Add format parameter
      * @param formatValue
+     */
+    public void addFormat(String formatValue) {
+        addParameters(new Parameter(FORMAT, formatValue, false));
+    }
+
+    /**
+     * Add bitrate parameter
      * @param bitrateValue
+     */
+    public void addBitrate(String bitrateValue) {
+        addParameters(new Parameter(BITRATE, bitrateValue, false));
+    }
+
+    /**
+     * Add volume parameter
      * @param volumeValue
+     */
+    public void addVolume(String volumeValue) {
+        addParameters(new Parameter(VOLUME, volumeValue, false));
+    }
+
+    /**
+     * Add hz parameter
      * @param hzValue
      */
-    public AudioRequestForm(String filepathValue, String formatValue, String bitrateValue, String volumeValue, String hzValue) {
-        this.filepathValue = filepathValue;
-        this.formatValue = formatValue;
-        this.bitrateValue = bitrateValue;
-        this.volumeValue = volumeValue;
-        this.hzValue = hzValue;
-    }
-
-    public String getFilepathValue() {
-        return filepathValue;
-    }
-
-    public void setFilepathValue(String filepathValue) {
-        this.filepathValue = filepathValue;
-    }
-
-    public String getFormatValue() {
-        return formatValue;
-    }
-
-    public void setFormatValue(String formatValue) {
-        this.formatValue = formatValue;
-    }
-
-    public String getBitrateValue() {
-        return bitrateValue;
-    }
-
-    public void setBitrateValue(String bitrateValue) {
-        this.bitrateValue = bitrateValue;
-    }
-
-    public String getVolumeValue() {
-        return volumeValue;
-    }
-
-    public void setVolumeValue(String volumeValue) {
-        this.volumeValue = volumeValue;
-    }
-
-    public String getHzValue() {
-        return hzValue;
-    }
-
-    public void setHzValue(String hzValue) {
-        this.hzValue = hzValue;
+    public void addHz(String hzValue) {
+        addParameters(new Parameter(HZ, hzValue, false));
     }
 }

@@ -1,4 +1,8 @@
 package org.fundacion.jala.converter.view.Models;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Copyright (c) 2021 Fundacion Jala.
  *
@@ -12,5 +16,11 @@ package org.fundacion.jala.converter.view.Models;
  */
 
 public interface IrequestForm {
-
+    public List<Parameter> bodyParameters = new ArrayList<>();
+    default List<Parameter> getBodyParameters() {
+        return bodyParameters;
+    }
+    default void addParameters(Parameter parameter) {
+        bodyParameters.add(parameter);
+    }
 }
