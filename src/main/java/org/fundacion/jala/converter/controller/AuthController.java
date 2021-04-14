@@ -62,7 +62,7 @@ public class AuthController {
                 .loadUserByUsername(authenticationRequest.getUsername());
 
         final String jwt = jwtTokenUtil.generateToken(userDetails);
-        editUserData(2, findUserById(2).getName(), findUserById(2).getPassword(), jwt);
+        editUserData(1, findUserById(1).getName(), findUserById(1).getPassword(), jwt);
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 }

@@ -110,6 +110,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         clientRequest.executeRequest(audioRequestForm);
         try {
             String result= clientRequest.executeRequest(audioRequestForm);
+            JOptionPane.showMessageDialog(this, "Download Link:\n" + result);
             System.out.println(result);
 
         } catch (IOException e) {
