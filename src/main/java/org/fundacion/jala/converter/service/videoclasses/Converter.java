@@ -88,9 +88,12 @@ public class Converter {
         String outputCommand = pathOutput + output + "\"" + " -ss 00:00:01 -vframes 1 -s 128x128 " + pathOutput + name + ".png\"";
         String tumbnailCommand = startCommand + outputCommand;
         try {
+            LOGGER.info("Execute Try");
             Process petition = Runtime.getRuntime().exec("cmd /c" + tumbnailCommand);
-        } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.info("finish");
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
         }
     }
 
