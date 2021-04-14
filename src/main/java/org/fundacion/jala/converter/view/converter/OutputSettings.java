@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- * <p>
+ *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -11,10 +11,12 @@ package org.fundacion.jala.converter.view.converter;
 
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
 
-import javax.swing.*;
-
-import java.awt.*;
-import java.util.ArrayList;
+import javax.swing.JPanel;
+import javax.swing.JComboBox;
+import javax.swing.JCheckBox;
+import java.awt.Font;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 
 class OutputSettings extends JPanel {
     private JComboBox<ResolutionVideo> resolutionComboBox;
@@ -53,7 +55,6 @@ class OutputSettings extends JPanel {
      * for video converter.
      */
     protected void setResolutionSelect() {
-
         resolutionComboBox = new JComboBox<ResolutionVideo>(
                 new ResolutionVideo[]{
                         new ResolutionVideo("720p(HD)", 1280, 720),
@@ -71,7 +72,7 @@ class OutputSettings extends JPanel {
      * for video converter.
      */
     protected void setFrameSelect() {
-        framesSelect=new JComboBox<FrameVideo>(
+        framesSelect = new JComboBox<FrameVideo>(
                 new FrameVideo[]{
                         new FrameVideo(21),
                         new FrameVideo(24),
@@ -110,7 +111,7 @@ class OutputSettings extends JPanel {
      * @return String, option selected of Frame.
      */
     protected int getFrame() {
-        FrameVideo frameVideo=(FrameVideo)framesSelect.getSelectedItem();
+        FrameVideo frameVideo = (FrameVideo) framesSelect.getSelectedItem();
         return frameVideo.getFrame();
     }
 

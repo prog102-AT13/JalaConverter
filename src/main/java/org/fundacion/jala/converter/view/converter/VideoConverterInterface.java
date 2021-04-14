@@ -9,21 +9,15 @@
 
 package org.fundacion.jala.converter.view.converter;
 
-import org.fundacion.jala.converter.service.videoclasses.Converter;
-import org.fundacion.jala.converter.service.videoclasses.VideoParameter;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-
 
 public class VideoConverterInterface extends JPanel implements ActionListener{
     private SelectFile file;
@@ -77,7 +71,3 @@ public class VideoConverterInterface extends JPanel implements ActionListener{
                 + settings.isThumbnailRequired());
     }
 }
-
-
-
-

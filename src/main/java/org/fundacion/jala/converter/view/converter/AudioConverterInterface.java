@@ -11,9 +11,12 @@ package org.fundacion.jala.converter.view.converter;
 
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.BoxLayout;
+import javax.swing.JOptionPane;
+import java.awt.Font;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
