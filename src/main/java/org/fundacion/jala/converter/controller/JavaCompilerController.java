@@ -32,7 +32,7 @@ public class JavaCompilerController {
      * Endpoint for compile java
      */
     @PostMapping("/compileJava")
-    public String compileJava2(final @RequestParam("code") String code) throws IllegalStateException, IOException {
+    public String compileJava(final @RequestParam("code") String code) throws IllegalStateException, IOException {
         LOGGER.info("start");
         if (!code.isBlank() || !code.equals(null)){
             JavaCompiler javaCompiler = new JavaCompiler();
