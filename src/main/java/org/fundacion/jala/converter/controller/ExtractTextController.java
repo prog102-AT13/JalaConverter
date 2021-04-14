@@ -10,15 +10,18 @@ package org.fundacion.jala.converter.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.models.parameter.ExtractTextParameter;
+import org.fundacion.jala.converter.service.ExtractText;
 import org.fundacion.jala.converter.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import java.io.IOException;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.fundacion.jala.converter.service.ExtractText;
 
 
 @RestController
@@ -38,7 +41,7 @@ public class ExtractTextController {
         LOGGER.info("start");
         String filename = file.getOriginalFilename();
         String storagePath = fileStorageService.uploadFile(file);
-        ExtractText extractText = new ExtractText(language, storagePath, nameOutput);
+        ExtractText extractText = new ExtractText(new ExtractTextParameter(storagePath, language, nameOutput));
         extractText.extractText();
         String outputPath = FileStorageService.getOutputPath(filename);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();

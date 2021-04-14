@@ -10,14 +10,12 @@ package org.fundacion.jala.converter.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.spi.LoggerRegistry;
-import org.fundacion.jala.converter.service.FileStorageService;
 import org.fundacion.jala.converter.service.javacompiler.JavaCompiler;
 import org.fundacion.jala.converter.service.javacompiler.JavaVersion;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 
@@ -25,19 +23,19 @@ import java.io.IOException;
 @RequestMapping("/api")
 public class JavaCompilerController {
     private static final Logger LOGGER = LogManager.getLogger();
-    @Autowired
-    FileStorageService fileStorageService;
 
     /**
      * Endpoint for compile java
      */
     @PostMapping("/compileJava")
-    public String uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("version") String version) throws IllegalStateException, IOException {
+    public String compileJava(final @RequestParam("code") String code) throws IllegalStateException, IOException {
         LOGGER.info("start");
-        String filename = file.getOriginalFilename();
-        String storagePath = fileStorageService.uploadFile(file);
-        JavaCompiler javaCompiler = new JavaCompiler();
-        LOGGER.info("finish");
-        return javaCompiler.javaCompiler(JavaVersion.JAVA_11, storagePath);
+        if (!code.isBlank() || !code.equals(null)){
+            JavaCompiler javaCompiler = new JavaCompiler();
+            String filePath = Transform.toFile(code, "Main", "java");
+            LOGGER.info("finish");
+            return javaCompiler.javaCompiler(JavaVersion.JAVA_11, filePath);
+        }
+        return "";
     }
 }
