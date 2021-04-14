@@ -8,13 +8,8 @@
  */
 
 package org.fundacion.jala.converter.view.converter;
-
-<<<<<<< HEAD
-import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;
-=======
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import org.fundacion.jala.converter.view.Models.AudioRequestForm;
->>>>>>> develop
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
 
 import javax.swing.JPanel;
@@ -26,10 +21,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-<<<<<<< HEAD
-import java.security.NoSuchAlgorithmException;
-=======
->>>>>>> develop
+
 
 public class AudioConverterInterface extends JPanel implements ActionListener {
     private SelectFile file;
