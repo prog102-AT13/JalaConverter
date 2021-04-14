@@ -59,7 +59,7 @@ public class Parameter {
     }
 
     /**
-     * return isFile value.
+     * @return isFile value.
      */
     public boolean isFile() {
         return isFile;

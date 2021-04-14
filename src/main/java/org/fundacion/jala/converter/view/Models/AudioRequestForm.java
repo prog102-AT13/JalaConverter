@@ -16,12 +16,13 @@ import java.util.List;
 
 public class AudioRequestForm implements IrequestForm{
     public List<Parameter> bodyParameters = new ArrayList<>();
-    public final String URL = "http://localhost:8080/api/extractAudio";
+    public final String URL = "http://localhost:8080/api/convertAudio";
     private final String FILE = "file";
     private final String FORMAT = "format";
     private final String BITRATE = "bitrate";
     private final String VOLUME = "volume";
     private final String HZ = "hz";
+    private final String AUDIOCHANNEL = "audiochannel";
     private final String METADATA = "metadata";
 
     private String filepathValue;
@@ -37,7 +38,7 @@ public class AudioRequestForm implements IrequestForm{
     }
 
     /**
-     * Add filepath parameter
+     * Adds filepath parameter
      * @param filepathValue
      */
     public void addFilepath(String filepathValue) {
@@ -45,7 +46,7 @@ public class AudioRequestForm implements IrequestForm{
     }
 
     /**
-     * Add format parameter
+     * Adds format parameter
      * @param formatValue
      */
     public void addFormat(String formatValue) {
@@ -53,7 +54,7 @@ public class AudioRequestForm implements IrequestForm{
     }
 
     /**
-     * Add bitrate parameter
+     * Adds bitrate parameter
      * @param bitrateValue
      */
     public void addBitrate(String bitrateValue) {
@@ -61,7 +62,7 @@ public class AudioRequestForm implements IrequestForm{
     }
 
     /**
-     * Add volume parameter
+     * Adds volume parameter
      * @param volumeValue
      */
     public void addVolume(String volumeValue) {
@@ -69,7 +70,7 @@ public class AudioRequestForm implements IrequestForm{
     }
 
     /**
-     * Add hz parameter
+     * Adds hz parameter
      * @param hzValue
      */
     public void addHz(String hzValue) {
@@ -77,12 +78,20 @@ public class AudioRequestForm implements IrequestForm{
     }
 
     /**
-     * Add metadata parameter
+     * Adds audiochannel parameter
+     * @param metadataValue
+     */
+    public void addAudiochannel(String metadataValue) {
+        addParameters(new Parameter(AUDIOCHANNEL, metadataValue, false));
+    }
+    /**
+     * Adds metadata parameter
      * @param metadataValue
      */
     public void addMetadata(String metadataValue) {
         addParameters(new Parameter(METADATA, metadataValue, false));
     }
+
 
     /**
      * @return bodyParameters

@@ -9,7 +9,7 @@
  * @author Saul Caspa Miranda
  * @version 1.0
  */
-package org.fundacion.jala.converter.view.Controller;
+package org.fundacion.jala.converter.view.controllers;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
@@ -24,22 +24,24 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.fundacion.jala.converter.view.Models.IrequestForm;
 import org.fundacion.jala.converter.view.Models.Parameter;
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class ClientRequest {
-    private String sURL;
     private CloseableHttpClient httpClient;
     private HttpPost httpPost;
     private MultipartEntityBuilder builder;
     private HttpEntity multipart;
     private IrequestForm requestForm;
+    private String token;
 
     /**
      * Http client creates a request given a requestForm.
      */
-    public ClientRequest(IrequestForm requestForm) {
-        this.requestForm = requestForm;
-        this.sURL = requestForm.getURL();
+    public ClientRequest(){
         this.httpClient = HttpClients.createDefault();
     }
 
@@ -50,17 +52,16 @@ public class ClientRequest {
      * @throws IOException
      */
     public String executeRequest(IrequestForm requestForm) throws ClientProtocolException, IOException {
-        String token = authGetToken();
-        httpPost = new HttpPost(sURL);
+        this.requestForm = requestForm;
+        httpPost = new HttpPost(requestForm.getURL());
         builder = MultipartEntityBuilder.create();
-        multipart = builder.build();
         addBodyFields();
+        multipart = builder.build();
         httpPost.setEntity(multipart);
-        httpPost.setHeader("Authorization", "Bearer " + token);
+        httpPost.setHeader("Authorization", "Bearer " + "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdDEzIiwiZXhwIjoxNjE4NDU2NzgzLCJpYXQiOjE2MTg0MjA3ODN9.R-WM5kEMMNX-UOBfCjQmCMZHaKWNmuF82gYZYzdMtlo");
         CloseableHttpResponse response = httpClient.execute(httpPost);
         HttpEntity responseEntity = response.getEntity();
         String sResponse = EntityUtils.toString(responseEntity, "UTF-8");
-        System.out.println("Post return result" + sResponse);
         return sResponse;
     }
 
@@ -105,7 +106,6 @@ public class ClientRequest {
         CloseableHttpResponse response = httpClient.execute(request);
         HttpEntity responseEntity = response.getEntity();
         String token = EntityUtils.toString(responseEntity, "UTF-8");
-        System.out.println("Post return result" + token);
         return token;
     }
 
