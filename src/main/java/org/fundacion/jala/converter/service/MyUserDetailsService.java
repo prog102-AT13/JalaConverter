@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
+import static org.fundacion.jala.converter.models.UserSQL.findUserById;
+
 @Service
 public class MyUserDetailsService implements UserDetailsService {
     /**
@@ -26,8 +28,8 @@ public class MyUserDetailsService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-        return new User("at13",
-                "$2y$12$8X0nbPBTLcnai9uc7IlsP.2c9ZXrbk80v.7YH4dt2NykMB3qdbLTa",
+        return new User(findUserById(2).getName(),
+                findUserById(2).getPassword(),
                 new ArrayList<>());
     }
 }

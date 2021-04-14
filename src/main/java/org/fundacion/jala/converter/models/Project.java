@@ -1,4 +1,3 @@
-
 /**
  * Copyright (c) 2021 Fundacion Jala.
  *
@@ -14,15 +13,18 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 
 @Entity
 @Table(name = "PROJECT")
 public class Project {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "PROJECT_ID")
     private int id;
 
@@ -32,8 +34,8 @@ public class Project {
     @Column(name = "PATH")
     private String path;
 
-    @Column(name = "TYPE")
-    private String type;
+    @Column(name = "CHECKSUM")
+    private String checksum;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
@@ -43,16 +45,15 @@ public class Project {
 
     }
 
-    public Project(final int newId, final String newTitle, final String newPath, final String newType, final User newUser) {
-        this.id = newId;
+    public Project(final String newTitle, final String newPath, final String newChecksum, final User newUser) {
         this.title = newTitle;
         this.path = newPath;
-        this.type = newType;
+        this.checksum = newChecksum;
         this.user = newUser;
     }
 
     /**
-     * Obtain Id of the project
+     * Obtains Id of the project
      * @return id of the project
      */
     public int getId() {
@@ -60,15 +61,15 @@ public class Project {
     }
 
     /**
-     * Set new id of the project
-     * @param newId
+     * Sets new id of the project
+     * @param newId int with the new project id
      */
     public void setId(final int newId) {
         this.id = newId;
     }
 
     /**
-     * Obtain title of the projetc
+     * Obtains title of the project
      * @return title of the project
      */
     public String getTitle() {
@@ -76,15 +77,15 @@ public class Project {
     }
 
     /**
-     * Set new title of the project
-     * @param newTitle
+     * Sets new title of the project
+     * @param newTitle String with the new title
      */
     public void setTitle(final String newTitle) {
         this.title = newTitle;
     }
 
     /**
-     * Obtain the user that realized the project
+     * Obtains the user that realized the project
      * @return user
      */
     public User getUser() {
@@ -92,15 +93,15 @@ public class Project {
     }
 
     /**
-     * Set User of the project
-     * @param newUser
+     * Sets the user of the project
+     * @param newUser the new user
      */
     public void setUser(final User newUser) {
         this.user = newUser;
     }
 
     /**
-     * Get path of the project where the project is saved
+     * Gets path of the project where the project is saved
      * @return path
      */
     public String getPath() {
@@ -108,7 +109,7 @@ public class Project {
     }
 
     /**
-     * Set new path of the project
+     * Sets new path of the project
      * @param newPath
      */
     public void setPath(final String newPath) {
@@ -116,23 +117,23 @@ public class Project {
     }
 
     /**
-     * Obtain type of the project
-     * @return
+     * Obtains type of the project
+     * @return a string of checksum
      */
-    public String getType() {
-        return type;
+    public String getChecksum() {
+        return checksum;
     }
 
     /**
-     * Set new path of the project
-     * @param newType
+     * Sets new path of the project
+     * @param newChecksum String with the new type
      */
-    public void setType(final String newType) {
-        this.type = newType;
+    public void setChecksum(final String newChecksum) {
+        this.checksum = newChecksum;
     }
 
     /**
-     * Obtain all date of the project
+     * Obtains all date of the project
      * @return String of the dates
      */
     @Override
@@ -140,7 +141,7 @@ public class Project {
         return "Project{" + "id=" + id
                 + ", titulo='" + title + '\''
                 + ", path='" + path + '\''
-                + ", type='" + type + '\''
+                + ", type='" + checksum + '\''
                 + '}';
     }
 }
