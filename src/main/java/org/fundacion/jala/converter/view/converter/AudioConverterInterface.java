@@ -10,9 +10,6 @@
 package org.fundacion.jala.converter.view.converter;
 
 import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;
-
-import org.fundacion.jala.converter.view.converter.http.ConRequest;
-import org.fundacion.jala.converter.view.converter.http.LoginRequest;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
 
 import javax.swing.*;
@@ -67,19 +64,28 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
      */
     @Override
     public void actionPerformed(final ActionEvent e) {
-        JOptionPane.showMessageDialog(this, "File Path: "
-                + file.getOriginFilePath()
-                + "\nConvert to: "
-                + audioSelect.getConvertTo()
-                + "\nQuality: "
-                + quality.getQualityAudio()
-                + "\nVolume: "
-                + settings.getVolume()
-                + "\nAudio Channel: "
-                + settings.getAudioChannel()
-                + "\nHz: "
-                + settings.getHz()
-                + "\nwith metadata: "
-                + settings.isMetadata());
+        try {
+            JOptionPane.showMessageDialog(this, "File Path: "
+                    + file.getOriginFilePath()
+                    + "\nConvert to: "
+                    + audioSelect.getConvertTo()
+                    + "\nQuality: "
+                    + quality.getQualityAudio()
+                    + "\nVolume: "
+                    + settings.getVolume()
+                    + "\nAudio Channel: "
+                    + settings.getAudioChannel()
+                    + "\nHz: "
+                    + settings.getHz()
+                    + "\nwith metadata: "
+                    + settings.isMetadata()
+                    + "\nChecksum: "
+                    + getFileChecksum(file.getOriginFilePath()));
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
+            noSuchAlgorithmException.printStackTrace();
+        }
+
     }
 }
