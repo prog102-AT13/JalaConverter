@@ -17,8 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
-//import static org.fundacion.jala.converter.models.Insert.insertData;
-
 import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetadata;
 
 @RestController

@@ -718,3 +718,23 @@
 [INFO ] 2021-04-14 14:42:55.527 [http-nio-8080-exec-4] ExtractMetadata - start
 [INFO ] 2021-04-14 14:42:55.527 [http-nio-8080-exec-4] ExtractMetadata - Execute Try
 [INFO ] 2021-04-14 14:42:55.532 [http-nio-8080-exec-4] ExtractMetadata - finish
+[INFO ] 2021-04-14 14:47:03.188 [main] ConverterApplication - start
+[INFO ] 2021-04-14 14:47:10.963 [main] ConverterApplication - finish
+[INFO ] 2021-04-14 14:47:22.646 [http-nio-8080-exec-2] RunCommand - start
+[INFO ] 2021-04-14 14:47:22.647 [http-nio-8080-exec-2] RunCommand - Execute Try
+[INFO ] 2021-04-14 14:47:26.996 [http-nio-8080-exec-2] RunCommand - finish
+[INFO ] 2021-04-14 14:47:27.028 [http-nio-8080-exec-2] ExtractMetadata - start
+[INFO ] 2021-04-14 14:47:27.028 [http-nio-8080-exec-2] ExtractMetadata - Execute Try
+[INFO ] 2021-04-14 14:47:27.037 [http-nio-8080-exec-2] ExtractMetadata - finish
+[INFO ] 2021-04-14 14:47:27.037 [http-nio-8080-exec-2] ExtractMetadata - start
+[INFO ] 2021-04-14 14:47:27.037 [http-nio-8080-exec-2] ExtractMetadata - Execute Try
+[INFO ] 2021-04-14 14:47:27.043 [http-nio-8080-exec-2] ExtractMetadata - finish
+[INFO ] 2021-04-14 14:47:45.660 [http-nio-8080-exec-3] RunCommand - start
+[INFO ] 2021-04-14 14:47:45.660 [http-nio-8080-exec-3] RunCommand - Execute Try
+[INFO ] 2021-04-14 14:47:49.864 [http-nio-8080-exec-3] RunCommand - finish
+[INFO ] 2021-04-14 14:47:49.864 [http-nio-8080-exec-3] ExtractMetadata - start
+[INFO ] 2021-04-14 14:47:49.864 [http-nio-8080-exec-3] ExtractMetadata - Execute Try
+[INFO ] 2021-04-14 14:47:49.867 [http-nio-8080-exec-3] ExtractMetadata - finish
+[INFO ] 2021-04-14 14:47:49.868 [http-nio-8080-exec-3] ExtractMetadata - start
+[INFO ] 2021-04-14 14:47:49.868 [http-nio-8080-exec-3] ExtractMetadata - Execute Try
+[INFO ] 2021-04-14 14:47:49.872 [http-nio-8080-exec-3] ExtractMetadata - finish

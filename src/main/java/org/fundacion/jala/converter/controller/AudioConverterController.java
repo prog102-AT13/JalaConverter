@@ -7,7 +7,8 @@
  * license agreement you entered into with Fundacion Jala
  */
 package org.fundacion.jala.converter.controller;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.models.Project;
 import org.fundacion.jala.converter.models.parameter.AudioParameter;
 import org.fundacion.jala.converter.service.AudioConverter;
@@ -28,7 +29,6 @@ import java.util.stream.Collectors;
 
 import static org.fundacion.jala.converter.models.ProjectSQL.insertProjectData;
 import static org.fundacion.jala.converter.models.ProjectSQL.listProject;
-
 import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;
 import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetadata;
 import static org.fundacion.jala.converter.service.ZipService.*;
@@ -40,6 +40,7 @@ public class AudioConverterController {
     private FileStorageService fileStorageService;
     @Autowired
     private AudioConverter audioConverter;
+    private static final Logger LOGGER = LogManager.getLogger();
 
     /**
      * Endpoint for audio converter
@@ -74,9 +75,12 @@ public class AudioConverterController {
             filename = file.getOriginalFilename();
             storagePath = fileStorageService.uploadFile(file);
             try {
+                LOGGER.info("Execute Try");
                 checksumLocal = getFileChecksum(storagePath);
+                LOGGER.info("finish");
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
+                LOGGER.error("Execute Exception" + e.getLocalizedMessage());
             }
         }
         audioConverter = new AudioConverter(new AudioParameter(storagePath, format, bitrate, hz, volume, audioChannel));

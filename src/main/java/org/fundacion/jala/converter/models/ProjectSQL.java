@@ -19,9 +19,9 @@ public class ProjectSQL {
 
     /**
      * This method is for to insert dates for database
-     * @param projectName
-     * @param pathProject
-     * @param checksum
+     * @param projectName name the archive
+     * @param pathProject path the archive
+     * @param checksum string checksum of the archive
      */
     public static void insertProjectData(final String projectName, final String pathProject, final String checksum, final int userId) {
         EntityManager manager = emf.createEntityManager();
