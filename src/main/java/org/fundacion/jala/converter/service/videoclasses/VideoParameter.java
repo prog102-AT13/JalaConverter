@@ -19,7 +19,6 @@ public class VideoParameter {
     private int width;
     private int height;
     private boolean audio;
-    private boolean metaData;
 
     /**
      * Sets the name of the output video
@@ -78,14 +77,6 @@ public class VideoParameter {
     }
 
     /**
-     * Sets the width of the output video
-     * @param newMetaData boolean that indicates if the video has to have metadata file
-     */
-    public void setMetaData(final boolean newMetaData) {
-        this.metaData = newMetaData;
-    }
-
-    /**
      * Gets the name of the output video
      * @return outputFormat
      */
@@ -141,11 +132,4 @@ public class VideoParameter {
         return tumbnail;
     }
 
-    /**
-     * Gets the metadata of the output video
-     * @return metaData
-     */
-    public boolean hasMetaData() {
-        return metaData;
-    }
 }

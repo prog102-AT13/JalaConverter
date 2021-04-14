@@ -18,6 +18,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
 
+import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetadata;
+
 @RestController
 @RequestMapping("/api")
 public class VideoConverterController {
@@ -40,7 +42,7 @@ public class VideoConverterController {
                              @RequestParam("width") int width,
                              @RequestParam("height") int height,
                              @RequestParam("audio") boolean audio,
-                             @RequestParam("metadata") boolean metaData
+                             @RequestParam("metadata") String metadata
     ) throws IllegalStateException, IOException {
         String filename = file.getOriginalFilename();
         String storagePath = fileStorageService.uploadFile(file);
@@ -51,9 +53,10 @@ public class VideoConverterController {
         videoParameter.setWidth(width);
         videoParameter.setHeight(height);
         videoParameter.setAudio(audio);
-        videoParameter.setMetaData(metaData);
         converter.convertVideo(storagePath);
         String outputPath = FileStorageService.getOutputPath(filename);
+        String outputFilename = converter.getOutputFileName();
+        extractMetadata(metadata, outputFilename, fileStorageService);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         String downloadLink = baseUrl + "/api/download/" + converter.getOutputFileName();
         return downloadLink;

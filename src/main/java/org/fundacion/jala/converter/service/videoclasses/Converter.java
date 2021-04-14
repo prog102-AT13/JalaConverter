@@ -45,9 +45,6 @@ public class Converter {
         }
         try {
             Thread.sleep(WAIT_TIME);
-            if (parameter.hasMetaData()) {
-                generateMetaDataJsonFormat();
-            }
             generateATumbnail();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -71,21 +68,6 @@ public class Converter {
             return resolutionCommand;
         }
         return "";
-    }
-
-    /**
-     * Generates a json file with the output video metadata
-     */
-    private void generateMetaDataJsonFormat() {
-        String startCommand = "ffprobe -v quiet -print_format json -show_format -show_streams ";
-        String outputCommand = pathOutput + output + "\"" + " > " + pathOutput + output + ".json\"";
-        String jsonCommand = startCommand + outputCommand;
-        System.out.println(jsonCommand);
-        try {
-            Process petition = Runtime.getRuntime().exec("cmd /c" + jsonCommand);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     /**
