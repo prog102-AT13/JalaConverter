@@ -30,24 +30,28 @@ public class ExtractTextParameter extends Parameter {
     public ExtractTextParameter() {
     }
     /**
-     * @return language
+     * Returns a string with the set language to be extracted.
+     * @return the language.
      */
     public String getLanguage() {
         return language;
     }
     /**
-     * @param newLanguage string with the file's extraction
+     * Set string with the file's language.
+     * @param newLanguage
      */
     public void setLanguage(final String newLanguage) {
         this.language = newLanguage;
     }
     /**
-     * @return name of the result file
+     * Returns a string with the name of the result file.
+     * @return name of the result file.
      */
     public String getResultFile() {
         return resultFile;
     }
     /**
+     * Set string with the file's name
      * @param newResultFile string with the file's name
      */
     public void setResultFile(final String newResultFile) {
