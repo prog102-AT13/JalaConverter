@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- * <p>
+ *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -12,9 +12,12 @@ package org.fundacion.jala.converter.view.converter;
 import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.BoxLayout;
+import javax.swing.JOptionPane;
+import java.awt.Font;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
