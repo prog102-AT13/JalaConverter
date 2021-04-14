@@ -16,11 +16,20 @@ import java.util.List;
  */
 
 public interface IrequestForm {
-    public List<Parameter> bodyParameters = new ArrayList<>();
-    default List<Parameter> getBodyParameters() {
-        return bodyParameters;
-    }
-    default void addParameters(Parameter parameter) {
-        bodyParameters.add(parameter);
-    }
+
+    /**
+     * @return bodyParameters
+     */
+    public List<Parameter> getBodyParameters();
+
+    /**
+     * Adds parameters to bodyParameters.
+     * @param parameter
+     */
+    public void addParameters(Parameter parameter);
+
+    /**
+     * @return URL
+     */
+    public String getURL();
 }

@@ -41,17 +41,16 @@ public class ClientRequest {
     private IrequestForm requestForm;
 
     /**
-     * Http client creates a request given an url endpoint
-     * @param url
+     * Http client creates a request given a requestForm.
      */
-    public ClientRequest(String url, IrequestForm requestForm) {
-        sURL = url;
+    public ClientRequest(IrequestForm requestForm) {
         this.requestForm = requestForm;
-        httpClient = HttpClients.createDefault();
+        this.sURL = requestForm.getURL();
+        this.httpClient = HttpClients.createDefault();
     }
 
     /**
-     * Executes a request given the type of requestForm
+     * Executes a request given the type of requestForm.
      * @return
      * @throws ClientProtocolException
      * @throws IOException
@@ -71,7 +70,7 @@ public class ClientRequest {
     }
 
     /**
-     * Retrieves a  token from the endpoint from a username and password
+     * Retrieves a  token from the endpoint from a username and password.
      * @return
      */
     public CompletableFuture<String> authGetToken() {
@@ -89,7 +88,7 @@ public class ClientRequest {
     }
 
     /**
-     * Adds text field to http request
+     * Adds text field to http request.
      * @param key
      * @param value
      */
@@ -98,7 +97,7 @@ public class ClientRequest {
     }
 
     /**
-     * Adds file field to http request
+     * Adds file field to http request.
      * @param key
      * @param filePath
      */
@@ -115,9 +114,18 @@ public class ClientRequest {
 
         }
     }
+
+    /**
+     * Iterates trough the body parameters.
+     */
     public void addBodyFields() {
         requestForm.getBodyParameters().stream().forEach(value -> addBodyField(value));
     }
+
+    /**
+     * Adds a body field with the parameter's information.
+     * @param parameter
+     */
     public void addBodyField(Parameter parameter) {
         if (!parameter.isFile()) {
             addTextBody(parameter.getKey(), parameter.getValue());

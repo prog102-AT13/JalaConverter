@@ -1,4 +1,8 @@
 package org.fundacion.jala.converter.view.Models;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Copyright (c) 2021 Fundacion Jala.
  *
@@ -12,6 +16,8 @@ package org.fundacion.jala.converter.view.Models;
  */
 
 public class AudioRequestForm implements IrequestForm{
+    public List<Parameter> bodyParameters = new ArrayList<>();
+    public final String URL = "http://localhost:8080/api/extractText";
     private final String FILE = "file";
     private final String FORMAT = "format";
     private final String BITRATE = "bitrate";
@@ -22,7 +28,6 @@ public class AudioRequestForm implements IrequestForm{
     private String formatValue;
     private String bitrateValue;
     private String volumeValue;
-    private String hzValue;
 
     /**
      * Audio Request Form stores parameters for an audio request
@@ -69,5 +74,30 @@ public class AudioRequestForm implements IrequestForm{
      */
     public void addHz(String hzValue) {
         addParameters(new Parameter(HZ, hzValue, false));
+    }
+
+    /**
+     * @return bodyParameters
+     */
+    @Override
+    public List<Parameter> getBodyParameters() {
+        return bodyParameters;
+    }
+
+    /**
+     * Adds parameters to bodyParameters
+     * @param parameter
+     */
+    @Override
+    public void addParameters(Parameter parameter) {
+        bodyParameters.add(parameter);
+    }
+
+    /**
+     * @return URL
+     */
+    @Override
+    public String getURL() {
+        return URL;
     }
 }
