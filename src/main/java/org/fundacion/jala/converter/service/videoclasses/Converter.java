@@ -37,9 +37,9 @@ public class Converter {
         output = adaptPath.substring((adaptPath.lastIndexOf("\\") + 1), adaptPath.lastIndexOf(".") + 1) + format;
         setOutputFileName(output);
         pathOutput = adaptPath.substring(0, (adaptPath.lastIndexOf("archive"))) + "archive\\";
-        String fCommand = startFirstCommand + adaptPath + " ";
+        String ffmpegCommand = startFirstCommand + adaptPath + " ";
         String parameters = changeResolution() + changeFrameRate() + removeAudio();
-        String theCommand = fCommand + parameters + pathOutput + output  + "\"" + " -y";
+        String theCommand = ffmpegCommand + parameters + pathOutput + output  + "\"" + " -y";
         System.out.println(theCommand);
         try {
             LOGGER.info("Execute Try");
