@@ -25,14 +25,13 @@ class QualityAudio extends JPanel implements ChangeListener {
         qualitySlider.setMinorTickSpacing(64);
         qualitySlider.addChangeListener(this::stateChanged);
         Hashtable positionJSlide = new Hashtable();
-        int sliderValue = 64;
-        for (int i = 0; i < 5; i++) {
-            JLabel labelSlide = new JLabel();
-            labelSlide.setFont(new Font("Barlow", 0, 11));
-            labelSlide.setText(String.valueOf(sliderValue));
-            positionJSlide.put(sliderValue, labelSlide);
-            sliderValue = sliderValue + 64;
-        }
+        JLabel labelSlide = new JLabel();
+        labelSlide.setFont(new Font("Barlow", 0, 11));
+        positionJSlide.put(64, new JLabel("64"));
+        positionJSlide.put(128, new JLabel("128"));
+        positionJSlide.put(192, new JLabel("192"));
+        positionJSlide.put(256, new JLabel("256"));
+        positionJSlide.put(320, new JLabel("320"));
         qualitySlider.setLabelTable(positionJSlide);
         qualitySlider.setAlignmentX(LEFT_ALIGNMENT);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
