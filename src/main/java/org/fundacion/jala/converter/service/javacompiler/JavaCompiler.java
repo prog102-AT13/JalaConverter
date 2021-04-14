@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class JavaCompiler {
+    BufferedReader bufferedReader;
     private static final Logger LOGGER = LogManager.getLogger();
     /**
      * @param javaVersion has the commands according to java version
@@ -26,11 +27,10 @@ public class JavaCompiler {
         LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");
-            String command = "\"" + System.getProperty("user.dir") + "\\" + javaVersion.getCompiler() + "\" " + filePath+ " && " +
-                    "\"" + System.getProperty("user.dir") + "\\" + javaVersion.getExecutor() + "\" " + filePath;
+            String command = javaVersion.getCompiler() + " " + "\"" + filePath + "\" "+ "&& " + javaVersion.getExecutor() + " " + "\"" + filePath + "\"";
             ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", command);
             Process process = processBuilder.start();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String resultOfExecution = null;
             String result = "";
             while((resultOfExecution = bufferedReader.readLine()) != null){
@@ -41,6 +41,14 @@ public class JavaCompiler {
         } catch (IOException exception) {
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
             return exception.getMessage();
+        }
+        finally {
+            try {
+                LOGGER.info("Close bufferedReader Stream");
+                bufferedReader.close();
+            } catch (IOException e) {
+                LOGGER.error("Close Stream error" + e.getLocalizedMessage());
+            }
         }
     }
 }
