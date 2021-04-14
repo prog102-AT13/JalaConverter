@@ -32,7 +32,7 @@ public final class Create {
 //        user2 = insertUserData("ed", "password2", "token2");
 //        editUserData(19, "Cristi", "123456", "tokeeen");
 //        deleteProject(28);
-        listProject();
+        System.out.println(listProject());
 
         //System.out.println(findUserById(29).getPassword());
 

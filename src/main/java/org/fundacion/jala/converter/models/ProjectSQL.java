@@ -53,9 +53,9 @@ public class ProjectSQL {
         EntityManager manager = emf.createEntityManager();
         manager.getTransaction().begin();
         List<Project> projectList = manager.createQuery("from Project", Project.class).getResultList();
-        System.out.println("----------------------------------------------");
-        System.out.println(projectList);
-        System.out.println("----------------------------------------------");
+//        System.out.println("----------------------------------------------");
+//        System.out.println(projectList);
+//        System.out.println("----------------------------------------------");
         manager.getTransaction().commit();
         manager.close();
         return projectList;
