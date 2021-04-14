@@ -81,7 +81,7 @@ public class AudioRequestForm implements IrequestForm{
      * @param metadataValue
      */
     public void addMetadata(String metadataValue) {
-        addParameters(new Parameter(HZ, metadataValue, false));
+        addParameters(new Parameter(METADATA, metadataValue, false));
     }
 
     /**
