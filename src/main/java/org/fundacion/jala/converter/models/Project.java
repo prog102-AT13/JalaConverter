@@ -118,7 +118,7 @@ public class Project {
 
     /**
      * Obtains type of the project
-     * @return
+     * @return a string of checksum
      */
     public String getChecksum() {
         return checksum;
