@@ -26,7 +26,8 @@ public class JavaCompiler {
         LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");
-            String command = javaVersion.getCompiler() + " " + filePath + "&&" + javaVersion.getExecutor() + " " + filePath;
+            String command = "\"" + System.getProperty("user.dir") + "\\" + javaVersion.getCompiler() + "\" " + filePath+ " && " +
+                    "\"" + System.getProperty("user.dir") + "\\" + javaVersion.getExecutor() + "\" " + filePath;
             ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", command);
             Process process = processBuilder.start();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
