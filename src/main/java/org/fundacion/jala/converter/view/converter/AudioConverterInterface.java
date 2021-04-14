@@ -21,6 +21,9 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+
+import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;
 
 
 public class AudioConverterInterface extends JPanel implements ActionListener {
@@ -39,9 +42,13 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         audioTitle.setAlignmentX(LEFT_ALIGNMENT);
         audioSettings.setAlignmentX(LEFT_ALIGNMENT);
         JButton convertAudio = new JButton("Convert");
+        JButton dowloadAudio = new JButton("Descarga");
         convertAudio.setAlignmentX(LEFT_ALIGNMENT);
         convertAudio.setFont(new Font("Barlow", 0, 12));
         convertAudio.addActionListener(this::actionPerformed);
+        dowloadAudio.setAlignmentX(LEFT_ALIGNMENT);
+        dowloadAudio.setFont(new Font("Barlow", 0, 12));
+        dowloadAudio.addActionListener(this::actionPerformed2);
         file = new SelectFile();
         file.setAlignmentX(LEFT_ALIGNMENT);
         audioSelect = new ConvertTypeSelectAudio();
@@ -59,6 +66,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         add(quality);
         add(settings);
         add(convertAudio);
+        add(dowloadAudio);
     }
 
     /**
@@ -68,24 +76,28 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
      */
     @Override
     public void actionPerformed(final ActionEvent e)  {
-        JOptionPane.showMessageDialog(this, "File Path: "
-                + file.getOriginFilePath()
-                + "\nConvert to: "
-                + audioSelect.getConvertTo()
-                + "\nQuality: "
-                + quality.getQualityAudio()
-                + "\nVolume: "
-                + settings.getVolume()
-                + "\nAudio Channel: "
-                + settings.getAudioChannel()
-                + "\nHz: "
-                + settings.getHz()
-                + "\nwith metadata: "
-                + settings.isMetadata());
         try {
+            JOptionPane.showMessageDialog(this, "File Path: "
+                    + file.getOriginFilePath()
+                    + "\nConvert to: "
+                    + audioSelect.getConvertTo()
+                    + "\nQuality: "
+                    + quality.getQualityAudio()
+                    + "\nVolume: "
+                    + settings.getVolume()
+                    + "\nAudio Channel: "
+                    + settings.getAudioChannel()
+                    + "\nHz: "
+                    + settings.getHz()
+                    + "\nwith metadata: "
+                    + settings.isMetadata()
+                    + "\nChecksum: "
+                    + getFileChecksum(file.getOriginFilePath()));
             callRequest();
-        } catch (Exception r) {
-
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
+            noSuchAlgorithmException.printStackTrace();
         }
 
     }
@@ -115,5 +127,14 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Action of JButton convert, send information for metadataCLASS conversion.
+     * Show a Dialog with the information.
+     * @param e event of the JButton.
+     */
+    public void actionPerformed2(final ActionEvent e)  {
+        System.out.println("Descargar");
     }
 }
