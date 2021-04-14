@@ -1,10 +1,13 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- * <p>
- * This software is the confidential and proprietary information of Fundacion Jala
+ *
+ * * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Juan Pablo Gonzales
+ * @version 1.0
  */
 
 package org.fundacion.jala.converter.models.parameter;
@@ -23,6 +26,7 @@ public class Parameter {
     }
 
     /**
+     * Returns a string with the path
      * @return the file's path
      */
     public String getFilePath() {
@@ -30,6 +34,7 @@ public class Parameter {
     }
 
     /**
+     * Sets the file's path
      * @param newFilePath a string with the path
      */
     public void setFilePath(final String newFilePath) {
