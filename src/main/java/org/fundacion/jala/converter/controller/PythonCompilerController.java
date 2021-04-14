@@ -22,33 +22,19 @@ import java.io.IOException;
 @RequestMapping("/api")
 public class PythonCompilerController {
     private static final Logger LOGGER = LogManager.getLogger();
-    @Autowired
-    private FileStorageService fileStorageService;
 
     /**
-     * Endpoint for compile python
+     * Endpoint for compile python from a string
      */
     @PostMapping("/compilePython")
-    public String uploadFile(final @RequestParam("file") MultipartFile file,
-                             final @RequestParam("version") String version) throws IllegalStateException, IOException {
+    public String compilePython(final @RequestParam("code") String code) throws IllegalStateException, IOException {
         LOGGER.info("start");
-        String filename = file.getOriginalFilename();
-        String storagePath = fileStorageService.uploadFile(file);
-        storagePath = "\"" + storagePath + "\"";
-        PythonCompiler pythonCompiler = new PythonCompiler();
-        LOGGER.info("finish");
-        return pythonCompiler.compiler(Python.V3, storagePath);
-    }
-
-    /**
-     * Endpoint for proving compile python
-     */
-    @PostMapping("/compilePython2")
-    public String uploadFile2(final @RequestParam("code") String code) throws IllegalStateException, IOException {
-        LOGGER.info("start");
-        PythonCompiler pythonCompiler = new PythonCompiler();
-        String filePath = pythonCompiler.makePythonFile(code);
-        LOGGER.info("finish");
-        return pythonCompiler.compiler(Python.V3, filePath);
+        if (!code.isBlank() || !code.equals(null)){
+            PythonCompiler pythonCompiler = new PythonCompiler();
+            String filePath = Transform.toFile(code, "filetocompile", "py");
+            LOGGER.info("finish");
+            return pythonCompiler.compiler(Python.V3, filePath);
+        }
+        return "";
     }
 }

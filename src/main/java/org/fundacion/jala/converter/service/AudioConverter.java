@@ -9,6 +9,7 @@
 
 package org.fundacion.jala.converter.service;
 
+import org.fundacion.jala.converter.models.parameter.AudioParameter;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -36,12 +37,12 @@ public final class AudioConverter {
     public AudioConverter() {
     }
 
-    public AudioConverter(final String format, final String bitrate, final String hz, final String volume, final String audioChannels) {
-        this.format = format;
-        this.bitrate = bitrate;
-        this.hz = hz;
-        this.volume = volume;
-        this.audioChannels = audioChannels;
+    public AudioConverter(final AudioParameter audioParameter) {
+        this.format = audioParameter.getFormat();
+        this.bitrate = audioParameter.getBitrate();
+        this.hz = audioParameter.getHz();
+        this.volume = audioParameter.getVolume();
+        this.audioChannels = audioParameter.getAudioChannels();
     }
 
     /**
