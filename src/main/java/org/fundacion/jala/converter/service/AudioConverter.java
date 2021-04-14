@@ -18,11 +18,31 @@ public final class AudioConverter {
     private String hz = "";
     private String volume = "";
     private String outputFileName = "";
+    private String audioChannels = "";
     private RunCommand runCommand = new RunCommand();
     private final int ONE_HUNDRED = 1000;
     private final String K20_HERTZ = "20";
     private final String K44_HERTZ = "44";
     private final String K48_HERTZ = "48";
+    private final String MONO_CHANNEL = "1";
+    private final String STEREO_CHANNEL = "2";
+    private final String TWO_POINT_ONE_CHANNEL = "3";
+    private final String FOUR_POINT_ZERO_CHANNEL = "4";
+    private final String FIVE_POINT_ZERO_CHANNEL = "5";
+    private final String FIVE_POINT_ONE_CHANNEL = "6";
+    private final String SIX_POINT_ONE_CHANNEL = "7";
+    private final String SEVEN_POINT_ONE_CHANNEL = "8";
+
+    public AudioConverter() {
+    }
+
+    public AudioConverter(final String format, final String bitrate, final String hz, final String volume, final String audioChannels) {
+        this.format = format;
+        this.bitrate = bitrate;
+        this.hz = hz;
+        this.volume = volume;
+        this.audioChannels = audioChannels;
+    }
 
     /**
      * Create command for audio converter
@@ -34,10 +54,11 @@ public final class AudioConverter {
         String bitrate = formatBitrate();
         String hz = formatHz();
         String volume = formatVolume();
+        String audioChannel = formatAudioChannel();
         String input = pathFile.substring(pathFile.lastIndexOf("\\") + 1);
         setOutputFileName(pathFile.substring((pathFile.lastIndexOf("\\") + 1), pathFile.lastIndexOf(".") + 1) + getFormat());
         String overwrite = " -y";
-        String command = relativePath + ffmpeg + input + bitrate + hz + volume + getOutputFileName() + overwrite;
+        String command = relativePath + ffmpeg + input + audioChannel + bitrate + hz + volume + getOutputFileName() + overwrite;
         System.out.println(command);
         runCommand.run(command);
     }
@@ -93,6 +114,48 @@ public final class AudioConverter {
     private String formatBitrate() {
         if (!getBitrate().equals("")) {
             return " -ab " + (Integer.parseInt(getBitrate()) * ONE_HUNDRED) + " ";
+        }
+        return "";
+    }
+
+    /**
+     * Gets the audio channels
+     * @return a String with the value
+     */
+    public String getAudioChannels() {
+        return audioChannels;
+    }
+
+    /**
+     * Sets the audio channels
+     * @param audioChannels the value to set
+     */
+    public void setAudioChannels(final String audioChannels) {
+        this.audioChannels = audioChannels;
+    }
+
+    /**
+     * Create parameter for audio channels
+     * @return a String with format for audio channels
+     */
+    private String formatAudioChannel() {
+        switch (getAudioChannels()) {
+            case "mono":
+                return " -ac " + MONO_CHANNEL + " ";
+            case "stereo":
+                return " -ac " + STEREO_CHANNEL + " ";
+            case "2.1":
+                return " -ac " + TWO_POINT_ONE_CHANNEL + " ";
+            case "4.0":
+                return " -ac " + FOUR_POINT_ZERO_CHANNEL + " ";
+            case "5.0":
+                return " -ac " + FIVE_POINT_ZERO_CHANNEL + " ";
+            case "5.1":
+                return " -ac " + FIVE_POINT_ONE_CHANNEL + " ";
+            case "6.1":
+                return " -ac " + SIX_POINT_ONE_CHANNEL + " ";
+            case "7.1":
+                return " -ac " + SEVEN_POINT_ONE_CHANNEL + " ";
         }
         return "";
     }

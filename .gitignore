@@ -48,3 +48,4 @@ bin/
 .vscode/
 *.class
 logs/propertieslogs.log
+*.log

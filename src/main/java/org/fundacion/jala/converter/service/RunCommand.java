@@ -26,9 +26,14 @@ public class RunCommand {
      * @param command
      */
     public void run(final String command) {
+        boolean isWindows = System.getProperty("os.name")
+                .toLowerCase().startsWith("windows");
         ProcessBuilder processBuilder = new ProcessBuilder();
-
-        processBuilder.command("bash", "-c", command);
+        if (isWindows) {
+            processBuilder.command("cmd.exe", "/c", command);
+        } else {
+            processBuilder.command("bash", "-c", command);
+        }
         LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");
