@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) 2021 Fundacion Jala.
+ *
+ * This software is the confidential and proprietary information of Fundacion Jala
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with Fundacion Jala
+ */
 package org.fundacion.jala.converter.models;
 
 import javax.persistence.EntityManager;
@@ -8,12 +16,14 @@ import java.util.List;
 public class UserSQL {
     public UserSQL() {
     }
+
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jalaPersistence");
+
     /**
-     * This method is for to insert dates for database
-     * @param userName
-     * @param password
-     * @param token
+     * Inserts users in the db
+     * @param userName String with the user name
+     * @param password String with the password of the user
+     * @param token String the token
      */
     public static User insertUserData(final String userName, final String password, final String token) {
         EntityManager manager = emf.createEntityManager();
@@ -28,6 +38,13 @@ public class UserSQL {
         return user;
     }
 
+    /**
+     * Edits the data of the user
+     * @param userId int with the id of the user to be edited
+     * @param userName String with the new user name
+     * @param password String with the new password of the user
+     * @param token String with the new token
+     */
     public static void editUserData(final int userId, final String userName, final String password, final String token) {
         EntityManager manager = emf.createEntityManager();
         manager.getTransaction().begin();
@@ -39,6 +56,10 @@ public class UserSQL {
         manager.close();
     }
 
+    /**
+     * Deletes a user
+     * @param userId int with the id of the user to be deleted
+     */
     public static void deleteUser(final int userId) {
         EntityManager manager = emf.createEntityManager();
         manager.getTransaction().begin();
@@ -48,6 +69,11 @@ public class UserSQL {
         manager.close();
     }
 
+    /**
+     * Finds a user by it's id
+     * @param userId int with the user id
+     * @return a user
+     */
     public static User findUserById(final int userId) {
         EntityManager manager = emf.createEntityManager();
         User userResult;
@@ -59,14 +85,15 @@ public class UserSQL {
         return userResult;
     }
 
+    /**
+     *Lists all users in the db
+     * @return a list of users
+     */
     @SuppressWarnings("unchecked")
     public static List<User> listUser() {
         EntityManager manager = emf.createEntityManager();
         manager.getTransaction().begin();
         List<User> userList = manager.createQuery("from User", User.class).getResultList();
-        System.out.println("----------------------------------------------");
-        System.out.println(userList);
-        System.out.println("----------------------------------------------");
         manager.getTransaction().commit();
         manager.close();
         return userList;
