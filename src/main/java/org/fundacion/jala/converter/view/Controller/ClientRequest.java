@@ -50,12 +50,13 @@ public class ClientRequest {
      * @throws IOException
      */
     public String executeRequest(IrequestForm requestForm) throws ClientProtocolException, IOException {
+        String token = authGetToken();
         httpPost = new HttpPost(sURL);
         builder = MultipartEntityBuilder.create();
         multipart = builder.build();
         addBodyFields();
         httpPost.setEntity(multipart);
-        httpPost.setHeader("Authorization", "Bearer " + authGetToken());
+        httpPost.setHeader("Authorization", "Bearer " + token);
         CloseableHttpResponse response = httpClient.execute(httpPost);
         HttpEntity responseEntity = response.getEntity();
         String sResponse = EntityUtils.toString(responseEntity, "UTF-8");

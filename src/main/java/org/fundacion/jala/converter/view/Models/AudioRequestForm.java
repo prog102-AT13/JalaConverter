@@ -16,12 +16,13 @@ import java.util.List;
 
 public class AudioRequestForm implements IrequestForm{
     public List<Parameter> bodyParameters = new ArrayList<>();
-    public final String URL = "http://localhost:8080/api/extractText";
+    public final String URL = "http://localhost:8080/api/extractAudio";
     private final String FILE = "file";
     private final String FORMAT = "format";
     private final String BITRATE = "bitrate";
     private final String VOLUME = "volume";
     private final String HZ = "hz";
+    private final String METADATA = "metadata";
 
     private String filepathValue;
     private String formatValue;
@@ -73,6 +74,14 @@ public class AudioRequestForm implements IrequestForm{
      */
     public void addHz(String hzValue) {
         addParameters(new Parameter(HZ, hzValue, false));
+    }
+
+    /**
+     * Add metadata parameter
+     * @param metadataValue
+     */
+    public void addMetadata(String metadataValue) {
+        addParameters(new Parameter(HZ, metadataValue, false));
     }
 
     /**
