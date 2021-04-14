@@ -41,7 +41,7 @@ public class ExtractTextController {
         LOGGER.info("start");
         String filename = file.getOriginalFilename();
         String storagePath = fileStorageService.uploadFile(file);
-        ExtractText extractText = new ExtractText(new ExtractTextParameter( storagePath,language, nameOutput));
+        ExtractText extractText = new ExtractText(new ExtractTextParameter(storagePath, language, nameOutput));
         extractText.extractText();
         String outputPath = FileStorageService.getOutputPath(filename);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
