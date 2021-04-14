@@ -14,7 +14,7 @@ public class ChecksumService {
      * @throws IOException when invalid file's path
      * @throws NoSuchAlgorithmException when invalid algorithm is provided
      */
-    private static String getFileChecksum(final String filePath) throws IOException, NoSuchAlgorithmException {
+    public static String getFileChecksum(final String filePath) throws IOException, NoSuchAlgorithmException {
         File file = new File(filePath);
         MessageDigest md5Digest = MessageDigest.getInstance("MD5");
         FileInputStream fileInputStream = new FileInputStream(file);
