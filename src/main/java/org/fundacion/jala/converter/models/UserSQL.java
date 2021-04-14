@@ -58,4 +58,17 @@ public class UserSQL {
         manager.close();
         return userResult;
     }
+
+    @SuppressWarnings("unchecked")
+    public static List<User> listUser() {
+        EntityManager manager = emf.createEntityManager();
+        manager.getTransaction().begin();
+        List<User> userList = manager.createQuery("from User", User.class).getResultList();
+        System.out.println("----------------------------------------------");
+        System.out.println(userList);
+        System.out.println("----------------------------------------------");
+        manager.getTransaction().commit();
+        manager.close();
+        return userList;
+    }
 }
