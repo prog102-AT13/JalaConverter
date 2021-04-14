@@ -28,8 +28,8 @@ public class MyUserDetailsService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-        return new User(findUserById(2).getName(),
-                findUserById(2).getPassword(),
+        return new User(findUserById(1).getName(),
+                findUserById(1).getPassword(),
                 new ArrayList<>());
     }
 }

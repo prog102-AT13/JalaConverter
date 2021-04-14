@@ -738,3 +738,25 @@
 [INFO ] 2021-04-14 14:47:49.868 [http-nio-8080-exec-3] ExtractMetadata - start
 [INFO ] 2021-04-14 14:47:49.868 [http-nio-8080-exec-3] ExtractMetadata - Execute Try
 [INFO ] 2021-04-14 14:47:49.872 [http-nio-8080-exec-3] ExtractMetadata - finish
+[INFO ] 2021-04-14 16:29:29.099 [main] ConverterApplication - start
+[INFO ] 2021-04-14 16:29:37.111 [main] ConverterApplication - finish
+[INFO ] 2021-04-14 16:30:24.605 [http-nio-8080-exec-1] AudioConverterController - Execute Try
+[INFO ] 2021-04-14 16:30:24.764 [http-nio-8080-exec-1] AudioConverterController - finish
+[INFO ] 2021-04-14 16:30:24.788 [http-nio-8080-exec-1] RunCommand - start
+[INFO ] 2021-04-14 16:30:24.788 [http-nio-8080-exec-1] RunCommand - Execute Try
+[INFO ] 2021-04-14 16:30:27.111 [http-nio-8080-exec-1] RunCommand - finish
+[INFO ] 2021-04-14 16:30:27.134 [http-nio-8080-exec-1] ExtractMetadata - start
+[INFO ] 2021-04-14 16:30:27.134 [http-nio-8080-exec-1] ExtractMetadata - Execute Try
+[INFO ] 2021-04-14 16:30:27.141 [http-nio-8080-exec-1] ExtractMetadata - finish
+[INFO ] 2021-04-14 16:30:27.141 [http-nio-8080-exec-1] ExtractMetadata - start
+[INFO ] 2021-04-14 16:30:27.142 [http-nio-8080-exec-1] ExtractMetadata - Execute Try
+[INFO ] 2021-04-14 16:30:27.145 [http-nio-8080-exec-1] ExtractMetadata - finish
+[INFO ] 2021-04-14 16:30:31.056 [http-nio-8080-exec-2] RunCommand - start
+[INFO ] 2021-04-14 16:30:31.056 [http-nio-8080-exec-2] RunCommand - Execute Try
+[INFO ] 2021-04-14 16:30:33.360 [http-nio-8080-exec-2] RunCommand - finish
+[INFO ] 2021-04-14 16:30:33.360 [http-nio-8080-exec-2] ExtractMetadata - start
+[INFO ] 2021-04-14 16:30:33.360 [http-nio-8080-exec-2] ExtractMetadata - Execute Try
+[INFO ] 2021-04-14 16:30:33.365 [http-nio-8080-exec-2] ExtractMetadata - finish
+[INFO ] 2021-04-14 16:30:33.365 [http-nio-8080-exec-2] ExtractMetadata - start
+[INFO ] 2021-04-14 16:30:33.365 [http-nio-8080-exec-2] ExtractMetadata - Execute Try
+[INFO ] 2021-04-14 16:30:33.368 [http-nio-8080-exec-2] ExtractMetadata - finish
