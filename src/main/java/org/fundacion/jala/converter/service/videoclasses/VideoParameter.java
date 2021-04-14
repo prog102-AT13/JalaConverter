@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class VideoParameter {
     private String outputFormat;
     private String resolution;
-    private boolean tumbnail;
+    private boolean thumbnail;
     private static final int FRAME_R_DEFAULT = 30;
     private int frameRate = FRAME_R_DEFAULT;
     private int width;
@@ -69,11 +69,11 @@ public class VideoParameter {
     }
 
     /**
-     * Sets the tumbnail of the output video
-     * @param newTumbnail boolean that indicates if the video has to have tumbnail
+     * Sets the thumbnail of the output video
+     * @param newThumbnail boolean that indicates if the video has to have tumbnail
      */
-    public void setTumbnail(final boolean newTumbnail) {
-        this.tumbnail = newTumbnail;
+    public void setThumbnail(final boolean newThumbnail) {
+        this.thumbnail = newThumbnail;
     }
 
     /**
@@ -125,11 +125,11 @@ public class VideoParameter {
     }
 
     /**
-     * Gets the tumbnail of the output video
-     * @return tumbnail
+     * Gets the thumbnail of the output video
+     * @return thumbnail
      */
-    public boolean hasTumbnail() {
-        return tumbnail;
+    public boolean hasThumbnail() {
+        return thumbnail;
     }
 
 }

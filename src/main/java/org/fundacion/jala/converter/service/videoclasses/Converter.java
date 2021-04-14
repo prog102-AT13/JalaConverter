@@ -52,7 +52,7 @@ public class Converter {
         try {
             LOGGER.info("Execute Try");
             Thread.sleep(WAIT_TIME);
-            generateATumbnail();
+            generateAThumbnail();
             LOGGER.info("finish");
         } catch (InterruptedException exception) {
             exception.printStackTrace();
@@ -80,16 +80,16 @@ public class Converter {
     }
 
     /**
-     * Generates a input video tumbnail
+     * Generates a input video thumbnail
      */
-    private void generateATumbnail() {
+    private void generateAThumbnail() {
         String name = getOutputFileName().substring(0, getOutputFileName().lastIndexOf("."));
         String startCommand = "ffmpeg -i ";
         String outputCommand = pathOutput + output + "\"" + " -ss 00:00:01 -vframes 1 -s 128x128 " + pathOutput + name + ".png\"";
-        String tumbnailCommand = startCommand + outputCommand;
+        String thumbnailCommand = startCommand + outputCommand;
         try {
             LOGGER.info("Execute Try");
-            Process petition = Runtime.getRuntime().exec("cmd /c" + tumbnailCommand);
+            Process petition = Runtime.getRuntime().exec("cmd /c" + thumbnailCommand);
             LOGGER.info("finish");
         } catch (Exception exception) {
             exception.printStackTrace();

@@ -37,7 +37,7 @@ public class VideoConverterController {
     public String uploadFile(@RequestParam("file") MultipartFile file,
                              @RequestParam("outputformat") String outputFormat,
                              @RequestParam("resolution") String resolution,
-                             @RequestParam("tumbnail") boolean tumbnail,
+                             @RequestParam("thumbnail") boolean thumbnail,
                              @RequestParam("framerate") int frameRate,
                              @RequestParam("width") int width,
                              @RequestParam("height") int height,
@@ -48,7 +48,7 @@ public class VideoConverterController {
         String storagePath = fileStorageService.uploadFile(file);
         videoParameter.setOutputFormat(outputFormat);
         videoParameter.setResolution(resolution);
-        videoParameter.setTumbnail(tumbnail);
+        videoParameter.setThumbnail(thumbnail);
         videoParameter.setFrameRate(frameRate);
         videoParameter.setWidth(width);
         videoParameter.setHeight(height);
