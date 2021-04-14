@@ -9,6 +9,8 @@
 
 package org.fundacion.jala.converter.view.converter;
 
+import org.fundacion.jala.converter.service.videoclasses.Converter;
+import org.fundacion.jala.converter.service.videoclasses.VideoParameter;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
 
 import javax.swing.JPanel;
@@ -20,6 +22,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 
 public class VideoConverterInterface extends JPanel implements ActionListener{
@@ -33,13 +36,13 @@ public class VideoConverterInterface extends JPanel implements ActionListener{
     public VideoConverterInterface() {
         JLabelStyle videoTitle = new JLabelStyle("Select Video:", "h2", 0, 100, 30);
         videoTitle.setAlignmentX(LEFT_ALIGNMENT);
-        JButton converterVideoButton = new JButton("Convert Video");
-        converterVideoButton.setFont(new Font("Barlow", 0, 12));
-        converterVideoButton.addActionListener(this::actionPerformed);
         file = new SelectFile();
         file.setAlignmentX(LEFT_ALIGNMENT);
         menuConverterType = new ConverterTypeSelect();
         menuConverterType.setAlignmentX(LEFT_ALIGNMENT);
+        JButton converterVideoButton = new JButton("Convert Video");
+        converterVideoButton.setFont(new Font("Barlow", 0, 12));
+        converterVideoButton.addActionListener(this::actionPerformed);
         settings = new OutputSettings();
         settings.setAlignmentX(LEFT_ALIGNMENT);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -62,8 +65,10 @@ public class VideoConverterInterface extends JPanel implements ActionListener{
                 + file.getOriginFilePath()
                 + "\nConvert to:"
                 + menuConverterType.getConvertTo()
-                + "\nResolution: "
-                + settings.getResolution()
+                + "\nResolutionWidth: "
+                + settings.getWidthResolution()
+                + "\nResolutionHeight: "
+                + settings.getHeightResolution()
                 + "\nFrames: "
                 + settings.getFrame()
                 + "\nSound: "
@@ -72,3 +77,7 @@ public class VideoConverterInterface extends JPanel implements ActionListener{
                 + settings.isThumbnailRequired());
     }
 }
+
+
+
+

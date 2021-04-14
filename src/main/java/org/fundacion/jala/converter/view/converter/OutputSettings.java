@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- *
+ * <p>
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -11,17 +11,14 @@ package org.fundacion.jala.converter.view.converter;
 
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
 
-import javax.swing.JPanel;
-import javax.swing.JComboBox;
-import javax.swing.JCheckBox;
+import javax.swing.*;
 
-import java.awt.Font;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.*;
+import java.util.ArrayList;
 
-class OutputSettings extends JPanel{
-    private JComboBox resolutionSelect;
-    private JComboBox framesSelect;
+class OutputSettings extends JPanel {
+    private JComboBox<ResolutionVideo> resolutionComboBox;
+    private JComboBox<FrameVideo> framesSelect;
     private JCheckBox optionCSound;
     private JCheckBox thumbnailOption;
 
@@ -31,14 +28,12 @@ class OutputSettings extends JPanel{
     protected OutputSettings() {
         JLabelStyle resolutionLabel = new JLabelStyle("Select resolution: ", "h3", 2, 70, 30);
         JLabelStyle frameLabel = new JLabelStyle("Select frame: ", "h3", 2, 70, 30);
-        resolutionSelect = new JComboBox();
-        resolutionSelect.setFont(new Font("Barlow", 0, 12));
-        resolutionSelect.setPreferredSize(new Dimension(70, 30));
         setResolutionSelect();
-        framesSelect = new JComboBox();
+        resolutionComboBox.setFont(new Font("Barlow", 0, 12));
+        resolutionComboBox.setPreferredSize(new Dimension(70, 30));
+        setFrameSelect();
         framesSelect.setFont(new Font("Barlow", 0, 12));
         framesSelect.setPreferredSize(new Dimension(70, 30));
-        setFrameSelect();
         optionCSound = new JCheckBox("With audio");
         optionCSound.setFont(new Font("Barlow", 0, 12));
         optionCSound.setSelected(true);
@@ -46,7 +41,7 @@ class OutputSettings extends JPanel{
         thumbnailOption.setFont(new Font("Barlow", 0, 12));
         setLayout(new GridLayout(3, 2));
         add(resolutionLabel.getTextLabel());
-        add(resolutionSelect);
+        add(resolutionComboBox);
         add(frameLabel.getTextLabel());
         add(framesSelect);
         add(optionCSound);
@@ -58,14 +53,17 @@ class OutputSettings extends JPanel{
      * for video converter.
      */
     protected void setResolutionSelect() {
-        resolutionSelect.addItem("Original resolution");
-        resolutionSelect.addItem("HD720p\t1280x720");
-        resolutionSelect.addItem("1920p\t108x1920");
-        resolutionSelect.addItem("480p\t854x480");
-        resolutionSelect.addItem("240p\t426x240");
-        resolutionSelect.addItem("DVD\t720x567");
-        resolutionSelect.addItem("Television\t640x480");
-        resolutionSelect.addItem("Mobile\t320x240");
+
+        resolutionComboBox = new JComboBox<ResolutionVideo>(
+                new ResolutionVideo[]{
+                        new ResolutionVideo("720p(HD)", 1280, 720),
+                        new ResolutionVideo("1920p", 1080, 1920),
+                        new ResolutionVideo("480p", 854, 480),
+                        new ResolutionVideo("240p", 426, 240),
+                        new ResolutionVideo("DVD", 720, 567),
+                        new ResolutionVideo("TV", 640, 480),
+                        new ResolutionVideo("Mobile", 320, 240)}
+        );
     }
 
     /**
@@ -73,36 +71,53 @@ class OutputSettings extends JPanel{
      * for video converter.
      */
     protected void setFrameSelect() {
-        framesSelect.addItem("Original frame");
-        framesSelect.addItem("21F");
-        framesSelect.addItem("24F");
-        framesSelect.addItem("27F");
-        framesSelect.addItem("29,9F");
-        framesSelect.addItem("30F");
-        framesSelect.addItem("60F");
+        framesSelect=new JComboBox<FrameVideo>(
+                new FrameVideo[]{
+                        new FrameVideo(21),
+                        new FrameVideo(24),
+                        new FrameVideo(27),
+                        new FrameVideo(29),
+                        new FrameVideo(30),
+                        new FrameVideo(60)});
     }
 
     /**
-     * Method that get selected resolution
+     * Method that get selected width resolution
      * for video converter.
-     * @return String, option selected of Resolution.
+     *
+     * @return int, width selected of Resolution.
      */
-    protected String getResolution() {
-        return resolutionSelect.getSelectedItem().toString();
+    protected int getWidthResolution() {
+        ResolutionVideo item = (ResolutionVideo) resolutionComboBox.getSelectedItem();
+        return item.getWidth();
+    }
+
+    /**
+     * Method that get selected Height resolution
+     * for video converter.
+     *
+     * @return int, Height selected of Resolution.
+     */
+    protected int getHeightResolution() {
+        ResolutionVideo resolutionVideo = (ResolutionVideo) resolutionComboBox.getSelectedItem();
+        return resolutionVideo.getHeight();
     }
 
     /**
      * Method that get selected frame
      * for video converter.
+     *
      * @return String, option selected of Frame.
      */
-    protected String getFrame() {
-        return framesSelect.getSelectedItem().toString();
+    protected int getFrame() {
+        FrameVideo frameVideo=(FrameVideo)framesSelect.getSelectedItem();
+        return frameVideo.getFrame();
     }
 
     /**
      * Method that get if Sound is required
      * for video converter.
+     *
      * @return true if audio is required, false if not.
      */
     protected boolean isAudioSelected() {
@@ -112,6 +127,7 @@ class OutputSettings extends JPanel{
     /**
      * Method that get if thumbnail is required
      * for video converter.
+     *
      * @return true if thumbnail is required, false if not.
      */
     protected boolean isThumbnailRequired() {
