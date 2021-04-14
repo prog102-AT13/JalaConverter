@@ -10,6 +10,7 @@
 package org.fundacion.jala.converter.view;
 
 import org.fundacion.jala.converter.view.converter.AudioConverterInterface;
+import org.fundacion.jala.converter.view.text_extractor.TextExtractorInterface;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
 import org.fundacion.jala.converter.view.compiler.CompilerInterface;
 import org.fundacion.jala.converter.view.converter.VideoConverterInterface;
@@ -31,6 +32,7 @@ public class MainInterface extends JFrame{
     private VideoConverterInterface video;
     private MetaDataInterface metaData;
     private AudioConverterInterface audio;
+    private TextExtractorInterface textExtractor;
 
     /**
      * Initialize all the graphics components in the
@@ -43,12 +45,14 @@ public class MainInterface extends JFrame{
         titleTxt = new JLabelStyle("Jala Converter Project v1.0", "h2", 0, 0, 90);
         metaData =  new MetaDataInterface();
         audio = new AudioConverterInterface();
+        textExtractor = new TextExtractorInterface();
         JTabbedPane mainTabPanel = new JTabbedPane();
         mainTabPanel.setFont(new Font("Barlow", 0, 11));
         mainTabPanel.add("Compiler", compilerJP);
         mainTabPanel.add("Video Converter", video);
         mainTabPanel.add("Audio Converter", audio);
         mainTabPanel.add("Meta Data", metaData);
+        mainTabPanel.add("Text Extractor", textExtractor);
         setLayout(new BorderLayout());
         add(titleTxt.getTextLabel(), BorderLayout.NORTH);
         add(mainTabPanel, BorderLayout.CENTER);
