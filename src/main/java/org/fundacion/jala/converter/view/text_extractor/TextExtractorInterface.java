@@ -27,8 +27,8 @@ public class TextExtractorInterface extends JPanel implements ActionListener {
      * Initialize of graphics elements for Audio converter interface.
      */
     public TextExtractorInterface() {
-        JLabelStyle audioTitle = new JLabelStyle("Audio converter", "h1", 2, 70, 30);
-        JLabelStyle audioSettings = new JLabelStyle("Audio settings", "h1", 2, 70, 30);
+        JLabelStyle audioTitle = new JLabelStyle("Text exctractor", "h1", 2, 70, 30);
+        JLabelStyle audioSettings = new JLabelStyle("Image settings", "h1", 2, 70, 30);
         audioTitle.setAlignmentX(LEFT_ALIGNMENT);
         audioSettings.setAlignmentX(LEFT_ALIGNMENT);
         JButton convertAudio = new JButton("Convert");

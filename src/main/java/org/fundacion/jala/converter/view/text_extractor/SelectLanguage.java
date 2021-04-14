@@ -28,11 +28,8 @@ public class SelectLanguage extends JPanel {
         convertTo = new JComboBox();
         convertTo.setPreferredSize(new Dimension(100, 30));
         convertTo.setFont(new Font("Barlow", 0, 12));
-        convertTo.addItem("mp3");
-        convertTo.addItem("wav");
-        convertTo.addItem("m4a");
-        convertTo.addItem("flac");
-        convertTo.addItem("ogg");
+        convertTo.addItem("eng");
+        convertTo.addItem("spa");
         setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
         add(labelConvertTo.getTextLabel());
         add(convertTo);
