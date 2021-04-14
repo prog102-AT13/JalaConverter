@@ -1,18 +1,23 @@
+/**
+ * Copyright (c) 2021 Fundacion Jala.
+ *
+ * This software is the confidential and proprietary information of Fundacion Jala
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with Fundacion Jala
+ *
+ * @author Saul Caspa Miranda
+ * @version 1.0
+ */
 package org.fundacion.jala.converter.view.text_extractor;
 
-import org.fundacion.jala.converter.view.converter.ConvertTypeSelectAudio;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * @author Saul Caspa Miranda
- * @version 1.0
- */
 
 public class TextExtractorInterface extends JPanel implements ActionListener {
     private SelectFile file;
