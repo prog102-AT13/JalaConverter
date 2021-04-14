@@ -9,9 +9,7 @@
 
 package org.fundacion.jala.converter.view.converter;
 
-import ch.qos.logback.core.encoder.EchoEncoder;
-import org.checkerframework.checker.units.qual.C;
-import org.fundacion.jala.converter.view.Controller.ClientRequest;
+import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import org.fundacion.jala.converter.view.Models.AudioRequestForm;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
 

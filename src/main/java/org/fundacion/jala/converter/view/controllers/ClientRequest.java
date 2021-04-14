@@ -9,7 +9,7 @@
  * @author Saul Caspa Miranda
  * @version 1.0
  */
-package org.fundacion.jala.converter.view.Controller;
+package org.fundacion.jala.converter.view.controllers;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
