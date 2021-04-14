@@ -8,6 +8,7 @@
  */
 package org.fundacion.jala.converter.controller;
 
+import org.fundacion.jala.converter.models.parameter.AudioParameter;
 import org.fundacion.jala.converter.service.AudioConverter;
 import org.fundacion.jala.converter.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,24 +27,24 @@ import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetada
 @RequestMapping("/api")
 public class AudioConverterController {
     @Autowired
-    FileStorageService fileStorageService;
+    private FileStorageService fileStorageService;
     @Autowired
-    AudioConverter audioConverter;
+    private AudioConverter audioConverter;
 
     /**
      * Endpoint for audio converter
      */
     @PostMapping("/convertAudio")
-    public String uploadFile(@RequestParam("file") MultipartFile file,
-                             @RequestParam("format") String format,
-                             @RequestParam("bitrate") String bitrate,
-                             @RequestParam("volume") String volume,
-                             @RequestParam("hz") String hz,
-                             @RequestParam("audiochannel") String audioChannel,
-                             @RequestParam("metadata") String metadata) throws IllegalStateException, IOException {
+    public String uploadFile(final @RequestParam("file") MultipartFile file,
+                             final @RequestParam("format") String format,
+                             final @RequestParam("bitrate") String bitrate,
+                             final @RequestParam("volume") String volume,
+                             final @RequestParam("hz") String hz,
+                             final @RequestParam("audiochannel") String audioChannel,
+                             final @RequestParam("metadata") String metadata) throws IllegalStateException, IOException {
         String filename = file.getOriginalFilename();
         String storagePath = fileStorageService.uploadFile(file);
-        audioConverter = new AudioConverter(format, bitrate, hz, volume, audioChannel);
+        audioConverter = new AudioConverter(new AudioParameter(storagePath, format, bitrate, hz, volume, audioChannel));
         audioConverter.audioConverter(storagePath);
         String outputFilename = audioConverter.getOutputFileName();
         extractMetadata(metadata, outputFilename, fileStorageService);
