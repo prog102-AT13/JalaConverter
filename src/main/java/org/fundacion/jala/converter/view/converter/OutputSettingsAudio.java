@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- * <p>
+ *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -8,11 +8,8 @@
  */
 
 package org.fundacion.jala.converter.view.converter;
-
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-
 import javax.swing.*;
-
 import java.awt.*;
 
 class OutputSettingsAudio extends JPanel {
@@ -54,11 +51,11 @@ class OutputSettingsAudio extends JPanel {
     }
 
     /**
-     * Method that set all possible resolutions
-     * for video converter.
+     * Method that set all possible volume
+     * for Audio converter.
      */
     protected void setVolumeSelect() {
-        volumeSelect.addItem("Original");
+        volumeSelect.addItem(" ");
         volumeSelect.addItem("1");
         volumeSelect.addItem("2");
         volumeSelect.addItem("3");
@@ -67,22 +64,22 @@ class OutputSettingsAudio extends JPanel {
     }
 
     /**
-     * Method that set all possible resolutions
-     * for video converter.
+     * Method that set all possible Hz
+     * for Audio converter.
      */
     protected void setHzSelect() {
-        hzSelect.addItem("Original");
+        hzSelect.addItem(" ");
         hzSelect.addItem("20");
         hzSelect.addItem("44");
         hzSelect.addItem("48");
     }
 
     /**
-     * Method that set all possible resolutions
-     * for video converter.
+     * Method that set all possible Audio Channel
+     * for Audio converter.
      */
     protected void setAudioChannelSelect() {
-        audioChannelSelect.addItem("Original");
+        audioChannelSelect.addItem(" ");
         audioChannelSelect.addItem("mono");
         audioChannelSelect.addItem("stereo");
         audioChannelSelect.addItem("2.1");
@@ -94,36 +91,36 @@ class OutputSettingsAudio extends JPanel {
     }
 
     /**
-     * Method that get selected resolution
-     * for video converter.
-     * @return String, option selected of Resolution.
+     * Method that get selected volume
+     * for Audio converter.
+     * @return String, option selected of volume.
      */
     protected String getVolume() {
         return volumeSelect.getSelectedItem().toString();
     }
 
     /**
-     * Method that get selected frame
-     * for video converter.
-     * @return String, option selected of Frame.
+     * Method that get selected Hz
+     * for Audio converter.
+     * @return String, option selected of Hz.
      */
     protected String getHz() {
         return hzSelect.getSelectedItem().toString();
     }
 
     /**
-     * Method that get selected frame
-     * for video converter.
-     * @return String, option selected of Frame.
+     * Method that get selected AudioChannel
+     * for Audio converter.
+     * @return String, option selected of AudioChannel.
      */
     protected String getAudioChannel() {
         return audioChannelSelect.getSelectedItem().toString();
     }
 
     /**
-     * Method that get if Sound is required
-     * for video converter.
-     * @return true if audio is required, false if not.
+     * Method that get if metadata is required
+     * for Audio converter.
+     * @return true if metadata is required, false if not.
      */
     protected boolean isMetadata() {
         return metadataOption.isSelected();
