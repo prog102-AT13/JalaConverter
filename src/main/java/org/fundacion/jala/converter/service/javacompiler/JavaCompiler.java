@@ -26,25 +26,16 @@ public class JavaCompiler {
         LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");
-            /*String command = "\"" + System.getProperty("user.dir") + "\\" + javaVersion.getCompiler() + "\" " + filePath+ " && " +
+            String command = "\"" + System.getProperty("user.dir") + "\\" + javaVersion.getCompiler() + "\" " + filePath+ " && " +
                     "\"" + System.getProperty("user.dir") + "\\" + javaVersion.getExecutor() + "\" " + filePath;
-            */
-            String command = "javac " + filePath + " && java " + filePath;
-            //filePath.substring(0,filePath.length()-5
-            System.out.println(command);
-            System.out.println("=================");
-            System.out.println(filePath);
             ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", command);
             Process process = processBuilder.start();
-            //String command = compilerVersion.getVersion() + " " + filePath;
-            //Process process = Runtime.getRuntime().exec(command);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String resultOfExecution = null;
             String result = "";
             while((resultOfExecution = bufferedReader.readLine()) != null){
                 result += resultOfExecution + "\n";
             }
-            System.out.println(result);
             LOGGER.info("finish");
             return result;
         } catch (IOException exception) {

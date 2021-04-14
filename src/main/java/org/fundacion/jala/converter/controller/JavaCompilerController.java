@@ -27,31 +27,16 @@ import java.io.IOException;
 @RequestMapping("/api")
 public class JavaCompilerController {
     private static final Logger LOGGER = LogManager.getLogger();
-    @Autowired
-    FileStorageService fileStorageService;
 
     /**
      * Endpoint for compile java
      */
     @PostMapping("/compileJava")
-    public String uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("version") String version) throws IllegalStateException, IOException {
-        LOGGER.info("start");
-        String filename = file.getOriginalFilename();
-        String storagePath = fileStorageService.uploadFile(file);
-        JavaCompiler javaCompiler = new JavaCompiler();
-        LOGGER.info("finish");
-        return javaCompiler.javaCompiler(JavaVersion.JAVA_11, storagePath);
-    }
-
-    /**
-     * Endpoint for compile java
-     */
-    @PostMapping("/compileJava2")
     public String compileJava2(final @RequestParam("code") String code) throws IllegalStateException, IOException {
         LOGGER.info("start");
         if (!code.isBlank() || !code.equals(null)){
             JavaCompiler javaCompiler = new JavaCompiler();
-            String filePath = Transform.toFile2(code);
+            String filePath = Transform.toFile(code, "Main", "java");
             LOGGER.info("finish");
             return javaCompiler.javaCompiler(JavaVersion.JAVA_11, filePath);
         }

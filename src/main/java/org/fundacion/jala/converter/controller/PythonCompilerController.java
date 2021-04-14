@@ -22,8 +22,6 @@ import java.io.IOException;
 @RequestMapping("/api")
 public class PythonCompilerController {
     private static final Logger LOGGER = LogManager.getLogger();
-    @Autowired
-    private FileStorageService fileStorageService;
 
     /**
      * Endpoint for compile python from a string
@@ -33,7 +31,7 @@ public class PythonCompilerController {
         LOGGER.info("start");
         if (!code.isBlank() || !code.equals(null)){
             PythonCompiler pythonCompiler = new PythonCompiler();
-            String filePath = Transform.toFile(code);
+            String filePath = Transform.toFile(code, "filetocompile", "py");
             LOGGER.info("finish");
             return pythonCompiler.compiler(Python.V3, filePath);
         }
