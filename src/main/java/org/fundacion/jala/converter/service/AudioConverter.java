@@ -34,8 +34,8 @@ public final class AudioConverter {
         String bitrate = formatBitrate();
         String hz = formatHz();
         String volume = formatVolume();
-        String input = pathFile.substring(pathFile.lastIndexOf("/") + 1);
-        setOutputFileName(pathFile.substring((pathFile.lastIndexOf("/") + 1), pathFile.lastIndexOf(".") + 1) + getFormat());
+        String input = pathFile.substring(pathFile.lastIndexOf("\\") + 1);
+        setOutputFileName(pathFile.substring((pathFile.lastIndexOf("\\") + 1), pathFile.lastIndexOf(".") + 1) + getFormat());
         String overwrite = " -y";
         String command = relativePath + ffmpeg + input + bitrate + hz + volume + getOutputFileName() + overwrite;
         System.out.println(command);

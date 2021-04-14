@@ -45,25 +45,15 @@ public class VideoConverterController {
     ) throws IllegalStateException, IOException {
         String filename = file.getOriginalFilename();
         String storagePath = fileStorageService.uploadFile(file);
-//        videoParameter.setOutputFormat(outputFormat);
-//        videoParameter.setResolution(resolution);
+        videoParameter.setOutputFormat(outputFormat);
+        videoParameter.setResolution(resolution);
 //        videoParameter.setTumbnail(tumbnail);
 //        videoParameter.setFrameRate(frameRate);
 //        videoParameter.setWidth(width);
 //        videoParameter.setHeight(height);
 //        videoParameter.setAudio(audio);
 //        videoParameter.setMetaData(metaData);
-//        converter.convertVideo(storagePath);
-
-        //--------------------------------
-//        insertData(Integer.parseInt(audio), outputFormat, resolution, tumbnail, Integer.parseInt(metaData), width, frameRate, height);
-//        insertData(7, "Pablo Perez", "pasword1", "token1", 4, "Project1", "/folder1/folder2/", "movie");
-
-        //--------------------------------
-
-
-
-
+        converter.convertVideo(storagePath);
         String outputPath = FileStorageService.getOutputPath(filename);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         String downloadLink = baseUrl + "/api/download/" + "converter.getOutputFileName()";

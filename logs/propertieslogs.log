@@ -140,3 +140,77 @@
 [INFO ] 2021-04-13 16:02:55.559 [main] ConverterApplication - start
 [INFO ] 2021-04-13 16:03:03.820 [main] ConverterApplication - finish
 [INFO ] 2021-04-13 16:03:09.726 [http-nio-8080-exec-2] AuthController - Start.
+[INFO ] 2021-04-13 16:35:31.559 [main] ConverterApplication - start
+[INFO ] 2021-04-13 16:35:39.648 [main] ConverterApplication - finish
+[INFO ] 2021-04-13 16:35:46.976 [http-nio-8080-exec-2] AuthController - Start.
+[INFO ] 2021-04-13 16:36:47.880 [main] ConverterApplication - start
+[INFO ] 2021-04-13 16:36:55.825 [main] ConverterApplication - finish
+[INFO ] 2021-04-13 16:37:01.791 [http-nio-8080-exec-2] AuthController - Start.
+[INFO ] 2021-04-13 16:37:16.232 [http-nio-8080-exec-3] AuthController - Start.
+[INFO ] 2021-04-13 16:38:33.508 [main] ConverterApplication - start
+[INFO ] 2021-04-13 16:38:41.311 [main] ConverterApplication - finish
+[INFO ] 2021-04-13 16:38:47.365 [http-nio-8080-exec-2] AuthController - Start.
+[INFO ] 2021-04-13 16:41:03.207 [main] ConverterApplication - start
+[INFO ] 2021-04-13 16:41:10.549 [main] ConverterApplication - finish
+[INFO ] 2021-04-13 16:41:15.892 [http-nio-8080-exec-2] AuthController - Start.
+[ERROR] 2021-04-13 16:41:20.046 [http-nio-8080-exec-2] AuthController - Error. Bad credentials
+[INFO ] 2021-04-13 16:41:51.407 [main] ConverterApplication - start
+[INFO ] 2021-04-13 16:41:59.582 [main] ConverterApplication - finish
+[INFO ] 2021-04-13 16:42:05.026 [http-nio-8080-exec-3] AuthController - Start.
+[ERROR] 2021-04-13 16:42:09.316 [http-nio-8080-exec-3] AuthController - Error. Bad credentials
+[INFO ] 2021-04-13 16:42:54.380 [http-nio-8080-exec-5] AuthController - Start.
+[ERROR] 2021-04-13 16:42:54.436 [http-nio-8080-exec-5] AuthController - Error. Bad credentials
+[INFO ] 2021-04-13 16:43:28.318 [http-nio-8080-exec-4] AuthController - Start.
+[ERROR] 2021-04-13 16:43:28.358 [http-nio-8080-exec-4] AuthController - Error. Bad credentials
+[INFO ] 2021-04-13 16:43:38.013 [http-nio-8080-exec-2] AuthController - Start.
+[ERROR] 2021-04-13 16:43:38.057 [http-nio-8080-exec-2] AuthController - Error. Bad credentials
+[INFO ] 2021-04-13 16:44:57.981 [http-nio-8080-exec-8] AuthController - Start.
+[ERROR] 2021-04-13 16:44:58.414 [http-nio-8080-exec-8] AuthController - Error. Bad credentials
+[INFO ] 2021-04-13 16:45:03.383 [http-nio-8080-exec-9] AuthController - Start.
+[ERROR] 2021-04-13 16:45:03.804 [http-nio-8080-exec-9] AuthController - Error. Bad credentials
+[INFO ] 2021-04-13 16:46:49.039 [main] ConverterApplication - start
+[INFO ] 2021-04-13 16:46:56.425 [main] ConverterApplication - finish
+[INFO ] 2021-04-13 16:47:02.036 [http-nio-8080-exec-1] AuthController - Start.
+[ERROR] 2021-04-13 16:47:06.699 [http-nio-8080-exec-1] AuthController - Error. Bad credentials
+[INFO ] 2021-04-13 17:08:31.525 [main] ConverterApplication - start
+[INFO ] 2021-04-13 17:08:39.339 [main] ConverterApplication - finish
+[INFO ] 2021-04-13 17:08:48.384 [http-nio-8080-exec-3] AuthController - Start.
+[ERROR] 2021-04-13 17:08:48.983 [http-nio-8080-exec-3] AuthController - Error. Bad credentials
+[INFO ] 2021-04-13 17:09:04.859 [http-nio-8080-exec-2] AuthController - Start.
+[ERROR] 2021-04-13 17:09:05.258 [http-nio-8080-exec-2] AuthController - Error. Bad credentials
+[INFO ] 2021-04-13 17:09:23.045 [http-nio-8080-exec-4] AuthController - Start.
+[INFO ] 2021-04-13 17:09:39.451 [http-nio-8080-exec-5] AuthController - Start.
+[INFO ] 2021-04-13 17:09:58.718 [main] ConverterApplication - start
+[INFO ] 2021-04-13 17:10:06.409 [main] ConverterApplication - finish
+[INFO ] 2021-04-13 17:10:10.608 [http-nio-8080-exec-2] AuthController - Start.
+[INFO ] 2021-04-13 17:10:30.529 [main] ConverterApplication - start
+[INFO ] 2021-04-13 17:10:38.141 [main] ConverterApplication - finish
+[INFO ] 2021-04-13 17:10:42.758 [http-nio-8080-exec-3] AuthController - Start.
+[INFO ] 2021-04-13 17:11:57.371 [http-nio-8080-exec-4] AuthController - Start.
+[INFO ] 2021-04-13 17:13:35.935 [main] ConverterApplication - start
+[INFO ] 2021-04-13 17:13:43.796 [main] ConverterApplication - finish
+[INFO ] 2021-04-13 17:13:51.036 [http-nio-8080-exec-4] AuthController - Start.
+[INFO ] 2021-04-13 17:34:47.705 [main] ConverterApplication - start
+[INFO ] 2021-04-13 17:34:55.353 [main] ConverterApplication - finish
+[INFO ] 2021-04-13 17:35:18.563 [http-nio-8080-exec-1] AuthController - Start.
+[INFO ] 2021-04-13 17:35:39.260 [http-nio-8080-exec-2] AuthController - Start.
+[INFO ] 2021-04-13 20:41:14.927 [main] ConverterApplication - start
+[INFO ] 2021-04-13 20:41:23.575 [main] ConverterApplication - finish
+[INFO ] 2021-04-13 20:47:54.569 [http-nio-8080-exec-4] RunCommand - start
+[INFO ] 2021-04-13 20:47:54.569 [http-nio-8080-exec-4] RunCommand - Execute Try
+[INFO ] 2021-04-13 20:47:58.263 [http-nio-8080-exec-4] RunCommand - finish
+[INFO ] 2021-04-13 20:49:25.412 [main] ConverterApplication - start
+[INFO ] 2021-04-13 20:49:33.438 [main] ConverterApplication - finish
+[INFO ] 2021-04-13 20:49:55.706 [http-nio-8080-exec-2] RunCommand - start
+[INFO ] 2021-04-13 20:49:55.707 [http-nio-8080-exec-2] RunCommand - Execute Try
+[INFO ] 2021-04-13 20:49:57.044 [http-nio-8080-exec-2] RunCommand - finish
+[INFO ] 2021-04-13 20:51:43.388 [main] ConverterApplication - start
+[INFO ] 2021-04-13 20:51:51.021 [main] ConverterApplication - finish
+[INFO ] 2021-04-13 20:52:35.317 [http-nio-8080-exec-1] RunCommand - start
+[INFO ] 2021-04-13 20:52:35.318 [http-nio-8080-exec-1] RunCommand - Execute Try
+[INFO ] 2021-04-13 20:52:40.860 [http-nio-8080-exec-1] RunCommand - finish
+[INFO ] 2021-04-13 20:54:42.581 [main] ConverterApplication - start
+[INFO ] 2021-04-13 20:54:49.305 [main] ConverterApplication - finish
+[INFO ] 2021-04-13 20:54:58.540 [http-nio-8080-exec-1] RunCommand - start
+[INFO ] 2021-04-13 20:54:58.540 [http-nio-8080-exec-1] RunCommand - Execute Try
+[INFO ] 2021-04-13 20:55:03.646 [http-nio-8080-exec-1] RunCommand - finish

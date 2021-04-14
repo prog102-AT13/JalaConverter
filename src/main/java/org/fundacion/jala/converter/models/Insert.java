@@ -44,15 +44,15 @@ public final class Insert {
      * This method is for to insert dates for database
      * @param projectName
      * @param pathProject
-     * @param type
+     * @param checksum
      */
-    public static void insertProjectData(final String projectName, final String pathProject, final String type, final User user) {
+    public static void insertProjectData(final String projectName, final String pathProject, final String checksum, final User user) {
         EntityManager manager = emf.createEntityManager();
         manager.getTransaction().begin();
         Project project = new Project();
         project.setTitle(projectName);
         project.setPath(pathProject);
-        project.setChecksum(type);
+        project.setChecksum(checksum);
         project.setUser(user);
         manager.persist(project);
 

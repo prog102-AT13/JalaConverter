@@ -16,6 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
+
+import static org.fundacion.jala.converter.models.Insert.insertProjectData;
 //import static org.fundacion.jalaconverter.models.Insert.insertData;
 
 
@@ -38,23 +40,28 @@ public class AudioConverterController {
                              @RequestParam("hz") String hz) throws IllegalStateException, IOException {
         String filename = file.getOriginalFilename();
         String storagePath = fileStorageService.uploadFile(file);
+        System.out.println("aqui1------- "+filename);
+        System.out.println("aqui2------- "+storagePath);
+        AudioConverter audio = new AudioConverter();
+        audio.setFormat(format);
+        audio.setBitrate(bitrate);
+        audio.setVolume(volume);
+        audio.setHz(hz);
         System.out.println(filename);
-        //--------------------------------
-//        insertData(Integer.parseInt(format), volume, hz, volume, Integer.parseInt(bitrate), volume, volume, volume);
-//        insertData(10, "Pablo Perez", "pasword1", "token1", 7, "Project1", "/folder1/folder2/", "movie");
-
-        //--------------------------------
-//        AudioConverter audio = new AudioConverter();
-//        audio.setFormat(format);
-//        audio.setBitrate(bitrate);
-//        audio.setVolume(volume);
-//        audio.setHz(hz);
-//        System.out.println(filename);
-//        audio.audioConverter(storagePath);
-//        String outputFilename = audio.getOutputFileName();
+        audio.audioConverter(storagePath);
+        String outputFilename = audio.getOutputFileName();
         String outputPath = FileStorageService.getOutputPath(filename);
+        System.out.println("aqui3------- "+outputFilename);
+        System.out.println("aqui4------- "+outputPath);
+        //DB
+        String pathFile =  storagePath.substring(storagePath.lastIndexOf("\\") + 1);
+        System.out.println("aqui5------- "+pathFile);
+
+        insertProjectData(outputFilename, pathFile, "este sera el checksum",2);
+
+        //
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-        String downloadLink = baseUrl + "/api/download/" + "outputFilename";
+        String downloadLink = baseUrl + "/api/download/" + outputFilename;
         return downloadLink;
     }
 }
