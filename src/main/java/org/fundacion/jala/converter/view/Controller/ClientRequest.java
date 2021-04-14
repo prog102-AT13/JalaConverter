@@ -1,4 +1,3 @@
-package org.fundacion.jala.converter.view.Controller;
 /**
  * Copyright (c) 2021 Fundacion Jala.
  *
@@ -10,27 +9,22 @@ package org.fundacion.jala.converter.view.Controller;
  * @author Saul Caspa Miranda
  * @version 1.0
  */
+package org.fundacion.jala.converter.view.Controller;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.fundacion.jala.converter.view.Models.IrequestForm;
 import org.fundacion.jala.converter.view.Models.Parameter;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.util.concurrent.CompletableFuture;
+import java.io.*;
 
 public class ClientRequest {
     private String sURL;
@@ -56,12 +50,13 @@ public class ClientRequest {
      * @throws IOException
      */
     public String executeRequest(IrequestForm requestForm) throws ClientProtocolException, IOException {
+        String token = authGetToken();
         httpPost = new HttpPost(sURL);
         builder = MultipartEntityBuilder.create();
         multipart = builder.build();
         addBodyFields();
         httpPost.setEntity(multipart);
-        httpPost.setHeader("Authorization", "Bearer " + authGetToken());
+        httpPost.setHeader("Authorization", "Bearer " + token);
         CloseableHttpResponse response = httpClient.execute(httpPost);
         HttpEntity responseEntity = response.getEntity();
         String sResponse = EntityUtils.toString(responseEntity, "UTF-8");
@@ -70,21 +65,48 @@ public class ClientRequest {
     }
 
     /**
+     * Downloads a file from endpoint to given path
+     * @throws ClientProtocolException
+     * @throws IOException
+     */
+    public void download (String filePath) throws IOException{
+        String token = authGetToken();
+        String sURL = "http://localhost:8080/api/download/img1.png";
+
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        HttpGet request = new HttpGet(sURL);
+        request.setHeader("Authorization","Bearer " + token);
+        CloseableHttpResponse response = httpClient.execute(request);
+        HttpEntity responseEntity = response.getEntity();
+        InputStream inputStream = responseEntity.getContent();
+        FileOutputStream outputStream = new FileOutputStream(new File(filePath));
+        int inByte;
+        while((inByte = inputStream.read()) != -1)
+            outputStream.write(inByte);
+        inputStream.close();
+        outputStream.close();
+    }
+    /**
      * Retrieves a  token from the endpoint from a username and password.
      * @return
      */
-    public CompletableFuture<String> authGetToken() {
-        String url = "http://localhost:8080/authenticate";
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder(URI.create(url))
-                .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString("{\n" +
-                        "    \"username\":\"at13\",\n" +
-                        "    \"password\":\"jalasoft\"\n" +
-                        "}")).
-                        uri(URI.create(url)).
-                        build();
-        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString()).thenApply(HttpResponse::body);
+    public String authGetToken() throws IOException {
+        String sURL = "http://localhost:8080/authenticate";
+
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        HttpPost request = new HttpPost(sURL);
+
+        StringEntity params = new StringEntity("{\n" +
+                "    \"username\":\"at13\",\n" +
+                "    \"password\":\"jalasoft\"\n" +
+                "}");
+        request.addHeader("Content-Type","application/json");
+        request.setEntity(params);
+        CloseableHttpResponse response = httpClient.execute(request);
+        HttpEntity responseEntity = response.getEntity();
+        String token = EntityUtils.toString(responseEntity, "UTF-8");
+        System.out.println("Post return result" + token);
+        return token;
     }
 
     /**

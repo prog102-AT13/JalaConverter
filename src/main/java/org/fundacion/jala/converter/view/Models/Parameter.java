@@ -1,5 +1,3 @@
-package org.fundacion.jala.converter.view.Models;
-
 /**
  * Copyright (c) 2021 Fundacion Jala.
  *
@@ -11,6 +9,8 @@ package org.fundacion.jala.converter.view.Models;
  * @author Saul Caspa Miranda
  * @version 1.0
  */
+package org.fundacion.jala.converter.view.Models;
+
 
 public class Parameter {
     private String key;

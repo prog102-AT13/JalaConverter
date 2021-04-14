@@ -1,8 +1,3 @@
-package org.fundacion.jala.converter.view.Models;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Copyright (c) 2021 Fundacion Jala.
  *
@@ -14,6 +9,10 @@ import java.util.List;
  * @author Saul Caspa Miranda
  * @version 1.0
  */
+package org.fundacion.jala.converter.view.Models;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public interface IrequestForm {
 
