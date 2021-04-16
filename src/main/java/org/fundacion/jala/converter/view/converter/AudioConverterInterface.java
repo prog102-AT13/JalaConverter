@@ -94,32 +94,26 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
             noSuchAlgorithmException.printStackTrace();
         }
-
     }
-    private void callRequest() throws IOException{
-        String storagePath=file.getOriginFilePath();
-        String format=audioSelect.getConvertTo();
-        String[] s=quality.getQualityAudio().split(" ");
-        String bitrate=s[0];
-        String volume=settings.getVolume();
-        String hz=settings.getHz();
-        String audiochannel = settings.getAudioChannel();
-        boolean metadata = settings.isMetadata();
-        AudioRequestForm audioRequestForm=new AudioRequestForm();
-        audioRequestForm.addFilepath(storagePath);
-        audioRequestForm.addFormat(format);
+    /**
+     * Obtains the request
+     * @throws IOException
+     */
+    private void callRequest() throws IOException {
+        String[] s = quality.getQualityAudio().split(" ");
+        String bitrate = s[0];
+        AudioRequestForm audioRequestForm = new AudioRequestForm();
+        audioRequestForm.addFilepath(file.getOriginFilePath());
+        audioRequestForm.addFormat(audioSelect.getConvertTo());
         audioRequestForm.addBitrate(bitrate);
-        audioRequestForm.addVolume(volume);
-        audioRequestForm.addHz(hz);
-        audioRequestForm.addAudiochannel(audiochannel);
-        audioRequestForm.addMetadata(String.valueOf(metadata));
-
+        audioRequestForm.addVolume(settings.getVolume());
+        audioRequestForm.addHz(settings.getHz());
+        audioRequestForm.addAudiochannel(settings.getAudioChannel());
+        audioRequestForm.addMetadata(String.valueOf(settings.isMetadata()));
         clientRequest.executeRequest(audioRequestForm);
         try {
-            String result= clientRequest.executeRequest(audioRequestForm);
-            JOptionPane.showMessageDialog(this, "Download Link:\n" + result);
+            String result = clientRequest.executeRequest(audioRequestForm);
             System.out.println(result);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
