@@ -30,6 +30,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import static org.fundacion.jala.converter.models.UserSQL.findUserById;
+
 public class ClientRequest {
     private CloseableHttpClient httpClient;
     private HttpPost httpPost;
@@ -58,7 +60,7 @@ public class ClientRequest {
         addBodyFields();
         multipart = builder.build();
         httpPost.setEntity(multipart);
-        httpPost.setHeader("Authorization", "Bearer " + "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdDEzIiwiZXhwIjoxNjE4NDU2NzgzLCJpYXQiOjE2MTg0MjA3ODN9.R-WM5kEMMNX-UOBfCjQmCMZHaKWNmuF82gYZYzdMtlo");
+        httpPost.setHeader("Authorization", "Bearer " + findUserById(1).getToken());
         CloseableHttpResponse response = httpClient.execute(httpPost);
         HttpEntity responseEntity = response.getEntity();
         String sResponse = EntityUtils.toString(responseEntity, "UTF-8");
