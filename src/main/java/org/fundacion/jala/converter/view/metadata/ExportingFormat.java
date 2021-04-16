@@ -10,7 +10,6 @@
 package org.fundacion.jala.converter.view.metadata;
 
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-
 import javax.swing.JPanel;
 import javax.swing.JCheckBox;
 import javax.swing.border.EmptyBorder;
@@ -23,7 +22,7 @@ class ExportingFormat extends JPanel {
     private JCheckBox xmpCheck;
 
     /**
-     * Initialize the graphic components for Exporting format.
+     * Initializes the graphic components for Exporting format.
      * Output name of the file.
      */
     protected ExportingFormat() {
@@ -46,7 +45,7 @@ class ExportingFormat extends JPanel {
     }
 
     /**
-     * Method that returns if Txt checkbox is selected.
+     * Returns if Txt checkbox is selected.
      * @return true if is selected, false if not.
      */
     protected String txtChecked() {
@@ -54,7 +53,7 @@ class ExportingFormat extends JPanel {
     }
 
     /**
-     * Method that returns if Html checkbox is selected.
+     * Returns if Html checkbox is selected.
      * @return true if is selected, false if not.
      */
     protected String isHtmlChecked() {
@@ -62,7 +61,7 @@ class ExportingFormat extends JPanel {
     }
 
     /**
-     * Method that returns if Xmp checkbox is selected.
+     * Returns if Xmp checkbox is selected.
      * @return true if is selected, false if not.
      */
     protected String isXmpChecked() {

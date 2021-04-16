@@ -13,8 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JFileChooser;
-
-import java.awt.*;
+import java.awt.Font;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -26,7 +27,7 @@ class SelectFile extends JPanel implements ActionListener {
     private String fileOriginPath;
 
     /**
-     * Initialize the graphic components for Selecting file display.
+     * Initializes the graphic components for Selecting file display.
      */
     protected SelectFile() {
         selectFile = new JButton("Open File");
@@ -46,7 +47,7 @@ class SelectFile extends JPanel implements ActionListener {
     }
 
     /**
-     * Action that open the File Chooser to select a file.
+     * Opens the File Chooser to select a file.
      * @param e event of the JButton.
      */
     @Override
@@ -66,7 +67,7 @@ class SelectFile extends JPanel implements ActionListener {
     }
 
     /**
-     * Method to get the Origin Path of File
+     * Gets the Origin Path of File
      * when selected.
      * @return String fileOriginPath.
      */

@@ -12,8 +12,13 @@
 
 package org.fundacion.jala.converter.view.text_extractor;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JTextField;
+import java.awt.Font;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -25,7 +30,7 @@ class SelectFile extends JPanel implements ActionListener {
     private JTextField videoPath;
 
     /**
-     * Initialize the graphic components to select a file.
+     * Initializes graphic components to select a file.
      */
     protected SelectFile() {
         fileButton = new JButton("Select a File");
@@ -41,7 +46,7 @@ class SelectFile extends JPanel implements ActionListener {
     }
 
     /**
-     * Action that open the File Chooser to select a file.
+     * Opens the File Chooser to select a file.
      * @param e event of the JButton.
      */
     @Override
@@ -61,7 +66,7 @@ class SelectFile extends JPanel implements ActionListener {
     }
 
     /**
-     * Method to get the Origin Path of File
+     * Gets the Origin Path of File
      * when selected.
      * @return String fileOriginPath.
      */

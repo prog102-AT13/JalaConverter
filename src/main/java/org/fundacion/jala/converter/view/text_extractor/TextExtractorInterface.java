@@ -12,9 +12,12 @@
 package org.fundacion.jala.converter.view.text_extractor;
 
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.BoxLayout;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,7 +27,7 @@ public class TextExtractorInterface extends JPanel implements ActionListener {
     private SelectLanguage languageSelect;
 
     /**
-     * Initialize of graphics elements for Audio converter interface.
+     * Initializes graphics elements for Audio converter interface.
      */
     public TextExtractorInterface() {
         JLabelStyle audioTitle = new JLabelStyle("Text exctractor", "h1", 2, 70, 30);
@@ -49,8 +52,8 @@ public class TextExtractorInterface extends JPanel implements ActionListener {
     }
 
     /**
-     * Action of JButton convert, send information for metadataCLASS conversion.
-     * Show a Dialog with the information.
+     * Action of JButton converts, sends information for metadataCLASS conversion.
+     * Shows a Dialog with the information.
      * @param e event of the JButton.
      */
     @Override

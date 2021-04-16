@@ -21,18 +21,18 @@ import java.awt.FlowLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-class OutputInfo extends JPanel implements ItemListener{
+class OutputInfo extends JPanel implements ItemListener {
     private JTextField outputNameField;
     private JCheckBox checkOutputName;
 
     /**
-     * Initialize the graphic components for how to output the file.
+     * Initializes the graphic components for how to output the file.
      * Output for Txt.
      * Output for HTML.
      * Output for XMP.
      */
     protected OutputInfo() {
-        JLabelStyle outputNameData = new JLabelStyle("Output name of MetaData", "h3", 2 ,  150, 30);
+        JLabelStyle outputNameData = new JLabelStyle("Output name of MetaData", "h3", 2, 150, 30);
         outputNameField = new JTextField();
         outputNameField.setPreferredSize(new Dimension(250, 30));
         outputNameField.setEnabled(false);
@@ -48,7 +48,7 @@ class OutputInfo extends JPanel implements ItemListener{
     }
 
     /**
-     * Action Method that enable the JTextField to change the
+     * Action Method that enables the JTextField to change the
      * name of the output file for MetaData.
      * @param e event of Check status.
      */

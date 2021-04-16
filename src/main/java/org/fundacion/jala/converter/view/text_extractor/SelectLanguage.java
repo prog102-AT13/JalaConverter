@@ -13,15 +13,17 @@
 package org.fundacion.jala.converter.view.text_extractor;
 
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import javax.swing.JComboBox;
+import java.awt.Font;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 public class SelectLanguage extends JPanel {
     private JComboBox convertTo;
 
     /**
-     * Initialize the graphic elements for SelectComboox for convert type.
+     * Initializes graphic elements for SelectComboox for convert type.
      */
     protected SelectLanguage() {
         JLabelStyle labelConvertTo = new JLabelStyle("Convert to: ", "h3", 2, 70, 30);
@@ -36,7 +38,7 @@ public class SelectLanguage extends JPanel {
     }
 
     /**
-     * Return the selected option to conversion.
+     * Returns the selected option to conversion.
      * @return String with the selected option.
      */
     protected String getConvertTo() {

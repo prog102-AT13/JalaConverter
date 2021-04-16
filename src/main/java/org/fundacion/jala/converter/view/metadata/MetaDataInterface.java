@@ -14,7 +14,7 @@ import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -44,8 +44,8 @@ public class MetaDataInterface extends JPanel implements ActionListener {
     }
 
     /**
-     * Action of JButton convert, send information for metadataCLASS conversion.
-     * Show a Dialog with the information.
+     * Action of JButton converts, sends information for metadataCLASS conversion.
+     * Shows a Dialog with the information.
      * @param e event of the JButton.
      */
     @Override
