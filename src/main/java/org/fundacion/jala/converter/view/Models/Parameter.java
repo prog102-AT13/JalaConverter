@@ -19,16 +19,17 @@ public class Parameter {
 
     /**
      * Creates a parameter for a request body with the key and value fields.
-     * @param key
-     * @param value
+     * @param newKey String with the new key
+     * @param newValue String with the new value
      */
-    public Parameter(String key, String value, boolean isFile) {
-        this.key = key;
-        this.value = value;
-        this.isFile = isFile;
+    public Parameter(final String newKey, final String newValue, final boolean isAFile) {
+        this.key = newKey;
+        this.value = newValue;
+        this.isFile = isAFile;
     }
 
     /**
+     * Gets the key
      * @return key.
      */
     public String getKey() {
@@ -37,13 +38,14 @@ public class Parameter {
 
     /**
      * Sets attribute key.
-     * @param key
+     * @param newKey
      */
-    public void setKey(String key) {
-        this.key = key;
+    public void setKey(final String newKey) {
+        this.key = newKey;
     }
 
     /**
+     * Gets the value
      * @return value.
      */
     public String getValue() {
@@ -52,13 +54,14 @@ public class Parameter {
 
     /**
      * Sets attribute value.
-     * @param value
+     * @param newValue
      */
-    public void setValue(String value) {
-        this.value = value;
+    public void setValue(final String newValue) {
+        this.value = newValue;
     }
 
     /**
+     * Indicates if is a file
      * @return isFile value.
      */
     public boolean isFile() {

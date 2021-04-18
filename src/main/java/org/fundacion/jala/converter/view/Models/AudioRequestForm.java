@@ -16,19 +16,14 @@ import java.util.List;
 
 public class AudioRequestForm implements IrequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
-    private static final String URL = "http://localhost:8080/api/convertAudio";
-    private static final String FILE = "file";
-    private static final String FORMAT = "format";
-    private static final String BITRATE = "bitrate";
-    private static final String VOLUME = "volume";
-    private static final String HZ = "hz";
-    private static final String AUDIOCHANNEL = "audiochannel";
-    private static final String METADATA = "metadata";
-
-    private String filepathValue;
-    private String formatValue;
-    private String bitrateValue;
-    private String volumeValue;
+    private final String url = "http://localhost:8080/api/convertAudio";
+    private final String file = "file";
+    private final String format = "format";
+    private final String bitrate = "bitrate";
+    private final String volume = "volume";
+    private final String hz = "hz";
+    private final String audioChannel = "audiochannel";
+    private final String metaData = "metadata";
 
     /**
      * Audio Request Form stores parameters for an audio request
@@ -41,7 +36,7 @@ public class AudioRequestForm implements IrequestForm {
      * @param filepathValue
      */
     public void addFilepath(final String filepathValue) {
-        addParameters(new Parameter(FILE, filepathValue, true));
+        addParameters(new Parameter(file, filepathValue, true));
     }
 
     /**
@@ -49,7 +44,7 @@ public class AudioRequestForm implements IrequestForm {
      * @param formatValue
      */
     public void addFormat(final String formatValue) {
-        addParameters(new Parameter(FORMAT, formatValue, false));
+        addParameters(new Parameter(format, formatValue, false));
     }
 
     /**
@@ -57,7 +52,7 @@ public class AudioRequestForm implements IrequestForm {
      * @param bitrateValue
      */
     public void addBitrate(final String bitrateValue) {
-        addParameters(new Parameter(BITRATE, bitrateValue, false));
+        addParameters(new Parameter(bitrate, bitrateValue, false));
     }
 
     /**
@@ -65,7 +60,7 @@ public class AudioRequestForm implements IrequestForm {
      * @param volumeValue
      */
     public void addVolume(final String volumeValue) {
-        addParameters(new Parameter(VOLUME, volumeValue, false));
+        addParameters(new Parameter(volume, volumeValue, false));
     }
 
     /**
@@ -73,7 +68,7 @@ public class AudioRequestForm implements IrequestForm {
      * @param hzValue
      */
     public void addHz(final String hzValue) {
-        addParameters(new Parameter(HZ, hzValue, false));
+        addParameters(new Parameter(hz, hzValue, false));
     }
 
     /**
@@ -81,18 +76,19 @@ public class AudioRequestForm implements IrequestForm {
      * @param metadataValue
      */
     public void addAudiochannel(final String metadataValue) {
-        addParameters(new Parameter(AUDIOCHANNEL, metadataValue, false));
+        addParameters(new Parameter(audioChannel, metadataValue, false));
     }
     /**
      * Adds metadata parameter
      * @param metadataValue
      */
     public void addMetadata(final String metadataValue) {
-        addParameters(new Parameter(METADATA, metadataValue, false));
+        addParameters(new Parameter(metaData, metadataValue, false));
     }
 
 
     /**
+     * Gets the body parameters
      * @return bodyParameters
      */
     @Override
@@ -110,10 +106,11 @@ public class AudioRequestForm implements IrequestForm {
     }
 
     /**
-     * @return URL
+     * Gets the url
+     * @return url
      */
     @Override
     public String getURL() {
-        return URL;
+        return url;
     }
 }
