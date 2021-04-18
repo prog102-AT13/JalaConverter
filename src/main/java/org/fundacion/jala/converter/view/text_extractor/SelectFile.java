@@ -28,6 +28,12 @@ class SelectFile extends JPanel implements ActionListener {
     private String fileOriginPath;
     private JFileChooser fileChooser;
     private JTextField videoPath;
+    private final int dimensionWidth = 350;
+    private final int dimensionHeight = 30;
+    private final int fontStyle = 0;
+    private final int fontSize = 12;
+    private final int flowLayoutHgap = 0;
+    private final int flowLayoutVgap = 20;
 
     /**
      * Initializes graphic components to select a file.
@@ -35,12 +41,12 @@ class SelectFile extends JPanel implements ActionListener {
     protected SelectFile() {
         fileButton = new JButton("Select a File");
         fileButton.addActionListener(this::actionPerformed);
-        fileButton.setFont(new Font("Barlow", 0, 12));
+        fileButton.setFont(new Font("Barlow", fontStyle, fontSize));
         videoPath = new JTextField();
         videoPath.setEnabled(false);
-        videoPath.setPreferredSize(new Dimension(350, 30));
-        videoPath.setFont(new Font("Barlow", 0, 12));
-        setLayout(new FlowLayout(FlowLayout.LEFT, 0, 20));
+        videoPath.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
+        videoPath.setFont(new Font("Barlow", fontStyle, fontSize));
+        setLayout(new FlowLayout(FlowLayout.LEFT, flowLayoutHgap, flowLayoutVgap));
         add(fileButton);
         add(videoPath);
     }
@@ -66,8 +72,7 @@ class SelectFile extends JPanel implements ActionListener {
     }
 
     /**
-     * Gets the Origin Path of File
-     * when selected.
+     * Gets the Origin Path of File when selected.
      * @return String fileOriginPath.
      */
     protected String getOriginFilePath() {
