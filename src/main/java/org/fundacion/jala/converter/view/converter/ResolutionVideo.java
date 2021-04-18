@@ -1,11 +1,12 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- * 
+ *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  */
+
 package org.fundacion.jala.converter.view.converter;
 
 public class ResolutionVideo {
@@ -13,15 +14,14 @@ public class ResolutionVideo {
     private int height;
     private String name;
 
-    ResolutionVideo(String name, int width, int height) {
-        this.height = height;
-        this.width = width;
-        this.name = name;
+    ResolutionVideo(final String newName, final int newWidth, final int newHeight) {
+        this.height = newHeight;
+        this.width = newWidth;
+        this.name = newName;
     }
 
     /**
-     * Get width of video.
-     *
+     * Gets width of video.
      * @return width of video.
      */
     public int getWidth() {
@@ -29,17 +29,15 @@ public class ResolutionVideo {
     }
 
     /**
-     * set width of video.
-     *
-     * @param width of video.
+     * Sets width of video.
+     * @param newWidth of video.
      */
-    public void setWidth(int width) {
-        this.width = width;
+    public void setWidth(final int newWidth) {
+        this.width = newWidth;
     }
 
     /**
-     * Get height of video.
-     *
+     * Gets height of video.
      * @return height of video.
      */
     public int getHeight() {
@@ -47,17 +45,15 @@ public class ResolutionVideo {
     }
 
     /**
-     * set height of video.
-     *
-     * @param height of video.
+     * Sets height of video.
+     * @param newHeight of video.
      */
-    public void setHeight(int height) {
-        this.height = height;
+    public void setHeight(final int newHeight) {
+        this.height = newHeight;
     }
 
     /**
-     * Get name to shown in combBox.
-     *
+     * Gets name to shown in combBox.
      * @return name to shown in combBox.
      */
     public String getName() {
@@ -65,17 +61,15 @@ public class ResolutionVideo {
     }
 
     /**
-     * set name to shown in combBox..
-     *
-     * @param name to shown in combBox..
+     * Sets name to shown in combBox.
+     * @param newName to shown in combBox.
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setName(final String newName) {
+        this.name = newName;
     }
 
     /**
-     * Get full name to shown in combBox.
-     *
+     * Gets full name to shown in combBox.
      * @return full name to shown in combBox.
      */
     @Override
