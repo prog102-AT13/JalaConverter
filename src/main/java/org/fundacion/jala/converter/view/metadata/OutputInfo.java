@@ -10,7 +10,6 @@
 package org.fundacion.jala.converter.view.metadata;
 
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
@@ -24,6 +23,19 @@ import java.awt.event.ItemListener;
 class OutputInfo extends JPanel implements ItemListener {
     private JTextField outputNameField;
     private JCheckBox checkOutputName;
+    private final int alignLabelStyle = 2;
+    private final int widthLabelStyle = 150;
+    private final int heightLabelStyle = 30;
+    private final int dimensionWidth = 250;
+    private final int dimensionHeight = 30;
+    private final int topBorder = 10;
+    private final int leftBorder = 30;
+    private final int bottomBorder = 10;
+    private final int rightBorder = 10;
+    private final int fontStyle = 0;
+    private final int fontSize = 12;
+    private final int flowLayoutHgap = 10;
+    private final int flowLayoutVgap = 5;
 
     /**
      * Initializes the graphic components for how to output the file.
@@ -32,24 +44,24 @@ class OutputInfo extends JPanel implements ItemListener {
      * Output for XMP.
      */
     protected OutputInfo() {
-        JLabelStyle outputNameData = new JLabelStyle("Output name of MetaData", "h3", 2, 150, 30);
+        JLabelStyle outputNameData = new JLabelStyle("Output name of MetaData", "h3",
+                alignLabelStyle, widthLabelStyle, heightLabelStyle);
         outputNameField = new JTextField();
-        outputNameField.setPreferredSize(new Dimension(250, 30));
+        outputNameField.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
         outputNameField.setEnabled(false);
         checkOutputName = new JCheckBox("Keep the name of output");
-        checkOutputName.setFont(new Font("Barlow", 0, 12));
+        checkOutputName.setFont(new Font("Barlow", fontStyle, fontSize));
         checkOutputName.setSelected(true);
         checkOutputName.addItemListener(this);
-        setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
-        setBorder(new EmptyBorder(10, 30, 10, 10));
+        setLayout(new FlowLayout(FlowLayout.LEFT, flowLayoutHgap, flowLayoutVgap));
+        setBorder(new EmptyBorder(topBorder, leftBorder, bottomBorder, rightBorder));
         add(outputNameData.getTextLabel());
         add(outputNameField);
         add(checkOutputName);
     }
 
     /**
-     * Action Method that enables the JTextField to change the
-     * name of the output file for MetaData.
+     * Enables the JTextField to change the name of the output file for MetaData.
      * @param e event of Check status.
      */
     @Override

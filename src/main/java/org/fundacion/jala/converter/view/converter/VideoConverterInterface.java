@@ -38,7 +38,8 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
      * Sets all the graphics elements for the main interface of Video Converter.
      */
     public VideoConverterInterface() {
-        JLabelStyle videoTitle = new JLabelStyle("Select Video:", "h2", alignLabelStyle, widthLabelStyle, heightLabelStyle);
+        JLabelStyle videoTitle = new JLabelStyle("Select Video:", "h2",
+                alignLabelStyle, widthLabelStyle, heightLabelStyle);
         videoTitle.setAlignmentX(LEFT_ALIGNMENT);
         file = new SelectFile();
         file.setAlignmentX(LEFT_ALIGNMENT);
