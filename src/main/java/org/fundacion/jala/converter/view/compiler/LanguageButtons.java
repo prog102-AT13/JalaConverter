@@ -12,31 +12,38 @@ package org.fundacion.jala.converter.view.compiler;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
-
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Component;
 
 class LanguageButtons extends JPanel {
     private JButton cPlusPlus;
     private JButton java;
     private JButton python;
+    private final int maximumSizeWidth = 50;
+    private final int maximumSizeHeight = 50;
+    private final int preferredSizeWidth = 70;
+    private final int preferredSizeHeight = 30;
+    private final int fontStyle = 0;
+    private final int fontSize = 11;
 
     /**
-     * Initialize the graphics elements for language buttons.
+     * Initializes the graphics elements for language buttons.
      */
     protected LanguageButtons() {
-        setPreferredSize(new Dimension(75, 30));
+        setPreferredSize(new Dimension(preferredSizeWidth, preferredSizeHeight));
         cPlusPlus = new JButton("C++");
-        cPlusPlus.setFont(new Font("Barlow", 0, 11));
-        cPlusPlus.setMaximumSize(new Dimension(50, 50));
+        cPlusPlus.setFont(new Font("Barlow", fontStyle, fontSize));
+        cPlusPlus.setMaximumSize(new Dimension(maximumSizeWidth, maximumSizeHeight));
         cPlusPlus.setAlignmentX(Component.CENTER_ALIGNMENT);
         java = new JButton("Java");
-        java.setMaximumSize(new Dimension(50, 50));
-        java.setFont(new Font("Barlow", 0, 11));
+        java.setMaximumSize(new Dimension(maximumSizeWidth, maximumSizeHeight));
+        java.setFont(new Font("Barlow", fontStyle, fontSize));
         java.setAlignmentX(Component.CENTER_ALIGNMENT);
         python = new JButton("Python");
-        python.setMaximumSize(new Dimension(50, 50));
+        python.setMaximumSize(new Dimension(maximumSizeWidth, maximumSizeHeight));
         python.setAlignmentX(Component.CENTER_ALIGNMENT);
-        python.setFont(new Font("Barlow", 0, 11));
+        python.setFont(new Font("Barlow", fontStyle, fontSize));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(cPlusPlus);
         add(java);
