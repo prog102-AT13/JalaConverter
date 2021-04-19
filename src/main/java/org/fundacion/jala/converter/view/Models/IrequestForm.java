@@ -11,12 +11,12 @@
  */
 package org.fundacion.jala.converter.view.Models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface IrequestForm {
 
     /**
+     * Gets the body parameters
      * @return bodyParameters
      */
     public List<Parameter> getBodyParameters();
@@ -28,6 +28,7 @@ public interface IrequestForm {
     public void addParameters(Parameter parameter);
 
     /**
+     * Gets the URL
      * @return URL
      */
     public String getURL();

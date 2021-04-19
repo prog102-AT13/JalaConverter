@@ -14,7 +14,7 @@ import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -23,6 +23,12 @@ public class MetaDataInterface extends JPanel implements ActionListener {
     private ExportingFormat exportInfo;
     private OutputInfo outputInfo;
     private JButton convertMetaData;
+    private final int topBorder = 20;
+    private final int leftBorder = 0;
+    private final int bottomBorder = 100;
+    private final int rightBorder = 0;
+    private final int fontStyle = 0;
+    private final int fontSize = 11;
 
     /**
      * Initialize the graphics components for MetaData interface.
@@ -34,9 +40,9 @@ public class MetaDataInterface extends JPanel implements ActionListener {
         convertMetaData = new JButton("Convert");
         convertMetaData.setAlignmentX(CENTER_ALIGNMENT);
         convertMetaData.addActionListener(this::actionPerformed);
-        convertMetaData.setFont(new Font("Barlow", 0, 11));
+        convertMetaData.setFont(new Font("Barlow", fontStyle, fontSize));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBorder(new EmptyBorder(20, 0, 100, 0));
+        setBorder(new EmptyBorder(topBorder, leftBorder, bottomBorder, rightBorder));
         add(file);
         add(exportInfo);
         add(outputInfo);
@@ -44,8 +50,8 @@ public class MetaDataInterface extends JPanel implements ActionListener {
     }
 
     /**
-     * Action of JButton convert, send information for metadataCLASS conversion.
-     * Show a Dialog with the information.
+     * Converts, sends information for metadataCLASS conversion.
+     * Shows a Dialog with the information.
      * @param e event of the JButton.
      */
     @Override

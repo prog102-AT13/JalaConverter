@@ -10,33 +10,45 @@
 package org.fundacion.jala.converter.view.converter;
 
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import javax.swing.JComboBox;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FlowLayout;
 
 public class ConvertTypeSelectAudio extends JPanel {
     private JComboBox convertTo;
+    private final int alignLabelStyle = 2;
+    private final int widthLabelStyle = 70;
+    private final int heightLabelStyle = 30;
+    private final int dimensionWidth = 100;
+    private final int dimensionHeight = 30;
+    private final int fontStyle = 0;
+    private final int fontSize = 12;
+    private final int flowLayoutHgap = 10;
+    private final int flowLayoutVgap = 10;
 
     /**
-     * Initialize the graphic elements for SelectComboox for convert type.
+     * Initializes the graphic elements for SelectCombobox for convert type.
      */
     protected ConvertTypeSelectAudio() {
-        JLabelStyle labelConvertTo = new JLabelStyle("Convert to: ", "h3", 2, 70, 30);
+        JLabelStyle labelConvertTo = new JLabelStyle("Convert to: ", "h3",
+                alignLabelStyle, widthLabelStyle, heightLabelStyle);
         convertTo = new JComboBox();
-        convertTo.setPreferredSize(new Dimension(100, 30));
-        convertTo.setFont(new Font("Barlow", 0, 12));
+        convertTo.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
+        convertTo.setFont(new Font("Barlow", fontStyle, fontSize));
         convertTo.addItem("mp3");
         convertTo.addItem("wav");
         convertTo.addItem("m4a");
         convertTo.addItem("flac");
         convertTo.addItem("ogg");
-        setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
+        setLayout(new FlowLayout(FlowLayout.LEFT, flowLayoutHgap, flowLayoutVgap));
         add(labelConvertTo.getTextLabel());
         add(convertTo);
     }
 
     /**
-     * Return the selected option to conversion.
+     * Returns the selected option to conversion.
      * @return String with the selected option.
      */
     protected String getConvertTo() {
