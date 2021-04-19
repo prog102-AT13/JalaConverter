@@ -24,9 +24,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-
 import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;
-
 
 public class AudioConverterInterface extends JPanel implements ActionListener {
     private SelectFile file;
@@ -85,7 +83,9 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
      */
     @Override
     public void actionPerformed(final ActionEvent e)  {
+        LOGGER.info("start");
         try {
+            LOGGER.info("Execute Try");
             JOptionPane.showMessageDialog(this, "File Path: "
                     + file.getOriginFilePath()
                     + "\nConvert to: "
@@ -103,17 +103,22 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
                     + "\nChecksum: "
                     + getFileChecksum(file.getOriginFilePath()));
             callRequest();
+            LOGGER.info("finish");
         } catch (IOException ioException) {
             ioException.printStackTrace();
+            LOGGER.error("Execute Exception");
         } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
             noSuchAlgorithmException.printStackTrace();
+            LOGGER.error("Execute Exception");
         }
+        LOGGER.info("Finish");
     }
     /**
      * Obtains the request
      * @throws IOException
      */
     private void callRequest() throws IOException {
+        LOGGER.info("start");
         String[] s = quality.getQualityAudio().split(" ");
         String bitrate = s[0];
         AudioRequestForm audioRequestForm = new AudioRequestForm();
@@ -130,6 +135,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
             String result = clientRequest.executeRequest(audioRequestForm);
             System.out.println(result);
             JOptionPane.showMessageDialog(this, "Download Link:\n" + result);
+            LOGGER.info("finish");
         } catch (IOException e) {
             LOGGER.error("Execute Exception to obtain the request");
             e.printStackTrace();
