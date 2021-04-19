@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.models.AuthenticationRequest;
 import org.fundacion.jala.converter.models.AuthenticationResponse;
+import org.fundacion.jala.converter.models.User;
 import org.fundacion.jala.converter.security.util.JwtUtil;
 import org.fundacion.jala.converter.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +21,11 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import static org.fundacion.jala.converter.models.UserSQL.editUserData;
-import static org.fundacion.jala.converter.models.UserSQL.findUserById;
+import java.util.List;
+
+import static org.fundacion.jala.converter.models.UserSQL.*;
 
 @RestController
 public class AuthController {
@@ -39,15 +38,16 @@ public class AuthController {
 
     @Autowired
     private JwtUtil jwtTokenUtil;
-
     /**
      * Create an authentication response with the token
-     * @param authenticationRequest a request to authenticate
+     * @param username a String with the username
+     * @param password a String with the password
      * @return response entity with the token
-     * @throws Exception when not found
+     * @throws Exception when invalid username or password is given
      */
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody final AuthenticationRequest authenticationRequest) throws Exception {
+    @PostMapping("/authenticate")
+    public ResponseEntity<?> createAuthenticationToken(final @RequestParam String username, final @RequestParam String password) throws Exception {
+        AuthenticationRequest authenticationRequest = new AuthenticationRequest(username, password);
         try {
             authLogger.info("Start.");
             authenticationManager.authenticate(
@@ -62,7 +62,16 @@ public class AuthController {
                 .loadUserByUsername(authenticationRequest.getUsername());
 
         final String jwt = jwtTokenUtil.generateToken(userDetails);
-        editUserData(1, findUserById(1).getName(), findUserById(1).getPassword(), jwt);
+        List<User> list = listUser();
+        int userId = 0;
+        for (org.fundacion.jala.converter.models.User user : list) {
+            if (user.getName().equals(username)) {
+                userId = user.getId();
+                break;
+            }
+        }
+        editUserData(userId, findUserById(userId).getName(), findUserById(userId).getPassword(), jwt);
+//        editUserData(1, findUserById(1).getName(), findUserById(1).getPassword(), jwt);
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 }

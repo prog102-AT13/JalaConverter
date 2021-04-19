@@ -89,16 +89,16 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         }
 
     }
-    private void callRequest() throws IOException{
-        String storagePath=file.getOriginFilePath();
-        String format=audioSelect.getConvertTo();
-        String[] s=quality.getQualityAudio().split(" ");
-        String bitrate=s[0];
-        String volume=settings.getVolume();
-        String hz=settings.getHz();
+    private void callRequest() throws IOException {
+        String storagePath = file.getOriginFilePath();
+        String format = audioSelect.getConvertTo();
+        String[] s = quality.getQualityAudio().split(" ");
+        String bitrate = s[0];
+        String volume = settings.getVolume();
+        String hz = settings.getHz();
         String audiochannel = settings.getAudioChannel();
         boolean metadata = settings.isMetadata();
-        AudioRequestForm audioRequestForm=new AudioRequestForm();
+        AudioRequestForm audioRequestForm = new AudioRequestForm();
         audioRequestForm.addFilepath(storagePath);
         audioRequestForm.addFormat(format);
         audioRequestForm.addBitrate(bitrate);
@@ -109,7 +109,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
 
         clientRequest.executeRequest(audioRequestForm);
         try {
-            String result= clientRequest.executeRequest(audioRequestForm);
+            String result = clientRequest.executeRequest(audioRequestForm);
             JOptionPane.showMessageDialog(this, "Download Link:\n" + result);
             System.out.println(result);
 

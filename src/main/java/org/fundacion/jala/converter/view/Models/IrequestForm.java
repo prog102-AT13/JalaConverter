@@ -11,7 +11,6 @@
  */
 package org.fundacion.jala.converter.view.Models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface IrequestForm {

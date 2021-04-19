@@ -8,6 +8,9 @@
  */
 package org.fundacion.jala.converter.models;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -26,11 +29,12 @@ public class UserSQL {
      * @param token String the token
      */
     public static User insertUserData(final String userName, final String password, final String token) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         EntityManager manager = emf.createEntityManager();
         manager.getTransaction().begin();
         User user = new User();
         user.setName(userName);
-        user.setPassword(password);
+        user.setPassword(passwordEncoder.encode(password));
         user.setToken(token);
         manager.persist(user);
         manager.getTransaction().commit();
