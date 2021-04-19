@@ -7,6 +7,7 @@
  */
 package org.fundacion.jala.converter;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.fundacion.jala.converter.view.MainInterface;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,7 +18,11 @@ import javax.swing.SwingUtilities;
 @SpringBootApplication
 public class ConverterApplication {
     private static final Logger LOGGER = LogManager.getLogger();
-
+    public static Dotenv dotenv = Dotenv.configure()
+                                        .filename(".env.develop")
+                                        .ignoreIfMalformed()
+                                        .ignoreIfMissing()
+                                        .load();
     public static void main(final String[] args) {
         MainInterface main = new MainInterface();
         LOGGER.info("start");
