@@ -12,7 +12,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.models.AuthenticationRequest;
 import org.fundacion.jala.converter.models.AuthenticationResponse;
-import org.fundacion.jala.converter.models.User;
 import org.fundacion.jala.converter.security.util.JwtUtil;
 import org.fundacion.jala.converter.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +20,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import static org.fundacion.jala.converter.models.UserSQL.*;
 
@@ -57,21 +56,11 @@ public class AuthController {
             authLogger.error("Error. " + e.getLocalizedMessage());
             throw new Exception("Incorrect username or password", e);
         }
-
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
-
         final String jwt = jwtTokenUtil.generateToken(userDetails);
-        List<User> list = listUser();
-        int userId = 0;
-        for (org.fundacion.jala.converter.models.User user : list) {
-            if (user.getName().equals(username)) {
-                userId = user.getId();
-                break;
-            }
-        }
+        int userId = getUserId(username);
         editUserData(userId, findUserById(userId).getName(), findUserById(userId).getPassword(), jwt);
-//        editUserData(1, findUserById(1).getName(), findUserById(1).getPassword(), jwt);
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 }

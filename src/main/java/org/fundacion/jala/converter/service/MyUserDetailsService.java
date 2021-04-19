@@ -16,7 +16,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.fundacion.jala.converter.models.UserSQL.*;
 
@@ -30,17 +29,9 @@ public class MyUserDetailsService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-        List<org.fundacion.jala.converter.models.User> list = listUser();
-        Boolean usernameExists = false;
-        int userId = 0;
-        for (org.fundacion.jala.converter.models.User user : list) {
-             if (user.getName().equals(username)) {
-                 usernameExists = true;
-                 userId = user.getId();
-                 break;
-             }
-        }
+        Boolean usernameExists = usernameExists(username);
         if (usernameExists) {
+            int userId = getUserId(username);
             return new User(findUserById(userId).getName(),
                     findUserById(userId).getPassword(),
                     new ArrayList<>());

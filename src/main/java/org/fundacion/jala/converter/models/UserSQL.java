@@ -90,6 +90,37 @@ public class UserSQL {
     }
 
     /**
+     * Verifies if a username exists in the database
+     * @param username a String with the username to check
+     * @return a boolean with the response
+     */
+    public static boolean usernameExists(final String username) {
+        List<User> list = listUser();
+        Boolean usernameExists = false;
+        for (User user : list) {
+            if (username.equals(user.getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Gets the userId from the database
+     * @param username a String to look for the userId
+     * @return an int with the userId
+     */
+    public static int getUserId(final String username) {
+        List<User> list = listUser();
+        for (User user : list) {
+            if (username.equals(user.getName())) {
+                return user.getId();
+            }
+        }
+        return 0;
+    }
+
+    /**
      *Lists all users in the db
      * @return a list of users
      */
