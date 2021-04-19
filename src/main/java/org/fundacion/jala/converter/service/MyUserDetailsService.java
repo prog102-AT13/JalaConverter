@@ -29,7 +29,7 @@ public class MyUserDetailsService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-        Boolean usernameExists = usernameExists(username);
+        boolean usernameExists = usernameExists(username);
         if (usernameExists) {
             int userId = getUserId(username);
             return new User(findUserById(userId).getName(),
@@ -41,10 +41,10 @@ public class MyUserDetailsService implements UserDetailsService {
     }
 
     /**
-     *
-     * @param username
-     * @param password
-     * @return
+     * Saves user in the database
+     * @param username a String with username
+     * @param password a String with password
+     * @return AuthenticationRequest with the given param
      */
     public AuthenticationRequest save(final String username, final String password) {
         insertUserData(username, password, "");
