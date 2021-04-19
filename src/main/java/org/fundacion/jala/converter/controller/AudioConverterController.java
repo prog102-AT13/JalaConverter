@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.fundacion.jala.converter.facade.CompilerFacade.getAudioConverter;
 import static org.fundacion.jala.converter.models.ProjectSQL.insertProjectData;
 import static org.fundacion.jala.converter.models.ProjectSQL.listProject;
 import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;
@@ -83,9 +84,7 @@ public class AudioConverterController {
                 LOGGER.error("Execute Exception" + e.getLocalizedMessage());
             }
         }
-        audioConverter = new AudioConverter(new AudioParameter(storagePath, format, bitrate, hz, volume, audioChannel));
-        audioConverter.audioConverter(storagePath);
-        String outputFilename = audioConverter.getOutputFileName();
+        String outputFilename=getAudioConverter(storagePath, format, bitrate, hz, volume, audioChannel);
         String outputPath = FileStorageService.getOutputPath(filename);
         String nameWithoutExtension = outputFilename.substring(0, outputFilename.lastIndexOf(".") + 1);
         extractMetadata(metadata, outputFilename, fileStorageService);
