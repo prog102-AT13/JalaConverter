@@ -13,8 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JFileChooser;
-
-import java.awt.*;
+import java.awt.Font;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -24,18 +25,20 @@ class SelectFile extends JPanel implements ActionListener {
     private JTextField textFile;
     private JFileChooser fileChooser;
     private String fileOriginPath;
+    private final int fontStyle = 0;
+    private final int fontSize = 11;
 
     /**
-     * Initialize the graphic components for Selecting file display.
+     * Initializes the graphic components for Selecting file display.
      */
     protected SelectFile() {
         selectFile = new JButton("Open File");
-        selectFile.setFont(new Font("Barlow", 0, 11));
+        selectFile.setFont(new Font("Barlow", fontStyle, fontSize));
         selectFile.addActionListener(this);
-        int textFieldHeight = 30;
-        int textFieldWidth = 350;
+        final int textFieldHeight = 30;
+        final int textFieldWidth = 350;
         textFile = new JTextField();
-        textFile.setFont(new Font("Barlow", 0, 11));
+        textFile.setFont(new Font("Barlow", fontStyle, fontSize));
         textFile.setPreferredSize(new Dimension(textFieldWidth, textFieldHeight));
         textFile.setEnabled(false);
         final int marginHeight = 30;
@@ -46,7 +49,7 @@ class SelectFile extends JPanel implements ActionListener {
     }
 
     /**
-     * Action that open the File Chooser to select a file.
+     * Opens the File Chooser to select a file.
      * @param e event of the JButton.
      */
     @Override
@@ -66,8 +69,7 @@ class SelectFile extends JPanel implements ActionListener {
     }
 
     /**
-     * Method to get the Origin Path of File
-     * when selected.
+     * Gets the Origin Path of File when selected.
      * @return String fileOriginPath.
      */
     protected String getOriginFilePath() {

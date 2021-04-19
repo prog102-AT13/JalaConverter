@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
-
 import java.awt.Font;
 import java.awt.FlowLayout;
 import java.awt.Dimension;
@@ -27,25 +26,31 @@ class SelectFile extends JPanel implements ActionListener {
     private String fileOriginPath;
     private JFileChooser fileChooser;
     private JTextField videoPath;
+    private final int dimensionWidth = 350;
+    private final int dimensionHeight = 30;
+    private final int fontStyle = 0;
+    private final int fontSize = 12;
+    private final int flowLayoutHgap = 0;
+    private final int flowLayoutVgap = 20;
 
     /**
-     * Initialize the graphic components to select a file.
+     * Initializes the graphic components to select a file.
      */
     protected SelectFile() {
         fileButton = new JButton("Select a File");
         fileButton.addActionListener(this::actionPerformed);
-        fileButton.setFont(new Font("Barlow", 0, 12));
+        fileButton.setFont(new Font("Barlow", fontStyle, fontSize));
         videoPath = new JTextField();
         videoPath.setEnabled(false);
-        videoPath.setPreferredSize(new Dimension(350, 30));
-        videoPath.setFont(new Font("Barlow", 0, 12));
-        setLayout(new FlowLayout(FlowLayout.LEFT, 0, 20));
+        videoPath.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
+        videoPath.setFont(new Font("Barlow", fontStyle, fontSize));
+        setLayout(new FlowLayout(FlowLayout.LEFT, flowLayoutHgap, flowLayoutVgap));
         add(fileButton);
         add(videoPath);
     }
 
     /**
-     * Action that open the File Chooser to select a file.
+     * Opens the File Chooser to select a file.
      * @param e event of the JButton.
      */
     @Override
@@ -65,8 +70,7 @@ class SelectFile extends JPanel implements ActionListener {
     }
 
     /**
-     * Method to get the Origin Path of File
-     * when selected.
+     * Gets the Origin Path of File when selected.
      * @return String fileOriginPath.
      */
     protected String getOriginFilePath() {

@@ -10,7 +10,6 @@
 package org.fundacion.jala.converter.view.converter;
 
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-
 import javax.swing.JPanel;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
@@ -23,25 +22,36 @@ class OutputSettings extends JPanel {
     private JComboBox<FrameVideo> framesSelect;
     private JCheckBox optionCSound;
     private JCheckBox thumbnailOption;
+    private final int alignLabelStyle = 2;
+    private final int widthLabelStyle = 70;
+    private final int heightLabelStyle = 30;
+    private final int dimensionWidth = 70;
+    private final int dimensionHeight = 30;
+    private final int fontStyle = 0;
+    private final int fontSize = 12;
+    private final int gridLayoutRows = 3;
+    private final int gridLayoutCols = 2;
 
     /**
-     * Initialize the graphic elements for output settings configurations.
+     * Initializes the graphic elements for output settings configurations.
      */
     protected OutputSettings() {
-        JLabelStyle resolutionLabel = new JLabelStyle("Select resolution: ", "h3", 2, 70, 30);
-        JLabelStyle frameLabel = new JLabelStyle("Select frame: ", "h3", 2, 70, 30);
+        JLabelStyle resolutionLabel = new JLabelStyle("Select resolution: ", "h3",
+                alignLabelStyle, widthLabelStyle, heightLabelStyle);
+        JLabelStyle frameLabel = new JLabelStyle("Select frame: ", "h3",
+                alignLabelStyle, widthLabelStyle, heightLabelStyle);
         setResolutionSelect();
-        resolutionComboBox.setFont(new Font("Barlow", 0, 12));
-        resolutionComboBox.setPreferredSize(new Dimension(70, 30));
+        resolutionComboBox.setFont(new Font("Barlow", fontStyle, fontSize));
+        resolutionComboBox.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
         setFrameSelect();
-        framesSelect.setFont(new Font("Barlow", 0, 12));
-        framesSelect.setPreferredSize(new Dimension(70, 30));
+        framesSelect.setFont(new Font("Barlow", fontStyle, fontSize));
+        framesSelect.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
         optionCSound = new JCheckBox("With audio");
-        optionCSound.setFont(new Font("Barlow", 0, 12));
+        optionCSound.setFont(new Font("Barlow", fontStyle, fontSize));
         optionCSound.setSelected(true);
         thumbnailOption = new JCheckBox("With Thumbnail");
-        thumbnailOption.setFont(new Font("Barlow", 0, 12));
-        setLayout(new GridLayout(3, 2));
+        thumbnailOption.setFont(new Font("Barlow", fontStyle, fontSize));
+        setLayout(new GridLayout(gridLayoutRows, gridLayoutCols));
         add(resolutionLabel.getTextLabel());
         add(resolutionComboBox);
         add(frameLabel.getTextLabel());
@@ -51,8 +61,7 @@ class OutputSettings extends JPanel {
     }
 
     /**
-     * Method that set all possible resolutions
-     * for video converter.
+     * Sets all possible resolutions for video converter.
      */
     protected void setResolutionSelect() {
         resolutionComboBox = new JComboBox<ResolutionVideo>(
@@ -68,8 +77,7 @@ class OutputSettings extends JPanel {
     }
 
     /**
-     * Method that set all possible resolutions
-     * for video converter.
+     * Sets all possible resolutions for video converter.
      */
     protected void setFrameSelect() {
         framesSelect = new JComboBox<FrameVideo>(
@@ -83,9 +91,7 @@ class OutputSettings extends JPanel {
     }
 
     /**
-     * Method that get selected width resolution
-     * for video converter.
-     *
+     * Gets selected width resolution for video converter.
      * @return int, width selected of Resolution.
      */
     protected int getWidthResolution() {
@@ -94,9 +100,7 @@ class OutputSettings extends JPanel {
     }
 
     /**
-     * Method that get selected Height resolution
-     * for video converter.
-     *
+     * Gets selected Height resolution for video converter.
      * @return int, Height selected of Resolution.
      */
     protected int getHeightResolution() {
@@ -105,9 +109,7 @@ class OutputSettings extends JPanel {
     }
 
     /**
-     * Method that get selected frame
-     * for video converter.
-     *
+     * Gets the selected frame for video converter.
      * @return String, option selected of Frame.
      */
     protected int getFrame() {
@@ -116,9 +118,7 @@ class OutputSettings extends JPanel {
     }
 
     /**
-     * Method that get if Sound is required
-     * for video converter.
-     *
+     * Gets if Sound is required for video converter.
      * @return true if audio is required, false if not.
      */
     protected boolean isAudioSelected() {
@@ -126,9 +126,7 @@ class OutputSettings extends JPanel {
     }
 
     /**
-     * Method that get if thumbnail is required
-     * for video converter.
-     *
+     * Gets if thumbnail is required for video converter.
      * @return true if thumbnail is required, false if not.
      */
     protected boolean isThumbnailRequired() {

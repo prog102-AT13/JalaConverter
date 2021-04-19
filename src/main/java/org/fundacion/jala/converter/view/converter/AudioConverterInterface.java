@@ -8,10 +8,12 @@
  */
 
 package org.fundacion.jala.converter.view.converter;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import org.fundacion.jala.converter.view.Models.AudioRequestForm;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
@@ -32,18 +34,30 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
     private QualityAudio quality;
     private OutputSettingsAudio settings;
     private ClientRequest clientRequest = new ClientRequest();
+    private static final Logger LOGGER = LogManager.getLogger();
+    private final int alignLabelStyle = 2;
+    private final int widthLabelStyle = 70;
+    private final int heightLabelStyle = 30;
+    private final int topBorder = 40;
+    private final int leftBorder = 40;
+    private final int bottomBorder = 100;
+    private final int rightBorder = 0;
+    private final int fontStyle = 0;
+    private final int fontSize = 12;
 
     /**
-     * Initialize of graphics elements for Audio converter interface.
+     * Initializes the graphics elements for Audio converter interface.
      */
     public AudioConverterInterface() {
-        JLabelStyle audioTitle = new JLabelStyle("Audio converter", "h1", 2, 70, 30);
-        JLabelStyle audioSettings = new JLabelStyle("Audio settings", "h1", 2, 70, 30);
+        JLabelStyle audioTitle = new JLabelStyle("Audio converter", "h1",
+                alignLabelStyle, widthLabelStyle, heightLabelStyle);
+        JLabelStyle audioSettings = new JLabelStyle("Audio settings", "h1",
+                alignLabelStyle, widthLabelStyle, heightLabelStyle);
         audioTitle.setAlignmentX(LEFT_ALIGNMENT);
         audioSettings.setAlignmentX(LEFT_ALIGNMENT);
         JButton convertAudio = new JButton("Convert");
         convertAudio.setAlignmentX(LEFT_ALIGNMENT);
-        convertAudio.setFont(new Font("Barlow", 0, 12));
+        convertAudio.setFont(new Font("Barlow", fontStyle, fontSize));
         convertAudio.addActionListener(this::actionPerformed);
         file = new SelectFile();
         file.setAlignmentX(LEFT_ALIGNMENT);
@@ -52,7 +66,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         quality = new QualityAudio();
         quality.setAlignmentX(LEFT_ALIGNMENT);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBorder(new EmptyBorder(40, 40, 100, 0));
+        setBorder(new EmptyBorder(topBorder, leftBorder, bottomBorder, rightBorder));
         settings = new OutputSettingsAudio();
         settings.setAlignmentX(LEFT_ALIGNMENT);
         add(audioTitle.getTextLabel());
@@ -65,8 +79,8 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
     }
 
     /**
-     * Action of JButton convert, send information for metadataCLASS conversion.
-     * Show a Dialog with the information.
+     * Converts, sends information for metadataClass conversion.
+     * Shows a Dialog with the information.
      * @param e event of the JButton.
      */
     @Override
@@ -112,10 +126,14 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         audioRequestForm.addMetadata(String.valueOf(settings.isMetadata()));
         clientRequest.executeRequest(audioRequestForm);
         try {
+            LOGGER.info("Execute Try");
             String result = clientRequest.executeRequest(audioRequestForm);
             System.out.println(result);
+            JOptionPane.showMessageDialog(this, "Download Link:\n" + result);
         } catch (IOException e) {
+            LOGGER.error("Execute Exception to obtain the request");
             e.printStackTrace();
         }
+        LOGGER.info("Finish");
     }
 }

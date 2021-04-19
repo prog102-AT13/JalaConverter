@@ -10,7 +10,6 @@
 package org.fundacion.jala.converter.view.metadata;
 
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-
 import javax.swing.JPanel;
 import javax.swing.JCheckBox;
 import javax.swing.border.EmptyBorder;
@@ -21,23 +20,35 @@ class ExportingFormat extends JPanel {
     private JCheckBox txtCheck;
     private JCheckBox htmlCheck;
     private JCheckBox xmpCheck;
+    private final int alignLabelStyle = 2;
+    private final int widthLabelStyle = 60;
+    private final int heightLabelStyle = 0;
+    private final int topBorder = 5;
+    private final int leftBorder = 40;
+    private final int bottomBorder = 0;
+    private final int rightBorder = 0;
+    private final int fontStyle = 0;
+    private final int fontSize = 12;
+    private final int gridLayoutRows = 5;
+    private final int gridLayoutCols = 1;
 
     /**
-     * Initialize the graphic components for Exporting format.
+     * Initializes the graphic components for Exporting format.
      * Output name of the file.
      */
     protected ExportingFormat() {
-        JLabelStyle formatTitle = new JLabelStyle("Exporting Format", "h2", 2, 60, 0);
-        JLabelStyle outPutTitle = new JLabelStyle("Output Information", "h2", 2, 60, 0);
-
+        JLabelStyle formatTitle = new JLabelStyle("Exporting Format", "h2",
+                alignLabelStyle, widthLabelStyle, heightLabelStyle);
+        JLabelStyle outPutTitle = new JLabelStyle("Output Information", "h2",
+                alignLabelStyle, widthLabelStyle, heightLabelStyle);
         txtCheck = new JCheckBox(".txt");
-        txtCheck.setFont(new Font("Barlow", 0, 12));
+        txtCheck.setFont(new Font("Barlow", fontStyle, fontSize));
         htmlCheck = new JCheckBox(".html");
-        htmlCheck.setFont(new Font("Barlow", 0, 12));
+        htmlCheck.setFont(new Font("Barlow", fontStyle, fontSize));
         xmpCheck = new JCheckBox(".xmp");
-        xmpCheck.setFont(new Font("Barlow", 0, 12));
-        setLayout(new GridLayout(5, 1));
-        setBorder(new EmptyBorder(5, 40, 0, 0));
+        xmpCheck.setFont(new Font("Barlow", fontStyle, fontSize));
+        setLayout(new GridLayout(gridLayoutRows, gridLayoutCols));
+        setBorder(new EmptyBorder(topBorder, leftBorder, bottomBorder, rightBorder));
         add(formatTitle.getTextLabel());
         add(txtCheck);
         add(htmlCheck);
@@ -46,7 +57,7 @@ class ExportingFormat extends JPanel {
     }
 
     /**
-     * Method that returns if Txt checkbox is selected.
+     * Returns if Txt checkbox is selected.
      * @return true if is selected, false if not.
      */
     protected String txtChecked() {
@@ -54,7 +65,7 @@ class ExportingFormat extends JPanel {
     }
 
     /**
-     * Method that returns if Html checkbox is selected.
+     * Returns if Html checkbox is selected.
      * @return true if is selected, false if not.
      */
     protected String isHtmlChecked() {
@@ -62,7 +73,7 @@ class ExportingFormat extends JPanel {
     }
 
     /**
-     * Method that returns if Xmp checkbox is selected.
+     * Returns if Xmp checkbox is selected.
      * @return true if is selected, false if not.
      */
     protected String isXmpChecked() {
