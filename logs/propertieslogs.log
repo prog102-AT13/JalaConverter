@@ -954,23 +954,3 @@
 [INFO ] 2021-04-14 17:07:34.760 [http-nio-8080-exec-4] ExtractMetadata - finish
 [INFO ] 2021-04-14 17:07:34.760 [http-nio-8080-exec-4] ExtractMetadata - start
 [INFO ] 2021-04-14 17:07:34.760 [http-nio-8080-exec-4] ExtractMetadata - Execute Try
-[INFO ] 2021-04-18 21:07:23.925 [main] ConverterApplication - start
-[INFO ] 2021-04-18 21:07:28.256 [main] ConverterApplication - finish
-[INFO ] 2021-04-18 21:07:49.466 [AWT-EventQueue-0] ClientRequest - Start
-[INFO ] 2021-04-18 21:07:49.466 [AWT-EventQueue-0] ClientRequest - Execute Try
-[INFO ] 2021-04-18 21:07:49.472 [AWT-EventQueue-0] ClientRequest - Finish
-[INFO ] 2021-04-18 21:07:51.931 [http-nio-8080-exec-1] AudioConverterController - Execute Try
-[INFO ] 2021-04-18 21:07:51.953 [http-nio-8080-exec-1] AudioConverterController - finish
-[INFO ] 2021-04-18 21:07:51.969 [http-nio-8080-exec-1] RunCommand - start
-[INFO ] 2021-04-18 21:07:51.969 [http-nio-8080-exec-1] RunCommand - Execute Try
-[INFO ] 2021-04-18 21:07:52.283 [http-nio-8080-exec-1] RunCommand - finish
-[INFO ] 2021-04-18 21:07:55.616 [AWT-EventQueue-0] AudioConverterInterface - Execute Try
-[INFO ] 2021-04-18 21:07:55.617 [AWT-EventQueue-0] ClientRequest - Start
-[INFO ] 2021-04-18 21:07:55.617 [AWT-EventQueue-0] ClientRequest - Execute Try
-[INFO ] 2021-04-18 21:07:55.617 [AWT-EventQueue-0] ClientRequest - Finish
-[INFO ] 2021-04-18 21:07:55.730 [http-nio-8080-exec-2] AudioConverterController - Execute Try
-[INFO ] 2021-04-18 21:07:55.752 [http-nio-8080-exec-2] AudioConverterController - finish
-[INFO ] 2021-04-18 21:07:55.753 [http-nio-8080-exec-2] RunCommand - start
-[INFO ] 2021-04-18 21:07:55.753 [http-nio-8080-exec-2] RunCommand - Execute Try
-[INFO ] 2021-04-18 21:07:56.064 [http-nio-8080-exec-2] RunCommand - finish
-[INFO ] 2021-04-18 21:08:01.859 [AWT-EventQueue-0] AudioConverterInterface - Finish
