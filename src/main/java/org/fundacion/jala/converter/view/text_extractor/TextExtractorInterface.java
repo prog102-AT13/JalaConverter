@@ -12,9 +12,12 @@
 package org.fundacion.jala.converter.view.text_extractor;
 
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.BoxLayout;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,25 +25,34 @@ import java.awt.event.ActionListener;
 public class TextExtractorInterface extends JPanel implements ActionListener {
     private SelectFile file;
     private SelectLanguage languageSelect;
+    private final int alignLabelStyle = 2;
+    private final int widthLabelStyle = 70;
+    private final int heightLabelStyle = 30;
+    private final int topBorder = 40;
+    private final int leftBorder = 40;
+    private final int bottomBorder = 100;
+    private final int rightBorder = 0;
+    private final int fontStyle = 0;
+    private final int fontSize = 12;
 
     /**
-     * Initialize of graphics elements for Audio converter interface.
+     * Initializes graphics elements for Audio converter interface.
      */
     public TextExtractorInterface() {
-        JLabelStyle audioTitle = new JLabelStyle("Text exctractor", "h1", 2, 70, 30);
-        JLabelStyle audioSettings = new JLabelStyle("Image settings", "h1", 2, 70, 30);
+        JLabelStyle audioTitle = new JLabelStyle("Text exctractor", "h1", alignLabelStyle, widthLabelStyle, heightLabelStyle);
+        JLabelStyle audioSettings = new JLabelStyle("Image settings", "h1", alignLabelStyle, widthLabelStyle, heightLabelStyle);
         audioTitle.setAlignmentX(LEFT_ALIGNMENT);
         audioSettings.setAlignmentX(LEFT_ALIGNMENT);
         JButton convertAudio = new JButton("Convert");
         convertAudio.setAlignmentX(LEFT_ALIGNMENT);
-        convertAudio.setFont(new Font("Barlow", 0, 12));
+        convertAudio.setFont(new Font("Barlow", fontStyle, fontSize));
         convertAudio.addActionListener(this::actionPerformed);
         file = new SelectFile();
         file.setAlignmentX(LEFT_ALIGNMENT);
         languageSelect = new SelectLanguage();
         languageSelect.setAlignmentX(LEFT_ALIGNMENT);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBorder(new EmptyBorder(40, 40, 100, 0));
+        setBorder(new EmptyBorder(topBorder, leftBorder, bottomBorder, rightBorder));
         add(audioTitle.getTextLabel());
         add(file);
         add(audioSettings.getTextLabel());
@@ -49,8 +61,8 @@ public class TextExtractorInterface extends JPanel implements ActionListener {
     }
 
     /**
-     * Action of JButton convert, send information for metadataCLASS conversion.
-     * Show a Dialog with the information.
+     * Converts, sends information for metadataCLASS conversion.
+     * Shows a Dialog with the information.
      * @param e event of the JButton.
      */
     @Override

@@ -33,7 +33,7 @@ public class CompilerInterface extends JPanel {
     private CompilerButtons buttonsCompiler;
 
     /**
-     * Initilize the graphics elements of the Main Compiler Interface.
+     * Initializes the graphics elements of the Main Compiler Interface.
      */
     public CompilerInterface() {
         buttonsCompiler = new CompilerButtons();
@@ -41,10 +41,6 @@ public class CompilerInterface extends JPanel {
         langButtons = new LanguageButtons();
         codeArea = new CodeTextArea();
 
-        /*JTabbedPane mainTabPanel = new JTabbedPane();
-        mainTabPanel.setFont(new Font("Barlow", 0, 11));
-        mainTabPanel.add("Main", codeArea);
-        */
         ProjectTab projectTab = new ProjectTab();
         projectTab.setFont(new Font("Barlow", 0, 11));
 
@@ -57,7 +53,6 @@ public class CompilerInterface extends JPanel {
         pnl.add(label);
         projectTab.setTabComponentAt(projectTab.getTabCount() - 1, pnl);
 
-        //projectTab.add("Main", codeArea);
         projectTab.start();
 
         setLayout(new GridBagLayout());
@@ -73,7 +68,6 @@ public class CompilerInterface extends JPanel {
         panelConstraint.gridy = 1;
         panelConstraint.gridheight = 2;
         panelConstraint.gridwidth = 4;
-        //add(mainTabPanel, panelConstraint);
 
         add(projectTab, panelConstraint);
 
@@ -92,19 +86,8 @@ public class CompilerInterface extends JPanel {
         buttonsCompiler.getRunButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //consoleOutput.getConsole().setText(codeArea.getText());
-                //System.out.println(codeArea.getText());
-
                 String url = "http://localhost:8080/api/compilePython";
                 HttpPost httpPost = new HttpPost(url);
-
-                /*String code1 = "print(\"Hello world 1\")\n" +
-                        "print(\"Hello world 2\")\n" +
-                        "print(25%2)\n" +
-                        "print(\"Dani piensa mal\")\n" +
-                        "print(\"Mariachi\")";
-                */
-                //String code1 = codeArea.getText();
 
                 String code1 = projectTab.getSelectedPane().getText();
                 System.out.println(code1);
