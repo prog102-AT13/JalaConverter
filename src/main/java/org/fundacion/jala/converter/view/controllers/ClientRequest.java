@@ -53,7 +53,7 @@ public class ClientRequest {
      * @throws ClientProtocolException
      * @throws IOException
      */
-    public String executeRequest(IrequestForm requestForm) throws ClientProtocolException, IOException {
+    public String executeRequest(final IrequestForm requestForm) throws ClientProtocolException, IOException {
         this.requestForm = requestForm;
         httpPost = new HttpPost(requestForm.getURL());
         builder = MultipartEntityBuilder.create();
@@ -72,7 +72,7 @@ public class ClientRequest {
      * @throws ClientProtocolException
      * @throws IOException
      */
-    public void download (String filePath) throws IOException{
+    public void download (final String filePath) throws IOException{
         String token = authGetToken();
         String sURL = "http://localhost:8080/api/download/img1.png";
 
@@ -116,7 +116,7 @@ public class ClientRequest {
      * @param key
      * @param value
      */
-    public void addTextBody(String key, String value) {
+    public void addTextBody(final String key, final String value) {
         builder.addTextBody(key, value, ContentType.TEXT_PLAIN);
     }
 
@@ -125,7 +125,7 @@ public class ClientRequest {
      * @param key
      * @param filePath
      */
-    public void addFileBody(String key, String filePath) {
+    public void addFileBody(final String key, final String filePath) {
         try {
             File f = new File(filePath);
             builder.addBinaryBody(
@@ -150,7 +150,7 @@ public class ClientRequest {
      * Adds a body field with the parameter's information.
      * @param parameter
      */
-    public void addBodyField(Parameter parameter) {
+    public void addBodyField(final Parameter parameter) {
         if (!parameter.isFile()) {
             addTextBody(parameter.getKey(), parameter.getValue());
         } else {

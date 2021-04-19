@@ -14,7 +14,7 @@ package org.fundacion.jala.converter.view.Models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegisterRequestForm implements IrequestForm {
+public class AuthenticateRequestForm implements IrequestForm{
     private List<Parameter> bodyParameters = new ArrayList<>();
     private final String URL = "http://localhost:8080/register";
     private final String USERNAME = "username";
@@ -42,7 +42,7 @@ public class RegisterRequestForm implements IrequestForm {
      */
     @Override
     public List<Parameter> getBodyParameters() {
-        return bodyParameters;
+        return null;
     }
 
     /**
@@ -51,7 +51,7 @@ public class RegisterRequestForm implements IrequestForm {
      */
     @Override
     public void addParameters(final Parameter parameter) {
-        bodyParameters.add(parameter);
+
     }
 
     /**
@@ -60,6 +60,6 @@ public class RegisterRequestForm implements IrequestForm {
      */
     @Override
     public String getURL() {
-        return URL;
+        return null;
     }
 }
