@@ -36,8 +36,8 @@ public class MainInterface extends JFrame {
     private final int alignLabelStyle = 0;
     private final int widthLabelStyle = 0;
     private final int heightLabelStyle = 90;
-    private final int witdh = 700;
-    private final int height = 800;
+    private final int witdh = 800;
+    private final int height = 700;
     private final int fontStyle = 0;
     private final int fontSize = 12;
 
