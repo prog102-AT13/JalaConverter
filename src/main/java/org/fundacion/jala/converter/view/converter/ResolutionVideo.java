@@ -10,11 +10,11 @@
 package org.fundacion.jala.converter.view.converter;
 
 public class ResolutionVideo {
-    private int width;
-    private int height;
+    private String width;
+    private String height;
     private String name;
 
-    ResolutionVideo(final String newName, final int newWidth, final int newHeight) {
+    ResolutionVideo(final String newName, final String newWidth, final String newHeight) {
         this.height = newHeight;
         this.width = newWidth;
         this.name = newName;
@@ -24,7 +24,7 @@ public class ResolutionVideo {
      * Gets width of video.
      * @return width of video.
      */
-    public int getWidth() {
+    public String getWidth() {
         return width;
     }
 
@@ -32,7 +32,7 @@ public class ResolutionVideo {
      * Sets width of video.
      * @param newWidth of video.
      */
-    public void setWidth(final int newWidth) {
+    public void setWidth(final String newWidth) {
         this.width = newWidth;
     }
 
@@ -40,7 +40,7 @@ public class ResolutionVideo {
      * Gets height of video.
      * @return height of video.
      */
-    public int getHeight() {
+    public String getHeight() {
         return height;
     }
 
@@ -48,7 +48,7 @@ public class ResolutionVideo {
      * Sets height of video.
      * @param newHeight of video.
      */
-    public void setHeight(final int newHeight) {
+    public void setHeight(final String newHeight) {
         this.height = newHeight;
     }
 
@@ -74,6 +74,53 @@ public class ResolutionVideo {
      */
     @Override
     public String toString() {
-        return width + "X" + height + "     " + name;
+        String spaces = addSpaces(numberSpaces(name));
+        return name + spaces + width + "x" + height;
+    }
+
+    /**
+     * Adds space depending for length of name
+     * @param nameLength of name
+     * @return a int with the long necessary for blank spaces
+     */
+    public int numberSpaces(final String nameLength) {
+        final int spacesFor720 = 59;
+        final int spacesFor1920 = 66;
+        final int spacesFor480 = 69;
+        final int spacesFor240 = 69;
+        final int spacesForDVD = 70;
+        final int spacesForTV = 74;
+        final int spacesForMobile = 67;
+        switch (nameLength) {
+            case "720p(HD)":
+                return spacesFor720;
+            case "1920p":
+                return spacesFor1920;
+            case "480p":
+                return spacesFor480;
+            case "240p":
+                return spacesFor240;
+            case "DVD":
+                return spacesForDVD;
+            case "TV":
+                return spacesForTV;
+            case "Mobile":
+                return spacesForMobile;
+            default:
+                return 0;
+        }
+    }
+
+    /**
+     * Add blank spaces
+     * @param numberSpaces
+     * @return a String with necessary spaces
+     */
+    public String addSpaces(final int numberSpaces) {
+        String spaces = "";
+        for (int i = 0; i < numberSpaces; i++) {
+            spaces += " ";
+        }
+        return spaces;
     }
 }

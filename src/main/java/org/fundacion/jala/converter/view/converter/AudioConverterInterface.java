@@ -24,8 +24,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-import static org.fundacion.jala.converter.ConverterApplication.dotenv;
-
 public class AudioConverterInterface extends JPanel implements ActionListener {
     private SelectFile file;
     private ConvertTypeSelectAudio audioSelect;
@@ -114,7 +112,11 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
      */
     private void callRequest() throws IOException {
         LOGGER.info("start");
+        System.out.println("Edson here log");
+        System.out.println(quality.getQualityAudio());
         String[] s = quality.getQualityAudio().split(" ");
+        System.out.println(s);
+        System.out.println("finis---------------------------------");
         AudioRequestForm audioRequestForm = new AudioRequestForm();
         audioRequestForm.addFilepath(file.getOriginFilePath());
         audioRequestForm.addFormat(audioSelect.getConvertTo());
@@ -123,7 +125,6 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         audioRequestForm.addHz(settings.getHz());
         audioRequestForm.addAudiochannel(settings.getAudioChannel());
         audioRequestForm.addMetadata(String.valueOf(settings.isMetadata()));
-        clientRequest.executeRequest(audioRequestForm);
         try {
             LOGGER.info("Execute Try");
             String result = clientRequest.executeRequest(audioRequestForm);

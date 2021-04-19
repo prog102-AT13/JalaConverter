@@ -18,6 +18,7 @@ import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 public class VideoRequestForm implements IrequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
     private final String url = dotenv.get("HTTP_URL_CONVERT_VIDEO");
+    private final String file = "file";
     private final String outputFormat = "outputFormat";
     private final String resolution = "resolution";
     private final String thumbnail = "thumbnail";
@@ -26,77 +27,79 @@ public class VideoRequestForm implements IrequestForm {
     private final String height = "height";
     private final String audio = "audio";
 
-
-    private String filepathValue;
-    private String formatValue;
-    private String bitrateValue;
-    private String volumeValue;
-
     /**
-     * Audio Request Form stores parameters for an audio request
+     * Video Request Form stores parameters for an video request
      */
     public VideoRequestForm() {
-
     }
 
     /**
      * Adds filepath parameter
      * @param filepathValue
      */
-    public void addFilepath(String filepathValue) {
-        addParameters(new Parameter(FILE, filepathValue, true));
+    public void addFilepath(final String filepathValue) {
+        addParameters(new Parameter(file, filepathValue, true));
     }
 
     /**
-     * Adds format parameter
-     * @param formatValue
+     * Adds outputFormat parameter
+     * @param outputFormatValue
      */
-    public void addFormat(String formatValue) {
-        addParameters(new Parameter(FORMAT, formatValue, false));
+    public void addOutputFormat(final String outputFormatValue) {
+        addParameters(new Parameter(outputFormat, outputFormatValue, false));
     }
 
     /**
-     * Adds bitrate parameter
-     * @param bitrateValue
+     * Adds resolution parameter
+     * @param resolutionValue
      */
-    public void addBitrate(String bitrateValue) {
-        addParameters(new Parameter(BITRATE, bitrateValue, false));
+    public void addResolution(final String resolutionValue) {
+        addParameters(new Parameter(resolution, resolutionValue, false));
     }
 
     /**
-     * Adds volume parameter
-     * @param volumeValue
+     * Adds thumbnail parameter
+     * @param thumbnailValue
      */
-    public void addVolume(String volumeValue) {
-        addParameters(new Parameter(VOLUME, volumeValue, false));
+    public void addThumbnail(final String thumbnailValue) {
+        addParameters(new Parameter(thumbnail, thumbnailValue, false));
     }
 
     /**
-     * Adds hz parameter
-     * @param hzValue
+     * Adds frameRate parameter
+     * @param frameRateValue
      */
-    public void addHz(String hzValue) {
-        addParameters(new Parameter(HZ, hzValue, false));
+    public void addFrameRate(final String frameRateValue) {
+        addParameters(new Parameter(frameRate, frameRateValue, false));
     }
 
     /**
-     * Adds audiochannel parameter
-     * @param metadataValue
+     * Adds width parameter
+     * @param widthValue
      */
-    public void addAudiochannel(String metadataValue) {
-        addParameters(new Parameter(AUDIOCHANNEL, metadataValue, false));
+    public void addWidth(final String widthValue) {
+        addParameters(new Parameter(width, widthValue, false));
     }
+
     /**
-     * Adds metadata parameter
-     * @param metadataValue
+     * Adds height parameter
+     * @param heightValue
      */
-    public void addMetadata(String metadataValue) {
-        addParameters(new Parameter(METADATA, metadataValue, false));
+    public void addHeight(final String heightValue) {
+        addParameters(new Parameter(height, heightValue, false));
     }
 
+    /**
+     * Adds audio parameter
+     * @param audioValue
+     */
+    public void addAudio(final String audioValue) {
+        addParameters(new Parameter(audio, audioValue, false));
+    }
 
     /**
-     * @return bodyParameters
+     * Gets the body parameters
+     * @return bodyParameters of video
      */
     @Override
     public List<Parameter> getBodyParameters() {
@@ -108,15 +111,16 @@ public class VideoRequestForm implements IrequestForm {
      * @param parameter
      */
     @Override
-    public void addParameters(Parameter parameter) {
+    public void addParameters(final Parameter parameter) {
         bodyParameters.add(parameter);
     }
 
     /**
-     * @return URL
+     * Gets the url
+     * @return url of endpoint
      */
     @Override
     public String getURL() {
-        return URL;
+        return url;
     }
 }

@@ -42,7 +42,8 @@ public class VideoConverterController {
                              @RequestParam("height") int height,
                              @RequestParam("audio") boolean audio,
                              @RequestParam("metadata") String metadata
-    ) throws IllegalStateException, IOException {
+    ) throws IllegalStateException, IOException, InterruptedException {
+        System.out.println("log video here");
         String filename = file.getOriginalFilename();
         String storagePath = fileStorageService.uploadFile(file);
         videoParameter.setOutputFormat(outputFormat);

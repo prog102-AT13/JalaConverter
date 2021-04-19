@@ -9,8 +9,11 @@
 
 package org.fundacion.jala.converter.view.converter;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.view.Models.VideoRequestForm;
+import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
@@ -19,11 +22,14 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class VideoConverterInterface extends JPanel implements ActionListener {
     private SelectFile file;
     private ConverterTypeSelect menuConverterType;
     private OutputSettings settings;
+    private ClientRequest clientRequest = new ClientRequest();
+    private static final Logger LOGGER = LogManager.getLogger();
     private final int alignLabelStyle = 0;
     private final int widthLabelStyle = 100;
     private final int heightLabelStyle = 30;
@@ -66,6 +72,7 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
      */
     @Override
     public void actionPerformed(final ActionEvent e) {
+        LOGGER.info("Start");
         JOptionPane.showMessageDialog(this, "File Path: "
                 + file.getOriginFilePath()
                 + "\nConvert to:"
@@ -80,5 +87,50 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
                 + settings.isAudioSelected()
                 + "\nThumbnail: "
                 + settings.isThumbnailRequired());
+        try {
+            LOGGER.info("Execute Try");
+            callRequest();
+        } catch (Exception ex) {
+            LOGGER.error("Execute Exception to metaData conversion");
+            ex.printStackTrace();
+        }
+        LOGGER.info("Finish");
+    }
+    /**
+     * Obtains the request
+     * @throws IOException
+     */
+    private void callRequest() throws IOException {
+        LOGGER.info("start");
+        VideoRequestForm videoRequestForm = new VideoRequestForm();
+        videoRequestForm.addFilepath(file.getOriginFilePath());
+        videoRequestForm.addOutputFormat(menuConverterType.getConvertTo());
+        System.out.println("Edson here log");
+        System.out.println(file.getOriginFilePath());
+        System.out.println(menuConverterType.getConvertTo());
+        System.out.println(settings.getFrame());
+        System.out.println(settings.getWidthResolution());
+        System.out.println(settings.getHeightResolution());
+        System.out.println(settings.isAudioSelected());
+        System.out.println(settings.isThumbnailRequired());
+        System.out.println(settings);
+        System.out.println("finis log ------------------------");
+        videoRequestForm.addOutputFormat(menuConverterType.getConvertTo());
+        videoRequestForm.addResolution(settings.getWidthResolution());
+        videoRequestForm.addThumbnail(String.valueOf(settings.isThumbnailRequired()));
+        videoRequestForm.addFrameRate(settings.getFrame());
+        videoRequestForm.addWidth(settings.getWidthResolution());
+        videoRequestForm.addHeight(settings.getHeightResolution());
+        videoRequestForm.addAudio(String.valueOf(settings.isAudioSelected()));
+        try {
+            LOGGER.info("Execute Try");
+            String result = clientRequest.executeRequest(videoRequestForm);
+            JOptionPane.showMessageDialog(this, "Download Link:\n" + result);
+            System.out.println(result);
+        } catch (IOException e) {
+            LOGGER.error("Execute Exception to obtain the request");
+            e.printStackTrace();
+        }
+        LOGGER.info("Finish");
     }
 }
