@@ -20,12 +20,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.FetchType;
 
 @Entity
-@Table(name = "PROJECT")
-public class Project {
+@Table(name = "ASSET")
+public class Asset {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "PROJECT_ID")
+    @Column(name = "ASSET_ID")
     private int id;
 
     @Column(name = "TITLE")
@@ -41,11 +41,11 @@ public class Project {
     @JoinColumn(name = "USER_ID")
     private User user;
 
-    public Project() {
+    public Asset() {
 
     }
 
-    public Project(final String newTitle, final String newPath, final String newChecksum, final User newUser) {
+    public Asset(final String newTitle, final String newPath, final String newChecksum, final User newUser) {
         this.title = newTitle;
         this.path = newPath;
         this.checksum = newChecksum;

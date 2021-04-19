@@ -41,7 +41,7 @@ public class User {
     private String token;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Project> projects = new ArrayList<>();
+    private List<Asset> assets = new ArrayList<>();
 
     public User() {
 
@@ -121,16 +121,16 @@ public class User {
      * Obtains all the projects that realized the user
      * @return all the projects of the user
      */
-    public List<Project> getProjects() {
-        return projects;
+    public List<Asset> getProjects() {
+        return assets;
     }
 
     /**
      * Sets projects of the user
      * @param newProjects a list of projects
      */
-    public void setProjects(final List<Project> newProjects) {
-        this.projects = newProjects;
+    public void setProjects(final List<Asset> newProjects) {
+        this.assets = newProjects;
     }
 
     /**
@@ -143,7 +143,7 @@ public class User {
                 + ", name='" + name + '\''
                 + ", pasword='" + password + '\''
                 + ", token='" + token + '\''
-                + ", projects=" + projects
+                + ", projects=" + assets
                 + '}';
     }
 }

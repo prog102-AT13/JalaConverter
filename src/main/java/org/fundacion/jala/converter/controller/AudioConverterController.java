@@ -9,7 +9,7 @@
 package org.fundacion.jala.converter.controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.fundacion.jala.converter.models.Project;
+import org.fundacion.jala.converter.models.Asset;
 import org.fundacion.jala.converter.models.parameter.AudioParameter;
 import org.fundacion.jala.converter.service.AudioConverter;
 import org.fundacion.jala.converter.service.FileStorageService;
@@ -27,8 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.fundacion.jala.converter.models.ProjectSQL.insertProjectData;
-import static org.fundacion.jala.converter.models.ProjectSQL.listProject;
+import static org.fundacion.jala.converter.models.AssetSQL.insertAssetData;
+import static org.fundacion.jala.converter.models.AssetSQL.listAsset;
 import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;
 import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetadata;
 import static org.fundacion.jala.converter.service.ZipService.*;
@@ -60,14 +60,12 @@ public class AudioConverterController {
         final int WAIT_TIME = 3000;
         boolean exist = false;
         final int USER_ID = 2;
-        List<Project> projects = listProject();
-        List<String> resultTitle = projects.stream().filter(project -> project.getChecksum().equals(checksum))
-                .map(project -> project.getTitle())
-                .collect(Collectors.toList());
-        List<String> resultPath = projects.stream().filter(project -> project.getChecksum().equals(checksum))
-                .map(project -> project.getPath())
-                .collect(Collectors.toList());
+        List<Asset> assets = listAsset();
+        List<String> resultTitle = getTitles(checksum, assets);
+        List<String> resultPath = getPath(checksum, assets);
+
         exist = resultTitle.size() > 0;
+
         if (exist) {
             filename = resultTitle.get(0);
             storagePath = resultPath.get(0) + filename;
@@ -83,6 +81,8 @@ public class AudioConverterController {
                 LOGGER.error("Execute Exception" + e.getLocalizedMessage());
             }
         }
+
+
         audioConverter = new AudioConverter(new AudioParameter(storagePath, format, bitrate, hz, volume, audioChannel));
         audioConverter.audioConverter(storagePath);
         String outputFilename = audioConverter.getOutputFileName();
@@ -91,7 +91,7 @@ public class AudioConverterController {
         extractMetadata(metadata, outputFilename, fileStorageService);
         String pathFile = storagePath.substring(0, storagePath.lastIndexOf("\\") + 1);
         if (!(resultTitle.size() > 0)) {
-            insertProjectData(filename, pathFile, checksumLocal, USER_ID);
+            insertAssetData(filename, pathFile, checksumLocal, USER_ID);
         }
         if (metadata.equals("true")) {
             ArrayList<String> zipList = new ArrayList<>();
@@ -106,5 +106,17 @@ public class AudioConverterController {
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         String downloadLink = baseUrl + "/api/download/" + nameWithoutExtension + "zip";
         return downloadLink;
+    }
+
+    private List<String> getPath(String checksum, List<Asset> assets) {
+        return assets.stream().filter(project -> project.getChecksum().equals(checksum))
+                    .map(asset -> asset.getPath())
+                    .collect(Collectors.toList());
+    }
+
+    private List<String> getTitles(String checksum, List<Asset> assets) {
+        return assets.stream().filter(project -> project.getChecksum().equals(checksum))
+                    .map(asset -> asset.getTitle())
+                    .collect(Collectors.toList());
     }
 }
