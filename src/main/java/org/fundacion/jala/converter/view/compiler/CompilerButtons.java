@@ -52,6 +52,7 @@ class CompilerButtons extends JPanel implements ActionListener {
         add(selectFile);
         add(runCode);
         add(clearConsole);
+        runCode.addActionListener(this);
     }
 
     /**
@@ -60,7 +61,7 @@ class CompilerButtons extends JPanel implements ActionListener {
      */
     @Override
     public void actionPerformed(final ActionEvent e) {
-        JFileChooser fileChooser = new JFileChooser();
+        /*JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 
         FileNameExtensionFilter imgFilter = new FileNameExtensionFilter("TxT", "txt");
@@ -78,5 +79,12 @@ class CompilerButtons extends JPanel implements ActionListener {
                 pathFile = fileName.getAbsolutePath();
             }
         }
+
+         */
+        System.out.println("Hola bebe");
+    }
+
+    public JButton getRunButton() {
+        return  runCode;
     }
 }

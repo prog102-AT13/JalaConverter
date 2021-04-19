@@ -63,4 +63,8 @@ public class MainInterface extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
+
+    public static void main(String[] args) {
+        new MainInterface().initInterface();
+    }
 }

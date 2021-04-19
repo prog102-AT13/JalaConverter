@@ -25,11 +25,11 @@ class LanguageButtons extends JPanel {
      */
     protected LanguageButtons() {
         setPreferredSize(new Dimension(75, 30));
-        cPlusPlus = new JButton("C++");
+        /*cPlusPlus = new JButton("C++");
         cPlusPlus.setFont(new Font("Barlow", 0, 11));
         cPlusPlus.setMaximumSize(new Dimension(50, 50));
         cPlusPlus.setAlignmentX(Component.CENTER_ALIGNMENT);
-        java = new JButton("Java");
+        */java = new JButton("Java");
         java.setMaximumSize(new Dimension(50, 50));
         java.setFont(new Font("Barlow", 0, 11));
         java.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -38,7 +38,7 @@ class LanguageButtons extends JPanel {
         python.setAlignmentX(Component.CENTER_ALIGNMENT);
         python.setFont(new Font("Barlow", 0, 11));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        add(cPlusPlus);
+//        add(cPlusPlus);
         add(java);
         add(python);
     }
