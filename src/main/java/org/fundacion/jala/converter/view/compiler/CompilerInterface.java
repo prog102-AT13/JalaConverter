@@ -16,7 +16,6 @@ import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -99,7 +98,6 @@ public class CompilerInterface extends JPanel {
                 }
                 HttpPost httpPost = new HttpPost(url);
                 String code1 = projectTab.getSelectedPane().getText();
-                System.out.println(code1);
                 MultipartEntityBuilder builder;
                 builder = MultipartEntityBuilder.create();
                 builder.addTextBody("code", code1, ContentType.TEXT_PLAIN);
@@ -114,7 +112,6 @@ public class CompilerInterface extends JPanel {
                     HttpEntity responseEntity = response.getEntity();
                     String sResponse = EntityUtils.toString(responseEntity, "UTF-8");
                     consoleOutput.getConsole().setText(sResponse);
-                    System.out.println(sResponse);
                 } catch (Exception exception) {
                     System.out.println(exception);
                 }

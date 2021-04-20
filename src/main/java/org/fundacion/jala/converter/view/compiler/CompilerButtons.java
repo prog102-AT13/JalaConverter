@@ -15,14 +15,11 @@ package org.fundacion.jala.converter.view.compiler;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 class CompilerButtons extends JPanel implements ActionListener {
     private JButton runCode;
@@ -69,8 +66,6 @@ class CompilerButtons extends JPanel implements ActionListener {
      */
     @Override
     public void actionPerformed(final ActionEvent e) {
-        
-        System.out.println("Hola bebe");
     }
 
     public JButton getRunButton() {

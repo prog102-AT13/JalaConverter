@@ -12,8 +12,12 @@
  */
 package org.fundacion.jala.converter.view.compiler;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JTabbedPane;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,12 +28,10 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
         button=new PlusButton();
         button.setPreferredSize(new Dimension(20,20));
         button.addActionListener(this);
-
         add(new JPanel());
         setTabComponentAt(getTabCount() - 1, button);
         contador = 0;
     }
-    CodeTextArea codeArea = new CodeTextArea();
 
     /**
      * Creates a new tab with X button included
