@@ -106,8 +106,6 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         audioRequestForm.addHz(hz);
         audioRequestForm.addAudiochannel(audiochannel);
         audioRequestForm.addMetadata(String.valueOf(metadata));
-
-        clientRequest.executeRequest(audioRequestForm);
         try {
             String result = clientRequest.executeRequest(audioRequestForm);
             JOptionPane.showMessageDialog(this, "Download Link:\n" + result);

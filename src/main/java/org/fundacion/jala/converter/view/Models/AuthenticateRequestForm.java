@@ -16,7 +16,7 @@ import java.util.List;
 
 public class AuthenticateRequestForm implements IrequestForm{
     private List<Parameter> bodyParameters = new ArrayList<>();
-    private final String URL = "http://localhost:8080/register";
+    private final String URL = "http://localhost:8080/authenticate";
     private final String USERNAME = "username";
     private final String PASSWORD = "password";
 
@@ -42,7 +42,7 @@ public class AuthenticateRequestForm implements IrequestForm{
      */
     @Override
     public List<Parameter> getBodyParameters() {
-        return null;
+        return bodyParameters;
     }
 
     /**
@@ -51,7 +51,7 @@ public class AuthenticateRequestForm implements IrequestForm{
      */
     @Override
     public void addParameters(final Parameter parameter) {
-
+        bodyParameters.add(parameter);
     }
 
     /**
@@ -60,6 +60,6 @@ public class AuthenticateRequestForm implements IrequestForm{
      */
     @Override
     public String getURL() {
-        return null;
+        return URL;
     }
 }

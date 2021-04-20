@@ -9,6 +9,10 @@
 
 package org.fundacion.jala.converter.view.login;
 
+import org.fundacion.jala.converter.view.MainInterface;
+import org.fundacion.jala.converter.view.Models.AuthenticateRequestForm;
+import org.fundacion.jala.converter.view.controllers.ClientRequest;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -21,6 +25,9 @@ import javax.swing.ImageIcon;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+
+import static org.fundacion.jala.converter.models.UserSQL.usernameExists;
 
 public class LoginInterface extends JFrame implements ActionListener {
     private Container loginContentPane = getContentPane();
@@ -37,6 +44,7 @@ public class LoginInterface extends JFrame implements ActionListener {
     private static final int TEXT_FIELD_WIDTH = 150;
     private static final int LABEL_OR_BUTTON_WIDTH = 100;
     private static final int SMALL_BUTTON_SIZE = 29;
+    private ClientRequest clientRequest = new ClientRequest();
 
     public LoginInterface() {
         setTitle("LOGIN");
@@ -93,6 +101,27 @@ public class LoginInterface extends JFrame implements ActionListener {
     }
 
     /**
+     *
+     * @param username
+     * @param password
+     */
+    public void callRequest(final String username, final String password) {
+        AuthenticateRequestForm authenticateRequestForm = new AuthenticateRequestForm();
+        authenticateRequestForm.addUsername(username);
+        authenticateRequestForm.addPassword(password);
+        try {
+            String result = clientRequest.executeRequestWithoutToken(authenticateRequestForm);
+            clientRequest.setToken(result);
+            System.out.println(result);
+            this.dispose();
+            new MainInterface().initInterface();
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Invalid username or password");
+        }
+    }
+
+    /**
      * Defines the operation after an action is done
      * @param e an action performed by user
      */
@@ -101,13 +130,7 @@ public class LoginInterface extends JFrame implements ActionListener {
         if (e.getSource() == loginButton) {
             String usernameText = usernameTextField.getText();
             String passwordText = String.copyValueOf(passwordField.getPassword());
-            if (usernameText.equals("ray") && passwordText.equals("123")) {
-                JOptionPane.showMessageDialog(this, "Login Successful");
-            } else {
-                JOptionPane.showMessageDialog(this, "Invalid username or password");
-            }
-            usernameTextField.setText("");
-            passwordField.setText("");
+            callRequest(usernameText, passwordText);
         }
 
         if (e.getSource() == showPasswordButton) {

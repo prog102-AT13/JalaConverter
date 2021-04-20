@@ -7,8 +7,6 @@
  */
 package org.fundacion.jala.converter;
 
-import org.fundacion.jala.converter.models.UserSQL;
-import org.fundacion.jala.converter.view.MainInterface;
 import org.fundacion.jala.converter.view.login.LoginInterface;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,14 +20,10 @@ public class ConverterApplication {
     private static final Logger LOGGER = LogManager.getLogger();
 
     public static void main(final String[] args) {
-//        LoginInterface loginInterface = new LoginInterface();
-        MainInterface main = new MainInterface();
         LOGGER.info("start");
         SpringApplication.run(ConverterApplication.class, args);
         System.setProperty("java.awt.headless", "false");
-        SwingUtilities.invokeLater(() -> {
-            main.initInterface();
-        });
+        SwingUtilities.invokeLater(LoginInterface::new);
         LOGGER.info("finish");
     }
 }
