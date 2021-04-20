@@ -112,8 +112,8 @@ public class RegisterInterface extends JFrame implements ActionListener {
             String username = usernameTextField.getText();
             String password = String.copyValueOf(passwordField.getPassword());
             String passwordConfirmation = String.copyValueOf(passwordConfirmationField.getPassword());
-            if (usernameExists(username)) {
-                JOptionPane.showMessageDialog(this, "Unavailable username");
+            if (usernameExists(username) || username.equals("")) {
+                JOptionPane.showMessageDialog(this, "Invalid username");
             } else {
                 if (password.equals(passwordConfirmation)) {
                     JOptionPane.showMessageDialog(this, "Register Successful");

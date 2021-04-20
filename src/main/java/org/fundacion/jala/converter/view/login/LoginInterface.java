@@ -35,7 +35,7 @@ public class LoginInterface extends JFrame implements ActionListener {
     private JButton registerButton = new JButton("REGISTER");
     private static final int FIELDS_HEIGHT = 30;
     private static final int TEXT_FIELD_WIDTH = 150;
-    private static final int LABEL_OR_BUTTON_WIDTH = 150;
+    private static final int LABEL_OR_BUTTON_WIDTH = 100;
     private static final int SMALL_BUTTON_SIZE = 29;
 
     public LoginInterface() {
