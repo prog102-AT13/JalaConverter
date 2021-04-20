@@ -12,7 +12,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.models.facade.CompilerFacade;
 import org.fundacion.jala.converter.service.pythoncompiler.Python;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 
@@ -28,12 +31,10 @@ public class PythonCompilerController {
     public String compilePython(final @RequestParam("code") String code) throws IllegalStateException, IOException {
         LOGGER.info("start");
         if (!code.isBlank() || !code.equals(null)){
-//            PythonCompiler pythonCompiler = new PythonCompiler();
             CompilerFacade python = new CompilerFacade();
             String filePath = Transform.toFile(code, "filetocompile", "py");
             LOGGER.info("finish");
           return python.facadePythonCompile(Python.V3, filePath);
-//            return pythonCompiler.compiler(Python.V3, filePath);
         }
         return "";
     }

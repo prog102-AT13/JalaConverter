@@ -12,12 +12,13 @@ import org.fundacion.jala.converter.service.FileStorageService;
 import org.fundacion.jala.converter.service.videoclasses.Converter;
 import org.fundacion.jala.converter.service.videoclasses.VideoParameter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.io.IOException;
-
 import static org.fundacion.jala.converter.models.facade.ConverterFacade.getVideoConverter;
 import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetadata;
 

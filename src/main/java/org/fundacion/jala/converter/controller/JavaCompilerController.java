@@ -32,11 +32,9 @@ public class JavaCompilerController {
         LOGGER.info("start");
         if (!code.isBlank() || !code.equals(null)){
             CompilerFacade java = new CompilerFacade();
-//            JavaCompiler javaCompiler = new JavaCompiler();
             String filePath = Transform.toFile(code, "Main", "java");
             LOGGER.info("finish");
             return java.facadeJavaCompile(JavaVersion.JAVA_11,filePath);
-//            return javaCompiler.javaCompiler(JavaVersion.JAVA_11, filePath);
         }
         return "";
     }

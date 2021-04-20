@@ -38,7 +38,6 @@ public class ExtractTextController {
                              final @RequestParam("language") String language,
                              final @RequestParam("nameOutput") String nameOutput) throws IllegalStateException, IOException {
         LOGGER.info("start");
-
         ExtractFacade.getTextExtract(file,language,nameOutput);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         String outFilename = nameOutput + ".txt";

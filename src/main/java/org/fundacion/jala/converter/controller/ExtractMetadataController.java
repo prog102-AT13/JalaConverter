@@ -13,9 +13,11 @@ import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.models.facade.ExtractFacade;
 import org.fundacion.jala.converter.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.io.IOException;
 
 @RestController
@@ -34,9 +36,9 @@ public class ExtractMetadataController {
                              @RequestParam("nameExport") String nameExport,
                              @RequestParam("format") String format) throws IllegalStateException, IOException {
         LOGGER.info("start");
-        String filename =ExtractFacade.getMetadataExtract(fileToExtract,isMoreInfo,nameExport,format);
+        String filename = ExtractFacade.getMetadataExtract(fileToExtract, isMoreInfo, nameExport, format);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-        String downloadLink = baseUrl + "/api/download/" + filename+"."+format;
+        String downloadLink = baseUrl + "/api/download/" + filename + "." + format;
         LOGGER.info("finish");
         return downloadLink;
     }
