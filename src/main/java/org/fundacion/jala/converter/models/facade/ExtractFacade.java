@@ -49,12 +49,13 @@ public class ExtractFacade {
      * @param format is the format of file where metadata are extracted
      * @return string with name of file which contains metadata
      */
-    public static String getMetadataExtract(final String file, final Boolean isMoreInfo,
-                                            final String nameExport, final String format) {
+    public static String getMetadataExtract(final MultipartFile file, final Boolean isMoreInfo,
+                                            final String nameExport, final String format) throws IOException {
         FileStorageService fileStorageService = new FileStorageService();
+        String pathFile = fileStorageService.uploadFile(file);
         TypeFileExport typeFileExport = stringToEnum(format);
-        String outputPath = fileStorageService.getOutputPathWithoutFileName(fileStorageService.getOutputPath(file));
-        File fileToExtract = new File(file);
+        String outputPath = fileStorageService.getOutputPathWithoutFileName(fileStorageService.getOutputPath(pathFile));
+        File fileToExtract = new File(pathFile);
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setNameExport(nameExport + "");
         objectMetadata.setFileToExtract(fileToExtract);

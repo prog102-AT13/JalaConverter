@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
 
@@ -31,7 +32,7 @@ public class ExtractMetadataController {
      * Endpoint for extract metadata
      */
     @PostMapping("/extractMetadata")
-    public String uploadFile(@RequestParam("fileToExtract") String fileToExtract,
+    public String uploadFile(@RequestParam("fileToExtract") MultipartFile fileToExtract,
                              @RequestParam("moreInfo") Boolean isMoreInfo,
                              @RequestParam("nameExport") String nameExport,
                              @RequestParam("format") String format) throws IllegalStateException, IOException {
