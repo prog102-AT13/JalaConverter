@@ -7,6 +7,9 @@
  * license agreement you entered into with Fundacion Jala
  */
 
+/**
+ * @author Paola Aguilar Quiñones
+ */
 package org.fundacion.jala.converter.view;
 
 import org.fundacion.jala.converter.view.converter.AudioConverterInterface;
@@ -71,7 +74,4 @@ public class MainInterface extends JFrame {
         setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new MainInterface().initInterface();
-    }
 }

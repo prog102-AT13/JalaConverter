@@ -7,6 +7,9 @@
  * license agreement you entered into with Fundacion Jala
  */
 
+/**
+ * @author Paola Aguilar Quiñones
+ */
 package org.fundacion.jala.converter.view.compiler;
 
 import javax.swing.JPanel;
