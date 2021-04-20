@@ -17,7 +17,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
-import static org.fundacion.jala.converter.models.UserSQL.*;
+import static org.fundacion.jala.converter.models.UserSQL.findUserById;
+import static org.fundacion.jala.converter.models.UserSQL.getUserId;
+import static org.fundacion.jala.converter.models.UserSQL.insertUserData;
+import static org.fundacion.jala.converter.models.UserSQL.usernameExists;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService {

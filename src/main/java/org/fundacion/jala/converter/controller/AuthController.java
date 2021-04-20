@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import static org.fundacion.jala.converter.models.UserSQL.*;
+import static org.fundacion.jala.converter.models.UserSQL.editToken;
 
 @RestController
 public class AuthController {
