@@ -56,17 +56,6 @@ public class AudioConverterController {
                              @RequestParam("metadata") String metadata) throws IllegalStateException, IOException, InterruptedException {
         String filename;
         String storagePath;
-//        checksum = "6ca5290ffb6fcb298b89d3d1efe3009e";
-        System.out.println("*******************************************************");
-        System.out.println("*******************************************************");
-        System.out.println("*******************************************************");
-        System.out.println(format);
-        System.out.println(bitrate);
-        System.out.println(volume);
-        System.out.println(hz);
-        System.out.println(audioChannel);
-        System.out.println(checksum);
-        System.out.println(metadata);
         String checksumLocal = checksum;
         final int WAIT_TIME = 6000;
         boolean exist = false;
@@ -102,15 +91,6 @@ public class AudioConverterController {
         extractMetadata(metadata, outputFilename, fileStorageService);
         String pathFile = storagePath.substring(0, storagePath.lastIndexOf(System.getProperty("file.separator")) + 1);
 
-        System.out.println("***************************************************");
-        System.out.println("***************************************************");
-        System.out.println("***************************************************");
-        System.out.println("***************************************************");
-        System.out.println("output fila name : " + outputFilename);
-        System.out.println("output path : " + outputPath);
-        System.out.println("name without extension : " + nameWithoutExtension);
-        System.out.println("path file : " + pathFile);
-
         if (!(resultTitle.size() > 0)) {
             insertAssetData(filename, pathFile, checksumLocal, USER_ID);
         }
@@ -127,8 +107,6 @@ public class AudioConverterController {
         }
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         String downloadLink = baseUrl + "/api/download/" + nameWithoutExtension + "zip";
-        System.out.println("**********************");
-        System.out.println(downloadLink);
         return downloadLink;
     }
 
