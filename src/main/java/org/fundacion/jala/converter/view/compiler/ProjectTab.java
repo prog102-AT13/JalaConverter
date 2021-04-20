@@ -24,6 +24,10 @@ import java.awt.event.ActionListener;
 public class ProjectTab extends JTabbedPane implements ActionListener {
     public static int contador;
     PlusButton button;
+
+    /**
+     * Starts required components to add new tabs
+     */
     public void start() {
         button=new PlusButton();
         button.setPreferredSize(new Dimension(20,20));
@@ -82,6 +86,4 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
     public CodeTextArea getSelectedPane() {
         return (CodeTextArea) getSelectedComponent();
     }
-
 }
-

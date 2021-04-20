@@ -38,6 +38,10 @@ class Console extends JPanel {
         add(console, BorderLayout.CENTER);
     }
 
+    /**
+     * Gets access to JTextArea
+     * @return a JTextArea
+     */
     public JTextArea getConsole() {
         return console;
     }

@@ -94,6 +94,4 @@ class CodeTextArea extends JPanel {
     public String getText() {
         return codeArea.getText();
     }
-
-
 }
