@@ -18,5 +18,4 @@ public class CompilerException extends PaoPaoException{
     public CompilerException(String message, Throwable exception) {
         super(message, exception);
     }
-
 }
