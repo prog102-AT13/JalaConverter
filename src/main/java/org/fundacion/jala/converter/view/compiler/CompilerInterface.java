@@ -40,7 +40,7 @@ public class CompilerInterface extends JPanel {
         consoleOutput = new Console();
         langButtons = new LanguageButtons();
         codeArea = new CodeTextArea();
-
+        langButtons.getJava().setEnabled(false);
         ProjectTab projectTab = new ProjectTab();
         projectTab.setFont(new Font("Barlow", 0, 11));
 
@@ -86,12 +86,17 @@ public class CompilerInterface extends JPanel {
         buttonsCompiler.getRunButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String url = "http://localhost:8080/api/compilePython";
-                HttpPost httpPost = new HttpPost(url);
+                String url = "";
+                if (!langButtons.getPython().isEnabled()){
+                    url = "http://localhost:8080/api/compilePython";
+                }
+                if (!langButtons.getJava().isEnabled()) {
+                    url = "http://localhost:8080/api/compileJava";
 
+                }
+                HttpPost httpPost = new HttpPost(url);
                 String code1 = projectTab.getSelectedPane().getText();
                 System.out.println(code1);
-
                 MultipartEntityBuilder builder;
                 builder = MultipartEntityBuilder.create();
                 builder.addTextBody("code", code1, ContentType.TEXT_PLAIN);
@@ -110,6 +115,20 @@ public class CompilerInterface extends JPanel {
                 } catch (Exception exception) {
                     System.out.println(exception);
                 }
+            }
+        });
+        langButtons.getJava().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                langButtons.getJava().setEnabled(false);
+                langButtons.getPython().setEnabled(true);
+            }
+        });
+        langButtons.getPython().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                langButtons.getPython().setEnabled(false);
+                langButtons.getJava().setEnabled(true);
             }
         });
     }

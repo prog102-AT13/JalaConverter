@@ -9,13 +9,11 @@
 
 package org.fundacion.jala.converter.view.metadata;
 
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.JFileChooser;
-import java.awt.Font;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import org.fundacion.jala.converter.view.utilities.JLabelStyle;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;

@@ -9,10 +9,9 @@
 
 package org.fundacion.jala.converter.view.metadata;
 
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.BoxLayout;
-import javax.swing.JOptionPane;
+import org.fundacion.jala.converter.view.utilities.JLabelStyle;
+
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -37,12 +36,14 @@ public class MetaDataInterface extends JPanel implements ActionListener {
         file = new SelectFile();
         exportInfo = new ExportingFormat();
         outputInfo = new OutputInfo();
+
         convertMetaData = new JButton("Convert");
         convertMetaData.setAlignmentX(CENTER_ALIGNMENT);
         convertMetaData.addActionListener(this::actionPerformed);
         convertMetaData.setFont(new Font("Barlow", fontStyle, fontSize));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(new EmptyBorder(topBorder, leftBorder, bottomBorder, rightBorder));
+
         add(file);
         add(exportInfo);
         add(outputInfo);

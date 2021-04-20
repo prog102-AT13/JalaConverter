@@ -83,11 +83,14 @@ class CodeTextArea extends JPanel {
         textCodeArea.setRowHeaderView(lineCode);
         add(textCodeArea, BorderLayout.CENTER);
     }
+
+    /**
+     * Gives us content of text area
+     * @return a String
+     */
     public String getText() {
         return codeArea.getText();
     }
 
-    public JTextArea getCodeArea() {
-        return codeArea;
-    }
+
 }

@@ -7,8 +7,8 @@ import java.awt.event.ActionListener;
 
 public class ProjectTab extends JTabbedPane implements ActionListener {
     public static int contador;
+    PlusButton button;
     public void start() {
-        PlusButton button;
         button=new PlusButton();
         button.setPreferredSize(new Dimension(20,20));
         button.addActionListener(this);
@@ -19,21 +19,20 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
     }
     CodeTextArea codeArea = new CodeTextArea();
 
+    /**
+     * Creates a new tab with X button included
+     * @param e means click on "button"
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         contador ++;
         CloseButton tabButton = new CloseButton();
-
         String title= "EndGame " + contador;
-
         CodeTextArea codeArea = new CodeTextArea();
         codeArea.setName(title);
         add(codeArea, getTabCount() - 1);
-
         tabButton.setPreferredSize(new Dimension(20,20));
-
         tabButton.addActionListener(e1 -> { removeTap(title);setSelectedIndex(getTabCount() - 2);});
-
         JPanel pnl = new JPanel();
         pnl.setLayout(new FlowLayout());
         pnl.setOpaque(false);
@@ -41,11 +40,15 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
         label.setFont(new Font("Barlow", 0, 11));
         pnl.add(label);
         pnl.add(tabButton);
-
         setTabComponentAt(getTabCount() - 2, pnl);
         setSelectedIndex(getTabCount() - 2);
     }
 
+    /**
+     * Deletes a selected tab
+     * @param title of tab we want to delete
+     * @return a boolean that means if works or not
+     */
     public boolean removeTap(String title) {
         int i = getTabCount();
         for (int index = 0; index < i; index++) {
@@ -58,6 +61,10 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
         return false;
     }
 
+    /**
+     * It represents what CodeTextArea is selected
+     * @return a CodeTextArea
+     */
     public CodeTextArea getSelectedPane() {
         return (CodeTextArea) getSelectedComponent();
     }
