@@ -56,7 +56,7 @@ public class AudioConverterController {
                              @RequestParam("metadata") String metadata) throws IllegalStateException, IOException, InterruptedException {
         String filename;
         String storagePath;
-        checksum = "6ca5290ffb6fcb298b89d3d1efe3009e";
+//        checksum = "6ca5290ffb6fcb298b89d3d1efe3009e";
         System.out.println("*******************************************************");
         System.out.println("*******************************************************");
         System.out.println("*******************************************************");
@@ -68,7 +68,7 @@ public class AudioConverterController {
         System.out.println(checksum);
         System.out.println(metadata);
         String checksumLocal = checksum;
-        final int WAIT_TIME = 3000;
+        final int WAIT_TIME = 6000;
         boolean exist = false;
         final int USER_ID = 2;
         List<Asset> assets = listAsset();
@@ -100,7 +100,17 @@ public class AudioConverterController {
         String outputPath = FileStorageService.getOutputPath(filename);
         String nameWithoutExtension = outputFilename.substring(0, outputFilename.lastIndexOf(".") + 1);
         extractMetadata(metadata, outputFilename, fileStorageService);
-        String pathFile = storagePath.substring(0, storagePath.lastIndexOf("\\") + 1);
+        String pathFile = storagePath.substring(0, storagePath.lastIndexOf(System.getProperty("file.separator")) + 1);
+
+        System.out.println("***************************************************");
+        System.out.println("***************************************************");
+        System.out.println("***************************************************");
+        System.out.println("***************************************************");
+        System.out.println("output fila name : " + outputFilename);
+        System.out.println("output path : " + outputPath);
+        System.out.println("name without extension : " + nameWithoutExtension);
+        System.out.println("path file : " + pathFile);
+
         if (!(resultTitle.size() > 0)) {
             insertAssetData(filename, pathFile, checksumLocal, USER_ID);
         }
@@ -113,9 +123,12 @@ public class AudioConverterController {
         } else {
             Thread.sleep(WAIT_TIME);
             zipFile(pathFile + outputFilename, pathFile + nameWithoutExtension + "zip");
+            System.out.println();
         }
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         String downloadLink = baseUrl + "/api/download/" + nameWithoutExtension + "zip";
+        System.out.println("**********************");
+        System.out.println(downloadLink);
         return downloadLink;
     }
 
