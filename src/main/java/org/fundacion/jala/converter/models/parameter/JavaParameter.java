@@ -23,7 +23,7 @@ public class JavaParameter extends Parameter {
 
     /**
      * Gets the version for Java version.
-     * @return javaVersion Python version
+     * @return javaVersion Java version
      */
     public JavaVersion getJavaVersion() {
         return javaVersion;

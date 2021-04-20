@@ -54,8 +54,8 @@ public class ExtractMetadataController {
     }
 
     /**
-     * Endpoint for extract metadata.
-     * @return String for download file
+     * Endpoint for metadata extraction.
+     * @return String to download file
      */
     @PostMapping("/extractMetadataMoreOption")
     public String uploadFile(@RequestParam("fileToExtract") String fileToExtract,
@@ -81,7 +81,7 @@ public class ExtractMetadataController {
     }
 
     /**
-     * Endpoint for extract metadata.
+     * Endpoint for metadata extraction.
      * @return ResponseEntity<String>
      */
     @GetMapping("/metadata")
@@ -96,7 +96,7 @@ public class ExtractMetadataController {
     }
 
     /**
-     * Endpoint for extract metadata.
+     * Endpoint for metadata extraction.
      * @return ResponseEntity<String>
      */
     @GetMapping("/metadataMoreOption")
