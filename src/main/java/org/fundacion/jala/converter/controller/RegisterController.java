@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class RegisterController {
     @Autowired
     private MyUserDetailsService myUserDetailsService;
+
     /**
      * Inserts users to the database
      * @param username a String with the username
@@ -29,7 +30,8 @@ public class RegisterController {
      * @return an entity response with the user
      */
     @PostMapping("/register")
-    public ResponseEntity<?> insertUser(final @RequestParam("username") String username, final @RequestParam("password") String password) {
+    public ResponseEntity<?> insertUser(final @RequestParam("username") String username,
+                                        final @RequestParam("password") String password) {
         return ResponseEntity.ok(myUserDetailsService.save(username, password));
     }
 }

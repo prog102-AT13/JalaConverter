@@ -9,6 +9,9 @@
 
 package org.fundacion.jala.converter.view.login;
 
+import org.fundacion.jala.converter.view.Models.RegisterRequestForm;
+import org.fundacion.jala.converter.view.controllers.ClientRequest;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -21,8 +24,7 @@ import javax.swing.ImageIcon;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import static org.fundacion.jala.converter.models.UserSQL.usernameExists;
+import java.io.IOException;
 
 public class RegisterInterface extends JFrame implements ActionListener {
     private final Container registerContentPane = getContentPane();
@@ -40,6 +42,7 @@ public class RegisterInterface extends JFrame implements ActionListener {
     private final JButton showPasswordConfirmationButton = new JButton(eyeIcon);
     private Boolean passwordShowStatus = true;
     private Boolean passwordConfirmationShowStatus = true;
+    private ClientRequest clientRequest = new ClientRequest();
 
     public RegisterInterface() {
         setTitle("SIGN UP");
@@ -103,6 +106,24 @@ public class RegisterInterface extends JFrame implements ActionListener {
     }
 
     /**
+     * Sends a request with given information
+     * @param username a String with username
+     * @param password a String with password
+     */
+    public void callRequest(final String username, final String password) {
+        RegisterRequestForm registerRequestForm = new RegisterRequestForm();
+        registerRequestForm.addUsername(username);
+        registerRequestForm.addPassword(password);
+        try {
+            String result = clientRequest.executeRequestWithoutToken(registerRequestForm);
+            System.out.println(result);
+            JOptionPane.showMessageDialog(this, "Register Successful");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Gets the actions performed on the components
      * @param e an action event
      */
@@ -112,14 +133,10 @@ public class RegisterInterface extends JFrame implements ActionListener {
             String username = usernameTextField.getText();
             String password = String.copyValueOf(passwordField.getPassword());
             String passwordConfirmation = String.copyValueOf(passwordConfirmationField.getPassword());
-            if (usernameExists(username) || username.equals("")) {
-                JOptionPane.showMessageDialog(this, "Invalid username");
+            if (password.equals(passwordConfirmation)) {
+                callRequest(username, password);
             } else {
-                if (password.equals(passwordConfirmation)) {
-                    JOptionPane.showMessageDialog(this, "Register Successful");
-                } else {
-                    JOptionPane.showMessageDialog(this, "Passwords do not match");
-                }
+                JOptionPane.showMessageDialog(this, "Passwords do not match");
             }
             usernameTextField.setText("");
             passwordField.setText("");

@@ -45,12 +45,16 @@ public class AuthController {
      * @throws Exception when invalid username or password is given
      */
     @PostMapping("/authenticate")
-    public ResponseEntity<?> createAuthenticationToken(final @RequestParam String username, final @RequestParam String password) throws Exception {
+    public ResponseEntity<?> createAuthenticationToken(final @RequestParam String username,
+                                                       final @RequestParam String password)
+            throws Exception {
         AuthenticationRequest authenticationRequest = new AuthenticationRequest(username, password);
         try {
             authLogger.info("Start.");
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword())
+                    new UsernamePasswordAuthenticationToken(
+                            authenticationRequest.getUsername(),
+                            authenticationRequest.getPassword())
             );
         } catch (BadCredentialsException e) {
             authLogger.error("Error. " + e.getLocalizedMessage());
@@ -59,8 +63,7 @@ public class AuthController {
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
         final String jwt = jwtTokenUtil.generateToken(userDetails);
-        int userId = getUserId(username);
-        editUserData(userId, findUserById(userId).getName(), findUserById(userId).getPassword(), jwt);
+        editToken(username, jwt);
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 }

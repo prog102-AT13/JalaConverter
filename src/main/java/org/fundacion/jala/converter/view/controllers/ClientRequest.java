@@ -84,11 +84,11 @@ public class ClientRequest {
     }
 
     /**
-     *
-     * @param newRequestForm
-     * @return
-     * @throws ClientProtocolException
-     * @throws IOException
+     * Executes a request given the type of requestForm
+     * @param newRequestForm the request form
+     * @return a String with the response
+     * @throws ClientProtocolException when an error on the HTTP protocol occurs
+     * @throws IOException when an invalid input is provided
      */
     public String executeRequestWithoutToken(final IrequestForm newRequestForm)
             throws ClientProtocolException, IOException {

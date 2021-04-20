@@ -14,7 +14,7 @@ package org.fundacion.jala.converter.view.Models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AuthenticateRequestForm implements IrequestForm{
+public class AuthenticateRequestForm implements IrequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
     private final String URL = "http://localhost:8080/authenticate";
     private final String USERNAME = "username";

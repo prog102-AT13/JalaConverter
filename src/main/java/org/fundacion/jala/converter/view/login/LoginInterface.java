@@ -27,8 +27,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-import static org.fundacion.jala.converter.models.UserSQL.usernameExists;
-
 public class LoginInterface extends JFrame implements ActionListener {
     private Container loginContentPane = getContentPane();
     private JLabel usernameLabel = new JLabel("USERNAME");
@@ -101,9 +99,9 @@ public class LoginInterface extends JFrame implements ActionListener {
     }
 
     /**
-     *
-     * @param username
-     * @param password
+     * Sends a request with given information
+     * @param username a String with username
+     * @param password a String with password
      */
     public void callRequest(final String username, final String password) {
         AuthenticateRequestForm authenticateRequestForm = new AuthenticateRequestForm();
@@ -144,7 +142,7 @@ public class LoginInterface extends JFrame implements ActionListener {
 
         if (e.getSource() == registerButton) {
             this.dispose();
-            RegisterInterface registerInterface = new RegisterInterface();
+            new RegisterInterface();
         }
     }
 }

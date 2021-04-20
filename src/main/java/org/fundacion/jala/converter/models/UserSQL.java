@@ -106,6 +106,21 @@ public class UserSQL {
     }
 
     /**
+     * Edits the token value in the database
+     * @param username a String with the username
+     * @param token a String with the token
+     */
+    public static void editToken(final String username, final String token) {
+        int userId = getUserId(username);
+        EntityManager manager = emf.createEntityManager();
+        manager.getTransaction().begin();
+        User editUser = manager.find(User.class, userId);
+        editUser.setToken(token);
+        manager.getTransaction().commit();
+        manager.close();
+    }
+
+    /**
      * Gets the userId from the database
      * @param username a String to look for the userId
      * @return an int with the userId
