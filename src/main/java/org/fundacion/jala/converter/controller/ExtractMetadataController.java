@@ -10,9 +10,11 @@ package org.fundacion.jala.converter.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.facade.ExtractFacade;
 import org.fundacion.jala.converter.service.ExtractMetadata;
 import org.fundacion.jala.converter.service.FileStorageService;
 import org.fundacion.jala.converter.service.ObjectMetadata;
+import org.fundacion.jala.converter.service.metadata.TypeFileExport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -32,42 +34,13 @@ public class ExtractMetadataController {
      */
     @PostMapping("/extractMetadata")
     public String uploadFile(@RequestParam("fileToExtract") String fileToExtract,
-                             @RequestParam("fileToExport") String fileToExport) throws IllegalStateException, IOException {
+                             @RequestParam("moreInfo") Boolean isMoreInfo,
+                             @RequestParam("nameExport") String nameExport,
+                             @RequestParam("format") String format) throws IllegalStateException, IOException {
         LOGGER.info("start");
-        ExtractMetadata extractMetadata = new ExtractMetadata(new File(fileToExtract), new File(fileToExport));
-        extractMetadata.extractMetadata();
-        File file = new File(fileToExtract);
-        String filename = file.getName();
-        String storagePath = filename;
-        String outputPath = FileStorageService.getOutputPath(filename);
+        String filename =ExtractFacade.getMetadataExtract(fileToExtract,isMoreInfo,nameExport,format);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-        String downloadLink = baseUrl + "/api/download/" + filename;
-        LOGGER.info("finish");
-        return downloadLink;
-    }
-
-    /**
-     * Endpoint for extract metadata
-     */
-    @PostMapping("/extractMetadataMoreOption")
-    public String uploadFile(@RequestParam("fileToExtract") String fileToExtract,
-                             @RequestParam("fileToExport") String fileToExport,
-                             @RequestParam("MoreInfo") Boolean isMoreInfo,
-                             @RequestParam("NameExport") String nameExport) throws IllegalStateException, IOException {
-        LOGGER.info("start");
-        ObjectMetadata objectMetadata = new ObjectMetadata();
-        objectMetadata.setFileToExtract(new File(fileToExtract));
-        objectMetadata.setFileToExport(new File(fileToExport));
-        objectMetadata.setMoreInfo(isMoreInfo);
-        objectMetadata.setNameExport(nameExport);
-        ExtractMetadata extractMetadata = new ExtractMetadata(objectMetadata);
-        extractMetadata.extractMetadata();
-        File file = new File(fileToExtract);
-        String filename = file.getName();
-        String storagePath = filename;
-        String outputPath = FileStorageService.getOutputPath(filename);
-        final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-        String downloadLink = baseUrl + "/api/download/" + filename;
+        String downloadLink = baseUrl + "/api/download/" + filename+"."+format;
         LOGGER.info("finish");
         return downloadLink;
     }
