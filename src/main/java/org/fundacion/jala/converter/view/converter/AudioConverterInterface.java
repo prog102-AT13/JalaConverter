@@ -23,6 +23,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;
 
 public class AudioConverterInterface extends JPanel implements ActionListener {
     private SelectFile file;
@@ -80,32 +82,37 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
      * @param e event of the JButton.
      */
     @Override
-    public void actionPerformed(final ActionEvent e) {
-        LOGGER.info("Start");
-        JOptionPane.showMessageDialog(this, "File Path: "
-                + file.getOriginFilePath()
-                + "\nConvert to: "
-                + audioSelect.getConvertTo()
-                + "\nQuality: "
-                + quality.getQualityAudio()
-                + "\nVolume: "
-                + settings.getVolume()
-                + "\nAudio Channel: "
-                + settings.getAudioChannel()
-                + "\nHz: "
-                + settings.getHz()
-                + "\nwith metadata: "
-                + settings.isMetadata());
+    public void actionPerformed(final ActionEvent e)  {
+        LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");
+            JOptionPane.showMessageDialog(this, "File Path: "
+                    + file.getOriginFilePath()
+                    + "\nConvert to: "
+                    + audioSelect.getConvertTo()
+                    + "\nQuality: "
+                    + quality.getQualityAudio()
+                    + "\nVolume: "
+                    + settings.getVolume()
+                    + "\nAudio Channel: "
+                    + settings.getAudioChannel()
+                    + "\nHz: "
+                    + settings.getHz()
+                    + "\nwith metadata: "
+                    + settings.isMetadata()
+                    + "\nChecksum: "
+                    + getFileChecksum(file.getOriginFilePath()));
             callRequest();
-        } catch (Exception ex) {
-            LOGGER.error("Execute Exception to audio conversion");
-            ex.printStackTrace();
+            LOGGER.info("finish");
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+            LOGGER.error("Execute Exception");
+        } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
+            noSuchAlgorithmException.printStackTrace();
+            LOGGER.error("Execute Exception");
         }
         LOGGER.info("Finish");
     }
-
     /**
      * Obtains the request
      * @throws IOException
@@ -113,10 +120,11 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
     private void callRequest() throws IOException {
         LOGGER.info("start");
         String[] s = quality.getQualityAudio().split(" ");
+        String bitrate = s[0];
         AudioRequestForm audioRequestForm = new AudioRequestForm();
         audioRequestForm.addFilepath(file.getOriginFilePath());
         audioRequestForm.addFormat(audioSelect.getConvertTo());
-        audioRequestForm.addBitrate(s[0]);
+        audioRequestForm.addBitrate(bitrate);
         audioRequestForm.addVolume(settings.getVolume());
         audioRequestForm.addHz(settings.getHz());
         audioRequestForm.addAudiochannel(settings.getAudioChannel());
@@ -125,8 +133,9 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         try {
             LOGGER.info("Execute Try");
             String result = clientRequest.executeRequest(audioRequestForm);
-            JOptionPane.showMessageDialog(this, "Download Link:\n" + result);
             System.out.println(result);
+            JOptionPane.showMessageDialog(this, "Download Link:\n" + result);
+            LOGGER.info("finish");
         } catch (IOException e) {
             LOGGER.error("Execute Exception to obtain the request");
             e.printStackTrace();

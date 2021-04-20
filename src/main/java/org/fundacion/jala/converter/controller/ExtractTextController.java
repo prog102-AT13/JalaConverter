@@ -10,8 +10,7 @@ package org.fundacion.jala.converter.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.fundacion.jala.converter.models.parameter.ExtractTextParameter;
-import org.fundacion.jala.converter.service.ExtractText;
+import org.fundacion.jala.converter.models.facade.ExtractFacade;
 import org.fundacion.jala.converter.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,11 +37,7 @@ public class ExtractTextController {
         LOGGER.info("start");
         String fileOut = file.getOriginalFilename();
         String outputFileName = fileOut.substring(0, fileOut.lastIndexOf("."));
-        String filename = file.getOriginalFilename();
-        String storagePath = fileStorageService.uploadFile(file);
-        ExtractText extractText = new ExtractText(new ExtractTextParameter(storagePath, language, outputFileName));
-        extractText.extractText();
-        String outputPath = FileStorageService.getOutputPath(filename);
+        ExtractFacade.getTextExtract(file,language,outputFileName);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         String outFilename = outputFileName + ".txt";
         String downloadLink = baseUrl + "/api/download/" + outFilename;

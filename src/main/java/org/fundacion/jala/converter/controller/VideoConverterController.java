@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- * <p>
+ *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -17,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
+
+import static org.fundacion.jala.converter.models.facade.ConverterFacade.getVideoConverter;
 import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetadata;
 
 @RestController
@@ -43,18 +45,8 @@ public class VideoConverterController {
                              @RequestParam("audio") boolean audio,
                              @RequestParam("metadata") String metadata
     ) throws IllegalStateException, IOException {
-        String filename = file.getOriginalFilename();
-        String storagePath = fileStorageService.uploadFile(file);
-        videoParameter.setOutputFormat(outputFormat);
-        videoParameter.setResolution(resolution);
-        videoParameter.setThumbnail(thumbnail);
-        videoParameter.setFrameRate(frameRate);
-        videoParameter.setWidth(width);
-        videoParameter.setHeight(height);
-        videoParameter.setAudio(audio);
-        converter.convertVideo(storagePath);
-        String outputPath = FileStorageService.getOutputPath(filename);
-        String outputFilename = converter.getOutputFileName();
+        String outputFilename = getVideoConverter(file, outputFormat, resolution,
+                thumbnail, frameRate, width, height, audio );
         extractMetadata(metadata, outputFilename, fileStorageService);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         String downloadLink = baseUrl + "/api/download/" + "converter.getOutputFileName()";
