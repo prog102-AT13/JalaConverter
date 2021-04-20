@@ -5,8 +5,9 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ */
+/**
  * @author Jorge Caceres Velasco
- *  * @version 1.0
  */
 package org.fundacion.jala.converter.models.parameter;
 
@@ -51,7 +52,7 @@ public class ExtractTextParameter extends Parameter {
         return resultFile;
     }
     /**
-     * Set string with the file's name
+     * Set string with the file's name.
      * @param newResultFile string with the file's name
      */
     public void setResultFile(final String newResultFile) {

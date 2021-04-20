@@ -6,13 +6,20 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  */
+/**
+ * @author Daniela Santa Cruz
+ * @colaborathor Paola Aguilar
+ */
 package org.fundacion.jala.converter.controller;
 
 import org.fundacion.jala.converter.service.FileStorageService;
-import org.fundacion.jala.converter.service.videoclasses.Converter;
-import org.fundacion.jala.converter.service.videoclasses.VideoParameter;
+import org.fundacion.jala.converter.service.VideoConverter;
+import org.fundacion.jala.converter.models.parameter.VideoParameter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -25,9 +32,7 @@ public class VideoConverterController {
     @Autowired
     FileStorageService fileStorageService;
     @Autowired
-    VideoParameter videoParameter;
-    @Autowired
-    Converter converter;
+    VideoConverter converter;
 
     /**
      * Endpoint for convertVideo
@@ -45,14 +50,8 @@ public class VideoConverterController {
     ) throws IllegalStateException, IOException {
         String filename = file.getOriginalFilename();
         String storagePath = fileStorageService.uploadFile(file);
-        videoParameter.setOutputFormat(outputFormat);
-        videoParameter.setResolution(resolution);
-        videoParameter.setThumbnail(thumbnail);
-        videoParameter.setFrameRate(frameRate);
-        videoParameter.setWidth(width);
-        videoParameter.setHeight(height);
-        videoParameter.setAudio(audio);
-        converter.convertVideo(storagePath);
+        converter = new VideoConverter(new VideoParameter(storagePath, outputFormat, resolution, thumbnail, frameRate, width, height, audio));
+        converter.convertVideo();
         String outputPath = FileStorageService.getOutputPath(filename);
         String outputFilename = converter.getOutputFileName();
         extractMetadata(metadata, outputFilename, fileStorageService);
