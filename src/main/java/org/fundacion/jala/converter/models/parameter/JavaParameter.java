@@ -21,6 +21,10 @@ public class JavaParameter extends Parameter {
         this.javaVersion = javaVersion;
     }
 
+    /**
+     * Gets the version for Java version.
+     * @return javaVersion Python version
+     */
     public JavaVersion getJavaVersion() {
         return javaVersion;
     }
