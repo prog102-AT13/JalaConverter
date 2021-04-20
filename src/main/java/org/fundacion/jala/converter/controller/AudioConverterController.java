@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.fundacion.jala.converter.facade.ConverterFacade.getAudioConverter;
+import static org.fundacion.jala.converter.models.facade.ConverterFacade.getAudioConverter;
 import static org.fundacion.jala.converter.models.ProjectSQL.insertProjectData;
 import static org.fundacion.jala.converter.models.ProjectSQL.listProject;
 import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;

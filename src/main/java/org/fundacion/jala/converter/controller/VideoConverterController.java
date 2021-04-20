@@ -18,7 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
 
-import static org.fundacion.jala.converter.facade.ConverterFacade.getVideoConverter;
+import static org.fundacion.jala.converter.models.facade.ConverterFacade.getVideoConverter;
 import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetadata;
 
 @RestController

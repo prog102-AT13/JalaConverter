@@ -10,10 +10,7 @@ package org.fundacion.jala.converter.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.fundacion.jala.converter.facade.ConverterFacade;
-import org.fundacion.jala.converter.facade.ExtractFacade;
-import org.fundacion.jala.converter.models.parameter.ExtractTextParameter;
-import org.fundacion.jala.converter.service.ExtractText;
+import org.fundacion.jala.converter.models.facade.ExtractFacade;
 import org.fundacion.jala.converter.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

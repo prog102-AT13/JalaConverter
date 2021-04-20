@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  */
-package org.fundacion.jala.converter.facade;
+package org.fundacion.jala.converter.models.facade;
 
 import org.fundacion.jala.converter.models.parameter.AudioParameter;
 import org.fundacion.jala.converter.service.AudioConverter;

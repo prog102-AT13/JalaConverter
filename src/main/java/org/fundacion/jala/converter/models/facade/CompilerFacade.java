@@ -9,7 +9,7 @@
  * @author Jorge Caceres Velasco
  * * @version 1.0
  */
-package org.fundacion.jala.converter.facade;
+package org.fundacion.jala.converter.models.facade;
 
 import org.fundacion.jala.converter.service.javacompiler.JavaCompiler;
 import org.fundacion.jala.converter.service.javacompiler.JavaVersion;
