@@ -52,10 +52,21 @@ public class AudioConverterController {
                              @RequestParam("volume") String volume,
                              @RequestParam("hz") String hz,
                              @RequestParam("audiochannel") String audioChannel,
+                             @RequestParam("checksum") String checksum,
                              @RequestParam("metadata") String metadata) throws IllegalStateException, IOException, InterruptedException {
         String filename;
         String storagePath;
-        String checksum = "6ca5290ffb6fcb298b89d3d1efe3009e";
+        checksum = "6ca5290ffb6fcb298b89d3d1efe3009e";
+        System.out.println("*******************************************************");
+        System.out.println("*******************************************************");
+        System.out.println("*******************************************************");
+        System.out.println(format);
+        System.out.println(bitrate);
+        System.out.println(volume);
+        System.out.println(hz);
+        System.out.println(audioChannel);
+        System.out.println(checksum);
+        System.out.println(metadata);
         String checksumLocal = checksum;
         final int WAIT_TIME = 3000;
         boolean exist = false;

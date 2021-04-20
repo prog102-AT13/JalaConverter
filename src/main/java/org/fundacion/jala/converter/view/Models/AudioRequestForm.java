@@ -24,6 +24,7 @@ public class AudioRequestForm implements IrequestForm {
     private final String hz = "hz";
     private final String audioChannel = "audiochannel";
     private final String metaData = "metadata";
+    private final String checksum = "checksum";
 
     /**
      * Audio Request Form stores parameters for an audio request
@@ -84,6 +85,13 @@ public class AudioRequestForm implements IrequestForm {
      */
     public void addMetadata(final String metadataValue) {
         addParameters(new Parameter(metaData, metadataValue, false));
+    }
+    /**
+     * Adds checksum parameter
+     * @param checksumValue
+     */
+    public void addChecksum(final String checksumValue) {
+        addParameters(new Parameter(checksum, checksumValue, false));
     }
 
 
