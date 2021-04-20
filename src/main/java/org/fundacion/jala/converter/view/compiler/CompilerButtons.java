@@ -68,6 +68,10 @@ class CompilerButtons extends JPanel implements ActionListener {
     public void actionPerformed(final ActionEvent e) {
     }
 
+    /**
+     * Gets runCode to manipulate
+     * @return a JButton
+     */
     public JButton getRunButton() {
         return  runCode;
     }

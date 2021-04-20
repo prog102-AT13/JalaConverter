@@ -20,15 +20,21 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import static org.fundacion.jala.converter.models.UserSQL.findUserById;
 
 public class CompilerInterface extends JPanel {
+    private static final Logger LOGGER = LogManager.getLogger();
     private CodeTextArea codeArea;
     private Console consoleOutput;
     private LanguageButtons langButtons;
@@ -45,7 +51,6 @@ public class CompilerInterface extends JPanel {
         langButtons.getJava().setEnabled(false);
         ProjectTab projectTab = new ProjectTab();
         projectTab.setFont(new Font("Barlow", 0, 11));
-
         projectTab.add(codeArea);
         JPanel pnl = new JPanel();
         pnl.setLayout(new FlowLayout());
@@ -54,9 +59,7 @@ public class CompilerInterface extends JPanel {
         label.setFont(new Font("Barlow", 0, 11));
         pnl.add(label);
         projectTab.setTabComponentAt(projectTab.getTabCount() - 1, pnl);
-
         projectTab.start();
-
         setLayout(new GridBagLayout());
         GridBagConstraints panelConstraint = new GridBagConstraints();
         panelConstraint.gridx = 0;
@@ -70,9 +73,7 @@ public class CompilerInterface extends JPanel {
         panelConstraint.gridy = 1;
         panelConstraint.gridheight = 2;
         panelConstraint.gridwidth = 4;
-
         add(projectTab, panelConstraint);
-
         panelConstraint.gridx = 3;
         panelConstraint.gridy = 7;
         panelConstraint.gridheight = 1;
@@ -84,10 +85,10 @@ public class CompilerInterface extends JPanel {
         panelConstraint.gridheight = 2;
         panelConstraint.gridwidth = 4;
         add(consoleOutput, panelConstraint);
-
         buttonsCompiler.getRunButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                LOGGER.info("start");
                 String url = "";
                 if (!langButtons.getPython().isEnabled()){
                     url = "http://localhost:8080/api/compilePython";
@@ -104,16 +105,17 @@ public class CompilerInterface extends JPanel {
                 HttpEntity multipart;
                 multipart = builder.build();
                 try {
+                    LOGGER.info("Execute Try");
                     httpPost.setEntity(multipart);
                     httpPost.setHeader("Authorization", "Bearer " + findUserById(1).getToken());
                     CloseableHttpClient httpClient = HttpClients.createDefault();
-
                     CloseableHttpResponse response = httpClient.execute(httpPost);
                     HttpEntity responseEntity = response.getEntity();
                     String sResponse = EntityUtils.toString(responseEntity, "UTF-8");
                     consoleOutput.getConsole().setText(sResponse);
+                    LOGGER.info("finish");
                 } catch (Exception exception) {
-                    System.out.println(exception);
+                    LOGGER.error("Execute Exception" + exception.getMessage());
                 }
             }
         });
