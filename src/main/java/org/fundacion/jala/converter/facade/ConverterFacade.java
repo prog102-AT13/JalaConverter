@@ -34,7 +34,7 @@ public class ConverterFacade {
      * @return a string of output filename
      */
     public static String getAudioConverter(final String filePath, final String format, final String bitrate,
-                                           final String hz, final String volume, final String audioChannels) {
+                                               final String hz, final String volume, final String audioChannels) {
         AudioParameter audioParameter = new AudioParameter(filePath, format, bitrate, hz, volume, audioChannels);
         AudioConverter audioConverter = new AudioConverter(audioParameter);
         audioConverter.audioConverter(filePath);
