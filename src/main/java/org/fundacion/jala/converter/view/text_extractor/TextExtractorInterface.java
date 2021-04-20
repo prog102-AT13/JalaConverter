@@ -9,8 +9,13 @@
  * @author Saul Caspa Miranda
  * @version 1.0
  */
+
 package org.fundacion.jala.converter.view.text_extractor;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.view.Models.ExtractTextRequestForm;
+import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -20,11 +25,13 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.io.IOException;
 
 public class TextExtractorInterface extends JPanel implements ActionListener {
     private SelectFile file;
     private SelectLanguage languageSelect;
+    private ClientRequest clientRequest = new ClientRequest();
+    private static final Logger LOGGER = LogManager.getLogger();
     private final int alignLabelStyle = 2;
     private final int widthLabelStyle = 70;
     private final int heightLabelStyle = 30;
@@ -39,7 +46,7 @@ public class TextExtractorInterface extends JPanel implements ActionListener {
      * Initializes graphics elements for Audio converter interface.
      */
     public TextExtractorInterface() {
-        JLabelStyle audioTitle = new JLabelStyle("Text exctractor", "h1", alignLabelStyle, widthLabelStyle, heightLabelStyle);
+        JLabelStyle audioTitle = new JLabelStyle("Text extractor", "h1", alignLabelStyle, widthLabelStyle, heightLabelStyle);
         JLabelStyle audioSettings = new JLabelStyle("Image settings", "h1", alignLabelStyle, widthLabelStyle, heightLabelStyle);
         audioTitle.setAlignmentX(LEFT_ALIGNMENT);
         audioSettings.setAlignmentX(LEFT_ALIGNMENT);
@@ -70,7 +77,35 @@ public class TextExtractorInterface extends JPanel implements ActionListener {
         JOptionPane.showMessageDialog(this, "File Path: "
                 + file.getOriginFilePath()
                 + "\nConvert to: "
-                + languageSelect.getConvertTo()
-                + "\nQuality: ");
+                + languageSelect.getConvertTo());
+        try {
+            LOGGER.info("Execute Try");
+            callRequest();
+        } catch (Exception ex) {
+            LOGGER.error("Execute Exception to text extraction");
+            ex.printStackTrace();
+        }
+        LOGGER.info("Finish");
+    }
+
+    /**
+     * Obtains the request
+     * @throws IOException
+     */
+    private void callRequest() throws IOException {
+        LOGGER.info("start");
+        ExtractTextRequestForm extractTextRequestFormat = new ExtractTextRequestForm();
+        extractTextRequestFormat.addFilepath(file.getOriginFilePath());
+        extractTextRequestFormat.addLanguageFormat(languageSelect.getConvertTo());
+        try {
+            LOGGER.info("Execute Try");
+            String result = clientRequest.executeRequest(extractTextRequestFormat);
+            JOptionPane.showMessageDialog(this, "Download Link:\n" + result);
+            System.out.println(result);
+        } catch (IOException e) {
+            LOGGER.error("Execute Exception to obtain the request");
+            e.printStackTrace();
+        }
+        LOGGER.info("Finish");
     }
 }

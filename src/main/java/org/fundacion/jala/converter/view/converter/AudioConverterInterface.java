@@ -100,7 +100,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
             LOGGER.info("Execute Try");
             callRequest();
         } catch (Exception ex) {
-            LOGGER.error("Execute Exception to metaData conversion");
+            LOGGER.error("Execute Exception to audio conversion");
             ex.printStackTrace();
         }
         LOGGER.info("Finish");

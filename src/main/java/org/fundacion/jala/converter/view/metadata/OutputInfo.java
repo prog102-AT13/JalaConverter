@@ -23,6 +23,7 @@ import java.awt.event.ItemListener;
 class OutputInfo extends JPanel implements ItemListener {
     private JTextField outputNameField;
     private JCheckBox checkOutputName;
+    private String outPutName;
     private final int alignLabelStyle = 2;
     private final int widthLabelStyle = 150;
     private final int heightLabelStyle = 30;
@@ -58,6 +59,23 @@ class OutputInfo extends JPanel implements ItemListener {
         add(outputNameData.getTextLabel());
         add(outputNameField);
         add(checkOutputName);
+    }
+
+    /**
+     * Gets the name of the outputfile
+     * @return outputname
+     */
+    public String getOutPutName() {
+        outPutName = outputNameField.getText();
+        return outPutName;
+    }
+
+    /**
+     * Gets if checkOutputName is required for metadata.
+     * @return true if is the same name, false if not.
+     */
+    protected boolean isSameName() {
+        return checkOutputName.isSelected();
     }
 
     /**

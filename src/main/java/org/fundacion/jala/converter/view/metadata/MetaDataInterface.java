@@ -9,20 +9,33 @@
 
 package org.fundacion.jala.converter.view.metadata;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.view.Models.MetaDataRequestForm;
+import org.fundacion.jala.converter.view.controllers.ClientRequest;
+import org.fundacion.jala.converter.view.utilities.JLabelStyle;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class MetaDataInterface extends JPanel implements ActionListener {
     private SelectFile file;
-    private ExportingFormat exportInfo;
-    private OutputInfo outputInfo;
+    private ExportingFormat exportingFormat;
+    private ExportingFormat moreInformation;
+    private OutputInfo outputName;
     private JButton convertMetaData;
+    private ClientRequest clientRequest = new ClientRequest();
+    private static final Logger LOGGER = LogManager.getLogger();
+    private final int alignLabelStyle = 0;
+    private final int widthLabelStyle = 70;
+    private final int heightLabelStyle = 30;
     private final int topBorder = 20;
     private final int leftBorder = 0;
     private final int bottomBorder = 100;
@@ -34,18 +47,23 @@ public class MetaDataInterface extends JPanel implements ActionListener {
      * Initialize the graphics components for MetaData interface.
      */
     public MetaDataInterface() {
+        JLabelStyle audioTitle = new JLabelStyle("Extract Metadata", "h1",
+                alignLabelStyle, widthLabelStyle, heightLabelStyle);
+        audioTitle.setAlignmentX(LEFT_ALIGNMENT);
         file = new SelectFile();
-        exportInfo = new ExportingFormat();
-        outputInfo = new OutputInfo();
+        exportingFormat = new ExportingFormat();
+        outputName = new OutputInfo();
         convertMetaData = new JButton("Convert");
         convertMetaData.setAlignmentX(CENTER_ALIGNMENT);
         convertMetaData.addActionListener(this::actionPerformed);
         convertMetaData.setFont(new Font("Barlow", fontStyle, fontSize));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(new EmptyBorder(topBorder, leftBorder, bottomBorder, rightBorder));
+        audioTitle.setAlignmentX(Component.LEFT_ALIGNMENT);
+        add(audioTitle.getTextLabel());
         add(file);
-        add(exportInfo);
-        add(outputInfo);
+        add(exportingFormat);
+        add(outputName);
         add(convertMetaData);
     }
 
@@ -58,9 +76,44 @@ public class MetaDataInterface extends JPanel implements ActionListener {
     public void actionPerformed(final ActionEvent e) {
         JOptionPane.showMessageDialog(this, "File Path: "
                 + file.getOriginFilePath()
+                + "\nConvert to: "
+                + exportingFormat.getConvertTo()
+                + "\nMore information: "
+                + moreInformation.hasMoreInfo()
                 + "\nOutput name: "
-                + "\nConvert to:\n" + exportInfo.txtChecked()
-                + exportInfo.isHtmlChecked()
-                + exportInfo.isXmpChecked());
+                + outputName.getOutPutName());
+        try {
+            LOGGER.info("Execute Try");
+            callRequest();
+        } catch (Exception ex) {
+            LOGGER.error("Execute Exception to metaData conversion");
+            ex.printStackTrace();
+        }
+        LOGGER.info("Finish");
+    }
+
+    /**
+     * Obtains the request
+     * @throws IOException
+     */
+    private void callRequest() throws IOException {
+        LOGGER.info("start");
+        MetaDataRequestForm metaDataRequestForm = new MetaDataRequestForm();
+        metaDataRequestForm.addFilepath(file.getOriginFilePath());
+        metaDataRequestForm.addMetaDataFormat(exportingFormat.getConvertTo());
+        metaDataRequestForm.addMoreInfo(String.valueOf(moreInformation.hasMoreInfo()));
+        metaDataRequestForm.addSameName(String.valueOf(outputName.isSameName()));
+        metaDataRequestForm.addOutputName(outputName.getOutPutName());
+        clientRequest.executeRequest(metaDataRequestForm);
+        try {
+            LOGGER.info("Execute Try");
+            String result = clientRequest.executeRequest(metaDataRequestForm);
+            JOptionPane.showMessageDialog(this, "Download Link:\n" + result);
+            System.out.println(result);
+        } catch (IOException e) {
+            LOGGER.error("Execute Exception to obtain the request");
+            e.printStackTrace();
+        }
+        LOGGER.info("Finish");
     }
 }

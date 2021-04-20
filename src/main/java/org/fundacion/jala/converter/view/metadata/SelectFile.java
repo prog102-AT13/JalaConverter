@@ -25,6 +25,10 @@ class SelectFile extends JPanel implements ActionListener {
     private JTextField textFile;
     private JFileChooser fileChooser;
     private String fileOriginPath;
+    private final int flowLayoutHgap = 30;
+    private final int flowLayoutVgap = 10;
+    private final int dimensionWidth = 350;
+    private final int dimensionHeight = 30;
     private final int fontStyle = 0;
     private final int fontSize = 11;
 
@@ -35,15 +39,11 @@ class SelectFile extends JPanel implements ActionListener {
         selectFile = new JButton("Open File");
         selectFile.setFont(new Font("Barlow", fontStyle, fontSize));
         selectFile.addActionListener(this);
-        final int textFieldHeight = 30;
-        final int textFieldWidth = 350;
         textFile = new JTextField();
         textFile.setFont(new Font("Barlow", fontStyle, fontSize));
-        textFile.setPreferredSize(new Dimension(textFieldWidth, textFieldHeight));
+        textFile.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
         textFile.setEnabled(false);
-        final int marginHeight = 30;
-        final int marginWidth = 10;
-        setLayout(new FlowLayout(FlowLayout.LEFT, marginHeight, marginWidth));
+        setLayout(new FlowLayout(FlowLayout.LEFT, flowLayoutHgap, flowLayoutVgap));
         add(selectFile);
         add(textFile);
     }
