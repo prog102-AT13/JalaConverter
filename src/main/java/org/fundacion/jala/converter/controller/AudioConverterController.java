@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- * <p>
+ *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -10,8 +10,6 @@ package org.fundacion.jala.converter.controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.models.Project;
-import org.fundacion.jala.converter.models.parameter.AudioParameter;
-import org.fundacion.jala.converter.service.AudioConverter;
 import org.fundacion.jala.converter.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,14 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.fundacion.jala.converter.facade.CompilerFacade.getAudioConverter;
+import static org.fundacion.jala.converter.facade.ConverterFacade.getAudioConverter;
 import static org.fundacion.jala.converter.models.ProjectSQL.insertProjectData;
 import static org.fundacion.jala.converter.models.ProjectSQL.listProject;
 import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;
@@ -39,8 +36,6 @@ import static org.fundacion.jala.converter.service.ZipService.*;
 public class AudioConverterController {
     @Autowired
     private FileStorageService fileStorageService;
-    @Autowired
-    private AudioConverter audioConverter;
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**
