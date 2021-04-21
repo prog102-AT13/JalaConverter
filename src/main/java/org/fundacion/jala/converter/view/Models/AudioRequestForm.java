@@ -14,86 +14,81 @@ package org.fundacion.jala.converter.view.Models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AudioRequestForm implements IrequestForm{
-    public List<Parameter> bodyParameters = new ArrayList<>();
-    public final String URL = "http://localhost:8080/api/convertAudio";
-    private final String FILE = "file";
-    private final String FORMAT = "format";
-    private final String BITRATE = "bitrate";
-    private final String VOLUME = "volume";
-    private final String HZ = "hz";
-    private final String AUDIOCHANNEL = "audiochannel";
-    private final String METADATA = "metadata";
-
-    private String filepathValue;
-    private String formatValue;
-    private String bitrateValue;
-    private String volumeValue;
+public class AudioRequestForm implements IRequestForm {
+    private List<Parameter> bodyParameters = new ArrayList<>();
+    private final String url = "http://localhost:8080/api/convertAudio";
+    private final String file = "file";
+    private final String format = "format";
+    private final String bitrate = "bitrate";
+    private final String volume = "volume";
+    private final String hz = "hz";
+    private final String audioChannel = "audiochannel";
+    private final String metaData = "metadata";
 
     /**
      * Audio Request Form stores parameters for an audio request
      */
     public AudioRequestForm() {
-        
     }
 
     /**
      * Adds filepath parameter
      * @param filepathValue
      */
-    public void addFilepath(String filepathValue) {
-        addParameters(new Parameter(FILE, filepathValue, true));
+    public void addFilepath(final String filepathValue) {
+        addParameters(new Parameter(file, filepathValue, true));
     }
 
     /**
      * Adds format parameter
      * @param formatValue
      */
-    public void addFormat(String formatValue) {
-        addParameters(new Parameter(FORMAT, formatValue, false));
+    public void addFormat(final String formatValue) {
+        addParameters(new Parameter(format, formatValue, false));
     }
 
     /**
      * Adds bitrate parameter
      * @param bitrateValue
      */
-    public void addBitrate(String bitrateValue) {
-        addParameters(new Parameter(BITRATE, bitrateValue, false));
+    public void addBitrate(final String bitrateValue) {
+        addParameters(new Parameter(bitrate, bitrateValue, false));
     }
 
     /**
      * Adds volume parameter
      * @param volumeValue
      */
-    public void addVolume(String volumeValue) {
-        addParameters(new Parameter(VOLUME, volumeValue, false));
+    public void addVolume(final String volumeValue) {
+        addParameters(new Parameter(volume, volumeValue, false));
     }
 
     /**
      * Adds hz parameter
      * @param hzValue
      */
-    public void addHz(String hzValue) {
-        addParameters(new Parameter(HZ, hzValue, false));
+    public void addHz(final String hzValue) {
+        addParameters(new Parameter(hz, hzValue, false));
     }
 
     /**
      * Adds audiochannel parameter
      * @param metadataValue
      */
-    public void addAudiochannel(String metadataValue) {
-        addParameters(new Parameter(AUDIOCHANNEL, metadataValue, false));
+    public void addAudiochannel(final String metadataValue) {
+        addParameters(new Parameter(audioChannel, metadataValue, false));
     }
     /**
      * Adds metadata parameter
      * @param metadataValue
      */
-    public void addMetadata(String metadataValue) {
-        addParameters(new Parameter(METADATA, metadataValue, false));
+    public void addMetadata(final String metadataValue) {
+        addParameters(new Parameter(metaData, metadataValue, false));
     }
 
 
     /**
+     * Gets the body parameters
      * @return bodyParameters
      */
     @Override
@@ -106,15 +101,16 @@ public class AudioRequestForm implements IrequestForm{
      * @param parameter
      */
     @Override
-    public void addParameters(Parameter parameter) {
+    public void addParameters(final Parameter parameter) {
         bodyParameters.add(parameter);
     }
 
     /**
-     * @return URL
+     * Gets the url
+     * @return url
      */
     @Override
     public String getURL() {
-        return URL;
+        return url;
     }
 }

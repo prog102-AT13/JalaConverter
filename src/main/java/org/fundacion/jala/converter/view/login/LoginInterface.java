@@ -29,6 +29,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import static org.fundacion.jala.converter.models.UserSQL.findUserById;
+
 public class LoginInterface extends JFrame implements ActionListener {
     private final Container LOGIN_CONTENT_PANE = getContentPane();
     private final JLabel USERNAME_LABEL = new JLabel("USERNAME");
@@ -130,8 +132,8 @@ public class LoginInterface extends JFrame implements ActionListener {
         authenticateRequestForm.addPassword(password);
         try {
             String result = CLIENT_REQUEST.executeRequestWithoutToken(authenticateRequestForm);
+            result = result.substring(8, result.length() - 2);
             CLIENT_REQUEST.setToken(result);
-            System.out.println(result);
             this.dispose();
             new MainInterface().initInterface();
         } catch (IOException e) {

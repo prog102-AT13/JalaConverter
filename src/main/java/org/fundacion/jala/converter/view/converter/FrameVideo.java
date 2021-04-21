@@ -12,14 +12,13 @@ public class FrameVideo {
     private String name = "F";
     private int frame;
 
-    public FrameVideo(int frame) {
+    public FrameVideo(final int newFrame) {
         this.name = name;
-        this.frame = frame;
+        this.frame = newFrame;
     }
 
     /**
-     * Get frame select of video.
-     *
+     * Gets frame select of video.
      * @return name of frame.
      */
     public String getName() {
@@ -27,17 +26,15 @@ public class FrameVideo {
     }
 
     /**
-     * set frame select of video.
-     *
-     * @param name is select options.
+     * Sets frame select of video.
+     * @param newName is select options.
      */
-    public void setName(final String name) {
-        this.name = name;
+    public void setName(final String newName) {
+        this.name = newName;
     }
 
     /**
-     * Get frame select of video.
-     *
+     * Gets frame select of video.
      * @return frame is value select options.
      */
     public int getFrame() {
@@ -45,17 +42,15 @@ public class FrameVideo {
     }
 
     /**
-     * set value frame select of video.
-     *
-     * @param frame is value select options.
+     * Sets value frame select of video.
+     * @param newFrame is value select options.
      */
-    public void setFrame(final int frame) {
-        this.frame = frame;
+    public void setFrame(final int newFrame) {
+        this.frame = newFrame;
     }
 
     /**
-     * Get string select of combBox.
-     *
+     * Gets string select of combBox.
      * @return string is value displayed in combBox.
      */
     @Override

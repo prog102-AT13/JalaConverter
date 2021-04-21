@@ -22,7 +22,9 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.fundacion.jala.converter.view.Models.IrequestForm;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.view.Models.IRequestForm;
 import org.fundacion.jala.converter.view.Models.Parameter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -37,7 +39,9 @@ public class ClientRequest {
     private HttpPost httpPost;
     private MultipartEntityBuilder builder;
     private HttpEntity multipart;
-    private IrequestForm requestForm;
+    private IRequestForm requestForm;
+    private final String defaultCharset = "UTF-8";
+    private static final Logger LOGGER = LogManager.getLogger();
     private String token;
 
     /**
@@ -59,27 +63,30 @@ public class ClientRequest {
     /**
      * Http client creates a request given a requestForm.
      */
-    public ClientRequest(){
+    public ClientRequest() {
         this.httpClient = HttpClients.createDefault();
     }
 
     /**
      * Executes a request given the type of requestForm.
-     * @return
+     * @return sResponse
      * @throws ClientProtocolException
      * @throws IOException
      */
-    public String executeRequest(final IrequestForm requestForm) throws ClientProtocolException, IOException {
-        this.requestForm = requestForm;
+    public String executeRequest(final IRequestForm newRequestForm) throws ClientProtocolException, IOException {
+        requestForm = newRequestForm;
         httpPost = new HttpPost(requestForm.getURL());
         builder = MultipartEntityBuilder.create();
         addBodyFields();
         multipart = builder.build();
         httpPost.setEntity(multipart);
+        System.out.println("------------------------");
+        System.out.println(token);
+        System.out.println("------------------------");
         httpPost.setHeader("Authorization", "Bearer " + findUserById(1).getToken());
         CloseableHttpResponse response = httpClient.execute(httpPost);
         HttpEntity responseEntity = response.getEntity();
-        String sResponse = EntityUtils.toString(responseEntity, "UTF-8");
+        String sResponse = EntityUtils.toString(responseEntity, defaultCharset);
         return sResponse;
     }
 
@@ -90,7 +97,7 @@ public class ClientRequest {
      * @throws ClientProtocolException when an error on the HTTP protocol occurs
      * @throws IOException when an invalid input is provided
      */
-    public String executeRequestWithoutToken(final IrequestForm newRequestForm)
+    public String executeRequestWithoutToken(final IRequestForm newRequestForm)
             throws ClientProtocolException, IOException {
         requestForm = newRequestForm;
         httpPost = new HttpPost(requestForm.getURL());
@@ -109,48 +116,46 @@ public class ClientRequest {
      * @throws ClientProtocolException
      * @throws IOException
      */
-    public void download (final String filePath) throws IOException{
+    public void download(final String filePath) throws IOException{
         String sURL = "http://localhost:8080/api/download/img1.png";
-
-        CloseableHttpClient httpClient = HttpClients.createDefault();
+        CloseableHttpClient localHttpClient = HttpClients.createDefault();
         HttpGet request = new HttpGet(sURL);
-        request.setHeader("Authorization","Bearer " + token);
-        CloseableHttpResponse response = httpClient.execute(request);
+        request.setHeader("Authorization", "Bearer " + findUserById(1).getToken());
+        CloseableHttpResponse response = localHttpClient.execute(request);
         HttpEntity responseEntity = response.getEntity();
         InputStream inputStream = responseEntity.getContent();
         FileOutputStream outputStream = new FileOutputStream(new File(filePath));
         int inByte;
-        while((inByte = inputStream.read()) != -1)
+        while ((inByte = inputStream.read()) != -1) {
             outputStream.write(inByte);
+        }
         inputStream.close();
         outputStream.close();
     }
+
     /**
      * Retrieves a  token from the endpoint from a username and password.
      * @return
      */
     public String authGetToken() throws IOException {
         String sURL = "http://localhost:8080/authenticate";
-
-        CloseableHttpClient httpClient = HttpClients.createDefault();
+        CloseableHttpClient localHttpClient = HttpClients.createDefault();
         HttpPost request = new HttpPost(sURL);
-
-        StringEntity params = new StringEntity("{\n" +
-                "    \"username\":\"at13\",\n" +
-                "    \"password\":\"jalasoft\"\n" +
-                "}");
-        request.addHeader("Content-Type","application/json");
+        StringEntity params = new StringEntity("{\n"
+                + "    \"username\":\"at13\",\n"
+                + "    \"password\":\"jalasoft\"\n" + "}");
+        request.addHeader("Content-Type", "application/json");
         request.setEntity(params);
-        CloseableHttpResponse response = httpClient.execute(request);
+        CloseableHttpResponse response = localHttpClient.execute(request);
         HttpEntity responseEntity = response.getEntity();
-        String token = EntityUtils.toString(responseEntity, "UTF-8");
-        return token;
+        String localToken = EntityUtils.toString(responseEntity, "UTF-8");
+        return localToken;
     }
 
     /**
      * Adds text field to http request.
-     * @param key
-     * @param value
+     * @param key String with the key
+     * @param value String with the value
      */
     public void addTextBody(final String key, final String value) {
         builder.addTextBody(key, value, ContentType.TEXT_PLAIN);
@@ -158,11 +163,13 @@ public class ClientRequest {
 
     /**
      * Adds file field to http request.
-     * @param key
-     * @param filePath
+     * @param key String with the key
+     * @param filePath String with the value
      */
     public void addFileBody(final String key, final String filePath) {
+        LOGGER.info("Start");
         try {
+            LOGGER.info("Execute Try");
             File f = new File(filePath);
             builder.addBinaryBody(
                     key,
@@ -171,8 +178,10 @@ public class ClientRequest {
                     f.getName()
             );
         } catch (Exception e) {
-
+            LOGGER.error("Execute Exception to add file field to http request");
+            e.printStackTrace();
         }
+        LOGGER.info("Finish");
     }
 
     /**

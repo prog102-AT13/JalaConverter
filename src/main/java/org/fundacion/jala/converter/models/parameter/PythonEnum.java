@@ -9,16 +9,16 @@
 /**
  * @author Joel Rodrigo Rojas Roman
  */
-package org.fundacion.jala.converter.service.pythoncompiler;
+package org.fundacion.jala.converter.models.parameter;
 
-public enum Python {
+public enum PythonEnum {
 
     V2("\"" + System.getProperty("user.dir") + "/thirdparty/python3/python.exe" + "\""),
     V3("\"" + System.getProperty("user.dir") + "/thirdparty/python3/python.exe" + "\"");
 
     private String version;
 
-    private Python(final String versionCommand) {
+    private PythonEnum(final String versionCommand) {
         this.version = versionCommand;
     }
 

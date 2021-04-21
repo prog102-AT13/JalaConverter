@@ -7,6 +7,9 @@
  * license agreement you entered into with Fundacion Jala
  */
 
+/**
+ * @author Paola Aguilar Quiñones
+ */
 package org.fundacion.jala.converter.view;
 
 import org.fundacion.jala.converter.view.converter.AudioConverterInterface;
@@ -23,7 +26,7 @@ import javax.swing.JTabbedPane;
 
 import java.awt.*;
 
-public class MainInterface extends JFrame{
+public class MainInterface extends JFrame {
     private ImageIcon compilerIcon;
     private ImageIcon converterIcon;
     private CompilerInterface compilerJP;
@@ -33,21 +36,28 @@ public class MainInterface extends JFrame{
     private MetaDataInterface metaData;
     private AudioConverterInterface audio;
     private TextExtractorInterface textExtractor;
+    private final int alignLabelStyle = 0;
+    private final int widthLabelStyle = 0;
+    private final int heightLabelStyle = 90;
+    private final int witdh = 800;
+    private final int height = 700;
+    private final int fontStyle = 0;
+    private final int fontSize = 12;
 
     /**
-     * Initialize all the graphics components in the
-     * main Frame
+     * Initializes all the graphics components in the main Frame
      */
-    public void initInterface(){
+    public void initInterface() {
         compilerJP = new CompilerInterface();
         video = new VideoConverterInterface();
         converterJP = new JPanel();
-        titleTxt = new JLabelStyle("Jala Converter Project v1.0", "h2", 0, 0, 90);
-        metaData =  new MetaDataInterface();
+        titleTxt = new JLabelStyle("Jala Converter Project v1.0", "h2",
+                alignLabelStyle, widthLabelStyle, heightLabelStyle);
+        metaData = new MetaDataInterface();
         audio = new AudioConverterInterface();
         textExtractor = new TextExtractorInterface();
         JTabbedPane mainTabPanel = new JTabbedPane();
-        mainTabPanel.setFont(new Font("Barlow", 0, 11));
+        mainTabPanel.setFont(new Font("Barlow", fontStyle, fontSize));
         mainTabPanel.add("Compiler", compilerJP);
         mainTabPanel.add("Video Converter", video);
         mainTabPanel.add("Audio Converter", audio);
@@ -56,11 +66,12 @@ public class MainInterface extends JFrame{
         setLayout(new BorderLayout());
         add(titleTxt.getTextLabel(), BorderLayout.NORTH);
         add(mainTabPanel, BorderLayout.CENTER);
-        setSize(700, 800);
+        setSize(witdh, height);
         setTitle("Prog102 - Final Project");
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
+
 }

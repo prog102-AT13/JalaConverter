@@ -22,31 +22,42 @@ class OutputSettingsAudio extends JPanel {
     private JComboBox hzSelect;
     private JComboBox audioChannelSelect;
     private JCheckBox metadataOption;
+    private final int alignLabelStyle = 2;
+    private final int widthLabelStyle = 70;
+    private final int heightLabelStyle = 30;
+    private final int dimensionWidth = 70;
+    private final int dimensionHeight = 30;
+    private final int fontStyle = 0;
+    private final int fontSize = 12;
+    private final int gridLayoutRows = 4;
+    private final int gridLayoutCols = 2;
 
     /**
-     * Initialize the graphic elements for output settings configurations.
+     * Initializes the graphic elements for output settings configurations.
      */
     protected OutputSettingsAudio() {
-        JLabelStyle volumeLabel = new JLabelStyle("Select Volume: ", "h3", 2, 70, 20);
-        JLabelStyle hzLabel = new JLabelStyle("Select Hz: ", "h3", 2, 70, 20);
-        JLabelStyle audioChannelLabel = new JLabelStyle("Select Audio Channel: ", "h3", 2, 70, 20);
+        JLabelStyle volumeLabel = new JLabelStyle("Select Volume: ", "h3",
+                alignLabelStyle, widthLabelStyle, heightLabelStyle);
+        JLabelStyle hzLabel = new JLabelStyle("Select Hz: ", "h3",
+                alignLabelStyle, widthLabelStyle, heightLabelStyle);
+        JLabelStyle audioChannelLabel = new JLabelStyle("Select Audio Channel: ", "h3",
+                alignLabelStyle, widthLabelStyle, heightLabelStyle);
         volumeSelect = new JComboBox();
-        volumeSelect.setFont(new Font("Barlow", 0, 12));
-        volumeSelect.setPreferredSize(new Dimension(70, 30));
+        volumeSelect.setFont(new Font("Barlow", fontStyle, fontSize));
+        volumeSelect.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
         setVolumeSelect();
         hzSelect = new JComboBox();
-        hzSelect.setFont(new Font("Barlow", 0, 12));
-        hzSelect.setPreferredSize(new Dimension(70, 30));
+        hzSelect.setFont(new Font("Barlow", fontStyle, fontSize));
+        hzSelect.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
         setHzSelect();
         audioChannelSelect = new JComboBox();
-        audioChannelSelect.setFont(new Font("Barlow", 0, 12));
-        audioChannelSelect.setPreferredSize(new Dimension(70, 30));
+        audioChannelSelect.setFont(new Font("Barlow", fontStyle, fontSize));
+        audioChannelSelect.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
         setAudioChannelSelect();
         metadataOption = new JCheckBox("With metadata");
-        metadataOption.setFont(new Font("Barlow", 0, 12));
-        setLayout(new GridLayout(4, 2));
+        metadataOption.setFont(new Font("Barlow", fontStyle, fontSize));
+        setLayout(new GridLayout(gridLayoutRows, gridLayoutCols));
         add(volumeLabel.getTextLabel());
-
         add(volumeSelect);
         add(hzLabel.getTextLabel());
         add(hzSelect);
@@ -56,8 +67,7 @@ class OutputSettingsAudio extends JPanel {
     }
 
     /**
-     * Method that set all possible volume
-     * for Audio converter.
+     * Sets all possible volume for Audio converter.
      */
     protected void setVolumeSelect() {
         volumeSelect.addItem(" ");
@@ -69,8 +79,7 @@ class OutputSettingsAudio extends JPanel {
     }
 
     /**
-     * Method that set all possible Hz
-     * for Audio converter.
+     * Sets all possible Hz for Audio converter.
      */
     protected void setHzSelect() {
         hzSelect.addItem(" ");
@@ -80,8 +89,7 @@ class OutputSettingsAudio extends JPanel {
     }
 
     /**
-     * Method that set all possible Audio Channel
-     * for Audio converter.
+     * Sets all possible Audio Channel for Audio converter.
      */
     protected void setAudioChannelSelect() {
         audioChannelSelect.addItem(" ");
@@ -96,8 +104,7 @@ class OutputSettingsAudio extends JPanel {
     }
 
     /**
-     * Method that get selected volume
-     * for Audio converter.
+     * Gets selected volume for Audio converter.
      * @return String, option selected of volume.
      */
     protected String getVolume() {
@@ -105,8 +112,7 @@ class OutputSettingsAudio extends JPanel {
     }
 
     /**
-     * Method that get selected Hz
-     * for Audio converter.
+     * Gets selected Hz for Audio converter.
      * @return String, option selected of Hz.
      */
     protected String getHz() {
@@ -114,8 +120,7 @@ class OutputSettingsAudio extends JPanel {
     }
 
     /**
-     * Method that get selected AudioChannel
-     * for Audio converter.
+     * Gets selected AudioChannel for Audio converter.
      * @return String, option selected of AudioChannel.
      */
     protected String getAudioChannel() {
@@ -123,8 +128,7 @@ class OutputSettingsAudio extends JPanel {
     }
 
     /**
-     * Method that get if metadata is required
-     * for Audio converter.
+     * Gets if metadata is required for Audio converter.
      * @return true if metadata is required, false if not.
      */
     protected boolean isMetadata() {
