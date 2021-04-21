@@ -48,6 +48,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
     private final int fontStyle = 0;
     private final int fontSize = 12;
     private String token;
+    private String checksumLocal;
 
     /**
      * Initializes the graphics elements for Audio converter interface.
@@ -93,6 +94,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");
+            checksumLocal = getFileChecksum(file.getOriginFilePath());
             JOptionPane.showMessageDialog(this, "File Path: "
                     + file.getOriginFilePath()
                     + "\nConvert to: "
@@ -108,7 +110,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
                     + "\nwith metadata: "
                     + settings.isMetadata()
                     + "\nChecksum: "
-                    + getFileChecksum(file.getOriginFilePath()));
+                    + checksumLocal);
             callRequest();
             LOGGER.info("finish");
         } catch (IOException ioException) {
@@ -138,7 +140,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
             audioRequestForm.addVolume(settings.getVolume());
             audioRequestForm.addHz(settings.getHz());
             audioRequestForm.addAudiochannel(settings.getAudioChannel());
-            audioRequestForm.addChecksum(getFileChecksum(file.getOriginFilePath()));
+            audioRequestForm.addChecksum(checksumLocal);
             audioRequestForm.addMetadata(String.valueOf(settings.isMetadata()));
             String result = clientRequest.executeRequest(audioRequestForm, token);
             clientRequest.downloadFile(result);
@@ -146,7 +148,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
                     + System.getProperty("user.home") + dotenv.get("DIR_DOWNLOAD"));
             System.out.println(result);
             LOGGER.info("finish");
-        } catch (IOException | NoSuchAlgorithmException ioException) {
+        } catch (IOException ioException) {
             ioException.printStackTrace();
             LOGGER.error("Execute Exception");
         }
