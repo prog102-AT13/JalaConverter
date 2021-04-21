@@ -13,6 +13,9 @@ import net.sourceforge.tess4j.TesseractException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.models.parameter.ExtractTextParameter;
+import org.fundacion.jala.converter.models.results.ExtractorResult;
+import org.fundacion.jala.converter.models.results.Result;
+import org.fundacion.jala.converter.view.converter.ResolutionVideo;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -24,7 +27,10 @@ public class ExtractText {
     private String language;
     private String pathFile;
     private String nameOutputFile;
+    private ExtractorResult extractorResult;
+    private final String TXT_EXTENSION = ".txt";
     private static final Logger LOGGER = LogManager.getLogger();
+
     public  ExtractText(final ExtractTextParameter extractTextParameter){
         this.language = extractTextParameter.getLanguage();
         this.pathFile = extractTextParameter.getFilePath();
@@ -80,6 +86,8 @@ public class ExtractText {
             if (this.getNameOutputFile() != null) {
                 safeInfo(this.getNameOutputFile(), text);
             }
+            extractorResult = new ExtractorResult();
+            extractorResult.setTextExtracted(text);
             System.out.println(text);
         } catch (TesseractException e) {
             LOGGER.error("Execute Tesseract Exception" + e.getLocalizedMessage());
@@ -102,18 +110,24 @@ public class ExtractText {
         PrintWriter printWriter;
         try {
             LOGGER.info("Execute Try");
-            file = new File(System.getProperty("user.dir") + "\\archive\\" + name + ".txt");
+            file = new File(System.getProperty("user.dir") + "\\archive\\" + name + TXT_EXTENSION);
             fileWriter =  new FileWriter(file);
             bufferedWriter = new BufferedWriter(fileWriter);
             printWriter = new PrintWriter(bufferedWriter);
             printWriter.write(text);
             printWriter.close();
             bufferedWriter.close();
+            extractorResult.setFilename(name + TXT_EXTENSION);
         } catch (Exception e) {
             LOGGER.error("Execute Exception to Safe text in a file");
             e.printStackTrace();
         }
         LOGGER.info("finish");
     }
+
+    private Result getResult() {
+        return extractorResult;
+    }
+
 }
 

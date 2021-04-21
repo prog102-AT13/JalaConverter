@@ -14,6 +14,7 @@ package org.fundacion.jala.converter.service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.models.parameter.PythonParameter;
+import org.fundacion.jala.converter.models.results.CompilerResult;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -24,6 +25,7 @@ import java.io.FileWriter;
 
 public class PythonCompiler {
     private PythonParameter pythonParameter;
+    private CompilerResult compilerResult;
     private static final Logger LOGGER = LogManager.getLogger();
     /**
      * @param newPythonParameter gets all the parameters needed for Python.
@@ -42,6 +44,8 @@ public class PythonCompiler {
             while ((resultOfExecution = bufferedReader.readLine()) != null) {
                 result += resultOfExecution + "\n";
             }
+            compilerResult = new CompilerResult();
+            compilerResult.setConsoleOutput(result);
             LOGGER.info("finish");
             return result;
         } catch (IOException exception) {

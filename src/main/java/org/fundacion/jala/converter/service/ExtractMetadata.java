@@ -10,6 +10,8 @@ package org.fundacion.jala.converter.service;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.models.results.ExtractorResult;
+import org.fundacion.jala.converter.models.results.Result;
 import org.fundacion.jala.converter.service.metadata.ExportTypeFile;
 import org.fundacion.jala.converter.service.metadata.TypeFileExport;
 import java.io.File;
@@ -22,6 +24,8 @@ public class ExtractMetadata {
     private String moreInformation = " ";
     private ExportTypeFile exportTypeFile;
     private static final Logger LOGGER = LogManager.getLogger();
+    private ExtractorResult extractorResult;
+    private String filename;
 
     public ExtractMetadata(ObjectMetadata extractMetadata) {
         this.fileToExtract = extractMetadata.getFileToExtract();
@@ -33,6 +37,7 @@ public class ExtractMetadata {
 
     public ExtractMetadata(final File fileExtract, final File fileExport) {
         this.fileToExtract = fileExtract;
+        filename = fileToExtract.getName();
         setMoreInformation();
         exportTypeFile = new ExportTypeFile(fileToExtract.getName(), "Default", TypeFileExport.TXT, fileExport);
         exportFile = exportTypeFile.getNameFileCompleteToExport();
@@ -48,6 +53,8 @@ public class ExtractMetadata {
             LOGGER.info("Execute Try");
             String command = "cmd /c " + addressExiftool + " && exiftool.exe " + "\"" + fileToExtract.getAbsolutePath() + "\"" + moreInformation + exportFile;
             Process process = Runtime.getRuntime().exec(command);
+            extractorResult = new ExtractorResult();
+            extractorResult.setFilename(this.filename);
         } catch (IOException e) {
             LOGGER.error("Execute Exception to Safe text in a file");
             e.printStackTrace();
@@ -76,5 +83,8 @@ public class ExtractMetadata {
             ExtractMetadata extractMetadata = new ExtractMetadata(new File(outputPath), new File(outputPathWithoutFileName));
             extractMetadata.extractMetadata();
         }
+    }
+    public Result getResult() {
+        return extractorResult;
     }
 }
