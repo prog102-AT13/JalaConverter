@@ -25,8 +25,8 @@ import java.io.IOException;
 public class ProjectController {
 
     /**
-     * Endpoint for create a project in data base
-     * @return int with the id og the project
+     * Endpoint for creating a project in data base
+     * @return int with the id of the project
      */
     @PostMapping("/projects")
     public int createProject(final @RequestParam("projectName") String projectName,
@@ -42,7 +42,7 @@ public class ProjectController {
 
 
     /**
-     * Endpoint for create a project in data base
+     * Endpoint for creating a project in data base
      * @return a String with the path of files
      */
     @PostMapping("/projects/{id}/file")
