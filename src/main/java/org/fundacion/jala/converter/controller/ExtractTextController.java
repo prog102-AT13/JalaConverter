@@ -11,6 +11,7 @@ package org.fundacion.jala.converter.controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.models.facade.ExtractFacade;
+import org.fundacion.jala.converter.models.parameter.ExtractTextParameter;
 import org.fundacion.jala.converter.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.io.IOException;
 
 
@@ -38,7 +38,7 @@ public class ExtractTextController {
                              final @RequestParam("language") String language,
                              final @RequestParam("nameOutput") String nameOutput) throws IllegalStateException, IOException {
         LOGGER.info("start");
-        ExtractFacade.getTextExtract(file,language,nameOutput);
+        ExtractFacade.getTextExtract(new ExtractTextParameter(fileStorageService.uploadFile(file),language,nameOutput));
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         String outFilename = nameOutput + ".txt";
         String downloadLink = baseUrl + "/api/download/" + outFilename;

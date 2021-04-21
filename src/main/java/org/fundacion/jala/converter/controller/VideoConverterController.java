@@ -5,6 +5,9 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Daniela Santa Cruz
+ * @colaborathor Paola Aguilar
  */
 /**
  * @author Daniela Santa Cruz
@@ -12,8 +15,8 @@
  */
 package org.fundacion.jala.converter.controller;
 
+import org.fundacion.jala.converter.models.facade.ConverterFacade;
 import org.fundacion.jala.converter.service.FileStorageService;
-import org.fundacion.jala.converter.service.VideoConverter;
 import org.fundacion.jala.converter.models.parameter.VideoParameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
-import static org.fundacion.jala.converter.models.facade.ConverterFacade.getVideoConverter;
 import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetadata;
 
 @RestController
@@ -31,8 +33,6 @@ import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetada
 public class VideoConverterController {
     @Autowired
     FileStorageService fileStorageService;
-    @Autowired
-    VideoConverter converter;
 
     /**
      * Endpoint for convertVideo
@@ -48,12 +48,8 @@ public class VideoConverterController {
                              @RequestParam("audio") boolean audio,
                              @RequestParam("metadata") String metadata
     ) throws IllegalStateException, IOException {
-        String filename = file.getOriginalFilename();
-        String storagePath = fileStorageService.uploadFile(file);
-        converter = new VideoConverter(new VideoParameter(storagePath, outputFormat, resolution, thumbnail, frameRate, width, height, audio));
-        converter.convertVideo();
-        String outputPath = FileStorageService.getOutputPath(filename);
-        String outputFilename = converter.getOutputFileName();
+        String outputFilename = ConverterFacade.getVideoConverter(new VideoParameter(fileStorageService.uploadFile(file), outputFormat,
+                resolution, thumbnail, frameRate, width, height, audio));
         extractMetadata(metadata, outputFilename, fileStorageService);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         String downloadLink = baseUrl + "/api/download/" + "converter.getOutputFileName()";
