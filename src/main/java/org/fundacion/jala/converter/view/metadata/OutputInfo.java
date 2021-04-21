@@ -86,6 +86,7 @@ class OutputInfo extends JPanel implements ItemListener {
     public void itemStateChanged(final ItemEvent e) {
         if (e.getStateChange() == ItemEvent.SELECTED) {
             outputNameField.setEnabled(false);
+            outputNameField.setText("");
         } else if (e.getStateChange() == ItemEvent.DESELECTED) {
             outputNameField.setEnabled(true);
         }

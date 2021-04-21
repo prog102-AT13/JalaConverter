@@ -28,7 +28,6 @@ import java.io.IOException;
 public class MetaDataInterface extends JPanel implements ActionListener {
     private SelectFile file;
     private ExportingFormat exportingFormat;
-    private ExportingFormat moreInformation;
     private OutputInfo outputName;
     private JButton convertMetaData;
     private ClientRequest clientRequest = new ClientRequest();
@@ -74,12 +73,17 @@ public class MetaDataInterface extends JPanel implements ActionListener {
      */
     @Override
     public void actionPerformed(final ActionEvent e) {
+        System.out.println("edson************************************************");
+        System.out.println(file.getOriginFilePath());
+        System.out.println(exportingFormat.getConvertTo());
+        System.out.println(outputName.getOutPutName());
+        System.out.println(exportingFormat.hasMoreInfo());
         JOptionPane.showMessageDialog(this, "File Path: "
                 + file.getOriginFilePath()
                 + "\nConvert to: "
                 + exportingFormat.getConvertTo()
                 + "\nMore information: "
-                + moreInformation.hasMoreInfo()
+                + exportingFormat.hasMoreInfo()
                 + "\nOutput name: "
                 + outputName.getOutPutName());
         try {
@@ -101,10 +105,9 @@ public class MetaDataInterface extends JPanel implements ActionListener {
         MetaDataRequestForm metaDataRequestForm = new MetaDataRequestForm();
         metaDataRequestForm.addFilepath(file.getOriginFilePath());
         metaDataRequestForm.addMetaDataFormat(exportingFormat.getConvertTo());
-        metaDataRequestForm.addMoreInfo(String.valueOf(moreInformation.hasMoreInfo()));
+        metaDataRequestForm.addMoreInfo(String.valueOf(exportingFormat.hasMoreInfo()));
         metaDataRequestForm.addSameName(String.valueOf(outputName.isSameName()));
         metaDataRequestForm.addOutputName(outputName.getOutPutName());
-        clientRequest.executeRequest(metaDataRequestForm);
         try {
             LOGGER.info("Execute Try");
             String result = clientRequest.executeRequest(metaDataRequestForm);
