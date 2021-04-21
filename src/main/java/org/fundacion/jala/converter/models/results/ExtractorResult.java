@@ -8,28 +8,22 @@ package org.fundacion.jala.converter.models.results;
  * license agreement you entered into with Fundacion Jala
  *
  * @author Saul Caspa Miranda
- * @version 1.0
  */
 
-public class CompilerResult implements Result {
+public class ExtractorResult implements Result {
     public String textExtracted;
     public String consoleOutput;
     public int processID;
     public String filename;
     public String thumbnailFilename;
 
-    public CompilerResult(String textExtracted) {
+    public ExtractorResult(String textExtracted) {
         this.textExtracted = textExtracted;
     }
 
-    public CompilerResult(String textExtracted, String filename) {
+    public ExtractorResult(String textExtracted, String filename) {
         this.textExtracted = textExtracted;
         this.filename = filename;
-    }
-    public CompilerResult(String textExtracted, String filename, int processID) {
-        this.textExtracted = textExtracted;
-        this.filename = filename;
-        this.processID = processID;
     }
 
     /**
@@ -55,7 +49,6 @@ public class CompilerResult implements Result {
     public int getProcessId() {
         return processID;
     }
-
     /**
      * Returns the filename from a processed file.
      * @return String filename.
@@ -69,23 +62,15 @@ public class CompilerResult implements Result {
      * @return String thumbnailFilename.
      */
     public String getThumbnailFilename() {
-        return thumbnailFilename;
+        return getThumbnailFilename();
     }
 
     /**
-     * Sets the text for the output for a compiled file.
-     * @param consoleOutput
+     * Sets the extracted text.
+     * @param textExtracted
      */
-    public void setConsoleOutput(String consoleOutput) {
-        this.consoleOutput = consoleOutput;
-    }
-
-    /**
-     * Sets the process Id for a compiled file.
-     * @param processID
-     */
-    public void setProcessID(int processID) {
-        this.processID = processID;
+    public void setTextExtracted(String textExtracted) {
+        this.textExtracted = textExtracted;
     }
 
     /**

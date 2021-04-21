@@ -11,25 +11,71 @@ package org.fundacion.jala.converter.models.results;
  * @version 1.0
  */
 
-public class ConverterResult implements ObjectResult{
-    public String status;
-    public String pathfile;
-    public String checksum;
+public class ConverterResult implements Result {
+    public String textExtracted;
+    public String consoleOutput;
+    public int processID;
+    public String filename;
+    public String thumbnailFilename;
 
-    public ConverterResult(String status, String pathfile, String checksum) {
-        this.status = status;
-        this.pathfile = pathfile;
-        this.checksum = checksum;
+    public ConverterResult(String filename) {
+        this.filename = filename;
     }
 
-    public String getStatus() {
-        return status;
+    /**
+     * Returns the text extracted from a file.
+     * @return String textExtracted.
+     */
+    public String getTextExtracted() {
+        return textExtracted;
     }
-    public String getPathfile() {
-        return pathfile;
+
+    /**
+     * Returns the output from a compiled file.
+     * @return String consoleOutput.
+     */
+    public String getConsoleOutput() {
+        return consoleOutput;
     }
-    public String getChecksum() {
-        return checksum;
+
+    /**
+     * Returns the processId from a compiling process.
+     * @return String processId.
+     */
+    public int getProcessId() {
+        return processID;
+    }
+
+    /**
+     * Returns the filename from a processed file.
+     * @return String filename.
+     */
+    public String getFilename() {
+        return filename;
+    }
+
+    /**
+     * Returns the filename from a thumbnail image.
+     * @return String thumbnailFilename.
+     */
+    public String getThumbnailFilename() {
+        return thumbnailFilename;
+    }
+
+    /**
+     * Sets the filename of a result processed file.
+     * @param filename
+     */
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
+    /**
+     * Sets the filename of a thumbnail image.
+     * @param thumbnailFilename
+     */
+    public void setThumbnailFilename(String thumbnailFilename) {
+        this.thumbnailFilename = thumbnailFilename;
     }
 }
 
