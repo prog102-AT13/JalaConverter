@@ -27,7 +27,6 @@ public class CompilerFacade {
 
     /**
      * The method to convert Audio.
-     *
      * @param javaParameter the version to be used in the compiler.
      * @return a string of the result on runtime console.
      */
@@ -39,7 +38,6 @@ public class CompilerFacade {
 
     /**
      * The method to convert Audio.
-     *
      * @param pythonParameter the version to be used in the compiler.
      * @return a string of the result on runtime console.
      */
@@ -48,5 +46,4 @@ public class CompilerFacade {
         result = pythonCompiler.compiler(pythonParameter);
         return result;
     }
-
 }

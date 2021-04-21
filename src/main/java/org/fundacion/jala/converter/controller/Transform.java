@@ -47,7 +47,7 @@ public class Transform {
         try {
             LOGGER.info("Execute Try");
             String path = pathProject + "\\" + fileName + "." + extension;
-            File file = new File( path);
+            File file = new File(path);
             if (!file.exists()) {
                 file.createNewFile();
             }

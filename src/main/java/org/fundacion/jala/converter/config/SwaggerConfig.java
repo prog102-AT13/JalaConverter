@@ -43,13 +43,13 @@ public class SwaggerConfig {
     private ApiInfo apiDetails() {
         return new ApiInfo(
                 "Jala Converter",
-                "Application that provides the following services:\n" +
-                        "\t• Convert audio files.\n" +
-                        "\t• Convert video files.\n" +
-                        "\t• Extract metadata from files.\n" +
-                        "\t• Extract text from images.\n" +
-                        "\t• Compile python projects.\n" +
-                        "\t• Compile java projects.",
+                "Application that provides the following services:\n"
+                        + "\t• Convert audio files.\n"
+                        + "\t• Convert video files.\n"
+                        + "\t• Extract metadata from files.\n"
+                        + "\t• Extract text from images.\n"
+                        + "\t• Compile python projects.\n"
+                        + "\t• Compile java projects.",
                 "1.0.0",
                 "localhost:8080/api/termsofservice",
                 new springfox.documentation.service.Contact("Team AT13", "https://www.fundacionjala.org", "AT13@fundacion-jala.org"),

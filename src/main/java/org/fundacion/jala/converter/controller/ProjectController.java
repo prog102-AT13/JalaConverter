@@ -30,7 +30,7 @@ public class ProjectController {
      */
     @PostMapping("/projects")
     public int createProject(final @RequestParam("projectName") String projectName,
-                              final @RequestParam("userId") int userId) throws IllegalStateException {
+                             final @RequestParam("userId") int userId) throws IllegalStateException {
         String command = "mkdir " + System.getProperty("user.dir") + "\\" + projectName;
         System.out.println("Commnad " + command);
         RunCommand runCommand = new RunCommand();
@@ -39,7 +39,6 @@ public class ProjectController {
         Project project = ProjectSQL.insertProjectData(projectName, pathProject, userId);
         return project.getId();
     }
-
 
     /**
      * Endpoint for creating a project in data base
