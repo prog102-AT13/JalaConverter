@@ -17,15 +17,6 @@ public class ExtractorResult implements Result {
     public String filename;
     public String thumbnailFilename;
 
-    public ExtractorResult(String textExtracted) {
-        this.textExtracted = textExtracted;
-    }
-
-    public ExtractorResult(String textExtracted, String filename) {
-        this.textExtracted = textExtracted;
-        this.filename = filename;
-    }
-
     /**
      * Returns the text extracted from a file.
      * @return String textExtracted.

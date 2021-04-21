@@ -18,10 +18,6 @@ public class ConverterResult implements Result {
     public String filename;
     public String thumbnailFilename;
 
-    public ConverterResult(String filename) {
-        this.filename = filename;
-    }
-
     /**
      * Returns the text extracted from a file.
      * @return String textExtracted.

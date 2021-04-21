@@ -13,6 +13,8 @@ package org.fundacion.jala.converter.service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.models.parameter.VideoParameter;
+import org.fundacion.jala.converter.models.results.ConverterResult;
+import org.fundacion.jala.converter.models.results.Result;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,6 +28,10 @@ public class VideoConverter {
     private static final int WAIT_TIME = 7000;
     private static final int INIT_NUMBER = 20;
     private static final Logger LOGGER = LogManager.getLogger();
+    private ConverterResult result;
+    private String thumbnailFilename;
+
+    private final String PNG_FORMAT = ".png";
 
     public VideoConverter(final VideoParameter videoParameter) {
         this.parameter = videoParameter;
@@ -61,6 +67,8 @@ public class VideoConverter {
             exception.printStackTrace();
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
         }
+        result = new ConverterResult();
+        result.setFilename(outputFileName);
     }
 
     /**
@@ -101,6 +109,8 @@ public class VideoConverter {
             exception.printStackTrace();
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
         }
+        thumbnailFilename = name + PNG_FORMAT;
+        result.setThumbnailFilename(thumbnailFilename);
     }
 
     /**
@@ -145,5 +155,9 @@ public class VideoConverter {
      */
     public String getOutputFileName() {
         return outputFileName;
+    }
+
+    public Result getResult() {
+        return result;
     }
 }

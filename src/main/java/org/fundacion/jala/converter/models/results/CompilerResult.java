@@ -18,20 +18,6 @@ public class CompilerResult implements Result {
     public String filename;
     public String thumbnailFilename;
 
-    public CompilerResult(String textExtracted) {
-        this.textExtracted = textExtracted;
-    }
-
-    public CompilerResult(String textExtracted, String filename) {
-        this.textExtracted = textExtracted;
-        this.filename = filename;
-    }
-    public CompilerResult(String textExtracted, String filename, int processID) {
-        this.textExtracted = textExtracted;
-        this.filename = filename;
-        this.processID = processID;
-    }
-
     /**
      * Returns the text extracted from a file.
      * @return String textExtracted.
