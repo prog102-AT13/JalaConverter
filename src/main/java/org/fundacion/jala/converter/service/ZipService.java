@@ -5,6 +5,8 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Raymundo Guaraguara Sansusty
  */
 package org.fundacion.jala.converter.service;
 
@@ -17,6 +19,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class ZipService {
+    private static final int BYTES = 1024;
     /**
      * Makes the process for zipping a file
      * @param filePath the file's direction
@@ -28,7 +31,7 @@ public class ZipService {
         FileInputStream fileInputStream = new FileInputStream(file);
         ZipEntry zipEntry = new ZipEntry(file.getName());
         zipOutputStream.putNextEntry(zipEntry);
-        byte[] bytes = new byte[1024];
+        byte[] bytes = new byte[BYTES];
         int length;
         while ((length = fileInputStream.read(bytes)) >= 0) {
             zipOutputStream.write(bytes, 0, length);

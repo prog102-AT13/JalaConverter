@@ -5,8 +5,9 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Raymundo Guaraguara Sansusty
  */
-
 package org.fundacion.jala.converter.view.login;
 
 import org.fundacion.jala.converter.view.Models.RegisterRequestForm;
@@ -24,7 +25,6 @@ import javax.swing.ImageIcon;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 public class RegisterInterface extends JFrame implements ActionListener {
     private final Container registerContentPane = getContentPane();
@@ -117,9 +117,10 @@ public class RegisterInterface extends JFrame implements ActionListener {
         try {
             String result = clientRequest.executeRequestWithoutToken(registerRequestForm);
             System.out.println(result);
-            JOptionPane.showMessageDialog(this, "Register Successful");
-        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Register successful");
+        } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Invalid username");
         }
     }
 

@@ -7,7 +7,6 @@
  * license agreement you entered into with Fundacion Jala
  *
  * @author Raymundo Guaraguara Sansusty
- * @version 1.0
  */
 package org.fundacion.jala.converter.controller;
 
@@ -17,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import static org.fundacion.jala.converter.models.UserSQL.usernameExists;
 
 @RestController
 public class RegisterController {
@@ -31,7 +32,10 @@ public class RegisterController {
      */
     @PostMapping("/register")
     public ResponseEntity<?> insertUser(final @RequestParam("username") String username,
-                                        final @RequestParam("password") String password) {
+                                        final @RequestParam("password") String password) throws Exception {
+        if (usernameExists(username) || username.trim().isEmpty()) {
+            throw new Exception("Invalid Username");
+        }
         return ResponseEntity.ok(myUserDetailsService.save(username, password));
     }
 }

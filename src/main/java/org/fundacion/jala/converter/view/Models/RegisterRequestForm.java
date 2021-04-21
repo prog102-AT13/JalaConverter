@@ -7,7 +7,6 @@
  * license agreement you entered into with Fundacion Jala
  *
  * @author Raymundo Guaraguara Sansusty
- * @version 1.0
  */
 package org.fundacion.jala.converter.view.Models;
 

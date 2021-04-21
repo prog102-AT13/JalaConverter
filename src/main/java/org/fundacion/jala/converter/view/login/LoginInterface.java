@@ -5,6 +5,8 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Raymundo Guaraguara Sansusty
  */
 
 package org.fundacion.jala.converter.view.login;
@@ -28,26 +30,38 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class LoginInterface extends JFrame implements ActionListener {
-    private Container loginContentPane = getContentPane();
-    private JLabel usernameLabel = new JLabel("USERNAME");
-    private JLabel passwordLabel = new JLabel("PASSWORD");
-    private JTextField usernameTextField = new JTextField();
-    private JPasswordField passwordField = new JPasswordField();
-    private JButton loginButton = new JButton("LOGIN");
-    private Icon eyeIcon = new ImageIcon("C:\\Users\\Raymundo\\Downloads\\EyeIcon.png");
-    private JButton showPasswordButton = new JButton(eyeIcon);
+    private final Container LOGIN_CONTENT_PANE = getContentPane();
+    private final JLabel USERNAME_LABEL = new JLabel("USERNAME");
+    private final JLabel PASSWORD_LABEL = new JLabel("PASSWORD");
+    private final JTextField USERNAME_TEXT_FIELD = new JTextField();
+    private final JPasswordField PASSWORD_FIELD = new JPasswordField();
+    private final Icon EYE_ICON = new ImageIcon("C:\\Users\\Raymundo\\Downloads\\EyeIcon.png");
+    private final JButton LOGIN_BUTTON = new JButton("LOGIN");
+    private final JButton SHOW_PASSWORD_BUTTON = new JButton(EYE_ICON);
+    private final JButton REGISTER_BUTTON = new JButton("REGISTER");
+    private final ClientRequest CLIENT_REQUEST = new ClientRequest();
+    private final int FIELDS_HEIGHT = 30;
+    private final int TEXT_FIELD_WIDTH = 150;
+    private final int LABEL_OR_BUTTON_WIDTH = 100;
+    private final int SMALL_BUTTON_SIZE = 29;
+    private final int LOGIN_X_POSITION = 500;
+    private final int LOGIN_Y_POSITION = 200;
+    private final int LOGIN_WIDTH = 400;
+    private final int LOGIN_HEIGHT = 350;
+    private final int LABEL_X_POSITION = 50;
+    private final int TEXT_FIELD_X_POSITION = 150;
+    private final int FIRST_COMPONENTS_Y_POSITION = 50;
+    private final int SECOND_COMPONENTS_Y_POSITION = 120;
+    private final int THIRD_COMPONENTS_Y_POSITION = 120;
+    private final int LOGIN_BUTTON_X_POSITION = 225;
+    private final int SHOW_PASSWORD_BUTTON_X_POSITION = 300;
+    private final int REGISTER_BUTTON_X_POSITION = 75;
     private Boolean passwordShowStatus = true;
-    private JButton registerButton = new JButton("REGISTER");
-    private static final int FIELDS_HEIGHT = 30;
-    private static final int TEXT_FIELD_WIDTH = 150;
-    private static final int LABEL_OR_BUTTON_WIDTH = 100;
-    private static final int SMALL_BUTTON_SIZE = 29;
-    private ClientRequest clientRequest = new ClientRequest();
 
     public LoginInterface() {
         setTitle("LOGIN");
         setVisible(true);
-        setBounds(500, 200, 400, 350);
+        setBounds(LOGIN_X_POSITION, LOGIN_Y_POSITION, LOGIN_WIDTH, LOGIN_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setLayoutManager();
@@ -60,42 +74,49 @@ public class LoginInterface extends JFrame implements ActionListener {
      * Sets the layout manager for the container
      */
     public void setLayoutManager() {
-        loginContentPane.setLayout(null);
+        LOGIN_CONTENT_PANE.setLayout(null);
     }
 
     /**
      * Sets all the components location and sizes
      */
     public void setLocationAndSize() {
-        usernameLabel.setBounds(50, 50, LABEL_OR_BUTTON_WIDTH, FIELDS_HEIGHT);
-        passwordLabel.setBounds(50, 120, LABEL_OR_BUTTON_WIDTH, FIELDS_HEIGHT);
-        usernameTextField.setBounds(150, 50, TEXT_FIELD_WIDTH, FIELDS_HEIGHT);
-        passwordField.setBounds(150, 120, TEXT_FIELD_WIDTH, FIELDS_HEIGHT);
-        loginButton.setBounds(225, 190, LABEL_OR_BUTTON_WIDTH, FIELDS_HEIGHT);
-        showPasswordButton.setBounds(300, 120, SMALL_BUTTON_SIZE, SMALL_BUTTON_SIZE);
-        registerButton.setBounds(75, 190, LABEL_OR_BUTTON_WIDTH, FIELDS_HEIGHT);
+        USERNAME_LABEL.setBounds(LABEL_X_POSITION, FIRST_COMPONENTS_Y_POSITION,
+                LABEL_OR_BUTTON_WIDTH, FIELDS_HEIGHT);
+        PASSWORD_LABEL.setBounds(LABEL_X_POSITION, SECOND_COMPONENTS_Y_POSITION,
+                LABEL_OR_BUTTON_WIDTH, FIELDS_HEIGHT);
+        USERNAME_TEXT_FIELD.setBounds(TEXT_FIELD_X_POSITION, FIRST_COMPONENTS_Y_POSITION,
+                TEXT_FIELD_WIDTH, FIELDS_HEIGHT);
+        PASSWORD_FIELD.setBounds(TEXT_FIELD_X_POSITION, SECOND_COMPONENTS_Y_POSITION,
+                TEXT_FIELD_WIDTH, FIELDS_HEIGHT);
+        LOGIN_BUTTON.setBounds(LOGIN_BUTTON_X_POSITION, THIRD_COMPONENTS_Y_POSITION,
+                LABEL_OR_BUTTON_WIDTH, FIELDS_HEIGHT);
+        SHOW_PASSWORD_BUTTON.setBounds(SHOW_PASSWORD_BUTTON_X_POSITION, SECOND_COMPONENTS_Y_POSITION,
+                SMALL_BUTTON_SIZE, SMALL_BUTTON_SIZE);
+        REGISTER_BUTTON.setBounds(REGISTER_BUTTON_X_POSITION, THIRD_COMPONENTS_Y_POSITION,
+                LABEL_OR_BUTTON_WIDTH, FIELDS_HEIGHT);
     }
 
     /**
      * Adds all the components to the container
      */
     public void addComponentsToContainer() {
-        loginContentPane.add(usernameLabel);
-        loginContentPane.add(passwordLabel);
-        loginContentPane.add(usernameTextField);
-        loginContentPane.add(passwordField);
-        loginContentPane.add(loginButton);
-        loginContentPane.add(showPasswordButton);
-        loginContentPane.add(registerButton);
+        LOGIN_CONTENT_PANE.add(USERNAME_LABEL);
+        LOGIN_CONTENT_PANE.add(PASSWORD_LABEL);
+        LOGIN_CONTENT_PANE.add(USERNAME_TEXT_FIELD);
+        LOGIN_CONTENT_PANE.add(PASSWORD_FIELD);
+        LOGIN_CONTENT_PANE.add(LOGIN_BUTTON);
+        LOGIN_CONTENT_PANE.add(SHOW_PASSWORD_BUTTON);
+        LOGIN_CONTENT_PANE.add(REGISTER_BUTTON);
     }
 
     /**
      * Adds the actions performed
      */
     public void addActionEvent() {
-        loginButton.addActionListener(this);
-        showPasswordButton.addActionListener(this);
-        registerButton.addActionListener(this);
+        LOGIN_BUTTON.addActionListener(this);
+        SHOW_PASSWORD_BUTTON.addActionListener(this);
+        REGISTER_BUTTON.addActionListener(this);
     }
 
     /**
@@ -108,8 +129,8 @@ public class LoginInterface extends JFrame implements ActionListener {
         authenticateRequestForm.addUsername(username);
         authenticateRequestForm.addPassword(password);
         try {
-            String result = clientRequest.executeRequestWithoutToken(authenticateRequestForm);
-            clientRequest.setToken(result);
+            String result = CLIENT_REQUEST.executeRequestWithoutToken(authenticateRequestForm);
+            CLIENT_REQUEST.setToken(result);
             System.out.println(result);
             this.dispose();
             new MainInterface().initInterface();
@@ -125,22 +146,22 @@ public class LoginInterface extends JFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(final ActionEvent e) {
-        if (e.getSource() == loginButton) {
-            String usernameText = usernameTextField.getText();
-            String passwordText = String.copyValueOf(passwordField.getPassword());
+        if (e.getSource() == LOGIN_BUTTON) {
+            String usernameText = USERNAME_TEXT_FIELD.getText();
+            String passwordText = String.copyValueOf(PASSWORD_FIELD.getPassword());
             callRequest(usernameText, passwordText);
         }
 
-        if (e.getSource() == showPasswordButton) {
+        if (e.getSource() == SHOW_PASSWORD_BUTTON) {
             if (passwordShowStatus) {
-                passwordField.setEchoChar((char) 0);
+                PASSWORD_FIELD.setEchoChar((char) 0);
             } else {
-                passwordField.setEchoChar('*');
+                PASSWORD_FIELD.setEchoChar('*');
             }
             passwordShowStatus = !passwordShowStatus;
         }
 
-        if (e.getSource() == registerButton) {
+        if (e.getSource() == REGISTER_BUTTON) {
             this.dispose();
             new RegisterInterface();
         }
