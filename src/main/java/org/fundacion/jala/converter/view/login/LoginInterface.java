@@ -35,7 +35,7 @@ public class LoginInterface extends JFrame implements ActionListener {
     private final JLabel PASSWORD_LABEL = new JLabel("PASSWORD");
     private final JTextField USERNAME_TEXT_FIELD = new JTextField();
     private final JPasswordField PASSWORD_FIELD = new JPasswordField();
-    private final Icon EYE_ICON = new ImageIcon("C:\\Users\\Raymundo\\Downloads\\EyeIcon.png");
+    private final Icon EYE_ICON = new ImageIcon("img/EyeIcon.png");
     private final JButton LOGIN_BUTTON = new JButton("LOGIN");
     private final JButton SHOW_PASSWORD_BUTTON = new JButton(EYE_ICON);
     private final JButton REGISTER_BUTTON = new JButton("REGISTER");
@@ -52,7 +52,7 @@ public class LoginInterface extends JFrame implements ActionListener {
     private final int TEXT_FIELD_X_POSITION = 150;
     private final int FIRST_COMPONENTS_Y_POSITION = 50;
     private final int SECOND_COMPONENTS_Y_POSITION = 120;
-    private final int THIRD_COMPONENTS_Y_POSITION = 120;
+    private final int THIRD_COMPONENTS_Y_POSITION = 190;
     private final int LOGIN_BUTTON_X_POSITION = 225;
     private final int SHOW_PASSWORD_BUTTON_X_POSITION = 300;
     private final int REGISTER_BUTTON_X_POSITION = 75;

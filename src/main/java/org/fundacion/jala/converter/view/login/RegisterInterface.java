@@ -27,27 +27,42 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class RegisterInterface extends JFrame implements ActionListener {
-    private final Container registerContentPane = getContentPane();
-    private final JLabel usernameLabel = new JLabel("USERNAME");
-    private final JLabel passwordLabel = new JLabel("PASSWORD");
-    private final JLabel passwordConfirmationLabel = new JLabel("<html>CONFIRM<br/>PASSWORD</html>");
-    private final JTextField usernameTextField = new JTextField();
-    private final JPasswordField passwordField = new JPasswordField();
-    private final JPasswordField passwordConfirmationField = new JPasswordField();
-    private final JButton registerButton = new JButton("REGISTER");
-    private final Icon backIcon = new ImageIcon("C:\\Users\\Raymundo\\Downloads\\BackIcon.jpg");
-    private final JButton backButton = new JButton(backIcon);
-    private final Icon eyeIcon = new ImageIcon("C:\\Users\\Raymundo\\Downloads\\EyeIcon.png");
-    private final JButton showPasswordButton = new JButton(eyeIcon);
-    private final JButton showPasswordConfirmationButton = new JButton(eyeIcon);
+    private final Container REGISTER_CONTENT_PANE = getContentPane();
+    private final JLabel USERNAME_LABEL = new JLabel("USERNAME");
+    private final JLabel PASSWORD_LABEL = new JLabel("PASSWORD");
+    private final JLabel PASSWORD_CONFIRMATION_LABEL = new JLabel("<html>CONFIRM<br/>PASSWORD</html>");
+    private final JTextField USERNAME_TEXT_FIELD = new JTextField();
+    private final JPasswordField PASSWORD_FIELD = new JPasswordField();
+    private final JPasswordField PASSWORD_CONFIRMATION_FIELD = new JPasswordField();
+    private final Icon BACK_ICON = new ImageIcon("img/BackIcon.jpg");
+    private final Icon EYE_ICON = new ImageIcon("img/EyeIcon.png");
+    private final JButton REGISTER_BUTTON = new JButton("REGISTER");
+    private final JButton BACK_BUTTON = new JButton(BACK_ICON);
+    private final JButton SHOW_PASSWORD_BUTTON = new JButton(EYE_ICON);
+    private final JButton SHOW_PASSWORD_CONFIRMATION_BUTTON = new JButton(EYE_ICON);
+    private final ClientRequest CLIENT_REQUEST = new ClientRequest();
+    private final int REGISTER_X_POSITION = 500;
+    private final int REGISTER_Y_POSITION = 200;
+    private final int REGISTER_WIDTH = 400;
+    private final int REGISTER_HEIGHT = 350;
+    private final int LABEL_X_POSITION = 50;
+    private final int TEXT_FIELD_X_POSITION = 150;
+    private final int PASSWORD_SHOW_X_POSITION = 300;
+    private final int FIRST_COMPONENTS_Y_POSITION = 50;
+    private final int SECOND_COMPONENTS_Y_POSITION = 120;
+    private final int THIRD_COMPONENTS_Y_POSITION = 190;
+    private final int FOURTH_COMPONENTS_Y_POSITION = 260;
+    private final int LABEL_BUTTON_WIDTH = 100;
+    private final int TEXT_FIELD_WIDTH = 150;
+    private final int SMALL_BUTTON_SIZE = 29;
+    private final int LABEL_TEXT_FIELD_HEIGHT = 30;
     private Boolean passwordShowStatus = true;
     private Boolean passwordConfirmationShowStatus = true;
-    private ClientRequest clientRequest = new ClientRequest();
 
     public RegisterInterface() {
         setTitle("SIGN UP");
         setVisible(true);
-        setBounds(500, 200, 400, 350);
+        setBounds(REGISTER_X_POSITION, REGISTER_Y_POSITION, REGISTER_WIDTH, REGISTER_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setLayoutManager();
@@ -60,49 +75,59 @@ public class RegisterInterface extends JFrame implements ActionListener {
      * Sets the layout Manager for the Container
      */
     public void setLayoutManager() {
-        registerContentPane.setLayout(null);
+        REGISTER_CONTENT_PANE.setLayout(null);
     }
 
     /**
      * Sets the position and size for the components
      */
     public void setLocationAndSize() {
-        usernameLabel.setBounds(50, 50, 100, 30);
-        passwordLabel.setBounds(50, 120, 100, 30);
-        passwordConfirmationLabel.setBounds(50, 190, 100, 30);
-        usernameTextField.setBounds(150, 50, 150, 30);
-        passwordField.setBounds(150, 120, 150, 30);
-        passwordConfirmationField.setBounds(150, 190, 150, 30);
-        registerButton.setBounds(150, 260, 100, 30);
-        backButton.setBounds(50, 260, 30, 30);
-        showPasswordButton.setBounds(300, 120, 29, 29);
-        showPasswordConfirmationButton.setBounds(300, 190, 29, 29);
+        USERNAME_LABEL.setBounds(LABEL_X_POSITION, FIRST_COMPONENTS_Y_POSITION,
+                LABEL_BUTTON_WIDTH, LABEL_TEXT_FIELD_HEIGHT);
+        PASSWORD_LABEL.setBounds(LABEL_X_POSITION, SECOND_COMPONENTS_Y_POSITION,
+                LABEL_BUTTON_WIDTH, LABEL_TEXT_FIELD_HEIGHT);
+        PASSWORD_CONFIRMATION_LABEL.setBounds(LABEL_X_POSITION, THIRD_COMPONENTS_Y_POSITION,
+                LABEL_BUTTON_WIDTH, LABEL_TEXT_FIELD_HEIGHT);
+        USERNAME_TEXT_FIELD.setBounds(TEXT_FIELD_X_POSITION, FIRST_COMPONENTS_Y_POSITION,
+                TEXT_FIELD_WIDTH, LABEL_TEXT_FIELD_HEIGHT);
+        PASSWORD_FIELD.setBounds(TEXT_FIELD_X_POSITION, SECOND_COMPONENTS_Y_POSITION,
+                TEXT_FIELD_WIDTH, LABEL_TEXT_FIELD_HEIGHT);
+        PASSWORD_CONFIRMATION_FIELD.setBounds(TEXT_FIELD_X_POSITION, THIRD_COMPONENTS_Y_POSITION,
+                TEXT_FIELD_WIDTH, LABEL_TEXT_FIELD_HEIGHT);
+        REGISTER_BUTTON.setBounds(TEXT_FIELD_X_POSITION, FOURTH_COMPONENTS_Y_POSITION,
+                LABEL_BUTTON_WIDTH, LABEL_TEXT_FIELD_HEIGHT);
+        BACK_BUTTON.setBounds(LABEL_X_POSITION, FOURTH_COMPONENTS_Y_POSITION,
+                SMALL_BUTTON_SIZE, SMALL_BUTTON_SIZE);
+        SHOW_PASSWORD_BUTTON.setBounds(PASSWORD_SHOW_X_POSITION, SECOND_COMPONENTS_Y_POSITION,
+                SMALL_BUTTON_SIZE, SMALL_BUTTON_SIZE);
+        SHOW_PASSWORD_CONFIRMATION_BUTTON.setBounds(PASSWORD_SHOW_X_POSITION, THIRD_COMPONENTS_Y_POSITION,
+                SMALL_BUTTON_SIZE, SMALL_BUTTON_SIZE);
     }
 
     /**
      * Adds all the components to the Container
      */
     public void addComponentsToContainer() {
-        registerContentPane.add(usernameLabel);
-        registerContentPane.add(passwordLabel);
-        registerContentPane.add(passwordConfirmationLabel);
-        registerContentPane.add(usernameTextField);
-        registerContentPane.add(passwordField);
-        registerContentPane.add(passwordConfirmationField);
-        registerContentPane.add(registerButton);
-        registerContentPane.add(backButton);
-        registerContentPane.add(showPasswordButton);
-        registerContentPane.add(showPasswordConfirmationButton);
+        REGISTER_CONTENT_PANE.add(USERNAME_LABEL);
+        REGISTER_CONTENT_PANE.add(PASSWORD_LABEL);
+        REGISTER_CONTENT_PANE.add(PASSWORD_CONFIRMATION_LABEL);
+        REGISTER_CONTENT_PANE.add(USERNAME_TEXT_FIELD);
+        REGISTER_CONTENT_PANE.add(PASSWORD_FIELD);
+        REGISTER_CONTENT_PANE.add(PASSWORD_CONFIRMATION_FIELD);
+        REGISTER_CONTENT_PANE.add(REGISTER_BUTTON);
+        REGISTER_CONTENT_PANE.add(BACK_BUTTON);
+        REGISTER_CONTENT_PANE.add(SHOW_PASSWORD_BUTTON);
+        REGISTER_CONTENT_PANE.add(SHOW_PASSWORD_CONFIRMATION_BUTTON);
     }
 
     /**
      * Adds the different events to the ActionListener
      */
     public void addActionEvent() {
-        registerButton.addActionListener(this);
-        backButton.addActionListener(this);
-        showPasswordButton.addActionListener(this);
-        showPasswordConfirmationButton.addActionListener(this);
+        REGISTER_BUTTON.addActionListener(this);
+        BACK_BUTTON.addActionListener(this);
+        SHOW_PASSWORD_BUTTON.addActionListener(this);
+        SHOW_PASSWORD_CONFIRMATION_BUTTON.addActionListener(this);
     }
 
     /**
@@ -115,7 +140,7 @@ public class RegisterInterface extends JFrame implements ActionListener {
         registerRequestForm.addUsername(username);
         registerRequestForm.addPassword(password);
         try {
-            String result = clientRequest.executeRequestWithoutToken(registerRequestForm);
+            String result = CLIENT_REQUEST.executeRequestWithoutToken(registerRequestForm);
             System.out.println(result);
             JOptionPane.showMessageDialog(this, "Register successful");
         } catch (Exception e) {
@@ -130,32 +155,32 @@ public class RegisterInterface extends JFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(final ActionEvent e) {
-        if (e.getSource() == registerButton) {
-            String username = usernameTextField.getText();
-            String password = String.copyValueOf(passwordField.getPassword());
-            String passwordConfirmation = String.copyValueOf(passwordConfirmationField.getPassword());
+        if (e.getSource() == REGISTER_BUTTON) {
+            String username = USERNAME_TEXT_FIELD.getText();
+            String password = String.copyValueOf(PASSWORD_FIELD.getPassword());
+            String passwordConfirmation = String.copyValueOf(PASSWORD_CONFIRMATION_FIELD.getPassword());
             if (password.equals(passwordConfirmation)) {
                 callRequest(username, password);
             } else {
                 JOptionPane.showMessageDialog(this, "Passwords do not match");
             }
-            usernameTextField.setText("");
-            passwordField.setText("");
-            passwordConfirmationField.setText("");
+            USERNAME_TEXT_FIELD.setText("");
+            PASSWORD_FIELD.setText("");
+            PASSWORD_CONFIRMATION_FIELD.setText("");
         }
 
-        if (e.getSource() == backButton) {
+        if (e.getSource() == BACK_BUTTON) {
             this.dispose();
             new LoginInterface();
         }
 
-        if (e.getSource() == showPasswordButton) {
-            showOrHidePassword(passwordField, passwordShowStatus);
+        if (e.getSource() == SHOW_PASSWORD_BUTTON) {
+            showOrHidePassword(PASSWORD_FIELD, passwordShowStatus);
             passwordShowStatus = !passwordShowStatus;
         }
 
-        if (e.getSource() == showPasswordConfirmationButton) {
-            showOrHidePassword(passwordConfirmationField, passwordConfirmationShowStatus);
+        if (e.getSource() == SHOW_PASSWORD_CONFIRMATION_BUTTON) {
+            showOrHidePassword(PASSWORD_CONFIRMATION_FIELD, passwordConfirmationShowStatus);
             passwordConfirmationShowStatus = !passwordConfirmationShowStatus;
         }
     }
