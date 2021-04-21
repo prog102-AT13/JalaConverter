@@ -23,7 +23,7 @@ public final class AudioConverter {
     private AudioParameter parameter;
     private String outputFileName = "";
     private RunCommand runCommand = new RunCommand();
-    private ConverterResult result;
+    private ConverterResult converterResult;
 
     public AudioConverter(final AudioParameter audioParameter) {
         this.parameter = audioParameter;
@@ -54,8 +54,8 @@ public final class AudioConverter {
      * @param newOutputFileName
      */
     public void setOutputFileName(final String newOutputFileName) {
-        this.result = new ConverterResult();
-        result.setFilename(newOutputFileName);
+        this.converterResult = new ConverterResult();
+        converterResult.setFilename(newOutputFileName);
         this.outputFileName = newOutputFileName;
     }
 
@@ -66,8 +66,13 @@ public final class AudioConverter {
     public String getOutputFileName() {
         return this.outputFileName;
     }
+
+    /**
+     * Returns the object result for the operation.
+     * @return converterResult.
+     */
     public Result getResult() {
-        return result;
+        return converterResult;
     }
 
 }

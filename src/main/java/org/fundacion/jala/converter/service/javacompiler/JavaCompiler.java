@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.models.parameter.JavaParameter;
 import org.fundacion.jala.converter.models.results.CompilerResult;
+import org.fundacion.jala.converter.models.results.Result;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -60,5 +61,13 @@ public class JavaCompiler {
                 LOGGER.error("Close Stream error" + e.getLocalizedMessage());
             }
         }
+    }
+
+    /**
+     * Returns the result object for the operation.
+     * @return compilerResult
+     */
+    public Result getResult() {
+        return compilerResult;
     }
 }

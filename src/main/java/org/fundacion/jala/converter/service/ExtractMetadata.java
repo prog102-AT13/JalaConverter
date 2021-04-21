@@ -84,6 +84,11 @@ public class ExtractMetadata {
             extractMetadata.extractMetadata();
         }
     }
+
+    /**
+     * Returns the object result for the operation.
+     * @return extractorResult.
+     */
     public Result getResult() {
         return extractorResult;
     }

@@ -124,10 +124,12 @@ public class ExtractText {
         }
         LOGGER.info("finish");
     }
-
+    /**
+     * Returns the object result for the operation.
+     * @return extractorResult.
+     */
     private Result getResult() {
         return extractorResult;
     }
-
 }
 

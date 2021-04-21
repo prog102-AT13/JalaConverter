@@ -28,7 +28,7 @@ public class VideoConverter {
     private static final int WAIT_TIME = 7000;
     private static final int INIT_NUMBER = 20;
     private static final Logger LOGGER = LogManager.getLogger();
-    private ConverterResult result;
+    private ConverterResult converterResult;
     private String thumbnailFilename;
 
     private final String PNG_FORMAT = ".png";
@@ -67,8 +67,8 @@ public class VideoConverter {
             exception.printStackTrace();
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
         }
-        result = new ConverterResult();
-        result.setFilename(outputFileName);
+        converterResult = new ConverterResult();
+        converterResult.setFilename(outputFileName);
     }
 
     /**
@@ -110,7 +110,7 @@ public class VideoConverter {
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
         }
         thumbnailFilename = name + PNG_FORMAT;
-        result.setThumbnailFilename(thumbnailFilename);
+        converterResult.setThumbnailFilename(thumbnailFilename);
     }
 
     /**
@@ -157,7 +157,11 @@ public class VideoConverter {
         return outputFileName;
     }
 
+    /**
+     * Returns the object result for the operation.
+     * @return extractorResult.
+     */
     public Result getResult() {
-        return result;
+        return converterResult;
     }
 }

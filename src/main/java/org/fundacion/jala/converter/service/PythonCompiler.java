@@ -15,6 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.models.parameter.PythonParameter;
 import org.fundacion.jala.converter.models.results.CompilerResult;
+import org.fundacion.jala.converter.models.results.Result;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -80,5 +81,13 @@ public class PythonCompiler {
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
             return exception.getMessage();
         }
+    }
+
+    /**
+     * Returns the result object for the operation.
+     * @return compilerResult
+     */
+    public Result getResult() {
+        return compilerResult;
     }
 }
