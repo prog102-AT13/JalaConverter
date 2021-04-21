@@ -60,10 +60,10 @@ public class VideoConverterController {
                              final @RequestParam("width") int width,
                              final @RequestParam("height") int height,
                              final @RequestParam("audio") boolean audio,
+                             final @RequestParam("checksum") String checksum,
                              final @RequestParam("metadata") String metadata
     ) throws IllegalStateException, IOException, InterruptedException {
         final int waitTime = 6000;
-        String checksum = "83a59b9445c3b9c58e2ca8611ad8fec9";
         String filename;
         String storagePath;
         String checksumLocal = checksum;

@@ -26,6 +26,8 @@ public class VideoRequestForm implements IRequestForm {
     private final String height = "height";
     private final String audio = "audio";
     private final String metadata = "metadata";
+    private final String checksum = "checksum";
+
 
     /**
      * Video Request Form stores parameters for an video request
@@ -55,6 +57,13 @@ public class VideoRequestForm implements IRequestForm {
      */
     public void addResolution(final String resolutionValue) {
         addParameters(new Parameter(resolution, resolutionValue, false));
+    }
+    /**
+     * Adds checksum parameter
+     * @param checksumValue
+     */
+    public void addChecksum(final String checksumValue) {
+        addParameters(new Parameter(checksum, checksumValue, false));
     }
 
     /**
