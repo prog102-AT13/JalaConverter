@@ -29,8 +29,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-import static org.fundacion.jala.converter.models.UserSQL.findUserById;
-
 public class LoginInterface extends JFrame implements ActionListener {
     private final Container LOGIN_CONTENT_PANE = getContentPane();
     private final JLabel USERNAME_LABEL = new JLabel("USERNAME");
@@ -127,19 +125,19 @@ public class LoginInterface extends JFrame implements ActionListener {
      * @param password a String with password
      */
     public void callRequest(final String username, final String password) {
+        String result = "";
         AuthenticateRequestForm authenticateRequestForm = new AuthenticateRequestForm();
         authenticateRequestForm.addUsername(username);
         authenticateRequestForm.addPassword(password);
         try {
-            String result = CLIENT_REQUEST.executeRequestWithoutToken(authenticateRequestForm);
+            result = CLIENT_REQUEST.executeRequestWithoutToken(authenticateRequestForm);
             result = result.substring(8, result.length() - 2);
-            CLIENT_REQUEST.setToken(result);
-            this.dispose();
-            new MainInterface().initInterface();
         } catch (IOException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Invalid username or password");
         }
+        this.dispose();
+        new MainInterface().initInterface(result);
     }
 
     /**

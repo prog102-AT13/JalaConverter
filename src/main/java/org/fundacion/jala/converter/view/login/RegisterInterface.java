@@ -142,11 +142,11 @@ public class RegisterInterface extends JFrame implements ActionListener {
         try {
             String result = CLIENT_REQUEST.executeRequestWithoutToken(registerRequestForm);
             System.out.println(result);
-            JOptionPane.showMessageDialog(this, "Register successful");
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Invalid username");
         }
+        JOptionPane.showMessageDialog(this, "Register successful");
     }
 
     /**

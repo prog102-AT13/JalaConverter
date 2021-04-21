@@ -42,11 +42,13 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
     private final int rightBorder = 0;
     private final int fontStyle = 0;
     private final int fontSize = 12;
+    private String token;
 
     /**
      * Initializes the graphics elements for Audio converter interface.
      */
-    public AudioConverterInterface() {
+    public AudioConverterInterface(final String newToken) {
+        token = newToken;
         JLabelStyle audioTitle = new JLabelStyle("Audio converter", "h1",
                 alignLabelStyle, widthLabelStyle, heightLabelStyle);
         JLabelStyle audioSettings = new JLabelStyle("Audio settings", "h1",
@@ -130,10 +132,9 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         audioRequestForm.addHz(settings.getHz());
         audioRequestForm.addAudiochannel(settings.getAudioChannel());
         audioRequestForm.addMetadata(String.valueOf(settings.isMetadata()));
-        clientRequest.executeRequest(audioRequestForm);
         try {
             LOGGER.info("Execute Try");
-            String result = clientRequest.executeRequest(audioRequestForm);
+            String result = clientRequest.executeRequest(audioRequestForm, token);
             System.out.println(result);
             JOptionPane.showMessageDialog(this, "Download Link:\n" + result);
             LOGGER.info("finish");

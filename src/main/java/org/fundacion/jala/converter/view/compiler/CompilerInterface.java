@@ -30,7 +30,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import static org.fundacion.jala.converter.models.UserSQL.findUserById;
 
 public class CompilerInterface extends JPanel {
     private static final Logger LOGGER = LogManager.getLogger();
@@ -41,17 +40,10 @@ public class CompilerInterface extends JPanel {
     private String token;
 
     /**
-     * Sets the token value
-     * @param newToken a String with the token value
-     */
-    public void setToken(final String newToken) {
-        this.token = token;
-    }
-
-    /**
      * Initializes the graphics elements of the Main Compiler Interface.
      */
-    public CompilerInterface() {
+    public CompilerInterface(final String newToken) {
+        token = newToken;
         buttonsCompiler = new CompilerButtons();
         consoleOutput = new Console();
         langButtons = new LanguageButtons();
@@ -63,7 +55,7 @@ public class CompilerInterface extends JPanel {
         JPanel pnl = new JPanel();
         pnl.setLayout(new FlowLayout());
         pnl.setOpaque(false);
-        JLabel label=new JLabel("Main");
+        JLabel label = new JLabel("Main");
         label.setFont(new Font("Barlow", 0, 11));
         pnl.add(label);
         projectTab.setTabComponentAt(projectTab.getTabCount() - 1, pnl);
@@ -98,7 +90,7 @@ public class CompilerInterface extends JPanel {
             public void actionPerformed(final ActionEvent e) {
                 LOGGER.info("start");
                 String url = "";
-                if (!langButtons.getPython().isEnabled()){
+                if (!langButtons.getPython().isEnabled()) {
                     url = "http://localhost:8080/api/compilePython";
                 }
                 if (!langButtons.getJava().isEnabled()) {

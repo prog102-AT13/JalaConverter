@@ -33,11 +33,13 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
     private final int rightBorder = 70;
     private final int fontStyle = 0;
     private final int fontSize = 12;
+    private String token;
 
     /**
      * Sets all the graphics elements for the main interface of Video Converter.
      */
-    public VideoConverterInterface() {
+    public VideoConverterInterface(final String newToken) {
+        token = newToken;
         JLabelStyle videoTitle = new JLabelStyle("Select Video:", "h2",
                 alignLabelStyle, widthLabelStyle, heightLabelStyle);
         videoTitle.setAlignmentX(LEFT_ALIGNMENT);

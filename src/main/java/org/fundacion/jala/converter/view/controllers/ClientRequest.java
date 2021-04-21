@@ -42,23 +42,6 @@ public class ClientRequest {
     private IRequestForm requestForm;
     private final String defaultCharset = "UTF-8";
     private static final Logger LOGGER = LogManager.getLogger();
-    private String token;
-
-    /**
-     * Gets token
-     * @return a String with the token
-     */
-    public String getToken() {
-        return token;
-    }
-
-    /**
-     * Sets the token value
-     * @param newToken the new value for the token
-     */
-    public void setToken(final String newToken) {
-        this.token = newToken;
-    }
 
     /**
      * Http client creates a request given a requestForm.
@@ -73,17 +56,14 @@ public class ClientRequest {
      * @throws ClientProtocolException
      * @throws IOException
      */
-    public String executeRequest(final IRequestForm newRequestForm) throws ClientProtocolException, IOException {
+    public String executeRequest(final IRequestForm newRequestForm, final String token) throws ClientProtocolException, IOException {
         requestForm = newRequestForm;
         httpPost = new HttpPost(requestForm.getURL());
         builder = MultipartEntityBuilder.create();
         addBodyFields();
         multipart = builder.build();
         httpPost.setEntity(multipart);
-        System.out.println("------------------------");
-        System.out.println(token);
-        System.out.println("------------------------");
-        httpPost.setHeader("Authorization", "Bearer " + findUserById(1).getToken());
+        httpPost.setHeader("Authorization", "Bearer " + token);
         CloseableHttpResponse response = httpClient.execute(httpPost);
         HttpEntity responseEntity = response.getEntity();
         String sResponse = EntityUtils.toString(responseEntity, defaultCharset);
@@ -116,7 +96,7 @@ public class ClientRequest {
      * @throws ClientProtocolException
      * @throws IOException
      */
-    public void download(final String filePath) throws IOException{
+    public void download(final String filePath) throws IOException {
         String sURL = "http://localhost:8080/api/download/img1.png";
         CloseableHttpClient localHttpClient = HttpClients.createDefault();
         HttpGet request = new HttpGet(sURL);

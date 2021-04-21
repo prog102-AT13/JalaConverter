@@ -43,18 +43,20 @@ public class MainInterface extends JFrame {
     private final int height = 700;
     private final int fontStyle = 0;
     private final int fontSize = 12;
+    private String token;
 
     /**
      * Initializes all the graphics components in the main Frame
      */
-    public void initInterface() {
-        compilerJP = new CompilerInterface();
-        video = new VideoConverterInterface();
+    public void initInterface(final String newToken) {
+        token = newToken;
+        compilerJP = new CompilerInterface(token);
+        video = new VideoConverterInterface(token);
         converterJP = new JPanel();
         titleTxt = new JLabelStyle("Jala Converter Project v1.0", "h2",
                 alignLabelStyle, widthLabelStyle, heightLabelStyle);
         metaData = new MetaDataInterface();
-        audio = new AudioConverterInterface();
+        audio = new AudioConverterInterface(token);
         textExtractor = new TextExtractorInterface();
         JTabbedPane mainTabPanel = new JTabbedPane();
         mainTabPanel.setFont(new Font("Barlow", fontStyle, fontSize));
