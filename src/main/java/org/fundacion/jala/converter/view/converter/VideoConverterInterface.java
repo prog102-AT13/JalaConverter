@@ -52,7 +52,7 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
         file.setAlignmentX(LEFT_ALIGNMENT);
         menuConverterType = new ConverterTypeSelect();
         menuConverterType.setAlignmentX(LEFT_ALIGNMENT);
-        JButton converterVideoButton = new JButton("Convert Video");
+        JButton converterVideoButton = new JButton("Convert");
         converterVideoButton.setFont(new Font("Barlow", fontStyle, fontSize));
         converterVideoButton.addActionListener(this::actionPerformed);
         settings = new OutputSettings();
