@@ -55,9 +55,9 @@ public class MainInterface extends JFrame {
         converterJP = new JPanel();
         titleTxt = new JLabelStyle("Jala Converter Project v1.0", "h2",
                 alignLabelStyle, widthLabelStyle, heightLabelStyle);
-        metaData = new MetaDataInterface();
+        metaData = new MetaDataInterface(token);
         audio = new AudioConverterInterface(token);
-        textExtractor = new TextExtractorInterface();
+        textExtractor = new TextExtractorInterface(token);
         JTabbedPane mainTabPanel = new JTabbedPane();
         mainTabPanel.setFont(new Font("Barlow", fontStyle, fontSize));
         mainTabPanel.add("Compiler", compilerJP);

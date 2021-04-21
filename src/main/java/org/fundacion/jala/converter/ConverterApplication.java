@@ -25,7 +25,7 @@ public class ConverterApplication {
                                         .load();
     public static void main(final String[] args) {
         LOGGER.info("start");
-        SpringApplication.run(ConverterApplication.class, args);
+        SpringApplication.run(ConverterApplication.at13class, args);
         System.setProperty("java.awt.headless", "false");
         SwingUtilities.invokeLater(LoginInterface::new);
         LOGGER.info("finish");

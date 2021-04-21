@@ -27,6 +27,7 @@ import java.io.IOException;
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 
 public class MetaDataInterface extends JPanel implements ActionListener {
+    private String token;
     private SelectFile file;
     private ExportingFormat exportingFormat;
     private OutputInfo outputName;
@@ -47,7 +48,8 @@ public class MetaDataInterface extends JPanel implements ActionListener {
     /**
      * Initializes the graphics components for MetaData interface.
      */
-    public MetaDataInterface() {
+    public MetaDataInterface(final String newToken) {
+        token = newToken;
         JLabelStyle metaDataTitle = new JLabelStyle("Extract Metadata", "h1",
                 alignLabelStyle, widthLabelStyle, heightLabelStyle);
         file = new SelectFile();
@@ -105,7 +107,7 @@ public class MetaDataInterface extends JPanel implements ActionListener {
         metaDataRequestForm.addOutputName(outputName.getOutPutName());
         try {
             LOGGER.info("Execute Try");
-            String result = clientRequest.executeRequest(metaDataRequestForm);
+            String result = clientRequest.executeRequest(metaDataRequestForm, token);
             Thread.sleep(waitTime);
             clientRequest.downloadFile(result);
             JOptionPane.showMessageDialog(this, "Downloaded in :\n"
