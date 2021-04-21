@@ -10,9 +10,9 @@ package org.fundacion.jala.converter.view.converter;
 
 public class FrameVideo {
     private String name = "F";
-    private int frame;
+    private String frame;
 
-    public FrameVideo(final int newFrame) {
+    public FrameVideo(final String newFrame) {
         this.name = name;
         this.frame = newFrame;
     }
@@ -37,7 +37,7 @@ public class FrameVideo {
      * Gets frame select of video.
      * @return frame is value select options.
      */
-    public int getFrame() {
+    public String getFrame() {
         return frame;
     }
 
@@ -45,7 +45,7 @@ public class FrameVideo {
      * Sets value frame select of video.
      * @param newFrame is value select options.
      */
-    public void setFrame(final int newFrame) {
+    public void setFrame(final String newFrame) {
         this.frame = newFrame;
     }
 

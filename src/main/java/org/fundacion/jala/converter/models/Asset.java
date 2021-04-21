@@ -5,6 +5,8 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Cristian Choque Quispe
  */
 
 package org.fundacion.jala.converter.models;
@@ -20,12 +22,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.FetchType;
 
 @Entity
-@Table(name = "PROJECT")
-public class Project {
+@Table(name = "ASSET")
+public class Asset {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "PROJECT_ID")
+    @Column(name = "ASSET_ID")
     private int id;
 
     @Column(name = "TITLE")
@@ -41,11 +43,11 @@ public class Project {
     @JoinColumn(name = "USER_ID")
     private User user;
 
-    public Project() {
+    public Asset() {
 
     }
 
-    public Project(final String newTitle, final String newPath, final String newChecksum, final User newUser) {
+    public Asset(final String newTitle, final String newPath, final String newChecksum, final User newUser) {
         this.title = newTitle;
         this.path = newPath;
         this.checksum = newChecksum;

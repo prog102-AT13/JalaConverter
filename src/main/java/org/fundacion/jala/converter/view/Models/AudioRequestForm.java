@@ -13,10 +13,10 @@ package org.fundacion.jala.converter.view.Models;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 public class AudioRequestForm implements IRequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
-    private final String url = "http://localhost:8080/api/convertAudio";
+    private final String url = dotenv.get("HTTP_URL_CONVERT_AUDIO");
     private final String file = "file";
     private final String format = "format";
     private final String bitrate = "bitrate";
@@ -24,6 +24,7 @@ public class AudioRequestForm implements IRequestForm {
     private final String hz = "hz";
     private final String audioChannel = "audiochannel";
     private final String metaData = "metadata";
+    private final String checksum = "checksum";
 
     /**
      * Audio Request Form stores parameters for an audio request
@@ -84,6 +85,13 @@ public class AudioRequestForm implements IRequestForm {
      */
     public void addMetadata(final String metadataValue) {
         addParameters(new Parameter(metaData, metadataValue, false));
+    }
+    /**
+     * Adds checksum parameter
+     * @param checksumValue
+     */
+    public void addChecksum(final String checksumValue) {
+        addParameters(new Parameter(checksum, checksumValue, false));
     }
 
 
