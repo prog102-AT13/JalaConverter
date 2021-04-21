@@ -43,6 +43,7 @@ public class ProjectController {
 
     /**
      * Endpoint for create a project in data base
+     * @return a String with the path of files
      */
     @PostMapping("/projects/{id}/file")
     public String createFiles(final @RequestParam("fileName") String fileName,
