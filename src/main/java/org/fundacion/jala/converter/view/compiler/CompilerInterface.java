@@ -50,6 +50,7 @@ public class CompilerInterface extends JPanel {
         langButtons.getJava().setEnabled(false);
         ProjectTab projectTab = new ProjectTab();
         projectTab.setFont(new Font("Barlow", 0, 11));
+        codeArea.setName("Main");
         projectTab.add(codeArea);
         JPanel pnl = new JPanel();
         pnl.setLayout(new FlowLayout());
