@@ -10,12 +10,13 @@ package org.fundacion.jala.converter.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.fundacion.jala.converter.service.FileStorageService;
-import org.fundacion.jala.converter.service.pythoncompiler.Python;
-import org.fundacion.jala.converter.service.pythoncompiler.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.fundacion.jala.converter.models.parameter.PythonEnum;
+import org.fundacion.jala.converter.models.parameter.PythonParameter;
+import org.fundacion.jala.converter.service.PythonCompiler;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import java.io.IOException;
 
 @RestController
@@ -33,7 +34,7 @@ public class PythonCompilerController {
             PythonCompiler pythonCompiler = new PythonCompiler();
             String filePath = Transform.toFile(code, "filetocompile", "py");
             LOGGER.info("finish");
-            return pythonCompiler.compiler(Python.V3, filePath);
+            return pythonCompiler.compiler(new PythonParameter(filePath, PythonEnum.V3));
         }
         return "";
     }

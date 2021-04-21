@@ -84,7 +84,7 @@ public class AudioConverterController {
 
 
         audioConverter = new AudioConverter(new AudioParameter(storagePath, format, bitrate, hz, volume, audioChannel));
-        audioConverter.audioConverter(storagePath);
+        audioConverter.audioConverter();
         String outputFilename = audioConverter.getOutputFileName();
         String outputPath = FileStorageService.getOutputPath(filename);
         String nameWithoutExtension = outputFilename.substring(0, outputFilename.lastIndexOf(".") + 1);

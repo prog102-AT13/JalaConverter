@@ -10,6 +10,7 @@ package org.fundacion.jala.converter.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.models.parameter.JavaParameter;
 import org.fundacion.jala.converter.service.javacompiler.JavaCompiler;
 import org.fundacion.jala.converter.service.javacompiler.JavaVersion;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,7 +35,7 @@ public class JavaCompilerController {
             JavaCompiler javaCompiler = new JavaCompiler();
             String filePath = Transform.toFile(code, "Main", "java");
             LOGGER.info("finish");
-            return javaCompiler.javaCompiler(JavaVersion.JAVA_11, filePath);
+            return javaCompiler.javaCompiler(new JavaParameter(JavaVersion.JAVA_11, filePath));
         }
         return "";
     }

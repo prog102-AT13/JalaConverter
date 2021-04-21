@@ -16,8 +16,11 @@ import org.fundacion.jala.converter.service.ObjectMetadata;
 import org.fundacion.jala.converter.service.metadata.TypeFileExport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.File;
@@ -31,7 +34,8 @@ public class ExtractMetadataController {
     FileStorageService fileStorageService;
 
     /**
-     * Endpoint for extract metadata
+     * Endpoint for extract metadata.
+     * @return String for download file
      */
     @PostMapping("/extractMetadata")
     public String uploadFile(@RequestParam("fileToExtract") String fileToExtract,
@@ -50,7 +54,8 @@ public class ExtractMetadataController {
     }
 
     /**
-     * Endpoint for extract metadata
+     * Endpoint for metadata extraction.
+     * @return String to download file
      */
     @PostMapping("/extractMetadataMoreOption")
     public String uploadFile(@RequestParam("fileToExtract") String fileToExtract,
@@ -76,7 +81,8 @@ public class ExtractMetadataController {
     }
 
     /**
-     * Endpoint for extract metadata
+     * Endpoint for metadata extraction.
+     * @return ResponseEntity<String>
      */
     @GetMapping("/metadata")
     public ResponseEntity<String> extractMetadataDefaultName() {
@@ -90,7 +96,8 @@ public class ExtractMetadataController {
     }
 
     /**
-     * Endpoint for extract metadata
+     * Endpoint for metadata extraction.
+     * @return ResponseEntity<String>
      */
     @GetMapping("/metadataMoreOption")
     public ResponseEntity<String> extractMetadata() {
