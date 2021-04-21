@@ -6,6 +6,10 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  */
+
+/**
+ * @author Jessicka Moya Andrade
+ */
 package org.fundacion.jala.converter.exceptions;
 
 public class PaoPaoException extends Exception{
