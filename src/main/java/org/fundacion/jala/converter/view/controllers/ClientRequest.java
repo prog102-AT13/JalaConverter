@@ -86,7 +86,6 @@ public class ClientRequest {
 
         CloseableHttpClient localHttpClient = HttpClients.createDefault();
         HttpGet request = new HttpGet(sURL);
-//        request.setHeader("Authorization", "Bearer " + localToken);
         CloseableHttpResponse response = localHttpClient.execute(request);
         HttpEntity responseEntity = response.getEntity();
         InputStream inputStream = responseEntity.getContent();
@@ -101,7 +100,6 @@ public class ClientRequest {
 
     /**
      * Retrieves a  token from the endpoint from a username and password.
-     *
      * @return
      */
     public String authGetToken() throws IOException {
@@ -123,7 +121,6 @@ public class ClientRequest {
 
     /**
      * Adds text field to http request.
-     *
      * @param key   String with the key
      * @param value String with the value
      */
@@ -133,7 +130,6 @@ public class ClientRequest {
 
     /**
      * Adds file field to http request.
-     *
      * @param key      String with the key
      * @param filePath String with the value
      */
@@ -164,7 +160,6 @@ public class ClientRequest {
 
     /**
      * Adds a body field with the parameter's information.
-     *
      * @param parameter
      */
     public void addBodyField(final Parameter parameter) {
@@ -176,7 +171,7 @@ public class ClientRequest {
     }
 
     /**
-     * Download a File by url
+     * Downloads a File by url
      * @param url with the url
      */
     public void downloadFile(final String url) {
@@ -192,7 +187,7 @@ public class ClientRequest {
     }
 
     /**
-     * Download a File by URL
+     * Downloads a File by URL
      * @param fileName name of file
      * @param fileUrl url complete
      * @throws MalformedURLException

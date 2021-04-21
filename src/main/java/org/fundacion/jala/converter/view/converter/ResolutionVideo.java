@@ -112,7 +112,7 @@ public class ResolutionVideo {
     }
 
     /**
-     * Add blank spaces
+     * Adds blank spaces
      * @param numberSpaces
      * @return a String with necessary spaces
      */
