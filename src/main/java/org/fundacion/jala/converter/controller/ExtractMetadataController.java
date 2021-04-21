@@ -34,9 +34,9 @@ public class ExtractMetadataController {
                              @RequestParam("nameExport") String nameExport,
                              @RequestParam("format") String format) throws IllegalStateException, IOException {
         LOGGER.info("start");
-        String filename =ExtractFacade.getMetadataExtract(fileToExtract,isMoreInfo,nameExport,format);
-        final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-        String downloadLink = baseUrl + "/api/download/" + filename+"."+format;
+//        String filename =ExtractFacade.getMetadataExtract(fileToExtract,isMoreInfo,nameExport,format);
+//        final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
+        String downloadLink = "" + "/api/download/" + ""+"."+format;
         LOGGER.info("finish");
         return downloadLink;
     }

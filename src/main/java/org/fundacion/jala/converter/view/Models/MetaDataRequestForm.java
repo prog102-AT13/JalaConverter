@@ -15,11 +15,11 @@ import java.util.List;
 public class MetaDataRequestForm implements IrequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
     private final String url = "http://localhost:8080/api/extractMetadata";
-    private final String file = "file";
+    private final String file = "fileToExtract";
     private final String format = "format";
-    private final String outputName = "outputname";
+    private final String outputName = "nameExport";
     private final String keepName = "name";
-    private final String moreInfo = "moreinfo";
+    private final String moreInfo = "moreInfo";
 
     public MetaDataRequestForm() {
     }
@@ -61,7 +61,8 @@ public class MetaDataRequestForm implements IrequestForm {
      * @param moreInformation
      */
     public void addMoreInfo(final String moreInformation) {
-        addParameters(new Parameter(moreInfo, moreInformation, false)); }
+        addParameters(new Parameter(moreInfo, moreInformation, false));
+    }
 
     /**
      * Gets the body parameters
