@@ -13,9 +13,8 @@ package org.fundacion.jala.converter.view.Models;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
-public class VideoRequestForm implements IrequestForm {
+public class VideoRequestForm implements IRequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
     private final String url = dotenv.get("HTTP_URL_CONVERT_VIDEO");
     private final String file = "file";

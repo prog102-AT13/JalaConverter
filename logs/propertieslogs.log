@@ -1109,3 +1109,54 @@
 [INFO ] 2021-04-20 21:57:38.506 [main] ConverterApplication - start
 [INFO ] 2021-04-20 21:57:45.020 [main] ConverterApplication - finish
 [INFO ] 2021-04-20 21:57:50.957 [http-nio-8080-exec-1] AuthController - Start.
+[INFO ] 2021-04-21 11:28:02.096 [main] ConverterApplication - start
+[INFO ] 2021-04-21 11:28:08.750 [main] ConverterApplication - finish
+[INFO ] 2021-04-21 11:29:07.695 [AWT-EventQueue-0] AudioConverterInterface - start
+[INFO ] 2021-04-21 11:29:07.696 [AWT-EventQueue-0] AudioConverterInterface - Execute Try
+[INFO ] 2021-04-21 11:29:09.178 [AWT-EventQueue-0] AudioConverterInterface - start
+[INFO ] 2021-04-21 11:29:09.179 [AWT-EventQueue-0] AudioConverterInterface - Execute Try
+[INFO ] 2021-04-21 11:29:09.333 [AWT-EventQueue-0] ClientRequest - Start
+[INFO ] 2021-04-21 11:29:09.334 [AWT-EventQueue-0] ClientRequest - Execute Try
+[INFO ] 2021-04-21 11:29:09.338 [AWT-EventQueue-0] ClientRequest - Finish
+[INFO ] 2021-04-21 11:29:13.957 [http-nio-8080-exec-1] AudioConverterController - Execute Try
+[INFO ] 2021-04-21 11:29:14.102 [http-nio-8080-exec-1] AudioConverterController - finish
+[INFO ] 2021-04-21 11:29:14.130 [http-nio-8080-exec-1] RunCommand - start
+[INFO ] 2021-04-21 11:29:14.130 [http-nio-8080-exec-1] RunCommand - Execute Try
+[INFO ] 2021-04-21 11:29:15.641 [http-nio-8080-exec-1] RunCommand - finish
+[INFO ] 2021-04-21 11:29:15.669 [http-nio-8080-exec-1] ExtractMetadata - start
+[INFO ] 2021-04-21 11:29:15.670 [http-nio-8080-exec-1] ExtractMetadata - Execute Try
+[INFO ] 2021-04-21 11:29:15.680 [http-nio-8080-exec-1] ExtractMetadata - finish
+[INFO ] 2021-04-21 11:29:15.680 [http-nio-8080-exec-1] ExtractMetadata - start
+[INFO ] 2021-04-21 11:29:15.680 [http-nio-8080-exec-1] ExtractMetadata - Execute Try
+[INFO ] 2021-04-21 11:29:15.684 [http-nio-8080-exec-1] ExtractMetadata - finish
+[INFO ] 2021-04-21 11:29:22.182 [AWT-EventQueue-0] ClientRequest - Start
+[INFO ] 2021-04-21 11:29:22.182 [AWT-EventQueue-0] ClientRequest - Execute Try
+[INFO ] 2021-04-21 11:29:22.183 [AWT-EventQueue-0] ClientRequest - Finish
+[INFO ] 2021-04-21 11:29:22.728 [http-nio-8080-exec-2] RunCommand - start
+[INFO ] 2021-04-21 11:29:22.729 [http-nio-8080-exec-2] RunCommand - Execute Try
+[INFO ] 2021-04-21 11:29:24.547 [http-nio-8080-exec-2] RunCommand - finish
+[INFO ] 2021-04-21 11:29:24.547 [http-nio-8080-exec-2] ExtractMetadata - start
+[INFO ] 2021-04-21 11:29:24.547 [http-nio-8080-exec-2] ExtractMetadata - Execute Try
+[INFO ] 2021-04-21 11:29:24.551 [http-nio-8080-exec-2] ExtractMetadata - finish
+[INFO ] 2021-04-21 11:29:24.551 [http-nio-8080-exec-2] ExtractMetadata - start
+[INFO ] 2021-04-21 11:29:24.551 [http-nio-8080-exec-2] ExtractMetadata - Execute Try
+[INFO ] 2021-04-21 11:29:24.554 [http-nio-8080-exec-2] ExtractMetadata - finish
+[INFO ] 2021-04-21 11:29:55.851 [AWT-EventQueue-0] AudioConverterInterface - finish
+[INFO ] 2021-04-21 11:29:55.852 [AWT-EventQueue-0] AudioConverterInterface - Finish
+[INFO ] 2021-04-21 11:29:55.852 [AWT-EventQueue-0] AudioConverterInterface - finish
+[INFO ] 2021-04-21 11:29:55.852 [AWT-EventQueue-0] AudioConverterInterface - Finish
+[INFO ] 2021-04-21 11:32:35.835 [AWT-EventQueue-0] VideoConverterInterface - Start
+[INFO ] 2021-04-21 11:32:37.436 [AWT-EventQueue-0] VideoConverterInterface - Execute Try
+[INFO ] 2021-04-21 11:32:37.436 [AWT-EventQueue-0] VideoConverterInterface - start
+[INFO ] 2021-04-21 11:32:37.438 [AWT-EventQueue-0] VideoConverterInterface - Execute Try
+[INFO ] 2021-04-21 11:32:37.438 [AWT-EventQueue-0] ClientRequest - Start
+[INFO ] 2021-04-21 11:32:37.438 [AWT-EventQueue-0] ClientRequest - Execute Try
+[INFO ] 2021-04-21 11:32:37.440 [AWT-EventQueue-0] ClientRequest - Finish
+[INFO ] 2021-04-21 11:32:37.895 [http-nio-8080-exec-6] VideoConverter - Execute Try
+[INFO ] 2021-04-21 11:32:37.899 [http-nio-8080-exec-6] VideoConverter - finish
+[INFO ] 2021-04-21 11:32:37.899 [http-nio-8080-exec-6] VideoConverter - Execute Try
+[INFO ] 2021-04-21 11:32:42.924 [http-nio-8080-exec-6] VideoConverter - Execute Try
+[INFO ] 2021-04-21 11:32:42.929 [http-nio-8080-exec-6] VideoConverter - finish
+[INFO ] 2021-04-21 11:32:42.929 [http-nio-8080-exec-6] VideoConverter - finish
+[INFO ] 2021-04-21 11:32:48.703 [AWT-EventQueue-0] VideoConverterInterface - Finish
+[INFO ] 2021-04-21 11:32:48.703 [AWT-EventQueue-0] VideoConverterInterface - Finish
