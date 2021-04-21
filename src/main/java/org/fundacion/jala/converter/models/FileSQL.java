@@ -32,7 +32,7 @@ public class FileSQL {
     }
 
     /**
-     * Finds a project by it's id
+     * Finds a project by its id
      * @param fileId int with the project id
      * @return a project
      */
