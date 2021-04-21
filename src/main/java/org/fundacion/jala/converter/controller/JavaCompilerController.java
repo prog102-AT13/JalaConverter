@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.models.parameter.JavaParameter;
 import org.fundacion.jala.converter.service.javacompiler.JavaCompiler;
+import org.fundacion.jala.converter.models.facade.CompilerFacade;
 import org.fundacion.jala.converter.service.javacompiler.JavaVersion;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,10 +33,10 @@ public class JavaCompilerController {
     public String compileJava(final @RequestParam("code") String code) throws IllegalStateException, IOException {
         LOGGER.info("start");
         if (!code.isBlank() || !code.equals(null)){
-            JavaCompiler javaCompiler = new JavaCompiler();
+//            JavaCompiler javaCompiler = new JavaCompiler();
             String filePath = Transform.toFile(code, "Main", "java");
             LOGGER.info("finish");
-            return javaCompiler.javaCompiler(new JavaParameter(JavaVersion.JAVA_11, filePath));
+            return CompilerFacade.facadeJavaCompile (new JavaParameter(JavaVersion.JAVA_11, filePath));
         }
         return "";
     }
