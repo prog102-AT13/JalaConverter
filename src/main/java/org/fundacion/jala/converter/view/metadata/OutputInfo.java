@@ -23,6 +23,7 @@ import java.awt.event.ItemListener;
 class OutputInfo extends JPanel implements ItemListener {
     private JTextField outputNameField;
     private JCheckBox checkOutputName;
+    private String outPutName;
     private final int alignLabelStyle = 2;
     private final int widthLabelStyle = 150;
     private final int heightLabelStyle = 30;
@@ -61,6 +62,23 @@ class OutputInfo extends JPanel implements ItemListener {
     }
 
     /**
+     * Gets the name of the outputfile
+     * @return outputname
+     */
+    public String getOutPutName() {
+        outPutName = outputNameField.getText();
+        return outPutName;
+    }
+
+    /**
+     * Gets if checkOutputName is required for metadata.
+     * @return true if is the same name, false if not.
+     */
+    protected boolean isSameName() {
+        return checkOutputName.isSelected();
+    }
+
+    /**
      * Enables the JTextField to change the name of the output file for MetaData.
      * @param e event of Check status.
      */
@@ -68,6 +86,7 @@ class OutputInfo extends JPanel implements ItemListener {
     public void itemStateChanged(final ItemEvent e) {
         if (e.getStateChange() == ItemEvent.SELECTED) {
             outputNameField.setEnabled(false);
+            outputNameField.setText("");
         } else if (e.getStateChange() == ItemEvent.DESELECTED) {
             outputNameField.setEnabled(true);
         }

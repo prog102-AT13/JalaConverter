@@ -140,7 +140,6 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
             audioRequestForm.addAudiochannel(settings.getAudioChannel());
             audioRequestForm.addChecksum(getFileChecksum(file.getOriginFilePath()));
             audioRequestForm.addMetadata(String.valueOf(settings.isMetadata()));
-//            clientRequest.executeRequest(audioRequestForm);
             String result = clientRequest.executeRequest(audioRequestForm, token);
             clientRequest.downloadFile(result);
             JOptionPane.showMessageDialog(this, "Download in :\n"

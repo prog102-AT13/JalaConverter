@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
 
-
 @RestController
 @RequestMapping("/api")
 public class ExtractTextController {
@@ -35,14 +34,15 @@ public class ExtractTextController {
      */
     @PostMapping("/extractText")
     public String uploadFile(final @RequestParam("file")MultipartFile file,
-                             final @RequestParam("language") String language,
-                             final @RequestParam("nameOutput") String nameOutput)
+                             final @RequestParam("language") String language)
             throws IllegalStateException, IOException {
         LOGGER.info("start");
-        ExtractFacade.getTextExtract(new ExtractTextParameter(fileStorageService.uploadFile(file),
-                language, nameOutput));
+        String fileOut = file.getOriginalFilename();
+        String outputFileName = fileOut.substring(0, fileOut.lastIndexOf("."));
+        ExtractFacade.getTextExtract(new ExtractTextParameter(fileStorageService
+                .uploadFile(file), language, outputFileName));
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-        String outFilename = nameOutput + ".txt";
+        String outFilename = outputFileName + ".txt";
         String downloadLink = baseUrl + "/api/download/" + outFilename;
         LOGGER.info("finish");
         return downloadLink;
