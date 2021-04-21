@@ -1,10 +1,13 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- * <p>
+ *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Daniela Santa Cruz Andrade
+ * @version 1.0
  */
 
 package org.fundacion.jala.converter.view.Models;
@@ -12,7 +15,7 @@ package org.fundacion.jala.converter.view.Models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExtractTextRequestForm implements IrequestForm {
+public class ExtractTextRequestForm implements IRequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
     private final String url = "http://localhost:8080/api/extractText";
     private final String file = "file";

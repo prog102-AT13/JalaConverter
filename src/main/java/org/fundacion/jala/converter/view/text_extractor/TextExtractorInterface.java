@@ -46,11 +46,13 @@ public class TextExtractorInterface extends JPanel implements ActionListener {
      * Initializes graphics elements for Audio converter interface.
      */
     public TextExtractorInterface() {
-        JLabelStyle audioTitle = new JLabelStyle("Text extractor", "h1", alignLabelStyle, widthLabelStyle, heightLabelStyle);
-        JLabelStyle audioSettings = new JLabelStyle("Image settings", "h1", alignLabelStyle, widthLabelStyle, heightLabelStyle);
+        JLabelStyle audioTitle = new JLabelStyle("Text extractor", "h1",
+                alignLabelStyle, widthLabelStyle, heightLabelStyle);
+        JLabelStyle audioSettings = new JLabelStyle("Image settings", "h1",
+                alignLabelStyle, widthLabelStyle, heightLabelStyle);
         audioTitle.setAlignmentX(LEFT_ALIGNMENT);
         audioSettings.setAlignmentX(LEFT_ALIGNMENT);
-        JButton convertAudio = new JButton("Convert");
+        JButton convertAudio = new JButton("Extract");
         convertAudio.setAlignmentX(LEFT_ALIGNMENT);
         convertAudio.setFont(new Font("Barlow", fontStyle, fontSize));
         convertAudio.addActionListener(this::actionPerformed);

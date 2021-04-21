@@ -5,6 +5,9 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Daniela Santa Cruz Andrade
+ * @version 1.0
  */
 
 package org.fundacion.jala.converter.view.Models;
@@ -12,7 +15,7 @@ package org.fundacion.jala.converter.view.Models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MetaDataRequestForm implements IrequestForm {
+public class MetaDataRequestForm implements IRequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
     private final String url = "http://localhost:8080/api/extractMetadata";
     private final String file = "fileToExtract";

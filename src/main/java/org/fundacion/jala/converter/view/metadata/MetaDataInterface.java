@@ -19,7 +19,6 @@ import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -43,22 +42,21 @@ public class MetaDataInterface extends JPanel implements ActionListener {
     private final int fontSize = 11;
 
     /**
-     * Initialize the graphics components for MetaData interface.
+     * Initializes the graphics components for MetaData interface.
      */
     public MetaDataInterface() {
-        JLabelStyle audioTitle = new JLabelStyle("Extract Metadata", "h1",
+        JLabelStyle metaDataTitle = new JLabelStyle("Extract Metadata", "h1",
                 alignLabelStyle, widthLabelStyle, heightLabelStyle);
-        audioTitle.setAlignmentX(LEFT_ALIGNMENT);
         file = new SelectFile();
-        exportInfo = new ExportingFormat();
-        outputInfo = new OutputInfo();
-
-        convertMetaData = new JButton("Convert");
-        convertMetaData.setAlignmentX(CENTER_ALIGNMENT);
+        exportingFormat = new ExportingFormat();
+        outputName = new OutputInfo();
+        convertMetaData = new JButton("Extract");
+        convertMetaData.setAlignmentX(RIGHT_ALIGNMENT);
         convertMetaData.addActionListener(this::actionPerformed);
         convertMetaData.setFont(new Font("Barlow", fontStyle, fontSize));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(new EmptyBorder(topBorder, leftBorder, bottomBorder, rightBorder));
+        add(metaDataTitle.getTextLabel());
         add(file);
         add(exportingFormat);
         add(outputName);
@@ -72,11 +70,6 @@ public class MetaDataInterface extends JPanel implements ActionListener {
      */
     @Override
     public void actionPerformed(final ActionEvent e) {
-        System.out.println("edson************************************************");
-        System.out.println(file.getOriginFilePath());
-        System.out.println(exportingFormat.getConvertTo());
-        System.out.println(outputName.getOutPutName());
-        System.out.println(exportingFormat.hasMoreInfo());
         JOptionPane.showMessageDialog(this, "File Path: "
                 + file.getOriginFilePath()
                 + "\nConvert to: "
