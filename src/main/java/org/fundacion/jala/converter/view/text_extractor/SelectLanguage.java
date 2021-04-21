@@ -32,7 +32,7 @@ public class SelectLanguage extends JPanel {
     private final int flowLayoutVgap = 10;
 
     /**
-     * Initializes graphic elements for SelectComboox for convert type.
+     * Initializes graphic elements for SelectCombox for convert type.
      */
     protected SelectLanguage() {
         JLabelStyle labelConvertTo = new JLabelStyle("Convert to: ", "h3",
