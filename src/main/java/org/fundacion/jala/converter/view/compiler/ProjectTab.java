@@ -5,11 +5,10 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
- */
-
-/**
+ *
  * @author Joel Rodrigo Rojas Roman
  */
+
 package org.fundacion.jala.converter.view.compiler;
 
 import javax.swing.JTabbedPane;

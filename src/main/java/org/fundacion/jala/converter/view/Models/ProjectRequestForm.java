@@ -14,48 +14,39 @@ package org.fundacion.jala.converter.view.Models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileRequestForm implements IRequestForm {
+public class ProjectRequestForm implements IRequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
-    private final String url = "http://localhost:8080/api/makeFile";
+    private final String url = "http://localhost:8080/api/makeProject";
     private final String projectId = "projectID";
-    private final String fileTitle = "fileTitle";
-    private final String code = "code";
-    private final String fileExtension = "extension";
+    private final String projectName = "projectName";
+    private final String type = "type";
 
     /**
-     * File Request Form stores parameters for an file request
+     * Project Request Form stores parameters for an project request
      */
-    public FileRequestForm() {
-    }
-
-    /**
-     * Adds projId parameter
-     * @param projId
-     */
-    public void addProjectId(final String projId) {
-        addParameters(new Parameter(projectId, projId, false));
-    }
-    /**
-     * Adds title parameter
-     * @param title
-     */
-    public void addFileTitle(final String title) {
-        addParameters(new Parameter(fileTitle, title, false));
-    }
-    /**
-     * Adds inputCode parameter
-     * @param inputCode
-     */
-    public void addCode(final String inputCode) {
-        addParameters(new Parameter(code, inputCode, false));
+    public ProjectRequestForm() {
     }
 
     /**
-     * Adds extension parameter
-     * @param extension
+     * Adds id parameter
+     * @param id
      */
-    public void addFileExtension(final String extension) {
-        addParameters(new Parameter(fileExtension, extension, false));
+    public void addProjectId(final String id) {
+        addParameters(new Parameter(projectId, id, false));
+    }
+    /**
+     * Adds name parameter
+     * @param name
+     */
+    public void addProjectName(final String name) {
+        addParameters(new Parameter(projectName, name, false));
+    }
+    /**
+     * Adds type parameter
+     * @param type
+     */
+    public void addType(final String type) {
+        addParameters(new Parameter(this.type, type, false));
     }
 
     /**

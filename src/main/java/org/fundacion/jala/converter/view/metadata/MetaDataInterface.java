@@ -9,9 +9,10 @@
 
 package org.fundacion.jala.converter.view.metadata;
 
-import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.BoxLayout;
+import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
