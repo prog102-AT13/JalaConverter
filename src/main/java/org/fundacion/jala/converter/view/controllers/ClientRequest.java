@@ -35,7 +35,6 @@ import java.io.BufferedInputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
-import static org.fundacion.jala.converter.models.UserSQL.findUserById;
 
 public class ClientRequest {
     private CloseableHttpClient httpClient;
@@ -55,7 +54,6 @@ public class ClientRequest {
 
     /**
      * Executes a request given the type of requestForm.
-     *
      * @return sResponse
      * @throws ClientProtocolException
      * @throws IOException
