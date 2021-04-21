@@ -11,10 +11,12 @@
  */
 package org.fundacion.jala.converter.models.facade;
 
+import org.fundacion.jala.converter.models.parameter.JavaParameter;
+import org.fundacion.jala.converter.models.parameter.PythonParameter;
 import org.fundacion.jala.converter.service.javacompiler.JavaCompiler;
 import org.fundacion.jala.converter.service.javacompiler.JavaVersion;
-import org.fundacion.jala.converter.service.pythoncompiler.PythonCompiler;
-import org.fundacion.jala.converter.service.pythoncompiler.Python;
+import org.fundacion.jala.converter.service.PythonCompiler;
+import org.fundacion.jala.converter.models.parameter.PythonEnum;
 
 public class CompilerFacade {
 
@@ -28,26 +30,24 @@ public class CompilerFacade {
     /**
      * The method to convert Audio.
      *
-     * @param javaVersion the version to be used in the compiler.
-     * @param filePath    is the path of file to convert.
+     * @param javaParameter the version to be used in the compiler.
      * @return a string of the result on runtime console.
      */
-    public static String facadeJavaCompile(final JavaVersion javaVersion, final String filePath) {
+    public static String facadeJavaCompile(JavaParameter javaParameter) {
         javaCompiler = new JavaCompiler();
-        result = javaCompiler.javaCompiler(javaVersion, filePath);
+        result = javaCompiler.javaCompiler(javaParameter);
         return result;
     }
 
     /**
      * The method to convert Audio.
      *
-     * @param pythonVersion the version to be used in the compiler.
-     * @param filePath      is the path of file to convert.
+     * @param pythonParameter the version to be used in the compiler.
      * @return a string of the result on runtime console.
      */
-    public String facadePythonCompile(final Python pythonVersion, final String filePath) {
+    public static String facadePythonCompile(PythonParameter pythonParameter) {
         pythonCompiler = new PythonCompiler();
-        result = pythonCompiler.compiler(pythonVersion, filePath);
+        result = pythonCompiler.compiler(pythonParameter);
         return result;
     }
 
