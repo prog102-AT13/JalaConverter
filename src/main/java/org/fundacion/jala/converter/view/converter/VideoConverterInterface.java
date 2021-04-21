@@ -118,6 +118,7 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
         try {
             LOGGER.info("Execute Try");
             String result = clientRequest.executeRequest(videoRequestForm);
+            clientRequest.downloadFile(result);
             JOptionPane.showMessageDialog(this, "Download in :\n" + System.getProperty("user.home") + dotenv.get("DIR_DOWNLOAD"));
             System.getProperty("file.separator");
             System.out.println(result);
