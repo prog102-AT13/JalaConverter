@@ -40,6 +40,7 @@ dependencies {
 	implementation group: 'net.sourceforge.tess4j', name: 'tess4j', version: '3.4.8'
 	compile 'org.apache.httpcomponents:httpclient:4.5.3'
 	compile "org.apache.httpcomponents:httpmime:4.3"
+	compile 'io.github.cdimascio:java-dotenv:5.2.2'
 }
 
 test {

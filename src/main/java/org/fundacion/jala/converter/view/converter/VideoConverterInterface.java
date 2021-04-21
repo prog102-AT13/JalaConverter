@@ -9,8 +9,11 @@
 
 package org.fundacion.jala.converter.view.converter;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.view.Models.VideoRequestForm;
+import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
@@ -19,11 +22,15 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 
 public class VideoConverterInterface extends JPanel implements ActionListener {
     private SelectFile file;
     private ConverterTypeSelect menuConverterType;
     private OutputSettings settings;
+    private ClientRequest clientRequest = new ClientRequest();
+    private static final Logger LOGGER = LogManager.getLogger();
     private final int alignLabelStyle = 0;
     private final int widthLabelStyle = 100;
     private final int heightLabelStyle = 30;
@@ -45,7 +52,7 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
         file.setAlignmentX(LEFT_ALIGNMENT);
         menuConverterType = new ConverterTypeSelect();
         menuConverterType.setAlignmentX(LEFT_ALIGNMENT);
-        JButton converterVideoButton = new JButton("Convert Video");
+        JButton converterVideoButton = new JButton("Convert");
         converterVideoButton.setFont(new Font("Barlow", fontStyle, fontSize));
         converterVideoButton.addActionListener(this::actionPerformed);
         settings = new OutputSettings();
@@ -66,6 +73,7 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
      */
     @Override
     public void actionPerformed(final ActionEvent e) {
+        LOGGER.info("Start");
         JOptionPane.showMessageDialog(this, "File Path: "
                 + file.getOriginFilePath()
                 + "\nConvert to:"
@@ -79,6 +87,44 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
                 + "\nSound: "
                 + settings.isAudioSelected()
                 + "\nThumbnail: "
-                + settings.isThumbnailRequired());
+                + settings.isThumbnailRequired()
+                + "\nMetadata: "
+                + settings.isMetadataRequired());
+        try {
+            LOGGER.info("Execute Try");
+            callRequest();
+        } catch (Exception ex) {
+            LOGGER.error("Execute Exception to metaData conversion");
+            ex.printStackTrace();
+        }
+        LOGGER.info("Finish");
+    }
+    /**
+     * Obtains the request
+     * @throws IOException
+     */
+    private void callRequest() throws IOException {
+        LOGGER.info("start");
+        VideoRequestForm videoRequestForm = new VideoRequestForm();
+        videoRequestForm.addFilepath(file.getOriginFilePath());
+        videoRequestForm.addOutputFormat(menuConverterType.getConvertTo());
+        videoRequestForm.addThumbnail(String.valueOf(settings.isThumbnailRequired()));
+        videoRequestForm.addFrameRate(settings.getFrame());
+        videoRequestForm.addWidth(settings.getWidthResolution());
+        videoRequestForm.addHeight(settings.getHeightResolution());
+        videoRequestForm.addAudio(String.valueOf(settings.isAudioSelected()));
+        videoRequestForm.addMetadata(String.valueOf(settings.isMetadataRequired()));
+        videoRequestForm.addResolution(settings.getWidthResolution());
+        try {
+            LOGGER.info("Execute Try");
+            String result = clientRequest.executeRequest(videoRequestForm);
+            JOptionPane.showMessageDialog(this, "Download in :\n" + System.getProperty("user.home") + dotenv.get("DIR_DOWNLOAD"));
+            System.getProperty("file.separator");
+            System.out.println(result);
+        } catch (IOException e) {
+            LOGGER.error("Execute Exception to obtain the request");
+            e.printStackTrace();
+        }
+        LOGGER.info("Finish");
     }
 }

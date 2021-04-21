@@ -29,6 +29,8 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;
 
+import static org.fundacion.jala.converter.ConverterApplication.dotenv;
+
 public class AudioConverterInterface extends JPanel implements ActionListener {
     private SelectFile file;
     private ConvertTypeSelectAudio audioSelect;
@@ -139,8 +141,9 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
             clientRequest.executeRequest(audioRequestForm);
 
             String result = clientRequest.executeRequest(audioRequestForm);
+            clientRequest.downloadFile(result);
+            JOptionPane.showMessageDialog(this, "Download in :\n" + System.getProperty("user.home") + dotenv.get("DIR_DOWNLOAD"));
             System.out.println(result);
-            JOptionPane.showMessageDialog(this, "Download Link:\n" + result);
             LOGGER.info("finish");
         } catch (IOException | NoSuchAlgorithmException ioException) {
             ioException.printStackTrace();
