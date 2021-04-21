@@ -6,6 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
+ * @author Paola Aguilar Quiñones
  * @colaborathor Cristian Choque Quispe
  */
 
@@ -115,13 +116,13 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         }
         LOGGER.info("Finish");
     }
+
     /**
      * Obtains the request
      * @throws IOException
      */
     private void callRequest() throws IOException {
         LOGGER.info("start");
-
         try {
             LOGGER.info("Execute Try");
             String[] s = quality.getQualityAudio().split(" ");

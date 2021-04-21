@@ -6,6 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
+ * @author Edson Añawaya Rios
  * @colaborathor Cristian Choque Quispe
  */
 package org.fundacion.jala.converter.controller;
@@ -27,12 +28,13 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import static org.fundacion.jala.converter.models.AssetSQL.insertAssetData;
 import static org.fundacion.jala.converter.models.AssetSQL.listAsset;
 import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;
 import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetadata;
-import static org.fundacion.jala.converter.service.ZipService.*;
+import static org.fundacion.jala.converter.service.ZipService.zipFile;
+import static org.fundacion.jala.converter.service.ZipService.zipFiles;
+
 
 @RestController
 @RequestMapping("/api")
@@ -62,9 +64,7 @@ public class AudioConverterController {
         List<Asset> assets = listAsset();
         List<String> resultTitle = getTitles(checksum, assets);
         List<String> resultPath = getPath(checksum, assets);
-
         exist = resultTitle.size() > 0;
-
         if (exist) {
             filename = resultTitle.get(0);
             storagePath = resultPath.get(0) + filename;
@@ -105,12 +105,24 @@ public class AudioConverterController {
         return downloadLink;
     }
 
+    /**
+     * Obtains the path of the file
+     * @param checksum
+     * @param assets
+     * @return
+     */
     private List<String> getPath(final String checksum, final List<Asset> assets) {
         return assets.stream().filter(project -> project.getChecksum().equals(checksum))
                     .map(asset -> asset.getPath())
                     .collect(Collectors.toList());
     }
 
+    /**
+     * Obtains the name of the file
+     * @param checksum
+     * @param assets
+     * @return
+     */
     private List<String> getTitles(final String checksum, final List<Asset> assets) {
         return assets.stream().filter(project -> project.getChecksum().equals(checksum))
                     .map(asset -> asset.getTitle())
