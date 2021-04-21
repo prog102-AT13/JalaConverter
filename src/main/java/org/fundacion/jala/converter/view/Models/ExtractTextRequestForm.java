@@ -7,7 +7,6 @@
  * license agreement you entered into with Fundacion Jala
  *
  * @author Daniela Santa Cruz Andrade
- * @version 1.0
  */
 
 package org.fundacion.jala.converter.view.Models;
