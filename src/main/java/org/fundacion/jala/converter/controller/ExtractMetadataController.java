@@ -28,10 +28,10 @@ public class ExtractMetadataController {
      * Endpoint for extract metadata
      */
     @PostMapping("/extractMetadata")
-    public String uploadFile(@RequestParam("fileToExtract") MultipartFile fileToExtract,
-                             @RequestParam("moreInfo") Boolean isMoreInfo,
-                             @RequestParam("nameExport") String nameExport,
-                             @RequestParam("format") String format) throws IllegalStateException, IOException {
+    public String uploadFile(final @RequestParam("fileToExtract") MultipartFile fileToExtract,
+                             final @RequestParam("moreInfo") Boolean isMoreInfo,
+                             final @RequestParam("nameExport") String nameExport,
+                             final @RequestParam("format") String format) throws IllegalStateException, IOException {
         LOGGER.info("start");
         String filename = ExtractFacade.getMetadataExtract(fileToExtract, isMoreInfo, nameExport, format);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();

@@ -31,7 +31,7 @@ public class PythonCompilerController {
     @PostMapping("/compilePython")
     public String compilePython(final @RequestParam("code") String code) throws IllegalStateException, IOException {
         LOGGER.info("start");
-        if (!code.isBlank() || !code.equals(null)){
+        if (!code.isBlank() || !code.equals(null)) {
             PythonCompiler pythonCompiler = new PythonCompiler();
             String filePath = Transform.toFile(code, "filetocompile", "py");
             LOGGER.info("finish");
