@@ -122,7 +122,6 @@ public class User {
         this.token = newToken;
     }
 
-
     /**
      * Obtains all the projects that realized the user
      * @return all the projects of the user
@@ -152,7 +151,7 @@ public class User {
      * @param newProjects a list of projects
      */
     public void setProjects(final List<Project> newProjects) {
-        this.projects = newProjects;
+        this.projects = projects;
     }
 
     /**
@@ -167,3 +166,4 @@ public class User {
                 + ", token='" + token + '\''
                 + '}';
     }
+}
