@@ -22,13 +22,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class DownloadController {
     @Autowired
-    FileStorageService fileStorageService;
+    private FileStorageService fileStorageService;
 
     /**
      * Endpoint for download controller
      */
     @GetMapping("/download/{fileName}")
-    ResponseEntity<Resource> downloadFile(@PathVariable String fileName) {
+    ResponseEntity<Resource> downloadFile(final @PathVariable String fileName) {
         Resource resource = fileStorageService.downloadFile(fileName);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + resource.getFilename())

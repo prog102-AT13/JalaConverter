@@ -5,6 +5,9 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Paola Aguilar Quiñones
+ * @colaborathor Cristian Choque Quispe
  */
 
 package org.fundacion.jala.converter.view.converter;
@@ -25,6 +28,8 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;
+
+import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 
 public class AudioConverterInterface extends JPanel implements ActionListener {
     private SelectFile file;
@@ -122,25 +127,29 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
      */
     private void callRequest() throws IOException {
         LOGGER.info("start");
-        String[] s = quality.getQualityAudio().split(" ");
-        String bitrate = s[0];
-        AudioRequestForm audioRequestForm = new AudioRequestForm();
-        audioRequestForm.addFilepath(file.getOriginFilePath());
-        audioRequestForm.addFormat(audioSelect.getConvertTo());
-        audioRequestForm.addBitrate(bitrate);
-        audioRequestForm.addVolume(settings.getVolume());
-        audioRequestForm.addHz(settings.getHz());
-        audioRequestForm.addAudiochannel(settings.getAudioChannel());
-        audioRequestForm.addMetadata(String.valueOf(settings.isMetadata()));
         try {
             LOGGER.info("Execute Try");
+            String[] s = quality.getQualityAudio().split(" ");
+            String bitrate = s[0];
+            AudioRequestForm audioRequestForm = new AudioRequestForm();
+            audioRequestForm.addFilepath(file.getOriginFilePath());
+            audioRequestForm.addFormat(audioSelect.getConvertTo());
+            audioRequestForm.addBitrate(bitrate);
+            audioRequestForm.addVolume(settings.getVolume());
+            audioRequestForm.addHz(settings.getHz());
+            audioRequestForm.addAudiochannel(settings.getAudioChannel());
+            audioRequestForm.addChecksum(getFileChecksum(file.getOriginFilePath()));
+            audioRequestForm.addMetadata(String.valueOf(settings.isMetadata()));
+//            clientRequest.executeRequest(audioRequestForm);
             String result = clientRequest.executeRequest(audioRequestForm, token);
+            clientRequest.downloadFile(result);
+            JOptionPane.showMessageDialog(this, "Download in :\n"
+                    + System.getProperty("user.home") + dotenv.get("DIR_DOWNLOAD"));
             System.out.println(result);
-            JOptionPane.showMessageDialog(this, "Download Link:\n" + result);
             LOGGER.info("finish");
-        } catch (IOException e) {
-            LOGGER.error("Execute Exception to obtain the request");
-            e.printStackTrace();
+        } catch (IOException | NoSuchAlgorithmException ioException) {
+            ioException.printStackTrace();
+            LOGGER.error("Execute Exception");
         }
         LOGGER.info("Finish");
     }

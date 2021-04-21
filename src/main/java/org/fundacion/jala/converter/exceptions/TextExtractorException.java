@@ -10,22 +10,22 @@
  */
 package org.fundacion.jala.converter.exceptions;
 
-public class TextExtractorException extends PaoPaoException{
-    private final static String DEFAULT_MESSAGE = "Text Extractor Error";
+public class TextExtractorException extends PaoPaoException {
+    private static final String DEFAULT_MESSAGE = "Text Extractor Error";
 
     public TextExtractorException() {
         super(DEFAULT_MESSAGE);
     }
 
-    public TextExtractorException(String message) {
+    public TextExtractorException(final String message) {
         super(message);
     }
 
-    public TextExtractorException(Throwable exception) {
+    public TextExtractorException(final Throwable exception) {
         super(DEFAULT_MESSAGE, exception);
     }
 
-    public TextExtractorException(String message, Throwable exception) {
+    public TextExtractorException(final String message, final Throwable exception) {
         super(message, exception);
     }
 }

@@ -31,7 +31,10 @@ import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
+import java.io.BufferedInputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 import static org.fundacion.jala.converter.models.UserSQL.findUserById;
 
 public class ClientRequest {
@@ -52,6 +55,7 @@ public class ClientRequest {
 
     /**
      * Executes a request given the type of requestForm.
+     *
      * @return sResponse
      * @throws ClientProtocolException
      * @throws IOException
@@ -97,14 +101,13 @@ public class ClientRequest {
      * @throws IOException
      */
     public void download(final String filePath) throws IOException {
-        String sURL = "http://localhost:8080/api/download/img1.png";
+        String sURL = "http://localhost:8080/api/download/";
         CloseableHttpClient localHttpClient = HttpClients.createDefault();
         HttpGet request = new HttpGet(sURL);
-        request.setHeader("Authorization", "Bearer " + findUserById(1).getToken());
         CloseableHttpResponse response = localHttpClient.execute(request);
         HttpEntity responseEntity = response.getEntity();
         InputStream inputStream = responseEntity.getContent();
-        FileOutputStream outputStream = new FileOutputStream(new File(filePath));
+        FileOutputStream outputStream = new FileOutputStream(new File(sURL));
         int inByte;
         while ((inByte = inputStream.read()) != -1) {
             outputStream.write(inByte);
@@ -134,7 +137,7 @@ public class ClientRequest {
 
     /**
      * Adds text field to http request.
-     * @param key String with the key
+     * @param key   String with the key
      * @param value String with the value
      */
     public void addTextBody(final String key, final String value) {
@@ -143,7 +146,7 @@ public class ClientRequest {
 
     /**
      * Adds file field to http request.
-     * @param key String with the key
+     * @param key      String with the key
      * @param filePath String with the value
      */
     public void addFileBody(final String key, final String filePath) {
@@ -180,6 +183,52 @@ public class ClientRequest {
             addTextBody(parameter.getKey(), parameter.getValue());
         } else {
             addFileBody(parameter.getKey(), parameter.getValue());
+        }
+    }
+
+    /**
+     * Downloads a File by url
+     * @param url with the url
+     */
+    public void downloadFile(final String url) {
+        String nameFile = url.substring(url.lastIndexOf("/") + 1);
+        String dirName = System.getProperty("user.home") + dotenv.get("DIR_DOWNLOAD");
+        try {
+            saveFileFromUrlWithJavaIO(dirName + nameFile, url);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Downloads a File by URL
+     * @param fileName name of file
+     * @param fileUrl url complete
+     * @throws MalformedURLException
+     * @throws IOException
+     */
+    public static void saveFileFromUrlWithJavaIO(final String fileName, final String fileUrl)
+            throws MalformedURLException, IOException {
+        final int numberByte = 1024;
+        BufferedInputStream in = null;
+        FileOutputStream fout = null;
+        try {
+            in = new BufferedInputStream(new URL(fileUrl).openStream());
+            fout = new FileOutputStream(fileName);
+            byte data[] = new byte[numberByte];
+            int count;
+            while ((count = in.read(data, 0, numberByte)) != -1) {
+                fout.write(data, 0, count);
+            }
+        } finally {
+            if (in != null) {
+                in.close();
+            }
+            if (fout != null) {
+                fout.close();
+            }
         }
     }
 }

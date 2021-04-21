@@ -10,21 +10,21 @@
  */
 package org.fundacion.jala.converter.exceptions;
 
-public class PaoPaoException extends Exception{
+public class PaoPaoException extends Exception {
 
     public PaoPaoException() {
         super();
     }
 
-    public PaoPaoException(String message) {
+    public PaoPaoException(final String message) {
         super(message);
     }
 
-    public PaoPaoException(Throwable exception) {
+    public PaoPaoException(final Throwable exception) {
         super(exception);
     }
 
-    public PaoPaoException(String message, Throwable exception) {
+    public PaoPaoException(final String message, final Throwable exception) {
         super(message, exception);
     }
 

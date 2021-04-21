@@ -26,7 +26,7 @@ public class ConverterFacade {
      * @param audioParameter is a object with parameter of audio to convert
      * @return a string of output filename
      */
-    public static String getAudioConverter(AudioParameter audioParameter) {
+    public static String getAudioConverter(final AudioParameter audioParameter) {
         AudioConverter audioConverter = new AudioConverter(audioParameter);
         audioConverter.audioConverter();
         return audioConverter.getOutputFileName();
@@ -38,7 +38,7 @@ public class ConverterFacade {
      * @param videoParameter is a object with parameter of video to convert
      * @return string of output filename
      */
-    public static String getVideoConverter(VideoParameter videoParameter) {
+    public static String getVideoConverter(final VideoParameter videoParameter) {
         VideoConverter converter = new VideoConverter(videoParameter);
         converter.convertVideo();
         return converter.getOutputFileName();

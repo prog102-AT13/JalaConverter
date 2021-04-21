@@ -11,7 +11,6 @@
  */
 package org.fundacion.jala.converter.models.parameter;
 
-import org.fundacion.jala.converter.service.AudioConverter;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,9 +33,11 @@ public class AudioParameter extends Parameter {
     private final String SIX_POINT_ONE_CHANNEL = "7";
     private final String SEVEN_POINT_ONE_CHANNEL = "8";
 
-    public AudioParameter() {}
+    public AudioParameter() { }
 
-    public AudioParameter(final String newFilePath, final String newFormat, final String newBitrate, final String newHz, final String newVolume, final String newAudioChannels) {
+    public AudioParameter(final String newFilePath, final String newFormat,
+                          final String newBitrate, final String newHz, final String newVolume,
+                          final String newAudioChannels) {
         super(newFilePath);
         this.format = newFormat;
         this.bitrate = newBitrate;
@@ -62,13 +63,13 @@ public class AudioParameter extends Parameter {
      */
     public String formatHz() {
         if (!getHz().equals("")) {
-            if (getHz().equals(K20_HERTZ)){
+            if (getHz().equals(K20_HERTZ)) {
                 return " -ar 22050 ";
             }
-            if (getHz().equals(K44_HERTZ)){
+            if (getHz().equals(K44_HERTZ)) {
                 return " -ar 44100 ";
             }
-            if (getHz().equals(K48_HERTZ)){
+            if (getHz().equals(K48_HERTZ)) {
                 return " -ar 48000 ";
             }
         }
@@ -96,10 +97,10 @@ public class AudioParameter extends Parameter {
 
     /**
      * Sets the audio channels
-     * @param audioChannels the value to set
+     * @param newAudioChannels the value to set
      */
-    public void setAudioChannels(final String audioChannels) {
-        this.audioChannels = audioChannels;
+    public void setAudioChannels(final String newAudioChannels) {
+        this.audioChannels = newAudioChannels;
     }
 
     /**
@@ -124,8 +125,9 @@ public class AudioParameter extends Parameter {
                 return " -ac " + SIX_POINT_ONE_CHANNEL + " ";
             case "7.1":
                 return " -ac " + SEVEN_POINT_ONE_CHANNEL + " ";
+                default:
+                    return "";
         }
-        return "";
     }
 
     /**

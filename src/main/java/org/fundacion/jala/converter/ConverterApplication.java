@@ -8,6 +8,7 @@
 package org.fundacion.jala.converter;
 
 import org.fundacion.jala.converter.view.login.LoginInterface;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.apache.logging.log4j.Logger;
@@ -17,7 +18,11 @@ import javax.swing.SwingUtilities;
 @SpringBootApplication
 public class ConverterApplication {
     private static final Logger LOGGER = LogManager.getLogger();
-
+    public static Dotenv dotenv = Dotenv.configure()
+                                        .filename(".env.develop")
+                                        .ignoreIfMalformed()
+                                        .ignoreIfMissing()
+                                        .load();
     public static void main(final String[] args) {
         LOGGER.info("start");
         SpringApplication.run(ConverterApplication.class, args);

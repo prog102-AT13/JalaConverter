@@ -30,7 +30,7 @@ public class ExtractFacade {
      *
      * @param extractTextParameter is a object with parameter of extractText to convert
      */
-    public static void getTextExtract(ExtractTextParameter extractTextParameter) {
+    public static void getTextExtract(final ExtractTextParameter extractTextParameter) {
         ExtractText extractText = new ExtractText(extractTextParameter);
         extractText.extractText();
     }

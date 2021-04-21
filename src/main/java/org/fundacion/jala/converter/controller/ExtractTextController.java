@@ -36,9 +36,11 @@ public class ExtractTextController {
     @PostMapping("/extractText")
     public String uploadFile(final @RequestParam("file")MultipartFile file,
                              final @RequestParam("language") String language,
-                             final @RequestParam("nameOutput") String nameOutput) throws IllegalStateException, IOException {
+                             final @RequestParam("nameOutput") String nameOutput)
+            throws IllegalStateException, IOException {
         LOGGER.info("start");
-        ExtractFacade.getTextExtract(new ExtractTextParameter(fileStorageService.uploadFile(file),language,nameOutput));
+        ExtractFacade.getTextExtract(new ExtractTextParameter(fileStorageService.uploadFile(file),
+                language, nameOutput));
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         String outFilename = nameOutput + ".txt";
         String downloadLink = baseUrl + "/api/download/" + outFilename;

@@ -22,6 +22,7 @@ class OutputSettings extends JPanel {
     private JComboBox<FrameVideo> framesSelect;
     private JCheckBox optionCSound;
     private JCheckBox thumbnailOption;
+    private JCheckBox metadataOption;
     private final int alignLabelStyle = 2;
     private final int widthLabelStyle = 70;
     private final int heightLabelStyle = 30;
@@ -29,7 +30,7 @@ class OutputSettings extends JPanel {
     private final int dimensionHeight = 30;
     private final int fontStyle = 0;
     private final int fontSize = 12;
-    private final int gridLayoutRows = 3;
+    private final int gridLayoutRows = 4;
     private final int gridLayoutCols = 2;
 
     /**
@@ -51,6 +52,8 @@ class OutputSettings extends JPanel {
         optionCSound.setSelected(true);
         thumbnailOption = new JCheckBox("With Thumbnail");
         thumbnailOption.setFont(new Font("Barlow", fontStyle, fontSize));
+        metadataOption = new JCheckBox("Metadata");
+        metadataOption.setFont(new Font("Barlow", fontStyle, fontSize));
         setLayout(new GridLayout(gridLayoutRows, gridLayoutCols));
         add(resolutionLabel.getTextLabel());
         add(resolutionComboBox);
@@ -58,6 +61,7 @@ class OutputSettings extends JPanel {
         add(framesSelect);
         add(optionCSound);
         add(thumbnailOption);
+        add(metadataOption);
     }
 
     /**
@@ -66,13 +70,13 @@ class OutputSettings extends JPanel {
     protected void setResolutionSelect() {
         resolutionComboBox = new JComboBox<ResolutionVideo>(
                 new ResolutionVideo[]{
-                        new ResolutionVideo("720p(HD)", 1280, 720),
-                        new ResolutionVideo("1920p", 1080, 1920),
-                        new ResolutionVideo("480p", 854, 480),
-                        new ResolutionVideo("240p", 426, 240),
-                        new ResolutionVideo("DVD", 720, 567),
-                        new ResolutionVideo("TV", 640, 480),
-                        new ResolutionVideo("Mobile", 320, 240)}
+                        new ResolutionVideo("720p(HD)", "1280", "720"),
+                        new ResolutionVideo("1920p", "1080", "1920"),
+                        new ResolutionVideo("480p", "854", "480"),
+                        new ResolutionVideo("240p", "426", "240"),
+                        new ResolutionVideo("DVD", "720", "567"),
+                        new ResolutionVideo("TV", "640", "480"),
+                        new ResolutionVideo("Mobile", "320", "240")}
         );
     }
 
@@ -82,19 +86,19 @@ class OutputSettings extends JPanel {
     protected void setFrameSelect() {
         framesSelect = new JComboBox<FrameVideo>(
                 new FrameVideo[]{
-                        new FrameVideo(21),
-                        new FrameVideo(24),
-                        new FrameVideo(27),
-                        new FrameVideo(29),
-                        new FrameVideo(30),
-                        new FrameVideo(60)});
+                        new FrameVideo("21"),
+                        new FrameVideo("24"),
+                        new FrameVideo("27"),
+                        new FrameVideo("29"),
+                        new FrameVideo("30"),
+                        new FrameVideo("60")});
     }
 
     /**
      * Gets selected width resolution for video converter.
      * @return int, width selected of Resolution.
      */
-    protected int getWidthResolution() {
+    protected String getWidthResolution() {
         ResolutionVideo item = (ResolutionVideo) resolutionComboBox.getSelectedItem();
         return item.getWidth();
     }
@@ -103,7 +107,7 @@ class OutputSettings extends JPanel {
      * Gets selected Height resolution for video converter.
      * @return int, Height selected of Resolution.
      */
-    protected int getHeightResolution() {
+    protected String getHeightResolution() {
         ResolutionVideo resolutionVideo = (ResolutionVideo) resolutionComboBox.getSelectedItem();
         return resolutionVideo.getHeight();
     }
@@ -112,7 +116,7 @@ class OutputSettings extends JPanel {
      * Gets the selected frame for video converter.
      * @return String, option selected of Frame.
      */
-    protected int getFrame() {
+    protected String getFrame() {
         FrameVideo frameVideo = (FrameVideo) framesSelect.getSelectedItem();
         return frameVideo.getFrame();
     }
@@ -131,5 +135,12 @@ class OutputSettings extends JPanel {
      */
     protected boolean isThumbnailRequired() {
         return thumbnailOption.isSelected();
+    }
+    /**
+     * Gets if metadata is required for video converter.
+     * @return true if metadata is required, false if not.
+     */
+    protected boolean isMetadataRequired() {
+        return metadataOption.isSelected();
     }
 }

@@ -5,6 +5,8 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Cristian Choque Quispe
  */
 package org.fundacion.jala.converter.models;
 
@@ -13,7 +15,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
-public class ProjectSQL {
+public class AssetSQL {
 
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jalaPersistence");
 
@@ -23,16 +25,16 @@ public class ProjectSQL {
      * @param pathProject path the archive
      * @param checksum string checksum of the archive
      */
-    public static void insertProjectData(final String projectName, final String pathProject, final String checksum, final int userId) {
+    public static void insertAssetData(final String projectName, final String pathProject, final String checksum, final int userId) {
         EntityManager manager = emf.createEntityManager();
         manager.getTransaction().begin();
         User editUser = manager.find(User.class, userId);
-        Project project = new Project();
-        project.setTitle(projectName);
-        project.setPath(pathProject);
-        project.setChecksum(checksum);
-        project.setUser(editUser);
-        manager.persist(project);
+        Asset asset = new Asset();
+        asset.setTitle(projectName);
+        asset.setPath(pathProject);
+        asset.setChecksum(checksum);
+        asset.setUser(editUser);
+        manager.persist(asset);
         manager.getTransaction().commit();
         manager.close();
     }
@@ -58,12 +60,12 @@ public class ProjectSQL {
 
     /**
      * Deletes a project
-     * @param projectId int with the project id
+     * @param assetId int with the project id
      */
-    public static void deleteProject(final int projectId) {
+    public static void deleteProject(final int assetId) {
         EntityManager manager = emf.createEntityManager();
         manager.getTransaction().begin();
-        Project deleteProject = manager.find(Project.class, projectId);
+        Asset deleteProject = manager.find(Asset.class, assetId);
         manager.remove(deleteProject);
         manager.getTransaction().commit();
         manager.close();
@@ -74,12 +76,12 @@ public class ProjectSQL {
      * @return a list of projects
      */
     @SuppressWarnings("unchecked")
-    public static List<Project> listProject() {
+    public static List<Asset> listAsset() {
         EntityManager manager = emf.createEntityManager();
         manager.getTransaction().begin();
-        List<Project> projectList = manager.createQuery("from Project", Project.class).getResultList();
+        List<Asset> assetList = manager.createQuery("from Asset", Asset.class).getResultList();
         manager.getTransaction().commit();
         manager.close();
-        return projectList;
+        return assetList;
     }
 }

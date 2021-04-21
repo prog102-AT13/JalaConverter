@@ -9,10 +9,6 @@
  * @author Daniela Santa Cruz
  * @colaborathor Paola Aguilar
  */
-/**
- * @author Daniela Santa Cruz
- * @colaborathor Paola Aguilar
- */
 package org.fundacion.jala.converter.controller;
 
 import org.fundacion.jala.converter.models.facade.ConverterFacade;
@@ -32,23 +28,24 @@ import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetada
 @RequestMapping("/api")
 public class VideoConverterController {
     @Autowired
-    FileStorageService fileStorageService;
+    private FileStorageService fileStorageService;
 
     /**
      * Endpoint for convertVideo
      */
     @PostMapping("/convertVideo")
-    public String uploadFile(@RequestParam("file") MultipartFile file,
-                             @RequestParam("outputformat") String outputFormat,
-                             @RequestParam("resolution") String resolution,
-                             @RequestParam("thumbnail") boolean thumbnail,
-                             @RequestParam("framerate") int frameRate,
-                             @RequestParam("width") int width,
-                             @RequestParam("height") int height,
-                             @RequestParam("audio") boolean audio,
-                             @RequestParam("metadata") String metadata
+    public String uploadFile(final @RequestParam("file") MultipartFile file,
+                             final @RequestParam("outputformat") String outputFormat,
+                             final @RequestParam("resolution") String resolution,
+                             final @RequestParam("thumbnail") boolean thumbnail,
+                             final @RequestParam("framerate") int frameRate,
+                             final @RequestParam("width") int width,
+                             final @RequestParam("height") int height,
+                             final @RequestParam("audio") boolean audio,
+                             final @RequestParam("metadata") String metadata
     ) throws IllegalStateException, IOException {
-        String outputFilename = ConverterFacade.getVideoConverter(new VideoParameter(fileStorageService.uploadFile(file), outputFormat,
+        String outputFilename = ConverterFacade.getVideoConverter(new VideoParameter(fileStorageService
+                .uploadFile(file), outputFormat,
                 resolution, thumbnail, frameRate, width, height, audio));
         extractMetadata(metadata, outputFilename, fileStorageService);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
