@@ -9,7 +9,7 @@
 
         <!--Here represent the class for the Entities-->
         <class>org.fundacion.jala.converter.models.User</class>
-        <class>org.fundacion.jala.converter.models.Project</class>
+        <class>org.fundacion.jala.converter.models.Asset</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />

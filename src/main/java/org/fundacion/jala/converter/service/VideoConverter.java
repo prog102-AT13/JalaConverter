@@ -5,14 +5,19 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  */
-package org.fundacion.jala.converter.service.videoclasses;
+/**
+ * @author Daniela Santa Cruz
+ * @colaborathor Paola Aguilar
+ */
+package org.fundacion.jala.converter.service;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.models.parameter.VideoParameter;
 import org.springframework.stereotype.Service;
 
 @Service
-public class Converter {
+public class VideoConverter {
     private String startFirstCommand = "ffmpeg -i ";
     private VideoParameter parameter;
     private String format;
@@ -23,16 +28,15 @@ public class Converter {
     private static final int INIT_NUMBER = 20;
     private static final Logger LOGGER = LogManager.getLogger();
 
-    public Converter(final VideoParameter videoParameter) {
+    public VideoConverter(final VideoParameter videoParameter) {
         this.parameter = videoParameter;
     }
 
     /**
-     * Converts the input video
-     * @param pathFile string with the input path
+     * Converts the input video.
      */
-    public void convertVideo(final String pathFile) {
-        String adaptPath = "\"" + pathFile + "\"";
+    public void convertVideo() {
+        String adaptPath = "\"" + parameter.getFilePath() + "\"";
         format = parameter.getOutputFormat();
         output = adaptPath.substring((adaptPath.lastIndexOf("\\") + 1), adaptPath.lastIndexOf(".") + 1) + format;
         setOutputFileName(output);
@@ -61,7 +65,7 @@ public class Converter {
     }
 
     /**
-     * Changes the resolution and aspect ratio of the input video
+     * Changes the resolution and aspect ratio of the input video.
      * @return resolution command
      */
     private String changeResolution() {
@@ -80,12 +84,15 @@ public class Converter {
     }
 
     /**
-     * Generates a input video thumbnail
+     * Generates a input video thumbnail.
      */
     private void generateAThumbnail() {
         String name = getOutputFileName().substring(0, getOutputFileName().lastIndexOf("."));
         String startCommand = "ffmpeg -i ";
-        String outputCommand = pathOutput + output + "\"" + " -ss 00:00:01 -vframes 1 -s 128x128 " + pathOutput + name + ".png\"";
+        String outputCommand = pathOutput + output + "\"" + " -ss 00:00:01 -vframes 1 -s 128x128 "
+                + pathOutput
+                + name
+                + ".png\"";
         String thumbnailCommand = startCommand + outputCommand;
         try {
             LOGGER.info("Execute Try");
@@ -98,7 +105,7 @@ public class Converter {
     }
 
     /**
-     * Removes the audio of the input video
+     * Removes the audio of the input video.
      * @return audio command
      */
     private String removeAudio() {
@@ -112,7 +119,7 @@ public class Converter {
     }
 
     /**
-     * Changes the input video frame rate
+     * Changes the input video frame rate.
      * @return frame command
      */
     private String changeFrameRate() {
@@ -126,7 +133,7 @@ public class Converter {
     }
 
     /**
-     * Sets the output file name
+     * Sets the output file name.
      * @param newOutputFileName String with the output file name
      */
     public void setOutputFileName(final String newOutputFileName) {
@@ -134,7 +141,7 @@ public class Converter {
     }
 
     /**
-     * Gets the output file name
+     * Gets the output file name.
      * @return outputFileName
      */
     public String getOutputFileName() {

@@ -38,7 +38,7 @@ public class ExportTypeFile {
      * @param nameExport define name of file which it is exported.
      */
     private void buildFileName(final String nameExport) {
-        if (nameExport == "Default" || nameExport == "") {
+        if ("Default" == nameExport || "" == nameExport || "Default".equals(nameExport)) {
             setDefaultNameFileWithTypeOfFile();
             return;
         }
@@ -55,6 +55,7 @@ public class ExportTypeFile {
         if (typeExport == TypeFileExport.HTML) exportFileHtml();
         if (typeExport == TypeFileExport.XMP) exportFileXMP();
     }
+
     /**
      * Defines name that the file are exported.
      * set nameFileExport.

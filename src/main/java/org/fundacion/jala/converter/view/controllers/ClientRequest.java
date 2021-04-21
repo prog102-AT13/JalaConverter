@@ -24,7 +24,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.fundacion.jala.converter.view.Models.IrequestForm;
+import org.fundacion.jala.converter.view.Models.IRequestForm;
 import org.fundacion.jala.converter.view.Models.Parameter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -42,7 +42,7 @@ public class ClientRequest {
     private HttpPost httpPost;
     private MultipartEntityBuilder builder;
     private HttpEntity multipart;
-    private IrequestForm requestForm;
+    private IRequestForm requestForm;
     private final String defaultCharset = "UTF-8";
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -61,7 +61,7 @@ public class ClientRequest {
      * @throws ClientProtocolException
      * @throws IOException
      */
-    public String executeRequest(final IrequestForm newRequestForm) throws ClientProtocolException, IOException {
+    public String executeRequest(final IRequestForm newRequestForm) throws ClientProtocolException, IOException {
         this.requestForm = newRequestForm;
         httpPost = new HttpPost(requestForm.getURL());
         builder = MultipartEntityBuilder.create();

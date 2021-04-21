@@ -5,12 +5,16 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  */
-package org.fundacion.jala.converter.service.videoclasses;
+/**
+ * @author Daniela Santa Cruz
+ * @colaborathor Paola Aguilar
+ */
+package org.fundacion.jala.converter.models.parameter;
 
 import org.springframework.stereotype.Service;
 
 @Service
-public class VideoParameter {
+public class VideoParameter extends Parameter {
     private String outputFormat;
     private String resolution;
     private boolean thumbnail;
@@ -20,8 +24,23 @@ public class VideoParameter {
     private int height;
     private boolean audio;
 
+    public VideoParameter() { }
+
+    public VideoParameter(final String filePath, final String newOutputFormat, final String newResolution,
+                          final boolean newThumbnail, final int newFrameRate, final int newWidth,
+                          final int newHeight, final boolean newAudio) {
+        super(filePath);
+        this.outputFormat = newOutputFormat;
+        this.resolution = newResolution;
+        this.thumbnail = newThumbnail;
+        this.frameRate = newFrameRate;
+        this.width = newWidth;
+        this.height = newHeight;
+        this.audio = newAudio;
+    }
+
     /**
-     * Sets the name of the output video
+     * Sets the name of the output video.
      * @param newOutputFormat String with the output format
      */
     public void setOutputFormat(final String newOutputFormat) {
@@ -29,7 +48,7 @@ public class VideoParameter {
     }
 
     /**
-     * Sets the resolution of the output video
+     * Sets the resolution of the output video.
      * @param newResolution String with the video resolution
      */
     public void setResolution(final String newResolution) {
@@ -37,7 +56,7 @@ public class VideoParameter {
     }
 
     /**
-     * Sets the width of the output video
+     * Sets the width of the output video.
      * @param newWidth int with the video width
      */
     public void setWidth(final int newWidth) {
@@ -45,7 +64,7 @@ public class VideoParameter {
     }
 
     /**
-     * Sets the height of the output video
+     * Sets the height of the output video.
      * @param newHeight int with the video height
      */
     public void setHeight(final int newHeight) {
@@ -53,15 +72,15 @@ public class VideoParameter {
     }
 
     /**
-     * Sets the audio of the output video
-     * @param newAudio boolean that indicates if the video has to have audio or not
+     * Sets the audio of the output video.
+     * @param newAudio boolean that indicates if the video needs audio
      */
     public void setAudio(final boolean newAudio) {
         this.audio = newAudio;
     }
 
     /**
-     * Sets the frame rate of the output video
+     * Sets the frame rate of the output video.
      * @param newFrameRate int with the video frame rate
      */
     public void setFrameRate(final int newFrameRate) {
@@ -69,15 +88,15 @@ public class VideoParameter {
     }
 
     /**
-     * Sets the thumbnail of the output video
-     * @param newThumbnail boolean that indicates if the video has to have tumbnail
+     * Sets the thumbnail of the output video.
+     * @param newThumbnail boolean that indicates if the video needs thumbnail
      */
     public void setThumbnail(final boolean newThumbnail) {
         this.thumbnail = newThumbnail;
     }
 
     /**
-     * Gets the name of the output video
+     * Gets the name of the output video.
      * @return outputFormat
      */
     public String getOutputFormat() {
@@ -85,7 +104,7 @@ public class VideoParameter {
     }
 
     /**
-     * Gets the resolution of the output video
+     * Gets the resolution of the output video.
      * @return resolution
      */
     public String getResolution() {
@@ -93,7 +112,7 @@ public class VideoParameter {
     }
 
     /**
-     * Gets the width of the output video
+     * Gets the width of the output video.
      * @return width
      */
     public int getWidth() {
@@ -101,7 +120,7 @@ public class VideoParameter {
     }
 
     /**
-     * Gets the height of the output video
+     * Gets the height of the output video.
      * @return height
      */
     public int getHeight() {
@@ -109,7 +128,7 @@ public class VideoParameter {
     }
 
     /**
-     * Gets the audio of the output video
+     * Gets the audio of the output video.
      * @return audio
      */
     public boolean hasAudio() {
@@ -117,7 +136,7 @@ public class VideoParameter {
     }
 
     /**
-     * Gets the frame rate of the output video
+     * Gets the frame rate of the output video.
      * @return frame rate
      */
     public int getFrameRate() {
@@ -125,7 +144,7 @@ public class VideoParameter {
     }
 
     /**
-     * Gets the thumbnail of the output video
+     * Gets the thumbnail of the output video.
      * @return thumbnail
      */
     public boolean hasThumbnail() {

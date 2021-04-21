@@ -37,12 +37,14 @@ public class MetaDataInterface extends JPanel implements ActionListener {
         file = new SelectFile();
         exportInfo = new ExportingFormat();
         outputInfo = new OutputInfo();
+
         convertMetaData = new JButton("Convert");
         convertMetaData.setAlignmentX(CENTER_ALIGNMENT);
         convertMetaData.addActionListener(this::actionPerformed);
         convertMetaData.setFont(new Font("Barlow", fontStyle, fontSize));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(new EmptyBorder(topBorder, leftBorder, bottomBorder, rightBorder));
+
         add(file);
         add(exportInfo);
         add(outputInfo);

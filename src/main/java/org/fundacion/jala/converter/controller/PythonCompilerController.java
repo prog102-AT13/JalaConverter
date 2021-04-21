@@ -10,12 +10,14 @@ package org.fundacion.jala.converter.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.fundacion.jala.converter.service.FileStorageService;
-import org.fundacion.jala.converter.service.pythoncompiler.Python;
-import org.fundacion.jala.converter.service.pythoncompiler.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.fundacion.jala.converter.models.facade.CompilerFacade;
+import org.fundacion.jala.converter.models.parameter.PythonEnum;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.fundacion.jala.converter.models.parameter.PythonParameter;
+import org.fundacion.jala.converter.service.PythonCompiler;
 import java.io.IOException;
 
 @RestController
@@ -29,11 +31,11 @@ public class PythonCompilerController {
     @PostMapping("/compilePython")
     public String compilePython(final @RequestParam("code") String code) throws IllegalStateException, IOException {
         LOGGER.info("start");
-        if (!code.isBlank() || !code.equals(null)){
+        if (!code.isBlank() || !code.equals(null)) {
             PythonCompiler pythonCompiler = new PythonCompiler();
             String filePath = Transform.toFile(code, "filetocompile", "py");
             LOGGER.info("finish");
-            return pythonCompiler.compiler(Python.V3, filePath);
+            return CompilerFacade.facadePythonCompile(new PythonParameter(filePath, PythonEnum.V3));
         }
         return "";
     }
