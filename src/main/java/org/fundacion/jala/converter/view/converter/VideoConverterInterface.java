@@ -1,6 +1,5 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -23,7 +22,9 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
+import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;
 
 public class VideoConverterInterface extends JPanel implements ActionListener {
     private SelectFile file;
@@ -40,6 +41,7 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
     private final int rightBorder = 70;
     private final int fontStyle = 0;
     private final int fontSize = 12;
+    private String checksumLocal;
 
     /**
      * Sets all the graphics elements for the main interface of Video Converter.
@@ -73,58 +75,68 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
      */
     @Override
     public void actionPerformed(final ActionEvent e) {
-        LOGGER.info("Start");
-        JOptionPane.showMessageDialog(this, "File Path: "
-                + file.getOriginFilePath()
-                + "\nConvert to:"
-                + menuConverterType.getConvertTo()
-                + "\nResolutionWidth: "
-                + settings.getWidthResolution()
-                + "\nResolutionHeight: "
-                + settings.getHeightResolution()
-                + "\nFrames: "
-                + settings.getFrame()
-                + "\nSound: "
-                + settings.isAudioSelected()
-                + "\nThumbnail: "
-                + settings.isThumbnailRequired()
-                + "\nMetadata: "
-                + settings.isMetadataRequired());
+        LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");
+            checksumLocal = getFileChecksum(file.getOriginFilePath());
+            JOptionPane.showMessageDialog(this, "File Path: "
+                    + file.getOriginFilePath()
+                    + "\nConvert to:"
+                    + menuConverterType.getConvertTo()
+                    + "\nResolutionWidth: "
+                    + settings.getWidthResolution()
+                    + "\nResolutionHeight: "
+                    + settings.getHeightResolution()
+                    + "\nFrames: "
+                    + settings.getFrame()
+                    + "\nSound: "
+                    + settings.isAudioSelected()
+                    + "\nThumbnail: "
+                    + settings.isThumbnailRequired()
+                    + "\nMetadata: "
+                    + settings.isMetadataRequired()
+                    + "\nChecksum: "
+                    + checksumLocal);
             callRequest();
-        } catch (Exception ex) {
-            LOGGER.error("Execute Exception to metaData conversion");
-            ex.printStackTrace();
+            LOGGER.info("finish");
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+            LOGGER.error("Execute Exception");
+        } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
+            noSuchAlgorithmException.printStackTrace();
+            LOGGER.error("Execute Exception");
         }
         LOGGER.info("Finish");
     }
+
     /**
      * Obtains the request
      * @throws IOException
      */
     private void callRequest() throws IOException {
         LOGGER.info("start");
-        VideoRequestForm videoRequestForm = new VideoRequestForm();
-        videoRequestForm.addFilepath(file.getOriginFilePath());
-        videoRequestForm.addOutputFormat(menuConverterType.getConvertTo());
-        videoRequestForm.addThumbnail(String.valueOf(settings.isThumbnailRequired()));
-        videoRequestForm.addFrameRate(settings.getFrame());
-        videoRequestForm.addWidth(settings.getWidthResolution());
-        videoRequestForm.addHeight(settings.getHeightResolution());
-        videoRequestForm.addAudio(String.valueOf(settings.isAudioSelected()));
-        videoRequestForm.addMetadata(String.valueOf(settings.isMetadataRequired()));
-        videoRequestForm.addResolution(settings.getWidthResolution());
         try {
             LOGGER.info("Execute Try");
+            VideoRequestForm videoRequestForm = new VideoRequestForm();
+            videoRequestForm.addFilepath(file.getOriginFilePath());
+            videoRequestForm.addOutputFormat(menuConverterType.getConvertTo());
+            videoRequestForm.addThumbnail(String.valueOf(settings.isThumbnailRequired()));
+            videoRequestForm.addFrameRate(settings.getFrame());
+            videoRequestForm.addWidth(settings.getWidthResolution());
+            videoRequestForm.addHeight(settings.getHeightResolution());
+            videoRequestForm.addAudio(String.valueOf(settings.isAudioSelected()));
+            videoRequestForm.addResolution(settings.getWidthResolution());
+            videoRequestForm.addChecksum(checksumLocal);
+            videoRequestForm.addMetadata(String.valueOf(settings.isMetadataRequired()));
             String result = clientRequest.executeRequest(videoRequestForm);
-            JOptionPane.showMessageDialog(this, "Downloaded in :\n"
-                    + System.getProperty("user.home") + dotenv.get("DIR_DOWNLOAD"));
+            clientRequest.downloadFile(result);
+            JOptionPane.showMessageDialog(this, "Download in :\n" + System.getProperty("user.home") + dotenv.get("DIR_DOWNLOAD"));
             System.getProperty("file.separator");
             System.out.println(result);
-        } catch (IOException e) {
-            LOGGER.error("Execute Exception to obtain the request");
-            e.printStackTrace();
+            LOGGER.info("finish");
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+            LOGGER.error("Execute Exception");
         }
         LOGGER.info("Finish");
     }
