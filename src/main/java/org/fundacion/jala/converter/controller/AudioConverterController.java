@@ -5,13 +5,15 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @colaborathor Cristian Choque Quispe
  */
 package org.fundacion.jala.converter.controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.models.Asset;
+import org.fundacion.jala.converter.models.facade.ConverterFacade;
 import org.fundacion.jala.converter.models.parameter.AudioParameter;
-import org.fundacion.jala.converter.service.AudioConverter;
 import org.fundacion.jala.converter.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -38,28 +39,26 @@ import static org.fundacion.jala.converter.service.ZipService.*;
 public class AudioConverterController {
     @Autowired
     private FileStorageService fileStorageService;
-    @Autowired
-    private AudioConverter audioConverter;
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**
      * Endpoint for audio converter
      */
     @PostMapping("/convertAudio")
-    public String uploadFile(@RequestParam("file") MultipartFile file,
-                             @RequestParam("format") String format,
-                             @RequestParam("bitrate") String bitrate,
-                             @RequestParam("volume") String volume,
-                             @RequestParam("hz") String hz,
-                             @RequestParam("audiochannel") String audioChannel,
-                             @RequestParam("checksum") String checksum,
-                             @RequestParam("metadata") String metadata) throws IllegalStateException, IOException, InterruptedException {
+    public String uploadFile(final @RequestParam("file") MultipartFile file,
+                             final @RequestParam("format") String format,
+                             final @RequestParam("bitrate") String bitrate,
+                             final @RequestParam("volume") String volume,
+                             final @RequestParam("hz") String hz,
+                             final @RequestParam("audiochannel") String audioChannel,
+                             final @RequestParam("checksum") String checksum,
+                             final @RequestParam("metadata") String metadata) throws IllegalStateException, IOException, InterruptedException {
         String filename;
         String storagePath;
         String checksumLocal = checksum;
-        final int WAIT_TIME = 6000;
+        final int waitTime = 6000;
         boolean exist = false;
-        final int USER_ID = 2;
+        final int userID = 1;
         List<Asset> assets = listAsset();
         List<String> resultTitle = getTitles(checksum, assets);
         List<String> resultPath = getPath(checksum, assets);
@@ -81,27 +80,23 @@ public class AudioConverterController {
                 LOGGER.error("Execute Exception" + e.getLocalizedMessage());
             }
         }
-
-
-        audioConverter = new AudioConverter(new AudioParameter(storagePath, format, bitrate, hz, volume, audioChannel));
-        audioConverter.audioConverter();
-        String outputFilename = audioConverter.getOutputFileName();
+        String outputFilename= ConverterFacade.getAudioConverter(new AudioParameter(storagePath, format, bitrate, hz, volume, audioChannel));
         String outputPath = FileStorageService.getOutputPath(filename);
         String nameWithoutExtension = outputFilename.substring(0, outputFilename.lastIndexOf(".") + 1);
         extractMetadata(metadata, outputFilename, fileStorageService);
         String pathFile = storagePath.substring(0, storagePath.lastIndexOf(System.getProperty("file.separator")) + 1);
 
         if (!(resultTitle.size() > 0)) {
-            insertAssetData(filename, pathFile, checksumLocal, USER_ID);
+            insertAssetData(filename, pathFile, checksumLocal, userID);
         }
         if (metadata.equals("true")) {
             ArrayList<String> zipList = new ArrayList<>();
             zipList.add(pathFile + outputFilename);
             zipList.add(pathFile + nameWithoutExtension + "txt");
-            Thread.sleep(WAIT_TIME);
+            Thread.sleep(waitTime);
             zipFiles(zipList, pathFile + nameWithoutExtension + "zip");
         } else {
-            Thread.sleep(WAIT_TIME);
+            Thread.sleep(waitTime);
             zipFile(pathFile + outputFilename, pathFile + nameWithoutExtension + "zip");
             System.out.println();
         }
@@ -110,13 +105,13 @@ public class AudioConverterController {
         return downloadLink;
     }
 
-    private List<String> getPath(String checksum, List<Asset> assets) {
+    private List<String> getPath(final String checksum, final List<Asset> assets) {
         return assets.stream().filter(project -> project.getChecksum().equals(checksum))
                     .map(asset -> asset.getPath())
                     .collect(Collectors.toList());
     }
 
-    private List<String> getTitles(String checksum, List<Asset> assets) {
+    private List<String> getTitles(final String checksum, final List<Asset> assets) {
         return assets.stream().filter(project -> project.getChecksum().equals(checksum))
                     .map(asset -> asset.getTitle())
                     .collect(Collectors.toList());
