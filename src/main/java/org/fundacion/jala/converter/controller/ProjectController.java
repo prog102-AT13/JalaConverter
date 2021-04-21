@@ -23,6 +23,7 @@ public class ProjectController {
 
     /**
      * Endpoint for create a project in data base
+     * @return int with the id og the project
      */
     @PostMapping("/projects")
     public int createProject(final @RequestParam("projectName") String projectName,
