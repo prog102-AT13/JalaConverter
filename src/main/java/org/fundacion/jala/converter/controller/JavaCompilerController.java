@@ -33,10 +33,10 @@ public class JavaCompilerController {
     public String compileJava(final @RequestParam("code") String code) throws IllegalStateException, IOException {
         LOGGER.info("start");
         if (!code.isBlank() || !code.equals(null)){
-            JavaCompiler javaCompiler = new JavaCompiler();
+//            JavaCompiler javaCompiler = new JavaCompiler();
             String filePath = Transform.toFile(code, "Main", "java");
             LOGGER.info("finish");
-            return javaCompiler.javaCompiler(new JavaParameter(JavaVersion.JAVA_11, filePath));
+            return CompilerFacade.facadeJavaCompile (new JavaParameter(JavaVersion.JAVA_11, filePath));
         }
         return "";
     }
