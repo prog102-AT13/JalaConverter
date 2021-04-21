@@ -10,16 +10,20 @@
 package org.fundacion.jala.converter.view.metadata;
 
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
+
 import javax.swing.JPanel;
+import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
 import javax.swing.border.EmptyBorder;
-import java.awt.GridLayout;
 import java.awt.Font;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 
 class ExportingFormat extends JPanel {
-    private JCheckBox txtCheck;
-    private JCheckBox htmlCheck;
-    private JCheckBox xmpCheck;
+    private JComboBox convertTo;
+    private JCheckBox checkMoreInfo;
+    private final int dimensionWidth = 30;
+    private final int dimensionHeight = 30;
     private final int alignLabelStyle = 2;
     private final int widthLabelStyle = 60;
     private final int heightLabelStyle = 0;
@@ -41,42 +45,35 @@ class ExportingFormat extends JPanel {
                 alignLabelStyle, widthLabelStyle, heightLabelStyle);
         JLabelStyle outPutTitle = new JLabelStyle("Output Information", "h2",
                 alignLabelStyle, widthLabelStyle, heightLabelStyle);
-        txtCheck = new JCheckBox(".txt");
-        txtCheck.setFont(new Font("Barlow", fontStyle, fontSize));
-        htmlCheck = new JCheckBox(".html");
-        htmlCheck.setFont(new Font("Barlow", fontStyle, fontSize));
-        xmpCheck = new JCheckBox(".xmp");
-        xmpCheck.setFont(new Font("Barlow", fontStyle, fontSize));
+        convertTo = new JComboBox();
+        convertTo.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
+        convertTo.setFont(new Font("Barlow", fontStyle, fontSize));
+        convertTo.addItem("txt");
+        convertTo.addItem("html");
+        convertTo.addItem("xmp");
+        checkMoreInfo = new JCheckBox("More metadata information");
+        checkMoreInfo.setFont(new Font("Barlow", fontStyle, fontSize));
         setLayout(new GridLayout(gridLayoutRows, gridLayoutCols));
         setBorder(new EmptyBorder(topBorder, leftBorder, bottomBorder, rightBorder));
         add(formatTitle.getTextLabel());
-        add(txtCheck);
-        add(htmlCheck);
-        add(xmpCheck);
+        add(convertTo);
         add(outPutTitle.getTextLabel());
+        add(checkMoreInfo);
     }
 
     /**
-     * Returns if Txt checkbox is selected.
-     * @return true if is selected, false if not.
+     * Gets if checkOutputName is required for metadata.
+     * @return true if is the same name, false if not.
      */
-    protected String txtChecked() {
-        return txtCheck.isSelected() ? "format Txt\n" : "";
+    protected boolean hasMoreInfo() {
+        return checkMoreInfo.isSelected();
     }
 
     /**
-     * Returns if Html checkbox is selected.
-     * @return true if is selected, false if not.
+     * Returns the selected option to conversion.
+     * @return String with the selected option.
      */
-    protected String isHtmlChecked() {
-        return htmlCheck.isSelected() ? "format HTML\n" : "";
-    }
-
-    /**
-     * Returns if Xmp checkbox is selected.
-     * @return true if is selected, false if not.
-     */
-    protected String isXmpChecked() {
-        return xmpCheck.isSelected() ? "format Xmp\n" : "";
+    protected String getConvertTo() {
+        return convertTo.getSelectedItem().toString();
     }
 }

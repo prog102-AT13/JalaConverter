@@ -142,7 +142,8 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
 
             String result = clientRequest.executeRequest(audioRequestForm);
             clientRequest.downloadFile(result);
-            JOptionPane.showMessageDialog(this, "Download in :\n" + System.getProperty("user.home") + dotenv.get("DIR_DOWNLOAD"));
+            JOptionPane.showMessageDialog(this, "Downloaded in :\n"
+                    + System.getProperty("user.home") + dotenv.get("DIR_DOWNLOAD"));
             System.out.println(result);
             LOGGER.info("finish");
         } catch (IOException | NoSuchAlgorithmException ioException) {
