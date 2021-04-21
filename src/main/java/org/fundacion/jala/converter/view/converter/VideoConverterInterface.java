@@ -24,6 +24,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import static org.fundacion.jala.converter.ConverterApplication.dotenv;
+
 public class VideoConverterInterface extends JPanel implements ActionListener {
     private SelectFile file;
     private ConverterTypeSelect menuConverterType;
@@ -86,7 +88,9 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
                 + "\nSound: "
                 + settings.isAudioSelected()
                 + "\nThumbnail: "
-                + settings.isThumbnailRequired());
+                + settings.isThumbnailRequired()
+                + "\nMetadata: "
+                + settings.isMetadataRequired());
         try {
             LOGGER.info("Execute Try");
             callRequest();
@@ -105,27 +109,18 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
         VideoRequestForm videoRequestForm = new VideoRequestForm();
         videoRequestForm.addFilepath(file.getOriginFilePath());
         videoRequestForm.addOutputFormat(menuConverterType.getConvertTo());
-        System.out.println("Edson here log");
-        System.out.println(file.getOriginFilePath());
-        System.out.println(menuConverterType.getConvertTo());
-        System.out.println(settings.getFrame());
-        System.out.println(settings.getWidthResolution());
-        System.out.println(settings.getHeightResolution());
-        System.out.println(settings.isAudioSelected());
-        System.out.println(settings.isThumbnailRequired());
-        System.out.println(settings);
-        System.out.println("finis log ------------------------");
-        videoRequestForm.addOutputFormat(menuConverterType.getConvertTo());
-        videoRequestForm.addResolution(settings.getWidthResolution());
         videoRequestForm.addThumbnail(String.valueOf(settings.isThumbnailRequired()));
         videoRequestForm.addFrameRate(settings.getFrame());
         videoRequestForm.addWidth(settings.getWidthResolution());
         videoRequestForm.addHeight(settings.getHeightResolution());
         videoRequestForm.addAudio(String.valueOf(settings.isAudioSelected()));
+        videoRequestForm.addMetadata(String.valueOf(settings.isMetadataRequired()));
+        videoRequestForm.addResolution(settings.getWidthResolution());
         try {
             LOGGER.info("Execute Try");
             String result = clientRequest.executeRequest(videoRequestForm);
-            JOptionPane.showMessageDialog(this, "Download Link:\n" + result);
+            JOptionPane.showMessageDialog(this, "Download in :\n" + System.getProperty("user.home") + dotenv.get("DIR_DOWNLOAD"));
+            System.getProperty("file.separator");
             System.out.println(result);
         } catch (IOException e) {
             LOGGER.error("Execute Exception to obtain the request");

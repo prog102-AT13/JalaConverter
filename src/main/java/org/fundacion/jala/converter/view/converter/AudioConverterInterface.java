@@ -24,6 +24,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import static org.fundacion.jala.converter.ConverterApplication.dotenv;
+
 public class AudioConverterInterface extends JPanel implements ActionListener {
     private SelectFile file;
     private ConvertTypeSelectAudio audioSelect;
@@ -128,7 +130,8 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         try {
             LOGGER.info("Execute Try");
             String result = clientRequest.executeRequest(audioRequestForm);
-            JOptionPane.showMessageDialog(this, "Download Link:\n" + result);
+            clientRequest.downloadFile(result);
+            JOptionPane.showMessageDialog(this, "Download in :\n" + System.getProperty("user.home") + dotenv.get("DIR_DOWNLOAD"));
             System.out.println(result);
         } catch (IOException e) {
             LOGGER.error("Execute Exception to obtain the request");

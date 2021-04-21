@@ -19,13 +19,14 @@ public class VideoRequestForm implements IrequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
     private final String url = dotenv.get("HTTP_URL_CONVERT_VIDEO");
     private final String file = "file";
-    private final String outputFormat = "outputFormat";
+    private final String outputFormat = "outputformat";
     private final String resolution = "resolution";
     private final String thumbnail = "thumbnail";
-    private final String frameRate = "frameRate";
+    private final String frameRate = "framerate";
     private final String width = "width";
     private final String height = "height";
     private final String audio = "audio";
+    private final String metadata = "metadata";
 
     /**
      * Video Request Form stores parameters for an video request
@@ -96,7 +97,13 @@ public class VideoRequestForm implements IrequestForm {
     public void addAudio(final String audioValue) {
         addParameters(new Parameter(audio, audioValue, false));
     }
-
+    /**
+     * Adds metadata parameter
+     * @param metadataValue
+     */
+    public void addMetadata(final String metadataValue) {
+        addParameters(new Parameter(metadata, metadataValue, false));
+    }
     /**
      * Gets the body parameters
      * @return bodyParameters of video

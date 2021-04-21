@@ -1106,3 +1106,6 @@
 [INFO ] 2021-04-19 12:25:44.107 [http-nio-8080-exec-7] ExtractMetadata - finish
 [INFO ] 2021-04-19 12:40:05.014 [main] ConverterApplication - start
 [INFO ] 2021-04-19 12:40:11.540 [main] ConverterApplication - finish
+[INFO ] 2021-04-20 21:57:38.506 [main] ConverterApplication - start
+[INFO ] 2021-04-20 21:57:45.020 [main] ConverterApplication - finish
+[INFO ] 2021-04-20 21:57:50.957 [http-nio-8080-exec-1] AuthController - Start.

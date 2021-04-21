@@ -22,6 +22,7 @@ class OutputSettings extends JPanel {
     private JComboBox<FrameVideo> framesSelect;
     private JCheckBox optionCSound;
     private JCheckBox thumbnailOption;
+    private JCheckBox metadataOption;
     private final int alignLabelStyle = 2;
     private final int widthLabelStyle = 70;
     private final int heightLabelStyle = 30;
@@ -29,7 +30,7 @@ class OutputSettings extends JPanel {
     private final int dimensionHeight = 30;
     private final int fontStyle = 0;
     private final int fontSize = 12;
-    private final int gridLayoutRows = 3;
+    private final int gridLayoutRows = 4;
     private final int gridLayoutCols = 2;
 
     /**
@@ -51,6 +52,8 @@ class OutputSettings extends JPanel {
         optionCSound.setSelected(true);
         thumbnailOption = new JCheckBox("With Thumbnail");
         thumbnailOption.setFont(new Font("Barlow", fontStyle, fontSize));
+        metadataOption = new JCheckBox("Metadata");
+        metadataOption.setFont(new Font("Barlow", fontStyle, fontSize));
         setLayout(new GridLayout(gridLayoutRows, gridLayoutCols));
         add(resolutionLabel.getTextLabel());
         add(resolutionComboBox);
@@ -58,6 +61,7 @@ class OutputSettings extends JPanel {
         add(framesSelect);
         add(optionCSound);
         add(thumbnailOption);
+        add(metadataOption);
     }
 
     /**
@@ -131,5 +135,12 @@ class OutputSettings extends JPanel {
      */
     protected boolean isThumbnailRequired() {
         return thumbnailOption.isSelected();
+    }
+    /**
+     * Gets if metadata is required for video converter.
+     * @return true if metadata is required, false if not.
+     */
+    protected boolean isMetadataRequired() {
+        return metadataOption.isSelected();
     }
 }
