@@ -23,7 +23,7 @@ public class VideoConverter {
     private String output;
     private String pathOutput;
     private String outputFileName;
-    private static final int WAIT_TIME = 5000;
+    private static final int WAIT_TIME = 7000;
     private static final int INIT_NUMBER = 20;
     private static final Logger LOGGER = LogManager.getLogger();
 

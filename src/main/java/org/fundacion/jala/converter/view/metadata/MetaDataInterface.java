@@ -24,6 +24,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import static org.fundacion.jala.converter.ConverterApplication.dotenv;
+
 public class MetaDataInterface extends JPanel implements ActionListener {
     private SelectFile file;
     private ExportingFormat exportingFormat;
@@ -31,6 +33,7 @@ public class MetaDataInterface extends JPanel implements ActionListener {
     private JButton convertMetaData;
     private ClientRequest clientRequest = new ClientRequest();
     private static final Logger LOGGER = LogManager.getLogger();
+    private final int waitTime = 5000;
     private final int alignLabelStyle = 0;
     private final int widthLabelStyle = 70;
     private final int heightLabelStyle = 30;
@@ -103,9 +106,12 @@ public class MetaDataInterface extends JPanel implements ActionListener {
         try {
             LOGGER.info("Execute Try");
             String result = clientRequest.executeRequest(metaDataRequestForm);
-            JOptionPane.showMessageDialog(this, "Download Link:\n" + result);
+            Thread.sleep(waitTime);
+            clientRequest.downloadFile(result);
+            JOptionPane.showMessageDialog(this, "Downloaded in :\n"
+                    + System.getProperty("user.home") + dotenv.get("DIR_DOWNLOAD"));
             System.out.println(result);
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             LOGGER.error("Execute Exception to obtain the request");
             e.printStackTrace();
         }

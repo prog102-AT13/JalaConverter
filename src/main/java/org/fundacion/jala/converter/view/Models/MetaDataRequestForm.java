@@ -15,9 +15,11 @@ package org.fundacion.jala.converter.view.Models;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.fundacion.jala.converter.ConverterApplication.dotenv;
+
 public class MetaDataRequestForm implements IRequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
-    private final String url = "http://localhost:8080/api/extractMetadata";
+    private final String url = dotenv.get("HTTP_URL_EXTRACT_METADATA");
     private final String file = "fileToExtract";
     private final String format = "format";
     private final String outputName = "nameExport";

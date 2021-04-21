@@ -27,6 +27,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import static org.fundacion.jala.converter.ConverterApplication.dotenv;
+
 public class TextExtractorInterface extends JPanel implements ActionListener {
     private SelectFile file;
     private SelectLanguage languageSelect;
@@ -102,7 +104,9 @@ public class TextExtractorInterface extends JPanel implements ActionListener {
         try {
             LOGGER.info("Execute Try");
             String result = clientRequest.executeRequest(extractTextRequestFormat);
-            JOptionPane.showMessageDialog(this, "Download Link:\n" + result);
+            clientRequest.downloadFile(result);
+            JOptionPane.showMessageDialog(this, "Downloaded in :\n"
+                    + System.getProperty("user.home") + dotenv.get("DIR_DOWNLOAD"));
             System.out.println(result);
         } catch (IOException e) {
             LOGGER.error("Execute Exception to obtain the request");

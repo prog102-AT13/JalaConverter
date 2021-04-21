@@ -47,9 +47,9 @@ class OutputSettings extends JPanel {
         setFrameSelect();
         framesSelect.setFont(new Font("Barlow", fontStyle, fontSize));
         framesSelect.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
-        optionCSound = new JCheckBox("With audio");
+        optionCSound = new JCheckBox("Without audio");
         optionCSound.setFont(new Font("Barlow", fontStyle, fontSize));
-        optionCSound.setSelected(true);
+        optionCSound.setSelected(false);
         thumbnailOption = new JCheckBox("With Thumbnail");
         thumbnailOption.setFont(new Font("Barlow", fontStyle, fontSize));
         metadataOption = new JCheckBox("Metadata");

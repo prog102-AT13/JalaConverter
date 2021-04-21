@@ -14,10 +14,11 @@ package org.fundacion.jala.converter.view.Models;
 
 import java.util.ArrayList;
 import java.util.List;
+import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 
 public class ExtractTextRequestForm implements IRequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
-    private final String url = "http://localhost:8080/api/extractText";
+    private final String url = dotenv.get("HTTP_URL_EXTRACT_TEXT");
     private final String file = "file";
     private final String format = "language";
 
