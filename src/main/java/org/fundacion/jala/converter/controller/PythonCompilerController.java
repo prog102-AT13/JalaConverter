@@ -17,6 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.fundacion.jala.converter.models.parameter.PythonEnum;
+import org.fundacion.jala.converter.models.parameter.PythonParameter;
+import org.fundacion.jala.converter.service.PythonCompiler;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import java.io.IOException;
 
 @RestController
@@ -31,10 +38,10 @@ public class PythonCompilerController {
     public String compilePython(final @RequestParam("code") String code) throws IllegalStateException, IOException {
         LOGGER.info("start");
         if (!code.isBlank() || !code.equals(null)){
-            CompilerFacade python = new CompilerFacade();
+            PythonCompiler pythonCompiler = new PythonCompiler();
             String filePath = Transform.toFile(code, "filetocompile", "py");
             LOGGER.info("finish");
-          return python.facadePythonCompile(Python.V3, filePath);
+            return pythonCompiler.compiler(new PythonParameter(filePath, PythonEnum.V3));
         }
         return "";
     }

@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- *
+ * <p>
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -78,7 +78,9 @@ public class AudioConverterController {
                 LOGGER.error("Execute Exception" + e.getLocalizedMessage());
             }
         }
-        String outputFilename=getAudioConverter(storagePath, format, bitrate, hz, volume, audioChannel);
+        audioConverter = new AudioConverter(new AudioParameter(storagePath, format, bitrate, hz, volume, audioChannel));
+        audioConverter.audioConverter();
+        String outputFilename = audioConverter.getOutputFileName();
         String outputPath = FileStorageService.getOutputPath(filename);
         String nameWithoutExtension = outputFilename.substring(0, outputFilename.lastIndexOf(".") + 1);
         extractMetadata(metadata, outputFilename, fileStorageService);
