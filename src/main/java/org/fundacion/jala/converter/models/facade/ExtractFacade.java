@@ -1,10 +1,12 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- * <p>
+ *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Gustavo Zacarias Huanca Alconz
  */
 package org.fundacion.jala.converter.models.facade;
 
@@ -26,17 +28,10 @@ public class ExtractFacade {
     /**
      * The method to extract text from image
      *
-     * @param file is the path of file to extract text.
-     * @param language is the language which file are written
-     * @param nameOutput is the name of file where text are extracted
-     * @throws IOException is the exception if File doesn't exist
+     * @param extractTextParameter is a object with parameter of extractText to convert
      */
-    public static void getTextExtract(final MultipartFile file, final String language,
-                                      final String nameOutput) throws IOException {
-        FileStorageService fileStorageService = new FileStorageService();
-        String filename = file.getOriginalFilename();
-        String storagePath = fileStorageService.uploadFile(file);
-        ExtractText extractText = new ExtractText(new ExtractTextParameter(storagePath, language, nameOutput));
+    public static void getTextExtract(ExtractTextParameter extractTextParameter) {
+        ExtractText extractText = new ExtractText(extractTextParameter);
         extractText.extractText();
     }
 
@@ -49,12 +44,13 @@ public class ExtractFacade {
      * @param format is the format of file where metadata are extracted
      * @return string with name of file which contains metadata
      */
-    public static String getMetadataExtract(final String file, final Boolean isMoreInfo,
-                                            final String nameExport, final String format) {
+    public static String getMetadataExtract(final MultipartFile file, final Boolean isMoreInfo,
+                                            final String nameExport, final String format) throws IOException {
         FileStorageService fileStorageService = new FileStorageService();
+        String pathFile = fileStorageService.uploadFile(file);
         TypeFileExport typeFileExport = stringToEnum(format);
-        String outputPath = fileStorageService.getOutputPathWithoutFileName(fileStorageService.getOutputPath(file));
-        File fileToExtract = new File(file);
+        String outputPath = fileStorageService.getOutputPathWithoutFileName(fileStorageService.getOutputPath(pathFile));
+        File fileToExtract = new File(pathFile);
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setNameExport(nameExport + "");
         objectMetadata.setFileToExtract(fileToExtract);

@@ -50,16 +50,15 @@ public class MetaDataInterface extends JPanel implements ActionListener {
                 alignLabelStyle, widthLabelStyle, heightLabelStyle);
         audioTitle.setAlignmentX(LEFT_ALIGNMENT);
         file = new SelectFile();
-        exportingFormat = new ExportingFormat();
-        outputName = new OutputInfo();
+        exportInfo = new ExportingFormat();
+        outputInfo = new OutputInfo();
+
         convertMetaData = new JButton("Convert");
         convertMetaData.setAlignmentX(CENTER_ALIGNMENT);
         convertMetaData.addActionListener(this::actionPerformed);
         convertMetaData.setFont(new Font("Barlow", fontStyle, fontSize));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(new EmptyBorder(topBorder, leftBorder, bottomBorder, rightBorder));
-        audioTitle.setAlignmentX(Component.LEFT_ALIGNMENT);
-        add(audioTitle.getTextLabel());
         add(file);
         add(exportingFormat);
         add(outputName);

@@ -5,6 +5,8 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Paola Aguilar Quiñones
  */
 
 package org.fundacion.jala.converter.view.compiler;
@@ -48,5 +50,21 @@ class LanguageButtons extends JPanel {
         add(cPlusPlus);
         add(java);
         add(python);
+    }
+
+    /**
+     * Button that defines or not java is selected
+     * @return a JButton
+     */
+    public JButton getJava() {
+        return java;
+    }
+
+    /**
+     * Button that defines or not python is selected
+     * @return a JButton
+     */
+    public JButton getPython() {
+        return python;
     }
 }

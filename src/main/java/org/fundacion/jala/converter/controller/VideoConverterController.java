@@ -1,24 +1,31 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- *
+ * <p>
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Daniela Santa Cruz
+ * @colaborathor Paola Aguilar
+ */
+/**
+ * @author Daniela Santa Cruz
+ * @colaborathor Paola Aguilar
  */
 package org.fundacion.jala.converter.controller;
 
+import org.fundacion.jala.converter.models.facade.ConverterFacade;
 import org.fundacion.jala.converter.service.FileStorageService;
-import org.fundacion.jala.converter.service.videoclasses.Converter;
-import org.fundacion.jala.converter.service.videoclasses.VideoParameter;
+import org.fundacion.jala.converter.models.parameter.VideoParameter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.io.IOException;
-
-import static org.fundacion.jala.converter.models.facade.ConverterFacade.getVideoConverter;
 import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetadata;
 
 @RestController
@@ -26,10 +33,6 @@ import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetada
 public class VideoConverterController {
     @Autowired
     FileStorageService fileStorageService;
-    @Autowired
-    VideoParameter videoParameter;
-    @Autowired
-    Converter converter;
 
     /**
      * Endpoint for convertVideo
@@ -45,8 +48,8 @@ public class VideoConverterController {
                              @RequestParam("audio") boolean audio,
                              @RequestParam("metadata") String metadata
     ) throws IllegalStateException, IOException {
-        String outputFilename = getVideoConverter(file, outputFormat, resolution,
-                thumbnail, frameRate, width, height, audio );
+        String outputFilename = ConverterFacade.getVideoConverter(new VideoParameter(fileStorageService.uploadFile(file), outputFormat,
+                resolution, thumbnail, frameRate, width, height, audio));
         extractMetadata(metadata, outputFilename, fileStorageService);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         String downloadLink = baseUrl + "/api/download/" + "converter.getOutputFileName()";
