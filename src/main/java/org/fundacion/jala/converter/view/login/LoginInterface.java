@@ -14,6 +14,7 @@ package org.fundacion.jala.converter.view.login;
 import org.fundacion.jala.converter.view.MainInterface;
 import org.fundacion.jala.converter.view.Models.AuthenticateRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
+import org.springframework.security.authentication.BadCredentialsException;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -131,11 +132,13 @@ public class LoginInterface extends JFrame implements ActionListener {
         authenticateRequestForm.addPassword(password);
         try {
             result = CLIENT_REQUEST.executeRequestWithoutToken(authenticateRequestForm);
-            result = result.substring(8, result.length() - 2);
-        } catch (IOException e) {
+        } catch (BadCredentialsException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Invalid username or password");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        result = result.substring(8, result.length() - 2);
         this.dispose();
         new MainInterface().initInterface(result);
     }
