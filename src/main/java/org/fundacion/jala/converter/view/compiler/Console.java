@@ -5,6 +5,8 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Paola Aguilar Quiñones
  */
 
 package org.fundacion.jala.converter.view.compiler;
@@ -33,5 +35,13 @@ class Console extends JPanel {
         console.setBorder(new EmptyBorder(0, 0, 0, 0));
         setLayout(new BorderLayout());
         add(console, BorderLayout.CENTER);
+    }
+
+    /**
+     * Gets access to JTextArea
+     * @return a JTextArea
+     */
+    public JTextArea getConsole() {
+        return console;
     }
 }

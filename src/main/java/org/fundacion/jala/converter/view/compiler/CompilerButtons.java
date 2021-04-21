@@ -5,6 +5,8 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Paola Aguilar Quiñones
  */
 
 package org.fundacion.jala.converter.view.compiler;
@@ -12,14 +14,11 @@ package org.fundacion.jala.converter.view.compiler;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 class CompilerButtons extends JPanel implements ActionListener {
     private JButton runCode;
@@ -57,6 +56,7 @@ class CompilerButtons extends JPanel implements ActionListener {
         add(selectFile);
         add(runCode);
         add(clearConsole);
+        runCode.addActionListener(this);
     }
 
     /**
@@ -65,18 +65,13 @@ class CompilerButtons extends JPanel implements ActionListener {
      */
     @Override
     public void actionPerformed(final ActionEvent e) {
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-        FileNameExtensionFilter imgFilter = new FileNameExtensionFilter("TxT", "txt");
-        fileChooser.setFileFilter(imgFilter);
-        int result = fileChooser.showOpenDialog(this);
-        if (result != JFileChooser.CANCEL_OPTION) {
-            File fileName = fileChooser.getSelectedFile();
-            if ((fileName == null) || (fileName.getName().equals(""))) {
-                pathFile = "";
-            } else {
-                pathFile = fileName.getAbsolutePath();
-            }
-        }
+    }
+
+    /**
+     * Gets runCode to manipulate
+     * @return a JButton
+     */
+    public JButton getRunButton() {
+        return  runCode;
     }
 }

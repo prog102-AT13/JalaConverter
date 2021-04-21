@@ -14,7 +14,7 @@ package org.fundacion.jala.converter.view.Models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AudioRequestForm implements IrequestForm {
+public class AudioRequestForm implements IRequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
     private final String url = "http://localhost:8080/api/convertAudio";
     private final String file = "file";
