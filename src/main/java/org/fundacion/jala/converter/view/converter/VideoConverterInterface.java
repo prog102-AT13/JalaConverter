@@ -1,6 +1,5 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- * <p>
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -14,7 +13,6 @@ import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.view.Models.VideoRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
@@ -25,7 +23,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;
 
@@ -131,8 +128,6 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
             videoRequestForm.addResolution(settings.getWidthResolution());
             videoRequestForm.addChecksum(checksumLocal);
             videoRequestForm.addMetadata(String.valueOf(settings.isMetadataRequired()));
-
-
             String result = clientRequest.executeRequest(videoRequestForm);
             clientRequest.downloadFile(result);
             JOptionPane.showMessageDialog(this, "Download in :\n" + System.getProperty("user.home") + dotenv.get("DIR_DOWNLOAD"));

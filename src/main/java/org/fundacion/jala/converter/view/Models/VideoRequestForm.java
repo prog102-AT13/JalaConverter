@@ -28,7 +28,6 @@ public class VideoRequestForm implements IRequestForm {
     private final String metadata = "metadata";
     private final String checksum = "checksum";
 
-
     /**
      * Video Request Form stores parameters for an video request
      */
