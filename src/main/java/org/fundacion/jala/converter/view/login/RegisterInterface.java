@@ -24,6 +24,9 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * This class sets the display and features of the Register UI
+ */
 public class RegisterInterface extends JFrame implements ActionListener {
     private final Container REGISTER_CONTENT_PANE = getContentPane();
     private final JLabel USERNAME_LABEL = new JLabel("USERNAME");
@@ -169,17 +172,14 @@ public class RegisterInterface extends JFrame implements ActionListener {
             PASSWORD_FIELD.setText("");
             PASSWORD_CONFIRMATION_FIELD.setText("");
         }
-
         if (e.getSource() == BACK_BUTTON) {
             this.dispose();
             new LoginInterface();
         }
-
         if (e.getSource() == SHOW_PASSWORD_BUTTON) {
             showOrHidePassword(PASSWORD_FIELD, passwordShowStatus);
             passwordShowStatus = !passwordShowStatus;
         }
-
         if (e.getSource() == SHOW_PASSWORD_CONFIRMATION_BUTTON) {
             showOrHidePassword(PASSWORD_CONFIRMATION_FIELD, passwordConfirmationShowStatus);
             passwordConfirmationShowStatus = !passwordConfirmationShowStatus;

@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import static org.fundacion.jala.converter.models.UserSQL.usernameExists;
 
+/**
+ * This class registers a user in the database
+ */
 @RestController
 public class RegisterController {
     @Autowired

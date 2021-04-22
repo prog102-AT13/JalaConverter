@@ -155,7 +155,6 @@ public class LoginInterface extends JFrame implements ActionListener {
             String passwordText = String.copyValueOf(PASSWORD_FIELD.getPassword());
             callRequest(usernameText, passwordText);
         }
-
         if (e.getSource() == SHOW_PASSWORD_BUTTON) {
             if (passwordShowStatus) {
                 PASSWORD_FIELD.setEchoChar((char) 0);
@@ -164,7 +163,6 @@ public class LoginInterface extends JFrame implements ActionListener {
             }
             passwordShowStatus = !passwordShowStatus;
         }
-
         if (e.getSource() == REGISTER_BUTTON) {
             this.dispose();
             new RegisterInterface();
