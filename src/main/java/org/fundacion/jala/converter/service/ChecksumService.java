@@ -18,6 +18,11 @@ import java.security.NoSuchAlgorithmException;
 
 public class ChecksumService {
     private static final int BYTES = 1024;
+    private static final String MD5_ALGORITHM = "MD5";
+    private static final int HEXADECIMAL_NUMBER_255 = 0xff;
+    private static final int HEXADECIMAL_NUMBER = 0x100;
+    private static final int HEXADECIMAL_RADIX = 16;
+
     /**
      * Gets the file's checksum
      * @param filePath the file's direction
@@ -27,7 +32,7 @@ public class ChecksumService {
      */
     public static String getFileChecksum(final String filePath) throws IOException, NoSuchAlgorithmException {
         File file = new File(filePath);
-        MessageDigest md5Digest = MessageDigest.getInstance("MD5");
+        MessageDigest md5Digest = MessageDigest.getInstance(MD5_ALGORITHM);
         FileInputStream fileInputStream = new FileInputStream(file);
         byte[] byteArray = new byte[BYTES];
         int bytesCount = 0;
@@ -38,7 +43,8 @@ public class ChecksumService {
         byte[] bytes = md5Digest.digest();
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < bytes.length; i++) {
-            stringBuilder.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            stringBuilder.append(Integer.toString((bytes[i] & HEXADECIMAL_NUMBER_255)
+                    + HEXADECIMAL_NUMBER, HEXADECIMAL_RADIX).substring(1));
         }
         return stringBuilder.toString();
     }
@@ -51,7 +57,9 @@ public class ChecksumService {
      * @throws IOException when invalid path
      * @throws NoSuchAlgorithmException when invalid algorithm provided
      */
-    private static Boolean repeatedChecksum(final String firstFilePath, final String checksum) throws IOException, NoSuchAlgorithmException {
+    private static Boolean repeatedChecksum(final String firstFilePath,
+                                            final String checksum)
+            throws IOException, NoSuchAlgorithmException {
         return (checksum.equals(getFileChecksum(firstFilePath)));
     }
 }

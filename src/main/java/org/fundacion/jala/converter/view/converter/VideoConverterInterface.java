@@ -46,6 +46,7 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
 
     /**
      * Sets all the graphics elements for the main interface of Video Converter.
+     * @param newToken a String with authentication token
      */
     public VideoConverterInterface(final String newToken) {
         token = newToken;

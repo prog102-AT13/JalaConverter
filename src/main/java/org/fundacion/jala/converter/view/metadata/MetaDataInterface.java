@@ -47,6 +47,7 @@ public class MetaDataInterface extends JPanel implements ActionListener {
 
     /**
      * Initializes the graphics components for MetaData interface.
+     * @param newToken a String with the authentication token
      */
     public MetaDataInterface(final String newToken) {
         token = newToken;

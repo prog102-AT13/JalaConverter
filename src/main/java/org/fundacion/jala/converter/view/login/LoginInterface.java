@@ -15,7 +15,6 @@ import org.fundacion.jala.converter.view.MainInterface;
 import org.fundacion.jala.converter.view.Models.AuthenticateRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import org.springframework.security.authentication.BadCredentialsException;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -24,7 +23,6 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -59,6 +57,9 @@ public class LoginInterface extends JFrame implements ActionListener {
     private final int REGISTER_BUTTON_X_POSITION = 75;
     private Boolean passwordShowStatus = true;
 
+    /**
+     * Initializes the graphics components for the Login interface.
+     */
     public LoginInterface() {
         setTitle("LOGIN");
         setVisible(true);

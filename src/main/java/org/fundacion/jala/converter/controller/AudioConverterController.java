@@ -86,7 +86,7 @@ public class AudioConverterController {
         String nameWithoutExtension = outputFilename.substring(0, outputFilename.lastIndexOf(".") + 1);
         extractMetadata(metadata, outputFilename, fileStorageService);
         String pathFile = storagePath.substring(0, storagePath.lastIndexOf(System.getProperty("file.separator")) + 1);
-        if (!(resultTitle.size() > 0)) {
+        if (resultTitle.size() <= 0) {
             insertAssetData(filename, pathFile, checksumLocal, userID);
         }
         if (metadata.equals("true")) {

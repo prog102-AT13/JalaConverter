@@ -12,7 +12,6 @@ package org.fundacion.jala.converter.view.login;
 
 import org.fundacion.jala.converter.view.Models.RegisterRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -21,7 +20,6 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -59,6 +57,9 @@ public class RegisterInterface extends JFrame implements ActionListener {
     private Boolean passwordShowStatus = true;
     private Boolean passwordConfirmationShowStatus = true;
 
+    /**
+     * Initializes the graphics components for the Register interface.
+     */
     public RegisterInterface() {
         setTitle("SIGN UP");
         setVisible(true);

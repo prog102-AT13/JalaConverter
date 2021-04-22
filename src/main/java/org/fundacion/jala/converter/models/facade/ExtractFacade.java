@@ -21,12 +21,15 @@ import java.io.File;
 import java.io.IOException;
 
 public class ExtractFacade {
+    public static final String TXT_FILE_EXTENSION = ".txt";
+    public static final String HTML_FILE_EXTENSION = ".html";
+    public static final String XMP_FILE_EXTENSION = ".xmp";
 
     private ExtractFacade() {
     }
 
     /**
-     * The method to extract text from image.
+     * Extracts text from image.
      * @param extractTextParameter is a object with parameter of extractText to convert
      */
     public static void getTextExtract(final ExtractTextParameter extractTextParameter) {
@@ -35,7 +38,7 @@ public class ExtractFacade {
     }
 
     /**
-     * The method to extract metadata from file.
+     * Extracts metadata from file.
      * @param file is the path of file to extract metadata.
      * @param isMoreInfo is get more info of file
      * @param nameExport  is the name of file where metadata are extracted
@@ -65,18 +68,18 @@ public class ExtractFacade {
     }
 
     /**
-     * Convert string to enum for metadata.
+     * Converts string to enum for metadata.
      * @param format define type of file which it is exported.
      * @return format type TypeFileExport
      */
     private static TypeFileExport stringToEnum(final String format) {
-        if ("txt".equals(format)) {
+        if (TXT_FILE_EXTENSION.equals(format)) {
             return TypeFileExport.TXT;
         }
-        if ("html".equals(format)) {
+        if (HTML_FILE_EXTENSION.equals(format)) {
             return TypeFileExport.HTML;
         }
-        if ("xmp".equals(format)) {
+        if (XMP_FILE_EXTENSION.equals(format)) {
             return TypeFileExport.XMP;
         }
         return TypeFileExport.TXT;

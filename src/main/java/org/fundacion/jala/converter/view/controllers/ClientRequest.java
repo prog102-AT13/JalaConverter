@@ -44,6 +44,8 @@ public class ClientRequest {
     private IRequestForm requestForm;
     private final String defaultCharset = "UTF-8";
     private static final Logger LOGGER = LogManager.getLogger();
+    private final String DOWNLOAD_URL = "http://localhost:8080/api/download/";
+    private final String AUTHENTICATE_URL = "http://localhost:8080/authenticate";
 
     /**
      * Http client creates a request given a requestForm.
@@ -99,7 +101,7 @@ public class ClientRequest {
      * @throws IOException
      */
     public void download(final String filePath) throws IOException {
-        String sURL = "http://localhost:8080/api/download/";
+        String sURL = DOWNLOAD_URL;
         CloseableHttpClient localHttpClient = HttpClients.createDefault();
         HttpGet request = new HttpGet(sURL);
         CloseableHttpResponse response = localHttpClient.execute(request);
@@ -119,7 +121,7 @@ public class ClientRequest {
      * @return
      */
     public String authGetToken() throws IOException {
-        String sURL = "http://localhost:8080/authenticate";
+        String sURL = AUTHENTICATE_URL;
         CloseableHttpClient localHttpClient = HttpClients.createDefault();
         HttpPost request = new HttpPost(sURL);
         StringEntity params = new StringEntity("{\n"
@@ -215,7 +217,7 @@ public class ClientRequest {
         try {
             in = new BufferedInputStream(new URL(fileUrl).openStream());
             fout = new FileOutputStream(fileName);
-            byte data[] = new byte[numberByte];
+            byte[] data = new byte[numberByte];
             int count;
             while ((count = in.read(data, 0, numberByte)) != -1) {
                 fout.write(data, 0, count);

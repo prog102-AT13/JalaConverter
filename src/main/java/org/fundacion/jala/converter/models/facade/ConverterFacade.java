@@ -21,7 +21,7 @@ public class ConverterFacade {
     }
 
     /**
-     * The method to convert Audio.
+     * Converts an audio file.
      * @param audioParameter is a object with parameter of audio to convert
      * @return a string of output filename
      */
@@ -32,7 +32,7 @@ public class ConverterFacade {
     }
 
     /**
-     * The method to convert Video.
+     * Converts a video file.
      * @param videoParameter is a object with parameter of video to convert
      * @return string of output filename
      */

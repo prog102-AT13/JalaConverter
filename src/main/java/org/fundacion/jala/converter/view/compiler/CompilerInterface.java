@@ -33,6 +33,8 @@ import java.awt.event.ActionListener;
 
 public class CompilerInterface extends JPanel {
     private static final Logger LOGGER = LogManager.getLogger();
+    private final String PYTHON_URL = "http://localhost:8080/api/compilePython";
+    private final String JAVA_URL = "http://localhost:8080/api/compileJava";
     private CodeTextArea codeArea;
     private Console consoleOutput;
     private LanguageButtons langButtons;
@@ -41,6 +43,7 @@ public class CompilerInterface extends JPanel {
 
     /**
      * Initializes the graphics elements of the Main Compiler Interface.
+     * @param newToken a String with authentication token
      */
     public CompilerInterface(final String newToken) {
         token = newToken;
@@ -91,10 +94,10 @@ public class CompilerInterface extends JPanel {
                 LOGGER.info("start");
                 String url = "";
                 if (!langButtons.getPython().isEnabled()) {
-                    url = "http://localhost:8080/api/compilePython";
+                    url = PYTHON_URL;
                 }
                 if (!langButtons.getJava().isEnabled()) {
-                    url = "http://localhost:8080/api/compileJava";
+                    url = JAVA_URL;
                 }
                 HttpPost httpPost = new HttpPost(url);
                 String code1 = projectTab.getSelectedPane().getText();

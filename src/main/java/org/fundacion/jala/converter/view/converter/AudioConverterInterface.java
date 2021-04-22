@@ -9,7 +9,6 @@
  * @author Paola Aguilar Quiñones
  * @colaborathor Cristian Choque Quispe
  */
-
 package org.fundacion.jala.converter.view.converter;
 
 import org.apache.logging.log4j.LogManager;
@@ -28,7 +27,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;
-
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 
 public class AudioConverterInterface extends JPanel implements ActionListener {
@@ -52,6 +50,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
 
     /**
      * Initializes the graphics elements for Audio converter interface.
+     * @param newToken a String with the authentication token
      */
     public AudioConverterInterface(final String newToken) {
         token = newToken;

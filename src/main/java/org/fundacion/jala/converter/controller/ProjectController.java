@@ -32,7 +32,6 @@ public class ProjectController {
     public int createProject(final @RequestParam("projectName") String projectName,
                              final @RequestParam("userId") int userId) throws IllegalStateException {
         String command = "mkdir " + System.getProperty("user.dir") + "\\" + projectName;
-        System.out.println("Commnad " + command);
         RunCommand runCommand = new RunCommand();
         runCommand.run(command);
         String pathProject = (System.getProperty("user.dir") + "\\" + projectName);
