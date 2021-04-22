@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- * <p>
+ *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -8,8 +8,10 @@
  *
  * @author Edson Añawaya Rios
  * @colaborathor Cristian Choque Quispe
+ * @colaborathor Gustavo Zacarias Huanca Alconz
  */
 package org.fundacion.jala.converter.controller;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.models.facade.ChecksumFacade;
@@ -34,7 +36,7 @@ public class AudioConverterController {
     @Autowired
     private FileStorageService fileStorageService;
     private static final Logger LOGGER = LogManager.getLogger();
-    ParameterOutputChecksum parameterOutputChecksum;
+    private ParameterOutputChecksum parameterOutputChecksum;
 
     /**
      * Endpoint for audio converter
@@ -51,7 +53,7 @@ public class AudioConverterController {
         parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
         String outputFilename = ConverterFacade.getAudioConverter(new AudioParameter(parameterOutputChecksum.getOutputFilename(), format, bitrate, hz, volume, audioChannel));
         extractMetadata(metadata, outputFilename, fileStorageService);
-        ZipFileFacade.getZipFile(parameterOutputChecksum, metadata, outputFilename);
+        ZipFileFacade.getZipFileAudio(parameterOutputChecksum, metadata, outputFilename);
         String nameWithoutExtension = outputFilename.substring(0, outputFilename.lastIndexOf(".") + 1);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         String downloadLink = baseUrl + "/api/download/" + nameWithoutExtension + "zip";
