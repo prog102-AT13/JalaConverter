@@ -5,6 +5,8 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Raymundo Guaraguara Sansusty
  */
 package org.fundacion.jala.converter.security.util;
 
@@ -13,19 +15,22 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+/**
+ * This class creates a json web token.
+ */
 @Service
 public class JwtUtil {
     private static final String SECRET_KEY = "secret";
     private static final int EXPIRATION_TIME = 1000 * 60 * 60 * 10;
 
     /**
-     * Gets username from token
+     * Gets username from token.
+     *
      * @param token a string with the token
      * @return username
      */
@@ -34,7 +39,8 @@ public class JwtUtil {
     }
 
     /**
-     * Gets expiration date from token
+     * Gets expiration date from token.
+     *
      * @param token a string with the token
      * @return expiration date
      */
@@ -43,7 +49,8 @@ public class JwtUtil {
     }
 
     /**
-     * Extracts all the claims
+     * Extracts all the claims.
+     *
      * @param token a string with the token
      * @param claimsResolver context information about an authorization request
      * @param <T> generic class
@@ -55,7 +62,8 @@ public class JwtUtil {
     }
 
     /**
-     * Gets all the claims from a token
+     * Gets all the claims from a token.
+     *
      * @param token a string with the token
      * @return the claims
      */
@@ -64,7 +72,8 @@ public class JwtUtil {
     }
 
     /**
-     * Checks if the token is still valid
+     * Checks if the token is still valid.
+     *
      * @param token a string with the token
      * @return a boolean with the result
      */
@@ -73,7 +82,8 @@ public class JwtUtil {
     }
 
     /**
-     * Generates the token
+     * Generates the token.
+     *
      * @param userDetails the users information
      * @return a token
      */
@@ -83,7 +93,8 @@ public class JwtUtil {
     }
 
     /**
-     * Creates a token
+     * Creates a token.
+     *
      * @param claims pieces of information asserted about a subject
      * @param subject the user
      * @return string with the token
@@ -95,7 +106,8 @@ public class JwtUtil {
     }
 
     /**
-     * Checks if the username matches the token and the token has not expired
+     * Checks if the username matches the token and the token has not expired.
+     *
      * @param token a string with the token
      * @param userDetails the users information
      * @return a boolean with the result

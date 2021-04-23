@@ -9,7 +9,6 @@
  * @author Paola Aguilar Quiñones
  * @colaborathor Cristian Choque Quispe
  */
-
 package org.fundacion.jala.converter.view.converter;
 
 import org.apache.logging.log4j.LogManager;
@@ -28,9 +27,11 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;
-
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 
+/**
+ * This class creates the audio converter's UI.
+ */
 public class AudioConverterInterface extends JPanel implements ActionListener {
     private SelectFile file;
     private ConvertTypeSelectAudio audioSelect;
@@ -47,12 +48,16 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
     private final int rightBorder = 0;
     private final int fontStyle = 0;
     private final int fontSize = 12;
+    private String token;
     private String checksumLocal;
 
     /**
      * Initializes the graphics elements for Audio converter interface.
+     *
+     * @param newToken a String with the authentication token
      */
-    public AudioConverterInterface() {
+    public AudioConverterInterface(final String newToken) {
+        token = newToken;
         JLabelStyle audioTitle = new JLabelStyle("Audio converter", "h1",
                 alignLabelStyle, widthLabelStyle, heightLabelStyle);
         JLabelStyle audioSettings = new JLabelStyle("Audio settings", "h1",
@@ -84,6 +89,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
 
     /**
      * Converts, sends information for metadataClass conversion.
+     *
      * Shows a Dialog with the information.
      * @param e event of the JButton.
      */
@@ -122,7 +128,8 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
     }
 
     /**
-     * Obtains the request
+     * Obtains the request.
+     *
      * @throws IOException
      */
     private void callRequest() throws IOException {
@@ -140,9 +147,9 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
             audioRequestForm.addAudiochannel(settings.getAudioChannel());
             audioRequestForm.addChecksum(checksumLocal);
             audioRequestForm.addMetadata(String.valueOf(settings.isMetadata()));
-            String result = clientRequest.executeRequest(audioRequestForm);
+            String result = clientRequest.executeRequest(audioRequestForm, token);
             clientRequest.downloadFile(result);
-            JOptionPane.showMessageDialog(this, "Downloaded in :\n"
+            JOptionPane.showMessageDialog(this, "Download in :\n"
                     + System.getProperty("user.home") + dotenv.get("DIR_DOWNLOAD"));
             System.out.println(result);
             LOGGER.info("finish");

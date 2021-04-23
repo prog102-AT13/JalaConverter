@@ -7,8 +7,8 @@
  */
 package org.fundacion.jala.converter;
 
+import org.fundacion.jala.converter.view.login.LoginInterface;
 import io.github.cdimascio.dotenv.Dotenv;
-import org.fundacion.jala.converter.view.MainInterface;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.apache.logging.log4j.Logger;
@@ -24,13 +24,10 @@ public class ConverterApplication {
                                         .ignoreIfMissing()
                                         .load();
     public static void main(final String[] args) {
-        MainInterface main = new MainInterface();
         LOGGER.info("start");
         SpringApplication.run(ConverterApplication.class, args);
         System.setProperty("java.awt.headless", "false");
-        SwingUtilities.invokeLater(() -> {
-            main.initInterface();
-        });
+        SwingUtilities.invokeLater(LoginInterface::new);
         LOGGER.info("finish");
     }
 }

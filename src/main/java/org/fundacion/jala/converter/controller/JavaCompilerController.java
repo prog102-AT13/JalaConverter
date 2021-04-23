@@ -5,13 +5,14 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Jessicka Moya Andrade
  */
 package org.fundacion.jala.converter.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.models.parameter.JavaParameter;
-import org.fundacion.jala.converter.service.javacompiler.JavaCompiler;
 import org.fundacion.jala.converter.models.facade.CompilerFacade;
 import org.fundacion.jala.converter.service.javacompiler.JavaVersion;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,22 +22,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 
+/**
+ * This class compiles a Java project.
+ */
 @RestController
 @RequestMapping("/api")
 public class JavaCompilerController {
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**
-     * Endpoint for compile java
+     * Compiles java code.
+     *
+     * @param code a String with the code to compile.
+     * @return a String with the compilation result.
+     * @throws IllegalStateException when method invoked at an illegal time.
+     * @throws IOException when invalid input is provided.
      */
     @PostMapping("/compileJava")
     public String compileJava(final @RequestParam("code") String code) throws IllegalStateException, IOException {
         LOGGER.info("start");
-        if (!code.isBlank() || !code.equals(null)){
-//            JavaCompiler javaCompiler = new JavaCompiler();
+        if (!code.isBlank() || !code.equals(null)) {
             String filePath = Transform.toFile(code, "Main", "java");
             LOGGER.info("finish");
-            return CompilerFacade.facadeJavaCompile (new JavaParameter(JavaVersion.JAVA_11, filePath));
+            return CompilerFacade.facadeJavaCompile(new JavaParameter(JavaVersion.JAVA_11, filePath));
         }
         return "";
     }

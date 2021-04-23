@@ -10,22 +10,25 @@
  */
 package org.fundacion.jala.converter.exceptions;
 
+/**
+ * This class creates the metadata's exceptions.
+ */
 public class MetadataException extends PaoPaoException {
-    private final static String DEFAULT_MESSAGE = "Metadata Error";
+    private static final String DEFAULT_MESSAGE = "Metadata Error";
 
     public MetadataException() {
         super(DEFAULT_MESSAGE);
     }
 
-    public MetadataException(String message) {
+    public MetadataException(final String message) {
         super(message);
     }
 
-    public MetadataException(Throwable exception) {
+    public MetadataException(final Throwable exception) {
         super(DEFAULT_MESSAGE, exception);
     }
 
-    public MetadataException(String message, Throwable exception) {
+    public MetadataException(final String message, final Throwable exception) {
         super(message, exception);
     }
 }

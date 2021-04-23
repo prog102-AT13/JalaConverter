@@ -7,7 +7,6 @@
  * license agreement you entered into with Fundacion Jala
  *
  * @author Saul Caspa Miranda
- * @version 1.0
  */
 package org.fundacion.jala.converter.view.controllers;
 
@@ -35,8 +34,10 @@ import java.io.BufferedInputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
-import static org.fundacion.jala.converter.models.UserSQL.findUserById;
 
+/**
+ * This class creates and handles the client's requests.
+ */
 public class ClientRequest {
     private CloseableHttpClient httpClient;
     private HttpPost httpPost;
@@ -45,10 +46,11 @@ public class ClientRequest {
     private IRequestForm requestForm;
     private final String defaultCharset = "UTF-8";
     private static final Logger LOGGER = LogManager.getLogger();
-
+    private final String DOWNLOAD_URL = "http://localhost:8080/api/download/";
+    private final String AUTHENTICATE_URL = "http://localhost:8080/authenticate";
 
     /**
-     * Creates a request given a requestForm.
+     * Http client creates a request given a requestForm.
      */
     public ClientRequest() {
         this.httpClient = HttpClients.createDefault();
@@ -61,14 +63,14 @@ public class ClientRequest {
      * @throws ClientProtocolException
      * @throws IOException
      */
-    public String executeRequest(final IRequestForm newRequestForm) throws ClientProtocolException, IOException {
-        this.requestForm = newRequestForm;
+    public String executeRequest(final IRequestForm newRequestForm, final String token) throws ClientProtocolException, IOException {
+        requestForm = newRequestForm;
         httpPost = new HttpPost(requestForm.getURL());
         builder = MultipartEntityBuilder.create();
         addBodyFields();
         multipart = builder.build();
         httpPost.setEntity(multipart);
-        httpPost.setHeader("Authorization", "Bearer " + findUserById(Integer.parseInt(dotenv.get("USER_ID"))).getToken());
+        httpPost.setHeader("Authorization", "Bearer " + token);
         CloseableHttpResponse response = httpClient.execute(httpPost);
         HttpEntity responseEntity = response.getEntity();
         String sResponse = EntityUtils.toString(responseEntity, defaultCharset);
@@ -76,14 +78,35 @@ public class ClientRequest {
     }
 
     /**
-     * Downloads a file from endpoint to given path
-     * @throws ClientProtocolException
-     * @throws IOException
+     * Executes a request given the type of requestForm.
+     *
+     * @param newRequestForm the request form
+     * @return a String with the response
+     * @throws ClientProtocolException when an error on the HTTP protocol occurs
+     * @throws IOException when an invalid input is provided
+     */
+    public String executeRequestWithoutToken(final IRequestForm newRequestForm)
+            throws ClientProtocolException, IOException {
+        requestForm = newRequestForm;
+        httpPost = new HttpPost(requestForm.getURL());
+        builder = MultipartEntityBuilder.create();
+        addBodyFields();
+        multipart = builder.build();
+        httpPost.setEntity(multipart);
+        CloseableHttpResponse response = httpClient.execute(httpPost);
+        HttpEntity responseEntity = response.getEntity();
+        String sResponse = EntityUtils.toString(responseEntity, "UTF-8");
+        return sResponse;
+    }
+
+    /**
+     * Downloads a file from endpoint to given path.
+     *
+     * @throws ClientProtocolException when there is an error on the client protocol
+     * @throws IOException when introduced an invalid path
      */
     public void download(final String filePath) throws IOException {
-        String localToken = authGetToken();
-        String sURL = "http://localhost:8080/api/download/";
-
+        String sURL = DOWNLOAD_URL;
         CloseableHttpClient localHttpClient = HttpClients.createDefault();
         HttpGet request = new HttpGet(sURL);
         CloseableHttpResponse response = localHttpClient.execute(request);
@@ -100,14 +123,13 @@ public class ClientRequest {
 
     /**
      * Retrieves a  token from the endpoint from a username and password.
-     * @return
+     *
+     * @return a String with the token
      */
     public String authGetToken() throws IOException {
-        String sURL = "http://localhost:8080/authenticate";
-
+        String sURL = AUTHENTICATE_URL;
         CloseableHttpClient localHttpClient = HttpClients.createDefault();
         HttpPost request = new HttpPost(sURL);
-
         StringEntity params = new StringEntity("{\n"
                 + "    \"username\":\"at13\",\n"
                 + "    \"password\":\"jalasoft\"\n" + "}");
@@ -121,7 +143,8 @@ public class ClientRequest {
 
     /**
      * Adds text field to http request.
-     * @param key   String with the key
+     *
+     * @param key String with the key
      * @param value String with the value
      */
     public void addTextBody(final String key, final String value) {
@@ -130,7 +153,8 @@ public class ClientRequest {
 
     /**
      * Adds file field to http request.
-     * @param key      String with the key
+     *
+     * @param key String with the key
      * @param filePath String with the value
      */
     public void addFileBody(final String key, final String filePath) {
@@ -160,6 +184,7 @@ public class ClientRequest {
 
     /**
      * Adds a body field with the parameter's information.
+     *
      * @param parameter
      */
     public void addBodyField(final Parameter parameter) {
@@ -171,7 +196,8 @@ public class ClientRequest {
     }
 
     /**
-     * Downloads a File by url
+     * Downloads a File by url.
+     *
      * @param url with the url
      */
     public void downloadFile(final String url) {
@@ -187,7 +213,8 @@ public class ClientRequest {
     }
 
     /**
-     * Downloads a File by URL
+     * Downloads a File by URL.
+     *
      * @param fileName name of file
      * @param fileUrl url complete
      * @throws MalformedURLException
@@ -201,7 +228,7 @@ public class ClientRequest {
         try {
             in = new BufferedInputStream(new URL(fileUrl).openStream());
             fout = new FileOutputStream(fileName);
-            byte data[] = new byte[numberByte];
+            byte[] data = new byte[numberByte];
             int count;
             while ((count = in.read(data, 0, numberByte)) != -1) {
                 fout.write(data, 0, count);

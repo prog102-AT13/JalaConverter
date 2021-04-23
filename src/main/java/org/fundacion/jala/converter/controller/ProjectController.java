@@ -1,11 +1,12 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
+ *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Juan Pablo Gonzales
+ * @author Juan Pablo Gonzales Alvarado
  */
 package org.fundacion.jala.converter.controller;
 
@@ -20,19 +21,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import java.io.IOException;
 
+/**
+ * This class creates a project and saves it in the database.
+ */
 @RestController
 @RequestMapping("/api")
 public class ProjectController {
 
     /**
-     * Endpoint for creating a project in data base
-     * @return int with the id of the project
+     * Endpoint for creating a project in data base.
+     *
+     * @param projectName a String with the project's name.
+     * @param userId an int with the user's id.
+     * @return int with the id of the project.
+     * @throws IllegalStateException when method invoked at an illegal time.
      */
     @PostMapping("/projects")
     public int createProject(final @RequestParam("projectName") String projectName,
-                              final @RequestParam("userId") int userId) throws IllegalStateException {
+                             final @RequestParam("userId") int userId) throws IllegalStateException {
         String command = "mkdir " + System.getProperty("user.dir") + "\\" + projectName;
-        System.out.println("Commnad " + command);
         RunCommand runCommand = new RunCommand();
         runCommand.run(command);
         String pathProject = (System.getProperty("user.dir") + "\\" + projectName);
@@ -40,10 +47,16 @@ public class ProjectController {
         return project.getId();
     }
 
-
     /**
-     * Endpoint for creating a project in data base
+     * Endpoint for creating a project in data base.
+     *
+     * @param fileName a String with the file's name.
+     * @param idProject an int with the project's id.
+     * @param extension a String with file's extension.
+     * @param code a String with the code for the file.
      * @return a String with the path of files
+     * @throws IllegalStateException when method invoked at an illegal time.
+     * @throws IOException when invalid input is provided.
      */
     @PostMapping("/projects/{id}/file")
     public String createFiles(final @RequestParam("fileName") String fileName,
