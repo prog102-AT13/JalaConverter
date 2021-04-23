@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Daniela Santa Cruz Andrade
+ * @author Paola Aguilar Quiñones
  */
 
 package org.fundacion.jala.converter.view.converter;
