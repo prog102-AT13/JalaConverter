@@ -41,6 +41,18 @@ public class AudioConverterController {
 
     /**
      * Calls endpoint for audio.
+     *
+     * @param file  is path of file which will be converted.
+     * @param format is the format with are converted of audio.
+     * @param bitrate is the bitrate with are converted of audio.
+     * @param volume is the volume with are converted of audio.
+     * @param hz is the hz with are converted of audio.
+     * @param audioChannel is the audioChannel with are converted of audio.
+     * @param checksum is checksum of audio.
+     * @param metadata if metadata is extracted from the audio.
+     * @return path to download files.
+     * @throws IOException  is exception when invalid path.
+     * @throws InterruptedException  is exception if process is interrupted.
      */
     @PostMapping("/convertAudio")
     public String uploadFile(final @RequestParam("file") MultipartFile file, final @RequestParam("format") String format,
@@ -49,7 +61,7 @@ public class AudioConverterController {
                              final @RequestParam("audiochannel") String audioChannel,
                              final @RequestParam("checksum") String checksum,
                              final @RequestParam("metadata") String metadata)
-            throws IllegalStateException, IOException, InterruptedException {
+            throws IOException, InterruptedException {
         parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
         String outputFilename = ConverterFacade.getAudioConverter(
                 new AudioParameter(parameterOutputChecksum.getOutputFilename(), format, bitrate, hz, volume,

@@ -41,6 +41,19 @@ public class VideoConverterController {
 
     /**
      * Calls endpoint for convertVideo.
+     *
+     * @param file  is path of file which will be converted.
+     * @param outputFormat is the format with are converted of video.
+     * @param resolution is the resolution with are converted of video.
+     * @param thumbnail is the thumbnail with are converted of video.
+     * @param height is the height with are converted of video.
+     * @param width is the width with are converted of video.
+     * @param audio if video has audio.
+     * @param checksum is checksum of video.
+     * @param metadata if metadata is extracted from the video.
+     * @return path to download files.
+     * @throws IOException is exception when invalid path.
+     * @throws InterruptedException  is exception if process is interrupted.
      */
     @PostMapping("/convertVideo")
     public String uploadFile(final @RequestParam("file") MultipartFile file,
@@ -51,7 +64,7 @@ public class VideoConverterController {
                              final @RequestParam("height") int height, final @RequestParam("audio") boolean audio,
                              final @RequestParam("checksum") String checksum,
                              final @RequestParam("metadata") String metadata)
-            throws IllegalStateException, IOException, InterruptedException {
+            throws IOException, InterruptedException {
         parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
         String outputFilename = ConverterFacade.getVideoConverter(
                 new VideoParameter(parameterOutputChecksum.getOutputFilename(), outputFormat, resolution, thumbnail,
