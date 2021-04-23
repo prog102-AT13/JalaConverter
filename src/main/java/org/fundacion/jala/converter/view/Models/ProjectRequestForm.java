@@ -8,7 +8,6 @@
  *
  * @author Joel Rodrigo Rojas Roman
  */
-
 package org.fundacion.jala.converter.view.Models;
 
 import java.util.ArrayList;
@@ -29,20 +28,25 @@ public class ProjectRequestForm implements IRequestForm {
 
     /**
      * Adds id parameter.
+     *
      * @param id is project id.
      */
     public void addProjectId(final String id) {
         addParameters(new Parameter(projectId, id, false));
     }
+
     /**
      * Adds name parameter.
+     *
      * @param name is project name.
      */
     public void addProjectName(final String name) {
         addParameters(new Parameter(projectName, name, false));
     }
+
     /**
      * Adds type parameter.
+     *
      * @param projectType represents what kind of files project has.
      */
     public void addType(final String projectType) {
@@ -51,7 +55,8 @@ public class ProjectRequestForm implements IRequestForm {
 
     /**
      * Gets the body parameters.
-     * @return bodyParameters.
+     *
+     * @return a list that contains all parameters of project.
      */
     @Override
     public List<Parameter> getBodyParameters() {
@@ -60,7 +65,8 @@ public class ProjectRequestForm implements IRequestForm {
 
     /**
      * Adds parameters to bodyParameters.
-     * @param parameter representes all attributes of projects.
+     *
+     * @param parameter represents all attributes of project.
      */
     @Override
     public void addParameters(final Parameter parameter) {
@@ -69,7 +75,8 @@ public class ProjectRequestForm implements IRequestForm {
 
     /**
      * Gets the url.
-     * @return url.
+     *
+     * @return the url of project.
      */
     @Override
     public String getURL() {
