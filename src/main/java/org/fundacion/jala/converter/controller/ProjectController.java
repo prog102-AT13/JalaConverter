@@ -31,7 +31,10 @@ public class ProjectController {
     /**
      * Endpoint for creating a project in data base.
      *
-     * @return int with the id of the project
+     * @param projectName a String with the project's name.
+     * @param userId an int with the user's id.
+     * @return int with the id of the project.
+     * @throws IllegalStateException when method invoked at an illegal time.
      */
     @PostMapping("/projects")
     public int createProject(final @RequestParam("projectName") String projectName,
@@ -47,7 +50,13 @@ public class ProjectController {
     /**
      * Endpoint for creating a project in data base.
      *
+     * @param fileName a String with the file's name.
+     * @param idProject an int with the project's id.
+     * @param extension a String with file's extension.
+     * @param code a String with the code for the file.
      * @return a String with the path of files
+     * @throws IllegalStateException when method invoked at an illegal time.
+     * @throws IOException when invalid input is provided.
      */
     @PostMapping("/projects/{id}/file")
     public String createFiles(final @RequestParam("fileName") String fileName,
