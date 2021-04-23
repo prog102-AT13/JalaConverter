@@ -19,7 +19,7 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 
 /**
- * This class customize buttons to turn them into plus buttons(+).
+ * This class customizes buttons to turn them into plus buttons(+).
  */
 class PlusButton extends JButton {
     private final int LINE_WIDTH = 3;

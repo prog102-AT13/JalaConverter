@@ -31,9 +31,6 @@ class CodeTextArea extends JPanel {
     private final int bottomBorder = 0;
     private final int rightBorder = 10;
 
-    /**
-     * Initializes the  graphic elements for Code Text Area.
-     */
     protected CodeTextArea() {
         codeArea = new JTextArea();
         codeArea.setBorder(new EmptyBorder(topBorder, leftBorder, bottomBorder, rightBorder));
@@ -44,15 +41,6 @@ class CodeTextArea extends JPanel {
         JScrollPane textCodeArea = new JScrollPane();
         textCodeArea.setBorder(new EmptyBorder(0, 0, 0, 0));
         codeArea.getDocument().addDocumentListener(new DocumentListener() {
-            public String getText() {
-                int caretPosition = codeArea.getDocument().getLength();
-                Element root = codeArea.getDocument().getDefaultRootElement();
-                String text = "1" + System.getProperty("line.separator");
-                for (int i = 2; i < root.getElementIndex(caretPosition) + 2; i++) {
-                    text += i + System.getProperty("line.separator");
-                }
-                return text;
-            }
 
             /**
              * Adds the number of rows in Code Area Text.
@@ -61,7 +49,7 @@ class CodeTextArea extends JPanel {
              */
             @Override
             public void changedUpdate(final DocumentEvent de) {
-                lineCode.setText(getText());
+                lineCode.setText(getLinesOfText());
             }
 
             /**
@@ -71,7 +59,7 @@ class CodeTextArea extends JPanel {
              */
             @Override
             public void insertUpdate(final DocumentEvent de) {
-                lineCode.setText(getText());
+                lineCode.setText(getLinesOfText());
             }
 
             /**
@@ -81,7 +69,7 @@ class CodeTextArea extends JPanel {
              */
             @Override
             public void removeUpdate(final DocumentEvent de) {
-                lineCode.setText(getText());
+                lineCode.setText(getLinesOfText());
             }
         });
         setLayout(new BorderLayout());
@@ -97,6 +85,16 @@ class CodeTextArea extends JPanel {
      */
     public String getText() {
         return codeArea.getText();
+    }
+
+    public String getLinesOfText() {
+        int caretPosition = codeArea.getDocument().getLength();
+        Element root = codeArea.getDocument().getDefaultRootElement();
+        String text = "1" + System.getProperty("line.separator");
+        for (int i = 2; i < root.getElementIndex(caretPosition) + 2; i++) {
+            text += i + System.getProperty("line.separator");
+        }
+        return text;
     }
 }
 

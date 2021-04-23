@@ -12,7 +12,6 @@ package org.fundacion.jala.converter.view.compiler;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import javax.swing.ImageIcon;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FlowLayout;
@@ -26,10 +25,6 @@ class CompilerButtons extends JPanel implements ActionListener {
     private JButton runCode;
     private JButton clearConsole;
     private JButton selectFile;
-    private String pathFile;
-    private final int width = 10;
-    private final int height = 10;
-    private final int hints = 30;
     private final int dimensionWidth = 80;
     private final int dimensionHeight = 20;
     private final int fontStyle = 0;
@@ -37,29 +32,14 @@ class CompilerButtons extends JPanel implements ActionListener {
     private final int hgap = 15;
     private final int vgap = 15;
 
-    /**
-     * Initializes the graphic elements for Compiler buttons.
-     *
-     * Runs code, cleans console, uploads code.
-     */
     protected CompilerButtons() {
-        ImageIcon runIcon = new ImageIcon("src/Images/RunIcon-02.png");
-        runCode = new JButton("Run");
-        runCode.setIcon(new ImageIcon(runIcon.getImage().getScaledInstance(width, height, hints)));
-        runCode.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
-        runCode.setFont(new Font("Barlow", fontStyle, fontSize));
-        clearConsole = new JButton("Clear");
-        clearConsole.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
-        clearConsole.setFont(new Font("Barlow", fontStyle, fontSize));
-        selectFile = new JButton("Open File");
-        selectFile.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
-        selectFile.setFont(new Font("Barlow", fontStyle, fontSize));
-        selectFile.addActionListener(this);
+        runCode = makeButton("Run");
+        clearConsole = makeButton("Clear");
+        selectFile = makeButton("Open File");
         setLayout(new FlowLayout(FlowLayout.RIGHT, hgap, vgap));
         add(selectFile);
         add(runCode);
         add(clearConsole);
-        runCode.addActionListener(this);
     }
 
     /**
@@ -71,11 +51,23 @@ class CompilerButtons extends JPanel implements ActionListener {
     }
 
     /**
-     * Gets runCode to manipulate
-     * @return a JButton
+     * Gets runCode to manipulate.
+     * @return a JButton.
      */
     public JButton getRunButton() {
         return  runCode;
+    }
+
+    /**
+     * Makes a custom button.
+     * @param text represents title that the button has.
+     * @return a JButton.
+     */
+    public JButton makeButton(final String text) {
+        JButton button = new JButton(text);
+        button.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
+        button.setFont(new Font("Barlow", fontStyle, fontSize));
+        return button;
     }
 }
 

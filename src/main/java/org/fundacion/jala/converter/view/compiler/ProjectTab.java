@@ -26,19 +26,20 @@ import java.awt.event.ActionEvent;
  * This class customizes a tabbed pane with custom tabs.
  */
 public class ProjectTab extends JTabbedPane implements ActionListener {
-    public static int COUNTER;
+    public static int counter;
     private PlusButton button;
 
     /**
      * Starts required components to add new tabs.
      */
     public void start() {
+        final int dimension = 20;
         button = new PlusButton();
-        button.setPreferredSize(new Dimension(20, 20));
+        button.setPreferredSize(new Dimension(dimension, dimension));
         button.addActionListener(this);
         add(new JPanel());
         setTabComponentAt(getTabCount() - 1, button);
-        COUNTER = 0;
+        counter = 0;
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(final MouseEvent mouseEvent) {
@@ -54,8 +55,8 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
      */
     @Override
     public void actionPerformed(final ActionEvent event) {
-        COUNTER++;
-        String title = "EndGame " + COUNTER;
+        counter++;
+        String title = "EndGame " + counter;
         CodeTextArea codeArea = new CodeTextArea();
         codeArea.setName(title);
         add(codeArea, getTabCount() - 1);
@@ -69,7 +70,7 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
      * @param title of tab we want to delete.
      * @return a boolean that means if works or not.
      */
-    public boolean removeTap(final String title) {
+    public boolean removeTab(final String title) {
         int i = getTabCount();
         for (int index = 0; index < i; index++) {
             String temp = getTitleAt(index);
@@ -82,7 +83,7 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
     }
 
     /**
-     * It represents what CodeTextArea is selected.
+     * Gets the selected tab CodeTextArea.
      *
      * @return a CodeTextArea of a selected tab.
      */
@@ -97,17 +98,19 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
      * @return a JPanel with complete title.
      */
     public JPanel makeTabTitle(final String title) {
+        final int dimension = 20;
+        final int sizeFont = 11;
         CloseButton tabButton = new CloseButton();
-        tabButton.setPreferredSize(new Dimension(20, 20));
+        tabButton.setPreferredSize(new Dimension(dimension, dimension));
         tabButton.addActionListener(e1 -> {
-            removeTap(title);
+            removeTab(title);
             setSelectedIndex(getTabCount() - 2);
         });
         JPanel pnl = new JPanel();
         pnl.setLayout(new FlowLayout());
         pnl.setOpaque(false);
         JLabel label = new JLabel(title);
-        label.setFont(new Font("Barlow", 0, 11));
+        label.setFont(new Font("Barlow", 0, sizeFont));
         pnl.add(label);
         pnl.add(tabButton);
         return pnl;
@@ -116,10 +119,10 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
     /**
      * Changes only name of title.
      *
-     * @param numberOfClick represents how many clicks it receives.
+     * @param numberOfClicks represents how many clicks it receives.
      */
-    public void changeTitle(final int numberOfClick) {
-        if (numberOfClick == 2 && !"Main".equals(getTitleAt(getSelectedIndex()))) {
+    public void changeTitle(final int numberOfClicks) {
+        if (numberOfClicks == 2 && !"Main".equals(getTitleAt(getSelectedIndex()))) {
             String result = (String) JOptionPane.showInputDialog(null,
                     "Change TabName", "Change name",
                     JOptionPane.PLAIN_MESSAGE, null, null, "Red");
