@@ -8,7 +8,6 @@
  *
  * @author Raymundo Guaraguara Sansusty
  */
-
 package org.fundacion.jala.converter.view.login;
 
 import org.fundacion.jala.converter.view.MainInterface;

@@ -8,7 +8,6 @@
  *
  * @author Paola Aguilar Quiñones
  */
-
 package org.fundacion.jala.converter.view.converter;
 
 import org.apache.logging.log4j.LogManager;
@@ -29,6 +28,9 @@ import java.security.NoSuchAlgorithmException;
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;
 
+/**
+ * This class creates the video converter's UI.
+ */
 public class VideoConverterInterface extends JPanel implements ActionListener {
     private SelectFile file;
     private ConverterTypeSelect menuConverterType;

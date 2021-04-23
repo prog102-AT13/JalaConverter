@@ -20,6 +20,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Class to do and call facade of extract.
+ */
 public class ExtractFacade {
     public static final String TXT_FILE_EXTENSION = ".txt";
     public static final String HTML_FILE_EXTENSION = ".html";
