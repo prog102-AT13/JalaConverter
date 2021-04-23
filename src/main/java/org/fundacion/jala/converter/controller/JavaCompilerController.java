@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.io.IOException;
 
 /**
@@ -30,7 +31,12 @@ public class JavaCompilerController {
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**
-     * Endpoint for compile java.
+     * Compiles java code.
+     *
+     * @param code a String with the code to compile.
+     * @return a String with the compilation result.
+     * @throws IllegalStateException when method invoked at an illegal time.
+     * @throws IOException when invalid input is provided.
      */
     @PostMapping("/compileJava")
     public String compileJava(final @RequestParam("code") String code) throws IllegalStateException, IOException {
