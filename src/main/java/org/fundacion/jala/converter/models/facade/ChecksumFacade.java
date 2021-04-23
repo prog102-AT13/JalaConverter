@@ -36,7 +36,8 @@ public class ChecksumFacade {
      * @return object of ParameterOutputChecksum
      * @throws IOException when invalid file's path
      */
-    public static ParameterOutputChecksum getChecksum(final String checksum, final MultipartFile file) throws  IOException {
+    public static ParameterOutputChecksum getChecksum(final String checksum, final MultipartFile file)
+            throws  IOException {
         FileStorageService fileStorageService = new FileStorageService();
         String filename;
         String storagePath;
@@ -69,7 +70,7 @@ public class ChecksumFacade {
      *
      * @param checksum is checksum of file
      * @param assets list of file in database
-     * @return
+     * @return return a List<String> with path of file with same checksum
      */
     private static List<String> getPath(final String checksum, final List<Asset> assets) {
         return assets.stream().filter(project -> project.getChecksum().equals(checksum))
@@ -82,7 +83,7 @@ public class ChecksumFacade {
      *
      * @param checksum is checksum of file
      * @param assets list of file in database
-     * @return
+     * @return return a List<String> with name of file with same checksum
      */
     private static List<String> getTitles(final String checksum, final List<Asset> assets) {
         return assets.stream().filter(project -> project.getChecksum().equals(checksum))

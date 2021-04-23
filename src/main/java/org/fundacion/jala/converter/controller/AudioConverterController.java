@@ -40,16 +40,17 @@ public class AudioConverterController {
      * Calls endpoint for audio converter
      */
     @PostMapping("/convertAudio")
-    public String uploadFile(final @RequestParam("file") MultipartFile file,
-                             final @RequestParam("format") String format,
-                             final @RequestParam("bitrate") String bitrate,
-                             final @RequestParam("volume") String volume,
+    public String uploadFile(final @RequestParam("file") MultipartFile file, final @RequestParam("format") String format,
+                             final @RequestParam("bitrate") String bitrate, final @RequestParam("volume") String volume,
                              final @RequestParam("hz") String hz,
                              final @RequestParam("audiochannel") String audioChannel,
                              final @RequestParam("checksum") String checksum,
-                             final @RequestParam("metadata") String metadata) throws IllegalStateException, IOException, InterruptedException {
+                             final @RequestParam("metadata") String metadata)
+            throws IllegalStateException, IOException, InterruptedException {
         parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
-        String outputFilename = ConverterFacade.getAudioConverter(new AudioParameter(parameterOutputChecksum.getOutputFilename(), format, bitrate, hz, volume, audioChannel));
+        String outputFilename = ConverterFacade.getAudioConverter(
+                new AudioParameter(parameterOutputChecksum.getOutputFilename(), format, bitrate, hz, volume,
+                        audioChannel));
         extractMetadata(metadata, outputFilename, fileStorageService);
         ZipFileFacade.getZipFileAudio(parameterOutputChecksum, metadata, outputFilename);
         String nameWithoutExtension = outputFilename.substring(0, outputFilename.lastIndexOf(".") + 1);

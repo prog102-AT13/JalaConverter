@@ -22,7 +22,7 @@ public class ZipFileFacade {
     }
 
     /**
-     * Compress files of Audio
+     * Compresses files of Audio
      *
      * @param parameterOutputChecksum object of ParameterOutputChecksum
      * @param metadata if add metadata of audio into zip
@@ -30,13 +30,13 @@ public class ZipFileFacade {
      * @throws IOException
      * @throws InterruptedException
      */
-    public static void getZipFileAudio(final ParameterOutputChecksum parameterOutputChecksum,final String metadata,
+    public static void getZipFileAudio(final ParameterOutputChecksum parameterOutputChecksum, final String metadata,
                                        final String storagePath) throws IOException, InterruptedException {
         getZipFile(parameterOutputChecksum, metadata, storagePath, false);
     }
 
     /**
-     * Compress files of video
+     * Compresses files of video
      *
      * @param parameterOutputChecksum object of ParameterOutputChecksum
      * @param metadata if add metadata of video into zip
@@ -45,13 +45,14 @@ public class ZipFileFacade {
      * @throws IOException when invalid path is given in zipFiles
      * @throws InterruptedException is exception if process is interrupted
      */
-    public static void getZipFileVideo(final ParameterOutputChecksum parameterOutputChecksum,final String metadata,
-                                       final boolean thumbnail,final String storagePath) throws IOException, InterruptedException {
+    public static void getZipFileVideo(final ParameterOutputChecksum parameterOutputChecksum, final String metadata,
+                                       final boolean thumbnail, final String storagePath)
+            throws IOException, InterruptedException {
         getZipFile(parameterOutputChecksum, metadata, storagePath, thumbnail);
     }
 
     /**
-     * Compress files
+     * Compresses files
      *
      * @param parameterOutputChecksum object of ParameterOutputChecksum
      * @param metadata if add metadata into zip
@@ -60,19 +61,19 @@ public class ZipFileFacade {
      * @throws IOException when invalid path is given in zipFiles
      * @throws InterruptedException is exception if process is interrupted
      */
-    private static void getZipFile(final ParameterOutputChecksum parameterOutputChecksum,final String metadata,
-                                   final String storagePath,final boolean thumbnail) throws IOException, InterruptedException {
+    private static void getZipFile(final ParameterOutputChecksum parameterOutputChecksum, final String metadata,
+                                   final String storagePath, final boolean thumbnail) throws IOException, InterruptedException {
         String checksumLocal = parameterOutputChecksum.getChecksumLocal();
         String outputFilename = parameterOutputChecksum.getOutputFilename();
         int resultTitleSize = parameterOutputChecksum.getResultTitleSize();
         String filename = parameterOutputChecksum.getFilename();
-        final int waitTime = 6000;
-        final int userID = 1;
+        final int WAIT_TIME = 6000;
+        final int USER_ID = 1;
         String nameWithoutExtension = outputFilename.substring(0, outputFilename.lastIndexOf(".") + 1);
         String pathFile = storagePath.substring(0, storagePath.lastIndexOf(System.getProperty("file.separator")) + 1);
 
         if (!(resultTitleSize > 0)) {
-            insertAssetData(filename, pathFile, checksumLocal, userID);
+            insertAssetData(filename, pathFile, checksumLocal, USER_ID);
         }
         if (metadata.equals("true") || thumbnail) {
             ArrayList<String> zipList = new ArrayList<>();
@@ -83,10 +84,10 @@ public class ZipFileFacade {
             if (thumbnail) {
                 zipList.add(pathFile + nameWithoutExtension + "png");
             }
-            Thread.sleep(waitTime);
+            Thread.sleep(WAIT_TIME);
             zipFiles(zipList, pathFile + nameWithoutExtension + "zip");
         } else {
-            Thread.sleep(waitTime);
+            Thread.sleep(WAIT_TIME);
             zipFile(pathFile + outputFilename, pathFile + nameWithoutExtension + "zip");
         }
     }

@@ -44,15 +44,15 @@ public class VideoConverterController {
                              final @RequestParam("outputformat") String outputFormat,
                              final @RequestParam("resolution") String resolution,
                              final @RequestParam("thumbnail") boolean thumbnail,
-                             final @RequestParam("framerate") int frameRate,
-                             final @RequestParam("width") int width,
-                             final @RequestParam("height") int height,
-                             final @RequestParam("audio") boolean audio,
+                             final @RequestParam("framerate") int frameRate, final @RequestParam("width") int width,
+                             final @RequestParam("height") int height, final @RequestParam("audio") boolean audio,
                              final @RequestParam("checksum") String checksum,
-                             final @RequestParam("metadata") String metadata) throws IllegalStateException, IOException, InterruptedException {
+                             final @RequestParam("metadata") String metadata)
+            throws IllegalStateException, IOException, InterruptedException {
         parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
-        String outputFilename = ConverterFacade.getVideoConverter(new VideoParameter(parameterOutputChecksum.getOutputFilename(), outputFormat,
-                resolution, thumbnail, frameRate, width, height, audio));
+        String outputFilename = ConverterFacade.getVideoConverter(
+                new VideoParameter(parameterOutputChecksum.getOutputFilename(), outputFormat, resolution, thumbnail,
+                        frameRate, width, height, audio));
         extractMetadata(metadata, outputFilename, fileStorageService);
         ZipFileFacade.getZipFileVideo(parameterOutputChecksum, metadata, thumbnail, outputFilename);
         String nameWithoutExtension = outputFilename.substring(0, outputFilename.lastIndexOf(".") + 1);
