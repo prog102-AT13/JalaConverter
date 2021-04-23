@@ -16,6 +16,9 @@ import static org.fundacion.jala.converter.models.AssetSQL.insertAssetData;
 import static org.fundacion.jala.converter.service.ZipService.zipFile;
 import static org.fundacion.jala.converter.service.ZipService.zipFiles;
 
+/**
+ * Class to do and call facade of ZipFile.
+ */
 public class ZipFileFacade {
 
     private ZipFileFacade() {
@@ -24,11 +27,11 @@ public class ZipFileFacade {
     /**
      * Compresses files of Audio
      *
-     * @param parameterOutputChecksum object of ParameterOutputChecksum
-     * @param metadata if add metadata of audio into zip
-     * @param storagePath path and name of file to compress
-     * @throws IOException
-     * @throws InterruptedException
+     * @param parameterOutputChecksum object of ParameterOutputChecksum.
+     * @param metadata if add metadata of audio into zip.
+     * @param storagePath path and name of file to compress.
+     * @throws IOException when invalid path is given in zipFiles.
+     * @throws InterruptedException is exception if process is interrupted.
      */
     public static void getZipFileAudio(final ParameterOutputChecksum parameterOutputChecksum, final String metadata,
                                        final String storagePath) throws IOException, InterruptedException {
@@ -36,14 +39,14 @@ public class ZipFileFacade {
     }
 
     /**
-     * Compresses files of video
+     * Compresses files of video.
      *
-     * @param parameterOutputChecksum object of ParameterOutputChecksum
-     * @param metadata if add metadata of video into zip
-     * @param storagePath path and name of file to compress
-     * @param thumbnail if add thumbnail of video into zip
-     * @throws IOException when invalid path is given in zipFiles
-     * @throws InterruptedException is exception if process is interrupted
+     * @param parameterOutputChecksum object of ParameterOutputChecksum.
+     * @param metadata if add metadata of video into zip.
+     * @param storagePath path and name of file to compress.
+     * @param thumbnail if add thumbnail of video into zip.
+     * @throws IOException when invalid path is given in zipFiles.
+     * @throws InterruptedException is exception if process is interrupted.
      */
     public static void getZipFileVideo(final ParameterOutputChecksum parameterOutputChecksum, final String metadata,
                                        final boolean thumbnail, final String storagePath)
@@ -52,17 +55,18 @@ public class ZipFileFacade {
     }
 
     /**
-     * Compresses files
+     * Compresses files.
      *
-     * @param parameterOutputChecksum object of ParameterOutputChecksum
-     * @param metadata if add metadata into zip
-     * @param storagePath path and name of file to compress
-     * @param thumbnail if add thumbnail of video into zip
-     * @throws IOException when invalid path is given in zipFiles
-     * @throws InterruptedException is exception if process is interrupted
+     * @param parameterOutputChecksum object of ParameterOutputChecksum.
+     * @param metadata if add metadata into zip.
+     * @param storagePath path and name of file to compress.
+     * @param thumbnail if add thumbnail of video into zip.
+     * @throws IOException when invalid path is given in zipFiles.
+     * @throws InterruptedException is exception if process is interrupted.
      */
     private static void getZipFile(final ParameterOutputChecksum parameterOutputChecksum, final String metadata,
-                                   final String storagePath, final boolean thumbnail) throws IOException, InterruptedException {
+                                   final String storagePath, final boolean thumbnail)
+            throws IOException, InterruptedException {
         String checksumLocal = parameterOutputChecksum.getChecksumLocal();
         String outputFilename = parameterOutputChecksum.getOutputFilename();
         int resultTitleSize = parameterOutputChecksum.getResultTitleSize();
@@ -71,7 +75,6 @@ public class ZipFileFacade {
         final int USER_ID = 1;
         String nameWithoutExtension = outputFilename.substring(0, outputFilename.lastIndexOf(".") + 1);
         String pathFile = storagePath.substring(0, storagePath.lastIndexOf(System.getProperty("file.separator")) + 1);
-
         if (!(resultTitleSize > 0)) {
             insertAssetData(filename, pathFile, checksumLocal, USER_ID);
         }

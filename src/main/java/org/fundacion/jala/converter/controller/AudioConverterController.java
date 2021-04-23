@@ -28,6 +28,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
 import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetadata;
 
+/**
+ * Calls endpoint for audio.
+ */
 @RestController
 @RequestMapping("/api")
 public class AudioConverterController {
@@ -37,7 +40,7 @@ public class AudioConverterController {
     private ParameterOutputChecksum parameterOutputChecksum;
 
     /**
-     * Calls endpoint for audio converter
+     * Calls endpoint for audio.
      */
     @PostMapping("/convertAudio")
     public String uploadFile(final @RequestParam("file") MultipartFile file, final @RequestParam("format") String format,

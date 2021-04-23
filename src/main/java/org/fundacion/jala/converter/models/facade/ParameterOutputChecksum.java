@@ -10,6 +10,9 @@
  */
 package org.fundacion.jala.converter.models.facade;
 
+/**
+ * Parameter output when checksum are called.
+ */
 public class ParameterOutputChecksum {
     private String checksumLocal;
     private String outputFilename;
@@ -25,36 +28,36 @@ public class ParameterOutputChecksum {
     }
 
     /**
-     * Gets checksum local
+     * Gets checksum local.
      *
-     * @return string with checksum Local
+     * @return string with checksum Local.
      */
     public String getChecksumLocal() {
         return checksumLocal;
     }
 
     /**
-     * Gets Out put Filename
+     * Gets Out put Filename.
      *
-     * @return string with out put Filename
+     * @return string with out put Filename.
      */
     public String getOutputFilename() {
         return outputFilename;
     }
 
     /**
-     * Gets number of file to compress
+     * Gets number of file to compress.
      *
-     * @return int with number of file to compress
+     * @return int with number of file to compress.
      */
     public int getResultTitleSize() {
         return resultTitleSize;
     }
 
     /**
-     * Gets name of archive with converts
+     * Gets name of archive with converts.
      *
-     * @return name of archive to converts
+     * @return name of archive to converts.
      */
     public String getFilename() {
         return filename;

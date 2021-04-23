@@ -28,6 +28,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
 import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetadata;
 
+/**
+ * Calls endpoint for video.
+ */
 @RestController
 @RequestMapping("/api")
 public class VideoConverterController {
@@ -37,7 +40,7 @@ public class VideoConverterController {
     private ParameterOutputChecksum parameterOutputChecksum;
 
     /**
-     * Calls endpoint for convertVideo
+     * Calls endpoint for convertVideo.
      */
     @PostMapping("/convertVideo")
     public String uploadFile(final @RequestParam("file") MultipartFile file,
