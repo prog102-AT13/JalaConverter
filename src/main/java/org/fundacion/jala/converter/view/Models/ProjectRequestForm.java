@@ -13,6 +13,9 @@ package org.fundacion.jala.converter.view.Models;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class represents a form with a list of project parameters.
+ */
 public class ProjectRequestForm implements IRequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
     private final String url = "http://localhost:8080/api/makeProject";
@@ -80,3 +83,4 @@ public class ProjectRequestForm implements IRequestForm {
         return url;
     }
 }
+

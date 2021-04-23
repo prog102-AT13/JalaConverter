@@ -22,6 +22,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
+/**
+ * This class customizes a tabbed pane with custom tabs.
+ */
 public class ProjectTab extends JTabbedPane implements ActionListener {
     public static int COUNTER;
     private PlusButton button;
@@ -128,3 +131,4 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
         }
     }
 }
+

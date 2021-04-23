@@ -17,6 +17,9 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Component;
 
+/**
+ *  * This class customizes a panel with custom buttons to change language.
+ */
 class LanguageButtons extends JPanel {
     private JButton cPlusPlus;
     private JButton java;
@@ -69,3 +72,4 @@ class LanguageButtons extends JPanel {
         return python;
     }
 }
+

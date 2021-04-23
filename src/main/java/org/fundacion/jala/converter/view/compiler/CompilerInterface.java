@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- * <p>
+ *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -30,6 +30,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import static org.fundacion.jala.converter.models.UserSQL.findUserById;
 
+/**
+ * This class customizes interface of compiler.
+ */
 public class CompilerInterface extends JPanel {
     private static final Logger LOGGER = LogManager.getLogger();
     private CodeTextArea codeArea;
@@ -133,3 +136,4 @@ public class CompilerInterface extends JPanel {
         });
     }
 }
+

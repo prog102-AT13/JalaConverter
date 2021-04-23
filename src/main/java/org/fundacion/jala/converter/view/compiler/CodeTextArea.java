@@ -20,6 +20,9 @@ import javax.swing.text.Element;
 import java.awt.Color;
 import java.awt.BorderLayout;
 
+/**
+ * This class customizes a panel with custom text areas.
+ */
 class CodeTextArea extends JPanel {
     private JTextArea codeArea;
     private JTextArea lineCode;
@@ -96,3 +99,4 @@ class CodeTextArea extends JPanel {
         return codeArea.getText();
     }
 }
+

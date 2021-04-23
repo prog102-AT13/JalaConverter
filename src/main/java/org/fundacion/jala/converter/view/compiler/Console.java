@@ -17,6 +17,9 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Color;
 
+/**
+ * This class customizes a panel as a console.
+ */
 class Console extends JPanel {
     private JTextArea console;
     private final int width = 600;
@@ -45,3 +48,4 @@ class Console extends JPanel {
         return console;
     }
 }
+
