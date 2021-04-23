@@ -28,6 +28,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+/**
+ * This class creates the Login UI.
+ */
 public class LoginInterface extends JFrame implements ActionListener {
     private final Container LOGIN_CONTENT_PANE = getContentPane();
     private final JLabel USERNAME_LABEL = new JLabel("USERNAME");
@@ -73,14 +76,14 @@ public class LoginInterface extends JFrame implements ActionListener {
     }
 
     /**
-     * Sets the layout manager for the container
+     * Sets the layout manager for the container.
      */
     public void setLayoutManager() {
         LOGIN_CONTENT_PANE.setLayout(null);
     }
 
     /**
-     * Sets all the components location and sizes
+     * Sets all the components location and sizes.
      */
     public void setLocationAndSize() {
         USERNAME_LABEL.setBounds(LABEL_X_POSITION, FIRST_COMPONENTS_Y_POSITION,
@@ -100,7 +103,7 @@ public class LoginInterface extends JFrame implements ActionListener {
     }
 
     /**
-     * Adds all the components to the container
+     * Adds all the components to the container.
      */
     public void addComponentsToContainer() {
         LOGIN_CONTENT_PANE.add(USERNAME_LABEL);
@@ -113,7 +116,7 @@ public class LoginInterface extends JFrame implements ActionListener {
     }
 
     /**
-     * Adds the actions performed
+     * Adds the actions performed.
      */
     public void addActionEvent() {
         LOGIN_BUTTON.addActionListener(this);
@@ -122,7 +125,8 @@ public class LoginInterface extends JFrame implements ActionListener {
     }
 
     /**
-     * Sends a request with given information
+     * Sends a request with given information.
+     *
      * @param username a String with username
      * @param password a String with password
      */
@@ -145,7 +149,8 @@ public class LoginInterface extends JFrame implements ActionListener {
     }
 
     /**
-     * Defines the operation after an action is done
+     * Defines the operation after an action is done.
+     *
      * @param e an action performed by user
      */
     @Override

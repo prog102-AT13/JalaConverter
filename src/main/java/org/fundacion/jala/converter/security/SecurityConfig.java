@@ -25,6 +25,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * This class configures the application's security.
+ */
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
@@ -34,7 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private JwtRequestFilter jwtRequestFilter;
 
     /**
-     * Enables memory based authentication
+     * Enables memory based authentication.
+     *
      * @param auth Authentication manager specified
      * @throws Exception when not found
      */
@@ -44,7 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * Disables security on /authenticate and set a filter to the jwtRequest
+     * Disables security on /authenticate and set a filter to the jwtRequest.
+     *
      * @param http to configure web based security
      * @throws Exception when not found
      */
@@ -59,7 +64,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * Makes the configuration ignore security on swagger endpoints
+     * Makes the configuration ignore security on swagger endpoints.
+     *
      * @param web to create a filter chain
      * @throws Exception when not found
      */
@@ -71,7 +77,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * Exposes AuthenticationManager as a Bean
+     * Exposes AuthenticationManager as a Bean.
+     *
      * @return AuthenticationManager
      * @throws Exception when not found
      */
@@ -82,7 +89,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * Encodes the password
+     * Encodes the password.
+     *
      * @return password encoded with BCrypt
      */
     @Bean

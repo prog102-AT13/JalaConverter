@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author
+ * @author Joel Rodrigo Rojas Roman
  */
 package org.fundacion.jala.converter.controller;
 
@@ -16,10 +16,14 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 
+/**
+ * This class converts a String to a file.
+ */
 public class Transform {
     private static final Logger LOGGER = LogManager.getLogger();
     /**
-     * Converts the code that is written as a string to a file with a python extension
+     * Converts the code that is written as a string to a file with a python extension.
+     *
      * @param code It is a string ready to be converted
      * @return path where will be created the file
      */
@@ -46,11 +50,13 @@ public class Transform {
     }
 
     /**
-     * Converts the code that is written as a string to a file with a python extension
+     * Converts the code that is written as a string to a file with a python extension.
+     *
      * @param code It is a string ready to be converted
      * @return path where will be created the file
      */
-    public static String createFile(final String code, final String fileName, final String extension, final String pathProject) {
+    public static String createFile(final String code, final String fileName, final String extension,
+                                    final String pathProject) {
         LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");

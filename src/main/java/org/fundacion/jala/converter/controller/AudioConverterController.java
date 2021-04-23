@@ -35,7 +35,9 @@ import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetada
 import static org.fundacion.jala.converter.service.ZipService.zipFile;
 import static org.fundacion.jala.converter.service.ZipService.zipFiles;
 
-
+/**
+ * This class converts an Audio File.
+ */
 @RestController
 @RequestMapping("/api")
 public class AudioConverterController {
@@ -44,7 +46,7 @@ public class AudioConverterController {
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**
-     * Endpoint for audio converter
+     * Endpoint for audio converter.
      */
     @PostMapping("/convertAudio")
     public String uploadFile(final @RequestParam("file") MultipartFile file,
@@ -54,7 +56,8 @@ public class AudioConverterController {
                              final @RequestParam("hz") String hz,
                              final @RequestParam("audiochannel") String audioChannel,
                              final @RequestParam("checksum") String checksum,
-                             final @RequestParam("metadata") String metadata) throws IllegalStateException, IOException, InterruptedException {
+                             final @RequestParam("metadata") String metadata) throws IllegalStateException, IOException,
+            InterruptedException {
         String filename;
         String storagePath;
         String checksumLocal = checksum;
@@ -106,10 +109,11 @@ public class AudioConverterController {
     }
 
     /**
-     * Obtains the path of the file
-     * @param checksum
-     * @param assets
-     * @return
+     * Obtains the path of the file.
+     *
+     * @param checksum a String with the checksum value
+     * @param assets a list of Assets
+     * @return a list with the Asset's paths
      */
     private List<String> getPath(final String checksum, final List<Asset> assets) {
         return assets.stream().filter(project -> project.getChecksum().equals(checksum))
@@ -118,10 +122,11 @@ public class AudioConverterController {
     }
 
     /**
-     * Obtains the name of the file
-     * @param checksum
-     * @param assets
-     * @return
+     * Obtains the name of the file.
+     *
+     * @param checksum a String with the checksum value.
+     * @param assets a list of Assets
+     * @return a list with the Asset's titles
      */
     private List<String> getTitles(final String checksum, final List<Asset> assets) {
         return assets.stream().filter(project -> project.getChecksum().equals(checksum))

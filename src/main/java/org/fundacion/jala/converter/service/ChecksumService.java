@@ -16,6 +16,9 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * This class gets a file's checksum and compares it.
+ */
 public class ChecksumService {
     private static final int BYTES = 1024;
     private static final String MD5_ALGORITHM = "MD5";
@@ -24,7 +27,8 @@ public class ChecksumService {
     private static final int HEXADECIMAL_RADIX = 16;
 
     /**
-     * Gets the file's checksum
+     * Gets the file's checksum.
+     *
      * @param filePath the file's direction
      * @return a String with the checksum
      * @throws IOException when invalid file's path
@@ -50,7 +54,8 @@ public class ChecksumService {
     }
 
     /**
-     * Verifies if two file's have the same checksum
+     * Verifies if two file's have the same checksum.
+     *
      * @param firstFilePath first file's path
      * @param checksum a String with the checksum
      * @return a Boolean with the response

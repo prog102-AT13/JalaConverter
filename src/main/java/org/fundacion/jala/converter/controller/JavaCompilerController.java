@@ -5,6 +5,8 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Jessicka Moya Andrade
  */
 package org.fundacion.jala.converter.controller;
 
@@ -19,13 +21,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 
+/**
+ * This class compiles a Java project.
+ */
 @RestController
 @RequestMapping("/api")
 public class JavaCompilerController {
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**
-     * Endpoint for compile java
+     * Endpoint for compile java.
      */
     @PostMapping("/compileJava")
     public String compileJava(final @RequestParam("code") String code) throws IllegalStateException, IOException {

@@ -10,6 +10,9 @@
  */
 package org.fundacion.jala.converter.models;
 
+/**
+ * This class creates an authentication request with the username and password.
+ */
 public class AuthenticationRequest {
     private String username;
     private String password;
@@ -20,7 +23,8 @@ public class AuthenticationRequest {
     }
 
     /**
-     * Gets the username
+     * Gets the username.
+     *
      * @return username
      */
     public String getUsername() {
@@ -28,7 +32,8 @@ public class AuthenticationRequest {
     }
 
     /**
-     * Sets the username
+     * Sets the username.
+     *
      * @param newUsername to set the new value
      */
     public void setUsername(final String newUsername) {
@@ -36,7 +41,8 @@ public class AuthenticationRequest {
     }
 
     /**
-     * Gets the password
+     * Gets the password.
+     *
      * @return password
      */
     public String getPassword() {
@@ -44,7 +50,8 @@ public class AuthenticationRequest {
     }
 
     /**
-     * Sets the password
+     * Sets the password.
+     *
      * @param newPassword to set new value
      */
     public void setPassword(final String newPassword) {

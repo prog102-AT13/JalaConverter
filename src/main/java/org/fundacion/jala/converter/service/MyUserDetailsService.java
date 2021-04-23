@@ -22,10 +22,14 @@ import static org.fundacion.jala.converter.models.UserSQL.getUserId;
 import static org.fundacion.jala.converter.models.UserSQL.insertUserData;
 import static org.fundacion.jala.converter.models.UserSQL.usernameExists;
 
+/**
+ * This class creates the user's details service.
+ */
 @Service
 public class MyUserDetailsService implements UserDetailsService {
     /**
-     * Gets user details with the username
+     * Gets user details with the username.
+     *
      * @param username to locate the user
      * @return User Details
      * @throws UsernameNotFoundException when user not found or has not granted authority
@@ -44,7 +48,8 @@ public class MyUserDetailsService implements UserDetailsService {
     }
 
     /**
-     * Saves user in the database
+     * Saves user in the database.
+     *
      * @param username a String with username
      * @param password a String with password
      * @return AuthenticationRequest with the given param

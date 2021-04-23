@@ -31,6 +31,9 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * This class creates the compiler's UI.
+ */
 public class CompilerInterface extends JPanel {
     private static final Logger LOGGER = LogManager.getLogger();
     private final String PYTHON_URL = "http://localhost:8080/api/compilePython";

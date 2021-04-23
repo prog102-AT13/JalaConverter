@@ -10,7 +10,10 @@
  */
 package org.fundacion.jala.converter.exceptions;
 
-public class ConverterException extends PaoPaoException{
+/**
+ * This class creates the converter's exceptions.
+ */
+public class ConverterException extends PaoPaoException {
     private static final String DEFAULT_MESSAGE = "Invalid Parameter";
     private static final String FIELD_ERROR = "Invalid input = %s, on field = %s";
 

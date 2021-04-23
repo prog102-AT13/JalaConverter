@@ -29,6 +29,9 @@ import java.security.NoSuchAlgorithmException;
 import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 
+/**
+ * This class creates the audio converter's UI.
+ */
 public class AudioConverterInterface extends JPanel implements ActionListener {
     private SelectFile file;
     private ConvertTypeSelectAudio audioSelect;
@@ -50,6 +53,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
 
     /**
      * Initializes the graphics elements for Audio converter interface.
+     *
      * @param newToken a String with the authentication token
      */
     public AudioConverterInterface(final String newToken) {
@@ -85,6 +89,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
 
     /**
      * Converts, sends information for metadataClass conversion.
+     *
      * Shows a Dialog with the information.
      * @param e event of the JButton.
      */
@@ -123,7 +128,8 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
     }
 
     /**
-     * Obtains the request
+     * Obtains the request.
+     *
      * @throws IOException
      */
     private void callRequest() throws IOException {

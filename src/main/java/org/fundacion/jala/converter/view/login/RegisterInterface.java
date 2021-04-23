@@ -25,7 +25,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * This class sets the display and features of the Register UI
+ * This class creates the Register UI.
  */
 public class RegisterInterface extends JFrame implements ActionListener {
     private final Container REGISTER_CONTENT_PANE = getContentPane();
@@ -76,14 +76,14 @@ public class RegisterInterface extends JFrame implements ActionListener {
     }
 
     /**
-     * Sets the layout Manager for the Container
+     * Sets the layout Manager for the Container.
      */
     public void setLayoutManager() {
         REGISTER_CONTENT_PANE.setLayout(null);
     }
 
     /**
-     * Sets the position and size for the components
+     * Sets the position and size for the components.
      */
     public void setLocationAndSize() {
         USERNAME_LABEL.setBounds(LABEL_X_POSITION, FIRST_COMPONENTS_Y_POSITION,
@@ -109,7 +109,7 @@ public class RegisterInterface extends JFrame implements ActionListener {
     }
 
     /**
-     * Adds all the components to the Container
+     * Adds all the components to the Container.
      */
     public void addComponentsToContainer() {
         REGISTER_CONTENT_PANE.add(USERNAME_LABEL);
@@ -125,7 +125,7 @@ public class RegisterInterface extends JFrame implements ActionListener {
     }
 
     /**
-     * Adds the different events to the ActionListener
+     * Adds the different events to the ActionListener.
      */
     public void addActionEvent() {
         REGISTER_BUTTON.addActionListener(this);
@@ -135,7 +135,8 @@ public class RegisterInterface extends JFrame implements ActionListener {
     }
 
     /**
-     * Sends a request with given information
+     * Sends a request with given information.
+     *
      * @param username a String with username
      * @param password a String with password
      */
@@ -154,7 +155,8 @@ public class RegisterInterface extends JFrame implements ActionListener {
     }
 
     /**
-     * Gets the actions performed on the components
+     * Gets the actions performed on the components.
+     *
      * @param e an action event
      */
     @Override
@@ -187,7 +189,8 @@ public class RegisterInterface extends JFrame implements ActionListener {
     }
 
     /**
-     * Shows or Hides a JPasswordField depending on its status
+     * Shows or Hides a JPasswordField depending on its status.
+     *
      * @param jPasswordField the field to change
      * @param status a boolean with current status
      */

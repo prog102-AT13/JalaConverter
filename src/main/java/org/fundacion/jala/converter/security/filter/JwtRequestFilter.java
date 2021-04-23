@@ -19,16 +19,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * This class creates a filter using the json web token.
+ */
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
-    private static final int BEARER_LENGTH = 7;
+    private final int BEARER_LENGTH = 7;
     @Autowired
     private MyUserDetailsService userDetailsService;
 
@@ -36,7 +38,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private JwtUtil jwtUtil;
 
     /**
-     * Makes an internal filter of the request
+     * Makes an internal filter of the request.
+     *
      * @param request a http servlet request
      * @param response a http servlet response
      * @param filterChain the web chain filters

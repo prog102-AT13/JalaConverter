@@ -17,13 +17,16 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-
 import java.util.Collections;
 
+/**
+ * This class configures swagger documentation.
+ */
 @Configuration
 public class SwaggerConfig {
     /**
-     * Creates a Docket
+     * Creates a Docket.
+     *
      * @return a Docket with Swagger configuration
      */
     @Bean
@@ -37,7 +40,8 @@ public class SwaggerConfig {
     }
 
     /**
-     * Customizes the API Information
+     * Customizes the API Information.
+     *
      * @return the ApiInfo with the customization values
      */
     private ApiInfo apiDetails() {
@@ -52,7 +56,8 @@ public class SwaggerConfig {
                         + "\t• Compile java projects.",
                 "1.0.0",
                 "localhost:8080/api/termsofservice",
-                new springfox.documentation.service.Contact("Team AT13", "https://www.fundacionjala.org", "AT13@fundacion-jala.org"),
+                new springfox.documentation.service.Contact("Team AT13",
+                        "https://www.fundacionjala.org", "AT13@fundacion-jala.org"),
                 "API license",
                 "localhost:8080/api/license",
                 Collections.emptyList());

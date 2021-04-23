@@ -25,9 +25,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import static org.fundacion.jala.converter.models.UserSQL.editToken;
 
+/**
+ * This class makes the user authentication.
+ */
 @RestController
 public class AuthController {
     private Logger authLogger = LogManager.getLogger();
@@ -40,7 +42,8 @@ public class AuthController {
     @Autowired
     private JwtUtil jwtTokenUtil;
     /**
-     * Create an authentication response with the token
+     * Create an authentication response with the token.
+     *
      * @param username a String with the username
      * @param password a String with the password
      * @return response entity with the token
@@ -48,8 +51,7 @@ public class AuthController {
      */
     @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthenticationToken(final @RequestParam String username,
-                                                       final @RequestParam String password)
-            throws Exception {
+                                                       final @RequestParam String password) throws Exception {
         AuthenticationRequest authenticationRequest = new AuthenticationRequest(username, password);
         try {
             authLogger.info("Start.");

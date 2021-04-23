@@ -7,7 +7,6 @@
  * license agreement you entered into with Fundacion Jala
  *
  * @author Saul Caspa Miranda
- * @version 1.0
  */
 package org.fundacion.jala.converter.view.controllers;
 
@@ -36,6 +35,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 
+/**
+ * This class creates and handles the client's requests.
+ */
 public class ClientRequest {
     private CloseableHttpClient httpClient;
     private HttpPost httpPost;
@@ -56,6 +58,7 @@ public class ClientRequest {
 
     /**
      * Executes a request given the type of requestForm.
+     *
      * @return sResponse
      * @throws ClientProtocolException
      * @throws IOException
@@ -75,7 +78,8 @@ public class ClientRequest {
     }
 
     /**
-     * Executes a request given the type of requestForm
+     * Executes a request given the type of requestForm.
+     *
      * @param newRequestForm the request form
      * @return a String with the response
      * @throws ClientProtocolException when an error on the HTTP protocol occurs
@@ -96,9 +100,10 @@ public class ClientRequest {
     }
 
     /**
-     * Downloads a file from endpoint to given path
-     * @throws ClientProtocolException
-     * @throws IOException
+     * Downloads a file from endpoint to given path.
+     *
+     * @throws ClientProtocolException when there is an error on the client protocol
+     * @throws IOException when introduced an invalid path
      */
     public void download(final String filePath) throws IOException {
         String sURL = DOWNLOAD_URL;
@@ -118,7 +123,8 @@ public class ClientRequest {
 
     /**
      * Retrieves a  token from the endpoint from a username and password.
-     * @return
+     *
+     * @return a String with the token
      */
     public String authGetToken() throws IOException {
         String sURL = AUTHENTICATE_URL;
@@ -137,7 +143,8 @@ public class ClientRequest {
 
     /**
      * Adds text field to http request.
-     * @param key   String with the key
+     *
+     * @param key String with the key
      * @param value String with the value
      */
     public void addTextBody(final String key, final String value) {
@@ -146,7 +153,8 @@ public class ClientRequest {
 
     /**
      * Adds file field to http request.
-     * @param key      String with the key
+     *
+     * @param key String with the key
      * @param filePath String with the value
      */
     public void addFileBody(final String key, final String filePath) {
@@ -176,6 +184,7 @@ public class ClientRequest {
 
     /**
      * Adds a body field with the parameter's information.
+     *
      * @param parameter
      */
     public void addBodyField(final Parameter parameter) {
@@ -187,7 +196,8 @@ public class ClientRequest {
     }
 
     /**
-     * Downloads a File by url
+     * Downloads a File by url.
+     *
      * @param url with the url
      */
     public void downloadFile(final String url) {
@@ -203,7 +213,8 @@ public class ClientRequest {
     }
 
     /**
-     * Downloads a File by URL
+     * Downloads a File by URL.
+     *
      * @param fileName name of file
      * @param fileUrl url complete
      * @throws MalformedURLException

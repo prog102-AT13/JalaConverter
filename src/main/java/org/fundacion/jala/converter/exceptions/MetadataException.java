@@ -10,6 +10,9 @@
  */
 package org.fundacion.jala.converter.exceptions;
 
+/**
+ * This class creates the metadata's exceptions.
+ */
 public class MetadataException extends PaoPaoException {
     private static final String DEFAULT_MESSAGE = "Metadata Error";
 

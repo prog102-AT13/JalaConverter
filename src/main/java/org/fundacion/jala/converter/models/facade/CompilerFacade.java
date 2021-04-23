@@ -27,6 +27,7 @@ public class CompilerFacade {
 
     /**
      * Compiles a Java project.
+     *
      * @param javaParameter the version to be used in the compiler.
      * @return a string of the result on runtime console.
      */
@@ -38,6 +39,7 @@ public class CompilerFacade {
 
     /**
      * Compiles a Python project.
+     *
      * @param pythonParameter the version to be used in the compiler.
      * @return a string of the result on runtime console.
      */

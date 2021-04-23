@@ -13,6 +13,9 @@ package org.fundacion.jala.converter.view.Models;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class creates the request form for authentication.
+ */
 public class AuthenticateRequestForm implements IRequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
     private final String URL = "http://localhost:8080/authenticate";
@@ -20,7 +23,8 @@ public class AuthenticateRequestForm implements IRequestForm {
     private final String PASSWORD = "password";
 
     /**
-     * Adds username parameter to bodyParameters
+     * Adds username parameter to bodyParameters.
+     *
      * @param username a String with the username
      */
     public void addUsername(final String username) {
@@ -28,7 +32,8 @@ public class AuthenticateRequestForm implements IRequestForm {
     }
 
     /**
-     * Adds password parameter to bodyParameters
+     * Adds password parameter to bodyParameters.
+     *
      * @param password a String with the password
      */
     public void addPassword(final String password) {
@@ -36,7 +41,8 @@ public class AuthenticateRequestForm implements IRequestForm {
     }
 
     /**
-     * Gets the parameters list
+     * Gets the parameters list.
+     *
      * @return a list with the parameters
      */
     @Override
@@ -45,7 +51,8 @@ public class AuthenticateRequestForm implements IRequestForm {
     }
 
     /**
-     * Adds a parameter to the parameters list
+     * Adds a parameter to the parameters list.
+     *
      * @param parameter a Parameter to add
      */
     @Override
@@ -54,7 +61,8 @@ public class AuthenticateRequestForm implements IRequestForm {
     }
 
     /**
-     * Gets the URL of the endpoint
+     * Gets the URL of the endpoint.
+     *
      * @return a String with the URL
      */
     @Override

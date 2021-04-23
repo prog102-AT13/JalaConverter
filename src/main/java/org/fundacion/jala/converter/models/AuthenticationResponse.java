@@ -10,6 +10,9 @@
  */
 package org.fundacion.jala.converter.models;
 
+/**
+ * This class creates an authentication response with the json web token.
+ */
 public class AuthenticationResponse {
     private final String jwt;
 
@@ -18,7 +21,8 @@ public class AuthenticationResponse {
     }
 
     /**
-     * Gets the java web token (jwt)
+     * Gets the java web token (jwt).
+     *
      * @return the jwt
      */
     public String getJwt() {

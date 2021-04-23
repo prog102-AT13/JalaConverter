@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.fundacion.jala.converter.models.UserSQL.usernameExists;
 
 /**
- * This class registers a user in the database
+ * This class registers a user in the database.
  */
 @RestController
 public class RegisterController {
@@ -27,7 +27,8 @@ public class RegisterController {
     private MyUserDetailsService myUserDetailsService;
 
     /**
-     * Inserts users to the database
+     * Inserts users to the database.
+     *
      * @param username a String with the username
      * @param password a String with the password
      * @return an entity response with the user

@@ -10,6 +10,9 @@
  */
 package org.fundacion.jala.converter.exceptions;
 
+/**
+ * This class creates the text extractor's exception.
+ */
 public class TextExtractorException extends PaoPaoException {
     private static final String DEFAULT_MESSAGE = "Text Extractor Error";
 

@@ -10,6 +10,9 @@
  */
 package org.fundacion.jala.converter.exceptions;
 
+/**
+ * This class creates the application's exceptions.
+ */
 public class PaoPaoException extends Exception {
 
     public PaoPaoException() {
