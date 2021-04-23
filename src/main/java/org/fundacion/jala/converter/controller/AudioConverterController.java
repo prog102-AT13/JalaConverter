@@ -7,8 +7,6 @@
  * license agreement you entered into with Fundacion Jala
  *
  * @author Edson Añawaya Rios
- * @colaborathor Cristian Choque Quispe
- * @colaborathor Gustavo Zacarias Huanca Alconz
  */
 package org.fundacion.jala.converter.controller;
 
@@ -39,7 +37,7 @@ public class AudioConverterController {
     private ParameterOutputChecksum parameterOutputChecksum;
 
     /**
-     * Endpoint for audio converter
+     * Calls endpoint for audio converter
      */
     @PostMapping("/convertAudio")
     public String uploadFile(final @RequestParam("file") MultipartFile file,

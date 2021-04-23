@@ -25,16 +25,19 @@ import static org.fundacion.jala.converter.service.ChecksumService.getFileChecks
 public class ChecksumFacade {
     private static final Logger LOGGER = LogManager.getLogger();
 
+    private ChecksumFacade() {
+    }
+
     /**
-     * The method to review checksum in database.
+     * Calls to review checksum in database.
      *
      * @param checksum of file
      * @param file is file which is applied
      * @return object of ParameterOutputChecksum
-     * @throws IOException
+     * @throws IOException when invalid file's path
      */
-    public static ParameterOutputChecksum getChecksum(final String checksum, MultipartFile file) throws IOException {
-        FileStorageService fileStorageService=new FileStorageService();
+    public static ParameterOutputChecksum getChecksum(final String checksum, final MultipartFile file) throws  IOException {
+        FileStorageService fileStorageService = new FileStorageService();
         String filename;
         String storagePath;
         String checksumLocal = checksum;
@@ -58,14 +61,14 @@ public class ChecksumFacade {
                 LOGGER.error("Execute Exception" + e.getLocalizedMessage());
             }
         }
-        return new ParameterOutputChecksum(checksumLocal,storagePath,resultTitle.size(),filename);
+        return new ParameterOutputChecksum(checksumLocal, storagePath, resultTitle.size(), filename);
     }
 
     /**
      * Obtains the path of the file
      *
-     * @param checksum
-     * @param assets
+     * @param checksum is checksum of file
+     * @param assets list of file in database
      * @return
      */
     private static List<String> getPath(final String checksum, final List<Asset> assets) {
@@ -77,8 +80,8 @@ public class ChecksumFacade {
     /**
      * Obtains the name of the file
      *
-     * @param checksum
-     * @param assets
+     * @param checksum is checksum of file
+     * @param assets list of file in database
      * @return
      */
     private static List<String> getTitles(final String checksum, final List<Asset> assets) {

@@ -12,7 +12,6 @@ package org.fundacion.jala.converter.models.facade;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 import static org.fundacion.jala.converter.models.AssetSQL.insertAssetData;
 import static org.fundacion.jala.converter.service.ZipService.zipFile;
 import static org.fundacion.jala.converter.service.ZipService.zipFiles;
@@ -31,7 +30,8 @@ public class ZipFileFacade {
      * @throws IOException
      * @throws InterruptedException
      */
-    public static void getZipFileAudio(ParameterOutputChecksum parameterOutputChecksum, String metadata, String storagePath) throws IOException, InterruptedException {
+    public static void getZipFileAudio(final ParameterOutputChecksum parameterOutputChecksum,final String metadata,
+                                       final String storagePath) throws IOException, InterruptedException {
         getZipFile(parameterOutputChecksum, metadata, storagePath, false);
     }
 
@@ -42,10 +42,11 @@ public class ZipFileFacade {
      * @param metadata if add metadata of video into zip
      * @param storagePath path and name of file to compress
      * @param thumbnail if add thumbnail of video into zip
-     * @throws IOException
-     * @throws InterruptedException
+     * @throws IOException when invalid path is given in zipFiles
+     * @throws InterruptedException is exception if process is interrupted
      */
-    public static void getZipFileVideo(ParameterOutputChecksum parameterOutputChecksum, String metadata, boolean thumbnail, String storagePath) throws IOException, InterruptedException {
+    public static void getZipFileVideo(final ParameterOutputChecksum parameterOutputChecksum,final String metadata,
+                                       final boolean thumbnail,final String storagePath) throws IOException, InterruptedException {
         getZipFile(parameterOutputChecksum, metadata, storagePath, thumbnail);
     }
 
@@ -56,10 +57,11 @@ public class ZipFileFacade {
      * @param metadata if add metadata into zip
      * @param storagePath path and name of file to compress
      * @param thumbnail if add thumbnail of video into zip
-     * @throws IOException
-     * @throws InterruptedException
+     * @throws IOException when invalid path is given in zipFiles
+     * @throws InterruptedException is exception if process is interrupted
      */
-    private static void getZipFile(ParameterOutputChecksum parameterOutputChecksum, String metadata, String storagePath, boolean thumbnail) throws IOException, InterruptedException {
+    private static void getZipFile(final ParameterOutputChecksum parameterOutputChecksum,final String metadata,
+                                   final String storagePath,final boolean thumbnail) throws IOException, InterruptedException {
         String checksumLocal = parameterOutputChecksum.getChecksumLocal();
         String outputFilename = parameterOutputChecksum.getOutputFilename();
         int resultTitleSize = parameterOutputChecksum.getResultTitleSize();
@@ -86,7 +88,6 @@ public class ZipFileFacade {
         } else {
             Thread.sleep(waitTime);
             zipFile(pathFile + outputFilename, pathFile + nameWithoutExtension + "zip");
-            System.out.println();
         }
     }
 }

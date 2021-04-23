@@ -7,8 +7,6 @@
  * license agreement you entered into with Fundacion Jala
  *
  * @author Daniela Santa Cruz
- * @colaborathor Paola Aguilar
- * @colaborathor Gustavo Huanca Alconz
  */
 package org.fundacion.jala.converter.controller;
 
@@ -39,7 +37,7 @@ public class VideoConverterController {
     private ParameterOutputChecksum parameterOutputChecksum;
 
     /**
-     * Endpoint for convertVideo
+     * Calls endpoint for convertVideo
      */
     @PostMapping("/convertVideo")
     public String uploadFile(final @RequestParam("file") MultipartFile file,

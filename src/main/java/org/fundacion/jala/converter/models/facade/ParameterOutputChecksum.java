@@ -16,11 +16,11 @@ public class ParameterOutputChecksum {
     private int resultTitleSize;
     private String filename;
 
-    public ParameterOutputChecksum(String checksumLocal, String outputFilename, int resultTitleSize, String filename) {
+    public ParameterOutputChecksum(final String checksumLocal, final String outputFilename, final int resultTitleSize, String filename) {
         this.checksumLocal = checksumLocal;
         this.outputFilename = outputFilename;
         this.resultTitleSize = resultTitleSize;
-        this.filename=filename;
+        this.filename = filename;
     }
 
     /**
