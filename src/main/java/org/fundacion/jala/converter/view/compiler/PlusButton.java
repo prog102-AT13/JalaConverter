@@ -18,6 +18,9 @@ import java.awt.BasicStroke;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 
+/**
+ * This class customize buttons to turn them into plus buttons(+).
+ */
 class PlusButton extends JButton {
     private final int LINE_WIDTH = 3;
 
@@ -39,3 +42,4 @@ class PlusButton extends JButton {
         graphics2D.draw(line2);
     }
 }
+

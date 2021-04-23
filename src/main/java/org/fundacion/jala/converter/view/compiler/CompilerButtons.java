@@ -19,6 +19,9 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * This class customizes a panel with custom buttons to compile.
+ */
 class CompilerButtons extends JPanel implements ActionListener {
     private JButton runCode;
     private JButton clearConsole;
@@ -75,3 +78,4 @@ class CompilerButtons extends JPanel implements ActionListener {
         return  runCode;
     }
 }
+

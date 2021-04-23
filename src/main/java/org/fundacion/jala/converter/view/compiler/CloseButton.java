@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- * <p>
+ *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -18,6 +18,9 @@ import java.awt.BasicStroke;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 
+/**
+ * This class customize buttons to turn them into close buttons(X).
+ */
 class CloseButton extends JButton {
     private final int LINE_WIDTH = 3;
 

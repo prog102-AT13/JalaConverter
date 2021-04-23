@@ -13,6 +13,9 @@ package org.fundacion.jala.converter.view.Models;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class represents a form with a list of file parameters.
+ */
 public class FileRequestForm implements IRequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
     private final String url = "http://localhost:8080/api/makeFile";
@@ -90,3 +93,4 @@ public class FileRequestForm implements IRequestForm {
         return url;
     }
 }
+
