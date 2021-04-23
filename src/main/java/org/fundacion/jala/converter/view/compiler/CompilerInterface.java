@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- *
+ * <p>
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -8,7 +8,6 @@
  *
  * @author Paola Aguilar Quiñones
  */
-
 package org.fundacion.jala.converter.view.compiler;
 
 import org.apache.http.HttpEntity;
@@ -21,7 +20,6 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -55,7 +53,7 @@ public class CompilerInterface extends JPanel {
         JPanel pnl = new JPanel();
         pnl.setLayout(new FlowLayout());
         pnl.setOpaque(false);
-        JLabel label=new JLabel("Main");
+        JLabel label = new JLabel("Main");
         label.setFont(new Font("Barlow", 0, 11));
         pnl.add(label);
         projectTab.setTabComponentAt(projectTab.getTabCount() - 1, pnl);
@@ -87,10 +85,10 @@ public class CompilerInterface extends JPanel {
         add(consoleOutput, panelConstraint);
         buttonsCompiler.getRunButton().addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 LOGGER.info("start");
                 String url = "";
-                if (!langButtons.getPython().isEnabled()){
+                if (!langButtons.getPython().isEnabled()) {
                     url = "http://localhost:8080/api/compilePython";
                 }
                 if (!langButtons.getJava().isEnabled()) {
@@ -121,14 +119,14 @@ public class CompilerInterface extends JPanel {
         });
         langButtons.getJava().addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 langButtons.getJava().setEnabled(false);
                 langButtons.getPython().setEnabled(true);
             }
         });
         langButtons.getPython().addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 langButtons.getPython().setEnabled(false);
                 langButtons.getJava().setEnabled(true);
             }

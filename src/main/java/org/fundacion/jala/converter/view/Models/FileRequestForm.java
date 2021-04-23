@@ -8,7 +8,6 @@
  *
  * @author Joel Rodrigo Rojas Roman
  */
-
 package org.fundacion.jala.converter.view.Models;
 
 import java.util.ArrayList;
@@ -23,27 +22,30 @@ public class FileRequestForm implements IRequestForm {
     private final String fileExtension = "extension";
 
     /**
-     * File Request Form stores parameters for an file request
+     * File Request Form stores parameters for an file request.
      */
     public FileRequestForm() {
     }
 
     /**
-     * Adds projId parameter
+     * Adds projId parameter.
+     *
      * @param projId
      */
     public void addProjectId(final String projId) {
         addParameters(new Parameter(projectId, projId, false));
     }
     /**
-     * Adds title parameter
+     * Adds title parameter.
+     *
      * @param title
      */
     public void addFileTitle(final String title) {
         addParameters(new Parameter(fileTitle, title, false));
     }
     /**
-     * Adds inputCode parameter
+     * Adds inputCode parameter.
+     *
      * @param inputCode
      */
     public void addCode(final String inputCode) {
@@ -51,7 +53,8 @@ public class FileRequestForm implements IRequestForm {
     }
 
     /**
-     * Adds extension parameter
+     * Adds extension parameter.
+     *
      * @param extension
      */
     public void addFileExtension(final String extension) {
@@ -59,8 +62,9 @@ public class FileRequestForm implements IRequestForm {
     }
 
     /**
-     * Gets the body parameters
-     * @return bodyParameters
+     * Gets the body parameters.
+     *
+     * @return bodyParameters.
      */
     @Override
     public List<Parameter> getBodyParameters() {
@@ -68,7 +72,8 @@ public class FileRequestForm implements IRequestForm {
     }
 
     /**
-     * Adds parameters to bodyParameters
+     * Adds parameters to bodyParameters.
+     *
      * @param parameter
      */
     @Override
@@ -77,8 +82,9 @@ public class FileRequestForm implements IRequestForm {
     }
 
     /**
-     * Gets the url
-     * @return url
+     * Gets the url.
+     *
+     * @return url.
      */
     @Override
     public String getURL() {

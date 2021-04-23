@@ -8,7 +8,6 @@
  *
  * @author Paola Aguilar Quiñones
  */
-
 package org.fundacion.jala.converter.view.compiler;
 
 import javax.swing.JPanel;
@@ -54,6 +53,7 @@ class LanguageButtons extends JPanel {
 
     /**
      * Button that defines or not java is selected
+     *
      * @return a JButton
      */
     public JButton getJava() {
@@ -62,6 +62,7 @@ class LanguageButtons extends JPanel {
 
     /**
      * Button that defines or not python is selected
+     *
      * @return a JButton
      */
     public JButton getPython() {

@@ -8,7 +8,6 @@
  *
  * @author Joel Rodrigo Rojas Roman
  */
-
 package org.fundacion.jala.converter.view.compiler;
 
 import javax.swing.JTabbedPane;
@@ -24,35 +23,36 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
 public class ProjectTab extends JTabbedPane implements ActionListener {
-    public static int contador;
-    PlusButton button;
+    public static int COUNTER;
+    private PlusButton button;
 
     /**
-     * Starts required components to add new tabs
+     * Starts required components to add new tabs.
      */
     public void start() {
-        button=new PlusButton();
-        button.setPreferredSize(new Dimension(20,20));
+        button = new PlusButton();
+        button.setPreferredSize(new Dimension(20, 20));
         button.addActionListener(this);
         add(new JPanel());
         setTabComponentAt(getTabCount() - 1, button);
-        contador = 0;
+        COUNTER = 0;
         addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent mouseEvent) {
+            public void mouseClicked(final MouseEvent mouseEvent) {
                 changeTitle(mouseEvent.getClickCount());
             }
         });
     }
 
     /**
-     * Creates a new tab with X button included
-     * @param e means click on "button"
+     * Creates a new tab with X button included.
+     *
+     * @param event means click on "button".
      */
     @Override
-    public void actionPerformed(ActionEvent e) {
-        contador ++;
-        String title= "EndGame " + contador;
+    public void actionPerformed(final ActionEvent event) {
+        COUNTER++;
+        String title = "EndGame " + COUNTER;
         CodeTextArea codeArea = new CodeTextArea();
         codeArea.setName(title);
         add(codeArea, getTabCount() - 1);
@@ -61,11 +61,12 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
     }
 
     /**
-     * Deletes a selected tab
-     * @param title of tab we want to delete
-     * @return a boolean that means if works or not
+     * Deletes a selected tab.
+     *
+     * @param title of tab we want to delete.
+     * @return a boolean that means if works or not.
      */
-    public boolean removeTap(String title) {
+    public boolean removeTap(final String title) {
         int i = getTabCount();
         for (int index = 0; index < i; index++) {
             String temp = getTitleAt(index);
@@ -78,26 +79,31 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
     }
 
     /**
-     * It represents what CodeTextArea is selected
-     * @return a CodeTextArea
+     * It represents what CodeTextArea is selected.
+     *
+     * @return a CodeTextArea of a selected tab.
      */
     public CodeTextArea getSelectedPane() {
         return (CodeTextArea) getSelectedComponent();
     }
 
     /**
-     * Creates a title made up of a name and a close button
-     * @param title
-     * @return a JPanel
+     * Creates a title made up of a name and a close button.
+     *
+     * @param title is text that shows as a title.
+     * @return a JPanel with complete title.
      */
-    public JPanel makeTabTitle(String title) {
+    public JPanel makeTabTitle(final String title) {
         CloseButton tabButton = new CloseButton();
-        tabButton.setPreferredSize(new Dimension(20,20));
-        tabButton.addActionListener(e1 -> { removeTap(title);setSelectedIndex(getTabCount() - 2);});
+        tabButton.setPreferredSize(new Dimension(20, 20));
+        tabButton.addActionListener(e1 -> {
+            removeTap(title);
+            setSelectedIndex(getTabCount() - 2);
+        });
         JPanel pnl = new JPanel();
         pnl.setLayout(new FlowLayout());
         pnl.setOpaque(false);
-        JLabel label=new JLabel(title);
+        JLabel label = new JLabel(title);
         label.setFont(new Font("Barlow", 0, 11));
         pnl.add(label);
         pnl.add(tabButton);
@@ -105,15 +111,16 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
     }
 
     /**
-     * Changes only name of title
-     * @param numberOfClick
+     * Changes only name of title.
+     *
+     * @param numberOfClick represents how many clicks it receives.
      */
     public void changeTitle(final int numberOfClick) {
-        if (numberOfClick == 2 && !"Main".equals(getTitleAt(getSelectedIndex())))  {
+        if (numberOfClick == 2 && !"Main".equals(getTitleAt(getSelectedIndex()))) {
             String result = (String) JOptionPane.showInputDialog(null,
                     "Change TabName", "Change name",
-                    JOptionPane.PLAIN_MESSAGE, null, null,"Red");
-            if(result != null && result.length() > 0){
+                    JOptionPane.PLAIN_MESSAGE, null, null, "Red");
+            if (result != null && result.length() > 0) {
                 int indexTab = getSelectedIndex();
                 setTitleAt(indexTab, result);
                 setTabComponentAt(indexTab, makeTabTitle(result));

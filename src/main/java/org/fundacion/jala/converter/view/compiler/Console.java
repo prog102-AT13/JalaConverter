@@ -8,7 +8,6 @@
  *
  * @author Paola Aguilar Quiñones
  */
-
 package org.fundacion.jala.converter.view.compiler;
 
 import javax.swing.JPanel;
@@ -39,6 +38,7 @@ class Console extends JPanel {
 
     /**
      * Gets access to JTextArea
+     *
      * @return a JTextArea
      */
     public JTextArea getConsole() {
