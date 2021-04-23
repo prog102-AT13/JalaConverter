@@ -11,7 +11,6 @@ package org.fundacion.jala.converter.service.javacompiler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.models.parameter.JavaParameter;
-import org.fundacion.jala.converter.models.results.CompilerResult;
 import org.fundacion.jala.converter.models.results.Result;
 
 import java.io.BufferedReader;
@@ -21,7 +20,7 @@ import java.io.InputStreamReader;
 public class JavaCompiler {
     BufferedReader bufferedReader;
     private JavaParameter javaParameter;
-    private CompilerResult compilerResult;
+    private Result result;
 
     private static final Logger LOGGER = LogManager.getLogger();
     /**
@@ -45,8 +44,8 @@ public class JavaCompiler {
             while((resultOfExecution = bufferedReader.readLine()) != null){
                 result += resultOfExecution + "\n";
             }
-            compilerResult = new CompilerResult();
-            compilerResult.setConsoleOutput(result);
+            this.result = new Result();
+            this.result.setTextContent(result);
             LOGGER.info("finish");
             return result;
         } catch (IOException exception) {
@@ -68,6 +67,6 @@ public class JavaCompiler {
      * @return compilerResult
      */
     public Result getResult() {
-        return compilerResult;
+        return result;
     }
 }

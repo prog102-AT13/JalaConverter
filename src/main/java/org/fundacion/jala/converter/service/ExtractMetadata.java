@@ -10,7 +10,6 @@ package org.fundacion.jala.converter.service;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.fundacion.jala.converter.models.results.ExtractorResult;
 import org.fundacion.jala.converter.models.results.Result;
 import org.fundacion.jala.converter.service.metadata.ExportTypeFile;
 import org.fundacion.jala.converter.service.metadata.TypeFileExport;
@@ -24,7 +23,7 @@ public class ExtractMetadata {
     private String moreInformation = " ";
     private ExportTypeFile exportTypeFile;
     private static final Logger LOGGER = LogManager.getLogger();
-    private ExtractorResult extractorResult;
+    private Result result;
     private String filename;
 
     public ExtractMetadata(ObjectMetadata extractMetadata) {
@@ -53,8 +52,8 @@ public class ExtractMetadata {
             LOGGER.info("Execute Try");
             String command = "cmd /c " + addressExiftool + " && exiftool.exe " + "\"" + fileToExtract.getAbsolutePath() + "\"" + moreInformation + exportFile;
             Process process = Runtime.getRuntime().exec(command);
-            extractorResult = new ExtractorResult();
-            extractorResult.setFilename(this.filename);
+            result= new Result();
+            result.setFilename(this.filename);
         } catch (IOException e) {
             LOGGER.error("Execute Exception to Safe text in a file");
             e.printStackTrace();
@@ -90,6 +89,6 @@ public class ExtractMetadata {
      * @return extractorResult.
      */
     public Result getResult() {
-        return extractorResult;
+        return result;
     }
 }

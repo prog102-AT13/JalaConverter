@@ -14,7 +14,6 @@
 package org.fundacion.jala.converter.service;
 
 import org.fundacion.jala.converter.models.parameter.AudioParameter;
-import org.fundacion.jala.converter.models.results.ConverterResult;
 import org.fundacion.jala.converter.models.results.Result;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +22,7 @@ public final class AudioConverter {
     private AudioParameter parameter;
     private String outputFileName = "";
     private RunCommand runCommand = new RunCommand();
-    private ConverterResult converterResult;
+    private Result result;
 
     public AudioConverter(final AudioParameter audioParameter) {
         this.parameter = audioParameter;
@@ -45,7 +44,6 @@ public final class AudioConverter {
         String overwrite = " -y";
         String command = relativePath + ffmpeg + input + audioChannel + bitrate + hz + volume + getOutputFileName()
                 + overwrite;
-        System.out.println(command);
         runCommand.run(command);
     }
 
@@ -54,8 +52,8 @@ public final class AudioConverter {
      * @param newOutputFileName
      */
     public void setOutputFileName(final String newOutputFileName) {
-        this.converterResult = new ConverterResult();
-        converterResult.setFilename(newOutputFileName);
+        this.result = new Result();
+        result.setFilename(newOutputFileName);
         this.outputFileName = newOutputFileName;
     }
 
@@ -72,7 +70,7 @@ public final class AudioConverter {
      * @return converterResult.
      */
     public Result getResult() {
-        return converterResult;
+        return result;
     }
 
 }

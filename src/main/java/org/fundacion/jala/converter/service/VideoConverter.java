@@ -13,7 +13,6 @@ package org.fundacion.jala.converter.service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.models.parameter.VideoParameter;
-import org.fundacion.jala.converter.models.results.ConverterResult;
 import org.fundacion.jala.converter.models.results.Result;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +27,7 @@ public class VideoConverter {
     private static final int WAIT_TIME = 7000;
     private static final int INIT_NUMBER = 20;
     private static final Logger LOGGER = LogManager.getLogger();
-    private ConverterResult converterResult;
+    private Result result;
     private String thumbnailFilename;
 
     private final String PNG_FORMAT = ".png";
@@ -49,7 +48,6 @@ public class VideoConverter {
         String ffmpegCommand = startFirstCommand + adaptPath + " ";
         String parameters = changeResolution() + changeFrameRate() + removeAudio();
         String theCommand = ffmpegCommand + parameters + pathOutput + output  + "\"" + " -y";
-        System.out.println(theCommand);
         try {
             LOGGER.info("Execute Try");
             Process petition = Runtime.getRuntime().exec("cmd /c " + theCommand);
@@ -67,8 +65,8 @@ public class VideoConverter {
             exception.printStackTrace();
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
         }
-        converterResult = new ConverterResult();
-        converterResult.setFilename(outputFileName);
+        result = new Result();
+        result.setFilename(outputFileName);
     }
 
     /**
@@ -110,7 +108,7 @@ public class VideoConverter {
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
         }
         thumbnailFilename = name + PNG_FORMAT;
-        converterResult.setThumbnailFilename(thumbnailFilename);
+        result.setFilename(thumbnailFilename);
     }
 
     /**
@@ -162,6 +160,6 @@ public class VideoConverter {
      * @return extractorResult.
      */
     public Result getResult() {
-        return converterResult;
+        return result;
     }
 }
