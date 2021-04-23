@@ -22,36 +22,36 @@ public class ProjectRequestForm implements IRequestForm {
     private final String type = "type";
 
     /**
-     * Project Request Form stores parameters for an project request
+     * Project Request Form stores parameters for an project request.
      */
     public ProjectRequestForm() {
     }
 
     /**
-     * Adds id parameter
-     * @param id
+     * Adds id parameter.
+     * @param id is project id.
      */
     public void addProjectId(final String id) {
         addParameters(new Parameter(projectId, id, false));
     }
     /**
-     * Adds name parameter
-     * @param name
+     * Adds name parameter.
+     * @param name is project name.
      */
     public void addProjectName(final String name) {
         addParameters(new Parameter(projectName, name, false));
     }
     /**
-     * Adds type parameter
-     * @param type
+     * Adds type parameter.
+     * @param projectType represents what kind of files project has.
      */
-    public void addType(final String type) {
-        addParameters(new Parameter(this.type, type, false));
+    public void addType(final String projectType) {
+        addParameters(new Parameter(type, projectType, false));
     }
 
     /**
-     * Gets the body parameters
-     * @return bodyParameters
+     * Gets the body parameters.
+     * @return bodyParameters.
      */
     @Override
     public List<Parameter> getBodyParameters() {
@@ -59,8 +59,8 @@ public class ProjectRequestForm implements IRequestForm {
     }
 
     /**
-     * Adds parameters to bodyParameters
-     * @param parameter
+     * Adds parameters to bodyParameters.
+     * @param parameter representes all attributes of projects.
      */
     @Override
     public void addParameters(final Parameter parameter) {
@@ -68,8 +68,8 @@ public class ProjectRequestForm implements IRequestForm {
     }
 
     /**
-     * Gets the url
-     * @return url
+     * Gets the url.
+     * @return url.
      */
     @Override
     public String getURL() {

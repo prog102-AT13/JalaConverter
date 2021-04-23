@@ -8,7 +8,6 @@
  *
  * @author Paola Aguilar Quiñones
  */
-
 package org.fundacion.jala.converter.view.compiler;
 
 import javax.swing.JPanel;
@@ -37,6 +36,7 @@ class CompilerButtons extends JPanel implements ActionListener {
 
     /**
      * Initializes the graphic elements for Compiler buttons.
+     *
      * Runs code, cleans console, uploads code.
      */
     protected CompilerButtons() {

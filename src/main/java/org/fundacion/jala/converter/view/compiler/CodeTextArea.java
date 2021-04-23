@@ -8,7 +8,6 @@
  *
  * @author Paola Aguilar Quiñones
  */
-
 package org.fundacion.jala.converter.view.compiler;
 
 import javax.swing.JPanel;
@@ -54,6 +53,7 @@ class CodeTextArea extends JPanel {
 
             /**
              * Adds the number of rows in Code Area Text.
+             *
              * @param de event when inserting text in Code Area Text.
              */
             @Override
@@ -63,6 +63,7 @@ class CodeTextArea extends JPanel {
 
             /**
              * Updates the number of rows in Code Area Text.
+             *
              * @param de event when updating text in Code Area Text.
              */
             @Override
@@ -72,6 +73,7 @@ class CodeTextArea extends JPanel {
 
             /**
              * Deletes the number of rows in Code Area Text.
+             *
              * @param de event when deleting text in Code Area Text.
              */
             @Override
@@ -79,7 +81,6 @@ class CodeTextArea extends JPanel {
                 lineCode.setText(getText());
             }
         });
-
         setLayout(new BorderLayout());
         textCodeArea.getViewport().add(codeArea);
         textCodeArea.setRowHeaderView(lineCode);
@@ -87,8 +88,9 @@ class CodeTextArea extends JPanel {
     }
 
     /**
-     * Gives us content of text area
-     * @return a String
+     * Gives us content of codeArea textarea.
+     *
+     * @return a string.
      */
     public String getText() {
         return codeArea.getText();
