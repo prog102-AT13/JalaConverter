@@ -60,7 +60,7 @@ public class AudioConverterController {
                              final @RequestParam("hz") String hz,
                              final @RequestParam("audiochannel") String audioChannel,
                              final @RequestParam("checksum") String checksum,
-                             final @RequestParam("metadata") String metadata)
+                             final @RequestParam("metadata") boolean metadata)
             throws IOException, InterruptedException {
         parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
         String outputFilename = ConverterFacade.getAudioConverter(

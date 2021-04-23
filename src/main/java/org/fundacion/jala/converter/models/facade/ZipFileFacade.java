@@ -33,7 +33,7 @@ public class ZipFileFacade {
      * @throws IOException when invalid path is given in zipFiles.
      * @throws InterruptedException is exception if process is interrupted.
      */
-    public static void getZipFileAudio(final ParameterOutputChecksum parameterOutputChecksum, final String metadata,
+    public static void getZipFileAudio(final ParameterOutputChecksum parameterOutputChecksum, final boolean metadata,
                                        final String storagePath) throws IOException, InterruptedException {
         getZipFile(parameterOutputChecksum, metadata, storagePath, false);
     }
@@ -48,7 +48,7 @@ public class ZipFileFacade {
      * @throws IOException when invalid path is given in zipFiles.
      * @throws InterruptedException is exception if process is interrupted.
      */
-    public static void getZipFileVideo(final ParameterOutputChecksum parameterOutputChecksum, final String metadata,
+    public static void getZipFileVideo(final ParameterOutputChecksum parameterOutputChecksum, final boolean metadata,
                                        final boolean thumbnail, final String storagePath)
             throws IOException, InterruptedException {
         getZipFile(parameterOutputChecksum, metadata, storagePath, thumbnail);
@@ -64,7 +64,7 @@ public class ZipFileFacade {
      * @throws IOException when invalid path is given in zipFiles.
      * @throws InterruptedException is exception if process is interrupted.
      */
-    private static void getZipFile(final ParameterOutputChecksum parameterOutputChecksum, final String metadata,
+    private static void getZipFile(final ParameterOutputChecksum parameterOutputChecksum, final boolean metadata,
                                    final String storagePath, final boolean thumbnail)
             throws IOException, InterruptedException {
         String checksumLocal = parameterOutputChecksum.getChecksumLocal();
@@ -78,10 +78,10 @@ public class ZipFileFacade {
         if (!(resultTitleSize > 0)) {
             insertAssetData(filename, pathFile, checksumLocal, USER_ID);
         }
-        if (metadata.equals("true") || thumbnail) {
+        if (metadata || thumbnail) {
             ArrayList<String> zipList = new ArrayList<>();
             zipList.add(pathFile + outputFilename);
-            if (metadata.equals("true")) {
+            if (metadata) {
                 zipList.add(pathFile + nameWithoutExtension + "txt");
             }
             if (thumbnail) {
