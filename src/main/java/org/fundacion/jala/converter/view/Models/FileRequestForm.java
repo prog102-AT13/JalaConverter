@@ -30,23 +30,25 @@ public class FileRequestForm implements IRequestForm {
     /**
      * Adds projId parameter.
      *
-     * @param projId
+     * @param projId represents id that is assigned to the file.
      */
     public void addProjectId(final String projId) {
         addParameters(new Parameter(projectId, projId, false));
     }
+
     /**
      * Adds title parameter.
      *
-     * @param title
+     * @param title represents title that is assigned to the file.
      */
     public void addFileTitle(final String title) {
         addParameters(new Parameter(fileTitle, title, false));
     }
+
     /**
      * Adds inputCode parameter.
      *
-     * @param inputCode
+     * @param inputCode represents code that is assigned to the file.
      */
     public void addCode(final String inputCode) {
         addParameters(new Parameter(code, inputCode, false));
@@ -55,7 +57,7 @@ public class FileRequestForm implements IRequestForm {
     /**
      * Adds extension parameter.
      *
-     * @param extension
+     * @param extension represents extension that is assigned to the file.
      */
     public void addFileExtension(final String extension) {
         addParameters(new Parameter(fileExtension, extension, false));
@@ -64,7 +66,7 @@ public class FileRequestForm implements IRequestForm {
     /**
      * Gets the body parameters.
      *
-     * @return bodyParameters.
+     * @return a list that contains all parameters of file.
      */
     @Override
     public List<Parameter> getBodyParameters() {
@@ -74,7 +76,7 @@ public class FileRequestForm implements IRequestForm {
     /**
      * Adds parameters to bodyParameters.
      *
-     * @param parameter
+     * @param parameter represents parameter that is assigned to the file.
      */
     @Override
     public void addParameters(final Parameter parameter) {
@@ -84,7 +86,7 @@ public class FileRequestForm implements IRequestForm {
     /**
      * Gets the url.
      *
-     * @return url.
+     * @return the url of file.
      */
     @Override
     public String getURL() {
