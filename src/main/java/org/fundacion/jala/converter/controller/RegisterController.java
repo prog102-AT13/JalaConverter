@@ -10,10 +10,13 @@
  */
 package org.fundacion.jala.converter.controller;
 
+import io.swagger.annotations.ApiOperation;
+import org.fundacion.jala.converter.models.UserSQL;
 import org.fundacion.jala.converter.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import static org.fundacion.jala.converter.models.UserSQL.usernameExists;
@@ -22,6 +25,7 @@ import static org.fundacion.jala.converter.models.UserSQL.usernameExists;
  * This class registers a user in the database.
  */
 @RestController
+@RequestMapping("/api")
 public class RegisterController {
     @Autowired
     private MyUserDetailsService myUserDetailsService;
@@ -34,6 +38,7 @@ public class RegisterController {
      * @return an entity response with the user
      */
     @PostMapping("/register")
+    @ApiOperation(value = "Inserts users to the database", notes = "Provide username and password to register")
     public ResponseEntity<?> insertUser(final @RequestParam("username") String username,
                                         final @RequestParam("password") String password) throws Exception {
         if (usernameExists(username) || username.trim().isEmpty()) {

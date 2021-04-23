@@ -15,8 +15,10 @@ import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.ApiKey;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import java.util.Arrays;
 import java.util.Collections;
 
 /**
@@ -32,6 +34,7 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
+                .securitySchemes(Arrays.asList(apiKey()))
                 .select()
                 .paths(PathSelectors.ant("/api/*"))
                 .apis(RequestHandlerSelectors.basePackage("org.fundacion.jala.converter"))
@@ -61,5 +64,9 @@ public class SwaggerConfig {
                 "API license",
                 "localhost:8080/api/license",
                 Collections.emptyList());
+    }
+
+    private ApiKey apiKey() {
+        return new ApiKey("JWT", "Authorization", "header");
     }
 }
