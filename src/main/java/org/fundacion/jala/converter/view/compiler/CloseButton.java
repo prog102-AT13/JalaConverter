@@ -39,3 +39,4 @@ class CloseButton extends JButton {
         graphics2D.draw(line2);
     }
 }
+

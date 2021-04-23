@@ -21,9 +21,6 @@ public class FileRequestForm implements IRequestForm {
     private final String code = "code";
     private final String fileExtension = "extension";
 
-    /**
-     * File Request Form stores parameters for an file request.
-     */
     public FileRequestForm() {
     }
 

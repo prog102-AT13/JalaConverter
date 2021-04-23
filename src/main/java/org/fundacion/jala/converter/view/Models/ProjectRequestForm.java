@@ -20,9 +20,6 @@ public class ProjectRequestForm implements IRequestForm {
     private final String projectName = "projectName";
     private final String type = "type";
 
-    /**
-     * Project Request Form stores parameters for an project request.
-     */
     public ProjectRequestForm() {
     }
 
