@@ -27,7 +27,7 @@ public class RegisterController {
     private MyUserDetailsService myUserDetailsService;
 
     /**
-     * * Inserts users to the database.
+     * Inserts users to the database.
      *
      * @param username is a String with the username.
      * @param password is a String with the password.
