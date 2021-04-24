@@ -26,16 +26,16 @@ import java.awt.BorderLayout;
 class CodeTextArea extends JPanel implements DocumentListener {
     private JTextArea codeArea;
     private JTextArea lineCode;
-    private final int topBorder = 5;
-    private final int leftBorder = 10;
-    private final int bottomBorder = 0;
-    private final int rightBorder = 10;
+    private final int TOP_BORDER = 5;
+    private final int LEFT_BORDER = 10;
+    private final int BOTTOM_BORDER = 0;
+    private final int RIGHT_BORDER = 10;
 
     protected CodeTextArea() {
         codeArea = new JTextArea();
-        codeArea.setBorder(new EmptyBorder(topBorder, leftBorder, bottomBorder, rightBorder));
+        codeArea.setBorder(new EmptyBorder(TOP_BORDER, LEFT_BORDER, BOTTOM_BORDER, RIGHT_BORDER));
         lineCode = new JTextArea("1");
-        lineCode.setBorder(new EmptyBorder(topBorder, leftBorder, bottomBorder, rightBorder));
+        lineCode.setBorder(new EmptyBorder(TOP_BORDER, LEFT_BORDER, BOTTOM_BORDER, RIGHT_BORDER));
         lineCode.setBackground(Color.darkGray);
         lineCode.setForeground(Color.white);
         JScrollPane textCodeArea = new JScrollPane();

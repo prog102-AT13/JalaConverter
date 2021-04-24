@@ -24,15 +24,15 @@ class LanguageButtons extends JPanel {
     private JButton cPlusPlus;
     private JButton java;
     private JButton python;
-    private final int maximumSizeWidth = 50;
-    private final int maximumSizeHeight = 50;
-    private final int preferredSizeWidth = 70;
-    private final int preferredSizeHeight = 30;
-    private final int fontStyle = 0;
-    private final int fontSize = 11;
+    private final int MAXIMUM_SIZE_WIDTH = 50;
+    private final int MAXIMUM_SIZE_HEIGHT = 50;
+    private final int PREFERRED_SIZE_WIDTH = 70;
+    private final int PREFERRED_SIZE_HEIGHT = 30;
+    private final int FONT_STYLE = 0;
+    private final int FONT_SIZE = 11;
 
     protected LanguageButtons() {
-        setPreferredSize(new Dimension(preferredSizeWidth, preferredSizeHeight));
+        setPreferredSize(new Dimension(PREFERRED_SIZE_WIDTH, PREFERRED_SIZE_HEIGHT));
         cPlusPlus = createButton("C++");
         java = createButton("Java");
         python = createButton("Python");
@@ -68,9 +68,9 @@ class LanguageButtons extends JPanel {
      */
     public JButton createButton(final String text) {
         JButton button = new JButton(text);
-        button.setMaximumSize(new Dimension(maximumSizeWidth, maximumSizeHeight));
+        button.setMaximumSize(new Dimension(MAXIMUM_SIZE_WIDTH, MAXIMUM_SIZE_HEIGHT));
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
-        button.setFont(new Font("Barlow", fontStyle, fontSize));
+        button.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
         return button;
     }
 }
