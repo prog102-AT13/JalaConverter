@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- *
+ * <p>
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -25,11 +25,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import java.io.IOException;
+
 import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetadata;
 
 /**
- * Calls endpoint for audio.
+ * This method calls endpoint for audio.
  */
 @RestController
 @RequestMapping("/api")
@@ -40,9 +42,9 @@ public class AudioConverterController {
     private ParameterOutputChecksum parameterOutputChecksum;
 
     /**
-     * Calls endpoint for audio.
+     * Calls endpoint for audio converter.
      *
-     * @param file  is path of file which will be converted.
+     * @param file is path of file which will be converted.
      * @param format is the format with are converted of audio.
      * @param bitrate is the bitrate with are converted of audio.
      * @param volume is the volume with are converted of audio.
@@ -51,26 +53,30 @@ public class AudioConverterController {
      * @param checksum is checksum of audio.
      * @param metadata if metadata is extracted from the audio.
      * @return path to download files.
-     * @throws IOException  is exception when invalid path.
-     * @throws InterruptedException  is exception if process is interrupted.
+     * @throws IOException is exception when invalid path.
+     * @throws InterruptedException is exception if process is interrupted.
      */
     @PostMapping("/convertAudio")
-    public String uploadFile(final @RequestParam("file") MultipartFile file, final @RequestParam("format") String format,
-                             final @RequestParam("bitrate") String bitrate, final @RequestParam("volume") String volume,
+    public String uploadFile(final @RequestParam("file") MultipartFile file,
+                             final @RequestParam("format") String format,
+                             final @RequestParam("bitrate") String bitrate,
+                             final @RequestParam("volume") String volume,
                              final @RequestParam("hz") String hz,
                              final @RequestParam("audiochannel") String audioChannel,
                              final @RequestParam("checksum") String checksum,
-                             final @RequestParam("metadata") String metadata)
-            throws IOException, InterruptedException {
+                             final @RequestParam("metadata") String metadata) throws IOException, InterruptedException {
+        final String baseUrl;
+        String downloadLink;
+        String nameWithoutExtension;
+        String outputFilename;
         parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
-        String outputFilename = ConverterFacade.getAudioConverter(
-                new AudioParameter(parameterOutputChecksum.getOutputFilename(), format, bitrate, hz, volume,
-                        audioChannel));
+        AudioParameter audioParameter = new AudioParameter(parameterOutputChecksum.getOutputFilename(), format, bitrate, hz, volume, audioChannel);
+        outputFilename = ConverterFacade.getAudioConverter(audioParameter);
         extractMetadata(metadata, outputFilename, fileStorageService);
         ZipFileFacade.getZipFileAudio(parameterOutputChecksum, metadata, outputFilename);
-        String nameWithoutExtension = outputFilename.substring(0, outputFilename.lastIndexOf(".") + 1);
-        final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-        String downloadLink = baseUrl + "/api/download/" + nameWithoutExtension + "zip";
+        nameWithoutExtension = outputFilename.substring(0, outputFilename.lastIndexOf(".") + 1);
+        baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
+        downloadLink = baseUrl + "/api/download/" + nameWithoutExtension + "zip";
         return downloadLink;
     }
 }
