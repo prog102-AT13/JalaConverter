@@ -8,12 +8,14 @@
  *
  * @author Joel Rodrigo Rojas Roman
  */
-
 package org.fundacion.jala.converter.view.Models;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class represents a form with a list of file parameters.
+ */
 public class FileRequestForm implements IRequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
     private final String url = "http://localhost:8080/api/makeFile";
@@ -22,45 +24,49 @@ public class FileRequestForm implements IRequestForm {
     private final String code = "code";
     private final String fileExtension = "extension";
 
-    /**
-     * File Request Form stores parameters for an file request
-     */
     public FileRequestForm() {
     }
 
     /**
-     * Adds projId parameter
-     * @param projId
+     * Adds projId parameter.
+     *
+     * @param projId represents id that is assigned to the file.
      */
     public void addProjectId(final String projId) {
         addParameters(new Parameter(projectId, projId, false));
     }
+
     /**
-     * Adds title parameter
-     * @param title
+     * Adds title parameter.
+     *
+     * @param title represents title that is assigned to the file.
      */
     public void addFileTitle(final String title) {
         addParameters(new Parameter(fileTitle, title, false));
     }
+
     /**
-     * Adds inputCode parameter
-     * @param inputCode
+     * Adds inputCode parameter.
+     *
+     * @param inputCode represents code that is assigned to the file.
      */
     public void addCode(final String inputCode) {
         addParameters(new Parameter(code, inputCode, false));
     }
 
     /**
-     * Adds extension parameter
-     * @param extension
+     * Adds extension parameter.
+     *
+     * @param extension represents extension that is assigned to the file.
      */
     public void addFileExtension(final String extension) {
         addParameters(new Parameter(fileExtension, extension, false));
     }
 
     /**
-     * Gets the body parameters
-     * @return bodyParameters
+     * Gets the body parameters.
+     *
+     * @return a list that contains all parameters of file.
      */
     @Override
     public List<Parameter> getBodyParameters() {
@@ -68,8 +74,9 @@ public class FileRequestForm implements IRequestForm {
     }
 
     /**
-     * Adds parameters to bodyParameters
-     * @param parameter
+     * Adds parameters to bodyParameters.
+     *
+     * @param parameter represents parameter that is assigned to the file.
      */
     @Override
     public void addParameters(final Parameter parameter) {
@@ -77,11 +84,13 @@ public class FileRequestForm implements IRequestForm {
     }
 
     /**
-     * Gets the url
-     * @return url
+     * Gets the url.
+     *
+     * @return the url of file.
      */
     @Override
     public String getURL() {
         return url;
     }
 }
+
