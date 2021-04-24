@@ -102,7 +102,7 @@ class OutputSettings extends JPanel {
     /**
      * Gets selected width resolution for video converter.
      *
-     * @return an int, width selected of Resolution.
+     * @return an int with selected resolution width.
      */
     protected String getWidthResolution() {
         ResolutionVideo item = (ResolutionVideo) resolutionComboBox.getSelectedItem();
@@ -112,7 +112,7 @@ class OutputSettings extends JPanel {
     /**
      * Gets selected Height resolution for video converter.
      *
-     * @return an int, Height selected of Resolution.
+     * @return an int with selected resolution height.
      */
     protected String getHeightResolution() {
         ResolutionVideo resolutionVideo = (ResolutionVideo) resolutionComboBox.getSelectedItem();
@@ -122,7 +122,7 @@ class OutputSettings extends JPanel {
     /**
      * Gets the selected frame for video converter.
      *
-     * @return a String, option selected of Frame.
+     * @return a String option selected of Frame.
      */
     protected String getFrame() {
         FrameVideo frameVideo = (FrameVideo) framesSelect.getSelectedItem();
