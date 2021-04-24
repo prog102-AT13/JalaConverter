@@ -5,6 +5,8 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Gustavo Huanca
  */
 package org.fundacion.jala.converter.view.converter;
 
@@ -19,7 +21,8 @@ public class FrameVideo {
 
     /**
      * Gets frame select of video.
-     * @return name of frame.
+     *
+     * @return a String with teh name of frame.
      */
     public String getName() {
         return name;
@@ -27,6 +30,7 @@ public class FrameVideo {
 
     /**
      * Sets frame select of video.
+     *
      * @param newName is select options.
      */
     public void setName(final String newName) {
@@ -35,7 +39,8 @@ public class FrameVideo {
 
     /**
      * Gets frame select of video.
-     * @return frame is value select options.
+     *
+     * @return a String with frame is value select options.
      */
     public String getFrame() {
         return frame;
@@ -43,6 +48,7 @@ public class FrameVideo {
 
     /**
      * Sets value frame select of video.
+     *
      * @param newFrame is value select options.
      */
     public void setFrame(final String newFrame) {
@@ -50,8 +56,9 @@ public class FrameVideo {
     }
 
     /**
-     * Gets string select of combBox.
-     * @return string is value displayed in combBox.
+     * Gets string select of comboBox.
+     *
+     * @return a String is value displayed in comboBox.
      */
     @Override
     public String toString() {

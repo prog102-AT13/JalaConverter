@@ -51,7 +51,8 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
 
     /**
      * Sets all the graphics elements for the main interface of Video Converter.
-     * @param newToken a String with authentication token
+     *
+     * @param newToken a String with authentication token.
      */
     public VideoConverterInterface(final String newToken) {
         token = newToken;
@@ -78,6 +79,7 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
 
     /**
      * Converts, sends information for metadataClass conversion.
+     *
      * Shows a Dialog with the information.
      * @param e event of the JButton.
      */
@@ -118,8 +120,9 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
     }
 
     /**
-     * Obtains the request
-     * @throws IOException
+     * Obtains the request.
+     *
+     * @throws IOException when problems on inputs and outputs.
      */
     private void callRequest() throws IOException {
         LOGGER.info("start");

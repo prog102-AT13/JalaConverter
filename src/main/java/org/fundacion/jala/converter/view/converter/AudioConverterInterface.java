@@ -7,7 +7,6 @@
  * license agreement you entered into with Fundacion Jala
  *
  * @author Paola Aguilar Quiñones
- * @colaborathor Cristian Choque Quispe
  */
 package org.fundacion.jala.converter.view.converter;
 
@@ -54,7 +53,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
     /**
      * Initializes the graphics elements for Audio converter interface.
      *
-     * @param newToken a String with the authentication token
+     * @param newToken a String with the authentication token.
      */
     public AudioConverterInterface(final String newToken) {
         token = newToken;
@@ -130,7 +129,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
     /**
      * Obtains the request.
      *
-     * @throws IOException
+     * @throws IOException when problems on inputs.
      */
     private void callRequest() throws IOException {
         LOGGER.info("start");

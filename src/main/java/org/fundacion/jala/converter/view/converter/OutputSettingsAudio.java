@@ -5,8 +5,9 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Gustavo Huanca
  */
-
 package org.fundacion.jala.converter.view.converter;
 
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
@@ -17,6 +18,9 @@ import java.awt.Font;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
+/**
+ * This class defines the interface for output settings for audio to convert.
+ */
 class OutputSettingsAudio extends JPanel {
     private JComboBox volumeSelect;
     private JComboBox hzSelect;
@@ -105,6 +109,7 @@ class OutputSettingsAudio extends JPanel {
 
     /**
      * Gets selected volume for Audio converter.
+     *
      * @return String, option selected of volume.
      */
     protected String getVolume() {
@@ -113,6 +118,7 @@ class OutputSettingsAudio extends JPanel {
 
     /**
      * Gets selected Hz for Audio converter.
+     *
      * @return String, option selected of Hz.
      */
     protected String getHz() {
@@ -121,6 +127,7 @@ class OutputSettingsAudio extends JPanel {
 
     /**
      * Gets selected AudioChannel for Audio converter.
+     *
      * @return String, option selected of AudioChannel.
      */
     protected String getAudioChannel() {
@@ -129,6 +136,7 @@ class OutputSettingsAudio extends JPanel {
 
     /**
      * Gets if metadata is required for Audio converter.
+     *
      * @return true if metadata is required, false if not.
      */
     protected boolean isMetadata() {

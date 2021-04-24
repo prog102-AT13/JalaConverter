@@ -24,10 +24,11 @@ import java.util.Collections;
  */
 @Configuration
 public class SwaggerConfig {
+
     /**
      * Creates a Docket.
      *
-     * @return a Docket with Swagger configuration
+     * @return a Docket with Swagger configuration.
      */
     @Bean
     public Docket api() {
