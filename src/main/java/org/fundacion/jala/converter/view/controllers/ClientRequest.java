@@ -56,9 +56,9 @@ public class ClientRequest {
     /**
      * Executes a request given the type of requestForm.
      *
-     * @return a String with the response
-     * @throws ClientProtocolException when an error on the HTTP protocol occurs
-     * @throws IOException when an invalid input is provided
+     * @return a String with the response.
+     * @throws ClientProtocolException when an error on the HTTP protocol occurs.
+     * @throws IOException when an invalid input is provided.
      */
     public String executeRequest(final IRequestForm newRequestForm, final String token) throws ClientProtocolException, IOException {
         requestForm = newRequestForm;
@@ -77,10 +77,10 @@ public class ClientRequest {
     /**
      * Executes a request given the type of requestForm.
      *
-     * @param newRequestForm the request form
-     * @return a String with the response
-     * @throws ClientProtocolException when an error on the HTTP protocol occurs
-     * @throws IOException when an invalid input is provided
+     * @param newRequestForm the request form.
+     * @return a String with the response.
+     * @throws ClientProtocolException when an error on the HTTP protocol occurs.
+     * @throws IOException when an invalid input is provided.
      */
     public String executeRequestWithoutToken(final IRequestForm newRequestForm)
             throws ClientProtocolException, IOException {
@@ -99,8 +99,8 @@ public class ClientRequest {
     /**
      * Downloads a file from endpoint to given path.
      *
-     * @throws ClientProtocolException when there is an error on the client protocol
-     * @throws IOException when introduced an invalid path
+     * @throws ClientProtocolException when there is an error on the client protocol.
+     * @throws IOException when introduced an invalid path.
      */
     public void download(final String filePath) throws IOException {
         String sURL = DOWNLOAD_URL;
