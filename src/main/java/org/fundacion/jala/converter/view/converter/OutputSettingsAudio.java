@@ -36,9 +36,6 @@ class OutputSettingsAudio extends JPanel {
     private final int gridLayoutRows = 4;
     private final int gridLayoutCols = 2;
 
-    /**
-     * Initializes the graphic elements for output settings configurations.
-     */
     protected OutputSettingsAudio() {
         JLabelStyle volumeLabel = new JLabelStyle("Select Volume: ", "h3",
                 alignLabelStyle, widthLabelStyle, heightLabelStyle);

@@ -36,9 +36,6 @@ class SelectFile extends JPanel implements ActionListener {
     private final int flowLayoutHgap = 0;
     private final int flowLayoutVgap = 20;
 
-    /**
-     * Initializes the graphic components to select a file.
-     */
     protected SelectFile() {
         fileButton = new JButton("Select a File");
         fileButton.addActionListener(this::actionPerformed);

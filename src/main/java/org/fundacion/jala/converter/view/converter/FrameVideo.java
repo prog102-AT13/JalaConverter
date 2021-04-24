@@ -20,7 +20,7 @@ public class FrameVideo {
     }
 
     /**
-     * Gets frame select of video.
+     * Gets the name select of video.
      *
      * @return a String with the name of frame.
      */
@@ -29,7 +29,7 @@ public class FrameVideo {
     }
 
     /**
-     * Sets frame select of video.
+     * Sets the name select of video.
      *
      * @param newName is select options.
      */

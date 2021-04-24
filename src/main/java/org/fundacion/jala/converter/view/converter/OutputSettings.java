@@ -38,9 +38,6 @@ class OutputSettings extends JPanel {
     private final int gridLayoutRows = 4;
     private final int gridLayoutCols = 2;
 
-    /**
-     * Initializes the graphic elements for output settings configurations.
-     */
     protected OutputSettings() {
         JLabelStyle resolutionLabel = new JLabelStyle("Select resolution: ", "h3",
                 alignLabelStyle, widthLabelStyle, heightLabelStyle);
