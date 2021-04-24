@@ -19,6 +19,7 @@ import org.fundacion.jala.converter.service.metadata.TypeFileExport;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 
 public class ExtractFacade {
 
@@ -45,38 +46,23 @@ public class ExtractFacade {
      * @return string with name of file which contains metadata
      */
     public static String getMetadataExtract(final MultipartFile file, final Boolean isMoreInfo,
-                                            final String nameExport, final String format) throws IOException {
+                                            final String nameExport, final String format) throws IOException, IllegalArgumentException{
         FileStorageService fileStorageService = new FileStorageService();
         String pathFile = fileStorageService.uploadFile(file);
-        TypeFileExport typeFileExport = stringToEnum(format);
-        String outputPath = fileStorageService.getOutputPathWithoutFileName(fileStorageService.getOutputPath(pathFile));
+        String outputPath = FileStorageService.getOutputPathWithoutFileName(pathFile);
         File fileToExtract = new File(pathFile);
         ObjectMetadata objectMetadata = new ObjectMetadata();
-        objectMetadata.setNameExport(nameExport + "");
+        objectMetadata.setNameExport(nameExport);
         objectMetadata.setFileToExtract(fileToExtract);
         objectMetadata.setFileToExport(new File(outputPath));
         objectMetadata.setMoreInfo(isMoreInfo);
-        objectMetadata.setTypeFileExport(typeFileExport);
+        objectMetadata.setTypeFileExport(TypeFileExport.valueOf(format.toUpperCase()));
         ExtractMetadata extractMetadata = new ExtractMetadata(objectMetadata);
         extractMetadata.extractMetadata();
         if ("Default".equals(nameExport)) {
-            return fileToExtract.getName().substring(0, fileToExtract.getName().lastIndexOf(".") + 0);
+            return fileToExtract.getName().substring(0, fileToExtract.getName().lastIndexOf("."));
         } else {
             return nameExport;
         }
     }
-
-    /**
-     * Convert string to enum for metadata.
-     *
-     * @param format define type of file which it is exported.
-     * @return format type TypeFileExport
-     */
-    private static TypeFileExport stringToEnum(final String format) {
-        if ("txt".equals(format)) return TypeFileExport.TXT;
-        if ("html".equals(format)) return TypeFileExport.HTML;
-        if ("xmp".equals(format)) return TypeFileExport.XMP;
-        return TypeFileExport.TXT;
-    }
-
 }
