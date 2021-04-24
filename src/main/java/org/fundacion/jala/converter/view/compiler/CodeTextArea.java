@@ -23,7 +23,7 @@ import java.awt.BorderLayout;
 /**
  * This class customizes a panel with custom text areas.
  */
-class CodeTextArea extends JPanel {
+class CodeTextArea extends JPanel implements DocumentListener {
     private JTextArea codeArea;
     private JTextArea lineCode;
     private final int topBorder = 5;
@@ -40,38 +40,7 @@ class CodeTextArea extends JPanel {
         lineCode.setForeground(Color.white);
         JScrollPane textCodeArea = new JScrollPane();
         textCodeArea.setBorder(new EmptyBorder(0, 0, 0, 0));
-        codeArea.getDocument().addDocumentListener(new DocumentListener() {
-
-            /**
-             * Adds the number of rows in Code Area Text.
-             *
-             * @param de event when inserting text in Code Area Text.
-             */
-            @Override
-            public void changedUpdate(final DocumentEvent de) {
-                lineCode.setText(getLinesOfText());
-            }
-
-            /**
-             * Updates the number of rows in Code Area Text.
-             *
-             * @param de event when updating text in Code Area Text.
-             */
-            @Override
-            public void insertUpdate(final DocumentEvent de) {
-                lineCode.setText(getLinesOfText());
-            }
-
-            /**
-             * Deletes the number of rows in Code Area Text.
-             *
-             * @param de event when deleting text in Code Area Text.
-             */
-            @Override
-            public void removeUpdate(final DocumentEvent de) {
-                lineCode.setText(getLinesOfText());
-            }
-        });
+        codeArea.getDocument().addDocumentListener(this);
         setLayout(new BorderLayout());
         textCodeArea.getViewport().add(codeArea);
         textCodeArea.setRowHeaderView(lineCode);
@@ -87,6 +56,11 @@ class CodeTextArea extends JPanel {
         return codeArea.getText();
     }
 
+    /**
+     * Counts how many lines has codArea
+     *
+     * @return a string that is the number of codArea lines.
+     */
     public String getLinesOfText() {
         int caretPosition = codeArea.getDocument().getLength();
         Element root = codeArea.getDocument().getDefaultRootElement();
@@ -95,6 +69,36 @@ class CodeTextArea extends JPanel {
             text += i + System.getProperty("line.separator");
         }
         return text;
+    }
+
+    /**
+     * Adds the number of rows in Code Area Text.
+     *
+     * @param de event when inserting text in Code Area Text.
+     */
+    @Override
+    public void changedUpdate(final DocumentEvent de) {
+        lineCode.setText(getLinesOfText());
+    }
+
+    /**
+     * Updates the number of rows in Code Area Text.
+     *
+     * @param de event when updating text in Code Area Text.
+     */
+    @Override
+    public void insertUpdate(final DocumentEvent de) {
+        lineCode.setText(getLinesOfText());
+    }
+
+    /**
+     * Deletes the number of rows in Code Area Text.
+     *
+     * @param de event when deleting text in Code Area Text.
+     */
+    @Override
+    public void removeUpdate(final DocumentEvent de) {
+        lineCode.setText(getLinesOfText());
     }
 }
 

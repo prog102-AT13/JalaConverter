@@ -17,14 +17,14 @@ public class ParameterOutputChecksum {
     private String checksumLocal;
     private String outputFilename;
     private int resultTitleSize;
-    private String filename;
+    private String fileName;
 
     public ParameterOutputChecksum(final String checksumLocal, final String outputFilename, final int resultTitleSize,
-                                   final String filename) {
+                                   final String fileName) {
         this.checksumLocal = checksumLocal;
         this.outputFilename = outputFilename;
         this.resultTitleSize = resultTitleSize;
-        this.filename = filename;
+        this.fileName = fileName;
     }
 
     /**
@@ -59,8 +59,8 @@ public class ParameterOutputChecksum {
      *
      * @return name of archive to converts.
      */
-    public String getFilename() {
-        return filename;
+    public String getFileName() {
+        return fileName;
     }
 }
 
