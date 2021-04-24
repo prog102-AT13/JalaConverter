@@ -31,21 +31,28 @@ import java.io.IOException;
 @RequestMapping("/api")
 public class ExtractTextController {
     private static final Logger LOGGER = LogManager.getLogger();
+
     @Autowired
     private FileStorageService fileStorageService;
 
     /**
-     * Endpoint for extract text.
+     * Creates endpoint to extract text.
+     *
+     * @param file is image file to extract text.
+     * @param language is a type of language of the text.
+     * @return path to download files.
+     * @throws IllegalStateException is a exception if process is Illegal.
+     * @throws IOException is a exception when invalid path.
      */
     @PostMapping("/extractText")
-    public String uploadFile(final @RequestParam("file")MultipartFile file,
-                             final @RequestParam("language") String language) throws IllegalStateException,
-            IOException {
+    public String uploadFile(final @RequestParam("file") MultipartFile file,
+                             final @RequestParam("language") String language) throws IllegalStateException, IOException {
         LOGGER.info("start");
         String fileOut = file.getOriginalFilename();
         String outputFileName = fileOut.substring(0, fileOut.lastIndexOf("."));
-        ExtractFacade.getTextExtract(new ExtractTextParameter(fileStorageService
-                .uploadFile(file), language, outputFileName));
+        ExtractTextParameter extractTextParameter;
+        extractTextParameter = new ExtractTextParameter(fileStorageService.uploadFile(file), language, outputFileName);
+        ExtractFacade.getTextExtract(extractTextParameter);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         String outFilename = outputFileName + ".txt";
         String downloadLink = baseUrl + "/api/download/" + outFilename;
