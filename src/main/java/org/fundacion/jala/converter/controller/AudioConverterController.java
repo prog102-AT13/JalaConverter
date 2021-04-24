@@ -41,7 +41,7 @@ public class AudioConverterController {
     private FileStorageService fileStorageService;
 
     /**
-     * Calls endpoint for audio converter.
+     * Calls endpoint to audio converter.
      *
      * @param file is path of file which will be converted.
      * @param format is the format with are converted of audio.
@@ -52,7 +52,7 @@ public class AudioConverterController {
      * @param checksum is checksum of audio.
      * @param metadata if metadata is extracted from the audio.
      * @return path to download files.
-     * @throws IOException is exception when invalid path.
+     * @throws IOException is a exception when invalid input is provided.
      * @throws InterruptedException is exception if process is interrupted.
      */
     @PostMapping("/convertAudio")

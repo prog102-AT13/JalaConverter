@@ -56,7 +56,7 @@ public class ProjectController {
      * @param code is a String with the code for the file.
      * @return String with the path of files.
      * @throws IllegalStateException when method invoked at an illegal time.
-     * @throws IOException when invalid input is provided.
+     * @throws IOException is a exception when invalid input is provided.
      */
     @PostMapping("/projects/{id}/file")
     public String createFiles(final @RequestParam("fileName") String fileName,

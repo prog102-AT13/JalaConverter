@@ -42,7 +42,7 @@ public class ExtractTextController {
      * @param language is a type of language of the text.
      * @return path to download files.
      * @throws IllegalStateException is a exception if process is Illegal.
-     * @throws IOException is a exception when invalid path.
+     * @throws IOException is a exception when invalid input is provided.
      */
     @PostMapping("/extractText")
     public String uploadFile(final @RequestParam("file") MultipartFile file,

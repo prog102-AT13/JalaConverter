@@ -35,7 +35,7 @@ public class JavaCompilerController {
      * @param code is a String with the code to compile.
      * @return String with the compilation result.
      * @throws IllegalStateException when method invoked at an illegal time.
-     * @throws IOException when invalid input is provided.
+     * @throws IOException is a exception when invalid input is provided.
      */
     @PostMapping("/compileJava")
     public String compileJava(final @RequestParam("code") String code) throws IllegalStateException, IOException {

@@ -38,7 +38,7 @@ public class ExtractMetadataController {
      * @param format is the format to file.
      * @return path to download files.
      * @throws IllegalStateException is a exception if process is Illegal.
-     * @throws IOException is a exception when invalid path.
+     * @throws IOException is a exception when invalid input is provided.
      */
     @PostMapping("/extractMetadata")
     public String uploadFile(final @RequestParam("fileToExtract") MultipartFile fileToExtract,
