@@ -78,9 +78,8 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
     }
 
     /**
-     * Converts, sends information for metadataClass conversion.
+     * Converts and sends information for metadataClass conversion then Shows a Dialog with the information.
      *
-     * Shows a Dialog with the information.
      * @param e event of the JButton.
      */
     @Override
