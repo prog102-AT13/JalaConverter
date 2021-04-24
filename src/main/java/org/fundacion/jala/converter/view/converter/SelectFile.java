@@ -76,7 +76,7 @@ class SelectFile extends JPanel implements ActionListener {
     /**
      * Gets the Origin Path of File when selected.
      *
-     * @return String fileOriginPath.
+     * @return a String with fileOriginPath.
      */
     protected String getOriginFilePath() {
         return fileOriginPath;

@@ -81,7 +81,7 @@ public class ResolutionVideo {
     /**
      * Gets full name to shown in combBox.
      *
-     * @return full name to shown in combBox.
+     * @return a String with the full name to shown in combBox.
      */
     @Override
     public String toString() {
@@ -93,7 +93,7 @@ public class ResolutionVideo {
      * Adds space depending for length of name.
      *
      * @param nameLength of name.
-     * @return a int with the long necessary for blank spaces.
+     * @return an int with the long necessary for blank spaces.
      */
     public int numberSpaces(final String nameLength) {
         final int spacesFor720 = 59;
