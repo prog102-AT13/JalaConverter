@@ -43,11 +43,13 @@ public class TextExtractorInterface extends JPanel implements ActionListener {
     private final int rightBorder = 0;
     private final int fontStyle = 0;
     private final int fontSize = 12;
+    private String token;
 
     /**
      * Initializes graphics elements for Audio converter interface.
      */
-    public TextExtractorInterface() {
+    public TextExtractorInterface(final String newToken) {
+        token = newToken;
         JLabelStyle audioTitle = new JLabelStyle("Text extractor", "h1",
                 alignLabelStyle, widthLabelStyle, heightLabelStyle);
         JLabelStyle audioSettings = new JLabelStyle("Image settings", "h1",
@@ -103,7 +105,7 @@ public class TextExtractorInterface extends JPanel implements ActionListener {
         extractTextRequestFormat.addLanguageFormat(languageSelect.getConvertTo());
         try {
             LOGGER.info("Execute Try");
-            String result = clientRequest.executeRequest(extractTextRequestFormat);
+            String result = clientRequest.executeRequest(extractTextRequestFormat, token);
             clientRequest.downloadFile(result);
             JOptionPane.showMessageDialog(this, "Downloaded in :\n"
                     + System.getProperty("user.home") + dotenv.get("DIR_DOWNLOAD"));

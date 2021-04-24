@@ -5,6 +5,7 @@ archive/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+thirdparty/windows/javabin/jdk-11.0.10
 
 ### STS ###
 .apt_generated

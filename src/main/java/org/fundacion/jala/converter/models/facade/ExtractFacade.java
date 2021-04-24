@@ -21,6 +21,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
 
+/**
+ * Class to do and call facade of extract.
+ */
 public class ExtractFacade {
 
     private ExtractFacade() {
@@ -31,7 +34,7 @@ public class ExtractFacade {
      *
      * @param extractTextParameter is a object with parameter of extractText to convert.
      */
-    public static void getTextExtract(ExtractTextParameter extractTextParameter) {
+    public static void getTextExtract(final ExtractTextParameter extractTextParameter) {
         ExtractText extractText = new ExtractText(extractTextParameter);
         extractText.extractText();
     }

@@ -8,7 +8,6 @@
  *
  * @author Paola Aguilar Quiñones
  */
-
 package org.fundacion.jala.converter.view.compiler;
 
 import javax.swing.JPanel;
@@ -18,34 +17,25 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Component;
 
+/**
+ *  * This class customizes a panel with custom buttons to change language.
+ */
 class LanguageButtons extends JPanel {
     private JButton cPlusPlus;
     private JButton java;
     private JButton python;
-    private final int maximumSizeWidth = 50;
-    private final int maximumSizeHeight = 50;
-    private final int preferredSizeWidth = 70;
-    private final int preferredSizeHeight = 30;
-    private final int fontStyle = 0;
-    private final int fontSize = 11;
+    private final int MAXIMUM_SIZE_WIDTH = 50;
+    private final int MAXIMUM_SIZE_HEIGHT = 50;
+    private final int PREFERRED_SIZE_WIDTH = 70;
+    private final int PREFERRED_SIZE_HEIGHT = 30;
+    private final int FONT_STYLE = 0;
+    private final int FONT_SIZE = 11;
 
-    /**
-     * Initializes the graphics elements for language buttons.
-     */
     protected LanguageButtons() {
-        setPreferredSize(new Dimension(preferredSizeWidth, preferredSizeHeight));
-        cPlusPlus = new JButton("C++");
-        cPlusPlus.setFont(new Font("Barlow", fontStyle, fontSize));
-        cPlusPlus.setMaximumSize(new Dimension(maximumSizeWidth, maximumSizeHeight));
-        cPlusPlus.setAlignmentX(Component.CENTER_ALIGNMENT);
-        java = new JButton("Java");
-        java.setMaximumSize(new Dimension(maximumSizeWidth, maximumSizeHeight));
-        java.setFont(new Font("Barlow", fontStyle, fontSize));
-        java.setAlignmentX(Component.CENTER_ALIGNMENT);
-        python = new JButton("Python");
-        python.setMaximumSize(new Dimension(maximumSizeWidth, maximumSizeHeight));
-        python.setAlignmentX(Component.CENTER_ALIGNMENT);
-        python.setFont(new Font("Barlow", fontStyle, fontSize));
+        setPreferredSize(new Dimension(PREFERRED_SIZE_WIDTH, PREFERRED_SIZE_HEIGHT));
+        cPlusPlus = createButton("C++");
+        java = createButton("Java");
+        python = createButton("Python");
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(cPlusPlus);
         add(java);
@@ -54,6 +44,7 @@ class LanguageButtons extends JPanel {
 
     /**
      * Button that defines or not java is selected
+     *
      * @return a JButton
      */
     public JButton getJava() {
@@ -62,9 +53,25 @@ class LanguageButtons extends JPanel {
 
     /**
      * Button that defines or not python is selected
+     *
      * @return a JButton
      */
     public JButton getPython() {
         return python;
     }
+
+    /**
+     * Creates a custom button.
+     *
+     * @param text represents title that the button has.
+     * @return a JButton
+     */
+    public JButton createButton(final String text) {
+        JButton button = new JButton(text);
+        button.setMaximumSize(new Dimension(MAXIMUM_SIZE_WIDTH, MAXIMUM_SIZE_HEIGHT));
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        button.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
+        return button;
+    }
 }
+

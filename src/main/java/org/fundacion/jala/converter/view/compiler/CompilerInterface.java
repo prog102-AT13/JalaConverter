@@ -8,129 +8,131 @@
  *
  * @author Paola Aguilar Quiñones
  */
-
 package org.fundacion.jala.converter.view.compiler;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.view.Models.CompileRequestForm;
+import org.fundacion.jala.converter.view.controllers.ClientRequest;
 
 import javax.swing.JPanel;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import static org.fundacion.jala.converter.models.UserSQL.findUserById;
 
+/**
+ * This class creates the compiler's UI.
+ */
 public class CompilerInterface extends JPanel {
     private static final Logger LOGGER = LogManager.getLogger();
-    private CodeTextArea codeArea;
     private Console consoleOutput;
     private LanguageButtons langButtons;
     private CompilerButtons buttonsCompiler;
+    private String token;
+    private ProjectTab projectTab;
+    private ClientRequest clientRequest = new ClientRequest();
+    private int choose;
 
-    /**
-     * Initializes the graphics elements of the Main Compiler Interface.
-     */
-    public CompilerInterface() {
+    public CompilerInterface(final String newToken) {
+        token = newToken;
+        choose = 1;
         buttonsCompiler = new CompilerButtons();
         consoleOutput = new Console();
         langButtons = new LanguageButtons();
-        codeArea = new CodeTextArea();
         langButtons.getJava().setEnabled(false);
-        ProjectTab projectTab = new ProjectTab();
-        projectTab.setFont(new Font("Barlow", 0, 11));
-        projectTab.add(codeArea);
-        JPanel pnl = new JPanel();
-        pnl.setLayout(new FlowLayout());
-        pnl.setOpaque(false);
-        JLabel label=new JLabel("Main");
-        label.setFont(new Font("Barlow", 0, 11));
-        pnl.add(label);
-        projectTab.setTabComponentAt(projectTab.getTabCount() - 1, pnl);
-        projectTab.start();
+        projectTab = new ProjectTab();
         setLayout(new GridBagLayout());
         GridBagConstraints panelConstraint = new GridBagConstraints();
-        panelConstraint.gridx = 0;
-        panelConstraint.gridy = 1;
-        panelConstraint.gridheight = 3;
-        panelConstraint.gridwidth = 1;
         panelConstraint.weighty = 1;
         panelConstraint.fill = GridBagConstraints.BOTH;
-        add(langButtons, panelConstraint);
-        panelConstraint.gridx = 1;
-        panelConstraint.gridy = 1;
-        panelConstraint.gridheight = 2;
-        panelConstraint.gridwidth = 4;
-        add(projectTab, panelConstraint);
-        panelConstraint.gridx = 3;
-        panelConstraint.gridy = 7;
-        panelConstraint.gridheight = 1;
-        panelConstraint.gridwidth = 2;
+        add(langButtons, setConstraints(panelConstraint, 0, 1, 3, 1));
+        add(projectTab, setConstraints(panelConstraint, 1, 1, 2, 4));
         panelConstraint.weighty = 0;
-        add(buttonsCompiler, panelConstraint);
-        panelConstraint.gridx = 1;
-        panelConstraint.gridy = 8;
-        panelConstraint.gridheight = 2;
-        panelConstraint.gridwidth = 4;
-        add(consoleOutput, panelConstraint);
-        buttonsCompiler.getRunButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                LOGGER.info("start");
-                String url = "";
-                if (!langButtons.getPython().isEnabled()){
-                    url = "http://localhost:8080/api/compilePython";
-                }
-                if (!langButtons.getJava().isEnabled()) {
-                    url = "http://localhost:8080/api/compileJava";
+        add(buttonsCompiler, setConstraints(panelConstraint, 3, 7, 1, 2));
+        add(consoleOutput, setConstraints(panelConstraint, 1, 8, 2, 4));
+        buttonsCompiler.getRunButton().addActionListener(addListenerToRunButton());
+        langButtons.getJava().addActionListener(addListenerToJavaButton());
+        langButtons.getPython().addActionListener(addListenerToPythonButton());
+    }
 
-                }
-                HttpPost httpPost = new HttpPost(url);
-                String code1 = projectTab.getSelectedPane().getText();
-                MultipartEntityBuilder builder;
-                builder = MultipartEntityBuilder.create();
-                builder.addTextBody("code", code1, ContentType.TEXT_PLAIN);
-                HttpEntity multipart;
-                multipart = builder.build();
+    /**
+     * Sets all grids to a GridBagConstraints.
+     *
+     * @param panelConstraint is the GridBagConstraints that sets.
+     * @param gx represents x grid.
+     * @param gy represents y grid.
+     * @param gh represents height grid.
+     * @param gw represents width grid.
+     * @return a custom GridBagConstraints.
+     */
+    public GridBagConstraints setConstraints(final GridBagConstraints panelConstraint, final int gx, final int gy,
+                                            final int gh, final int gw) {
+        panelConstraint.gridx = gx;
+        panelConstraint.gridy = gy;
+        panelConstraint.gridheight = gh;
+        panelConstraint.gridwidth = gw;
+        return panelConstraint;
+    }
+
+    /**
+     * Processes code and receives its result.
+     *
+     * @return a custom ActionListener.
+     */
+    public ActionListener addListenerToRunButton() {
+        ActionListener actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                LOGGER.info("start");
+                String inputCode = projectTab.getSelectedPane().getText();
+                CompileRequestForm compileRequestForm = new CompileRequestForm(choose);
+                compileRequestForm.addCode(inputCode);
                 try {
                     LOGGER.info("Execute Try");
-                    httpPost.setEntity(multipart);
-                    httpPost.setHeader("Authorization", "Bearer " + findUserById(1).getToken());
-                    CloseableHttpClient httpClient = HttpClients.createDefault();
-                    CloseableHttpResponse response = httpClient.execute(httpPost);
-                    HttpEntity responseEntity = response.getEntity();
-                    String sResponse = EntityUtils.toString(responseEntity, "UTF-8");
+                    String sResponse = clientRequest.executeRequest(compileRequestForm, token);
                     consoleOutput.getConsole().setText(sResponse);
                     LOGGER.info("finish");
                 } catch (Exception exception) {
                     LOGGER.error("Execute Exception" + exception.getMessage());
                 }
             }
-        });
-        langButtons.getJava().addActionListener(new ActionListener() {
+        };
+        return actionListener;
+    }
+
+    /**
+     * Sets enabled to java button and disabled to python button.
+     *
+     * @return a custom ActionListener
+     */
+    public ActionListener addListenerToJavaButton() {
+        ActionListener actionListener = new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 langButtons.getJava().setEnabled(false);
                 langButtons.getPython().setEnabled(true);
+                choose = 1;
             }
-        });
-        langButtons.getPython().addActionListener(new ActionListener() {
+        };
+        return actionListener;
+    }
+
+    /**
+     * Sets enabled to python button and disabled to java button.
+     *
+     * @return a custom ActionListener
+     */
+    public ActionListener addListenerToPythonButton() {
+        ActionListener actionListener = new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 langButtons.getPython().setEnabled(false);
                 langButtons.getJava().setEnabled(true);
+                choose = 2;
             }
-        });
+        };
+        return actionListener;
     }
 }
+

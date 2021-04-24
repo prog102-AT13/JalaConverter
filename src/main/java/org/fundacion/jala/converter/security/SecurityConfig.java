@@ -5,6 +5,8 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Raymundo Guaraguara Sansusty
  */
 package org.fundacion.jala.converter.security;
 
@@ -23,6 +25,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * This class configures the application's security.
+ */
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
@@ -32,7 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private JwtRequestFilter jwtRequestFilter;
 
     /**
-     * Enables memory based authentication
+     * Enables memory based authentication.
+     *
      * @param auth Authentication manager specified
      * @throws Exception when not found
      */
@@ -42,14 +48,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * Disables security on /authenticate and set a filter to the jwtRequest
+     * Disables security on /authenticate and set a filter to the jwtRequest.
+     *
      * @param http to configure web based security
      * @throws Exception when not found
      */
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeRequests().antMatchers("/authenticate").permitAll()
+                .authorizeRequests().antMatchers("/authenticate", "/register").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
@@ -57,7 +64,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * Makes the configuration ignore security on swagger endpoints
+     * Makes the configuration ignore security on swagger endpoints.
+     *
      * @param web to create a filter chain
      * @throws Exception when not found
      */
@@ -65,11 +73,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(final WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui",
                 "/swagger-resources/**", "/configuration/security",
-                "/swagger-ui/**", "/webjars/**", "/api/**");
+                "/swagger-ui/**", "/webjars/**", "/api/download/**");
     }
 
     /**
-     * Exposes AuthenticationManager as a Bean
+     * Exposes AuthenticationManager as a Bean.
+     *
      * @return AuthenticationManager
      * @throws Exception when not found
      */
@@ -80,7 +89,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * Encodes the password
+     * Encodes the password.
+     *
      * @return password encoded with BCrypt
      */
     @Bean

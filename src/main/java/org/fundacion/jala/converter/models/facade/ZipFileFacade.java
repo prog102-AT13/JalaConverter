@@ -70,7 +70,7 @@ public class ZipFileFacade {
         String checksumLocal = parameterOutputChecksum.getChecksumLocal();
         String outputFilename = parameterOutputChecksum.getOutputFilename();
         int resultTitleSize = parameterOutputChecksum.getResultTitleSize();
-        String filename = parameterOutputChecksum.getFilename();
+        String filename = parameterOutputChecksum.getFileName();
         final int WAIT_TIME = 6000;
         final int USER_ID = 1;
         String nameWithoutExtension = outputFilename.substring(0, outputFilename.lastIndexOf(".") + 1);
@@ -95,3 +95,4 @@ public class ZipFileFacade {
         }
     }
 }
+
