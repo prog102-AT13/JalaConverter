@@ -72,8 +72,8 @@ public class AssetSQL {
     }
 
     /**
-     * Lists the project in the db
-     * @return a list of projects
+     * Lists the project in the db.
+     * @return a list of projects.
      */
     @SuppressWarnings("unchecked")
     public static List<Asset> listAsset() {

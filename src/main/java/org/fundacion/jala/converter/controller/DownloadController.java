@@ -31,6 +31,9 @@ public class DownloadController {
 
     /**
      * Creates endpoint to download controller.
+     *
+     * @param fileName is a name of the file to download.
+     * @return response entity ok with the resource get file name.
      */
     @GetMapping("/download/{fileName}")
     ResponseEntity<Resource> downloadFile(final @PathVariable String fileName) {
