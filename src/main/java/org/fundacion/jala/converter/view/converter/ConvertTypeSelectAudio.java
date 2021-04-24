@@ -54,7 +54,7 @@ public class ConvertTypeSelectAudio extends JPanel {
     /**
      * Returns the selected option to conversion.
      *
-     * @return String with the selected option.
+     * @return a String with the selected option.
      */
     protected String getConvertTo() {
         return convertTo.getSelectedItem().toString();

@@ -206,7 +206,7 @@ public class ClientRequest {
     }
 
     /**
-     * Downloads a File by URL.
+     * Saves a File by URL.
      *
      * @param fileName name of file.
      * @param fileUrl complete url of the file.
