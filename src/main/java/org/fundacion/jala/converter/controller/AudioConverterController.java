@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- * <p>
+ *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -25,21 +25,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.io.IOException;
-
 import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetadata;
 
 /**
- * This method calls endpoint for audio.
+ * This method calls endpoint of the audio.
  */
 @RestController
 @RequestMapping("/api")
 public class AudioConverterController {
-    @Autowired
-    private FileStorageService fileStorageService;
     private static final Logger LOGGER = LogManager.getLogger();
     private ParameterOutputChecksum parameterOutputChecksum;
+
+    @Autowired
+    private FileStorageService fileStorageService;
 
     /**
      * Calls endpoint for audio converter.
