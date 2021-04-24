@@ -17,7 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
  */
 public class DownloadLinkFacade {
     private DownloadLinkFacade(){}
-
+    private static String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
     /**
      *  Generator link to download to convert.
      *
@@ -26,7 +26,6 @@ public class DownloadLinkFacade {
      */
     public static String getLinkConverter(final String outputFilename){
         String nameWithoutExtension = outputFilename.substring(0, outputFilename.lastIndexOf(".") + 1);
-        String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         return  baseUrl + "/api/download/" + nameWithoutExtension + "zip";
     }
 
@@ -37,10 +36,17 @@ public class DownloadLinkFacade {
      * @return path which permit download the result process.
      */
     public static String getLinkExtractText(final String outputFileName){
-        final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-        String outFilename = outputFileName + ".txt";
-        String downloadLink = baseUrl + "/api/download/" + outFilename;
-        return downloadLink;
+        return baseUrl + "/api/download/" + outputFileName + ".txt";
+    }
+
+    /**
+     *
+     * @param filename is name of file which are extracted metadata.
+     * @param format is format which the result process do.
+     * @return path which permit download the result process.
+     */
+    public static String getLinkMetadata(final String filename, final String format){
+        return baseUrl + "/api/download/" + filename + "." + format;
     }
 }
 

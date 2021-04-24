@@ -47,6 +47,7 @@ public class ExtractTextController {
         String outputFileName = fileOut.substring(0, fileOut.lastIndexOf("."));
         ExtractFacade.getTextExtract(new ExtractTextParameter(fileStorageService
                 .uploadFile(file), language, outputFileName));
+        LOGGER.info("finish");
         return DownloadLinkFacade.getLinkExtractText(outputFileName);
     }
 }
