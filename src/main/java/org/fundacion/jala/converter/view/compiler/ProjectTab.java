@@ -28,12 +28,14 @@ import java.awt.event.ActionEvent;
 public class ProjectTab extends JTabbedPane implements ActionListener {
     public static int counter;
     private PlusButton button;
+    private final int sizeFont = 11;
+    private final int dimension = 20;
 
     /**
      * Starts required components to add new tabs.
      */
     public void start() {
-        final int dimension = 20;
+        setFont(new Font("Barlow", 0, sizeFont));
         button = new PlusButton();
         button.setPreferredSize(new Dimension(dimension, dimension));
         button.addActionListener(this);
@@ -60,7 +62,7 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
         CodeTextArea codeArea = new CodeTextArea();
         codeArea.setName(title);
         add(codeArea, getTabCount() - 1);
-        setTabComponentAt(getTabCount() - 2, makeTabTitle(title));
+        setTabComponentAt(getTabCount() - 2, createTabHeader(title));
         setSelectedIndex(getTabCount() - 2);
     }
 
@@ -97,23 +99,32 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
      * @param title is text that shows as a title.
      * @return a JPanel with complete title.
      */
-    public JPanel makeTabTitle(final String title) {
-        final int dimension = 20;
-        final int sizeFont = 11;
+    public JPanel createTabHeader(final String title) {
         CloseButton tabButton = new CloseButton();
         tabButton.setPreferredSize(new Dimension(dimension, dimension));
         tabButton.addActionListener(e1 -> {
             removeTab(title);
             setSelectedIndex(getTabCount() - 2);
         });
-        JPanel pnl = new JPanel();
-        pnl.setLayout(new FlowLayout());
-        pnl.setOpaque(false);
-        JLabel label = new JLabel(title);
-        label.setFont(new Font("Barlow", 0, sizeFont));
-        pnl.add(label);
-        pnl.add(tabButton);
-        return pnl;
+        JPanel tabHeader = createTabHeaderWithTitle(title);
+        tabHeader.add(tabButton);
+        return tabHeader;
+    }
+
+    /**
+     * Creates a header tab with only title.
+     *
+     * @param title represents title that the header has.
+     * @return a JPanel with parcial title.
+     */
+    public JPanel createTabHeaderWithTitle(final String title) {
+        JPanel headerTab = new JPanel();
+        headerTab.setLayout(new FlowLayout());
+        headerTab.setOpaque(false);
+        JLabel headerLabel = new JLabel(title);
+        headerLabel.setFont(new Font("Barlow", 0, sizeFont));
+        headerTab.add(headerLabel);
+        return headerTab;
     }
 
     /**
@@ -129,7 +140,7 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
             if (result != null && result.length() > 0) {
                 int indexTab = getSelectedIndex();
                 setTitleAt(indexTab, result);
-                setTabComponentAt(indexTab, makeTabTitle(result));
+                setTabComponentAt(indexTab, createTabHeader(result));
             }
         }
     }

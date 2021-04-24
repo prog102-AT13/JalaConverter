@@ -33,18 +33,9 @@ class LanguageButtons extends JPanel {
 
     protected LanguageButtons() {
         setPreferredSize(new Dimension(preferredSizeWidth, preferredSizeHeight));
-        cPlusPlus = new JButton("C++");
-        cPlusPlus.setFont(new Font("Barlow", fontStyle, fontSize));
-        cPlusPlus.setMaximumSize(new Dimension(maximumSizeWidth, maximumSizeHeight));
-        cPlusPlus.setAlignmentX(Component.CENTER_ALIGNMENT);
-        java = new JButton("Java");
-        java.setMaximumSize(new Dimension(maximumSizeWidth, maximumSizeHeight));
-        java.setFont(new Font("Barlow", fontStyle, fontSize));
-        java.setAlignmentX(Component.CENTER_ALIGNMENT);
-        python = new JButton("Python");
-        python.setMaximumSize(new Dimension(maximumSizeWidth, maximumSizeHeight));
-        python.setAlignmentX(Component.CENTER_ALIGNMENT);
-        python.setFont(new Font("Barlow", fontStyle, fontSize));
+        cPlusPlus = createButton("C++");
+        java = createButton("Java");
+        python = createButton("Python");
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(cPlusPlus);
         add(java);
@@ -67,6 +58,20 @@ class LanguageButtons extends JPanel {
      */
     public JButton getPython() {
         return python;
+    }
+
+    /**
+     * Creates a custom button.
+     *
+     * @param text represents title that the button has.
+     * @return a JButton
+     */
+    public JButton createButton(final String text) {
+        JButton button = new JButton(text);
+        button.setMaximumSize(new Dimension(maximumSizeWidth, maximumSizeHeight));
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        button.setFont(new Font("Barlow", fontStyle, fontSize));
+        return button;
     }
 }
 
