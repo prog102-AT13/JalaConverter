@@ -25,9 +25,6 @@ class Console extends JPanel {
     private final int width = 600;
     private final int height = 200;
 
-    /**
-     * Initializes the graphic elements of Console.
-     */
     protected Console() {
         console = new JTextArea();
         console.setBackground(Color.black);

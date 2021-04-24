@@ -5,9 +5,7 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
- */
-
-/**
+ *
  * @author Paola Aguilar Quiñones
  */
 package org.fundacion.jala.converter.view;
@@ -18,19 +16,13 @@ import org.fundacion.jala.converter.view.utilities.JLabelStyle;
 import org.fundacion.jala.converter.view.compiler.CompilerInterface;
 import org.fundacion.jala.converter.view.converter.VideoConverterInterface;
 import org.fundacion.jala.converter.view.metadata.MetaDataInterface;
-
 import javax.swing.JFrame;
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-
-import java.awt.*;
+import java.awt.Font;
+import java.awt.BorderLayout;
 
 public class MainInterface extends JFrame {
-    private ImageIcon compilerIcon;
-    private ImageIcon converterIcon;
-    private CompilerInterface compilerJP;
-    private JPanel converterJP;
+    private CompilerInterface compilerJPanel;
     private JLabelStyle titleTxt;
     private VideoConverterInterface video;
     private MetaDataInterface metaData;
@@ -43,22 +35,23 @@ public class MainInterface extends JFrame {
     private final int height = 700;
     private final int fontStyle = 0;
     private final int fontSize = 12;
+    private String token;
 
     /**
      * Initializes all the graphics components in the main Frame
      */
-    public void initInterface() {
-        compilerJP = new CompilerInterface();
-        video = new VideoConverterInterface();
-        converterJP = new JPanel();
+    public void initInterface(final String newToken) {
+        token = newToken;
+        compilerJPanel = new CompilerInterface(token);
+        video = new VideoConverterInterface(token);
         titleTxt = new JLabelStyle("Jala Converter Project v1.0", "h2",
                 alignLabelStyle, widthLabelStyle, heightLabelStyle);
-        metaData = new MetaDataInterface();
-        audio = new AudioConverterInterface();
-        textExtractor = new TextExtractorInterface();
+        metaData = new MetaDataInterface(token);
+        audio = new AudioConverterInterface(token);
+        textExtractor = new TextExtractorInterface(token);
         JTabbedPane mainTabPanel = new JTabbedPane();
         mainTabPanel.setFont(new Font("Barlow", fontStyle, fontSize));
-        mainTabPanel.add("Compiler", compilerJP);
+        mainTabPanel.add("Compiler", compilerJPanel);
         mainTabPanel.add("Video Converter", video);
         mainTabPanel.add("Audio Converter", audio);
         mainTabPanel.add("Meta Data", metaData);
@@ -73,5 +66,4 @@ public class MainInterface extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
-
 }

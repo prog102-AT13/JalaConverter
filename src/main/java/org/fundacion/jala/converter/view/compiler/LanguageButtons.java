@@ -31,9 +31,6 @@ class LanguageButtons extends JPanel {
     private final int fontStyle = 0;
     private final int fontSize = 11;
 
-    /**
-     * Initializes the graphics elements for language buttons.
-     */
     protected LanguageButtons() {
         setPreferredSize(new Dimension(preferredSizeWidth, preferredSizeHeight));
         cPlusPlus = new JButton("C++");

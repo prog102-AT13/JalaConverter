@@ -5,6 +5,8 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Raymundo Guaraguara Sansusty
  */
 package org.fundacion.jala.converter.service;
 
@@ -16,9 +18,15 @@ import java.util.ArrayList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+/**
+ * This class zips a file or group of files.
+ */
 public class ZipService {
+    private static final int BYTES = 1024;
+
     /**
-     * Makes the process for zipping a file
+     * Makes the process for zipping a file.
+     *
      * @param filePath the file's direction
      * @param zipOutputStream an output stream filter to write the zip file
      * @throws IOException when invalid path is given
@@ -28,7 +36,7 @@ public class ZipService {
         FileInputStream fileInputStream = new FileInputStream(file);
         ZipEntry zipEntry = new ZipEntry(file.getName());
         zipOutputStream.putNextEntry(zipEntry);
-        byte[] bytes = new byte[1024];
+        byte[] bytes = new byte[BYTES];
         int length;
         while ((length = fileInputStream.read(bytes)) >= 0) {
             zipOutputStream.write(bytes, 0, length);
@@ -37,7 +45,8 @@ public class ZipService {
     }
 
     /**
-     * Creates a zip file of a file
+     * Creates a zip file of a file.
+     *
      * @param filePath the file's direction
      * @param outputPath the destination's direction
      * @throws IOException when invalid path is given
@@ -51,7 +60,8 @@ public class ZipService {
     }
 
     /**
-     * Creates a zip file of a group of files
+     * Creates a zip file of a group of files.
+     *
      * @param filesPaths an arraylist with the files paths
      * @param outputPath the destination's direction
      * @throws IOException when invalid path is given

@@ -14,10 +14,11 @@ package org.fundacion.jala.converter.models.facade;
 import org.fundacion.jala.converter.models.parameter.JavaParameter;
 import org.fundacion.jala.converter.models.parameter.PythonParameter;
 import org.fundacion.jala.converter.service.javacompiler.JavaCompiler;
-import org.fundacion.jala.converter.service.javacompiler.JavaVersion;
 import org.fundacion.jala.converter.service.PythonCompiler;
-import org.fundacion.jala.converter.models.parameter.PythonEnum;
 
+/**
+ * Class to do and call facade of compiler.
+ */
 public class CompilerFacade {
 
     private static String result;
@@ -28,27 +29,26 @@ public class CompilerFacade {
     }
 
     /**
-     * The method to convert Audio.
+     * Compiles a Java project.
      *
      * @param javaParameter the version to be used in the compiler.
      * @return a string of the result on runtime console.
      */
-    public static String facadeJavaCompile(JavaParameter javaParameter) {
+    public static String facadeJavaCompile(final JavaParameter javaParameter) {
         javaCompiler = new JavaCompiler();
         result = javaCompiler.javaCompiler(javaParameter);
         return result;
     }
 
     /**
-     * The method to convert Audio.
+     * Compiles a Python project.
      *
      * @param pythonParameter the version to be used in the compiler.
      * @return a string of the result on runtime console.
      */
-    public static String facadePythonCompile(PythonParameter pythonParameter) {
+    public static String facadePythonCompile(final PythonParameter pythonParameter) {
         pythonCompiler = new PythonCompiler();
         result = pythonCompiler.compiler(pythonParameter);
         return result;
     }
-
 }

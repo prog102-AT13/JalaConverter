@@ -10,22 +10,25 @@
  */
 package org.fundacion.jala.converter.exceptions;
 
-public class CompilerException extends PaoPaoException{
-    private final static String DEFAULT_MESSAGE = "Compile Error";
+/**
+ * This class creates the compiler's exceptions.
+ */
+public class CompilerException extends PaoPaoException {
+    private static final String DEFAULT_MESSAGE = "Compile Error";
 
     public CompilerException() {
         super(DEFAULT_MESSAGE);
     }
 
-    public CompilerException(String message) {
+    public CompilerException(final String message) {
         super(message);
     }
 
-    public CompilerException(Throwable exception) {
+    public CompilerException(final Throwable exception) {
         super(DEFAULT_MESSAGE, exception);
     }
 
-    public CompilerException(String message, Throwable exception) {
+    public CompilerException(final String message, final Throwable exception) {
         super(message, exception);
     }
 }

@@ -1,11 +1,13 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
+ *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Paola Aguilar Quiñones
  */
-
 package org.fundacion.jala.converter.view.converter;
 
 import org.apache.logging.log4j.LogManager;
@@ -26,6 +28,9 @@ import java.security.NoSuchAlgorithmException;
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;
 
+/**
+ * This class creates the video converter's UI.
+ */
 public class VideoConverterInterface extends JPanel implements ActionListener {
     private SelectFile file;
     private ConverterTypeSelect menuConverterType;
@@ -41,12 +46,15 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
     private final int rightBorder = 70;
     private final int fontStyle = 0;
     private final int fontSize = 12;
+    private String token;
     private String checksumLocal;
 
     /**
      * Sets all the graphics elements for the main interface of Video Converter.
+     * @param newToken a String with authentication token
      */
-    public VideoConverterInterface() {
+    public VideoConverterInterface(final String newToken) {
+        token = newToken;
         JLabelStyle videoTitle = new JLabelStyle("Select Video:", "h2",
                 alignLabelStyle, widthLabelStyle, heightLabelStyle);
         videoTitle.setAlignmentX(LEFT_ALIGNMENT);
@@ -128,9 +136,10 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
             videoRequestForm.addResolution(settings.getWidthResolution());
             videoRequestForm.addChecksum(checksumLocal);
             videoRequestForm.addMetadata(String.valueOf(settings.isMetadataRequired()));
-            String result = clientRequest.executeRequest(videoRequestForm);
+            String result = clientRequest.executeRequest(videoRequestForm, token);
             clientRequest.downloadFile(result);
-            JOptionPane.showMessageDialog(this, "Download in :\n" + System.getProperty("user.home") + dotenv.get("DIR_DOWNLOAD"));
+            JOptionPane.showMessageDialog(this, "Download in :\n"
+                    + System.getProperty("user.home") + dotenv.get("DIR_DOWNLOAD"));
             System.getProperty("file.separator");
             System.out.println(result);
             LOGGER.info("finish");

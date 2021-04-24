@@ -28,22 +28,22 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import static org.fundacion.jala.converter.models.UserSQL.findUserById;
 
 /**
- * This class customizes interface of compiler.
+ * This class creates the compiler's UI.
  */
 public class CompilerInterface extends JPanel {
     private static final Logger LOGGER = LogManager.getLogger();
+    private final String PYTHON_URL = "http://localhost:8080/api/compilePython";
+    private final String JAVA_URL = "http://localhost:8080/api/compileJava";
     private CodeTextArea codeArea;
     private Console consoleOutput;
     private LanguageButtons langButtons;
     private CompilerButtons buttonsCompiler;
+    private String token;
 
-    /**
-     * Initializes the graphics elements of the Main Compiler Interface.
-     */
-    public CompilerInterface() {
+    public CompilerInterface(final String newToken) {
+        token = newToken;
         buttonsCompiler = new CompilerButtons();
         consoleOutput = new Console();
         langButtons = new LanguageButtons();
@@ -92,11 +92,10 @@ public class CompilerInterface extends JPanel {
                 LOGGER.info("start");
                 String url = "";
                 if (!langButtons.getPython().isEnabled()) {
-                    url = "http://localhost:8080/api/compilePython";
+                    url = PYTHON_URL;
                 }
                 if (!langButtons.getJava().isEnabled()) {
-                    url = "http://localhost:8080/api/compileJava";
-
+                    url = JAVA_URL;
                 }
                 HttpPost httpPost = new HttpPost(url);
                 String code1 = projectTab.getSelectedPane().getText();
@@ -108,7 +107,7 @@ public class CompilerInterface extends JPanel {
                 try {
                     LOGGER.info("Execute Try");
                     httpPost.setEntity(multipart);
-                    httpPost.setHeader("Authorization", "Bearer " + findUserById(1).getToken());
+                    httpPost.setHeader("Authorization", "Bearer " + token);
                     CloseableHttpClient httpClient = HttpClients.createDefault();
                     CloseableHttpResponse response = httpClient.execute(httpPost);
                     HttpEntity responseEntity = response.getEntity();
