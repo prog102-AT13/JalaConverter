@@ -65,7 +65,7 @@ public class JwtUtil {
      * Gets all the claims from a token.
      *
      * @param token a string with the token.
-     * @return Claims object with the claims.
+     * @return a Claims object with the claims.
      */
     private Claims extractAllClaims(final String token) {
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();

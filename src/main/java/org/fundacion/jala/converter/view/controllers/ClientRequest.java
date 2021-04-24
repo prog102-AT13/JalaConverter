@@ -121,8 +121,8 @@ public class ClientRequest {
     /**
      * Retrieves a  token from the endpoint from a username and password.
      *
-     * @throws IOException when introduced an invalid path
-     * @return a String with the token
+     * @throws IOException when introduced an invalid path.
+     * @return a String with the token.
      */
     public String authGetToken() throws IOException {
         String sURL = AUTHENTICATE_URL;
@@ -142,8 +142,8 @@ public class ClientRequest {
     /**
      * Adds text field to http request.
      *
-     * @param key String with the key
-     * @param value String with the value
+     * @param key String with the key.
+     * @param value String with the value.
      */
     public void addTextBody(final String key, final String value) {
         builder.addTextBody(key, value, ContentType.TEXT_PLAIN);
@@ -152,8 +152,8 @@ public class ClientRequest {
     /**
      * Adds file field to http request.
      *
-     * @param key String with the key
-     * @param filePath String with the value
+     * @param key String with the key.
+     * @param filePath String with the value.
      */
     public void addFileBody(final String key, final String filePath) {
         LOGGER.info("Start");
@@ -178,7 +178,7 @@ public class ClientRequest {
     /**
      * Adds a body field with the parameter's information.
      *
-     * @param parameter Parameter object to be added
+     * @param parameter Parameter object to be added.
      */
     public void addBodyField(final Parameter parameter) {
         if (!parameter.isFile()) {
@@ -191,7 +191,7 @@ public class ClientRequest {
     /**
      * Downloads a File by url.
      *
-     * @param url with url to form the download path
+     * @param url with url to form the download path.
      */
     public void downloadFile(final String url) {
         String nameFile = url.substring(url.lastIndexOf("/") + 1);
@@ -208,10 +208,10 @@ public class ClientRequest {
     /**
      * Downloads a File by URL.
      *
-     * @param fileName name of file
-     * @param fileUrl complete url of the file
-     * @throws MalformedURLException when the path is not formed correctly
-     * @throws IOException when introduced an invalid path
+     * @param fileName name of file.
+     * @param fileUrl complete url of the file.
+     * @throws MalformedURLException when the path is not formed correctly.
+     * @throws IOException when introduced an invalid path.
      */
     public static void saveFileFromUrlWithJavaIO(final String fileName, final String fileUrl)
             throws MalformedURLException, IOException {
