@@ -5,9 +5,14 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Gustavo Huanca Alconz
  */
 package org.fundacion.jala.converter.service.metadata;
 
+/**
+ * This enum defines possibles extensions to be exported.
+ */
 public enum TypeFileExport {
     TXT,
     HTML,

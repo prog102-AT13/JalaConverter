@@ -5,12 +5,12 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Paola Ximena Aguilar Quiñonez
  */
-
 package org.fundacion.jala.converter.view.metadata;
 
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-
 import javax.swing.JPanel;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
@@ -19,6 +19,9 @@ import java.awt.Font;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
+/**
+ * This class is for the metadata exporting format UI.
+ */
 class ExportingFormat extends JPanel {
     private JComboBox convertTo;
     private JCheckBox checkMoreInfo;
@@ -42,9 +45,13 @@ class ExportingFormat extends JPanel {
      */
     protected ExportingFormat() {
         JLabelStyle formatTitle = new JLabelStyle("Exporting Format", "h2",
-                alignLabelStyle, widthLabelStyle, heightLabelStyle);
+                alignLabelStyle,
+                widthLabelStyle,
+                heightLabelStyle);
         JLabelStyle outPutTitle = new JLabelStyle("Output Information", "h2",
-                alignLabelStyle, widthLabelStyle, heightLabelStyle);
+                alignLabelStyle,
+                widthLabelStyle,
+                heightLabelStyle);
         convertTo = new JComboBox();
         convertTo.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
         convertTo.setFont(new Font("Barlow", fontStyle, fontSize));

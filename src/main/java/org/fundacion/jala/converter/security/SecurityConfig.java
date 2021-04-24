@@ -39,8 +39,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * Enables memory based authentication.
      *
-     * @param auth Authentication manager specified
-     * @throws Exception when not found
+     * @param auth Authentication manager specified.
+     * @throws Exception when not found.
      */
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
@@ -50,8 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * Disables security on /authenticate and set a filter to the jwtRequest.
      *
-     * @param http to configure web based security
-     * @throws Exception when not found
+     * @param http to configure web based security.
+     * @throws Exception when not found.
      */
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
@@ -66,8 +66,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * Makes the configuration ignore security on swagger endpoints.
      *
-     * @param web to create a filter chain
-     * @throws Exception when not found
+     * @param web to create a filter chain.
+     * @throws Exception when not found.
      */
     @Override
     public void configure(final WebSecurity web) throws Exception {
@@ -79,8 +79,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * Exposes AuthenticationManager as a Bean.
      *
-     * @return AuthenticationManager
-     * @throws Exception when not found
+     * @return AuthenticationManager.
+     * @throws Exception when not found.
      */
     @Override
     @Bean
@@ -91,7 +91,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * Encodes the password.
      *
-     * @return password encoded with BCrypt
+     * @return password encoded with BCrypt.
      */
     @Bean
     public PasswordEncoder encoder() {
