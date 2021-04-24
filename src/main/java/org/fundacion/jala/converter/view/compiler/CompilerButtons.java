@@ -25,18 +25,18 @@ class CompilerButtons extends JPanel implements ActionListener {
     private JButton runCode;
     private JButton clearConsole;
     private JButton selectFile;
-    private final int dimensionWidth = 80;
-    private final int dimensionHeight = 20;
-    private final int fontStyle = 0;
-    private final int fontSize = 11;
-    private final int hgap = 15;
-    private final int vgap = 15;
+    private final int DIMENSION_WIDTH = 80;
+    private final int DIMENSION_HEIGHT = 20;
+    private final int FONT_STYLE = 0;
+    private final int FONT_SIZE = 11;
+    private final int HGAP = 15;
+    private final int VGAP = 15;
 
     protected CompilerButtons() {
         runCode = makeButton("Run");
         clearConsole = makeButton("Clear");
         selectFile = makeButton("Open File");
-        setLayout(new FlowLayout(FlowLayout.RIGHT, hgap, vgap));
+        setLayout(new FlowLayout(FlowLayout.RIGHT, HGAP, VGAP));
         add(selectFile);
         add(runCode);
         add(clearConsole);
@@ -65,8 +65,8 @@ class CompilerButtons extends JPanel implements ActionListener {
      */
     public JButton makeButton(final String text) {
         JButton button = new JButton(text);
-        button.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
-        button.setFont(new Font("Barlow", fontStyle, fontSize));
+        button.setPreferredSize(new Dimension(DIMENSION_WIDTH, DIMENSION_HEIGHT));
+        button.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
         return button;
     }
 }
