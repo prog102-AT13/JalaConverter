@@ -32,9 +32,6 @@ public class ConvertTypeSelectAudio extends JPanel {
     private final int flowLayoutHgap = 10;
     private final int flowLayoutVgap = 10;
 
-    /**
-     * Initializes the graphic elements for SelectCombobox for convert type.
-     */
     protected ConvertTypeSelectAudio() {
         JLabelStyle labelConvertTo = new JLabelStyle("Convert to: ", "h3",
                 alignLabelStyle, widthLabelStyle, heightLabelStyle);
