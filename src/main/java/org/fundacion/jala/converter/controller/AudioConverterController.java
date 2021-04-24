@@ -12,10 +12,7 @@ package org.fundacion.jala.converter.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.fundacion.jala.converter.models.facade.ChecksumFacade;
-import org.fundacion.jala.converter.models.facade.ConverterFacade;
-import org.fundacion.jala.converter.models.facade.ParameterOutputChecksum;
-import org.fundacion.jala.converter.models.facade.ZipFileFacade;
+import org.fundacion.jala.converter.models.facade.*;
 import org.fundacion.jala.converter.models.parameter.AudioParameter;
 import org.fundacion.jala.converter.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,9 +65,6 @@ public class AudioConverterController {
                         audioChannel));
         extractMetadata(metadata, outputFilename, fileStorageService);
         ZipFileFacade.getZipFileAudio(parameterOutputChecksum, metadata, outputFilename);
-        String nameWithoutExtension = outputFilename.substring(0, outputFilename.lastIndexOf(".") + 1);
-        final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-        String downloadLink = baseUrl + "/api/download/" + nameWithoutExtension + "zip";
-        return downloadLink;
+        return DownloadLinkFacade.getLink(outputFilename);
     }
 }

@@ -27,9 +27,9 @@ public class ExtractFacade {
     }
 
     /**
-     * The method to extract text from image
+     * Extracts text from image.
      *
-     * @param extractTextParameter is a object with parameter of extractText to convert
+     * @param extractTextParameter is a object with parameter of extractText to convert.
      */
     public static void getTextExtract(ExtractTextParameter extractTextParameter) {
         ExtractText extractText = new ExtractText(extractTextParameter);
@@ -37,13 +37,15 @@ public class ExtractFacade {
     }
 
     /**
-     * The method to extract metadata from file
+     * Extracts metadata from file.
      *
      * @param file is the path of file to extract metadata.
-     * @param isMoreInfo is get more info of file
-     * @param nameExport  is the name of file where metadata are extracted
-     * @param format is the format of file where metadata are extracted
-     * @return string with name of file which contains metadata
+     * @param isMoreInfo is get more info of file.
+     * @param nameExport  is the name of file where metadata are extracted.
+     * @param format is the format of file where metadata are extracted.
+     * @return string with name of file which contains metadata.
+     * @throws IOException is exception when invalid path.
+     * @throws IllegalArgumentException is exception when string not correspond enum.
      */
     public static String getMetadataExtract(final MultipartFile file, final Boolean isMoreInfo,
                                             final String nameExport, final String format) throws IOException, IllegalArgumentException{
