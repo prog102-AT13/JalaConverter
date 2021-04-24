@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import java.io.IOException;
 import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetadata;
 
@@ -65,7 +65,7 @@ public class AudioConverterController {
                         audioChannel));
         extractMetadata(metadata, outputFilename, fileStorageService);
         ZipFileFacade.getZipFileAudio(parameterOutputChecksum, metadata, outputFilename);
-        return DownloadLinkFacade.getLink(outputFilename);
+        return DownloadLinkFacade.getLinkConverter(outputFilename);
     }
 }
 

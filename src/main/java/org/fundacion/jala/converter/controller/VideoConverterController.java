@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import java.io.IOException;
 import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetadata;
 
@@ -68,7 +68,7 @@ public class VideoConverterController {
                         frameRate, width, height, audio));
         extractMetadata(metadata, outputFilename, fileStorageService);
         ZipFileFacade.getZipFileVideo(parameterOutputChecksum, metadata, thumbnail, outputFilename);
-        return DownloadLinkFacade.getLink(outputFilename);
+        return DownloadLinkFacade.getLinkConverter(outputFilename);
     }
 }
 
