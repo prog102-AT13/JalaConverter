@@ -16,13 +16,18 @@ import java.util.List;
 
 public class CompileRequestForm implements IRequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
-    private final String url = "http://localhost:8080/api/compilePython";
+    private final String url;
     private final String code = "code";
 
-    /**
-     * Project Request Form stores parameters for an project request
-     */
-    public CompileRequestForm() {
+    public CompileRequestForm(final int choose) {
+        switch (choose) {
+            case 1:
+                url = "http://localhost:8080/api/compileJava";
+                break;
+            default:
+                url = "http://localhost:8080/api/compilePython";
+                break;
+        }
     }
 
     /**
