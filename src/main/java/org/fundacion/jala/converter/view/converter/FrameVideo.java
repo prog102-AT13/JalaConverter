@@ -22,7 +22,7 @@ public class FrameVideo {
     /**
      * Gets frame select of video.
      *
-     * @return a String with teh name of frame.
+     * @return a String with the name of frame.
      */
     public String getName() {
         return name;

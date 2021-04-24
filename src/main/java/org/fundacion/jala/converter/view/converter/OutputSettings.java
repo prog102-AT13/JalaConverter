@@ -122,7 +122,7 @@ class OutputSettings extends JPanel {
     /**
      * Gets the selected frame for video converter.
      *
-     * @return a String option selected of Frame.
+     * @return a String with the option selected of Frame.
      */
     protected String getFrame() {
         FrameVideo frameVideo = (FrameVideo) framesSelect.getSelectedItem();
