@@ -44,7 +44,7 @@ public class AuthController {
     private JwtUtil jwtTokenUtil;
 
     /**
-     * Create an authentication response with the token.
+     * Creates an authentication response with the token.
      *
      * @param username a String with the username.
      * @param password a String with the password.

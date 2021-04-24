@@ -5,6 +5,8 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Saul Caspa Miranda
  */
 package org.fundacion.jala.converter.controller;
 
@@ -18,6 +20,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * This class calls endpoint to download controller.
+ */
 @RestController
 @RequestMapping("/api")
 public class DownloadController {
@@ -25,7 +30,7 @@ public class DownloadController {
     private FileStorageService fileStorageService;
 
     /**
-     * Endpoint for download controller
+     * Creates endpoint to download controller.
      */
     @GetMapping("/download/{fileName}")
     ResponseEntity<Resource> downloadFile(final @PathVariable String fileName) {

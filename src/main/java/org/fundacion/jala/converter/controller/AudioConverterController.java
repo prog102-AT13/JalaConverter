@@ -29,7 +29,7 @@ import java.io.IOException;
 import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetadata;
 
 /**
- * This method calls endpoint of the audio.
+ * This class calls endpoint of the audio.
  */
 @RestController
 @RequestMapping("/api")
