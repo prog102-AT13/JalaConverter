@@ -27,16 +27,49 @@ import java.util.Collections;
 @Configuration
 public class SwaggerConfig {
     /**
-     * Creates a Docket.
+     * Creates the API Docket.
      *
      * @return a Docket with Swagger configuration
      */
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("API")
                 .securitySchemes(Arrays.asList(apiKey()))
                 .select()
                 .paths(PathSelectors.ant("/api/*"))
+                .apis(RequestHandlerSelectors.basePackage("org.fundacion.jala.converter"))
+                .build()
+                .apiInfo(apiDetails());
+    }
+
+    /**
+     * Creates the authentication Docket.
+     *
+     * @return a Docket with Swagger configuration
+     */
+    @Bean
+    public Docket apiAuthentication() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("AUTHENTICATION")
+                .select()
+                .paths(PathSelectors.ant("/authenticate"))
+                .apis(RequestHandlerSelectors.basePackage("org.fundacion.jala.converter"))
+                .build()
+                .apiInfo(apiDetails());
+    }
+
+    /**
+     * Creates the registration Docket.
+     *
+     * @return a Docket with Swagger configuration
+     */
+    @Bean
+    public Docket apiRegistration() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("REGISTRATION")
+                .select()
+                .paths(PathSelectors.ant("/register"))
                 .apis(RequestHandlerSelectors.basePackage("org.fundacion.jala.converter"))
                 .build()
                 .apiInfo(apiDetails());
@@ -66,6 +99,11 @@ public class SwaggerConfig {
                 Collections.emptyList());
     }
 
+    /**
+     * Creates an API key.
+     *
+     * @return the API key.
+     */
     private ApiKey apiKey() {
         return new ApiKey("JWT", "Authorization", "header");
     }

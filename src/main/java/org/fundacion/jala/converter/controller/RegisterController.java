@@ -11,6 +11,10 @@
 package org.fundacion.jala.converter.controller;
 
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.Authorization;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.ApiResponse;
 import org.fundacion.jala.converter.models.UserSQL;
 import org.fundacion.jala.converter.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +29,6 @@ import static org.fundacion.jala.converter.models.UserSQL.usernameExists;
  * This class registers a user in the database.
  */
 @RestController
-@RequestMapping("/api")
 public class RegisterController {
     @Autowired
     private MyUserDetailsService myUserDetailsService;
@@ -38,9 +41,16 @@ public class RegisterController {
      * @return an entity response with the user
      */
     @PostMapping("/register")
-    @ApiOperation(value = "Inserts users to the database", notes = "Provide username and password to register")
-    public ResponseEntity<?> insertUser(final @RequestParam("username") String username,
-                                        final @RequestParam("password") String password) throws Exception {
+    @ApiOperation(value = "Inserts users to the database", notes = "Provide username and password to register",
+            authorizations = {@Authorization(value = "JWT")})
+    @ApiResponses({@ApiResponse(code = 200, message = "Success"),
+            @ApiResponse(code = 403, message = "Forbidden"),
+            @ApiResponse(code = 404, message = "Not found"),
+            @ApiResponse(code = 500, message = "Internal server error")})
+    public ResponseEntity<?> insertUser(final @ApiParam(value = "Introduce the username", required = true)
+                                            @RequestParam("username") String username,
+                                        final @ApiParam(value = "Introduce the password", required = true)
+                                        @RequestParam("password") String password) throws Exception {
         if (usernameExists(username) || username.trim().isEmpty()) {
             throw new Exception("Invalid Username");
         }

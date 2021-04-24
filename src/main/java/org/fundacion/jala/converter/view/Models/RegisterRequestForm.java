@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class RegisterRequestForm implements IRequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
-    private final String URL = "http://localhost:8080/api/register";
+    private final String URL = "http://localhost:8080/register";
     private final String USERNAME = "username";
     private final String PASSWORD = "password";
 
