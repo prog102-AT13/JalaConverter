@@ -56,9 +56,9 @@ public class FrameVideo {
     }
 
     /**
-     * Gets the selected String form the comboBox
+     * Gets the selected String form the comboBox.
      *
-     * @return a String with the displayed value on the comboBox
+     * @return a String with the displayed value on the comboBox.
      */
     @Override
     public String toString() {
