@@ -102,7 +102,7 @@ public class JLabelStyle extends JLabel {
     }
 
     /**
-     * Return the text, formatted with the Style.
+     * Returns the text, formatted with the Style.
      *
      * @return a JLabel formatted.
      */

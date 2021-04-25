@@ -11,7 +11,7 @@
 package org.fundacion.jala.converter.view.Models;
 
 /**
- * This class define the parameter object.
+ * This class defines the parameter object.
  */
 public class Parameter {
     private String key;

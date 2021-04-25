@@ -41,7 +41,7 @@ public class MainInterface extends JFrame {
     private String token;
 
     /**
-     * Initializes all the graphics components in the main Frame.
+     * Initializes all the graphic components in the main Frame.
      *
      * @param newToken String with the user's token.
      */

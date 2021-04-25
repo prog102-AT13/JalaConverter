@@ -15,7 +15,6 @@ import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.view.Models.ExtractTextRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;

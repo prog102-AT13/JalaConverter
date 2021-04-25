@@ -30,7 +30,7 @@ public class ExtractTextRequestForm implements IRequestForm {
     /**
      * Adds filepath parameter.
      *
-     * @param filepathValue Sting with the file's path.
+     * @param filepathValue String with the file's path.
      */
     public void addFilepath(final String filepathValue) {
         addParameters(new Parameter(FILE, filepathValue, true));
