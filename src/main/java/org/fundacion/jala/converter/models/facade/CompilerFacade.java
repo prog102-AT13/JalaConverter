@@ -19,29 +19,31 @@ import org.fundacion.jala.converter.models.parameter.PythonEnum;
 import org.fundacion.jala.converter.models.parameter.PythonParameter;
 import org.fundacion.jala.converter.service.javacompiler.JavaCompiler;
 import org.fundacion.jala.converter.service.PythonCompiler;
+import org.fundacion.jala.converter.service.javacompiler.JavaVersion;
 
 /**
  * Class to do and call facade of compiler.
  */
 public class CompilerFacade {
 
-    private static String result;
     private static JavaCompiler javaCompiler;
     private static PythonCompiler pythonCompiler;
-    private static final Logger LOGGER = LogManager.getLogger();
     public CompilerFacade() {
     }
 
     /**
      * Compiles a Java project.
      *
-     * @param javaParameter the version to be used in the compiler.
+     * @param code is string with code in jva.
      * @return a string of the result on runtime console.
      */
-    public static String facadeJavaCompile(final JavaParameter javaParameter) {
-        javaCompiler = new JavaCompiler();
-        result = javaCompiler.javaCompiler(javaParameter);
-        return result;
+    public static String facadeJavaCompile(final String code) {
+        if (!code.isBlank() || !code.equals(null)) {
+            javaCompiler = new JavaCompiler();
+            String filePath = Transform.toFile(code, "Main", "java");
+            return javaCompiler.javaCompiler(new JavaParameter(JavaVersion.JAVA_11, filePath));
+        }
+        return "";
     }
 
     /**
@@ -52,13 +54,10 @@ public class CompilerFacade {
      */
     public static String facadePythonCompile(final String code) {
         if (!code.isBlank() || !code.equals(null)) {
-            PythonCompiler pythonCompiler = new PythonCompiler();
+            pythonCompiler=new PythonCompiler();
             String filePath = Transform.toFile(code, "filetocompile", "py");
-            result = pythonCompiler.compiler(new PythonParameter(filePath, PythonEnum.V3));
-            return result;
+            return pythonCompiler.compiler(new PythonParameter(filePath, PythonEnum.V3));
         }
-        return "DON'T HAVE CODE";
-
-
+        return "";
     }
 }

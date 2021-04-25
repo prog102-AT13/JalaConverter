@@ -39,13 +39,7 @@ public class JavaCompilerController {
      * @throws IOException when invalid input is provided.
      */
     @PostMapping("/compileJava")
-    public String compileJava(final @RequestParam("code") String code) throws IllegalStateException, IOException {
-        LOGGER.info("start");
-        if (!code.isBlank() || !code.equals(null)) {
-            String filePath = Transform.toFile(code, "Main", "java");
-            LOGGER.info("finish");
-            return CompilerFacade.facadeJavaCompile(new JavaParameter(JavaVersion.JAVA_11, filePath));
-        }
-        return "";
+    public String compileJava(final @RequestParam("code") String code) throws IllegalStateException {
+        return CompilerFacade.facadeJavaCompile(code);
     }
 }
