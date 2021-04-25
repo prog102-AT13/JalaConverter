@@ -26,8 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class DownloadController {
-    @Autowired
-    private FileStorageService fileStorageService;
+    private FileStorageService fileStorageService = new FileStorageService();
 
     /**
      * Creates endpoint to download controller.

@@ -12,9 +12,6 @@
 
 package org.fundacion.jala.converter.core.parameter;
 
-import org.springframework.stereotype.Service;
-
-@Service
 public class Parameter {
     private String filePath;
 

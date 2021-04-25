@@ -11,9 +11,6 @@
  */
 package org.fundacion.jala.converter.core.parameter;
 
-import org.springframework.stereotype.Service;
-
-@Service
 public class ExtractTextParameter extends Parameter {
     private String language;
     private String resultFile;

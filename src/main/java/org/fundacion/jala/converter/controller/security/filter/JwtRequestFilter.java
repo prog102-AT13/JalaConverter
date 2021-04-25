@@ -11,7 +11,7 @@
 package org.fundacion.jala.converter.controller.security.filter;
 
 import org.fundacion.jala.converter.controller.security.util.JwtUtil;
-import org.fundacion.jala.converter.core.MyUserDetailsService;
+import org.fundacion.jala.converter.controller.security.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

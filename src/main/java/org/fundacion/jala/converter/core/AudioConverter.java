@@ -15,9 +15,7 @@ package org.fundacion.jala.converter.core;
 
 import org.fundacion.jala.converter.core.parameter.AudioParameter;
 import org.fundacion.jala.converter.core.results.Result;
-import org.springframework.stereotype.Service;
 
-@Service
 public final class AudioConverter {
     private AudioParameter parameter;
     private String outputFileName = "";

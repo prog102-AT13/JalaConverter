@@ -11,9 +11,6 @@
  */
 package org.fundacion.jala.converter.core.parameter;
 
-import org.springframework.stereotype.Service;
-
-@Service
 public class VideoParameter extends Parameter {
     private String outputFormat;
     private String resolution;

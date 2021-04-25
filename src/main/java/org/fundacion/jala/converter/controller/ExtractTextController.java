@@ -31,9 +31,7 @@ import java.io.IOException;
 @RequestMapping("/api")
 public class ExtractTextController {
     private static final Logger LOGGER = LogManager.getLogger();
-
-    @Autowired
-    private FileStorageService fileStorageService;
+    private FileStorageService fileStorageService = new FileStorageService();
 
     /**
      * Creates endpoint to extract text.

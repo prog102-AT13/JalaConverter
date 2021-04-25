@@ -8,7 +8,7 @@
  *
  * @author Raymundo Guaraguara Sansusty
  */
-package org.fundacion.jala.converter.core;
+package org.fundacion.jala.converter.controller.security;
 
 import org.fundacion.jala.converter.models.AuthenticationRequest;
 import org.springframework.security.core.userdetails.User;
@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import static org.fundacion.jala.converter.models.UserSQL.findUserById;
 import static org.fundacion.jala.converter.models.UserSQL.getUserId;

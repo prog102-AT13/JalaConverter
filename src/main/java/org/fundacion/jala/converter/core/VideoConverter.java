@@ -14,11 +14,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.core.parameter.VideoParameter;
 import org.fundacion.jala.converter.core.results.Result;
-import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
-@Service
 public class VideoConverter {
     private String startFirstCommand = "ffmpeg -i ";
     private VideoParameter parameter;

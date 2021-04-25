@@ -15,7 +15,7 @@ import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.models.AuthenticationRequest;
 import org.fundacion.jala.converter.models.AuthenticationResponse;
 import org.fundacion.jala.converter.controller.security.util.JwtUtil;
-import org.fundacion.jala.converter.core.MyUserDetailsService;
+import org.fundacion.jala.converter.controller.security.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

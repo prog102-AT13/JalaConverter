@@ -36,9 +36,7 @@ import static org.fundacion.jala.converter.core.ExtractMetadata.extractMetadata;
 public class AudioConverterController {
     private static final Logger LOGGER = LogManager.getLogger();
     private ParameterOutputChecksum paramChecksum;
-
-    @Autowired
-    private FileStorageService fileStorageService;
+    private FileStorageService fileStorageService = new FileStorageService();
 
     /**
      * Calls endpoint to audio converter.

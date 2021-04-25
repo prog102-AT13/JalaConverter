@@ -10,7 +10,7 @@
  */
 package org.fundacion.jala.converter.controller;
 
-import org.fundacion.jala.converter.core.MyUserDetailsService;
+import org.fundacion.jala.converter.controller.security.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

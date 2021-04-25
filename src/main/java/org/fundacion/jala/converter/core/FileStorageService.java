@@ -10,16 +10,13 @@ package org.fundacion.jala.converter.core;
 
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
-import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-@Service
 public class FileStorageService {
     public static final String PATH = System.getProperty("user.dir");
     public static final String ARCHIVE = "archive";

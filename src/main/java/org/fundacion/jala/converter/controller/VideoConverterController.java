@@ -18,7 +18,6 @@ import org.fundacion.jala.converter.core.facade.ParameterOutputChecksum;
 import org.fundacion.jala.converter.core.facade.ZipFileFacade;
 import org.fundacion.jala.converter.core.FileStorageService;
 import org.fundacion.jala.converter.core.parameter.VideoParameter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,9 +35,7 @@ import static org.fundacion.jala.converter.core.ExtractMetadata.extractMetadata;
 public class VideoConverterController {
     private static final Logger LOGGER = LogManager.getLogger();
     private ParameterOutputChecksum paramChecksum;
-
-    @Autowired
-    private FileStorageService fileStorageService;
+    private FileStorageService fileStorageService = new FileStorageService();
 
     /**
      * Calls endpoint to convertVideo.
