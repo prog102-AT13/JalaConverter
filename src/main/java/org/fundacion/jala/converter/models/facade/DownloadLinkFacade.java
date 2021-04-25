@@ -16,17 +16,20 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
  * Class to do link to download.
  */
 public class DownloadLinkFacade {
-    private DownloadLinkFacade(){}
+    private DownloadLinkFacade() {
+    }
+
     private static String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
+
     /**
      *  Generator link to download to convert.
      *
      * @param outputFilename is path of file which are converted.
      * @return path which permit download the result process.
      */
-    public static String getLinkConverter(final String outputFilename){
+    public static String getLinkConverter(final String outputFilename) {
         String nameWithoutExtension = outputFilename.substring(0, outputFilename.lastIndexOf(".") + 1);
-        return  baseUrl + "/api/download/" + nameWithoutExtension + "zip";
+        return baseUrl + "/api/download/" + nameWithoutExtension + "zip";
     }
 
     /**
@@ -35,7 +38,7 @@ public class DownloadLinkFacade {
      * @param outputFileName is path of file which are extracted text.
      * @return path which permit download the result process.
      */
-    public static String getLinkExtractText(final String outputFileName){
+    public static String getLinkExtractText(final String outputFileName) {
         return baseUrl + "/api/download/" + outputFileName + ".txt";
     }
 
@@ -45,7 +48,7 @@ public class DownloadLinkFacade {
      * @param format is format which the result process do.
      * @return path which permit download the result process.
      */
-    public static String getLinkMetadata(final String filename, final String format){
+    public static String getLinkMetadata(final String filename, final String format) {
         return baseUrl + "/api/download/" + filename + "." + format;
     }
 }

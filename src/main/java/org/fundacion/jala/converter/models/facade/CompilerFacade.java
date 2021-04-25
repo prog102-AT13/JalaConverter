@@ -11,7 +11,11 @@
  */
 package org.fundacion.jala.converter.models.facade;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.controller.Transform;
 import org.fundacion.jala.converter.models.parameter.JavaParameter;
+import org.fundacion.jala.converter.models.parameter.PythonEnum;
 import org.fundacion.jala.converter.models.parameter.PythonParameter;
 import org.fundacion.jala.converter.service.javacompiler.JavaCompiler;
 import org.fundacion.jala.converter.service.PythonCompiler;
@@ -24,7 +28,7 @@ public class CompilerFacade {
     private static String result;
     private static JavaCompiler javaCompiler;
     private static PythonCompiler pythonCompiler;
-
+    private static final Logger LOGGER = LogManager.getLogger();
     public CompilerFacade() {
     }
 
@@ -43,12 +47,18 @@ public class CompilerFacade {
     /**
      * Compiles a Python project.
      *
-     * @param pythonParameter the version to be used in the compiler.
+     * @param code is string with code in Python.
      * @return a string of the result on runtime console.
      */
-    public static String facadePythonCompile(final PythonParameter pythonParameter) {
-        pythonCompiler = new PythonCompiler();
-        result = pythonCompiler.compiler(pythonParameter);
-        return result;
+    public static String facadePythonCompile(final String code) {
+        if (!code.isBlank() || !code.equals(null)) {
+            PythonCompiler pythonCompiler = new PythonCompiler();
+            String filePath = Transform.toFile(code, "filetocompile", "py");
+            result = pythonCompiler.compiler(new PythonParameter(filePath, PythonEnum.V3));
+            return result;
+        }
+        return "DON'T HAVE CODE";
+
+
     }
 }
