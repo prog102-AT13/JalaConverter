@@ -35,7 +35,7 @@ import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetada
 @RequestMapping("/api")
 public class VideoConverterController {
     private static final Logger LOGGER = LogManager.getLogger();
-    private ParameterOutputChecksum parameterOutputChecksum;
+    private ParameterOutputChecksum paramChecksum;
 
     @Autowired
     private FileStorageService fileStorageService;
@@ -68,13 +68,13 @@ public class VideoConverterController {
                              final @RequestParam("audio") boolean audio,
                              final @RequestParam("checksum") String checksum,
                              final @RequestParam("metadata") String metadata) throws IOException, InterruptedException {
-        parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
-        VideoParameter videoParameter;
-        videoParameter = new VideoParameter(parameterOutputChecksum.getOutputFilename(), outputFormat, resolution, thumbnail,
-                frameRate, width, height, audio);
-        String outputFilename = ConverterFacade.getVideoConverter(videoParameter);
+        paramChecksum = ChecksumFacade.getChecksum(checksum, file);
+        VideoParameter videoParam;
+        String path = paramChecksum.getOutputFilename();
+        videoParam = new VideoParameter(path, outputFormat, resolution, thumbnail, frameRate, width, height, audio);
+        String outputFilename = ConverterFacade.getVideoConverter(videoParam);
         extractMetadata(metadata, outputFilename, fileStorageService);
-        ZipFileFacade.getZipFileVideo(parameterOutputChecksum, metadata, thumbnail, outputFilename);
+        ZipFileFacade.getZipFileVideo(paramChecksum, metadata, thumbnail, outputFilename);
         String nameWithoutExtension = outputFilename.substring(0, outputFilename.lastIndexOf(".") + 1);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         String downloadLink = baseUrl + "/api/download/" + nameWithoutExtension + "zip";

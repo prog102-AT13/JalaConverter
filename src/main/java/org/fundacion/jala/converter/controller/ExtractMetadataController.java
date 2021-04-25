@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- * <p>
+ *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.io.IOException;
 
 /**
@@ -34,18 +33,18 @@ public class ExtractMetadataController {
      * Creates endpoint to extract metadata.
      *
      * @param fileToExtract is a file to extract.
-     * @param isMoreInfo    is more information about the file.
-     * @param nameExport    is a name of file to export.
-     * @param format        is the format to file.
+     * @param isMoreInfo is more information about the file.
+     * @param nameExport is a name of file to export.
+     * @param format is the format to file.
      * @return path to download files.
      * @throws IllegalStateException is a exception if process is Illegal.
-     * @throws IOException           is a exception when invalid input is provided.
+     * @throws IOException is a exception when invalid input is provided.
      */
     @PostMapping("/extractMetadata")
-    public String extrMetadata(final @RequestParam("fileToExtract") MultipartFile fileToExtract,
-                               final @RequestParam("moreInfo") Boolean isMoreInfo,
-                               final @RequestParam("nameExport") String nameExport,
-                               final @RequestParam("format") String format) throws IllegalStateException, IOException {
+    public String uploadFile(final @RequestParam("fileToExtract") MultipartFile fileToExtract,
+                             final @RequestParam("moreInfo") Boolean isMoreInfo,
+                             final @RequestParam("nameExport") String nameExport,
+                             final @RequestParam("format") String format) throws IllegalStateException, IOException {
         LOGGER.info("start");
         String filename = ExtractFacade.getMetadataExtract(fileToExtract, isMoreInfo, nameExport, format);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
