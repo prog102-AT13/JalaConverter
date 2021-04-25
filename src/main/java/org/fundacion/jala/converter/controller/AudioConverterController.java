@@ -35,7 +35,7 @@ import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetada
 @RequestMapping("/api")
 public class AudioConverterController {
     private static final Logger LOGGER = LogManager.getLogger();
-    private ParameterOutputChecksum parameterOutputChecksum;
+    private ParameterOutputChecksum paramChecksum;
 
     @Autowired
     private FileStorageService fileStorageService;
@@ -68,11 +68,12 @@ public class AudioConverterController {
         String downloadLink;
         String nameWithoutExtension;
         String outputFilename;
-        parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
-        AudioParameter audioParameter = new AudioParameter(parameterOutputChecksum.getOutputFilename(), format, bitrate, hz, volume, audioChannel);
-        outputFilename = ConverterFacade.getAudioConverter(audioParameter);
+        paramChecksum = ChecksumFacade.getChecksum(checksum, file);
+        AudioParameter audioParam;
+        audioParam = new AudioParameter(paramChecksum.getOutputFilename(), format, bitrate, hz, volume, audioChannel);
+        outputFilename = ConverterFacade.getAudioConverter(audioParam);
         extractMetadata(metadata, outputFilename, fileStorageService);
-        ZipFileFacade.getZipFileAudio(parameterOutputChecksum, metadata, outputFilename);
+        ZipFileFacade.getZipFileAudio(paramChecksum, metadata, outputFilename);
         nameWithoutExtension = outputFilename.substring(0, outputFilename.lastIndexOf(".") + 1);
         baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         downloadLink = baseUrl + "/api/download/" + nameWithoutExtension + "zip";

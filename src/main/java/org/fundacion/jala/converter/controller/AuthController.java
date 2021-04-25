@@ -59,9 +59,11 @@ public class AuthController {
         AuthenticationRequest authenticationRequest = new AuthenticationRequest(username, password);
         try {
             authLogger.info("Start.");
-            UsernamePasswordAuthenticationToken userPassAuthenToken;
-            userPassAuthenToken = new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-            authenticationManager.authenticate(userPassAuthenToken);
+            UsernamePasswordAuthenticationToken userPassAuthTok;
+            Object getUsernameAuth = authenticationRequest.getUsername();
+            Object getPassAuth = authenticationRequest.getPassword();
+            userPassAuthTok = new UsernamePasswordAuthenticationToken(getUsernameAuth, getPassAuth);
+            authenticationManager.authenticate(userPassAuthTok);
         } catch (BadCredentialsException e) {
             authLogger.error("Error. " + e.getLocalizedMessage());
             throw new Exception("Incorrect username or password", e);
