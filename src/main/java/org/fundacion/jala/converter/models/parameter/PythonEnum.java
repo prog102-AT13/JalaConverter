@@ -10,6 +10,9 @@
  */
 package org.fundacion.jala.converter.models.parameter;
 
+/**
+ * This class refers to binary file to python.
+ */
 public enum PythonEnum {
 
     V2("\"" + System.getProperty("user.dir") + "/thirdparty/python3/python.exe" + "\""),
