@@ -16,6 +16,8 @@ import org.fundacion.jala.converter.models.parameter.VideoParameter;
 import org.fundacion.jala.converter.models.results.Result;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+
 @Service
 public class VideoConverter {
     private String startFirstCommand = "ffmpeg -i ";
@@ -39,7 +41,7 @@ public class VideoConverter {
     /**
      * Converts the input video.
      */
-    public void convertVideo() {
+    public void convertVideo() throws IOException {
         String adaptPath = "\"" + parameter.getFilePath() + "\"";
         format = parameter.getOutputFormat();
         output = adaptPath.substring((adaptPath.lastIndexOf("\\") + 1), adaptPath.lastIndexOf(".") + 1) + format;
@@ -47,23 +49,22 @@ public class VideoConverter {
         pathOutput = adaptPath.substring(0, (adaptPath.lastIndexOf("archive"))) + "archive\\";
         String ffmpegCommand = startFirstCommand + adaptPath + " ";
         String parameters = changeResolution() + changeFrameRate() + removeAudio();
-        String theCommand = ffmpegCommand + parameters + pathOutput + output  + "\"" + " -y";
+        String theCommand = ffmpegCommand + parameters + pathOutput + output  + "\"";
+        System.out.println("\n\n\n\n\n\n" + theCommand);
+
+        Process process = Runtime.getRuntime().exec("cmd /c " + theCommand);
+        ThreadHandler errorHandler = new ThreadHandler(process.getErrorStream(), "Error Stream");
+        errorHandler.start();
+        ThreadHandler threadHandler = new ThreadHandler(process.getInputStream(), "Output Stream");
+        threadHandler.start();
         try {
-            LOGGER.info("Execute Try");
-            Process petition = Runtime.getRuntime().exec("cmd /c " + theCommand);
-            LOGGER.info("finish");
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
+            process.waitFor();
+        } catch (InterruptedException e) {
+            throw new IOException("process interrupted");
         }
-        try {
-            LOGGER.info("Execute Try");
-            Thread.sleep(WAIT_TIME);
+        System.out.println("exit code: " + process.exitValue());
+        if (parameter.hasThumbnail()) {
             generateAThumbnail();
-            LOGGER.info("finish");
-        } catch (InterruptedException exception) {
-            exception.printStackTrace();
-            LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
         }
         result = new Result();
         result.setFilename(outputFileName);
@@ -91,7 +92,7 @@ public class VideoConverter {
     /**
      * Generates a input video thumbnail.
      */
-    private void generateAThumbnail() {
+    private void generateAThumbnail() throws IOException{
         String name = getOutputFileName().substring(0, getOutputFileName().lastIndexOf("."));
         String startCommand = "ffmpeg -i ";
         String outputCommand = pathOutput + output + "\"" + " -ss 00:00:01 -vframes 1 -s 128x128 "
@@ -99,16 +100,17 @@ public class VideoConverter {
                 + name
                 + ".png\"";
         String thumbnailCommand = startCommand + outputCommand;
+
+        Process process = Runtime.getRuntime().exec("cmd /c " + thumbnailCommand);
+        ThreadHandler errorHandler = new ThreadHandler(process.getErrorStream(), "Error Stream");
+        errorHandler.start();
+        ThreadHandler threadHandler = new ThreadHandler(process.getInputStream(), "Output Stream");
+        threadHandler.start();
         try {
-            LOGGER.info("Execute Try");
-            Process petition = Runtime.getRuntime().exec("cmd /c" + thumbnailCommand);
-            LOGGER.info("finish");
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
+            process.waitFor();
+        } catch (InterruptedException e) {
+            throw new IOException("process interrupted");
         }
-        thumbnailFilename = name + PNG_FORMAT;
-        result.setFilename(thumbnailFilename);
     }
 
     /**
@@ -133,7 +135,7 @@ public class VideoConverter {
         int frameRate = parameter.getFrameRate();
         String frameCommand;
         if (frameRate > INIT_NUMBER) {
-            frameCommand = " -r " + frameRate + " -y ";
+            frameCommand = " -filter:v fps=" + frameRate + " ";
             return frameCommand;
         }
         return "";

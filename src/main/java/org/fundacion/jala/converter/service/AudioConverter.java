@@ -42,7 +42,7 @@ public final class AudioConverter {
         setOutputFileName(parameter.getFilePath().substring((parameter.getFilePath().lastIndexOf(System.getProperty("file.separator")) + 1),
                 parameter.getFilePath().lastIndexOf(".") + 1) + parameter.getFormat());
         String overwrite = " -y";
-        String command = relativePath + ffmpeg + input + audioChannel + bitrate + hz + volume + getOutputFileName()
+        String command = relativePath + ffmpeg + input + bitrate + hz + volume + audioChannel + getOutputFileName()
                 + overwrite;
         runCommand.run(command);
     }
