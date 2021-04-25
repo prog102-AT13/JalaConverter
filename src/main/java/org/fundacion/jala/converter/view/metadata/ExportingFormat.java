@@ -70,6 +70,7 @@ class ExportingFormat extends JPanel {
 
     /**
      * Gets if checkOutputName is required for metadata.
+     *
      * @return true if is the same name, false if not.
      */
     protected boolean hasMoreInfo() {
@@ -78,6 +79,7 @@ class ExportingFormat extends JPanel {
 
     /**
      * Returns the selected option to conversion.
+     *
      * @return String with the selected option.
      */
     protected String getConvertTo() {

@@ -50,6 +50,7 @@ public class MetaDataInterface extends JPanel implements ActionListener {
 
     /**
      * Initializes the graphics components for MetaData interface.
+     *
      * @param newToken a String with the authentication token.
      */
     public MetaDataInterface(final String newToken) {
@@ -75,6 +76,7 @@ public class MetaDataInterface extends JPanel implements ActionListener {
     /**
      * Converts, sends information for metadataCLASS conversion.
      * Shows a Dialog with the information.
+     *
      * @param e event of the JButton.
      */
     @Override
@@ -99,6 +101,7 @@ public class MetaDataInterface extends JPanel implements ActionListener {
 
     /**
      * Obtains the request
+     *
      * @throws IOException
      */
     private void callRequest() throws IOException {

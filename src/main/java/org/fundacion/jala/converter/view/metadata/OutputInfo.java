@@ -67,6 +67,7 @@ class OutputInfo extends JPanel implements ItemListener {
 
     /**
      * Gets the name of the outputfile.
+     *
      * @return outputname.
      */
     public String getOutPutName() {
@@ -76,6 +77,7 @@ class OutputInfo extends JPanel implements ItemListener {
 
     /**
      * Gets if checkOutputName is required for metadata.
+     *
      * @return true if is the same name, false if not.
      */
     protected boolean isSameName() {
@@ -84,6 +86,7 @@ class OutputInfo extends JPanel implements ItemListener {
 
     /**
      * Enables the JTextField to change the name of the output file for MetaData.
+     *
      * @param e event of Check status.
      */
     @Override

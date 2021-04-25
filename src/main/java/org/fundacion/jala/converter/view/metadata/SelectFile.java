@@ -54,6 +54,7 @@ class SelectFile extends JPanel implements ActionListener {
 
     /**
      * Opens the File Chooser to select a file.
+     *
      * @param e event of the JButton.
      */
     @Override
@@ -74,6 +75,7 @@ class SelectFile extends JPanel implements ActionListener {
 
     /**
      * Gets the Origin Path of File when selected.
+     *
      * @return String fileOriginPath.
      */
     protected String getOriginFilePath() {
