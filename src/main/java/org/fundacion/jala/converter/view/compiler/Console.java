@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Paola Aguilar Quiñones
+ * @author Paola Ximena Aguilar Quiñones
  */
 package org.fundacion.jala.converter.view.compiler;
 
@@ -37,9 +37,9 @@ class Console extends JPanel {
     }
 
     /**
-     * Gets access to JTextArea
+     * Gets access to JTextArea.
      *
-     * @return a JTextArea
+     * @return a JTextArea.
      */
     public JTextArea getConsole() {
         return console;

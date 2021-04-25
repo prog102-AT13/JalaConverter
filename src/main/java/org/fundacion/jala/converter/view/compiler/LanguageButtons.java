@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Paola Aguilar Quiñones
+ * @author Paola Ximena Aguilar Quiñones
  */
 package org.fundacion.jala.converter.view.compiler;
 
@@ -18,7 +18,7 @@ import java.awt.Font;
 import java.awt.Component;
 
 /**
- *  * This class customizes a panel with custom buttons to change language.
+ * This class customizes a panel with custom buttons to change language.
  */
 class LanguageButtons extends JPanel {
     private JButton cPlusPlus;
@@ -43,18 +43,18 @@ class LanguageButtons extends JPanel {
     }
 
     /**
-     * Button that defines or not java is selected
+     * Button that defines is java is selected or not.
      *
-     * @return a JButton
+     * @return a JButton.
      */
     public JButton getJava() {
         return java;
     }
 
     /**
-     * Button that defines or not python is selected
+     * Button that defines if python is selected or not.
      *
-     * @return a JButton
+     * @return a JButton.
      */
     public JButton getPython() {
         return python;
@@ -64,7 +64,7 @@ class LanguageButtons extends JPanel {
      * Creates a custom button.
      *
      * @param text represents title that the button has.
-     * @return a JButton
+     * @return a JButton.
      */
     public JButton createButton(final String text) {
         JButton button = new JButton(text);
