@@ -5,8 +5,9 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Paola Ximena Aguilar Quiñones
  */
-
 package org.fundacion.jala.converter.view.metadata;
 
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
@@ -20,6 +21,9 @@ import java.awt.FlowLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
+/**
+ * This class is for output information UI.
+ */
 class OutputInfo extends JPanel implements ItemListener {
     private JTextField outputNameField;
     private JCheckBox checkOutputName;
@@ -62,8 +66,8 @@ class OutputInfo extends JPanel implements ItemListener {
     }
 
     /**
-     * Gets the name of the outputfile
-     * @return outputname
+     * Gets the name of the outputfile.
+     * @return outputname.
      */
     public String getOutPutName() {
         outPutName = outputNameField.getText();

@@ -16,16 +16,17 @@ import javax.persistence.Persistence;
 import java.util.List;
 
 public class AssetSQL {
-
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jalaPersistence");
 
     /**
-     * This method is for to insert dates for database
-     * @param projectName name the archive
-     * @param pathProject path the archive
-     * @param checksum string checksum of the archive
+     * This method is for to insert dates for database.
+     *
+     * @param projectName name the archive.
+     * @param pathProject path the archive.
+     * @param checksum string checksum of the archive.
      */
-    public static void insertAssetData(final String projectName, final String pathProject, final String checksum, final int userId) {
+    public static void insertAssetData(final String projectName, final String pathProject,
+                                       final String checksum, final int userId) {
         EntityManager manager = emf.createEntityManager();
         manager.getTransaction().begin();
         User editUser = manager.find(User.class, userId);
@@ -41,13 +42,15 @@ public class AssetSQL {
 
     /**
      * Edits the data of the project
-     * @param projectId int with the project id
-     * @param projectName String with the name of the project
-     * @param pathProject String with the path of the project
-     * @param type String with the type og¿f the project
-     * @param user a User
+     *
+     * @param projectId int with the project id.
+     * @param projectName String with the name of the project.
+     * @param pathProject String with the path of the project.
+     * @param type String with the type og¿f the project.
+     * @param user a User.
      */
-    public static void editProjectData(final int projectId, final String projectName, final String pathProject, final String type, final User user) {
+    public static void editProjectData(final int projectId, final String projectName,
+                                       final String pathProject, final String type, final User user) {
         EntityManager manager = emf.createEntityManager();
         manager.getTransaction().begin();
         User editProject = manager.find(User.class, projectId);
@@ -59,8 +62,9 @@ public class AssetSQL {
     }
 
     /**
-     * Deletes a project
-     * @param assetId int with the project id
+     * Deletes a project.
+     *
+     * @param assetId int with the project id.
      */
     public static void deleteProject(final int assetId) {
         EntityManager manager = emf.createEntityManager();
@@ -72,8 +76,9 @@ public class AssetSQL {
     }
 
     /**
-     * Lists the project in the db
-     * @return a list of projects
+     * Lists the project in the db.
+     *
+     * @return a list of projects.
      */
     @SuppressWarnings("unchecked")
     public static List<Asset> listAsset() {

@@ -6,8 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Paola Aguilar Quiñones
- * @colaborathor Cristian Choque Quispe
+ * @author Paola Ximena Aguilar Quiñones
  */
 package org.fundacion.jala.converter.view.converter;
 
@@ -16,6 +15,7 @@ import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import org.fundacion.jala.converter.view.Models.AudioRequestForm;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
+
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
@@ -26,6 +26,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+
 import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 
@@ -51,11 +52,6 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
     private String token;
     private String checksumLocal;
 
-    /**
-     * Initializes the graphics elements for Audio converter interface.
-     *
-     * @param newToken a String with the authentication token
-     */
     public AudioConverterInterface(final String newToken) {
         token = newToken;
         JLabelStyle audioTitle = new JLabelStyle("Audio converter", "h1",
@@ -88,13 +84,12 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
     }
 
     /**
-     * Converts, sends information for metadataClass conversion.
+     * Converts and sends information for metadataClass conversion then shows a Dialog with the information.
      *
-     * Shows a Dialog with the information.
      * @param e event of the JButton.
      */
     @Override
-    public void actionPerformed(final ActionEvent e)  {
+    public void actionPerformed(final ActionEvent e) {
         LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");
@@ -130,7 +125,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
     /**
      * Obtains the request.
      *
-     * @throws IOException
+     * @throws IOException when problems on inputs.
      */
     private void callRequest() throws IOException {
         LOGGER.info("start");

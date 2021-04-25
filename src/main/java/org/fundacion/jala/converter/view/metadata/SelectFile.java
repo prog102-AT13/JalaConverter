@@ -5,8 +5,9 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Paola Ximena Aguilar Quiñones
  */
-
 package org.fundacion.jala.converter.view.metadata;
 
 import javax.swing.JPanel;
@@ -20,6 +21,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+/**
+ * This class is for the select file option in metadata UI.
+ */
 class SelectFile extends JPanel implements ActionListener {
     private JButton selectFile;
     private JTextField textFile;

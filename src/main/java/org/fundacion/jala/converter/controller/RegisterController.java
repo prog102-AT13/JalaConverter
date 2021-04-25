@@ -31,9 +31,10 @@ public class RegisterController {
     /**
      * Inserts users to the database.
      *
-     * @param username a String with the username
-     * @param password a String with the password
-     * @return an entity response with the user
+     * @param username is a String with the username.
+     * @param password is a String with the password.
+     * @return an entity response with the user.
+     * @throws Exception when invalid username or password is given.
      */
     @PostMapping("/register")
     @ApiOperation(value = "Inserts users to the database", notes = "Provide username and password to register")

@@ -44,14 +44,11 @@ public class ClientRequest {
     private MultipartEntityBuilder builder;
     private HttpEntity multipart;
     private IRequestForm requestForm;
-    private final String defaultCharset = "UTF-8";
+    private final String DEFAULT_CHARSET = "UTF-8";
     private static final Logger LOGGER = LogManager.getLogger();
     private final String DOWNLOAD_URL = "http://localhost:8080/api/download/";
     private final String AUTHENTICATE_URL = "http://localhost:8080/authenticate";
 
-    /**
-     * Http client creates a request given a requestForm.
-     */
     public ClientRequest() {
         this.httpClient = HttpClients.createDefault();
     }
@@ -59,9 +56,9 @@ public class ClientRequest {
     /**
      * Executes a request given the type of requestForm.
      *
-     * @return sResponse
-     * @throws ClientProtocolException
-     * @throws IOException
+     * @return a String with the response.
+     * @throws ClientProtocolException when an error on the HTTP protocol occurs.
+     * @throws IOException when an invalid input is provided.
      */
     public String executeRequest(final IRequestForm newRequestForm, final String token) throws ClientProtocolException, IOException {
         requestForm = newRequestForm;
@@ -73,17 +70,17 @@ public class ClientRequest {
         httpPost.setHeader("Authorization", "Bearer " + token);
         CloseableHttpResponse response = httpClient.execute(httpPost);
         HttpEntity responseEntity = response.getEntity();
-        String sResponse = EntityUtils.toString(responseEntity, defaultCharset);
+        String sResponse = EntityUtils.toString(responseEntity, DEFAULT_CHARSET);
         return sResponse;
     }
 
     /**
      * Executes a request given the type of requestForm.
      *
-     * @param newRequestForm the request form
-     * @return a String with the response
-     * @throws ClientProtocolException when an error on the HTTP protocol occurs
-     * @throws IOException when an invalid input is provided
+     * @param newRequestForm the request form.
+     * @return a String with the response.
+     * @throws ClientProtocolException when an error on the HTTP protocol occurs.
+     * @throws IOException when an invalid input is provided.
      */
     public String executeRequestWithoutToken(final IRequestForm newRequestForm)
             throws ClientProtocolException, IOException {
@@ -102,8 +99,8 @@ public class ClientRequest {
     /**
      * Downloads a file from endpoint to given path.
      *
-     * @throws ClientProtocolException when there is an error on the client protocol
-     * @throws IOException when introduced an invalid path
+     * @throws ClientProtocolException when there is an error on the client protocol.
+     * @throws IOException when introduced an invalid path.
      */
     public void download(final String filePath) throws IOException {
         String sURL = DOWNLOAD_URL;
@@ -124,7 +121,8 @@ public class ClientRequest {
     /**
      * Retrieves a  token from the endpoint from a username and password.
      *
-     * @return a String with the token
+     * @throws IOException when introduced an invalid path.
+     * @return a String with the token.
      */
     public String authGetToken() throws IOException {
         String sURL = AUTHENTICATE_URL;
@@ -144,8 +142,8 @@ public class ClientRequest {
     /**
      * Adds text field to http request.
      *
-     * @param key String with the key
-     * @param value String with the value
+     * @param key String with the key.
+     * @param value String with the value.
      */
     public void addTextBody(final String key, final String value) {
         builder.addTextBody(key, value, ContentType.TEXT_PLAIN);
@@ -154,20 +152,15 @@ public class ClientRequest {
     /**
      * Adds file field to http request.
      *
-     * @param key String with the key
-     * @param filePath String with the value
+     * @param key String with the key.
+     * @param filePath String with the value.
      */
     public void addFileBody(final String key, final String filePath) {
         LOGGER.info("Start");
         try {
             LOGGER.info("Execute Try");
             File f = new File(filePath);
-            builder.addBinaryBody(
-                    key,
-                    new FileInputStream(filePath),
-                    ContentType.APPLICATION_OCTET_STREAM,
-                    f.getName()
-            );
+            builder.addBinaryBody(key, new FileInputStream(filePath), ContentType.APPLICATION_OCTET_STREAM, f.getName());
         } catch (Exception e) {
             LOGGER.error("Execute Exception to add file field to http request");
             e.printStackTrace();
@@ -185,7 +178,7 @@ public class ClientRequest {
     /**
      * Adds a body field with the parameter's information.
      *
-     * @param parameter
+     * @param parameter Parameter object to be added.
      */
     public void addBodyField(final Parameter parameter) {
         if (!parameter.isFile()) {
@@ -198,7 +191,7 @@ public class ClientRequest {
     /**
      * Downloads a File by url.
      *
-     * @param url with the url
+     * @param url with url to form the download path.
      */
     public void downloadFile(final String url) {
         String nameFile = url.substring(url.lastIndexOf("/") + 1);
@@ -213,12 +206,12 @@ public class ClientRequest {
     }
 
     /**
-     * Downloads a File by URL.
+     * Saves a File by URL.
      *
-     * @param fileName name of file
-     * @param fileUrl url complete
-     * @throws MalformedURLException
-     * @throws IOException
+     * @param fileName name of file.
+     * @param fileUrl complete url of the file.
+     * @throws MalformedURLException when the path is not formed correctly.
+     * @throws IOException when introduced an invalid path.
      */
     public static void saveFileFromUrlWithJavaIO(final String fileName, final String fileUrl)
             throws MalformedURLException, IOException {
