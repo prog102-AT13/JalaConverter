@@ -32,7 +32,7 @@ public class ExportTypeFile {
     }
 
     /**
-     * Get parameter nameFileCompleteToExport.
+     * Gets parameter nameFileCompleteToExport.
      *
      * @return nameFileCompleteToExport with code in order to run in Exiftool.
      */
@@ -66,7 +66,7 @@ public class ExportTypeFile {
 
     /**
      * Defines name that the file are exported.
-     * Set nameFileExport.
+     * Sets nameFileExport.
      * e.g. DragonBall.mp4 --> DragonBall.xmp.
      */
     private void setDefaultNameFileWithTypeOfFile() {
@@ -82,7 +82,7 @@ public class ExportTypeFile {
 
     /**
      * Defines name that the file are exported.
-     * Set nameFileExport.
+     * Sets nameFileExport.
      * e.g. DragonBall.mp4 --> NameSet.xmp.
      *
      * @param newName a String to set a new file name.
@@ -92,8 +92,8 @@ public class ExportTypeFile {
     }
 
     /**
-     * Define file are exported with type Txt.
-     * Set nameFileCompleteToExport.
+     * Defines file are exported with type Txt.
+     * Sets nameFileCompleteToExport.
      */
     private void exportFileTxt() {
         nameFileCompleteToExport = " > " + "\"" +
@@ -102,8 +102,8 @@ public class ExportTypeFile {
     }
 
     /**
-     * Define file are exported with type Html.
-     * Set nameFileCompleteToExport.
+     * Defines file are exported with type Html.
+     * Sets nameFileCompleteToExport.
      */
     private void exportFileHtml() {
         nameFileCompleteToExport = " -h > " + "\"" +
@@ -112,8 +112,8 @@ public class ExportTypeFile {
     }
 
     /**
-     * Define file are exported with type XMP.
-     * Set exportFileXMP.
+     * Defines file are exported with type XMP.
+     * Sets exportFileXMP.
      */
     private void exportFileXMP() {
         nameFileCompleteToExport = " -X > " + "\"" +

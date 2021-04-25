@@ -11,7 +11,7 @@
 package org.fundacion.jala.converter.service.metadata;
 
 /**
- * This enum defines possibles extensions to be exported.
+ * This enum defines possible extensions to be exported.
  */
 public enum TypeFileExport {
     TXT,
