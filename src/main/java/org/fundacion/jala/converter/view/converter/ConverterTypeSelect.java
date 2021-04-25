@@ -12,6 +12,7 @@
 package org.fundacion.jala.converter.view.converter;
 
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
+
 import javax.swing.JPanel;
 import javax.swing.JComboBox;
 import java.awt.Dimension;
@@ -33,9 +34,6 @@ class ConverterTypeSelect extends JPanel {
     private final int flowLayoutHgap = 10;
     private final int flowLayoutVgap = 10;
 
-    /**
-     * Initializes the graphic elements for SelectCombobox for convert type.
-     */
     protected ConverterTypeSelect() {
         JLabelStyle labelConvertTo = new JLabelStyle("Convert to: ", "h3",
                 alignLabelStyle, widthLabelStyle, heightLabelStyle);
