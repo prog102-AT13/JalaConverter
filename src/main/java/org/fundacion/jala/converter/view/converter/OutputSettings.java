@@ -83,7 +83,7 @@ class OutputSettings extends JPanel {
     }
 
     /**
-     * Sets all possible resolutions for video converter.
+     * Sets all possible frames for video converter.
      */
     protected void setFrameSelect() {
         framesSelect = new JComboBox<FrameVideo>(

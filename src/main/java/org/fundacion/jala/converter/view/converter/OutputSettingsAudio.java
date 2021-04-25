@@ -107,7 +107,7 @@ class OutputSettingsAudio extends JPanel {
     /**
      * Gets selected volume for Audio converter.
      *
-     * @return String, option selected of volume.
+     * @return a String, option selected of volume.
      */
     protected String getVolume() {
         return volumeSelect.getSelectedItem().toString();
@@ -116,7 +116,7 @@ class OutputSettingsAudio extends JPanel {
     /**
      * Gets selected Hz for Audio converter.
      *
-     * @return String, option selected of Hz.
+     * @return a String, option selected of Hz.
      */
     protected String getHz() {
         return hzSelect.getSelectedItem().toString();
@@ -125,7 +125,7 @@ class OutputSettingsAudio extends JPanel {
     /**
      * Gets selected AudioChannel for Audio converter.
      *
-     * @return String, option selected of AudioChannel.
+     * @return a String, option selected of AudioChannel.
      */
     protected String getAudioChannel() {
         return audioChannelSelect.getSelectedItem().toString();
@@ -134,7 +134,7 @@ class OutputSettingsAudio extends JPanel {
     /**
      * Gets if metadata is required for Audio converter.
      *
-     * @return true if metadata is required, false if not.
+     * @return a true if metadata is required, false if not.
      */
     protected boolean isMetadata() {
         return metadataOption.isSelected();
