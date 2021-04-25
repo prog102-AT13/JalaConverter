@@ -21,7 +21,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Class to do and call facade of extract.
+ * This class calls facade of extract.
  */
 public class ExtractFacade {
     public static final String TXT_FILE_EXTENSION = ".txt";
@@ -33,7 +33,8 @@ public class ExtractFacade {
 
     /**
      * Extracts text from image.
-     * @param extractTextParameter is a object with parameter of extractText to convert
+     *
+     * @param extractTextParameter is a object with parameter of extractText to convert.
      */
     public static void getTextExtract(final ExtractTextParameter extractTextParameter) {
         ExtractText extractText = new ExtractText(extractTextParameter);
@@ -42,6 +43,7 @@ public class ExtractFacade {
 
     /**
      * Extracts metadata from file.
+     *
      * @param file is the path of file to extract metadata.
      * @param isMoreInfo is get more info of file
      * @param nameExport  is the name of file where metadata are extracted
@@ -53,12 +55,12 @@ public class ExtractFacade {
         FileStorageService fileStorageService = new FileStorageService();
         String pathFile = fileStorageService.uploadFile(file);
         TypeFileExport typeFileExport = stringToEnum(format);
-        String outputPath = fileStorageService.getOutputPathWithoutFileName(fileStorageService.getOutputPath(pathFile));
+        String outPath = fileStorageService.getOutputPathWithoutFileName(fileStorageService.getOutputPath(pathFile));
         File fileToExtract = new File(pathFile);
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setNameExport(nameExport + "");
         objectMetadata.setFileToExtract(fileToExtract);
-        objectMetadata.setFileToExport(new File(outputPath));
+        objectMetadata.setFileToExport(new File(outPath));
         objectMetadata.setMoreInfo(isMoreInfo);
         objectMetadata.setTypeFileExport(typeFileExport);
         ExtractMetadata extractMetadata = new ExtractMetadata(objectMetadata);
