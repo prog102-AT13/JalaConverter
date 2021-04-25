@@ -5,6 +5,8 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Gustavo Zacarias Huanca Alconz
  */
 package org.fundacion.jala.converter.controller;
 
@@ -19,13 +21,24 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
 
+/**
+ * This class calls endpoint to extract metadata.
+ */
 @RestController
 @RequestMapping("/api")
 public class ExtractMetadataController {
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**
-     * Endpoint for extract metadata
+     * Creates endpoint to extract metadata.
+     *
+     * @param fileToExtract is a file to extract.
+     * @param isMoreInfo is more information about the file.
+     * @param nameExport is a name of file to export.
+     * @param format is the format to file.
+     * @return path to download files.
+     * @throws IllegalStateException is a exception if process is Illegal.
+     * @throws IOException is a exception when invalid input is provided.
      */
     @PostMapping("/extractMetadata")
     public String uploadFile(final @RequestParam("fileToExtract") MultipartFile fileToExtract,
