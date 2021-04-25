@@ -30,8 +30,8 @@ public class MyUserDetailsService implements UserDetailsService {
     /**
      * Gets user details with the username.
      *
-     * @param username to locate the user.
-     * @return User Details.
+     * @param username a String to locate the user.
+     * @return User Details a object with details of the user.
      * @throws UsernameNotFoundException when user not found or has not granted authority.
      */
     @Override

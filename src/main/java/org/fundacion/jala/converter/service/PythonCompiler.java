@@ -31,7 +31,7 @@ public class PythonCompiler {
      * Compiles a python file.
      *
      * @param newPythonParameter gets all the parameters needed for Python.
-     * @return the result of execution in console.
+     * @return a String with the result of execution in console.
      */
     public String compiler(final PythonParameter newPythonParameter) {
         LOGGER.info("start");
@@ -58,8 +58,8 @@ public class PythonCompiler {
     /**
      * Converts the code that is written as a string to a file with a python extension.
      *
-     * @param code It is a string ready to be converted
-     * @return path where will be created the file
+     * @param code a string ready to be converted
+     * @return a String with the path where will be created the file
      */
     public String makePythonFile(final String code) {
         LOGGER.info("start");

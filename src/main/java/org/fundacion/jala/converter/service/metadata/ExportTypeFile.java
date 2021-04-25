@@ -96,9 +96,8 @@ public class ExportTypeFile {
      * Sets nameFileCompleteToExport.
      */
     private void exportFileTxt() {
-        nameFileCompleteToExport = " > " + "\"" +
-                addressExportFile.getAbsolutePath() + "\\" +
-                nameFileExport + ".txt" + "\"";
+        nameFileCompleteToExport = " > " + "\"" + addressExportFile.getAbsolutePath() + "\\" +
+                                   nameFileExport + ".txt" + "\"";
     }
 
     /**
@@ -106,9 +105,8 @@ public class ExportTypeFile {
      * Sets nameFileCompleteToExport.
      */
     private void exportFileHtml() {
-        nameFileCompleteToExport = " -h > " + "\"" +
-                addressExportFile.getAbsolutePath() + "\\" +
-                nameFileExport + ".html" + "\"";
+        nameFileCompleteToExport = " -h > " + "\"" + addressExportFile.getAbsolutePath() + "\\" +
+                                   nameFileExport + ".html" + "\"";
     }
 
     /**
@@ -116,8 +114,7 @@ public class ExportTypeFile {
      * Sets exportFileXMP.
      */
     private void exportFileXMP() {
-        nameFileCompleteToExport = " -X > " + "\"" +
-                addressExportFile.getAbsolutePath() + "\\" +
-                nameFileExport + ".xmp" + "\"";
+        nameFileCompleteToExport = " -X > " + "\"" + addressExportFile.getAbsolutePath() + "\\" +
+                                   nameFileExport + ".xmp" + "\"";
     }
 }

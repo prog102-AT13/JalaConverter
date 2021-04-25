@@ -29,13 +29,12 @@ public class ChecksumService {
     /**
      * Gets the file's checksum.
      *
-     * @param filePath the file's direction.
+     * @param filePath a String with the file's direction.
      * @return a String with the checksum.
      * @throws IOException when invalid file's path.
      * @throws NoSuchAlgorithmException when invalid algorithm is provided.
      */
-    public static String getFileChecksum(final String filePath)
-           throws IOException, NoSuchAlgorithmException {
+    public static String getFileChecksum(final String filePath) throws IOException, NoSuchAlgorithmException {
         File file = new File(filePath);
         MessageDigest md5Digest = MessageDigest.getInstance(MD5_ALGORITHM);
         FileInputStream fileInputStream = new FileInputStream(file);
@@ -57,14 +56,13 @@ public class ChecksumService {
     /**
      * Verifies if two file's have the same checksum.
      *
-     * @param firstFilePath first file's path.
+     * @param firstFilePath a Strinng with the first file's path.
      * @param checksum a String with the checksum.
      * @return a Boolean with the response.
      * @throws IOException when invalid path.
      * @throws NoSuchAlgorithmException when invalid algorithm provided.
      */
-    private static Boolean repeatedChecksum(final String firstFilePath,
-                                            final String checksum)
+    private static Boolean repeatedChecksum(final String firstFilePath, final String checksum)
             throws IOException, NoSuchAlgorithmException {
         return (checksum.equals(getFileChecksum(firstFilePath)));
     }

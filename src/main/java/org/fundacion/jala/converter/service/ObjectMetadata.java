@@ -44,7 +44,7 @@ public class ObjectMetadata {
     /**
      * Gets file's path to  be exported.
      *
-     * @return path's file to be exported.
+     * @return a file to be exported.
      */
     public File getFileToExport() {
         return fileToExport;
@@ -80,7 +80,7 @@ public class ObjectMetadata {
     /**
      * Gets file's type which the metadata is exported.
      *
-     * @return file's type which the metadata is exported.
+     * @return TypeFileExport file's type which the metadata is exported.
      */
     public TypeFileExport getTypeFileExport() {
         return typeFileExport;
@@ -98,7 +98,7 @@ public class ObjectMetadata {
     /**
      * Verifies if the metadata file has more information than usual.
      *
-     * @return moreInfo of file which the metadata is extracted.
+     * @return a boolean wiht more information of the file which the metadata is extracted.
      */
     public boolean getMoreInfo() {
         return moreInfo;

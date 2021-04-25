@@ -51,7 +51,7 @@ public class ExtractText {
     /**
      * Returns the language to be extracted.
      *
-     * @return a string with the value of the selected language.
+     * @return a String with the value of the selected language.
      */
     public String getLanguage() {
         return language;
@@ -60,7 +60,7 @@ public class ExtractText {
     /**
      * Returns the path file.
      *
-     * @return a string with the path of the images.
+     * @return a String with the path of the images.
      */
     public String getPathFile() {
         return pathFile;
@@ -69,7 +69,7 @@ public class ExtractText {
     /**
      * Returns the output name.
      *
-     * @return a string with the name of file generate.
+     * @return a String with the name of file generate.
      */
     public String getNameOutputFile() {
         return nameOutputFile;
@@ -102,8 +102,8 @@ public class ExtractText {
     /**
      * Saves the extracted text on a file .txt.
      *
-     * @param name String with the name with which the file will be created.
-     * @param text String containing the text extracted from the image.
+     * @param name a String with the name with which the file will be created.
+     * @param text a String containing the text extracted from the image.
      */
     private void safeInfo(final String name, final String text) {
         LOGGER.info("start");

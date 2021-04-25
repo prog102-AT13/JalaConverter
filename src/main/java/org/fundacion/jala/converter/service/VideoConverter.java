@@ -40,8 +40,7 @@ public class VideoConverter {
     public void convertVideo() {
         String adaptPath = "\"" + parameter.getFilePath() + "\"";
         format = parameter.getOutputFormat();
-        output = adaptPath.substring((adaptPath.lastIndexOf("\\") + 1),
-                 adaptPath.lastIndexOf(".") + 1) + format;
+        output = adaptPath.substring((adaptPath.lastIndexOf("\\") + 1), adaptPath.lastIndexOf(".") + 1) + format;
         setOutputFileName(output);
         pathOutput = adaptPath.substring(0, (adaptPath.lastIndexOf("archive"))) + "archive\\";
         String ffmpegCommand = startFirstCommand + adaptPath + " ";
@@ -94,10 +93,8 @@ public class VideoConverter {
     private void generateAThumbnail() {
         String name = getOutputFileName().substring(0, getOutputFileName().lastIndexOf("."));
         String startCommand = "ffmpeg -i ";
-        String outputCommand = pathOutput + output + "\"" + " -ss 00:00:01 -vframes 1 -s 128x128 "
-                + pathOutput
-                + name
-                + ".png\"";
+        String outputCommand = pathOutput + output + "\"" + " -ss 00:00:01 -vframes 1 -s 128x128 " +
+                               pathOutput + name + ".png\"";
         String thumbnailCommand = startCommand + outputCommand;
         try {
             LOGGER.info("Execute Try");
@@ -112,7 +109,7 @@ public class VideoConverter {
     /**
      * Removes the audio of the input video.
      *
-     * @return audio command.
+     * @return a String with the remove audio command.
      */
     private String removeAudio() {
         boolean audio = parameter.hasAudio();
@@ -127,7 +124,7 @@ public class VideoConverter {
     /**
      * Changes the input video frame rate.
      *
-     * @return frame command.
+     * @return a String frame command.
      */
     private String changeFrameRate() {
         int frameRate = parameter.getFrameRate();
@@ -151,7 +148,7 @@ public class VideoConverter {
     /**
      * Gets the output file name.
      *
-     * @return outputFileName.
+     * @return a String with the outputFileName.
      */
     public String getOutputFileName() {
         return outputFileName;

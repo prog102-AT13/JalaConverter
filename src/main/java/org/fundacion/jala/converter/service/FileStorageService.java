@@ -33,8 +33,8 @@ public class FileStorageService {
     /**
      * Uploads a file to designed storage path.
      *
-     * @param file to be updated.
-     * @return storageDir the storage path.
+     * @param file a MultipartFile file to be updated.
+     * @return a String with the storageDir.
      */
     public String uploadFile(MultipartFile file) throws IllegalStateException, IOException {
         String filename = file.getOriginalFilename();
@@ -46,9 +46,9 @@ public class FileStorageService {
     /**
      * Returns a resource from given filename.
      *
-     * @param fileName of the resource.
+     * @param fileName a String of the resource.
      * @throws RuntimeException if the file does not exist.
-     * @return resource from a file name.
+     * @return a String with the resource from a file name.
      */
     public Resource downloadFile(String fileName) {
         Path path = Paths.get(getArchivePath(fileName));
@@ -66,10 +66,10 @@ public class FileStorageService {
     }
 
     /**
-     * Returns the designed output path.
+     * Returns a String with the designed output path.
      *
-     * @param filename to get an output path.
-     * @return output path.
+     * @param filename a String to get an output path.
+     * @return a String with the output path.
      */
     public static String getOutputPath(String filename) {
         return PATH + File.separator + ARCHIVE + File.separator + File.separator + filename;
@@ -78,18 +78,18 @@ public class FileStorageService {
     /**
      * Returns the designed output path without the file's name.
      *
-     * @param filename to get an output path.
-     * @return path withour the file name.
+     * @param filename a String to get an output path.
+     * @return a String path without the file name.
      */
     public static String getOutputPathWithoutFileName(String filename) {
         return PATH + File.separator + ARCHIVE + File.separator + File.separator;
     }
 
     /**
-     * Returns archive path.
+     * Returns a String archive path.
      *
-     * @param filename to get an archive path.
-     * @return the archive path.
+     * @param filename a String to get an archive path.
+     * @return a String with the archive path.
      */
     public String getArchivePath(String filename) {
         return PATH + File.separator + ARCHIVE + File.separator + filename;

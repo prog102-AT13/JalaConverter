@@ -31,10 +31,8 @@ public class ExtractMetadata {
     public ExtractMetadata(final ObjectMetadata extractMetadata) {
         this.fileToExtract = extractMetadata.getFileToExtract();
         if (extractMetadata.getMoreInfo()) setMoreInformation();
-        exportTypeFile = new ExportTypeFile(fileToExtract.getName(),
-                         extractMetadata.getNameExport(),
-                         extractMetadata.getTypeFileExport(),
-                         extractMetadata.getFileToExport());
+        exportTypeFile = new ExportTypeFile(fileToExtract.getName(), extractMetadata.getNameExport(),
+                         extractMetadata.getTypeFileExport(), extractMetadata.getFileToExport());
         exportFile = exportTypeFile.getNameFileCompleteToExport();
         extractMetadata();
     }
@@ -55,7 +53,8 @@ public class ExtractMetadata {
         LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");
-            String command = "cmd /c " + addressExiftool + " && exiftool.exe " + "\"" + fileToExtract.getAbsolutePath() + "\"" + moreInformation + exportFile;
+            String command = "cmd /c " + addressExiftool + " && exiftool.exe " + "\"" +
+                             fileToExtract.getAbsolutePath() + "\"" + moreInformation + exportFile;
             Process process = Runtime.getRuntime().exec(command);
         } catch (IOException e) {
             LOGGER.error("Execute Exception to Safe text in a file");
@@ -66,7 +65,6 @@ public class ExtractMetadata {
 
     /**
      * Adds more information about metadata's file.
-     *
      */
     private void setMoreInformation() {
         this.moreInformation = " -api largefilesupport=1 -" + "ee";
@@ -76,17 +74,16 @@ public class ExtractMetadata {
      * Extracts metadata from a file.
      *
      * @param metadata a String with metadata request.
-     * @param outputFileName the new file's name.
-     * @param fileStorageService object to create the path.
+     * @param outputFileName a String with the new file's name.
+     * @param fileStorageService an object to create the path.
      */
-    public static void extractMetadata(final String metadata,
-                                       final String outputFileName,
+    public static void extractMetadata(final String metadata, final String outputFileName,
                                        final FileStorageService fileStorageService) {
         String outputPath = fileStorageService.getOutputPath(outputFileName);
         String outputPathWithoutFileName = fileStorageService.getOutputPathWithoutFileName(outputFileName);
         if (metadata.equals("true")) {
             ExtractMetadata extractMetadata = new ExtractMetadata(new File(outputPath),
-                                              new File(outputPathWithoutFileName));
+                    new File(outputPathWithoutFileName));
             extractMetadata.extractMetadata();
         }
     }

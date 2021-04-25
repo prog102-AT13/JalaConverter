@@ -24,7 +24,7 @@ public final class AudioConverter {
     }
 
     /**
-     * Create command for audio converter.
+     * Creates a command for audio converter.
      */
     public void audioConverter() {
         String relativePath = "cd archive/ && ";
@@ -33,28 +33,20 @@ public final class AudioConverter {
         String hz = parameter.formatHz();
         String volume = parameter.formatVolume();
         String audioChannel = parameter.formatAudioChannel();
-        String input = parameter.getFilePath()
-                       .substring(parameter.getFilePath()
+        String input = parameter.getFilePath().substring(parameter.getFilePath()
                        .lastIndexOf(System.getProperty("file.separator")) + 1);
-        setOutputFileName(parameter.getFilePath()
-                         .substring((parameter.getFilePath()
+        setOutputFileName(parameter.getFilePath().substring((parameter.getFilePath()
                          .lastIndexOf(System.getProperty("file.separator")) + 1),
                          parameter.getFilePath().lastIndexOf(".") + 1) + parameter.getFormat());
         String overwrite = " -y";
-        String command = relativePath + ffmpeg +
-                         input +
-                         audioChannel +
-                         bitrate +
-                         hz +
-                         volume +
-                         getOutputFileName() +
+        String command = relativePath + ffmpeg + input + audioChannel + bitrate + hz + volume + getOutputFileName() +
                          overwrite;
         System.out.println(command);
         runCommand.run(command);
     }
 
     /**
-     * Sets new outputFileName of the audio converter.
+     * Sets a new outputFileName of the audio converter.
      *
      * @param newOutputFileName output file name to be set.
      */
@@ -63,7 +55,7 @@ public final class AudioConverter {
     }
 
     /**
-     * Gets name of the output filename.
+     * Gets the name of the output filename.
      *
      * @return a string of output filename.
      */
