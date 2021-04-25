@@ -27,7 +27,7 @@ public class ResolutionVideo {
     /**
      * Gets width of video.
      *
-     * @return width of video.
+     * @return a width of video.
      */
     public String getWidth() {
         return width;
@@ -45,7 +45,7 @@ public class ResolutionVideo {
     /**
      * Gets height of video.
      *
-     * @return height of video.
+     * @return a height of video.
      */
     public String getHeight() {
         return height;
@@ -63,7 +63,7 @@ public class ResolutionVideo {
     /**
      * Gets name to shown in combBox.
      *
-     * @return name to shown in combBox.
+     * @return a name to shown in combBox.
      */
     public String getName() {
         return name;
