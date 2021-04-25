@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
+ *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Daniela Santa Cruz
- * @colaborathor Paola Aguilar
+ * @author Daniela Santa Cruz Andrade
  */
 package org.fundacion.jala.converter.service;
 
@@ -15,6 +15,9 @@ import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.models.parameter.VideoParameter;
 import org.springframework.stereotype.Service;
 
+/**
+ * This class converts a video to an specified format.
+ */
 @Service
 public class VideoConverter {
     private String startFirstCommand = "ffmpeg -i ";
@@ -37,12 +40,13 @@ public class VideoConverter {
     public void convertVideo() {
         String adaptPath = "\"" + parameter.getFilePath() + "\"";
         format = parameter.getOutputFormat();
-        output = adaptPath.substring((adaptPath.lastIndexOf("\\") + 1), adaptPath.lastIndexOf(".") + 1) + format;
+        output = adaptPath.substring((adaptPath.lastIndexOf("\\") + 1),
+                 adaptPath.lastIndexOf(".") + 1) + format;
         setOutputFileName(output);
         pathOutput = adaptPath.substring(0, (adaptPath.lastIndexOf("archive"))) + "archive\\";
         String ffmpegCommand = startFirstCommand + adaptPath + " ";
         String parameters = changeResolution() + changeFrameRate() + removeAudio();
-        String theCommand = ffmpegCommand + parameters + pathOutput + output  + "\"" + " -y";
+        String theCommand = ffmpegCommand + parameters + pathOutput + output + "\"" + " -y";
         System.out.println(theCommand);
         try {
             LOGGER.info("Execute Try");
@@ -65,7 +69,8 @@ public class VideoConverter {
 
     /**
      * Changes the resolution and aspect ratio of the input video.
-     * @return resolution command
+     *
+     * @return resolution command.
      */
     private String changeResolution() {
         int width = parameter.getWidth();
@@ -76,7 +81,8 @@ public class VideoConverter {
         if (width > 0 && height > 0) {
             scale = width + ":" + height;
             aspectRatio = ":force_original_aspect_ratio=decrease,pad=";
-            resolutionCommand = "-vf \"scale=" + scale + aspectRatio + scale + ":-1:-1:color=white\"";
+            resolutionCommand = "-vf \"scale=" + scale + aspectRatio + scale +
+                                ":-1:-1:color=white\"";
             return resolutionCommand;
         }
         return "";
@@ -105,7 +111,8 @@ public class VideoConverter {
 
     /**
      * Removes the audio of the input video.
-     * @return audio command
+     *
+     * @return audio command.
      */
     private String removeAudio() {
         boolean audio = parameter.hasAudio();
@@ -119,7 +126,8 @@ public class VideoConverter {
 
     /**
      * Changes the input video frame rate.
-     * @return frame command
+     *
+     * @return frame command.
      */
     private String changeFrameRate() {
         int frameRate = parameter.getFrameRate();
@@ -133,7 +141,8 @@ public class VideoConverter {
 
     /**
      * Sets the output file name.
-     * @param newOutputFileName String with the output file name
+     *
+     * @param newOutputFileName String with the output file name.
      */
     public void setOutputFileName(final String newOutputFileName) {
         this.outputFileName = newOutputFileName;
@@ -141,7 +150,8 @@ public class VideoConverter {
 
     /**
      * Gets the output file name.
-     * @return outputFileName
+     *
+     * @return outputFileName.
      */
     public String getOutputFileName() {
         return outputFileName;

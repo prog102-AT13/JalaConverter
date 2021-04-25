@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- *
+ * <p>
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -29,12 +29,13 @@ public class ChecksumService {
     /**
      * Gets the file's checksum.
      *
-     * @param filePath the file's direction
-     * @return a String with the checksum
-     * @throws IOException when invalid file's path
-     * @throws NoSuchAlgorithmException when invalid algorithm is provided
+     * @param filePath the file's direction.
+     * @return a String with the checksum.
+     * @throws IOException when invalid file's path.
+     * @throws NoSuchAlgorithmException when invalid algorithm is provided.
      */
-    public static String getFileChecksum(final String filePath) throws IOException, NoSuchAlgorithmException {
+    public static String getFileChecksum(final String filePath)
+           throws IOException, NoSuchAlgorithmException {
         File file = new File(filePath);
         MessageDigest md5Digest = MessageDigest.getInstance(MD5_ALGORITHM);
         FileInputStream fileInputStream = new FileInputStream(file);
@@ -56,11 +57,11 @@ public class ChecksumService {
     /**
      * Verifies if two file's have the same checksum.
      *
-     * @param firstFilePath first file's path
-     * @param checksum a String with the checksum
-     * @return a Boolean with the response
-     * @throws IOException when invalid path
-     * @throws NoSuchAlgorithmException when invalid algorithm provided
+     * @param firstFilePath first file's path.
+     * @param checksum a String with the checksum.
+     * @return a Boolean with the response.
+     * @throws IOException when invalid path.
+     * @throws NoSuchAlgorithmException when invalid algorithm provided.
      */
     private static Boolean repeatedChecksum(final String firstFilePath,
                                             final String checksum)

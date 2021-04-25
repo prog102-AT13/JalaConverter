@@ -30,9 +30,9 @@ public class MyUserDetailsService implements UserDetailsService {
     /**
      * Gets user details with the username.
      *
-     * @param username to locate the user
-     * @return User Details
-     * @throws UsernameNotFoundException when user not found or has not granted authority
+     * @param username to locate the user.
+     * @return User Details.
+     * @throws UsernameNotFoundException when user not found or has not granted authority.
      */
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
@@ -50,9 +50,9 @@ public class MyUserDetailsService implements UserDetailsService {
     /**
      * Saves user in the database.
      *
-     * @param username a String with username
-     * @param password a String with password
-     * @return AuthenticationRequest with the given param
+     * @param username a String with username.
+     * @param password a String with password.
+     * @return AuthenticationRequest with the given param.
      */
     public AuthenticationRequest save(final String username, final String password) {
         insertUserData(username, password, "");
