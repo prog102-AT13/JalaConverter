@@ -10,7 +10,7 @@
  */
 package org.fundacion.jala.converter.controller;
 
-import org.fundacion.jala.converter.service.FileStorageService;
+import org.fundacion.jala.converter.core.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
