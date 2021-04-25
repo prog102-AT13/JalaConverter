@@ -5,14 +5,16 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
- */
-/**
+ *
  * @author Jorge Caceres Velasco
  */
 package org.fundacion.jala.converter.models.parameter;
 
 import org.springframework.stereotype.Service;
 
+/**
+ * This class is the options of the extract text parameters.
+ */
 @Service
 public class ExtractTextParameter extends Parameter {
     private String language;
@@ -30,30 +32,38 @@ public class ExtractTextParameter extends Parameter {
 
     public ExtractTextParameter() {
     }
+
     /**
-     * Returns a string with the set language to be extracted.
-     * @return the language.
+     * Obtains a String with the set language to be extracted.
+     *
+     * @return the language of the text.
      */
     public String getLanguage() {
         return language;
     }
+
     /**
-     * Set string with the file's language.
-     * @param newLanguage
+     * Set String with the file's language.
+     *
+     * @param newLanguage is a new language of the text.
      */
     public void setLanguage(final String newLanguage) {
         this.language = newLanguage;
     }
+
     /**
-     * Returns a string with the name of the result file.
+     * Obtains a String with the name of the result file.
+     *
      * @return name of the result file.
      */
     public String getResultFile() {
         return resultFile;
     }
+
     /**
-     * Set string with the file's name.
-     * @param newResultFile string with the file's name
+     * Sets String with the file's name.
+     *
+     * @param newResultFile is a String with the file's name.
      */
     public void setResultFile(final String newResultFile) {
         this.resultFile = newResultFile;

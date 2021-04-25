@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- * <p>
+ *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -13,7 +13,7 @@ package org.fundacion.jala.converter.models.parameter;
 import org.springframework.stereotype.Service;
 
 /**
- * This class is to option of the parameters.
+ * This class is the options of the audio parameters.
  */
 @Service
 public class AudioParameter extends Parameter {
