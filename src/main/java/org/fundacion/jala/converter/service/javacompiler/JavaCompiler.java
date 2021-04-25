@@ -26,7 +26,7 @@ public class JavaCompiler {
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**
-     * The method compiles a java file.
+     * Compiles a java file.
      *
      * @param newJavaParameter for all the parameters needed for Java Compiler.
      * @return the result of execution in console.

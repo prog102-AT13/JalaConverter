@@ -11,7 +11,7 @@
 package org.fundacion.jala.converter.service.javacompiler;
 
 /**
- * This enum defines possibles Java versions.
+ * This enum defines possible Java versions.
  */
 public enum JavaVersion {
     JAVA_11("thirdparty\\windows\\javabin\\jdk-11.0.10\\bin\\javac.exe",
