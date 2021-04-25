@@ -48,7 +48,6 @@ public class VideoConverter {
         String ffmpegCommand = startFirstCommand + adaptPath + " ";
         String parameters = changeResolution() + changeFrameRate() + removeAudio();
         String theCommand = ffmpegCommand + parameters + pathOutput + output  + "\"";
-        System.out.println("\n\n\n\n\n\n" + theCommand);
 
         Process process = Runtime.getRuntime().exec("cmd /c " + theCommand);
         ThreadHandler errorHandler = new ThreadHandler(process.getErrorStream(), "Error Stream");
@@ -81,7 +80,7 @@ public class VideoConverter {
         if (width > 0 && height > 0) {
             scale = width + ":" + height;
             aspectRatio = ":force_original_aspect_ratio=decrease,pad=";
-            resolutionCommand = "-vf \"scale=" + scale + aspectRatio + scale + ":-1:-1:color=white\"";
+            resolutionCommand = "-vf scale=" + scale + aspectRatio + scale + ":-1:-1:color=white";
             return resolutionCommand;
         }
         return "";
@@ -93,10 +92,11 @@ public class VideoConverter {
     private void generateAThumbnail() throws IOException{
         String name = getOutputFileName().substring(0, getOutputFileName().lastIndexOf("."));
         String startCommand = "ffmpeg -i ";
-        String outputCommand = pathOutput + output + "\"" + " -ss 00:00:01 -vframes 1 -s 128x128 "
+        String adaptPath = "\"" + parameter.getFilePath() + "\"";
+        String outputCommand = adaptPath + " -ss 00:00:02 -vframes 1 -s 128x128 "
                 + pathOutput
                 + name
-                + ".png\"";
+                + PNG_FORMAT + "\"";
         String thumbnailCommand = startCommand + outputCommand;
 
         Process process = Runtime.getRuntime().exec("cmd /c " + thumbnailCommand);
