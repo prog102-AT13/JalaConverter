@@ -7,7 +7,6 @@
  * license agreement you entered into with Fundacion Jala
  *
  * @author Jorge Caceres Velasco
- * * @version 1.0
  */
 package org.fundacion.jala.converter.models.facade;
 
@@ -17,10 +16,9 @@ import org.fundacion.jala.converter.service.javacompiler.JavaCompiler;
 import org.fundacion.jala.converter.service.PythonCompiler;
 
 /**
- * Class to do and call facade of compiler.
+ * This class calls facade of compiler.
  */
 public class CompilerFacade {
-
     private static String result;
     private static JavaCompiler javaCompiler;
     private static PythonCompiler pythonCompiler;
