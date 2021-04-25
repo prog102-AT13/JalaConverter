@@ -74,6 +74,7 @@ public class ExtractFacade {
 
     /**
      * Converts string to enum for metadata.
+     *
      * @param format define type of file which it is exported.
      * @return format type TypeFileExport
      */
