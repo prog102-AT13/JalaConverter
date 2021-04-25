@@ -15,6 +15,7 @@ import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import org.fundacion.jala.converter.view.Models.AudioRequestForm;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
+
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
@@ -25,6 +26,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+
 import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 
@@ -50,11 +52,6 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
     private String token;
     private String checksumLocal;
 
-    /**
-     * Initializes the graphics elements for Audio converter interface.
-     *
-     * @param newToken a String with the authentication token.
-     */
     public AudioConverterInterface(final String newToken) {
         token = newToken;
         JLabelStyle audioTitle = new JLabelStyle("Audio converter", "h1",
@@ -92,7 +89,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
      * @param e event of the JButton.
      */
     @Override
-    public void actionPerformed(final ActionEvent e)  {
+    public void actionPerformed(final ActionEvent e) {
         LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");
