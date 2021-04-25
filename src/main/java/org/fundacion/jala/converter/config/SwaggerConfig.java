@@ -78,7 +78,7 @@ public class SwaggerConfig {
     /**
      * Customizes the API Information.
      *
-     * @return the ApiInfo with the customization values
+     * @return the ApiInfo with the custom values
      */
     private ApiInfo apiDetails() {
         return new ApiInfo(

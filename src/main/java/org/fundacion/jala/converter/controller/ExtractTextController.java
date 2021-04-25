@@ -10,16 +10,15 @@
  */
 package org.fundacion.jala.converter.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.models.facade.ExtractFacade;
 import org.fundacion.jala.converter.models.parameter.ExtractTextParameter;
 import org.fundacion.jala.converter.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
@@ -37,7 +36,9 @@ public class ExtractTextController {
     /**
      * Endpoint for extract text.
      */
-    @PostMapping("/extractText")
+    @PostMapping(value = "/extractText")
+    @ApiOperation(value = "Extracts the text of an image", notes = "Provide the image's path",
+            authorizations = {@Authorization(value = "JWT")})
     public String uploadFile(final @RequestParam("file")MultipartFile file,
                              final @RequestParam("language") String language) throws IllegalStateException,
             IOException {

@@ -8,6 +8,8 @@
  */
 package org.fundacion.jala.converter.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.models.facade.CompilerFacade;
@@ -29,6 +31,8 @@ public class PythonCompilerController {
      * Endpoint for compile python from a string
      */
     @PostMapping("/compilePython")
+    @ApiOperation(value = "Compiles python code", notes = "Provide the code to compile",
+            authorizations = {@Authorization(value = "JWT")})
     public String compilePython(final @RequestParam("code") String code) throws IllegalStateException, IOException {
         LOGGER.info("start");
         if (!code.isBlank() || !code.equals(null)) {
