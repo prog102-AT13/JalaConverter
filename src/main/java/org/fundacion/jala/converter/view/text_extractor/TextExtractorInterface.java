@@ -7,9 +7,7 @@
  * license agreement you entered into with Fundacion Jala
  *
  * @author Saul Caspa Miranda
- * @version 1.0
  */
-
 package org.fundacion.jala.converter.view.text_extractor;
 
 import org.apache.logging.log4j.LogManager;
@@ -17,6 +15,7 @@ import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.view.Models.ExtractTextRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
+
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -29,43 +28,43 @@ import java.io.IOException;
 
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 
+/**
+ * This class shows the extractText interface.
+ */
 public class TextExtractorInterface extends JPanel implements ActionListener {
     private SelectFile file;
     private SelectLanguage languageSelect;
     private ClientRequest clientRequest = new ClientRequest();
-    private static final Logger LOGGER = LogManager.getLogger();
-    private final int alignLabelStyle = 2;
-    private final int widthLabelStyle = 70;
-    private final int heightLabelStyle = 30;
-    private final int topBorder = 40;
-    private final int leftBorder = 40;
-    private final int bottomBorder = 100;
-    private final int rightBorder = 0;
-    private final int fontStyle = 0;
-    private final int fontSize = 12;
+    private final Logger LOGGER = LogManager.getLogger();
+    private final int ALIGN_LABEL_STYLE = 2;
+    private final int WIDTH_LABEL_STYLE = 70;
+    private final int HEIGHT_LABEL_STYLE = 30;
+    private final int TOP_BORDER = 40;
+    private final int LEFT_BORDER = 40;
+    private final int BOTTOM_BORDER = 100;
+    private final int RIGHT_BORDER = 0;
+    private final int FONT_STYLE = 0;
+    private final int FONT_SIZE = 12;
     private String token;
 
-    /**
-     * Initializes graphics elements for Audio converter interface.
-     */
     public TextExtractorInterface(final String newToken) {
         token = newToken;
         JLabelStyle audioTitle = new JLabelStyle("Text extractor", "h1",
-                alignLabelStyle, widthLabelStyle, heightLabelStyle);
+                ALIGN_LABEL_STYLE, WIDTH_LABEL_STYLE, HEIGHT_LABEL_STYLE);
         JLabelStyle audioSettings = new JLabelStyle("Image settings", "h1",
-                alignLabelStyle, widthLabelStyle, heightLabelStyle);
+                ALIGN_LABEL_STYLE, WIDTH_LABEL_STYLE, HEIGHT_LABEL_STYLE);
         audioTitle.setAlignmentX(LEFT_ALIGNMENT);
         audioSettings.setAlignmentX(LEFT_ALIGNMENT);
         JButton convertAudio = new JButton("Extract");
         convertAudio.setAlignmentX(LEFT_ALIGNMENT);
-        convertAudio.setFont(new Font("Barlow", fontStyle, fontSize));
+        convertAudio.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
         convertAudio.addActionListener(this::actionPerformed);
         file = new SelectFile();
         file.setAlignmentX(LEFT_ALIGNMENT);
         languageSelect = new SelectLanguage();
         languageSelect.setAlignmentX(LEFT_ALIGNMENT);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBorder(new EmptyBorder(topBorder, leftBorder, bottomBorder, rightBorder));
+        setBorder(new EmptyBorder(TOP_BORDER, LEFT_BORDER, BOTTOM_BORDER, RIGHT_BORDER));
         add(audioTitle.getTextLabel());
         add(file);
         add(audioSettings.getTextLabel());
@@ -74,8 +73,8 @@ public class TextExtractorInterface extends JPanel implements ActionListener {
     }
 
     /**
-     * Converts, sends information for metadataCLASS conversion.
-     * Shows a Dialog with the information.
+     * Converts and sends information for metadata CLASS conversion then shows a Dialog with the information.
+     *
      * @param e event of the JButton.
      */
     @Override
@@ -95,8 +94,9 @@ public class TextExtractorInterface extends JPanel implements ActionListener {
     }
 
     /**
-     * Obtains the request
-     * @throws IOException
+     * Obtains the request.
+     *
+     * @throws IOException when invalid username or password is given.
      */
     private void callRequest() throws IOException {
         LOGGER.info("start");

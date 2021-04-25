@@ -7,26 +7,29 @@
  * license agreement you entered into with Fundacion Jala
  *
  * @author Edson Añawaya Rios
- * @version 1.0
  */
 package org.fundacion.jala.converter.view.Models;
 
 import java.util.ArrayList;
 import java.util.List;
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
+
+/**
+ * This class shows the Video's form.
+ */
 public class VideoRequestForm implements IRequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
-    private final String url = dotenv.get("HTTP_URL_CONVERT_VIDEO");
-    private final String file = "file";
-    private final String outputFormat = "outputformat";
-    private final String resolution = "resolution";
-    private final String thumbnail = "thumbnail";
-    private final String frameRate = "framerate";
-    private final String width = "width";
-    private final String height = "height";
-    private final String audio = "audio";
-    private final String metadata = "metadata";
-    private final String checksum = "checksum";
+    private final String URL = dotenv.get("HTTP_URL_CONVERT_VIDEO");
+    private final String FILE = "file";
+    private final String OUTPUT_FORMAT = "outputformat";
+    private final String RESOLUTION = "resolution";
+    private final String THUMBNAIL = "thumbnail";
+    private final String FRAME_RATE = "framerate";
+    private final String WIDTH = "width";
+    private final String HEIGHT = "height";
+    private final String AUDIO = "audio";
+    private final String METADATA = "metadata";
+    private final String CHECKSUM = "checksum";
 
     /**
      * Video Request Form stores parameters for an video request
@@ -35,85 +38,96 @@ public class VideoRequestForm implements IRequestForm {
     }
 
     /**
-     * Adds filepath parameter
-     * @param filepathValue
+     * Adds filepath parameter.
+     *
+     * @param filepathValue String with file's path.
      */
     public void addFilepath(final String filepathValue) {
-        addParameters(new Parameter(file, filepathValue, true));
+        addParameters(new Parameter(FILE, filepathValue, true));
     }
 
     /**
-     * Adds outputFormat parameter
-     * @param outputFormatValue
+     * Adds outputFormat parameter.
+     *
+     * @param outputFormatValue String with outputs format.
      */
     public void addOutputFormat(final String outputFormatValue) {
-        addParameters(new Parameter(outputFormat, outputFormatValue, false));
+        addParameters(new Parameter(OUTPUT_FORMAT, outputFormatValue, false));
     }
 
     /**
-     * Adds resolution parameter
-     * @param resolutionValue
+     * Adds resolution parameter.
+     *
+     * @param resolutionValue String with resolution value.
      */
     public void addResolution(final String resolutionValue) {
-        addParameters(new Parameter(resolution, resolutionValue, false));
+        addParameters(new Parameter(RESOLUTION, resolutionValue, false));
     }
     /**
-     * Adds checksum parameter
-     * @param checksumValue
+     * Adds checksum parameter.
+     *
+     * @param checksumValue String with checksum value.
      */
     public void addChecksum(final String checksumValue) {
-        addParameters(new Parameter(checksum, checksumValue, false));
+        addParameters(new Parameter(CHECKSUM, checksumValue, false));
     }
 
     /**
-     * Adds thumbnail parameter
-     * @param thumbnailValue
+     * Adds thumbnail parameter.
+     *
+     * @param thumbnailValue String with thumbnail value.
      */
     public void addThumbnail(final String thumbnailValue) {
-        addParameters(new Parameter(thumbnail, thumbnailValue, false));
+        addParameters(new Parameter(THUMBNAIL, thumbnailValue, false));
     }
 
     /**
-     * Adds frameRate parameter
-     * @param frameRateValue
+     * Adds frameRate parameter.
+     *
+     * @param frameRateValue String with frameRate value.
      */
     public void addFrameRate(final String frameRateValue) {
-        addParameters(new Parameter(frameRate, frameRateValue, false));
+        addParameters(new Parameter(FRAME_RATE, frameRateValue, false));
     }
 
     /**
-     * Adds width parameter
-     * @param widthValue
+     * Adds width parameter.
+     *
+     * @param widthValue String with width value.
      */
     public void addWidth(final String widthValue) {
-        addParameters(new Parameter(width, widthValue, false));
+        addParameters(new Parameter(WIDTH, widthValue, false));
     }
 
     /**
-     * Adds height parameter
-     * @param heightValue
+     * Adds height parameter.
+     *
+     * @param heightValue String with height value.
      */
     public void addHeight(final String heightValue) {
-        addParameters(new Parameter(height, heightValue, false));
+        addParameters(new Parameter(HEIGHT, heightValue, false));
     }
 
     /**
-     * Adds audio parameter
-     * @param audioValue
+     * Adds audio parameter.
+     *
+     * @param audioValue String with audio value.
      */
     public void addAudio(final String audioValue) {
-        addParameters(new Parameter(audio, audioValue, false));
+        addParameters(new Parameter(AUDIO, audioValue, false));
     }
     /**
-     * Adds metadata parameter
-     * @param metadataValue
+     * Adds metadata parameter.
+     *
+     * @param metadataValue String with metadata value.
      */
     public void addMetadata(final String metadataValue) {
-        addParameters(new Parameter(metadata, metadataValue, false));
+        addParameters(new Parameter(METADATA, metadataValue, false));
     }
     /**
-     * Gets the body parameters
-     * @return bodyParameters of video
+     * Gets the body parameters.
+     *
+     * @return a List<Parameter> with video's Parameters.
      */
     @Override
     public List<Parameter> getBodyParameters() {
@@ -121,8 +135,9 @@ public class VideoRequestForm implements IRequestForm {
     }
 
     /**
-     * Adds parameters to bodyParameters
-     * @param parameter
+     * Adds parameters to bodyParameters.
+     *
+     * @param parameter Object Parameter.
      */
     @Override
     public void addParameters(final Parameter parameter) {
@@ -130,11 +145,12 @@ public class VideoRequestForm implements IRequestForm {
     }
 
     /**
-     * Gets the url
-     * @return url of endpoint
+     * Gets the url.
+     *
+     * @return a String with endpoint's url.
      */
     @Override
     public String getURL() {
-        return url;
+        return URL;
     }
 }

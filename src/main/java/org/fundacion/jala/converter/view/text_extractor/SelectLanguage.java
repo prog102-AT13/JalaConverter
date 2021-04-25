@@ -7,9 +7,7 @@
  * license agreement you entered into with Fundacion Jala
  *
  * @author Saul Caspa Miranda
- * @version 1.0
  */
-
 package org.fundacion.jala.converter.view.text_extractor;
 
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
@@ -19,6 +17,9 @@ import java.awt.Font;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 
+/**
+ * This class shows the select language form.
+ */
 public class SelectLanguage extends JPanel {
     private JComboBox convertTo;
     private final int alignLabelStyle = 2;
@@ -31,9 +32,6 @@ public class SelectLanguage extends JPanel {
     private final int flowLayoutHgap = 10;
     private final int flowLayoutVgap = 10;
 
-    /**
-     * Initializes graphic elements for SelectCombox for convert type.
-     */
     protected SelectLanguage() {
         JLabelStyle labelConvertTo = new JLabelStyle("Convert to: ", "h3",
                 alignLabelStyle, widthLabelStyle, heightLabelStyle);
@@ -49,7 +47,8 @@ public class SelectLanguage extends JPanel {
 
     /**
      * Returns the selected option to conversion.
-     * @return String with the selected option.
+     *
+     * @return a String with the selected option.
      */
     protected String getConvertTo() {
         return convertTo.getSelectedItem().toString();

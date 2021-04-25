@@ -15,34 +15,40 @@ import java.util.ArrayList;
 import java.util.List;
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 
+/**
+ * This class shows the extract text form.
+ */
 public class ExtractTextRequestForm implements IRequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
-    private final String url = dotenv.get("HTTP_URL_EXTRACT_TEXT");
-    private final String file = "file";
-    private final String format = "language";
+    private final String URL = dotenv.get("HTTP_URL_EXTRACT_TEXT");
+    private final String FILE = "file";
+    private final String FORMAT = "language";
 
     public ExtractTextRequestForm() {
     }
 
     /**
-     * Adds filepath parameter
-     * @param filepathValue
+     * Adds filepath parameter.
+     *
+     * @param filepathValue Sting with the file's path.
      */
     public void addFilepath(final String filepathValue) {
-        addParameters(new Parameter(file, filepathValue, true));
+        addParameters(new Parameter(FILE, filepathValue, true));
     }
 
     /**
-     * Adds language format parameter
-     * @param languageFormat
+     * Adds language format parameter.
+     *
+     * @param languageFormat String with format's language.
      */
     public void addLanguageFormat(final String languageFormat) {
-        addParameters(new Parameter(format, languageFormat, false));
+        addParameters(new Parameter(FORMAT, languageFormat, false));
     }
 
     /**
-     * Gets the body parameters
-     * @return bodyParameters
+     * Gets the body parameters.
+     *
+     * @return a List<Parameter> with body's parameters.
      */
     @Override
     public List<Parameter> getBodyParameters() {
@@ -51,7 +57,8 @@ public class ExtractTextRequestForm implements IRequestForm {
 
     /**
      * Adds parameters to bodyParameters.
-     * @param parameter
+     *
+     * @param parameter Object Parameter.
      */
     @Override
     public void addParameters(final Parameter parameter) {
@@ -59,11 +66,12 @@ public class ExtractTextRequestForm implements IRequestForm {
     }
 
     /**
-     * Gets the URL
-     * @return URL
+     * Gets the URL.
+     *
+     * @return a String with the file's url.
      */
     @Override
     public String getURL() {
-        return url;
+        return URL;
     }
 }

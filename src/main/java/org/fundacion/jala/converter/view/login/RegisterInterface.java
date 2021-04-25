@@ -137,8 +137,8 @@ public class RegisterInterface extends JFrame implements ActionListener {
     /**
      * Sends a request with given information.
      *
-     * @param username a String with username
-     * @param password a String with password
+     * @param username a String with username.
+     * @param password a String with password.
      */
     public void callRequest(final String username, final String password) {
         RegisterRequestForm registerRequestForm = new RegisterRequestForm();
@@ -157,7 +157,7 @@ public class RegisterInterface extends JFrame implements ActionListener {
     /**
      * Gets the actions performed on the components.
      *
-     * @param e an action event
+     * @param e an action event.
      */
     @Override
     public void actionPerformed(final ActionEvent e) {
@@ -191,8 +191,8 @@ public class RegisterInterface extends JFrame implements ActionListener {
     /**
      * Shows or Hides a JPasswordField depending on its status.
      *
-     * @param jPasswordField the field to change
-     * @param status a boolean with current status
+     * @param jPasswordField the field to change.
+     * @param status a boolean with current status.
      */
     public void showOrHidePassword(final JPasswordField jPasswordField, final boolean status) {
         if (status) {
