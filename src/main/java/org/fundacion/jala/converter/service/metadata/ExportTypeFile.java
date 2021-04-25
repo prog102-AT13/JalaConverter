@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Gustavo Huanca Alconz
+ * @author Gustavo Zacarias Huanca Alconz
  */
 package org.fundacion.jala.converter.service.metadata;
 
@@ -41,7 +41,7 @@ public class ExportTypeFile {
     }
 
     /**
-     * Defines name that the file are exported.
+     * Defines name that the files are exported.
      *
      * @param nameExport define name of file which it is exported.
      */
@@ -84,6 +84,8 @@ public class ExportTypeFile {
      * Defines name that the file are exported.
      * Set nameFileExport.
      * e.g. DragonBall.mp4 --> NameSet.xmp.
+     *
+     * @param newName a String to set a new file name.
      */
     private void setNameFileExport(final String newName) {
         this.nameFileExport = newName;
