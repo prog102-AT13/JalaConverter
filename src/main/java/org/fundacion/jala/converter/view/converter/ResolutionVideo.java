@@ -5,10 +5,14 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Gustavo Zacarias Huanca Alconz
  */
-
 package org.fundacion.jala.converter.view.converter;
 
+/**
+ * This class defines the interface for resolution of video.
+ */
 public class ResolutionVideo {
     private String width;
     private String height;
@@ -22,7 +26,8 @@ public class ResolutionVideo {
 
     /**
      * Gets width of video.
-     * @return width of video.
+     *
+     * @return a width of video.
      */
     public String getWidth() {
         return width;
@@ -30,6 +35,7 @@ public class ResolutionVideo {
 
     /**
      * Sets width of video.
+     *
      * @param newWidth of video.
      */
     public void setWidth(final String newWidth) {
@@ -37,8 +43,9 @@ public class ResolutionVideo {
     }
 
     /**
-     * Gets height of video.
-     * @return height of video.
+     * Gets video's height.
+     *
+     * @return video's height.
      */
     public String getHeight() {
         return height;
@@ -46,6 +53,7 @@ public class ResolutionVideo {
 
     /**
      * Sets height of video.
+     *
      * @param newHeight of video.
      */
     public void setHeight(final String newHeight) {
@@ -54,7 +62,8 @@ public class ResolutionVideo {
 
     /**
      * Gets name to shown in combBox.
-     * @return name to shown in combBox.
+     *
+     * @return a name to shown in combBox.
      */
     public String getName() {
         return name;
@@ -62,6 +71,7 @@ public class ResolutionVideo {
 
     /**
      * Sets name to shown in combBox.
+     *
      * @param newName to shown in combBox.
      */
     public void setName(final String newName) {
@@ -70,7 +80,8 @@ public class ResolutionVideo {
 
     /**
      * Gets full name to shown in combBox.
-     * @return full name to shown in combBox.
+     *
+     * @return a String with the full name to shown in combBox.
      */
     @Override
     public String toString() {
@@ -79,9 +90,10 @@ public class ResolutionVideo {
     }
 
     /**
-     * Adds space depending for length of name
-     * @param nameLength of name
-     * @return a int with the long necessary for blank spaces
+     * Ass space depending on name's length.
+     *
+     * @param nameLength a String with the name's length
+     * @return an int with necessary blank spaces.
      */
     public int numberSpaces(final String nameLength) {
         final int spacesFor720 = 59;
@@ -112,9 +124,10 @@ public class ResolutionVideo {
     }
 
     /**
-     * Adds blank spaces
-     * @param numberSpaces
-     * @return a String with necessary spaces
+     * Adds blank spaces.
+     *
+     * @param numberSpaces int with number of spaces .
+     * @return a String with necessary spaces.
      */
     public String addSpaces(final int numberSpaces) {
         String spaces = "";

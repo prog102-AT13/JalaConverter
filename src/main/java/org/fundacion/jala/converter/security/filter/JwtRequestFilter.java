@@ -31,6 +31,7 @@ import java.io.IOException;
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
     private final int BEARER_LENGTH = 7;
+
     @Autowired
     private MyUserDetailsService userDetailsService;
 
@@ -40,26 +41,23 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     /**
      * Makes an internal filter of the request.
      *
-     * @param request a http servlet request
-     * @param response a http servlet response
-     * @param filterChain the web chain filters
-     * @throws ServletException when the servlet has difficulties
-     * @throws IOException when problems on inputs and outputs
+     * @param request a http servlet request.
+     * @param response a http servlet response.
+     * @param filterChain the web chain filters.
+     * @throws ServletException when the servlet has difficulties.
+     * @throws IOException when problems on inputs and outputs.
      */
     @Override
     protected void doFilterInternal(final HttpServletRequest request,
                                     final HttpServletResponse response,
                                     final FilterChain filterChain) throws ServletException, IOException {
         final String authorizationHeader = request.getHeader("Authorization");
-
         String username = null;
         String jwt = null;
-
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             jwt = authorizationHeader.substring(BEARER_LENGTH);
             username = jwtUtil.extractUsername(jwt);
         }
-
         if (authorizationHeader != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
             if (jwtUtil.validateToken(jwt, userDetails)) {
