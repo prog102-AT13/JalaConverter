@@ -43,9 +43,9 @@ public class ResolutionVideo {
     }
 
     /**
-     * Gets height of video.
+     * Gets video's height.
      *
-     * @return a height of video.
+     * @return video's height.
      */
     public String getHeight() {
         return height;
@@ -90,10 +90,10 @@ public class ResolutionVideo {
     }
 
     /**
-     * Adds space depending for length of name.
+     * Ass space depending on name's length.
      *
-     * @param nameLength of name.
-     * @return an int with the long necessary for blank spaces.
+     * @param nameLength a String with the name's length
+     * @return an int with necessary blank spaces.
      */
     public int numberSpaces(final String nameLength) {
         final int spacesFor720 = 59;

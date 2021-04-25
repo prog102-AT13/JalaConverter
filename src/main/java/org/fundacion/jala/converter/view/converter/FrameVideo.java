@@ -29,7 +29,7 @@ public class FrameVideo {
     }
 
     /**
-     * Sets the name select of video.
+     * Sets selected video's name.
      *
      * @param newName is select options.
      */

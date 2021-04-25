@@ -71,7 +71,7 @@ class QualityAudio extends JPanel implements ChangeListener {
     }
 
     /**
-     * Changes the state of the quality audio.
+     * Changes the audio's quality state.
      *
      * @param e a ChangeEvent.
      */
@@ -81,7 +81,7 @@ class QualityAudio extends JPanel implements ChangeListener {
     }
 
     /**
-     * Gets the quality audio.
+     * Gets the audio's quality.
      *
      * @return a String with the qualityAudio.
      */
