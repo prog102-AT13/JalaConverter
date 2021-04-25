@@ -40,7 +40,7 @@ public class FrameVideo {
     /**
      * Gets frame select of video.
      *
-     * @return a String with frame is value select options.
+     * @return a String with the video frame.
      */
     public String getFrame() {
         return frame;
