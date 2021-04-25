@@ -33,6 +33,7 @@ import static org.fundacion.jala.converter.models.UserSQL.editToken;
 @RestController
 public class AuthController {
     private Logger authLogger = LogManager.getLogger();
+
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -41,32 +42,34 @@ public class AuthController {
 
     @Autowired
     private JwtUtil jwtTokenUtil;
+
     /**
-     * Create an authentication response with the token.
+     * Creates an authentication response with the token.
      *
-     * @param username a String with the username
-     * @param password a String with the password
-     * @return response entity with the token
-     * @throws Exception when invalid username or password is given
+     * @param username is a String with the username.
+     * @param password is a String with the password.
+     * @return response entity with the token.
+     * @throws Exception when invalid username or password is given.
      */
     @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthenticationToken(final @RequestParam String username,
                                                        final @RequestParam String password) throws Exception {
+        final UserDetails userDetails;
+        final String jwt;
         AuthenticationRequest authenticationRequest = new AuthenticationRequest(username, password);
         try {
             authLogger.info("Start.");
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            authenticationRequest.getUsername(),
-                            authenticationRequest.getPassword())
-            );
+            UsernamePasswordAuthenticationToken userPassAuthTok;
+            Object getUsernameAuth = authenticationRequest.getUsername();
+            Object getPassAuth = authenticationRequest.getPassword();
+            userPassAuthTok = new UsernamePasswordAuthenticationToken(getUsernameAuth, getPassAuth);
+            authenticationManager.authenticate(userPassAuthTok);
         } catch (BadCredentialsException e) {
             authLogger.error("Error. " + e.getLocalizedMessage());
             throw new Exception("Incorrect username or password", e);
         }
-        final UserDetails userDetails = userDetailsService
-                .loadUserByUsername(authenticationRequest.getUsername());
-        final String jwt = jwtTokenUtil.generateToken(userDetails);
+        userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+        jwt = jwtTokenUtil.generateToken(userDetails);
         editToken(username, jwt);
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }

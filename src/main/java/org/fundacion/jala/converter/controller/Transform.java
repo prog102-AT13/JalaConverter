@@ -21,11 +21,14 @@ import java.io.FileWriter;
  */
 public class Transform {
     private static final Logger LOGGER = LogManager.getLogger();
+
     /**
      * Converts the code that is written as a string to a file with a python extension.
      *
-     * @param code It is a string ready to be converted
-     * @return path where will be created the file
+     * @param code is a string ready to be converted.
+     * @param fileName is the name of the file converted.
+     * @param extension is python extension.
+     * @return path where will be created the file.
      */
     public static String toFile(final String code, final String fileName, final String extension) {
         LOGGER.info("start");
@@ -36,7 +39,6 @@ public class Transform {
             if (!file.exists()) {
                 file.createNewFile();
             }
-
             FileWriter fileWriter = new FileWriter(file);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(code);

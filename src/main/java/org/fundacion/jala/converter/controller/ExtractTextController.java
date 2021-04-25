@@ -32,16 +32,22 @@ import java.io.IOException;
 @RequestMapping("/api")
 public class ExtractTextController {
     private static final Logger LOGGER = LogManager.getLogger();
+
     @Autowired
     private FileStorageService fileStorageService;
 
     /**
-     * Endpoint for extract text.
+     * Creates endpoint to extract text.
+     *
+     * @param file is image file to extract text.
+     * @param language is a type of language of the text.
+     * @return path to download files.
+     * @throws IllegalStateException is a exception if process is Illegal.
+     * @throws IOException is a exception when invalid input is provided.
      */
     @PostMapping("/extractText")
-    public String uploadFile(final @RequestParam("file")MultipartFile file,
-                             final @RequestParam("language") String language) throws IllegalStateException,
-            IOException {
+    public String uploadFile(final @RequestParam("file") MultipartFile file,
+                             final @RequestParam("language") String language) throws IllegalStateException, IOException {
         LOGGER.info("start");
         String fileOut = file.getOriginalFilename();
         String outputFileName = fileOut.substring(0, fileOut.lastIndexOf("."));
