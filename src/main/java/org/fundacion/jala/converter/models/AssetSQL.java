@@ -25,7 +25,8 @@ public class AssetSQL {
      * @param pathProject path the archive.
      * @param checksum string checksum of the archive.
      */
-    public static void insertAssetData(final String projectName, final String pathProject, final String checksum, final int userId) {
+    public static void insertAssetData(final String projectName, final String pathProject,
+                                       final String checksum, final int userId) {
         EntityManager manager = emf.createEntityManager();
         manager.getTransaction().begin();
         User editUser = manager.find(User.class, userId);
@@ -48,7 +49,8 @@ public class AssetSQL {
      * @param type String with the type og¿f the project.
      * @param user a User.
      */
-    public static void editProjectData(final int projectId, final String projectName, final String pathProject, final String type, final User user) {
+    public static void editProjectData(final int projectId, final String projectName,
+                                       final String pathProject, final String type, final User user) {
         EntityManager manager = emf.createEntityManager();
         manager.getTransaction().begin();
         User editProject = manager.find(User.class, projectId);
