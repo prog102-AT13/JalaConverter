@@ -12,6 +12,7 @@ package org.fundacion.jala.converter.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -107,5 +108,14 @@ public class SwaggerConfig {
      */
     private ApiKey apiKey() {
         return new ApiKey("JWT", "Authorization", "header");
+    }
+
+    /**
+     * hello
+     * @return
+     */
+    @Bean(name = "multipartResolver")
+    public CommonsMultipartResolver commonsMultipartResolver() {
+        return new CommonsMultipartResolver();
     }
 }
