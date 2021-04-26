@@ -21,7 +21,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Class to do and call facade of extract.
+ * This class calls facade of extract.
  */
 public class ExtractFacade {
     public static final String TXT_FILE_EXTENSION = ".txt";
@@ -33,7 +33,8 @@ public class ExtractFacade {
 
     /**
      * Extracts text from image.
-     * @param extractTextParameter is a object with parameter of extractText to convert
+     *
+     * @param extractTextParameter is a object with parameter of extractText to convert.
      */
     public static void getTextExtract(final ExtractTextParameter extractTextParameter) {
         ExtractText extractText = new ExtractText(extractTextParameter);
@@ -42,23 +43,24 @@ public class ExtractFacade {
 
     /**
      * Extracts metadata from file.
+     *
      * @param file is the path of file to extract metadata.
-     * @param isMoreInfo is get more info of file
-     * @param nameExport  is the name of file where metadata are extracted
-     * @param format is the format of file where metadata are extracted
-     * @return string with name of file which contains metadata
+     * @param isMoreInfo is get more info of file.
+     * @param nameExport  is the name of file where metadata are extracted.
+     * @param format is the format of file where metadata are extracted.
+     * @return string with name of file which contains metadata.
      */
     public static String getMetadataExtract(final MultipartFile file, final Boolean isMoreInfo,
                                             final String nameExport, final String format) throws IOException {
         FileStorageService fileStorageService = new FileStorageService();
         String pathFile = fileStorageService.uploadFile(file);
         TypeFileExport typeFileExport = stringToEnum(format);
-        String outputPath = fileStorageService.getOutputPathWithoutFileName(fileStorageService.getOutputPath(pathFile));
+        String outPath = fileStorageService.getOutputPathWithoutFileName(fileStorageService.getOutputPath(pathFile));
         File fileToExtract = new File(pathFile);
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setNameExport(nameExport + "");
         objectMetadata.setFileToExtract(fileToExtract);
-        objectMetadata.setFileToExport(new File(outputPath));
+        objectMetadata.setFileToExport(new File(outPath));
         objectMetadata.setMoreInfo(isMoreInfo);
         objectMetadata.setTypeFileExport(typeFileExport);
         ExtractMetadata extractMetadata = new ExtractMetadata(objectMetadata);
@@ -72,8 +74,9 @@ public class ExtractFacade {
 
     /**
      * Converts string to enum for metadata.
+     *
      * @param format define type of file which it is exported.
-     * @return format type TypeFileExport
+     * @return format type TypeFileExport.
      */
     private static TypeFileExport stringToEnum(final String format) {
         if (TXT_FILE_EXTENSION.equals(format)) {
