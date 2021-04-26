@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
+ *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
  * @author Daniela Santa Cruz
- * @colaborathor Paola Aguilar
  */
 package org.fundacion.jala.converter.service;
 
@@ -42,7 +42,7 @@ public class VideoConverter {
         pathOutput = adaptPath.substring(0, (adaptPath.lastIndexOf("archive"))) + "archive\\";
         String ffmpegCommand = startFirstCommand + adaptPath + " ";
         String parameters = changeResolution() + changeFrameRate() + removeAudio();
-        String theCommand = ffmpegCommand + parameters + pathOutput + output  + "\"" + " -y";
+        String theCommand = ffmpegCommand + parameters + pathOutput + output + "\"" + " -y";
         System.out.println(theCommand);
         try {
             LOGGER.info("Execute Try");
@@ -54,8 +54,10 @@ public class VideoConverter {
         }
         try {
             LOGGER.info("Execute Try");
-            Thread.sleep(WAIT_TIME);
-            generateAThumbnail();
+            if (parameter.hasThumbnail()) {
+                Thread.sleep(WAIT_TIME);
+                generateAThumbnail();
+            }
             LOGGER.info("finish");
         } catch (InterruptedException exception) {
             exception.printStackTrace();
@@ -65,6 +67,7 @@ public class VideoConverter {
 
     /**
      * Changes the resolution and aspect ratio of the input video.
+     *
      * @return resolution command
      */
     private String changeResolution() {
@@ -105,6 +108,7 @@ public class VideoConverter {
 
     /**
      * Removes the audio of the input video.
+     *
      * @return audio command
      */
     private String removeAudio() {
@@ -119,6 +123,7 @@ public class VideoConverter {
 
     /**
      * Changes the input video frame rate.
+     *
      * @return frame command
      */
     private String changeFrameRate() {
@@ -133,6 +138,7 @@ public class VideoConverter {
 
     /**
      * Sets the output file name.
+     *
      * @param newOutputFileName String with the output file name
      */
     public void setOutputFileName(final String newOutputFileName) {
@@ -141,6 +147,7 @@ public class VideoConverter {
 
     /**
      * Gets the output file name.
+     *
      * @return outputFileName
      */
     public String getOutputFileName() {
