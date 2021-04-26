@@ -12,6 +12,7 @@ package org.fundacion.jala.converter.service;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.exceptions.MetadataException;
 import org.fundacion.jala.converter.service.metadata.ExportTypeFile;
 import org.fundacion.jala.converter.service.metadata.TypeFileExport;
 import java.io.File;
@@ -28,7 +29,7 @@ public class ExtractMetadata {
     private ExportTypeFile exportTypeFile;
     private static final Logger LOGGER = LogManager.getLogger();
 
-    public ExtractMetadata(final ObjectMetadata extractMetadata) {
+    public ExtractMetadata(final ObjectMetadata extractMetadata) throws MetadataException {
         this.fileToExtract = extractMetadata.getFileToExtract();
         if (extractMetadata.getMoreInfo()) setMoreInformation();
         exportTypeFile = new ExportTypeFile(fileToExtract.getName(), extractMetadata.getNameExport(),
@@ -37,7 +38,7 @@ public class ExtractMetadata {
         extractMetadata();
     }
 
-    public ExtractMetadata(final File fileExtract, final File fileExport) {
+    public ExtractMetadata(final File fileExtract, final File fileExport) throws MetadataException {
         this.fileToExtract = fileExtract;
         setMoreInformation();
         exportTypeFile = new ExportTypeFile(fileToExtract.getName(), "Default", TypeFileExport.TXT,
@@ -49,16 +50,16 @@ public class ExtractMetadata {
     /**
      * Assembles the command to run in Exiftool.
      */
-    public void extractMetadata() {
+    public void extractMetadata() throws MetadataException {
         LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");
             String command = "cmd /c " + addressExiftool + " && exiftool.exe " + "\""
                              + fileToExtract.getAbsolutePath() + "\"" + moreInformation + exportFile;
             Process process = Runtime.getRuntime().exec(command);
-        } catch (IOException e) {
+        } catch (IOException exception) {
             LOGGER.error("Execute Exception to Safe text in a file");
-            e.printStackTrace();
+            throw new MetadataException(exception);
         }
         LOGGER.info("finish");
     }
@@ -78,7 +79,7 @@ public class ExtractMetadata {
      * @param fileStorageService an object to create the path.
      */
     public static void extractMetadata(final String metadata, final String outputFileName,
-                                       final FileStorageService fileStorageService) {
+                                       final FileStorageService fileStorageService) throws MetadataException {
         String outputPath = fileStorageService.getOutputPath(outputFileName);
         String outputPathWithoutFileName = fileStorageService.getOutputPathWithoutFileName(outputFileName);
         if (metadata.equals("true")) {

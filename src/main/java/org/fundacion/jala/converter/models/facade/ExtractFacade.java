@@ -10,6 +10,7 @@
  */
 package org.fundacion.jala.converter.models.facade;
 
+import org.fundacion.jala.converter.exceptions.MetadataException;
 import org.fundacion.jala.converter.models.parameter.ExtractTextParameter;
 import org.fundacion.jala.converter.service.ExtractMetadata;
 import org.fundacion.jala.converter.service.ExtractText;
@@ -51,7 +52,7 @@ public class ExtractFacade {
      * @return string with name of file which contains metadata.
      */
     public static String getMetadataExtract(final MultipartFile file, final Boolean isMoreInfo,
-                                            final String nameExport, final String format) throws IOException {
+                                            final String nameExport, final String format) throws IOException, MetadataException {
         FileStorageService fileStorageService = new FileStorageService();
         String pathFile = fileStorageService.uploadFile(file);
         TypeFileExport typeFileExport = stringToEnum(format);

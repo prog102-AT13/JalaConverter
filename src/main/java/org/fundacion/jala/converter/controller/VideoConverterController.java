@@ -79,7 +79,11 @@ public class VideoConverterController {
         } catch (PaoPaoException converterException) {
             converterException.printStackTrace();
         }
-        extractMetadata(metadata, outputFilename, fileStorageService);
+        try {
+            extractMetadata(metadata, outputFilename, fileStorageService);
+        } catch (PaoPaoException exception) {
+            exception.printStackTrace();
+        }
         ZipFileFacade.getZipFileVideo(paramChecksum, metadata, thumbnail, outputFilename);
         String nameWithoutExtension = outputFilename.substring(0, outputFilename.lastIndexOf(".") + 1);
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();

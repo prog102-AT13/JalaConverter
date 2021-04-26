@@ -12,6 +12,7 @@ package org.fundacion.jala.converter.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.exceptions.PaoPaoException;
 import org.fundacion.jala.converter.models.facade.ExtractFacade;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,7 +47,12 @@ public class ExtractMetadataController {
                              final @RequestParam("nameExport") String nameExport,
                              final @RequestParam("format") String format) throws IllegalStateException, IOException {
         LOGGER.info("start");
-        String filename = ExtractFacade.getMetadataExtract(fileToExtract, isMoreInfo, nameExport, format);
+        String filename = null;
+        try {
+            filename = ExtractFacade.getMetadataExtract(fileToExtract, isMoreInfo, nameExport, format);
+        } catch (PaoPaoException exception) {
+            exception.printStackTrace();
+        }
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         String downloadLink = baseUrl + "/api/download/" + filename + "." + format;
         LOGGER.info("finish");
