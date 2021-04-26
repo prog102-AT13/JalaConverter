@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Cristian Choque Quispe
+ * @author Cristian Felix Choque Quispe
  */
 
 package org.fundacion.jala.converter.models;
