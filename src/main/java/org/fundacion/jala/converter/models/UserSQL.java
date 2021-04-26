@@ -32,7 +32,7 @@ public class UserSQL {
      *
      * @param userName String with the user name.
      * @param password String with the password of the user.
-     * @param token    String the token.
+     * @param token String the token.
      */
     public static User insertUserData(final String userName, final String password, final String token) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -51,10 +51,10 @@ public class UserSQL {
     /**
      * Edits the data of the user.
      *
-     * @param userId   int with the id of the user to be edited.
+     * @param userId int with the id of the user to be edited.
      * @param userName String with the new user name.
      * @param password String with the new password of the user.
-     * @param token    String with the new token.
+     * @param token String with the new token.
      */
     public static void editUserData(final int userId, final String userName, final String password,
                                     final String token) {
@@ -120,7 +120,7 @@ public class UserSQL {
      * Edits the token value in the database.
      *
      * @param username a String with the username.
-     * @param token    a String with the token.
+     * @param token a String with the token.
      */
     public static void editToken(final String username, final String token) {
         int userId = getUserId(username);
