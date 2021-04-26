@@ -10,6 +10,8 @@
  */
 package org.fundacion.jala.converter.controller;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.models.facade.ChecksumFacade;
 import org.fundacion.jala.converter.models.facade.ConverterFacade;
 import org.fundacion.jala.converter.models.facade.ParameterOutputChecksum;
@@ -33,6 +35,7 @@ import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetada
 @RequestMapping("/api")
 public class VideoConverterController {
     private ParameterOutputChecksum parameterOutputChecksum;
+    private static final Logger LOGGER = LogManager.getLogger();
 
     @Autowired
     private FileStorageService fileStorageService;
@@ -66,12 +69,14 @@ public class VideoConverterController {
                              final @RequestParam("checksum") String checksum,
                              final @RequestParam("metadata") boolean metadata)
             throws IOException, InterruptedException {
+        LOGGER.info("start");
         parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
         String outputFilename = ConverterFacade.getVideoConverter(
                 new VideoParameter(parameterOutputChecksum.getOutputFilename(), outputFormat, resolution, thumbnail,
                         frameRate, width, height, audio));
         extractMetadata(metadata, outputFilename, fileStorageService);
         ZipFileFacade.getZipFileVideo(parameterOutputChecksum, metadata, thumbnail, outputFilename);
+        LOGGER.info("finish");
         return DownloadLinkFacade.getLinkConverter(outputFilename);
     }
 }

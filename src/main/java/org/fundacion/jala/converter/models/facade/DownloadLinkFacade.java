@@ -10,6 +10,7 @@
  */
 package org.fundacion.jala.converter.models.facade;
 
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 /**
@@ -35,10 +36,12 @@ public class DownloadLinkFacade {
     /**
      *  Generator link to download.
      *
-     * @param outputFileName is path of file which are extracted text.
+     * @param file is path of file which are extracted text.
      * @return path which permit download the result process.
      */
-    public static String getLinkExtractText(final String outputFileName) {
+    public static String getLinkExtractText(final MultipartFile file) {
+        String fileOut = file.getOriginalFilename();
+        String outputFileName = fileOut.substring(0, fileOut.lastIndexOf("."));
         return baseUrl + "/api/download/" + outputFileName + ".txt";
     }
 

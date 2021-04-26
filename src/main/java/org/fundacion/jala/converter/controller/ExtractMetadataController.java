@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.io.IOException;
 
 /**
@@ -43,7 +41,7 @@ public class ExtractMetadataController {
      * @throws IOException is a exception when invalid input is provided.
      */
     @PostMapping("/extractMetadata")
-    public String uploadFile(final @RequestParam("fileToExtract") MultipartFile fileToExtract,
+    public String extractMetadata(final @RequestParam("fileToExtract") MultipartFile fileToExtract,
                              final @RequestParam("moreInfo") Boolean isMoreInfo,
                              final @RequestParam("nameExport") String nameExport,
                              final @RequestParam("format") String format) throws IllegalStateException, IOException {

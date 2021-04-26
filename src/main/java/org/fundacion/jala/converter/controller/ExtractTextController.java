@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
 
 /**
@@ -46,14 +45,11 @@ public class ExtractTextController {
      * @throws IOException is a exception when invalid input is provided.
      */
     @PostMapping("/extractText")
-    public String uploadFile(final @RequestParam("file") MultipartFile file,
+    public String extractText(final @RequestParam("file") MultipartFile file,
                              final @RequestParam("language") String language) throws IllegalStateException, IOException {
         LOGGER.info("start");
-        String fileOut = file.getOriginalFilename();
-        String outputFileName = fileOut.substring(0, fileOut.lastIndexOf("."));
-        ExtractFacade.getTextExtract(new ExtractTextParameter(fileStorageService
-                .uploadFile(file), language, outputFileName));
+        ExtractFacade.getTextExtract(new ExtractTextParameter(fileStorageService.uploadFile(file), language));
         LOGGER.info("finish");
-        return DownloadLinkFacade.getLinkExtractText(outputFileName);
+        return DownloadLinkFacade.getLinkExtractText(file);
     }
 }

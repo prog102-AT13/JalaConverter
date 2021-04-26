@@ -7,7 +7,7 @@
  * license agreement you entered into with Fundacion Jala
  */
 /**
- * @author Jorge Caceres Velasco
+ * @author Jorge Rodrigo Caceres Velasco
  */
 package org.fundacion.jala.converter.models.parameter;
 
@@ -18,18 +18,14 @@ public class ExtractTextParameter extends Parameter {
     private String language;
     private String resultFile;
 
-    public ExtractTextParameter(final String newFilePath) {
-        super(newFilePath);
-    }
-
-    public ExtractTextParameter(final String newFilePath, final String newLanguage, final String newResultFile) {
-        super(newFilePath);
-        this.language = newLanguage;
-        this.resultFile = newResultFile;
-    }
-
     public ExtractTextParameter() {
     }
+
+    public ExtractTextParameter(final String newFilePath, final String newLanguage) {
+        super(newFilePath);
+        this.language = newLanguage;
+    }
+
     /**
      * Returns a string with the set language to be extracted.
      * @return the language.

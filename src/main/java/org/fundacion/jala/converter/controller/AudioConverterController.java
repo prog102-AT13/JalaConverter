@@ -34,10 +34,11 @@ import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetada
 @RestController
 @RequestMapping("/api")
 public class AudioConverterController {
-    @Autowired
-    private FileStorageService fileStorageService;
     private static final Logger LOGGER = LogManager.getLogger();
     private ParameterOutputChecksum parameterOutputChecksum;
+
+    @Autowired
+    private FileStorageService fileStorageService;
 
     /**
      * Calls endpoint to audio converter.
@@ -64,12 +65,14 @@ public class AudioConverterController {
                              final @RequestParam("checksum") String checksum,
                              final @RequestParam("metadata") boolean metadata)
             throws IOException, InterruptedException {
+        LOGGER.info("start");
         parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
         String outputFilename = ConverterFacade.getAudioConverter(
                 new AudioParameter(parameterOutputChecksum.getOutputFilename(), format, bitrate, hz, volume,
                         audioChannel));
         extractMetadata(metadata, outputFilename, fileStorageService);
         ZipFileFacade.getZipFileAudio(parameterOutputChecksum, metadata, outputFilename);
+        LOGGER.info("finish");
         return DownloadLinkFacade.getLinkConverter(outputFilename);
     }
 }
