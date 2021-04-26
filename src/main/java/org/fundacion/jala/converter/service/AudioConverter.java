@@ -57,7 +57,7 @@ public final class AudioConverter {
     /**
      * Gets the name of the output filename.
      *
-     * @return a string of output filename.
+     * @return a String of output filename.
      */
     public String getOutputFileName() {
         return this.outputFileName;

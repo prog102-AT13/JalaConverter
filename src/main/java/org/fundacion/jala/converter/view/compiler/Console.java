@@ -39,7 +39,7 @@ class Console extends JPanel {
     /**
      * Gets access to JTextArea.
      *
-     * @return a JTextArea.
+     * @return a JTextArea for the console.
      */
     public JTextArea getConsole() {
         return console;

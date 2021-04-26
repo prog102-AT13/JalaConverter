@@ -92,7 +92,7 @@ public class MetaDataInterface extends JPanel implements ActionListener {
     /**
      * Obtains the call request.
      *
-     * @throws IOException if fails.
+     * @throws IOException if the client request fails.
      */
     private void callRequest() throws IOException {
         LOGGER.info("start");

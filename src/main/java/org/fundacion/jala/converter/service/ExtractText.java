@@ -41,8 +41,7 @@ public class ExtractText {
         this.pathFile = pathFile;
     }
 
-    public ExtractText(final String language, final String pathFile,
-                       final String nameOutputFile) {
+    public ExtractText(final String language, final String pathFile, final String nameOutputFile) {
         this.language = language;
         this.pathFile = pathFile;
         this.nameOutputFile = nameOutputFile;
@@ -113,8 +112,7 @@ public class ExtractText {
         PrintWriter printWriter;
         try {
             LOGGER.info("Execute Try");
-            file = new File(System.getProperty("user.dir") +
-                            "\\archive\\" + name + ".txt");
+            file = new File(System.getProperty("user.dir") + "\\archive\\" + name + ".txt");
             fileWriter = new FileWriter(file);
             bufferedWriter = new BufferedWriter(fileWriter);
             printWriter = new PrintWriter(bufferedWriter);

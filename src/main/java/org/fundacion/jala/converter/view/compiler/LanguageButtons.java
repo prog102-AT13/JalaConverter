@@ -43,9 +43,9 @@ class LanguageButtons extends JPanel {
     }
 
     /**
-     * Button that defines is java is selected or not.
+     * Button that defines if java is selected or not.
      *
-     * @return a JButton.
+     * @return a JButton to select a language.
      */
     public JButton getJava() {
         return java;
@@ -54,7 +54,7 @@ class LanguageButtons extends JPanel {
     /**
      * Button that defines if python is selected or not.
      *
-     * @return a JButton.
+     * @return a JButton to select a language.
      */
     public JButton getPython() {
         return python;
@@ -64,7 +64,7 @@ class LanguageButtons extends JPanel {
      * Creates a custom button.
      *
      * @param text represents title that the button has.
-     * @return a JButton.
+     * @return a JButton for the programming language.
      */
     public JButton createButton(final String text) {
         JButton button = new JButton(text);

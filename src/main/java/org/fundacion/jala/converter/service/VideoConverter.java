@@ -69,7 +69,7 @@ public class VideoConverter {
     /**
      * Changes the resolution and aspect ratio of the input video.
      *
-     * @return resolution command.
+     * @return a String with the resolution command.
      */
     private String changeResolution() {
         int width = parameter.getWidth();
@@ -124,7 +124,7 @@ public class VideoConverter {
     /**
      * Changes the input video frame rate.
      *
-     * @return a String frame command.
+     * @return a String with the frame command.
      */
     private String changeFrameRate() {
         int frameRate = parameter.getFrameRate();

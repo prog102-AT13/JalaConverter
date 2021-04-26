@@ -63,10 +63,9 @@ public class CompilerInterface extends JPanel {
      * @param gy represents y grid.
      * @param gh represents height grid.
      * @param gw represents width grid.
-     * @return a custom GridBagConstraints.
+     * @return a GridBagConstraints for the compiler.
      */
-    public GridBagConstraints setConstraints(final GridBagConstraints panelConstraint,
-                                             final int gx, final int gy,
+    public GridBagConstraints setConstraints(final GridBagConstraints panelConstraint, final int gx, final int gy,
                                              final int gh, final int gw) {
         panelConstraint.gridx = gx;
         panelConstraint.gridy = gy;
