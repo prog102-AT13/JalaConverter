@@ -29,25 +29,22 @@ class SelectFile extends JPanel implements ActionListener {
     private JTextField textFile;
     private JFileChooser fileChooser;
     private String fileOriginPath;
-    private final int flowLayoutHgap = 30;
-    private final int flowLayoutVgap = 10;
-    private final int dimensionWidth = 350;
-    private final int dimensionHeight = 30;
-    private final int fontStyle = 0;
-    private final int fontSize = 11;
+    private final int FLOW_LAYOUT_HGAP = 30;
+    private final int FLOW_LAYOUT_VGAP = 10;
+    private final int DIMENSION_WIDTH = 350;
+    private final int DIMENSION_HEIGHT = 30;
+    private final int FONT_STYLE = 0;
+    private final int FONT_SIZE = 11;
 
-    /**
-     * Initializes the graphic components for Selecting file display.
-     */
     protected SelectFile() {
         selectFile = new JButton("Open File");
-        selectFile.setFont(new Font("Barlow", fontStyle, fontSize));
+        selectFile.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
         selectFile.addActionListener(this);
         textFile = new JTextField();
-        textFile.setFont(new Font("Barlow", fontStyle, fontSize));
-        textFile.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
+        textFile.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
+        textFile.setPreferredSize(new Dimension(DIMENSION_WIDTH, DIMENSION_HEIGHT));
         textFile.setEnabled(false);
-        setLayout(new FlowLayout(FlowLayout.LEFT, flowLayoutHgap, flowLayoutVgap));
+        setLayout(new FlowLayout(FlowLayout.LEFT, FLOW_LAYOUT_HGAP, FLOW_LAYOUT_VGAP));
         add(selectFile);
         add(textFile);
     }
@@ -76,7 +73,7 @@ class SelectFile extends JPanel implements ActionListener {
     /**
      * Gets the Origin Path of File when selected.
      *
-     * @return String fileOriginPath.
+     * @return a String with the fileOriginPath.
      */
     protected String getOriginFilePath() {
         return fileOriginPath;
