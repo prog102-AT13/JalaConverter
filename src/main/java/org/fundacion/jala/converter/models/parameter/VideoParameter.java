@@ -52,7 +52,7 @@ public class VideoParameter extends Parameter {
     /**
      * Sets the resolution of the output video.
      *
-     * @param newResolution is a String with the video resolution
+     * @param newResolution is a String with the video resolution.
      */
     public void setResolution(final String newResolution) {
         this.resolution = newResolution;
@@ -79,7 +79,7 @@ public class VideoParameter extends Parameter {
     /**
      * Sets the audio of the output video.
      *
-     * @param newAudio is a boolean that indicates if the video needs audio
+     * @param newAudio is a boolean that indicates if the video needs audio.
      */
     public void setAudio(final boolean newAudio) {
         this.audio = newAudio;
@@ -88,7 +88,7 @@ public class VideoParameter extends Parameter {
     /**
      * Sets the frame rate of the output video.
      *
-     * @param newFrameRate is a int with the video frame rate
+     * @param newFrameRate is a int with the video frame rate.
      */
     public void setFrameRate(final int newFrameRate) {
         this.frameRate = newFrameRate;

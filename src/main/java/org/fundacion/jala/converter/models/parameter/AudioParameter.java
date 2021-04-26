@@ -13,7 +13,7 @@ package org.fundacion.jala.converter.models.parameter;
 import org.springframework.stereotype.Service;
 
 /**
- * This class is the options of the audio parameters.
+ * This class has the options of the audio parameters.
  */
 @Service
 public class AudioParameter extends Parameter {
