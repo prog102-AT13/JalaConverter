@@ -15,15 +15,19 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
+/**
+ * This class is to query to database.
+ */
 public class AssetSQL {
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jalaPersistence");
 
     /**
-     * This method is for to insert dates for database.
+     * Inserts date into the database.
      *
-     * @param projectName name the archive.
-     * @param pathProject path the archive.
-     * @param checksum string checksum of the archive.
+     * @param projectName is a name of the file to save in the database.
+     * @param pathProject is a path of the file to save in the database.
+     * @param checksum is a String of the checksum to save in the database.
+     * @param userId is a id of the user to identify the user.
      */
     public static void insertAssetData(final String projectName, final String pathProject,
                                        final String checksum, final int userId) {
@@ -41,13 +45,13 @@ public class AssetSQL {
     }
 
     /**
-     * Edits the data of the project
+     * Edits the data of the project.
      *
-     * @param projectId int with the project id.
-     * @param projectName String with the name of the project.
-     * @param pathProject String with the path of the project.
-     * @param type String with the type og¿f the project.
-     * @param user a User.
+     * @param projectId is a id of the audio or video converter.
+     * @param projectName is a name of the file to edit in the database.
+     * @param pathProject is a path of the file to save in the database.
+     * @param type is a String with the type of the audio or video converter.
+     * @param user is all the date of the user.
      */
     public static void editProjectData(final int projectId, final String projectName,
                                        final String pathProject, final String type, final User user) {
@@ -62,9 +66,9 @@ public class AssetSQL {
     }
 
     /**
-     * Deletes a project.
+     * Deletes a date from the database of the audio or video converter.
      *
-     * @param assetId int with the project id.
+     * @param assetId is a int with the id of the audio or video converter.
      */
     public static void deleteProject(final int assetId) {
         EntityManager manager = emf.createEntityManager();
@@ -76,9 +80,9 @@ public class AssetSQL {
     }
 
     /**
-     * Lists the project in the db.
+     * Lists all the date of the audio and video converter in the db.
      *
-     * @return a list of projects.
+     * @return a list of the all the date of the database.
      */
     @SuppressWarnings("unchecked")
     public static List<Asset> listAsset() {
