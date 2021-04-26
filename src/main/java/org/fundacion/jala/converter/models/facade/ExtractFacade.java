@@ -24,9 +24,9 @@ import java.io.IOException;
  * This class calls facade of extract.
  */
 public class ExtractFacade {
-    public static final String TXT_FILE_EXTENSION = ".txt";
-    public static final String HTML_FILE_EXTENSION = ".html";
-    public static final String XMP_FILE_EXTENSION = ".xmp";
+    public final String TXT_FILE_EXTENSION = ".txt";
+    public final String HTML_FILE_EXTENSION = ".html";
+    public final String XMP_FILE_EXTENSION = ".xmp";
 
     private ExtractFacade() {
     }

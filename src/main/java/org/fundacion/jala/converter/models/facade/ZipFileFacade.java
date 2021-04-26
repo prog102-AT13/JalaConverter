@@ -65,8 +65,7 @@ public class ZipFileFacade {
      * @throws InterruptedException is exception if process is interrupted.
      */
     private static void getZipFile(final ParameterOutputChecksum parameterOutputChecksum,
-                                   final String metadata,
-                                   final String storagePath,
+                                   final String metadata, final String storagePath,
                                    final boolean thumbnail) throws IOException, InterruptedException {
         String checksumLocal = parameterOutputChecksum.getChecksumLocal();
         String outputFilename = parameterOutputChecksum.getOutputFilename();
