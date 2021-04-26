@@ -19,8 +19,8 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.stream.Collectors;
-import static org.fundacion.jala.converter.models.AssetSQL.listAsset;
 import static org.fundacion.jala.converter.core.ChecksumService.getFileChecksum;
+import static org.fundacion.jala.converter.models.AssetSQL.*;
 
 /**
  * This class calls facade of checksum.
@@ -39,8 +39,8 @@ public class ChecksumFacade {
      * @return object of ParameterOutputChecksum.
      * @throws IOException is a exception when invalid file's path.
      */
-    public static ParameterOutputChecksum getChecksum(final String checksum,
-                                                      final MultipartFile file) throws IOException {
+    public static ParameterOutputChecksum getChecksum(final String checksum, final MultipartFile file)
+            throws  IOException {
         FileStorageService fileStorageService = new FileStorageService();
         String filename;
         String storagePath;
@@ -71,28 +71,26 @@ public class ChecksumFacade {
     /**
      * Obtains the path of the file.
      *
-     * @param checksum is a date of file, it is unique for each file.
+     * @param checksum is checksum of file.
      * @param assets list of file in database.
      * @return return a List<String> with path of file with same checksum.
      */
     private static List<String> getPath(final String checksum, final List<Asset> assets) {
-        return assets.stream()
-                .filter(project -> project.getChecksum().equals(checksum))
-                .map(asset -> asset.getPath())
+        return assets.stream().filter(project -> project.getChecksum().equals(checksum)).map(asset -> asset.getPath())
                 .collect(Collectors.toList());
     }
 
     /**
      * Obtains the name of the file.
      *
-     * @param checksum is a date of file, it is unique for each file.
+     * @param checksum is checksum of file.
      * @param assets list of file in database.
      * @return return a List<String> with name of file with same checksum.
      */
     private static List<String> getTitles(final String checksum, final List<Asset> assets) {
         return assets.stream()
-                .filter(project -> project.getChecksum().equals(checksum))
-                .map(asset -> asset.getTitle())
+                .filter(project -> project.getChecksum().equals(checksum)).map(asset -> asset.getTitle())
                 .collect(Collectors.toList());
     }
 }
+
