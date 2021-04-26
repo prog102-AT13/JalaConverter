@@ -53,8 +53,8 @@ public class ExtractMetadata {
         LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");
-            String command = "cmd /c " + addressExiftool + " && exiftool.exe " + "\"" +
-                             fileToExtract.getAbsolutePath() + "\"" + moreInformation + exportFile;
+            String command = "cmd /c " + addressExiftool + " && exiftool.exe " + "\""
+                             + fileToExtract.getAbsolutePath() + "\"" + moreInformation + exportFile;
             Process process = Runtime.getRuntime().exec(command);
         } catch (IOException e) {
             LOGGER.error("Execute Exception to Safe text in a file");
