@@ -14,11 +14,10 @@ import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.exceptions.TextExtractorException;
 import org.fundacion.jala.converter.models.parameter.ExtractTextParameter;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+
+import java.io.*;
 
 /**
  * This class extracts the text of a image.
@@ -77,7 +76,7 @@ public class ExtractText {
     /**
      *  Extracts the text of an image.
      */
-    public void extractText() {
+    public void extractText() throws TextExtractorException {
         LOGGER.info("start");
         System.out.println("Loaded");
         Tesseract tesseract = new Tesseract();
@@ -104,7 +103,7 @@ public class ExtractText {
      * @param name a String with the name with which the file will be created.
      * @param text a String containing the text extracted from the image.
      */
-    private void safeInfo(final String name, final String text) {
+    private void safeInfo(final String name, final String text) throws TextExtractorException {
         LOGGER.info("start");
         File file;
         FileWriter fileWriter;
@@ -119,9 +118,9 @@ public class ExtractText {
             printWriter.write(text);
             printWriter.close();
             bufferedWriter.close();
-        } catch (Exception e) {
+        } catch (IOException exception) {
             LOGGER.error("Execute Exception to Safe text in a file");
-            e.printStackTrace();
+            throw new TextExtractorException(exception);
         }
         LOGGER.info("finish");
     }

@@ -11,6 +11,7 @@
 package org.fundacion.jala.converter.models.facade;
 
 import org.fundacion.jala.converter.exceptions.MetadataException;
+import org.fundacion.jala.converter.exceptions.TextExtractorException;
 import org.fundacion.jala.converter.models.parameter.ExtractTextParameter;
 import org.fundacion.jala.converter.service.ExtractMetadata;
 import org.fundacion.jala.converter.service.ExtractText;
@@ -37,7 +38,7 @@ public class ExtractFacade {
      *
      * @param extractTextParameter is a object with parameter of extractText to convert.
      */
-    public static void getTextExtract(final ExtractTextParameter extractTextParameter) {
+    public static void getTextExtract(final ExtractTextParameter extractTextParameter) throws TextExtractorException {
         ExtractText extractText = new ExtractText(extractTextParameter);
         extractText.extractText();
     }

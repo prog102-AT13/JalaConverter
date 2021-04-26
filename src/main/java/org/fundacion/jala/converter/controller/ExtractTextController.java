@@ -12,6 +12,7 @@ package org.fundacion.jala.converter.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.exceptions.PaoPaoException;
 import org.fundacion.jala.converter.models.facade.ExtractFacade;
 import org.fundacion.jala.converter.models.parameter.ExtractTextParameter;
 import org.fundacion.jala.converter.service.FileStorageService;
@@ -52,7 +53,11 @@ public class ExtractTextController {
         String outputFileName = fileOut.substring(0, fileOut.lastIndexOf("."));
         ExtractTextParameter extractTextParameter;
         extractTextParameter = new ExtractTextParameter(fileStorageService.uploadFile(file), language, outputFileName);
-        ExtractFacade.getTextExtract(extractTextParameter);
+        try {
+            ExtractFacade.getTextExtract(extractTextParameter);
+        } catch (PaoPaoException exception) {
+            exception.printStackTrace();
+        }
         final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         String outFilename = outputFileName + ".txt";
         String downloadLink = baseUrl + "/api/download/" + outFilename;
