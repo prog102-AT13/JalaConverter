@@ -10,17 +10,20 @@
  */
 package org.fundacion.jala.converter.view.compiler;
 
+import org.fundacion.jala.converter.view.Models.FileRequestForm;
+import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.FlowLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 /**
  * This class customizes a tabbed pane with custom tabs.
@@ -30,19 +33,23 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
     private PlusButton button;
     private final int sizeFont = 11;
     private final int dimension = 20;
+    private ArrayList<String> tabList;
+    private ClientRequest clientRequest = new ClientRequest();
+    private String token;
 
-    public ProjectTab() {
-        CodeTextArea codeArea = new CodeTextArea();
-        codeArea.setName("Main");
-        add(codeArea);
-        setTabComponentAt(getTabCount() - 1, createTabHeaderWithTitle("Main"));
-        start();
+    public ProjectTab(final String newToken) {
+        token = newToken;
     }
 
     /**
      * Starts required components to add new tabs.
      */
     public void start() {
+        CodeTextArea codeArea = new CodeTextArea();
+        codeArea.setName("Main");
+        add(codeArea);
+        setTabComponentAt(getTabCount() - 1, createTabHeaderWithTitle("Main"));
+        tabList = new ArrayList<>();
         setFont(new Font("Barlow", 0, sizeFont));
         button = new PlusButton();
         button.setPreferredSize(new Dimension(dimension, dimension));
@@ -66,12 +73,30 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
     @Override
     public void actionPerformed(final ActionEvent event) {
         counter++;
-        String title = "EndGame " + counter;
-        CodeTextArea codeArea = new CodeTextArea();
-        codeArea.setName(title);
-        add(codeArea, getTabCount() - 1);
-        setTabComponentAt(getTabCount() - 2, createTabHeader(title));
-        setSelectedIndex(getTabCount() - 2);
+        String title = (String) JOptionPane.showInputDialog(null,
+                "Write file name", "Create file",
+                JOptionPane.PLAIN_MESSAGE, null, null, "file1");
+        if (title.isBlank()) {
+            title = "file1";
+        }
+        if (!tabList.contains(title)) {
+            tabList.add(title);
+            FileRequestForm fileRequestForm = new FileRequestForm();
+            fileRequestForm.addFileTitle(title);
+            fileRequestForm.setUrl(CompilerInterface.projectId);
+            fileRequestForm.addFileExtension("java");
+            fileRequestForm.addCode("");
+            try {
+                clientRequest.executeRequest(fileRequestForm, token);
+                CodeTextArea codeArea = new CodeTextArea();
+                codeArea.setName(title);
+                add(codeArea, getTabCount() - 1);
+                setTabComponentAt(getTabCount() - 2, createTabHeader(title));
+                setSelectedIndex(getTabCount() - 2);
+            } catch (Exception e) {
+            }
+        }
+
     }
 
     /**
@@ -151,6 +176,15 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
                 setTabComponentAt(indexTab, createTabHeader(result));
             }
         }
+    }
+
+    /**
+     * Gets us the plus button to access it.
+     *
+     * @return a plus button
+     */
+    public PlusButton getButton() {
+        return button;
     }
 }
 

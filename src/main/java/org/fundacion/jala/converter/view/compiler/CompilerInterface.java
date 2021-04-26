@@ -13,8 +13,11 @@ package org.fundacion.jala.converter.view.compiler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.view.Models.CompileRequestForm;
+import org.fundacion.jala.converter.view.Models.ProjectRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -32,6 +35,7 @@ public class CompilerInterface extends JPanel {
     private ProjectTab projectTab;
     private ClientRequest clientRequest = new ClientRequest();
     private int choose;
+    public static String projectId;
 
     public CompilerInterface(final String newToken) {
         token = newToken;
@@ -40,7 +44,7 @@ public class CompilerInterface extends JPanel {
         consoleOutput = new Console();
         langButtons = new LanguageButtons();
         langButtons.getJava().setEnabled(false);
-        projectTab = new ProjectTab();
+        projectTab = new ProjectTab(token);
         setLayout(new GridBagLayout());
         GridBagConstraints panelConstraint = new GridBagConstraints();
         panelConstraint.weighty = 1;
@@ -53,6 +57,9 @@ public class CompilerInterface extends JPanel {
         buttonsCompiler.getRunButton().addActionListener(addListenerToRunButton());
         langButtons.getJava().addActionListener(addListenerToJavaButton());
         langButtons.getPython().addActionListener(addListenerToPythonButton());
+        JButton project = new JButton("Create Project");
+        add(project, setConstraints(panelConstraint, 0, 7, 1, 1));
+        project.addActionListener(addListenerToCreateProjectButton());
     }
 
     /**
@@ -129,6 +136,37 @@ public class CompilerInterface extends JPanel {
                 langButtons.getPython().setEnabled(false);
                 langButtons.getJava().setEnabled(true);
                 choose = 2;
+            }
+        };
+        return actionListener;
+    }
+
+    /**
+     * Processes code and receives its result.
+     *
+     * @return a custom ActionListener.
+     */
+    public ActionListener addListenerToCreateProjectButton() {
+        ActionListener actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                LOGGER.info("start");
+                ProjectRequestForm projectRequestForm = new ProjectRequestForm();
+                String result = (String) JOptionPane.showInputDialog(null,
+                        "Write project name", "Project Name",
+                        JOptionPane.PLAIN_MESSAGE, null, null, "project 1");
+                projectRequestForm.addProjectName(result);
+                projectRequestForm.addUserId("1");
+                try {
+                    LOGGER.info("Execute Try");
+                    String sResponse = clientRequest.executeRequest(projectRequestForm, token);
+                    projectId = sResponse;
+                    consoleOutput.getConsole().setText(sResponse + " " + result);
+                    projectTab.start();
+                    LOGGER.info("finish");
+                } catch (Exception exception) {
+                    LOGGER.error("Execute Exception" + exception.getMessage());
+                }
             }
         };
         return actionListener;

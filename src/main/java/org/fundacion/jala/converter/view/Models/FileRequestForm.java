@@ -18,22 +18,12 @@ import java.util.List;
  */
 public class FileRequestForm implements IRequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
-    private final String URL = "http://localhost:8080/api/makeFile";
-    private final String PROJECT_ID = "projectID";
-    private final String FILE_TITLE = "fileTitle";
+    private String url = "http://localhost:8080/api/projects/{id}/file";
+    private final String FILE_NAME = "fileName";
     private final String CODE = "code";
     private final String FILE_EXTENSION = "extension";
 
     public FileRequestForm() {
-    }
-
-    /**
-     * Adds projId parameter.
-     *
-     * @param projId represents id that is assigned to the file.
-     */
-    public void addProjectId(final String projId) {
-        addParameters(new Parameter(PROJECT_ID, projId, false));
     }
 
     /**
@@ -42,7 +32,7 @@ public class FileRequestForm implements IRequestForm {
      * @param title represents title that is assigned to the file.
      */
     public void addFileTitle(final String title) {
-        addParameters(new Parameter(FILE_TITLE, title, false));
+        addParameters(new Parameter(FILE_NAME, title, false));
     }
 
     /**
@@ -90,7 +80,16 @@ public class FileRequestForm implements IRequestForm {
      */
     @Override
     public String getURL() {
-        return URL;
+        return url;
+    }
+
+    /**
+     * Sets project id to point the correct endpoint.
+     *
+     * @param idProj represents id of project.
+     */
+    public void setUrl(final String idProj) {
+        url = "http://localhost:8080/api/projects/" + idProj + "/file";
     }
 }
 
