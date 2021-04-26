@@ -5,8 +5,9 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Paola Ximena Aguilar Quiñones
  */
-
 package org.fundacion.jala.converter.view.metadata;
 
 import javax.swing.JPanel;
@@ -20,36 +21,37 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+/**
+ * This class is for the select file option in metadata UI.
+ */
 class SelectFile extends JPanel implements ActionListener {
     private JButton selectFile;
     private JTextField textFile;
     private JFileChooser fileChooser;
     private String fileOriginPath;
-    private final int flowLayoutHgap = 30;
-    private final int flowLayoutVgap = 10;
-    private final int dimensionWidth = 350;
-    private final int dimensionHeight = 30;
-    private final int fontStyle = 0;
-    private final int fontSize = 11;
+    private final int FLOW_LAYOUT_HGAP = 30;
+    private final int FLOW_LAYOUT_VGAP = 10;
+    private final int DIMENSION_WIDTH = 350;
+    private final int DIMENSION_HEIGHT = 30;
+    private final int FONT_STYLE = 0;
+    private final int FONT_SIZE = 11;
 
-    /**
-     * Initializes the graphic components for Selecting file display.
-     */
     protected SelectFile() {
         selectFile = new JButton("Open File");
-        selectFile.setFont(new Font("Barlow", fontStyle, fontSize));
+        selectFile.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
         selectFile.addActionListener(this);
         textFile = new JTextField();
-        textFile.setFont(new Font("Barlow", fontStyle, fontSize));
-        textFile.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
+        textFile.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
+        textFile.setPreferredSize(new Dimension(DIMENSION_WIDTH, DIMENSION_HEIGHT));
         textFile.setEnabled(false);
-        setLayout(new FlowLayout(FlowLayout.LEFT, flowLayoutHgap, flowLayoutVgap));
+        setLayout(new FlowLayout(FlowLayout.LEFT, FLOW_LAYOUT_HGAP, FLOW_LAYOUT_VGAP));
         add(selectFile);
         add(textFile);
     }
 
     /**
      * Opens the File Chooser to select a file.
+     *
      * @param e event of the JButton.
      */
     @Override
@@ -70,7 +72,8 @@ class SelectFile extends JPanel implements ActionListener {
 
     /**
      * Gets the Origin Path of File when selected.
-     * @return String fileOriginPath.
+     *
+     * @return a String with the fileOriginPath.
      */
     protected String getOriginFilePath() {
         return fileOriginPath;

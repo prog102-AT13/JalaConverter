@@ -5,18 +5,26 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Gustavo Zacarias Huanca Alconz
  */
 package org.fundacion.jala.converter.core.metadata;
 
 import java.io.File;
 
+/**
+ * This class exports a metadata text file.
+ */
 public class ExportTypeFile {
     private File addressExportFile;
     private String nameFileComplete;
     private String nameFileExport;
     private String nameFileCompleteToExport;
 
-    public ExportTypeFile(final String nameFileComplete, final String nameExport, final TypeFileExport typeExport, final File addressFileExport) {
+    public ExportTypeFile(final String nameFileComplete,
+                          final String nameExport,
+                          final TypeFileExport typeExport,
+                          final File addressFileExport) {
         this.nameFileComplete = nameFileComplete;
         this.addressExportFile = addressFileExport;
         buildFileName(nameExport);
@@ -24,7 +32,7 @@ public class ExportTypeFile {
     }
 
     /**
-     * Get parameter nameFileCompleteToExport
+     * Gets parameter nameFileCompleteToExport.
      *
      * @return nameFileCompleteToExport with code in order to run in Exiftool.
      */
@@ -33,7 +41,7 @@ public class ExportTypeFile {
     }
 
     /**
-     * Defines name that the file are exported.
+     * Defines name that the files are exported.
      *
      * @param nameExport define name of file which it is exported.
      */
@@ -57,9 +65,7 @@ public class ExportTypeFile {
     }
 
     /**
-     * Defines name that the file are exported.
-     * set nameFileExport.
-     * e.g. DragonBall.mp4 --> DragonBall.xmp
+     * Defines name that the file are exported and sets nameFileExport.
      */
     private void setDefaultNameFileWithTypeOfFile() {
         char[] spellName = nameFileComplete.toCharArray();
@@ -73,36 +79,35 @@ public class ExportTypeFile {
     }
 
     /**
-     * Defines name that the file are exported.
-     * set nameFileExport.
-     * e.g. DragonBall.mp4 --> NameSet.xmp
+     * Defines name that the file are exported and sets nameFileExport.
+     *
+     * @param newName a String to set a new file name.
      */
     private void setNameFileExport(final String newName) {
         this.nameFileExport = newName;
     }
 
     /**
-     * Define file are exported with type Txt.
-     * set nameFileCompleteToExport.
+     * Defines file are exported with type Txt and sets nameFileCompleteToExport.
      */
     private void exportFileTxt() {
-        nameFileCompleteToExport = " > " + "\"" + addressExportFile.getAbsolutePath() + "\\" + nameFileExport + ".txt" + "\"";
+        nameFileCompleteToExport = " > " + "\"" + addressExportFile.getAbsolutePath() + "\\"
+                                   + nameFileExport + ".txt" + "\"";
     }
 
     /**
-     * Define file are exported with type Html.
-     * set nameFileCompleteToExport.
+     * Defines file are exported with type Html sets nameFileCompleteToExport.
      */
     private void exportFileHtml() {
-        nameFileCompleteToExport = " -h > " + "\"" + addressExportFile.getAbsolutePath() + "\\" + nameFileExport + ".html" + "\"";
+        nameFileCompleteToExport = " -h > " + "\"" + addressExportFile.getAbsolutePath() + "\\"
+                                   + nameFileExport + ".html" + "\"";
     }
 
     /**
-     * Define file are exported with type XMP.
-     * set exportFileXMP.
+     * Defines file are exported with type XMP sets exportFileXMP.
      */
     private void exportFileXMP() {
-        nameFileCompleteToExport = " -X > " + "\"" + addressExportFile.getAbsolutePath() + "\\" + nameFileExport + ".xmp" + "\"";
+        nameFileCompleteToExport = " -X > " + "\"" + addressExportFile.getAbsolutePath() + "\\"
+                                   + nameFileExport + ".xmp" + "\"";
     }
 }
-

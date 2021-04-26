@@ -1,14 +1,12 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- * <p>
+ *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
- */
-/**
- * @author Edson
- * @collaborator Paola Aguilar
+ *
+ * @author Edson Añawaya Rios
  */
 
 package org.fundacion.jala.converter.core;
@@ -27,7 +25,7 @@ public final class AudioConverter {
     }
 
     /**
-     * Create command for audio converter
+     * Creates a command for audio converter.
      */
     public void audioConverter() {
         String relativePath = "cd archive/ && ";
@@ -36,18 +34,22 @@ public final class AudioConverter {
         String hz = parameter.formatHz();
         String volume = parameter.formatVolume();
         String audioChannel = parameter.formatAudioChannel();
-        String input = parameter.getFilePath().substring(parameter.getFilePath().lastIndexOf(System.getProperty("file.separator")) + 1);
-        setOutputFileName(parameter.getFilePath().substring((parameter.getFilePath().lastIndexOf(System.getProperty("file.separator")) + 1),
-                parameter.getFilePath().lastIndexOf(".") + 1) + parameter.getFormat());
+        String input = parameter.getFilePath().substring(parameter.getFilePath()
+                       .lastIndexOf(System.getProperty("file.separator")) + 1);
+        setOutputFileName(parameter.getFilePath().substring((parameter.getFilePath()
+                         .lastIndexOf(System.getProperty("file.separator")) + 1),
+                         parameter.getFilePath().lastIndexOf(".") + 1) + parameter.getFormat());
         String overwrite = " -y";
-        String command = relativePath + ffmpeg + input + bitrate + hz + audioChannel + volume + getOutputFileName()
-                + overwrite;
+        String command = relativePath + ffmpeg + input + audioChannel + bitrate + hz + volume + getOutputFileName()
+                         + overwrite;
+        System.out.println(command);
         runCommand.run(command);
     }
 
     /**
-     * Sets new outputFileName of the audio converter
-     * @param newOutputFileName
+     * Sets a new outputFileName of the audio converter.
+     *
+     * @param newOutputFileName output file name to be set.
      */
     public void setOutputFileName(final String newOutputFileName) {
         this.result = new Result();
@@ -56,8 +58,9 @@ public final class AudioConverter {
     }
 
     /**
-     * Gets name of the output filename
-     * @return a string of output filename
+     * Gets the name of the output filename.
+     *
+     * @return a String of output filename.
      */
     public String getOutputFileName() {
         return this.outputFileName;

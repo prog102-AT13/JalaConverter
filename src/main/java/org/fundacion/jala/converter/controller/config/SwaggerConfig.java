@@ -24,10 +24,11 @@ import java.util.Collections;
  */
 @Configuration
 public class SwaggerConfig {
+
     /**
      * Creates a Docket.
      *
-     * @return a Docket with Swagger configuration
+     * @return a Docket with Swagger configuration.
      */
     @Bean
     public Docket api() {
@@ -42,7 +43,7 @@ public class SwaggerConfig {
     /**
      * Customizes the API Information.
      *
-     * @return the ApiInfo with the customization values
+     * @return the ApiInfo with the customization values.
      */
     private ApiInfo apiDetails() {
         return new ApiInfo(

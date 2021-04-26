@@ -5,8 +5,9 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Daniela Santa Cruz Andrade
  */
-
 package org.fundacion.jala.converter.view.converter;
 
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
@@ -20,6 +21,9 @@ import javax.swing.event.ChangeListener;
 import java.awt.Font;
 import java.util.Hashtable;
 
+/**
+ * This class defines the interface for quality of audio.
+ */
 class QualityAudio extends JPanel implements ChangeListener {
     private JSlider qualitySlider;
     private String qualityAudio;
@@ -67,8 +71,9 @@ class QualityAudio extends JPanel implements ChangeListener {
     }
 
     /**
-     * Changes the state of the auqlity audio
-     * @param e a ChangeEvent
+     * Changes the audio's quality state.
+     *
+     * @param e a ChangeEvent.
      */
     @Override
     public void stateChanged(final ChangeEvent e) {
@@ -76,8 +81,9 @@ class QualityAudio extends JPanel implements ChangeListener {
     }
 
     /**
-     * Gets the quality audio
-     * @return qualityAudio
+     * Gets the audio's quality.
+     *
+     * @return a String with the qualityAudio.
      */
     public String getQualityAudio() {
         return qualityAudio;

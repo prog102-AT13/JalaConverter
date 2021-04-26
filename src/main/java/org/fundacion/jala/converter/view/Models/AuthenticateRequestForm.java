@@ -25,7 +25,7 @@ public class AuthenticateRequestForm implements IRequestForm {
     /**
      * Adds username parameter to bodyParameters.
      *
-     * @param username a String with the username
+     * @param username a String with the username.
      */
     public void addUsername(final String username) {
         addParameters(new Parameter(USERNAME, username, false));
@@ -34,7 +34,7 @@ public class AuthenticateRequestForm implements IRequestForm {
     /**
      * Adds password parameter to bodyParameters.
      *
-     * @param password a String with the password
+     * @param password a String with the password.
      */
     public void addPassword(final String password) {
         addParameters(new Parameter(PASSWORD, password, false));
@@ -43,7 +43,7 @@ public class AuthenticateRequestForm implements IRequestForm {
     /**
      * Gets the parameters list.
      *
-     * @return a list with the parameters
+     * @return a list with the parameters.
      */
     @Override
     public List<Parameter> getBodyParameters() {
@@ -53,7 +53,7 @@ public class AuthenticateRequestForm implements IRequestForm {
     /**
      * Adds a parameter to the parameters list.
      *
-     * @param parameter a Parameter to add
+     * @param parameter a Parameter to add.
      */
     @Override
     public void addParameters(final Parameter parameter) {
@@ -63,7 +63,7 @@ public class AuthenticateRequestForm implements IRequestForm {
     /**
      * Gets the URL of the endpoint.
      *
-     * @return a String with the URL
+     * @return a String with the file's url.
      */
     @Override
     public String getURL() {

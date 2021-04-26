@@ -6,18 +6,20 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Juan Pablo Gonzales
- * @version 1.0
+ * @author Juan Pablo Gonzales Alvarado
  */
 package org.fundacion.jala.converter.core.parameter;
 
 import org.springframework.stereotype.Service;
 
+/**
+ * This class has the options of the audio parameters.
+ */
 @Service
 public class AudioParameter extends Parameter {
     private String format;
     private String bitrate;
-    private String hz;
+    private String frecuency;
     private String volume;
     private String audioChannels;
     private final int ONE_HUNDRED = 1000;
@@ -33,22 +35,24 @@ public class AudioParameter extends Parameter {
     private final String SIX_POINT_ONE_CHANNEL = "7";
     private final String SEVEN_POINT_ONE_CHANNEL = "8";
 
-    public AudioParameter() { }
+    public AudioParameter() {
+    }
 
     public AudioParameter(final String newFilePath, final String newFormat,
-                          final String newBitrate, final String newHz, final String newVolume,
+                          final String newBitrate, final String newFrecuency, final String newVolume,
                           final String newAudioChannels) {
         super(newFilePath);
         this.format = newFormat;
         this.bitrate = newBitrate;
-        this.hz = newHz;
+        this.frecuency = newFrecuency;
         this.volume = newVolume;
         this.audioChannels = newAudioChannels;
     }
 
     /**
-     * Creates a parameter for volume
-     * @return a string with format for volume
+     * Creates a parameter for volume.
+     *
+     * @return a string with format for volume.
      */
     public String formatVolume() {
         if (!getVolume().equals("") && !getVolume().equals("1")) {
@@ -58,18 +62,19 @@ public class AudioParameter extends Parameter {
     }
 
     /**
-     * Creates a parameter for Hz
-     * @return a string with format for hz
+     * Creates a parameter for frecuency.
+     *
+     * @return a string with format for frecuency in hz.
      */
     public String formatHz() {
-        if (!getHz().equals("")) {
-            if (getHz().equals(K20_HERTZ)) {
+        if (!getFrecuency().equals("")) {
+            if (getFrecuency().equals(K20_HERTZ)) {
                 return " -ar 22050 ";
             }
-            if (getHz().equals(K44_HERTZ)) {
+            if (getFrecuency().equals(K44_HERTZ)) {
                 return " -ar 44100 ";
             }
-            if (getHz().equals(K48_HERTZ)) {
+            if (getFrecuency().equals(K48_HERTZ)) {
                 return " -ar 48000 ";
             }
         }
@@ -77,8 +82,9 @@ public class AudioParameter extends Parameter {
     }
 
     /**
-     * Creates a parameter for bitrate
-     * @return a string with format for bitrate
+     * Creates a parameter for bitrate.
+     *
+     * @return a string with format for bitrate.
      */
     public String formatBitrate() {
         if (!getBitrate().equals("")) {
@@ -88,24 +94,27 @@ public class AudioParameter extends Parameter {
     }
 
     /**
-     * Gets the audio channels
-     * @return a String with the value
+     * Gets the audio channels.
+     *
+     * @return a String with the value.
      */
     public String getAudioChannels() {
         return audioChannels;
     }
 
     /**
-     * Sets the audio channels
-     * @param newAudioChannels the value to set
+     * Sets the new audio channels.
+     *
+     * @param newAudioChannels the value to set.
      */
     public void setAudioChannels(final String newAudioChannels) {
         this.audioChannels = newAudioChannels;
     }
 
     /**
-     * Creates a parameter for audio channels
-     * @return a String with format for audio channels
+     * Creates a parameter for audio channels.
+     *
+     * @return a String with format for audio channels.
      */
     public String formatAudioChannel() {
         switch (getAudioChannels()) {
@@ -125,69 +134,80 @@ public class AudioParameter extends Parameter {
                 return " -ac " + SIX_POINT_ONE_CHANNEL + " ";
             case "7.1":
                 return " -ac " + SEVEN_POINT_ONE_CHANNEL + " ";
-                default:
-                    return "";
+            default:
+                return "";
         }
     }
 
     /**
-     * Obtains the format of audio converter
-     * @return a string of format of audio converter
+     * Obtains the format of audio converter.
+     *
+     * @return a string of format of audio converter.
      */
     public String getFormat() {
         return format;
     }
 
     /**
-     * Sets new format of the audio converter
-     * @param newFormat
+     * Sets new format of the audio converter.
+     *
+     * @param newFormat is a new format to audio.
      */
     public void setFormat(final String newFormat) {
         this.format = newFormat;
     }
+
     /**
-     * Obtains bitrate of audio converter
-     * @return a string of bitrate of audio converter
+     * Obtains bitrate of audio converter.
+     *
+     * @return a string of bitrate of audio converter.
      */
     public String getBitrate() {
         return bitrate;
     }
 
     /**
-     * Sets new bitrate of the audio converter
-     * @param newBitrate
+     * Sets new bitrate of the audio converter.
+     *
+     * @param newBitrate is a new bit rate to the audio.
      */
     public void setBitrate(final String newBitrate) {
         this.bitrate = newBitrate;
     }
+
     /**
-     * Obtains volume of audio converter
-     * @return a string of volume of audio converter
+     * Obtains volume of audio converter.
+     *
+     * @return a string of volume of audio converter.
      */
     public String getVolume() {
         return volume;
     }
 
     /**
-     * Sets new volume of the audio converter
-     * @param newVolume
+     * Sets new volume of the audio converter.
+     *
+     * @param newVolume is a new volumen to the audio.
      */
     public void setVolume(final String newVolume) {
         this.volume = newVolume;
     }
+
     /**
-     * Obtains the hz of audio converter
-     * @return a string of hz of audio converter
+     * Obtains the frecuency of audio converter.
+     *
+     * @return a string of frecuency of audio converter.
      */
-    public String getHz() {
-        return hz;
+    public String getFrecuency() {
+        return frecuency;
     }
 
     /**
-     * Sets new Hz of the audio converter
-     * @param newHz
+     * Sets new frecuency of the audio converter.
+     *
+     * @param newFrecuency is a new frecuency of the audio.
      */
-    public void setHz(final String newHz) {
-        this.hz = newHz;
+    public void setFrecuency(final String newFrecuency) {
+        this.frecuency = newFrecuency;
     }
 }

@@ -1,33 +1,37 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- * <p>
+ *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Edson Añawaya Rios
  */
 
 package org.fundacion.jala.converter.core;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+/**
+ * This class runs a command in cmd or bash.
+ */
 public class RunCommand {
     private static final Logger LOGGER = LogManager.getLogger();
     private ArrayList<String> resultCommand = new ArrayList<String>();
 
     /**
-     * Run command by cmd or bash
-     * @param command
+     * Runs the command in cmd or bash.
+     *
+     * @param command a string with the command.
      */
     public void run(final String command) {
-        boolean isWindows = System.getProperty("os.name")
-                .toLowerCase().startsWith("windows");
+        boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
         ProcessBuilder processBuilder = new ProcessBuilder();
         if (isWindows) {
             processBuilder.command("cmd.exe", "/c", command);

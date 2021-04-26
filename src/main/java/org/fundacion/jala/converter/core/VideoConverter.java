@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
+ *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Daniela Santa Cruz
- * @colaborathor Paola Aguilar
+ * @author Daniela Santa Cruz Andrade
  */
 package org.fundacion.jala.converter.core;
 
@@ -14,9 +14,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.core.parameter.VideoParameter;
 import org.fundacion.jala.converter.core.results.Result;
-
 import java.io.IOException;
 
+/**
+ * This class converts a video to an specified format.
+ */
 public class VideoConverter {
     private String startFirstCommand = "ffmpeg -i ";
     private VideoParameter parameter;
@@ -69,7 +71,8 @@ public class VideoConverter {
 
     /**
      * Changes the resolution and aspect ratio of the input video.
-     * @return resolution command
+     *
+     * @return a String with the resolution command.
      */
     private String changeResolution() {
         int width = parameter.getWidth();
@@ -80,7 +83,8 @@ public class VideoConverter {
         if (width > 0 && height > 0) {
             scale = width + ":" + height;
             aspectRatio = ":force_original_aspect_ratio=decrease,pad=";
-            resolutionCommand = "-vf scale=" + scale + aspectRatio + scale + ":-1:-1:color=white";
+            resolutionCommand = "-vf \"scale=" + scale + aspectRatio + scale +
+                                ":-1:-1:color=white\"";
             return resolutionCommand;
         }
         return "";
@@ -92,11 +96,8 @@ public class VideoConverter {
     private void generateAThumbnail() throws IOException{
         String name = getOutputFileName().substring(0, getOutputFileName().lastIndexOf("."));
         String startCommand = "ffmpeg -i ";
-        String adaptPath = "\"" + parameter.getFilePath() + "\"";
-        String outputCommand = adaptPath + " -ss 00:00:02 -vframes 1 -s 128x128 "
-                + pathOutput
-                + name
-                + PNG_FORMAT + "\"";
+        String outputCommand = pathOutput + output + "\"" + " -ss 00:00:01 -vframes 1 -s 128x128 " +
+                               pathOutput + name + PNG_FORMAT;
         String thumbnailCommand = startCommand + outputCommand;
 
         Process process = Runtime.getRuntime().exec("cmd /c " + thumbnailCommand);
@@ -113,7 +114,8 @@ public class VideoConverter {
 
     /**
      * Removes the audio of the input video.
-     * @return audio command
+     *
+     * @return a String with the remove audio command.
      */
     private String removeAudio() {
         boolean audio = parameter.hasAudio();
@@ -127,7 +129,8 @@ public class VideoConverter {
 
     /**
      * Changes the input video frame rate.
-     * @return frame command
+     *
+     * @return a String with the frame command.
      */
     private String changeFrameRate() {
         int frameRate = parameter.getFrameRate();
@@ -141,7 +144,8 @@ public class VideoConverter {
 
     /**
      * Sets the output file name.
-     * @param newOutputFileName String with the output file name
+     *
+     * @param newOutputFileName String with the output file name.
      */
     public void setOutputFileName(final String newOutputFileName) {
         this.outputFileName = newOutputFileName;
@@ -149,7 +153,8 @@ public class VideoConverter {
 
     /**
      * Gets the output file name.
-     * @return outputFileName
+     *
+     * @return a String with the outputFileName.
      */
     public String getOutputFileName() {
         return outputFileName;

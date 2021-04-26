@@ -14,33 +14,38 @@ package org.fundacion.jala.converter.view.Models;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class shows the compilers form.
+ */
 public class CompileRequestForm implements IRequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
-    private final String url;
-    private final String code = "code";
+    private final String URL;
+    private final String CODE = "code";
 
     public CompileRequestForm(final int choose) {
         switch (choose) {
             case 1:
-                url = "http://localhost:8080/api/compileJava";
+                URL = "http://localhost:8080/api/compileJava";
                 break;
             default:
-                url = "http://localhost:8080/api/compilePython";
+                URL = "http://localhost:8080/api/compilePython";
                 break;
         }
     }
 
     /**
-     * Adds inputCode parameter
-     * @param inputCode
+     * Adds inputCode parameter.
+     *
+     * @param inputCode String with the input code.
      */
     public void addCode(final String inputCode) {
-        addParameters(new Parameter(code, inputCode, false));
+        addParameters(new Parameter(CODE, inputCode, false));
     }
 
     /**
-     * Gets the body parameters
-     * @return bodyParameters
+     * Gets the body parameters.
+     *
+     * @return a List<Parameter> with body's Parameters.
      */
     @Override
     public List<Parameter> getBodyParameters() {
@@ -48,8 +53,9 @@ public class CompileRequestForm implements IRequestForm {
     }
 
     /**
-     * Adds parameters to bodyParameters
-     * @param parameter
+     * Adds parameters to bodyParameters.
+     *
+     * @param parameter Object Parameter.
      */
     @Override
     public void addParameters(final Parameter parameter) {
@@ -57,11 +63,12 @@ public class CompileRequestForm implements IRequestForm {
     }
 
     /**
-     * Gets the url
-     * @return url
+     * Gets the url.
+     *
+     * @return a String with the file's url.
      */
     @Override
     public String getURL() {
-        return url;
+        return URL;
     }
 }

@@ -33,13 +33,10 @@ class CloseButton extends JButton {
         super.paintComponent(graphics);
         Graphics2D graphics2D = (Graphics2D) graphics;
         graphics2D.setPaint(Color.BLACK);
-        Line2D line1 = new Line2D.Double(new Point2D.Double(0, 0),
-                new Point2D.Double(getWidth(), getHeight()));
-        Line2D line2 = new Line2D.Double(new Point2D.Double(0, getHeight()),
-                new Point2D.Double(getWidth(), 0));
+        Line2D line1 = new Line2D.Double(new Point2D.Double(0, 0), new Point2D.Double(getWidth(), getHeight()));
+        Line2D line2 = new Line2D.Double(new Point2D.Double(0, getHeight()), new Point2D.Double(getWidth(), 0));
         graphics2D.setStroke(new BasicStroke(LINE_WIDTH));
         graphics2D.draw(line1);
         graphics2D.draw(line2);
     }
 }
-

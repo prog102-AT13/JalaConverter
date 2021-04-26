@@ -11,7 +11,7 @@
 package org.fundacion.jala.converter.core.facade;
 
 /**
- * Parameter output when checksum are called.
+ * This class calls parameter output when checksum are called.
  */
 public class ParameterOutputChecksum {
     private String checksumLocal;
@@ -19,12 +19,12 @@ public class ParameterOutputChecksum {
     private int resultTitleSize;
     private String fileName;
 
-    public ParameterOutputChecksum(final String checksumLocal, final String outputFilename, final int resultTitleSize,
-                                   final String fileName) {
-        this.checksumLocal = checksumLocal;
-        this.outputFilename = outputFilename;
-        this.resultTitleSize = resultTitleSize;
-        this.fileName = fileName;
+    public ParameterOutputChecksum(final String newChecksumLocal, final String newOutputFilename,
+                                   final int newResultTitleSize, final String newFileName) {
+        this.checksumLocal = newChecksumLocal;
+        this.outputFilename = newOutputFilename;
+        this.resultTitleSize = newResultTitleSize;
+        this.fileName = newFileName;
     }
 
     /**
@@ -63,4 +63,3 @@ public class ParameterOutputChecksum {
         return fileName;
     }
 }
-

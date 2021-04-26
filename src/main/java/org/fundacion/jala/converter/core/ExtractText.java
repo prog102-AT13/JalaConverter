@@ -5,6 +5,8 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Juan Pablo Gonzales Alvarado
  */
 package org.fundacion.jala.converter.core;
 
@@ -20,6 +22,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
+/**
+ * This class extracts the text of a image.
+ */
 public class ExtractText {
 
     private String language;
@@ -29,11 +34,12 @@ public class ExtractText {
     private final String TXT_EXTENSION = ".txt";
     private static final Logger LOGGER = LogManager.getLogger();
 
-    public  ExtractText(final ExtractTextParameter extractTextParameter){
+    public ExtractText(final ExtractTextParameter extractTextParameter) {
         this.language = extractTextParameter.getLanguage();
         this.pathFile = extractTextParameter.getFilePath();
         this.nameOutputFile = extractTextParameter.getResultFile();
     }
+
     public ExtractText(final String language, final String pathFile) {
         this.language = language;
         this.pathFile = pathFile;
@@ -46,31 +52,34 @@ public class ExtractText {
     }
 
     /**
+     * Returns the language to be extracted.
      *
-     * @return a string with the value of the selected language
+     * @return a String with the value of the selected language.
      */
     public String getLanguage() {
         return language;
     }
 
     /**
+     * Returns the path file.
      *
-     * @return a string with the path of the images
+     * @return a String with the path of the images.
      */
     public String getPathFile() {
         return pathFile;
     }
 
     /**
+     * Returns the output name.
      *
-     * @return a string with the name of file generate
+     * @return a String with the name of file generate.
      */
     public String getNameOutputFile() {
         return nameOutputFile;
     }
 
     /**
-     *  extract text for a image
+     *  Extracts the text of an image.
      */
     public void extractText() {
         LOGGER.info("start");
@@ -80,7 +89,7 @@ public class ExtractText {
         tesseract.setLanguage(this.getLanguage());
         try {
             LOGGER.info("Execute Try");
-            String text =  tesseract.doOCR(new File(this.getPathFile()));
+            String text = tesseract.doOCR(new File(this.getPathFile()));
             if (this.getNameOutputFile() != null) {
                 safeInfo(this.getNameOutputFile(), text);
             }
@@ -96,9 +105,10 @@ public class ExtractText {
     }
 
     /**
-     * Safe extracted text on a file .txt
-     * @param name String with the name with which the file will be created
-     * @param text String containing the text extracted from the image
+     * Saves the extracted text on a file .txt.
+     *
+     * @param name a String with the name with which the file will be created.
+     * @param text a String containing the text extracted from the image.
      */
     private void safeInfo(final String name, final String text) {
         LOGGER.info("start");
@@ -109,7 +119,7 @@ public class ExtractText {
         try {
             LOGGER.info("Execute Try");
             file = new File(System.getProperty("user.dir") + "\\archive\\" + name + TXT_EXTENSION);
-            fileWriter =  new FileWriter(file);
+            fileWriter = new FileWriter(file);
             bufferedWriter = new BufferedWriter(fileWriter);
             printWriter = new PrintWriter(bufferedWriter);
             printWriter.write(text);
