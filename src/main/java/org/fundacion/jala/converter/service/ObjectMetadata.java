@@ -5,12 +5,17 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Gustavo Zacarias Huanca Alconz
  */
 package org.fundacion.jala.converter.service;
 
 import org.fundacion.jala.converter.service.metadata.TypeFileExport;
 import java.io.File;
 
+/**
+ * This class creates a metadata object.
+ */
 public class ObjectMetadata {
     private File fileToExtract;
     private File fileToExport;
@@ -19,56 +24,63 @@ public class ObjectMetadata {
     private boolean moreInfo = false;
 
     /**
-     * Get path of file to extract.
-     * @return path of file which the metadata is extracted.
+     * Gets file's path to be extracted.
+     *
+     * @return path's file to be extracted.
      */
     public File getFileToExtract() {
         return fileToExtract;
     }
 
     /**
-     * Set path of file to extract.
-     * @param file is path of file which the metadata is extracted.
+     * Sets file's path to be extracted.
+     *
+     * @param file is path's file to be extracted.
      */
     public void setFileToExtract(final File file) {
         this.fileToExtract = file;
     }
 
     /**
-     * Get path of file to extract.
-     * @return path of file which the metadata is exported.
+     * Gets file's path to  be exported.
+     *
+     * @return a file to be exported.
      */
     public File getFileToExport() {
         return fileToExport;
     }
 
     /**
-     * Set path of file to extract.
-     * @param file is path of file which the metadata is exported.
+     * Sets file's path to export.
+     *
+     * @param file is file's path to be exported.
      */
     public void setFileToExport(final File file) {
         this.fileToExport = file;
     }
 
     /**
-     * Get name of file which the metadata is extracted.
-     * @return name of file which the metadata is extracted.
+     * Gets file's name which the metadata is extracted.
+     *
+     * @return file's name which the metadata is extracted.
      */
     public String getNameExport() {
         return nameExport;
     }
 
     /**
-     * Set name of file which the metadata is extracted.
-     * @param nameExport is name of file which the metadata is extracted.
+     * Sets file's name which the metadata is exported.
+     *
+     * @param nameExport is file's name which the metadata is exported.
      */
     public void setNameExport(String nameExport) {
         this.nameExport = nameExport;
     }
 
     /**
-     * Get type of file which the metadata is extracted.
-     * @return type of file which the metadata is extracted.
+     * Gets file's type which the metadata is exported.
+     *
+     * @return TypeFileExport file's type which the metadata is exported.
      */
     public TypeFileExport getTypeFileExport() {
         return typeFileExport;
@@ -76,6 +88,7 @@ public class ObjectMetadata {
 
     /**
      * Set type of file which the metadata is extracted.
+     *
      * @param typeFileExport is type of file which the metadata is extracted.
      */
     public void setTypeFileExport(TypeFileExport typeFileExport) {
@@ -83,15 +96,17 @@ public class ObjectMetadata {
     }
 
     /**
-     * if The file metadata has more information than usual.
-     * @return moreInfo of file which the metadata is extracted.
+     * Verifies if the metadata file has more information than usual.
+     *
+     * @return a boolean wiht more information of the file which the metadata is extracted.
      */
     public boolean getMoreInfo() {
         return moreInfo;
     }
 
     /**
-     * Set the file metadata has more information than usual.
+     * Sets if the file metadata has more information than usual.
+     *
      * @param moreInfo of file which the metadata is extracted.
      */
     public void setMoreInfo(boolean moreInfo) {
