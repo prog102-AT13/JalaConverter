@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Cristian Choque Quispe
+ * @author Cristian Felix Choque Quispe
  */
 package org.fundacion.jala.converter.models;
 
@@ -22,7 +22,7 @@ public class AssetSQL {
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jalaPersistence");
 
     /**
-     * Inserts date into the database.
+     * Inserts data into the database.
      *
      * @param projectName is a name of the file to save in the database.
      * @param pathProject is a path of the file to save in the database.
@@ -51,7 +51,7 @@ public class AssetSQL {
      * @param projectName is a name of the file to edit in the database.
      * @param pathProject is a path of the file to save in the database.
      * @param type is a String with the type of the audio or video converter.
-     * @param user is all the date of the user.
+     * @param user is all the data of the user.
      */
     public static void editProjectData(final int projectId, final String projectName,
                                        final String pathProject, final String type, final User user) {
@@ -66,7 +66,7 @@ public class AssetSQL {
     }
 
     /**
-     * Deletes a date from the database of the audio or video converter.
+     * Deletes a data from the database of the audio or video converter.
      *
      * @param assetId is a int with the id of the audio or video converter.
      */
@@ -80,9 +80,9 @@ public class AssetSQL {
     }
 
     /**
-     * Lists all the date of the audio and video converter in the db.
+     * Lists all the data of the audio and video converter in the db.
      *
-     * @return a list of the all the date of the database.
+     * @return a list of the all the data of the database.
      */
     @SuppressWarnings("unchecked")
     public static List<Asset> listAsset() {
