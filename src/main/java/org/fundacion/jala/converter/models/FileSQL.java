@@ -36,7 +36,7 @@ public class FileSQL {
      * @param fileId int with the project id
      * @return a project
      */
-    public static File findProjectById(final int fileId) {
+    public static File findFileById(final int fileId) {
         EntityManager manager = emf.createEntityManager();
         File fileResult;
         manager.getTransaction().begin();
@@ -44,5 +44,19 @@ public class FileSQL {
         manager.getTransaction().commit();
         manager.close();
         return fileResult;
+    }
+
+    /**
+     * Deletes a file.
+     *
+     * @param fileId int with the file's id to be deleted
+     */
+    public static void deleteFile(final int fileId) {
+        EntityManager manager = emf.createEntityManager();
+        manager.getTransaction().begin();
+        File deleteFile = manager.find(File.class, fileId);
+        manager.remove(deleteFile);
+        manager.getTransaction().commit();
+        manager.close();
     }
 }
