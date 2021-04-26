@@ -24,9 +24,9 @@ import java.io.IOException;
  * This class calls facade of extract.
  */
 public class ExtractFacade {
-    public final String TXT_FILE_EXTENSION = ".txt";
-    public final String HTML_FILE_EXTENSION = ".html";
-    public final String XMP_FILE_EXTENSION = ".xmp";
+    public static final String TXT_FILE_EXTENSION = ".txt";
+    public static final String HTML_FILE_EXTENSION = ".html";
+    public static final String XMP_FILE_EXTENSION = ".xmp";
 
     private ExtractFacade() {
     }
@@ -45,10 +45,10 @@ public class ExtractFacade {
      * Extracts metadata from file.
      *
      * @param file is the path of file to extract metadata.
-     * @param isMoreInfo is get more info of file
-     * @param nameExport  is the name of file where metadata are extracted
-     * @param format is the format of file where metadata are extracted
-     * @return string with name of file which contains metadata
+     * @param isMoreInfo is get more info of file.
+     * @param nameExport  is the name of file where metadata are extracted.
+     * @param format is the format of file where metadata are extracted.
+     * @return string with name of file which contains metadata.
      */
     public static String getMetadataExtract(final MultipartFile file, final Boolean isMoreInfo,
                                             final String nameExport, final String format) throws IOException {
@@ -76,7 +76,7 @@ public class ExtractFacade {
      * Converts string to enum for metadata.
      *
      * @param format define type of file which it is exported.
-     * @return format type TypeFileExport
+     * @return format type TypeFileExport.
      */
     private static TypeFileExport stringToEnum(final String format) {
         if (TXT_FILE_EXTENSION.equals(format)) {
