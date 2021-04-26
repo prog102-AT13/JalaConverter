@@ -8,7 +8,6 @@
  *
  * @author Cristian Choque Quispe
  */
-
 package org.fundacion.jala.converter.models;
 
 import javax.persistence.Column;

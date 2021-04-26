@@ -7,7 +7,6 @@
  *
  * @author Juan Pablo Gonzales Alvarado
  */
-
 package org.fundacion.jala.converter.models;
 
 import javax.persistence.*;
