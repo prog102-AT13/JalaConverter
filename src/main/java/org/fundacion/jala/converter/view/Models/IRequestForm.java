@@ -13,7 +13,7 @@ package org.fundacion.jala.converter.view.Models;
 import java.util.List;
 
 /**
- * This interface defines the signatures for handling the parameters
+ * This interface defines the signatures for handling the parameters.
  */
 public interface IRequestForm {
 

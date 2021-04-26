@@ -32,7 +32,7 @@ public class VideoRequestForm implements IRequestForm {
     private final String CHECKSUM = "checksum";
 
     /**
-     * Video Request Form stores parameters for an video request
+     * Video Request Form stores parameters for an video request.
      */
     public VideoRequestForm() {
     }
