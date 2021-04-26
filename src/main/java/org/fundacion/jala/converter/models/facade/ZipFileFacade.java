@@ -29,13 +29,13 @@ public class ZipFileFacade {
      *
      * @param parameterOutputChecksum object of ParameterOutputChecksum.
      * @param metadata if add metadata of audio into zip.
-     * @param storagePath path and name of file to compress.
+     * @param outputFilename path and name of file to compress.
      * @throws IOException when invalid path is given in zipFiles.
      * @throws InterruptedException is exception if process is interrupted.
      */
     public static void getZipFileAudio(final ParameterOutputChecksum parameterOutputChecksum, final boolean metadata,
-                                       final String storagePath) throws IOException, InterruptedException {
-        getZipFile(parameterOutputChecksum, metadata, storagePath, false);
+                                       final String outputFilename) throws IOException, InterruptedException {
+        getZipFile(parameterOutputChecksum, metadata, outputFilename, false);
     }
 
     /**
@@ -43,15 +43,15 @@ public class ZipFileFacade {
      *
      * @param parameterOutputChecksum object of ParameterOutputChecksum.
      * @param metadata if add metadata of video into zip.
-     * @param storagePath path and name of file to compress.
+     * @param outputFilename path and name of file to compress.
      * @param thumbnail if add thumbnail of video into zip.
      * @throws IOException when invalid path is given in zipFiles.
      * @throws InterruptedException is exception if process is interrupted.
      */
     public static void getZipFileVideo(final ParameterOutputChecksum parameterOutputChecksum, final boolean metadata,
-                                       final boolean thumbnail, final String storagePath)
+                                       final boolean thumbnail, final String outputFilename)
             throws IOException, InterruptedException {
-        getZipFile(parameterOutputChecksum, metadata, storagePath, thumbnail);
+        getZipFile(parameterOutputChecksum, metadata, outputFilename, thumbnail);
     }
 
     /**
@@ -59,16 +59,16 @@ public class ZipFileFacade {
      *
      * @param parameterOutputChecksum object of ParameterOutputChecksum.
      * @param metadata if add metadata into zip.
-     * @param storagePath path and name of file to compress.
+     * @param outputFilename path and name of file to compress.
      * @param thumbnail if add thumbnail of video into zip.
      * @throws IOException when invalid path is given in zipFiles.
      * @throws InterruptedException is exception if process is interrupted.
      */
     private static void getZipFile(final ParameterOutputChecksum parameterOutputChecksum, final boolean metadata,
-                                   final String storagePath, final boolean thumbnail)
+                                   final String outputFilename, final boolean thumbnail)
             throws IOException, InterruptedException {
         String checksumLocal = parameterOutputChecksum.getChecksumLocal();
-        String outputFilename = parameterOutputChecksum.getOutputFilename();
+        String storagePath = parameterOutputChecksum.getOutputFilename();
         int resultTitleSize = parameterOutputChecksum.getResultTitleSize();
         String filename = parameterOutputChecksum.getFileName();
         final int WAIT_TIME = 6000;
@@ -93,6 +93,7 @@ public class ZipFileFacade {
             Thread.sleep(WAIT_TIME);
             zipFile(pathFile + outputFilename, pathFile + nameWithoutExtension + "zip");
         }
+        System.out.println("SS");
     }
 }
 

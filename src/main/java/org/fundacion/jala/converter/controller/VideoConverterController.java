@@ -10,12 +10,11 @@
  */
 package org.fundacion.jala.converter.controller;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.models.facade.ChecksumFacade;
 import org.fundacion.jala.converter.models.facade.ConverterFacade;
 import org.fundacion.jala.converter.models.facade.ParameterOutputChecksum;
 import org.fundacion.jala.converter.models.facade.ZipFileFacade;
+import org.fundacion.jala.converter.models.facade.DownloadLinkFacade;
 import org.fundacion.jala.converter.service.FileStorageService;
 import org.fundacion.jala.converter.models.parameter.VideoParameter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
 import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetadata;
 
@@ -34,8 +32,7 @@ import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetada
 @RestController
 @RequestMapping("/api")
 public class VideoConverterController {
-    private static final Logger LOGGER = LogManager.getLogger();
-    private ParameterOutputChecksum paramChecksum;
+    private ParameterOutputChecksum parameterOutputChecksum;
 
     @Autowired
     private FileStorageService fileStorageService;

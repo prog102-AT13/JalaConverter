@@ -16,6 +16,7 @@ import org.fundacion.jala.converter.models.facade.ChecksumFacade;
 import org.fundacion.jala.converter.models.facade.ConverterFacade;
 import org.fundacion.jala.converter.models.facade.ParameterOutputChecksum;
 import org.fundacion.jala.converter.models.facade.ZipFileFacade;
+import org.fundacion.jala.converter.models.facade.DownloadLinkFacade;
 import org.fundacion.jala.converter.models.parameter.AudioParameter;
 import org.fundacion.jala.converter.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
