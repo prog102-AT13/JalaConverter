@@ -22,7 +22,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.FetchType;
 
 /**
- * This Class is a Entity of the database.
+ * This Class is a Entity of the database with the name ASSET.
  */
 @Entity
 @Table(name = "ASSET")
@@ -59,7 +59,7 @@ public class Asset {
     /**
      * Obtains Id of the audio or video converter.
      *
-     * @return id of the project.
+     * @return id of the audio or video converter.
      */
     public int getId() {
         return id;
