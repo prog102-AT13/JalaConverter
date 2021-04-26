@@ -44,7 +44,6 @@ public class File {
     public File() {
     }
 
-
     public File(final String newName, final String newPathFile, final Project newProject) {
         this.name = newName;
         this.pathFile = newPathFile;
@@ -81,7 +80,7 @@ public class File {
     /**
      * Sets new name of the file.
      *
-     * @param newName String with the name of tre file.
+     * @param newName String with the name of the file.
      */
     public void setName(final String newName) {
         this.name = newName;

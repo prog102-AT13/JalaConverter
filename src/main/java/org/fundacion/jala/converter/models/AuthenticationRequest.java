@@ -43,7 +43,7 @@ public class AuthenticationRequest {
     /**
      * Gets the password.
      *
-     * @return String tha is password.
+     * @return String that is password.
      */
     public String getPassword() {
         return password;

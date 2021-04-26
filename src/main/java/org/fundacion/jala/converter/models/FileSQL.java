@@ -5,7 +5,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Juan Pablo Gonzales
+ * @author Juan Pablo Gonzalez Alvarado
  */
 package org.fundacion.jala.converter.models;
 
@@ -20,7 +20,7 @@ public class FileSQL {
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jalaPersistence");
 
     /**
-     * Inserts date into the database.
+     * Inserts data into the database.
      *
      * @param fileName is a name the file.
      * @param pathFile is a path the file.
@@ -38,7 +38,7 @@ public class FileSQL {
     /**
      * Finds a project by id.
      *
-     * @param fileId is a int with the project id.
+     * @param fileId is an int with the project id.
      * @return File with the project found.
      */
     public static File findProjectById(final int fileId) {

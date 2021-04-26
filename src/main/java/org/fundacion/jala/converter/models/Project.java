@@ -5,7 +5,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Juan Pablo Gonzales
+ * @author Juan Pablo Gonzalez Alvarado
  */
 package org.fundacion.jala.converter.models;
 
@@ -49,7 +49,6 @@ public class Project {
     private List<File> files = new ArrayList<>();
 
     public Project() {
-
     }
 
     public Project(final String newTitle, final String newPath, final User newUser) {
@@ -113,7 +112,7 @@ public class Project {
     }
 
     /**
-     * Obtains all date of the project.
+     * Obtains all data of the project.
      *
      * @return String of the dates.
      */

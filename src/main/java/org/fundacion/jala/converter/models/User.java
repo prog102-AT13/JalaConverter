@@ -59,7 +59,7 @@ public class User {
     }
 
     /**
-     * Obtains Ids of the User.
+     * Obtains user's id.
      *
      * @return id of the user.
      */
@@ -131,7 +131,7 @@ public class User {
     }
 
     /**
-     * Obtains all the projects that realized the user.
+     * Obtains all the projects that the user realized.
      *
      * @return all the Assets of the user.
      */
@@ -167,9 +167,9 @@ public class User {
     }
 
     /**
-     * Obtains all date of the user.
+     * Obtains all data of the user.
      *
-     * @return String of the dates.
+     * @return String of the data.
      */
     @Override
     public String toString() {

@@ -66,7 +66,7 @@ public class AssetSQL {
     }
 
     /**
-     * Deletes a data from the database of the audio or video converter.
+     * Deletes data of the audio or video converter from the database.
      *
      * @param assetId is a int with the id of the audio or video converter.
      */
@@ -82,7 +82,7 @@ public class AssetSQL {
     /**
      * Lists all the data of the audio and video converter in the db.
      *
-     * @return a list of the all the data of the database.
+     * @return a list with all the data of the database.
      */
     @SuppressWarnings("unchecked")
     public static List<Asset> listAsset() {
