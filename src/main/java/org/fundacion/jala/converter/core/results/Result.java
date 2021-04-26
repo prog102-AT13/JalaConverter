@@ -1,5 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
+ *
  * *  This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -32,7 +33,7 @@ public class Result {
      *
      * @param filename A String that represents the filename of the result.
      */
-    public void setFilename(String filename) {
+    public void setFilename(final String filename) {
         this.filename = filename;
     }
 
@@ -50,7 +51,7 @@ public class Result {
      *
      * @param path A String with the path for the result.
      */
-    public void setPath(String path) {
+    public void setPath(final String path) {
         this.path = path;
     }
 
@@ -68,7 +69,7 @@ public class Result {
      *
      * @param processId
      */
-    public void setProcessId(String processId) {
+    public void setProcessId(final String processId) {
         this.processId = processId;
     }
 
@@ -86,7 +87,7 @@ public class Result {
      *
      * @param textContent A String with the text content of the result.
      */
-    public void setTextContent(String textContent) {
+    public void setTextContent(final String textContent) {
         this.textContent = textContent;
     }
 }

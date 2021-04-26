@@ -34,7 +34,7 @@ public class FileStorageService {
      * @param file a MultipartFile file to be updated.
      * @return a String with the storageDir.
      */
-    public String uploadFile(MultipartFile file) throws IllegalStateException, IOException {
+    public String uploadFile(final MultipartFile file) throws IllegalStateException, IOException {
         String filename = file.getOriginalFilename();
         String storageDir = PATH + File.separator + ARCHIVE + File.separator + filename;
         file.transferTo(new File(storageDir));
@@ -48,7 +48,7 @@ public class FileStorageService {
      * @throws RuntimeException if the file does not exist.
      * @return a String with the resource from a file name.
      */
-    public Resource downloadFile(String fileName) {
+    public Resource downloadFile(final String fileName) {
         Path path = Paths.get(getArchivePath(fileName));
         Resource resource;
         try {
@@ -69,7 +69,7 @@ public class FileStorageService {
      * @param filename a String to get an output path.
      * @return a String with the output path.
      */
-    public static String getOutputPath(String filename) {
+    public static String getOutputPath(final String filename) {
         return PATH + File.separator + ARCHIVE + File.separator + File.separator + filename;
     }
 
@@ -79,7 +79,7 @@ public class FileStorageService {
      * @param filename a String to get an output path.
      * @return a String path without the file name.
      */
-    public static String getOutputPathWithoutFileName(String filename) {
+    public static String getOutputPathWithoutFileName(final String filename) {
         return PATH + File.separator + ARCHIVE + File.separator + File.separator;
     }
 
@@ -89,7 +89,7 @@ public class FileStorageService {
      * @param filename a String to get an archive path.
      * @return a String with the archive path.
      */
-    public String getArchivePath(String filename) {
+    public String getArchivePath(final String filename) {
         return PATH + File.separator + ARCHIVE + File.separator + filename;
     }
 }
