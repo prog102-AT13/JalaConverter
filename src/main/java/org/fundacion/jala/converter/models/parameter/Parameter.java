@@ -8,7 +8,6 @@
  *
  * @author Juan Pablo Gonzales
  */
-
 package org.fundacion.jala.converter.models.parameter;
 
 import org.springframework.stereotype.Service;
