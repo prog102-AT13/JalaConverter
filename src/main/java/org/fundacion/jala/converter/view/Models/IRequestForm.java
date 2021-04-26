@@ -7,29 +7,34 @@
  * license agreement you entered into with Fundacion Jala
  *
  * @author Saul Caspa Miranda
- * @version 1.0
  */
 package org.fundacion.jala.converter.view.Models;
 
 import java.util.List;
 
+/**
+ * This interface defines the signatures for handling the parameters.
+ */
 public interface IRequestForm {
 
     /**
-     * Gets the body parameters
-     * @return bodyParameters
+     * Gets the body parameters.
+     *
+     * @return a List<Parameter> Object with body's parameters.
      */
     public List<Parameter> getBodyParameters();
 
     /**
      * Adds parameters to bodyParameters.
-     * @param parameter
+     *
+     * @param parameter Object Parameter.
      */
     public void addParameters(Parameter parameter);
 
     /**
-     * Gets the URL
-     * @return URL
+     * Gets the URL.
+     *
+     * @return a String with the file's url.
      */
     public String getURL();
 }

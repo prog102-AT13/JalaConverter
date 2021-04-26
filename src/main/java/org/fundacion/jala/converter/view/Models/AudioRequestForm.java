@@ -7,97 +7,108 @@
  * license agreement you entered into with Fundacion Jala
  *
  * @author Saul Caspa Miranda
- * @version 1.0
  */
 package org.fundacion.jala.converter.view.Models;
 
 import java.util.ArrayList;
 import java.util.List;
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
+
+/**
+ * This class shows the audio's form.
+ */
 public class AudioRequestForm implements IRequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
-    private final String url = dotenv.get("HTTP_URL_CONVERT_AUDIO");
-    private final String file = "file";
-    private final String format = "format";
-    private final String bitrate = "bitrate";
-    private final String volume = "volume";
-    private final String hz = "hz";
-    private final String audioChannel = "audiochannel";
-    private final String metaData = "metadata";
-    private final String checksum = "checksum";
+    private final String URL = dotenv.get("HTTP_URL_CONVERT_AUDIO");
+    private final String FILE = "file";
+    private final String FORMAT = "format";
+    private final String BITRATE = "bitrate";
+    private final String VOLUME = "volume";
+    private final String HZ = "hz";
+    private final String AUDIOCHANEL = "audiochannel";
+    private final String METADATA = "metadata";
+    private final String CHECKSUM = "checksum";
 
-    /**
-     * Audio Request Form stores parameters for an audio request
-     */
     public AudioRequestForm() {
     }
 
     /**
-     * Adds filepath parameter
-     * @param filepathValue
+     * Adds filepath parameter.
+     *
+     * @param filepathValue String with the path.
      */
     public void addFilepath(final String filepathValue) {
-        addParameters(new Parameter(file, filepathValue, true));
+        addParameters(new Parameter(FILE, filepathValue, true));
     }
 
     /**
-     * Adds format parameter
-     * @param formatValue
+     * Adds format parameter.
+     *
+     * @param formatValue String with the format value.
      */
     public void addFormat(final String formatValue) {
-        addParameters(new Parameter(format, formatValue, false));
+        addParameters(new Parameter(FORMAT, formatValue, false));
     }
 
     /**
-     * Adds bitrate parameter
-     * @param bitrateValue
+     * Adds bitrate parameter.
+     *
+     * @param bitrateValue String with the bitrate value.
      */
     public void addBitrate(final String bitrateValue) {
-        addParameters(new Parameter(bitrate, bitrateValue, false));
+        addParameters(new Parameter(BITRATE, bitrateValue, false));
     }
 
     /**
-     * Adds volume parameter
-     * @param volumeValue
+     * Adds volume parameter.
+     *
+     * @param volumeValue String with the volume value.
      */
     public void addVolume(final String volumeValue) {
-        addParameters(new Parameter(volume, volumeValue, false));
+        addParameters(new Parameter(VOLUME, volumeValue, false));
     }
 
     /**
-     * Adds hz parameter
-     * @param hzValue
+     * Adds hz parameter.
+     *
+     * @param hzValue String with the hz value.
      */
     public void addHz(final String hzValue) {
-        addParameters(new Parameter(hz, hzValue, false));
+        addParameters(new Parameter(HZ, hzValue, false));
     }
 
     /**
-     * Adds audiochannel parameter
-     * @param metadataValue
+     * Adds audiochannel parameter.
+     *
+     * @param metadataValue String with the metadata value.
      */
     public void addAudiochannel(final String metadataValue) {
-        addParameters(new Parameter(audioChannel, metadataValue, false));
+        addParameters(new Parameter(AUDIOCHANEL, metadataValue, false));
     }
+
     /**
-     * Adds metadata parameter
-     * @param metadataValue
+     * Adds metadata parameter.
+     *
+     * @param metadataValue String with the metadata value.
      */
     public void addMetadata(final String metadataValue) {
-        addParameters(new Parameter(metaData, metadataValue, false));
+        addParameters(new Parameter(METADATA, metadataValue, false));
     }
+
     /**
-     * Adds checksum parameter
-     * @param checksumValue
+     * Adds checksum parameter.
+     *
+     * @param checksumValue String with the checksum value.
      */
     public void addChecksum(final String checksumValue) {
-        addParameters(new Parameter(checksum, checksumValue, false));
+        addParameters(new Parameter(CHECKSUM, checksumValue, false));
     }
 
 
     /**
-     * Gets the body parameters
-     * @return bodyParameters
+     * Gets the body parameters.
+     *
+     * @return a List<Parameter> for bodyParameters.
      */
     @Override
     public List<Parameter> getBodyParameters() {
@@ -105,8 +116,9 @@ public class AudioRequestForm implements IRequestForm {
     }
 
     /**
-     * Adds parameters to bodyParameters
-     * @param parameter
+     * Adds parameters to bodyParameters.
+     *
+     * @param parameter String with the object's parameters.
      */
     @Override
     public void addParameters(final Parameter parameter) {
@@ -114,11 +126,12 @@ public class AudioRequestForm implements IRequestForm {
     }
 
     /**
-     * Gets the url
-     * @return url
+     * Gets the url.
+     *
+     * @return a String with the file's url.
      */
     @Override
     public String getURL() {
-        return url;
+        return URL;
     }
 }
