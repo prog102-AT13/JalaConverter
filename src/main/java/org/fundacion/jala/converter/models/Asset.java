@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- * <p>
+ *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -56,7 +56,7 @@ public class Asset {
     }
 
     /**
-     * Obtains Id of the audio or video converter.
+     * Obtains Id of the database.
      *
      * @return id of the audio or video converter.
      */
@@ -94,7 +94,7 @@ public class Asset {
     /**
      * Obtains the user that realized the project.
      *
-     * @return name of the user that is realized the audio or video converter.
+     * @return name of the user that is used the audio or video converter.
      */
     public User getUser() {
         return user;
@@ -103,7 +103,7 @@ public class Asset {
     /**
      * Sets the user of the audio or video converter.
      *
-     * @param newUser the new user that realized the audio or video converter.
+     * @param newUser the new user that used the audio or video converter.
      */
     public void setUser(final User newUser) {
         this.user = newUser;
@@ -146,9 +146,9 @@ public class Asset {
     }
 
     /**
-     * Obtains all date of the audio or video converter.
+     * Obtains all data of the audio or video converter.
      *
-     * @return String of the dates of the audio or video converter.
+     * @return String of the data of the audio or video converter.
      */
     @Override
     public String toString() {
