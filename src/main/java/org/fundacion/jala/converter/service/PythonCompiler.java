@@ -12,6 +12,7 @@ package org.fundacion.jala.converter.service;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.exceptions.CompilerException;
 import org.fundacion.jala.converter.models.parameter.PythonParameter;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -51,7 +52,8 @@ public class PythonCompiler {
             return result;
         } catch (IOException exception) {
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
-            return exception.getMessage();
+//            throw new ConverterException(exception);
+            return String.valueOf(new CompilerException(exception));
         }
     }
 
@@ -78,9 +80,9 @@ public class PythonCompiler {
             bufferedWriter.close();
             LOGGER.info("finish");
             return file.getAbsolutePath();
-        } catch (Exception exception) {
+        } catch (IOException exception) {
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
-            return exception.getMessage();
+            return String.valueOf(new CompilerException(exception));
         }
     }
 }
