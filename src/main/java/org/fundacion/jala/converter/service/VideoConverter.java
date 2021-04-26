@@ -53,7 +53,6 @@ public class VideoConverter {
             Process petition = Runtime.getRuntime().exec("cmd /c " + theCommand);
             LOGGER.info("finish");
         } catch (Exception exception) {
-//            exception.printStackTrace();
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
             throw new ConverterException(exception);
         }

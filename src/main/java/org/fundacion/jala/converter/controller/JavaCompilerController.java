@@ -12,6 +12,7 @@ package org.fundacion.jala.converter.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.exceptions.PaoPaoException;
 import org.fundacion.jala.converter.models.parameter.JavaParameter;
 import org.fundacion.jala.converter.models.facade.CompilerFacade;
 import org.fundacion.jala.converter.service.javacompiler.JavaVersion;
@@ -43,7 +44,11 @@ public class JavaCompilerController {
         if (!code.isBlank() || !code.equals(null)) {
             String filePath = Transform.toFile(code, "Main", "java");
             LOGGER.info("finish");
-            return CompilerFacade.facadeJavaCompile(new JavaParameter(JavaVersion.JAVA_11, filePath));
+            try {
+                return CompilerFacade.facadeJavaCompile(new JavaParameter(JavaVersion.JAVA_11, filePath));
+            } catch (PaoPaoException exception) {
+                exception.printStackTrace();
+            }
         }
         return "";
     }

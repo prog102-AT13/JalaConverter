@@ -10,6 +10,7 @@
  */
 package org.fundacion.jala.converter.models.facade;
 
+import org.fundacion.jala.converter.exceptions.CompilerException;
 import org.fundacion.jala.converter.models.parameter.JavaParameter;
 import org.fundacion.jala.converter.models.parameter.PythonParameter;
 import org.fundacion.jala.converter.service.javacompiler.JavaCompiler;
@@ -32,7 +33,7 @@ public class CompilerFacade {
      * @param javaParameter the version to be used in the compiler.
      * @return a string of the result on runtime console.
      */
-    public static String facadeJavaCompile(final JavaParameter javaParameter) {
+    public static String facadeJavaCompile(final JavaParameter javaParameter) throws CompilerException {
         javaCompiler = new JavaCompiler();
         result = javaCompiler.javaCompiler(javaParameter);
         return result;
