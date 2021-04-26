@@ -1,5 +1,3 @@
-package org.fundacion.jala.converter.core.results;
-
 /**
  * Copyright (c) 2021 Fundacion Jala.
  * *  This software is the confidential and proprietary information of Fundacion Jala
@@ -9,6 +7,7 @@ package org.fundacion.jala.converter.core.results;
  *
  * @author Saul Caspa Miranda
  */
+package org.fundacion.jala.converter.core.results;
 
 /**
  * This class stores the return variables for a converter and compiler result.

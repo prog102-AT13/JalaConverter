@@ -8,10 +8,7 @@
  *
  * @author Juan Pablo Gonzales Alvarado
  */
-
 package org.fundacion.jala.converter.core.parameter;
-
-import org.springframework.stereotype.Service;
 
 /**
  * This class has the options from the parameters to file path.

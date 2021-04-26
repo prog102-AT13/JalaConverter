@@ -8,12 +8,14 @@
  *
  * @author Edson Añawaya Rios
  */
-
 package org.fundacion.jala.converter.core;
 
 import org.fundacion.jala.converter.core.parameter.AudioParameter;
 import org.fundacion.jala.converter.core.results.Result;
 
+/**
+ * This class handles the requests to convert an audio with the given operations from an audio parameters form.
+ */
 public final class AudioConverter {
     private AudioParameter parameter;
     private String outputFileName = "";

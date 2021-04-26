@@ -15,7 +15,6 @@ import java.io.InputStream;
  * This class runs an input stream in a single thread.
  */
 class ThreadHandler extends Thread {
-
     InputStream input;
 
     ThreadHandler(InputStream input, String name) {

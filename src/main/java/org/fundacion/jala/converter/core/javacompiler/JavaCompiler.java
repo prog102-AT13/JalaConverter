@@ -14,7 +14,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.core.parameter.JavaParameter;
 import org.fundacion.jala.converter.core.results.Result;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -71,6 +70,7 @@ public class JavaCompiler {
 
     /**
      * Returns the result object for the operation.
+     *
      * @return compilerResult
      */
     public Result getResult() {

@@ -91,6 +91,7 @@ public class PythonCompiler {
 
     /**
      * Returns the result object for the operation.
+     *
      * @return compilerResult
      */
     public Result getResult() {

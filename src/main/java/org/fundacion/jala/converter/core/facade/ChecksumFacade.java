@@ -40,7 +40,7 @@ public class ChecksumFacade {
      * @throws IOException is a exception when invalid file's path.
      */
     public static ParameterOutputChecksum getChecksum(final String checksum, final MultipartFile file)
-            throws  IOException {
+            throws IOException {
         FileStorageService fileStorageService = new FileStorageService();
         String filename;
         String storagePath;

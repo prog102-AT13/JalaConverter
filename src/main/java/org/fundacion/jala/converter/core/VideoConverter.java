@@ -49,7 +49,6 @@ public class VideoConverter {
         String ffmpegCommand = startFirstCommand + adaptPath + " ";
         String parameters = changeResolution() + changeFrameRate() + removeAudio();
         String theCommand = ffmpegCommand + parameters + pathOutput + output  + "\"";
-
         Process process = Runtime.getRuntime().exec("cmd /c " + theCommand);
         ThreadHandler errorHandler = new ThreadHandler(process.getErrorStream(), "Error Stream");
         errorHandler.start();
@@ -98,7 +97,6 @@ public class VideoConverter {
         String outputCommand = pathOutput + output + "\"" + " -ss 00:00:01 -vframes 1 -s 128x128 " +
                                pathOutput + name + PNG_FORMAT;
         String thumbnailCommand = startCommand + outputCommand;
-
         Process process = Runtime.getRuntime().exec("cmd /c " + thumbnailCommand);
         ThreadHandler errorHandler = new ThreadHandler(process.getErrorStream(), "Error Stream");
         errorHandler.start();
@@ -161,6 +159,7 @@ public class VideoConverter {
 
     /**
      * Returns the object result for the operation.
+     *
      * @return extractorResult.
      */
     public Result getResult() {
