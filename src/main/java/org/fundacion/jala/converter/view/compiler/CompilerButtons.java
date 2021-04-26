@@ -72,5 +72,9 @@ class CompilerButtons extends JPanel implements ActionListener {
         button.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
         return button;
     }
+
+    public JButton getSelectFile() {
+        return selectFile;
+    }
 }
 
