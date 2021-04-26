@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Paola Aguilar Quiñones
+ * @author Paola Ximena Aguilar Quiñones
  */
 package org.fundacion.jala.converter.view.compiler;
 
@@ -14,7 +14,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.view.Models.CompileRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
-
 import javax.swing.JPanel;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -64,10 +63,10 @@ public class CompilerInterface extends JPanel {
      * @param gy represents y grid.
      * @param gh represents height grid.
      * @param gw represents width grid.
-     * @return a custom GridBagConstraints.
+     * @return a GridBagConstraints for the compiler.
      */
     public GridBagConstraints setConstraints(final GridBagConstraints panelConstraint, final int gx, final int gy,
-                                            final int gh, final int gw) {
+                                             final int gh, final int gw) {
         panelConstraint.gridx = gx;
         panelConstraint.gridy = gy;
         panelConstraint.gridheight = gh;
@@ -104,7 +103,7 @@ public class CompilerInterface extends JPanel {
     /**
      * Sets enabled to java button and disabled to python button.
      *
-     * @return a custom ActionListener
+     * @return a custom ActionListener.
      */
     public ActionListener addListenerToJavaButton() {
         ActionListener actionListener = new ActionListener() {
@@ -121,7 +120,7 @@ public class CompilerInterface extends JPanel {
     /**
      * Sets enabled to python button and disabled to java button.
      *
-     * @return a custom ActionListener
+     * @return a custom ActionListener.
      */
     public ActionListener addListenerToPythonButton() {
         ActionListener actionListener = new ActionListener() {
