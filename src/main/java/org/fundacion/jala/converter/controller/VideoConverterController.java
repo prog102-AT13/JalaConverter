@@ -12,6 +12,7 @@ package org.fundacion.jala.converter.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.exceptions.PaoPaoException;
 import org.fundacion.jala.converter.models.facade.ChecksumFacade;
 import org.fundacion.jala.converter.models.facade.ConverterFacade;
 import org.fundacion.jala.converter.models.facade.ParameterOutputChecksum;
@@ -72,7 +73,12 @@ public class VideoConverterController {
         VideoParameter videoParam;
         String path = paramChecksum.getOutputFilename();
         videoParam = new VideoParameter(path, outputFormat, resolution, thumbnail, frameRate, width, height, audio);
-        String outputFilename = ConverterFacade.getVideoConverter(videoParam);
+        String outputFilename = null;
+        try {
+            outputFilename = ConverterFacade.getVideoConverter(videoParam);
+        } catch (PaoPaoException converterException) {
+            converterException.printStackTrace();
+        }
         extractMetadata(metadata, outputFilename, fileStorageService);
         ZipFileFacade.getZipFileVideo(paramChecksum, metadata, thumbnail, outputFilename);
         String nameWithoutExtension = outputFilename.substring(0, outputFilename.lastIndexOf(".") + 1);

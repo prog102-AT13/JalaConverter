@@ -10,6 +10,7 @@
  */
 package org.fundacion.jala.converter.models.facade;
 
+import org.fundacion.jala.converter.exceptions.ConverterException;
 import org.fundacion.jala.converter.models.parameter.AudioParameter;
 import org.fundacion.jala.converter.models.parameter.VideoParameter;
 import org.fundacion.jala.converter.service.AudioConverter;
@@ -41,7 +42,7 @@ public class ConverterFacade {
      * @param videoParameter is a object with parameter of video to convert.
      * @return string of output filename.
      */
-    public static String getVideoConverter(final VideoParameter videoParameter) {
+    public static String getVideoConverter(final VideoParameter videoParameter) throws ConverterException {
         VideoConverter converter = new VideoConverter(videoParameter);
         converter.convertVideo();
         return converter.getOutputFileName();

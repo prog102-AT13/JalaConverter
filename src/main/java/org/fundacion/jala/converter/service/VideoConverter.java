@@ -12,6 +12,7 @@ package org.fundacion.jala.converter.service;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.exceptions.ConverterException;
 import org.fundacion.jala.converter.models.parameter.VideoParameter;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +38,7 @@ public class VideoConverter {
     /**
      * Converts the input video.
      */
-    public void convertVideo() {
+    public void convertVideo() throws ConverterException {
         String adaptPath = "\"" + parameter.getFilePath() + "\"";
         format = parameter.getOutputFormat();
         output = adaptPath.substring((adaptPath.lastIndexOf("\\") + 1), adaptPath.lastIndexOf(".") + 1) + format;
@@ -52,8 +53,9 @@ public class VideoConverter {
             Process petition = Runtime.getRuntime().exec("cmd /c " + theCommand);
             LOGGER.info("finish");
         } catch (Exception exception) {
-            exception.printStackTrace();
+//            exception.printStackTrace();
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
+            throw new ConverterException(exception);
         }
         try {
             LOGGER.info("Execute Try");
