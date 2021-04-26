@@ -56,9 +56,9 @@ public class Asset {
     }
 
     /**
-     * Obtains Id of the database.
+     * Obtains Id from the database.
      *
-     * @return id of the audio or video converter.
+     * @return id from the audio or video converter.
      */
     public int getId() {
         return id;
@@ -94,7 +94,7 @@ public class Asset {
     /**
      * Obtains the user that realized the project.
      *
-     * @return name of the user that is used the audio or video converter.
+     * @return name of the user that used the audio or video converter.
      */
     public User getUser() {
         return user;
@@ -139,7 +139,7 @@ public class Asset {
     /**
      * Sets new checksum value of the audio or video file.
      *
-     * @param newChecksum ia a String with the new checksum.
+     * @param newChecksum is a String with the new checksum.
      */
     public void setChecksum(final String newChecksum) {
         this.checksum = newChecksum;

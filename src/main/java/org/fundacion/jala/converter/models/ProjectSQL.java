@@ -20,10 +20,10 @@ public class ProjectSQL {
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jalaPersistence");
 
     /**
-     * Inserts data for database.
+     * Inserts data into the database.
      *
-     * @param projectName name the file.
-     * @param pathProject path the file.
+     * @param projectName file's name.
+     * @param pathProject file's path.
      */
     public static Project insertProjectData(final String projectName, final String pathProject, final int userId) {
         EntityManager manager = emf.createEntityManager();

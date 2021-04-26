@@ -69,7 +69,7 @@ public class UserSQL {
     }
 
     /**
-     * Deletes a user of the database.
+     * Deletes a user from the database.
      *
      * @param userId int with the id of the user to be deleted.
      */
