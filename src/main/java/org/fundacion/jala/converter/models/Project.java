@@ -14,6 +14,9 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This Class is a Entity of the database with the name PROJECT.
+ */
 @Entity
 @Table(name = "PROJECT")
 public class Project {
@@ -47,57 +50,63 @@ public class Project {
     }
 
     /**
-     * Obtains Id of the project
+     * Obtains Id of the project.
      *
-     * @return id of the project
+     * @return id of the project.
      */
     public int getId() {
         return id;
     }
 
     /**
-     * Sets new id of the project
-     * @param newId int with the new project id
+     * Sets new id of the project.
+     *
+     * @param newId is a int with the new project id.
      */
     public void setId(final int newId) {
         this.id = newId;
     }
 
     /**
-     * Obtains title of the project
-     * @return title of the project
+     * Obtains title of the project.
+     *
+     * @return String with title of the project.
      */
     public String getTitle() {
         return title;
     }
 
     /**
-     * Sets new title of the project
-     * @param newTitle String with the new title
+     * Sets new title of the project.
+     *
+     * @param newTitle String with the new title.
      */
     public void setTitle(final String newTitle) {
         this.title = newTitle;
     }
 
     /**
-     * Gets path of the project where the project is saved
-     * @return path of project
+     * Gets path of the project where the project is saved.
+     *
+     * @return String with the path of project.
      */
     public String getPath() {
         return path;
     }
 
     /**
-     * Sets new path of the project
-     * @param newPath path of project
+     * Sets new path of the project.
+     *
+     * @param newPath path of project.
      */
     public void setPath(final String newPath) {
         this.path = newPath;
     }
 
     /**
-     * Obtains all date of the project
-     * @return String of the dates
+     * Obtains all date of the project.
+     *
+     * @return String of the dates.
      */
     @Override
     public String toString() {

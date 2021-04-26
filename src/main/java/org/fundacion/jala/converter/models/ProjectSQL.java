@@ -13,14 +13,18 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+/**
+ * This class is to query to database.
+ */
 public class ProjectSQL {
 
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jalaPersistence");
 
     /**
-     * This method is for to insert dates for database
-     * @param projectName name the archive
-     * @param pathProject path the archive
+     * This method is for to insert dates for database.
+     *
+     * @param projectName name the archive.
+     * @param pathProject path the archive.
      */
     public static Project insertProjectData(final String projectName, final String pathProject, final int userId) {
         EntityManager manager = emf.createEntityManager();
@@ -34,9 +38,10 @@ public class ProjectSQL {
     }
 
     /**
-     * Finds a project by it's id
-     * @param projectId int with the project id
-     * @return a project
+     * Finds a project by it's id.
+     *
+     * @param projectId int with the project id.
+     * @return a project found by id.
      */
     public static Project findProjectById(final int projectId) {
         EntityManager manager = emf.createEntityManager();
@@ -47,5 +52,4 @@ public class ProjectSQL {
         manager.close();
         return projectResult;
     }
-
 }
