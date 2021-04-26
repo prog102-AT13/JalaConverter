@@ -1,7 +1,3 @@
-package org.fundacion.jala.converter.core;
-
-import java.io.InputStream;
-
 /**
  * Copyright (c) 2021 Fundacion Jala.
  * *  This software is the confidential and proprietary information of Fundacion Jala
@@ -11,7 +7,13 @@ import java.io.InputStream;
  *
  * @author Saul Caspa Miranda
  */
+package org.fundacion.jala.converter.core;
 
+import java.io.InputStream;
+
+/**
+ * This class runs an input stream in a single thread.
+ */
 class ThreadHandler extends Thread {
 
     InputStream input;
@@ -21,6 +23,9 @@ class ThreadHandler extends Thread {
         this.input = input;
     }
 
+    /**
+     * Executes the thread.
+     */
     public void run() {
         try {
             int c;

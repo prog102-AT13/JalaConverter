@@ -31,7 +31,6 @@ public class VideoConverter {
     private static final Logger LOGGER = LogManager.getLogger();
     private Result result;
     private String thumbnailFilename;
-
     private final String PNG_FORMAT = ".png";
 
     public VideoConverter(final VideoParameter videoParameter) {

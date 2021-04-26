@@ -10,40 +10,75 @@ package org.fundacion.jala.converter.core.results;
  * @author Saul Caspa Miranda
  */
 
+/**
+ * This class stores the return variables for a converter and compiler result.
+ */
 public class Result {
     private String filename;
     private String path;
     private String processId;
     private String textContent;
 
+    /**
+     * Returns the filename.
+     * @return A String that represents the filename.
+     */
     public String getFilename() {
         return filename;
     }
 
+    /**
+     * Sets the value for the filename attribute.
+     * @param filename
+     */
     public void setFilename(String filename) {
         this.filename = filename;
     }
 
+    /**
+     * Returns the Path.
+     * @return The String that represents the Path of a file.
+     */
     public String getPath() {
         return path;
     }
 
+    /**
+     * Sets the path.
+     * @param path
+     */
     public void setPath(String path) {
         this.path = path;
     }
 
+    /**
+     * Returns the processId attribute.
+     * @return A processId String
+     */
     public String getProcessId() {
         return processId;
     }
 
+    /**
+     * Sets the processId.
+     * @param processId
+     */
     public void setProcessId(String processId) {
         this.processId = processId;
     }
 
+    /**
+     * Returns the content in text from a compiler or extractor.
+     * @return
+     */
     public String getTextContent() {
         return textContent;
     }
 
+    /**
+     * Sets the text content for the result.
+     * @param textContent
+     */
     public void setTextContent(String textContent) {
         this.textContent = textContent;
     }
