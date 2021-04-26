@@ -14,7 +14,7 @@ package org.fundacion.jala.converter.models.parameter;
 import org.springframework.stereotype.Service;
 
 /**
- * This class is the options of the java parameters.
+ * This class has the options of the parameters to file path.
  */
 @Service
 public class Parameter {

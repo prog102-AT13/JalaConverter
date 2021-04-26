@@ -11,7 +11,7 @@
 package org.fundacion.jala.converter.models.parameter;
 
 /**
- * This class refers to binary file to python.
+ * This class refers to binary file for python.
  */
 public enum PythonEnum {
 

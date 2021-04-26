@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class AudioParameter extends Parameter {
     private String format;
     private String bitrate;
-    private String hz;
+    private String frecuency;
     private String volume;
     private String audioChannels;
     private final int ONE_HUNDRED = 1000;
@@ -39,12 +39,12 @@ public class AudioParameter extends Parameter {
     }
 
     public AudioParameter(final String newFilePath, final String newFormat,
-                          final String newBitrate, final String newHz, final String newVolume,
+                          final String newBitrate, final String newFrecuency, final String newVolume,
                           final String newAudioChannels) {
         super(newFilePath);
         this.format = newFormat;
         this.bitrate = newBitrate;
-        this.hz = newHz;
+        this.frecuency = newFrecuency;
         this.volume = newVolume;
         this.audioChannels = newAudioChannels;
     }
@@ -64,7 +64,7 @@ public class AudioParameter extends Parameter {
     /**
      * Creates a parameter for frecuency.
      *
-     * @return a string with format for hz..
+     * @return a string with format for hz.
      */
     public String formatHz() {
         if (!getHz().equals("")) {
@@ -199,7 +199,7 @@ public class AudioParameter extends Parameter {
      * @return a string of hz of audio converter.
      */
     public String getHz() {
-        return hz;
+        return frecuency;
     }
 
     /**
@@ -207,7 +207,7 @@ public class AudioParameter extends Parameter {
      *
      * @param newHz is a new frecuency of the audio.
      */
-    public void setHz(final String newHz) {
-        this.hz = newHz;
+    public void setHz(final String newFrecuency) {
+        this.frecuency = newFrecuency;
     }
 }

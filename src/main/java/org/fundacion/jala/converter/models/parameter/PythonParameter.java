@@ -11,7 +11,7 @@
 package org.fundacion.jala.converter.models.parameter;
 
 /**
- * This class is to python parameter.
+ * This class is for python parameter.
  */
 public class PythonParameter extends Parameter {
     private PythonEnum pythonEnum;
