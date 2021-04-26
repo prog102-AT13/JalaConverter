@@ -4,6 +4,8 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Raymundo Guaraguara Sansusty
  */
 package org.fundacion.jala.converter;
 
@@ -15,14 +17,13 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import javax.swing.SwingUtilities;
 
+/**
+ * This class is the main class of the software.
+ */
 @SpringBootApplication
 public class ConverterApplication {
     private static final Logger LOGGER = LogManager.getLogger();
-    public static Dotenv dotenv = Dotenv.configure()
-                                        .filename(".env.develop")
-                                        .ignoreIfMalformed()
-                                        .ignoreIfMissing()
-                                        .load();
+    public static Dotenv dotenv = Dotenv.configure().filename(".env.develop").ignoreIfMalformed().ignoreIfMissing().load();
     public static void main(final String[] args) {
         LOGGER.info("start");
         SpringApplication.run(ConverterApplication.class, args);
