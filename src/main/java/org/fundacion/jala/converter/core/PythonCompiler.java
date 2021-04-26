@@ -63,8 +63,8 @@ public class PythonCompiler {
     /**
      * Converts the code that is written as a string to a file with a python extension.
      *
-     * @param code a string ready to be converted
-     * @return a String with the path where will be created the file
+     * @param code a string ready to be converted.
+     * @return a String with the path where will be created the file.
      */
     public String makePythonFile(final String code) {
         LOGGER.info("start");
@@ -76,7 +76,6 @@ public class PythonCompiler {
             if (!file.exists()) {
                 file.createNewFile();
             }
-
             FileWriter fileWriter = new FileWriter(file);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(code);
@@ -92,7 +91,7 @@ public class PythonCompiler {
     /**
      * Returns the result object for the operation.
      *
-     * @return compilerResult
+     * @return compilerResult.
      */
     public Result getResult() {
         return result;

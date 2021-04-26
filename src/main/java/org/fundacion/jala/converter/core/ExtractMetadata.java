@@ -96,6 +96,7 @@ public class ExtractMetadata {
 
     /**
      * Returns the object result for the operation.
+     *
      * @return extractorResult.
      */
     public Result getResult() {

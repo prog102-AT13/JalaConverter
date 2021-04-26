@@ -70,6 +70,7 @@ public final class AudioConverter {
 
     /**
      * Returns the object result for the operation.
+     *
      * @return converterResult.
      */
     public Result getResult() {

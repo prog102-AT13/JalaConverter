@@ -20,6 +20,7 @@ public class Result {
 
     /**
      * Returns the filename.
+     *
      * @return A String that represents the filename.
      */
     public String getFilename() {
@@ -28,7 +29,8 @@ public class Result {
 
     /**
      * Sets the value for the filename attribute.
-     * @param filename
+     *
+     * @param filename A String that represents the filename of the result.
      */
     public void setFilename(String filename) {
         this.filename = filename;
@@ -36,6 +38,7 @@ public class Result {
 
     /**
      * Returns the Path.
+     *
      * @return The String that represents the Path of a file.
      */
     public String getPath() {
@@ -44,7 +47,8 @@ public class Result {
 
     /**
      * Sets the path.
-     * @param path
+     *
+     * @param path A String with the path for the result.
      */
     public void setPath(String path) {
         this.path = path;
@@ -52,6 +56,7 @@ public class Result {
 
     /**
      * Returns the processId attribute.
+     *
      * @return A processId String
      */
     public String getProcessId() {
@@ -60,6 +65,7 @@ public class Result {
 
     /**
      * Sets the processId.
+     *
      * @param processId
      */
     public void setProcessId(String processId) {
@@ -68,7 +74,8 @@ public class Result {
 
     /**
      * Returns the content in text from a compiler or extractor.
-     * @return
+     *
+     * @return A String with the content of a text result.
      */
     public String getTextContent() {
         return textContent;
@@ -76,7 +83,8 @@ public class Result {
 
     /**
      * Sets the text content for the result.
-     * @param textContent
+     *
+     * @param textContent A String with the text content of the result.
      */
     public void setTextContent(String textContent) {
         this.textContent = textContent;
