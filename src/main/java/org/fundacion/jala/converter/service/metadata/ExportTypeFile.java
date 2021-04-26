@@ -65,9 +65,7 @@ public class ExportTypeFile {
     }
 
     /**
-     * Defines name that the file are exported.
-     * Sets nameFileExport.
-     * e.g. DragonBall.mp4 --> DragonBall.xmp.
+     * Defines name that the file are exported and sets nameFileExport.
      */
     private void setDefaultNameFileWithTypeOfFile() {
         char[] spellName = nameFileComplete.toCharArray();
@@ -81,9 +79,7 @@ public class ExportTypeFile {
     }
 
     /**
-     * Defines name that the file are exported.
-     * Sets nameFileExport.
-     * e.g. DragonBall.mp4 --> NameSet.xmp.
+     * Defines name that the file are exported and sets nameFileExport.
      *
      * @param newName a String to set a new file name.
      */
@@ -92,29 +88,26 @@ public class ExportTypeFile {
     }
 
     /**
-     * Defines file are exported with type Txt.
-     * Sets nameFileCompleteToExport.
+     * Defines file are exported with type Txt and sets nameFileCompleteToExport.
      */
     private void exportFileTxt() {
-        nameFileCompleteToExport = " > " + "\"" + addressExportFile.getAbsolutePath() + "\\" +
-                                   nameFileExport + ".txt" + "\"";
+        nameFileCompleteToExport = " > " + "\"" + addressExportFile.getAbsolutePath() + "\\"
+                                   + nameFileExport + ".txt" + "\"";
     }
 
     /**
-     * Defines file are exported with type Html.
-     * Sets nameFileCompleteToExport.
+     * Defines file are exported with type Html sets nameFileCompleteToExport.
      */
     private void exportFileHtml() {
-        nameFileCompleteToExport = " -h > " + "\"" + addressExportFile.getAbsolutePath() + "\\" +
-                                   nameFileExport + ".html" + "\"";
+        nameFileCompleteToExport = " -h > " + "\"" + addressExportFile.getAbsolutePath() + "\\"
+                                   + nameFileExport + ".html" + "\"";
     }
 
     /**
-     * Defines file are exported with type XMP.
-     * Sets exportFileXMP.
+     * Defines file are exported with type XMP sets exportFileXMP.
      */
     private void exportFileXMP() {
-        nameFileCompleteToExport = " -X > " + "\"" + addressExportFile.getAbsolutePath() + "\\" +
-                                   nameFileExport + ".xmp" + "\"";
+        nameFileCompleteToExport = " -X > " + "\"" + addressExportFile.getAbsolutePath() + "\\"
+                                   + nameFileExport + ".xmp" + "\"";
     }
 }

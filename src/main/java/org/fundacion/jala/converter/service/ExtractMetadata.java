@@ -40,8 +40,8 @@ public class ExtractMetadata {
     public ExtractMetadata(final File fileExtract, final File fileExport) {
         this.fileToExtract = fileExtract;
         setMoreInformation();
-        exportTypeFile = new ExportTypeFile(fileToExtract.getName(),
-               "Default", TypeFileExport.TXT, fileExport);
+        exportTypeFile = new ExportTypeFile(fileToExtract.getName(), "Default", TypeFileExport.TXT,
+                         fileExport);
         exportFile = exportTypeFile.getNameFileCompleteToExport();
         extractMetadata();
     }

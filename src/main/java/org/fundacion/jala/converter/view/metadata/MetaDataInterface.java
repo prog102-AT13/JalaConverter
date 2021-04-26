@@ -69,8 +69,7 @@ public class MetaDataInterface extends JPanel implements ActionListener {
     }
 
     /**
-     * Converts, sends information for metadataCLASS conversion.
-     * Shows a Dialog with the information.
+     * Converts, sends information for metadataCLASS conversion and shows a Dialog with the information.
      *
      * @param e event of the JButton.
      */

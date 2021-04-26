@@ -38,8 +38,8 @@ public class PythonCompiler {
         try {
             this.pythonParameter = newPythonParameter;
             LOGGER.info("Execute Try");
-            String command = pythonParameter.getPythonEnum().getVersion() + " " + "\"" +
-                             pythonParameter.getFilePath() + "\"";
+            String command = pythonParameter.getPythonEnum().getVersion() + " " + "\""
+                             + pythonParameter.getFilePath() + "\"";
             Process process = Runtime.getRuntime().exec(command);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String resultOfExecution = null;
