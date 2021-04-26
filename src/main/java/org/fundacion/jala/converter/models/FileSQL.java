@@ -13,13 +13,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+/**
+ * This class is to query to database.
+ */
 public class FileSQL {
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jalaPersistence");
 
     /**
-     * This method is for to insert dates for database
-     * @param fileName name the file
-     * @param pathFile path the file
+     * Inserts date into the database.
+     *
+     * @param fileName is a name the file.
+     * @param pathFile is a path the file.
      */
     public static void insertFileData(final String fileName, final String pathFile, final int projectId) {
         EntityManager manager = emf.createEntityManager();
@@ -32,9 +36,10 @@ public class FileSQL {
     }
 
     /**
-     * Finds a project by its id
-     * @param fileId int with the project id
-     * @return a project
+     * Finds a project by id.
+     *
+     * @param fileId is a int with the project id.
+     * @return File with the project found.
      */
     public static File findProjectById(final int fileId) {
         EntityManager manager = emf.createEntityManager();
