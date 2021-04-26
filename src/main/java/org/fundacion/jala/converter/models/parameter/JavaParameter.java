@@ -5,25 +5,28 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
- */
-/**
- * @author Paola Aguilar
+ *
+ * @author Paola Ximena Aguilar Quiñones
  */
 package org.fundacion.jala.converter.models.parameter;
 
 import org.fundacion.jala.converter.service.javacompiler.JavaVersion;
 
+/**
+ * This class has the options from the java parameters.
+ */
 public class JavaParameter extends Parameter {
     private JavaVersion javaVersion;
 
-    public JavaParameter(final JavaVersion javaVersion, final String filePath) {
+    public JavaParameter(final JavaVersion newJavaVersion, final String filePath) {
         super(filePath);
-        this.javaVersion = javaVersion;
+        this.javaVersion = newJavaVersion;
     }
 
     /**
      * Gets the version for Java version.
-     * @return javaVersion Java version
+     *
+     * @return javaVersion Java version.
      */
     public JavaVersion getJavaVersion() {
         return javaVersion;
