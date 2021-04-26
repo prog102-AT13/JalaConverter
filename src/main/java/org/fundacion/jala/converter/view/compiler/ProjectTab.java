@@ -50,6 +50,7 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
         add(codeArea);
         setTabComponentAt(getTabCount() - 1, createTabHeaderWithTitle("Main"));
         tabList = new ArrayList<>();
+//        createFile("Main");
         setFont(new Font("Barlow", 0, sizeFont));
         button = new PlusButton();
         button.setPreferredSize(new Dimension(dimension, dimension));
@@ -80,23 +81,13 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
             title = "file1";
         }
         if (!tabList.contains(title)) {
-            tabList.add(title);
-            FileRequestForm fileRequestForm = new FileRequestForm();
-            fileRequestForm.addFileTitle(title);
-            fileRequestForm.setUrl(CompilerInterface.projectId);
-            fileRequestForm.addFileExtension("java");
-            fileRequestForm.addCode("");
-            try {
-                clientRequest.executeRequest(fileRequestForm, token);
-                CodeTextArea codeArea = new CodeTextArea();
-                codeArea.setName(title);
-                add(codeArea, getTabCount() - 1);
-                setTabComponentAt(getTabCount() - 2, createTabHeader(title));
-                setSelectedIndex(getTabCount() - 2);
-            } catch (Exception e) {
-            }
+            createFile(title);
+            CodeTextArea codeArea = new CodeTextArea();
+            codeArea.setName(title);
+            add(codeArea, getTabCount() - 1);
+            setTabComponentAt(getTabCount() - 2, createTabHeader(title));
+            setSelectedIndex(getTabCount() - 2);
         }
-
     }
 
     /**
@@ -138,6 +129,7 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
         tabButton.addActionListener(e1 -> {
             removeTab(title);
             setSelectedIndex(getTabCount() - 2);
+            tabList.remove(tabList.indexOf(title));
         });
         JPanel tabHeader = createTabHeaderWithTitle(title);
         tabHeader.add(tabButton);
@@ -185,6 +177,31 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
      */
     public PlusButton getButton() {
         return button;
+    }
+
+    /**
+     *
+     * @param title
+     */
+    public void createFile(final String title) {
+        tabList.add(title);
+        FileRequestForm fileRequestForm = new FileRequestForm();
+        fileRequestForm.addFileTitle(title);
+        fileRequestForm.setUrl(CompilerInterface.projectId);
+        fileRequestForm.addFileExtension("java");
+        fileRequestForm.addCode("");
+        try {
+            clientRequest.executeRequest(fileRequestForm, token);
+        } catch (Exception e) {
+        }
+    }
+
+    /**
+     *
+     * @return
+     */
+    public ArrayList<String> getTabList() {
+        return tabList;
     }
 }
 
