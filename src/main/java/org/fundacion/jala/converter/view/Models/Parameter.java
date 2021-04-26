@@ -43,7 +43,7 @@ public class Parameter {
     }
 
     /**
-     * Gets the value.
+     * Gets the value from parameter i.e: CHECKSUM, VOLUME, METADATA, BITRATE, RESOLUTION etc.
      *
      * @return a String with value.
      */
@@ -52,9 +52,9 @@ public class Parameter {
     }
 
     /**
-     * Sets attribute value.
+     * Sets attribute new value of the parameter i.e: CHECKSUM, VOLUME, METADATA, BITRATE, RESOLUTION etc.
      *
-     * @param newValue String with the new value.
+     * @param newValue String with the new value from the parameter.
      */
     public void setValue(final String newValue) {
         this.value = newValue;

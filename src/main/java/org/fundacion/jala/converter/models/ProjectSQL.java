@@ -5,7 +5,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Juan Pablo Gonzales
+ * @author Juan Pablo Gonzalez Alvarado
  */
 package org.fundacion.jala.converter.models;
 
@@ -13,14 +13,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+/**
+ * This class is to query to database.
+ */
 public class ProjectSQL {
-
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jalaPersistence");
 
     /**
-     * This method is for to insert dates for database
-     * @param projectName name the archive
-     * @param pathProject path the archive
+     * Inserts data into the database.
+     *
+     * @param projectName file's name.
+     * @param pathProject file's path.
      */
     public static Project insertProjectData(final String projectName, final String pathProject, final int userId) {
         EntityManager manager = emf.createEntityManager();
@@ -34,9 +37,10 @@ public class ProjectSQL {
     }
 
     /**
-     * Finds a project by it's id
-     * @param projectId int with the project id
-     * @return a project
+     * Finds a project by it's id.
+     *
+     * @param projectId int with the project id.
+     * @return a project found by id.
      */
     public static Project findProjectById(final int projectId) {
         EntityManager manager = emf.createEntityManager();
@@ -47,5 +51,4 @@ public class ProjectSQL {
         manager.close();
         return projectResult;
     }
-
 }

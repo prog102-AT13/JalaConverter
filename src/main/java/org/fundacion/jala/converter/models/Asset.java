@@ -6,9 +6,8 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Cristian Choque Quispe
+ * @author Cristian Felix Choque Quispe
  */
-
 package org.fundacion.jala.converter.models;
 
 import javax.persistence.Column;
@@ -21,6 +20,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.FetchType;
 
+/**
+ * This Class is a Entity of the database with the name ASSET.
+ */
 @Entity
 @Table(name = "ASSET")
 public class Asset {
@@ -44,7 +46,6 @@ public class Asset {
     private User user;
 
     public Asset() {
-
     }
 
     public Asset(final String newTitle, final String newPath, final String newChecksum, final User newUser) {
@@ -55,88 +56,99 @@ public class Asset {
     }
 
     /**
-     * Obtains Id of the project
-     * @return id of the project
+     * Obtains Id from the database.
+     *
+     * @return id from the audio or video converter.
      */
     public int getId() {
         return id;
     }
 
     /**
-     * Sets new id of the project
-     * @param newId int with the new project id
+     * Sets new id of the audio or video converter.
+     *
+     * @param newId is a int if the new audio or video converter.
      */
     public void setId(final int newId) {
         this.id = newId;
     }
 
     /**
-     * Obtains title of the project
-     * @return title of the project
+     * Obtains title of the audio or video converter.
+     *
+     * @return title of the project.
      */
     public String getTitle() {
         return title;
     }
 
     /**
-     * Sets new title of the project
-     * @param newTitle String with the new title
+     * Sets new title of the audio or video converter.
+     *
+     * @param newTitle String with the new title.
      */
     public void setTitle(final String newTitle) {
         this.title = newTitle;
     }
 
     /**
-     * Obtains the user that realized the project
-     * @return user
+     * Obtains the user that realized the project.
+     *
+     * @return name of the user that used the audio or video converter.
      */
     public User getUser() {
         return user;
     }
 
     /**
-     * Sets the user of the project
-     * @param newUser the new user
+     * Sets the user of the audio or video converter.
+     *
+     * @param newUser the new user that used the audio or video converter.
      */
     public void setUser(final User newUser) {
         this.user = newUser;
     }
 
     /**
-     * Gets path of the project where the project is saved
-     * @return path
+     * Gets path of the audio or video where the project is saved.
+     *
+     * @return path of the audio or video converted.
      */
     public String getPath() {
         return path;
     }
 
     /**
-     * Sets new path of the project
-     * @param newPath
+     * Sets new path of the audio or video.
+     *
+     * @param newPath is a new path of the audio or video converter.
      */
     public void setPath(final String newPath) {
         this.path = newPath;
     }
 
     /**
-     * Obtains type of the project
-     * @return a string of checksum
+     * Obtains the checksum's value of the audio or video file.
+     *
+     * @return a string of checksum.
      */
     public String getChecksum() {
         return checksum;
     }
 
     /**
-     * Sets new path of the project
-     * @param newChecksum String with the new type
+     * Sets new checksum value of the audio or video file.
+     *
+     * @param newChecksum is a String with the new checksum.
      */
     public void setChecksum(final String newChecksum) {
         this.checksum = newChecksum;
     }
 
     /**
-     * Obtains all date of the project
-     * @return String of the dates
+     * Obtains all data of the audio or video converter.
+     *
+     * @return String of the data of the audio or video converter.
      */
     @Override
     public String toString() {

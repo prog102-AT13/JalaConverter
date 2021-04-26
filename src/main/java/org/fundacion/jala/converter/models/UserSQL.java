@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Cristian Choque Quispe
+ * @author Cristian Felix Choque Quispe
  */
 package org.fundacion.jala.converter.models;
 
@@ -17,18 +17,21 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
+/**
+ * This class is to query to database.
+ */
 public class UserSQL {
+    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jalaPersistence");
+
     public UserSQL() {
     }
-
-    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jalaPersistence");
 
     /**
      * Inserts users in the db.
      *
-     * @param userName String with the user name
-     * @param password String with the password of the user
-     * @param token String the token
+     * @param userName String with the user name.
+     * @param password String with the password of the user.
+     * @param token String the token.
      */
     public static User insertUserData(final String userName, final String password, final String token) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -47,10 +50,10 @@ public class UserSQL {
     /**
      * Edits the data of the user.
      *
-     * @param userId int with the id of the user to be edited
-     * @param userName String with the new user name
-     * @param password String with the new password of the user
-     * @param token String with the new token
+     * @param userId int with the id of the user to be edited.
+     * @param userName String with the new user name.
+     * @param password String with the new password of the user.
+     * @param token String with the new token.
      */
     public static void editUserData(final int userId, final String userName, final String password,
                                     final String token) {
@@ -65,9 +68,9 @@ public class UserSQL {
     }
 
     /**
-     * Deletes a user.
+     * Deletes a user from the database.
      *
-     * @param userId int with the id of the user to be deleted
+     * @param userId int with the id of the user to be deleted.
      */
     public static void deleteUser(final int userId) {
         EntityManager manager = emf.createEntityManager();
@@ -81,8 +84,8 @@ public class UserSQL {
     /**
      * Finds a user by it's id.
      *
-     * @param userId int with the user id
-     * @return a user
+     * @param userId is a int with the user id.
+     * @return a user found by id.
      */
     public static User findUserById(final int userId) {
         EntityManager manager = emf.createEntityManager();
@@ -98,8 +101,8 @@ public class UserSQL {
     /**
      * Verifies if a username exists in the database.
      *
-     * @param username a String with the username to check
-     * @return a boolean with the response
+     * @param username a String with the username to check.
+     * @return a boolean with the response.
      */
     public static boolean usernameExists(final String username) {
         List<User> list = listUser();
@@ -115,8 +118,8 @@ public class UserSQL {
     /**
      * Edits the token value in the database.
      *
-     * @param username a String with the username
-     * @param token a String with the token
+     * @param username a String with the username.
+     * @param token a String with the token.
      */
     public static void editToken(final String username, final String token) {
         int userId = getUserId(username);
@@ -131,8 +134,8 @@ public class UserSQL {
     /**
      * Gets the userId from the database.
      *
-     * @param username a String to look for the userId
-     * @return an int with the userId
+     * @param username a String to look for the userId.
+     * @return an int with the userId.
      */
     public static int getUserId(final String username) {
         List<User> list = listUser();
@@ -147,7 +150,7 @@ public class UserSQL {
     /**
      * Lists all users in the db.
      *
-     * @return a list of users
+     * @return a list of users.
      */
     @SuppressWarnings("unchecked")
     public static List<User> listUser() {
