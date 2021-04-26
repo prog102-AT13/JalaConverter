@@ -10,6 +10,7 @@
  */
 package org.fundacion.jala.converter.controller;
 
+import org.fundacion.jala.converter.models.File;
 import org.fundacion.jala.converter.models.FileSQL;
 import org.fundacion.jala.converter.models.Project;
 import org.fundacion.jala.converter.models.ProjectSQL;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import java.io.IOException;
 
 /**
@@ -65,8 +67,23 @@ public class ProjectController {
                               final @RequestParam("code") String code) throws IllegalStateException, IOException {
         Project project = ProjectSQL.findProjectById(idProject);
         String pathFile = project.getPath();
-        FileSQL.insertFileData(fileName, pathFile, idProject);
+        FileSQL.insertFileData(fileName + "." + extension, pathFile, idProject);
         Transform.createFile(code, fileName, extension, pathFile);
         return pathFile;
+    }
+
+    /**
+     * Endpoint for creating a project in data base.
+     *
+     * @param idFile is a String with the file's name.
+     * @throws IllegalStateException when method invoked at an illegal time.
+     */
+    @DeleteMapping("/projects/file/{id}")
+    public void deleteFile(final @PathVariable("id") int idFile) throws IllegalStateException {
+        File file = FileSQL.findFileById(idFile);
+        String command = "del " + file.getPathFile() + "\\" + file.getName();
+        RunCommand runCommand = new RunCommand();
+        runCommand.run(command);
+        FileSQL.deleteFile(idFile);
     }
 }
