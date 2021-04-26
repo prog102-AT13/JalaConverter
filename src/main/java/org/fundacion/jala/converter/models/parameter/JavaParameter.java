@@ -13,7 +13,7 @@ package org.fundacion.jala.converter.models.parameter;
 import org.fundacion.jala.converter.service.javacompiler.JavaVersion;
 
 /**
- * This class has the options of the java parameters.
+ * This class has the options from the java parameters.
  */
 public class JavaParameter extends Parameter {
     private JavaVersion javaVersion;

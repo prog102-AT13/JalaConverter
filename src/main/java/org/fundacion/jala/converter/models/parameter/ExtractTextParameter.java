@@ -13,7 +13,7 @@ package org.fundacion.jala.converter.models.parameter;
 import org.springframework.stereotype.Service;
 
 /**
- * This class is the options of the extract text parameters.
+ * This class is the options from the extract text parameters.
  */
 @Service
 public class ExtractTextParameter extends Parameter {

@@ -194,18 +194,18 @@ public class AudioParameter extends Parameter {
     }
 
     /**
-     * Obtains the hz of audio converter.
+     * Obtains the frecuency of audio converter.
      *
-     * @return a string of hz of audio converter.
+     * @return a string of frecuency of audio converter.
      */
     public String getHz() {
         return frecuency;
     }
 
     /**
-     * Sets new Hz of the audio converter.
+     * Sets new frecuency of the audio converter.
      *
-     * @param newHz is a new frecuency of the audio.
+     * @param newFrecuency is a new frecuency of the audio.
      */
     public void setHz(final String newFrecuency) {
         this.frecuency = newFrecuency;
