@@ -64,17 +64,17 @@ public class AudioParameter extends Parameter {
     /**
      * Creates a parameter for frecuency.
      *
-     * @return a string with format for hz.
+     * @return a string with format for frecuency in hz.
      */
     public String formatHz() {
-        if (!getHz().equals("")) {
-            if (getHz().equals(K20_HERTZ)) {
+        if (!getFrecuency().equals("")) {
+            if (getFrecuency().equals(K20_HERTZ)) {
                 return " -ar 22050 ";
             }
-            if (getHz().equals(K44_HERTZ)) {
+            if (getFrecuency().equals(K44_HERTZ)) {
                 return " -ar 44100 ";
             }
-            if (getHz().equals(K48_HERTZ)) {
+            if (getFrecuency().equals(K48_HERTZ)) {
                 return " -ar 48000 ";
             }
         }
@@ -198,7 +198,7 @@ public class AudioParameter extends Parameter {
      *
      * @return a string of frecuency of audio converter.
      */
-    public String getHz() {
+    public String getFrecuency() {
         return frecuency;
     }
 
@@ -207,7 +207,7 @@ public class AudioParameter extends Parameter {
      *
      * @param newFrecuency is a new frecuency of the audio.
      */
-    public void setHz(final String newFrecuency) {
+    public void setFrecuency(final String newFrecuency) {
         this.frecuency = newFrecuency;
     }
 }
