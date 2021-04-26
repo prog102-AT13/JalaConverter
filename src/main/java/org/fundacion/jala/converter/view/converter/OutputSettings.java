@@ -5,11 +5,13 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Paola Ximena Aguilar Quiñones
  */
-
 package org.fundacion.jala.converter.view.converter;
 
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
+
 import javax.swing.JPanel;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
@@ -17,6 +19,9 @@ import java.awt.Font;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
+/**
+ * This class defines the interface for output settings to convert.
+ */
 class OutputSettings extends JPanel {
     private JComboBox<ResolutionVideo> resolutionComboBox;
     private JComboBox<FrameVideo> framesSelect;
@@ -33,9 +38,6 @@ class OutputSettings extends JPanel {
     private final int gridLayoutRows = 4;
     private final int gridLayoutCols = 2;
 
-    /**
-     * Initializes the graphic elements for output settings configurations.
-     */
     protected OutputSettings() {
         JLabelStyle resolutionLabel = new JLabelStyle("Select resolution: ", "h3",
                 alignLabelStyle, widthLabelStyle, heightLabelStyle);
@@ -81,7 +83,7 @@ class OutputSettings extends JPanel {
     }
 
     /**
-     * Sets all possible resolutions for video converter.
+     * Sets all possible frames for video converter.
      */
     protected void setFrameSelect() {
         framesSelect = new JComboBox<FrameVideo>(
@@ -96,7 +98,8 @@ class OutputSettings extends JPanel {
 
     /**
      * Gets selected width resolution for video converter.
-     * @return int, width selected of Resolution.
+     *
+     * @return an int with selected resolution width.
      */
     protected String getWidthResolution() {
         ResolutionVideo item = (ResolutionVideo) resolutionComboBox.getSelectedItem();
@@ -105,7 +108,8 @@ class OutputSettings extends JPanel {
 
     /**
      * Gets selected Height resolution for video converter.
-     * @return int, Height selected of Resolution.
+     *
+     * @return an int with selected resolution height.
      */
     protected String getHeightResolution() {
         ResolutionVideo resolutionVideo = (ResolutionVideo) resolutionComboBox.getSelectedItem();
@@ -114,7 +118,8 @@ class OutputSettings extends JPanel {
 
     /**
      * Gets the selected frame for video converter.
-     * @return String, option selected of Frame.
+     *
+     * @return a String with the option selected of Frame.
      */
     protected String getFrame() {
         FrameVideo frameVideo = (FrameVideo) framesSelect.getSelectedItem();
@@ -123,6 +128,7 @@ class OutputSettings extends JPanel {
 
     /**
      * Gets if Sound is required for video converter.
+     *
      * @return true if audio is required, false if not.
      */
     protected boolean isAudioSelected() {
@@ -131,13 +137,16 @@ class OutputSettings extends JPanel {
 
     /**
      * Gets if thumbnail is required for video converter.
+     *
      * @return true if thumbnail is required, false if not.
      */
     protected boolean isThumbnailRequired() {
         return thumbnailOption.isSelected();
     }
+
     /**
      * Gets if metadata is required for video converter.
+     *
      * @return true if metadata is required, false if not.
      */
     protected boolean isMetadataRequired() {

@@ -27,9 +27,9 @@ public class ZipService {
     /**
      * Makes the process for zipping a file.
      *
-     * @param filePath the file's direction
-     * @param zipOutputStream an output stream filter to write the zip file
-     * @throws IOException when invalid path is given
+     * @param filePath ta String with the file's direction.
+     * @param zipOutputStream Object with an output stream filter to write the zip file.
+     * @throws IOException when invalid path is given.
      */
     public static void zipProcess(final String filePath, final ZipOutputStream zipOutputStream) throws IOException {
         File file = new File(filePath);
@@ -47,9 +47,9 @@ public class ZipService {
     /**
      * Creates a zip file of a file.
      *
-     * @param filePath the file's direction
-     * @param outputPath the destination's direction
-     * @throws IOException when invalid path is given
+     * @param filePath a String with the file's direction.
+     * @param outputPath a String with the destination's direction.
+     * @throws IOException when invalid path is given.
      */
     public static void zipFile(final String filePath, final String outputPath) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(outputPath);
@@ -62,9 +62,9 @@ public class ZipService {
     /**
      * Creates a zip file of a group of files.
      *
-     * @param filesPaths an arraylist with the files paths
-     * @param outputPath the destination's direction
-     * @throws IOException when invalid path is given
+     * @param filesPaths an arraylist with the files paths.
+     * @param outputPath the destination's direction.
+     * @throws IOException when invalid path is given.
      */
     public static void zipFiles(final ArrayList<String> filesPaths, final String outputPath) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(outputPath);
