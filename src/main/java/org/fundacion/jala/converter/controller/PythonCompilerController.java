@@ -12,14 +12,14 @@ package org.fundacion.jala.converter.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.fundacion.jala.converter.models.facade.CompilerFacade;
-import org.fundacion.jala.converter.models.parameter.PythonEnum;
+import org.fundacion.jala.converter.core.facade.CompilerFacade;
+import org.fundacion.jala.converter.core.parameter.PythonEnum;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.fundacion.jala.converter.models.parameter.PythonParameter;
-import org.fundacion.jala.converter.service.PythonCompiler;
+import org.fundacion.jala.converter.core.parameter.PythonParameter;
+import org.fundacion.jala.converter.core.PythonCompiler;
 import java.io.IOException;
 
 /**

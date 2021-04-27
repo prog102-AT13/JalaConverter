@@ -12,9 +12,9 @@ package org.fundacion.jala.converter.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.fundacion.jala.converter.models.facade.ExtractFacade;
-import org.fundacion.jala.converter.models.parameter.ExtractTextParameter;
-import org.fundacion.jala.converter.service.FileStorageService;
+import org.fundacion.jala.converter.core.facade.ExtractFacade;
+import org.fundacion.jala.converter.core.parameter.ExtractTextParameter;
+import org.fundacion.jala.converter.core.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,9 +31,7 @@ import java.io.IOException;
 @RequestMapping("/api")
 public class ExtractTextController {
     private static final Logger LOGGER = LogManager.getLogger();
-
-    @Autowired
-    private FileStorageService fileStorageService;
+    private FileStorageService fileStorageService = new FileStorageService();
 
     /**
      * Creates endpoint to extract text.

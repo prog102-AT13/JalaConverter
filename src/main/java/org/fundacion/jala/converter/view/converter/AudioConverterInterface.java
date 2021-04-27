@@ -15,7 +15,6 @@ import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import org.fundacion.jala.converter.view.Models.AudioRequestForm;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
@@ -26,8 +25,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-
-import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;
+import static org.fundacion.jala.converter.core.ChecksumService.getFileChecksum;
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 
 /**
