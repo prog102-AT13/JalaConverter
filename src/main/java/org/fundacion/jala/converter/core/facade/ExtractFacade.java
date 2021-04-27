@@ -34,7 +34,12 @@ public class ExtractFacade {
      *
      * @param extractTextParameter is a object with parameter of extractText to convert.
      */
-    public static void getTextExtract(final ExtractTextParameter extractTextParameter) {
+    public static void getTextExtract(final MultipartFile file,final String language) throws IOException {
+        FileStorageService fileStorageService = new FileStorageService();
+        String fileOut = file.getOriginalFilename();
+        String outputFileName = fileOut.substring(0, fileOut.lastIndexOf("."));
+        ExtractTextParameter extractTextParameter;
+        extractTextParameter = new ExtractTextParameter(fileStorageService.uploadFile(file), language, outputFileName);
         ExtractText extractText = new ExtractText(extractTextParameter);
         extractText.extractText();
     }
@@ -65,7 +70,7 @@ public class ExtractFacade {
         objectMetadata.setTypeFileExport(TypeFileExport.valueOf(format.toUpperCase()));
         ExtractMetadata extractMetadata = new ExtractMetadata(objectMetadata);
         extractMetadata.extractMetadata();
-        if ("Default".equals(nameExport)) {
+        if ("".equals(nameExport)) {
             return fileToExtract.getName().substring(0, fileToExtract.getName().lastIndexOf(".") + 0);
         } else {
             return nameExport;

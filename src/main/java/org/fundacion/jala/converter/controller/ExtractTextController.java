@@ -46,7 +46,7 @@ public class ExtractTextController {
     public String extractText(final @RequestParam("file") MultipartFile file,
                              final @RequestParam("language") String language) throws IllegalStateException, IOException {
         LOGGER.info("start");
-        ExtractFacade.getTextExtract(new ExtractTextParameter(fileStorageService.uploadFile(file), language));
+        ExtractFacade.getTextExtract(file,language);
         LOGGER.info("finish");
         return DownloadLinkFacade.getLinkExtractText(file);
     }

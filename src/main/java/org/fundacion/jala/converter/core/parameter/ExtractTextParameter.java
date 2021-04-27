@@ -14,12 +14,17 @@ public class ExtractTextParameter extends Parameter {
     private String language;
     private String resultFile;
 
-    public ExtractTextParameter() {
+    public ExtractTextParameter(final String newFilePath) {
+        super(newFilePath);
     }
 
-    public ExtractTextParameter(final String newFilePath, final String newLanguage) {
+    public ExtractTextParameter(final String newFilePath, final String newLanguage, final String newResultFile) {
         super(newFilePath);
         this.language = newLanguage;
+        this.resultFile = newResultFile;
+    }
+
+    public ExtractTextParameter() {
     }
 
     /**
