@@ -7,20 +7,17 @@
  * license agreement you entered into with Fundacion Jala
  *
  * @author Saul Caspa Miranda
- * @version 1.0
  */
 package org.fundacion.jala.converter.view.Models;
 
+/**
+ * This class defines the parameter object.
+ */
 public class Parameter {
     private String key;
     private String value;
     private boolean isFile;
 
-    /**
-     * Creates a parameter for a request body with the key and value fields.
-     * @param newKey String with the new key
-     * @param newValue String with the new value
-     */
     public Parameter(final String newKey, final String newValue, final boolean isAFile) {
         this.key = newKey;
         this.value = newValue;
@@ -28,8 +25,9 @@ public class Parameter {
     }
 
     /**
-     * Gets the key
-     * @return key.
+     * Gets the key.
+     *
+     * @return a String with key.
      */
     public String getKey() {
         return key;
@@ -37,31 +35,35 @@ public class Parameter {
 
     /**
      * Sets attribute key.
-     * @param newKey
+     *
+     * @param newKey String with the new key.
      */
     public void setKey(final String newKey) {
         this.key = newKey;
     }
 
     /**
-     * Gets the value
-     * @return value.
+     * Gets the value from parameter i.e: CHECKSUM, VOLUME, METADATA, BITRATE, RESOLUTION etc.
+     *
+     * @return a String with value.
      */
     public String getValue() {
         return value;
     }
 
     /**
-     * Sets attribute value.
-     * @param newValue
+     * Sets attribute new value of the parameter i.e: CHECKSUM, VOLUME, METADATA, BITRATE, RESOLUTION etc.
+     *
+     * @param newValue String with the new value from the parameter.
      */
     public void setValue(final String newValue) {
         this.value = newValue;
     }
 
     /**
-     * Indicates if is a file
-     * @return isFile value.
+     * Indicates if is a file.
+     *
+     * @return a boolean isFile value.
      */
     public boolean isFile() {
         return isFile;

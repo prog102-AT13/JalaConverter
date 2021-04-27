@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Paola Aguilar Quiñones
+ * @author Paola Ximena Aguilar Quiñones
  */
 package org.fundacion.jala.converter.view.converter;
 
@@ -26,7 +26,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
-import static org.fundacion.jala.converter.service.ChecksumService.getFileChecksum;
+import static org.fundacion.jala.converter.core.ChecksumService.getFileChecksum;
 
 /**
  * This class creates the video converter's UI.
@@ -49,10 +49,6 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
     private String token;
     private String checksumLocal;
 
-    /**
-     * Sets all the graphics elements for the main interface of Video Converter.
-     * @param newToken a String with authentication token
-     */
     public VideoConverterInterface(final String newToken) {
         token = newToken;
         JLabelStyle videoTitle = new JLabelStyle("Select Video:", "h2",
@@ -77,8 +73,8 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
     }
 
     /**
-     * Converts, sends information for metadataClass conversion.
-     * Shows a Dialog with the information.
+     * Converts and sends information for metadataClass conversion then Shows a Dialog with the information.
+     *
      * @param e event of the JButton.
      */
     @Override
@@ -118,8 +114,9 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
     }
 
     /**
-     * Obtains the request
-     * @throws IOException
+     * Obtains the request.
+     *
+     * @throws IOException when problems on inputs and outputs.
      */
     private void callRequest() throws IOException {
         LOGGER.info("start");

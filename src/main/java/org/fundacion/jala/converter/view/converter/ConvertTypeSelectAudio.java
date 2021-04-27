@@ -5,8 +5,9 @@
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
+ *
+ * @author Paola Ximena Aguilar Quiñones
  */
-
 package org.fundacion.jala.converter.view.converter;
 
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
@@ -16,6 +17,9 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FlowLayout;
 
+/**
+ * This class defines the interface for selecting the type of audio to convert.
+ */
 public class ConvertTypeSelectAudio extends JPanel {
     private JComboBox convertTo;
     private final int alignLabelStyle = 2;
@@ -28,9 +32,6 @@ public class ConvertTypeSelectAudio extends JPanel {
     private final int flowLayoutHgap = 10;
     private final int flowLayoutVgap = 10;
 
-    /**
-     * Initializes the graphic elements for SelectCombobox for convert type.
-     */
     protected ConvertTypeSelectAudio() {
         JLabelStyle labelConvertTo = new JLabelStyle("Convert to: ", "h3",
                 alignLabelStyle, widthLabelStyle, heightLabelStyle);
@@ -49,7 +50,8 @@ public class ConvertTypeSelectAudio extends JPanel {
 
     /**
      * Returns the selected option to conversion.
-     * @return String with the selected option.
+     *
+     * @return a String with the selected option.
      */
     protected String getConvertTo() {
         return convertTo.getSelectedItem().toString();

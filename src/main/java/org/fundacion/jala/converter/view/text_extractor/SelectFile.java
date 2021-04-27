@@ -7,9 +7,7 @@
  * license agreement you entered into with Fundacion Jala
  *
  * @author Saul Caspa Miranda
- * @version 1.0
  */
-
 package org.fundacion.jala.converter.view.text_extractor;
 
 import javax.swing.JPanel;
@@ -23,6 +21,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+/**
+ * This class shows the select file form.
+ */
 class SelectFile extends JPanel implements ActionListener {
     private JButton fileButton;
     private String fileOriginPath;
@@ -35,9 +36,6 @@ class SelectFile extends JPanel implements ActionListener {
     private final int flowLayoutHgap = 0;
     private final int flowLayoutVgap = 20;
 
-    /**
-     * Initializes graphic components to select a file.
-     */
     protected SelectFile() {
         fileButton = new JButton("Select a File");
         fileButton.addActionListener(this::actionPerformed);
@@ -53,6 +51,7 @@ class SelectFile extends JPanel implements ActionListener {
 
     /**
      * Opens the File Chooser to select a file.
+     *
      * @param e event of the JButton.
      */
     @Override
@@ -73,7 +72,8 @@ class SelectFile extends JPanel implements ActionListener {
 
     /**
      * Gets the Origin Path of File when selected.
-     * @return String fileOriginPath.
+     *
+     * @return a String with fileOriginPath.
      */
     protected String getOriginFilePath() {
         return fileOriginPath;
