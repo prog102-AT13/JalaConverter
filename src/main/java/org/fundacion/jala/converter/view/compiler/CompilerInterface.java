@@ -124,6 +124,7 @@ public class CompilerInterface extends JPanel {
                 langButtons.getPython().setEnabled(true);
                 choose = 1;
                 extension = "java";
+                projectTab.setExtension(extension);
             }
         };
         return actionListener;
@@ -142,6 +143,7 @@ public class CompilerInterface extends JPanel {
                 langButtons.getJava().setEnabled(true);
                 choose = 2;
                 extension = "py";
+                projectTab.setExtension(extension);
             }
         };
         return actionListener;
@@ -168,7 +170,7 @@ public class CompilerInterface extends JPanel {
                     String sResponse = clientRequest.executeRequest(projectRequestForm, token);
                     projectId = sResponse;
                     consoleOutput.getConsole().setText(sResponse + " " + result);
-                    projectTab.start();
+                    projectTab.start(extension);
                     LOGGER.info("finish");
                 } catch (Exception exception) {
                     LOGGER.error("Execute Exception" + exception.getMessage());
@@ -178,6 +180,10 @@ public class CompilerInterface extends JPanel {
         return actionListener;
     }
 
+    /**
+     *
+     * @return
+     */
     public ActionListener addListenerSaveButton() {
         ActionListener actionListener = new ActionListener() {
             @Override

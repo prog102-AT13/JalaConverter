@@ -36,6 +36,7 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
     private ArrayList<String> tabList;
     private ClientRequest clientRequest = new ClientRequest();
     private String token;
+    private String extension;
 
     public ProjectTab(final String newToken) {
         token = newToken;
@@ -44,13 +45,14 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
     /**
      * Starts required components to add new tabs.
      */
-    public void start() {
+    public void start(final String filetype) {
+        extension = filetype;
         CodeTextArea codeArea = new CodeTextArea();
         codeArea.setName("Main");
+        codeArea.getCodeArea().setText(InitialCode.genetare("Main", extension));
         add(codeArea);
         setTabComponentAt(getTabCount() - 1, createTabHeaderWithTitle("Main"));
         tabList = new ArrayList<>();
-//        createFile("Main");
         setFont(new Font("Barlow", 0, sizeFont));
         button = new PlusButton();
         button.setPreferredSize(new Dimension(dimension, dimension));
@@ -81,9 +83,9 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
             title = "file1";
         }
         if (!tabList.contains(title)) {
-            createFile(title);
             CodeTextArea codeArea = new CodeTextArea();
             codeArea.setName(title);
+            codeArea.getCodeArea().setText(InitialCode.genetare(title, extension));
             add(codeArea, getTabCount() - 1);
             setTabComponentAt(getTabCount() - 2, createTabHeader(title));
             setSelectedIndex(getTabCount() - 2);
@@ -202,6 +204,14 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
      */
     public ArrayList<String> getTabList() {
         return tabList;
+    }
+
+    /**
+     *
+     * @param fileType
+     */
+    public void setExtension(final String fileType) {
+        extension = fileType;
     }
 }
 
