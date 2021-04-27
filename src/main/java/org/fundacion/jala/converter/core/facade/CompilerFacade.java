@@ -11,12 +11,14 @@
 package org.fundacion.jala.converter.core.facade;
 
 import org.fundacion.jala.converter.controller.Transform;
-import org.fundacion.jala.converter.core.parameter.JavaParameter;
-import org.fundacion.jala.converter.core.parameter.PythonEnum;
-import org.fundacion.jala.converter.core.parameter.PythonParameter;
+import org.fundacion.jala.converter.core.AudioConverter;
+import org.fundacion.jala.converter.core.VideoConverter;
+import org.fundacion.jala.converter.core.parameter.*;
 import org.fundacion.jala.converter.core.javacompiler.JavaCompiler;
 import org.fundacion.jala.converter.core.PythonCompiler;
 import org.fundacion.jala.converter.core.javacompiler.JavaVersion;
+
+import java.io.IOException;
 
 /**
  * This class calls facade of compiler.
@@ -30,7 +32,7 @@ public class CompilerFacade {
     }
 
     /**
-     * Compiles a Java project.
+     * Compiles a Java file.
      *
      * @param code is string with code in java.
      * @return a string of the result on runtime console.
@@ -45,7 +47,7 @@ public class CompilerFacade {
     }
 
     /**
-     * Compiles a Python project.
+     * Compiles a Python file.
      *
      * @param code is string with code in Python.
      * @return a string of the result on runtime console.
@@ -57,5 +59,29 @@ public class CompilerFacade {
             return pythonCompiler.compiler(new PythonParameter(filePath, PythonEnum.V3));
         }
         return "";
+    }
+
+    /**
+     * Compiles a Java project.
+     *
+     * @param javaParameter the version to be used in the compiler.
+     * @return a string of the result on runtime console.
+     */
+    public static String facadeJavaProjectCompile(final JavaParameter javaParameter) {
+        javaCompiler = new JavaCompiler();
+        result = javaCompiler.javaCompiler(javaParameter);
+        return result;
+    }
+
+    /**
+     * Compiles a Python project.
+     *
+     * @param pythonParameter the version to be used in the compiler.
+     * @return a string of the result on runtime console.
+     */
+    public static String facadePythonProjectCompile(final PythonParameter pythonParameter) {
+        pythonCompiler = new PythonCompiler();
+        result = pythonCompiler.compiler(pythonParameter);
+        return result;
     }
 }
