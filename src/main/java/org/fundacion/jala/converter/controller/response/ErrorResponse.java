@@ -1,9 +1,9 @@
 package org.fundacion.jala.converter.controller.response;
 
-public class ErrorAuthenticationResponse extends PaoPaoResponse {
+public class ErrorResponse extends PaoPaoResponse {
     private String message;
 
-    public ErrorAuthenticationResponse(final String initialStatus, final String initialMessage) {
+    public ErrorResponse(final String initialStatus, final String initialMessage) {
         super(initialStatus);
         this.message = initialMessage;
     }

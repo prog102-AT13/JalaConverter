@@ -23,7 +23,9 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.controller.response.ErrorResponse;
 import org.fundacion.jala.converter.controller.response.PaoPaoResponse;
+import org.fundacion.jala.converter.controller.response.SuccessAuthenticationResponse;
 import org.fundacion.jala.converter.view.Models.IRequestForm;
 import org.fundacion.jala.converter.view.Models.Parameter;
 import java.io.File;
@@ -83,7 +85,7 @@ public class ClientRequest {
      * @throws ClientProtocolException when an error on the HTTP protocol occurs.
      * @throws IOException when an invalid input is provided.
      */
-    public String executeRequestWithoutToken(final IRequestForm newRequestForm)
+    public PaoPaoResponse executeRequestWithoutToken(final IRequestForm newRequestForm)
             throws ClientProtocolException, IOException {
         requestForm = newRequestForm;
         httpPost = new HttpPost(requestForm.getURL());
@@ -93,18 +95,25 @@ public class ClientRequest {
         httpPost.setEntity(multipart);
         CloseableHttpResponse response = httpClient.execute(httpPost);
         HttpEntity responseEntity = response.getEntity();
-        System.out.println("-------------------------------------");
-        System.out.println();
-        System.out.println(responseEntity.toString());
-        System.out.println();
-        System.out.println("-------------------------------------");
         String sResponse = EntityUtils.toString(responseEntity, "UTF-8");
-        System.out.println("-------------------------------------");
-        System.out.println();
-        System.out.println(sResponse);
-        System.out.println();
-        System.out.println("-------------------------------------");
-        return sResponse;
+        PaoPaoResponse paoPaoResponse = createResponseWithString(sResponse);
+        return paoPaoResponse;
+    }
+
+    /**
+     * Transforms a String to a PaoPaoResponse.
+     * @param response a String with entity response.
+     * @return a PaoPao response with values from entity response.
+     */
+    public PaoPaoResponse createResponseWithString(final String response) {
+        String status = response.substring(11, 14);
+        if ("200".equals(status)) {
+            String jwt = response.substring(23, response.length() - 2);
+            return new SuccessAuthenticationResponse(status, jwt);
+        } else {
+            String errorMessage = response.substring(27, response.length() - 2);
+            return new ErrorResponse(status, errorMessage);
+        }
     }
 
     /**

@@ -12,11 +12,10 @@ package org.fundacion.jala.converter.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.fundacion.jala.converter.controller.response.ErrorAuthenticationResponse;
+import org.fundacion.jala.converter.controller.response.ErrorResponse;
 import org.fundacion.jala.converter.controller.response.PaoPaoResponse;
 import org.fundacion.jala.converter.controller.response.SuccessAuthenticationResponse;
 import org.fundacion.jala.converter.models.AuthenticationRequest;
-import org.fundacion.jala.converter.models.AuthenticationResponse;
 import org.fundacion.jala.converter.security.util.JwtUtil;
 import org.fundacion.jala.converter.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +69,7 @@ public class AuthController {
             authenticationManager.authenticate(userPassAuthTok);
         } catch (BadCredentialsException e) {
             authLogger.error("Error. " + e.getLocalizedMessage());
-            return ResponseEntity.badRequest().body(new ErrorAuthenticationResponse("400", e.getMessage()));
+            return ResponseEntity.badRequest().body(new ErrorResponse("400", e.getMessage()));
         }
         userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         jwt = jwtTokenUtil.generateToken(userDetails);
