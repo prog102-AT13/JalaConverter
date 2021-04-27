@@ -46,7 +46,7 @@ public class ExportTypeFile {
      * @param nameExport define name of file which it is exported.
      */
     private void buildFileName(final String nameExport) {
-        if ("Default" == nameExport || "" == nameExport || "Default".equals(nameExport)) {
+        if ("Default" == nameExport || "".equals(nameExport) || "Default".equals(nameExport)) {
             setDefaultNameFileWithTypeOfFile();
             return;
         }
@@ -96,8 +96,7 @@ public class ExportTypeFile {
      * Sets nameFileCompleteToExport.
      */
     private void exportFileTxt() {
-        nameFileCompleteToExport = " > " + "\"" +
-                addressExportFile.getAbsolutePath() + "\\" +
+        nameFileCompleteToExport = " > " + "\"" + addressExportFile.getAbsolutePath() + "\\" +
                 nameFileExport + ".txt" + "\"";
     }
 
@@ -106,8 +105,7 @@ public class ExportTypeFile {
      * Sets nameFileCompleteToExport.
      */
     private void exportFileHtml() {
-        nameFileCompleteToExport = " -h > " + "\"" +
-                addressExportFile.getAbsolutePath() + "\\" +
+        nameFileCompleteToExport = " -h > " + "\"" + addressExportFile.getAbsolutePath() + "\\" +
                 nameFileExport + ".html" + "\"";
     }
 
@@ -116,8 +114,7 @@ public class ExportTypeFile {
      * Sets exportFileXMP.
      */
     private void exportFileXMP() {
-        nameFileCompleteToExport = " -X > " + "\"" +
-                addressExportFile.getAbsolutePath() + "\\" +
+        nameFileCompleteToExport = " -X > " + "\"" + addressExportFile.getAbsolutePath() + "\\" +
                 nameFileExport + ".xmp" + "\"";
     }
 }

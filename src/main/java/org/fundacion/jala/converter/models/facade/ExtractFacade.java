@@ -51,7 +51,8 @@ public class ExtractFacade {
      * @throws IllegalArgumentException is exception when string not correspond enum.
      */
     public static String getMetadataExtract(final MultipartFile file, final Boolean isMoreInfo,
-                                            final String nameExport, final String format) throws IOException, IllegalArgumentException{
+                                            final String nameExport, final String format)
+            throws IOException, IllegalArgumentException{
         FileStorageService fileStorageService = new FileStorageService();
         String pathFile = fileStorageService.uploadFile(file);
         String outputPath = FileStorageService.getOutputPathWithoutFileName(pathFile);
@@ -64,7 +65,7 @@ public class ExtractFacade {
         objectMetadata.setTypeFileExport(TypeFileExport.valueOf(format.toUpperCase()));
         ExtractMetadata extractMetadata = new ExtractMetadata(objectMetadata);
         extractMetadata.extractMetadata();
-        if ("Default".equals(nameExport)) {
+        if ("".equals(nameExport)) {
             return fileToExtract.getName().substring(0, fileToExtract.getName().lastIndexOf("."));
         } else {
             return nameExport;
