@@ -38,15 +38,6 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
     private OutputSettingsAudio settings;
     private ClientRequest clientRequest = new ClientRequest();
     private static final Logger LOGGER = LogManager.getLogger();
-//    private final int alignLabelStyle = 2;
-//    private final int widthLabelStyle = 70;
-//    private final int heightLabelStyle = 30;
-//    private final int topBorder = 40;
-//    private final int LEFT_BORDER = 40;
-//    private final int bottomBorder = 100;
-//    private final int rightBorder = 0;
-//    private final int fontStyle = 0;
-//    private final int fontSize = 12;
     private final int ALIGN_LABEL_STYLE = 2;
     private final int WIDTH_LABEL_STYLE = 70;
     private final int HEIGHT_LABEL_STYLE = 30;
@@ -100,15 +91,11 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         try {
             LOGGER.info("Execute Try");
             checksumLocal = getFileChecksum(file.getOriginFilePath());
-            JOptionPane.showMessageDialog(this, "File Path: "
-                    + file.getOriginFilePath()
-                    + "\nConvert to: " + audioSelect.getConvertTo()
-                    + "\nQuality: " + settings.getQuality()
-                    + "\nVolume: " + settings.getVolume()
-                    + "\nAudio Channel: " + settings.getAudioChannel()
-                    + "\nHz: " + settings.getHz()
-                    + "\nwith metadata: " + settings.isMetadata()
-                    + "\nChecksum: " + checksumLocal);
+            JOptionPane.showMessageDialog(this, "File Path: " + file.getOriginFilePath()
+                    + "\nConvert to: " + audioSelect.getConvertTo() + "\nQuality: " + settings.getQuality()
+                    + "\nVolume: " + settings.getVolume() + "\nAudio Channel: " + settings.getAudioChannel()
+                    + "\nHz: " + settings.getHz() + "\nwith metadata: " + settings.isMetadata() + "\nChecksum: "
+                    + checksumLocal);
             callRequest();
             LOGGER.info("finish");
         } catch (IOException ioException) {
