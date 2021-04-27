@@ -10,12 +10,9 @@
  */
 package org.fundacion.jala.converter.core.parameter;
 
-import org.springframework.stereotype.Service;
-
 /**
  * This class has the options of the audio parameters.
  */
-@Service
 public class AudioParameter extends Parameter {
     private String format;
     private String bitrate;

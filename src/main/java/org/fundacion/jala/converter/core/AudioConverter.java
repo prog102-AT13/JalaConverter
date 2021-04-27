@@ -76,5 +76,4 @@ public final class AudioConverter {
     public Result getResult() {
         return result;
     }
-
 }

@@ -14,7 +14,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.core.parameter.PythonParameter;
 import org.fundacion.jala.converter.core.results.Result;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;

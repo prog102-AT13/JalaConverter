@@ -8,7 +8,6 @@
  *
  * @author Edson Añawaya Rios
  */
-
 package org.fundacion.jala.converter.core;
 
 import org.apache.logging.log4j.LogManager;
