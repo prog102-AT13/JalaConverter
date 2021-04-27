@@ -23,6 +23,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.controller.response.PaoPaoResponse;
 import org.fundacion.jala.converter.view.Models.IRequestForm;
 import org.fundacion.jala.converter.view.Models.Parameter;
 import java.io.File;
@@ -92,7 +93,17 @@ public class ClientRequest {
         httpPost.setEntity(multipart);
         CloseableHttpResponse response = httpClient.execute(httpPost);
         HttpEntity responseEntity = response.getEntity();
+        System.out.println("-------------------------------------");
+        System.out.println();
+        System.out.println(responseEntity.toString());
+        System.out.println();
+        System.out.println("-------------------------------------");
         String sResponse = EntityUtils.toString(responseEntity, "UTF-8");
+        System.out.println("-------------------------------------");
+        System.out.println();
+        System.out.println(sResponse);
+        System.out.println();
+        System.out.println("-------------------------------------");
         return sResponse;
     }
 

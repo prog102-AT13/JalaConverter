@@ -12,6 +12,9 @@ package org.fundacion.jala.converter.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.controller.response.ErrorAuthenticationResponse;
+import org.fundacion.jala.converter.controller.response.PaoPaoResponse;
+import org.fundacion.jala.converter.controller.response.SuccessAuthenticationResponse;
 import org.fundacion.jala.converter.models.AuthenticationRequest;
 import org.fundacion.jala.converter.models.AuthenticationResponse;
 import org.fundacion.jala.converter.security.util.JwtUtil;
@@ -52,8 +55,9 @@ public class AuthController {
      * @throws Exception when invalid username or password is given.
      */
     @PostMapping("/authenticate")
-    public ResponseEntity<?> createAuthenticationToken(final @RequestParam String username,
-                                                       final @RequestParam String password) throws Exception {
+    public ResponseEntity<PaoPaoResponse> createAuthenticationToken(final @RequestParam String username,
+                                                                    final @RequestParam String password)
+            throws Exception {
         final UserDetails userDetails;
         final String jwt;
         AuthenticationRequest authenticationRequest = new AuthenticationRequest(username, password);
@@ -66,11 +70,11 @@ public class AuthController {
             authenticationManager.authenticate(userPassAuthTok);
         } catch (BadCredentialsException e) {
             authLogger.error("Error. " + e.getLocalizedMessage());
-            throw new Exception("Incorrect username or password", e);
+            return ResponseEntity.badRequest().body(new ErrorAuthenticationResponse("400", e.getMessage()));
         }
         userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         jwt = jwtTokenUtil.generateToken(userDetails);
         editToken(username, jwt);
-        return ResponseEntity.ok(new AuthenticationResponse(jwt));
+        return ResponseEntity.ok(new SuccessAuthenticationResponse("200", jwt));
     }
 }

@@ -10,6 +10,7 @@
  */
 package org.fundacion.jala.converter.view.login;
 
+import org.fundacion.jala.converter.controller.response.PaoPaoResponse;
 import org.fundacion.jala.converter.view.MainInterface;
 import org.fundacion.jala.converter.view.Models.AuthenticateRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
