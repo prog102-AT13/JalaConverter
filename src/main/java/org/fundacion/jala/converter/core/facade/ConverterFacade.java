@@ -42,7 +42,7 @@ public class ConverterFacade {
      * @param videoParameter is a object with parameter of video to convert.
      * @return string of output filename.
      */
-    public static String getVideoConverter(VideoParameter videoParameter) throws IOException {
+    public static String getVideoConverter(final VideoParameter videoParameter) throws IOException {
         VideoConverter converter = new VideoConverter(videoParameter);
         converter.convertVideo();
         return converter.getOutputFileName();

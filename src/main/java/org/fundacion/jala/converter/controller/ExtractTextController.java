@@ -14,9 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.core.facade.DownloadLinkFacade;
 import org.fundacion.jala.converter.core.facade.ExtractFacade;
-import org.fundacion.jala.converter.core.parameter.ExtractTextParameter;
 import org.fundacion.jala.converter.core.FileStorageService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,9 +42,9 @@ public class ExtractTextController {
      */
     @PostMapping("/extractText")
     public String extractText(final @RequestParam("file") MultipartFile file,
-                             final @RequestParam("language") String language) throws IllegalStateException, IOException {
+                              final @RequestParam("language") String language) throws IllegalStateException, IOException {
         LOGGER.info("start");
-        ExtractFacade.getTextExtract(file,language);
+        ExtractFacade.getTextExtract(file, language);
         LOGGER.info("finish");
         return DownloadLinkFacade.getLinkExtractText(file);
     }

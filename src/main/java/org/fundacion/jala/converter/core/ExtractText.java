@@ -133,6 +133,7 @@ public class ExtractText {
 
     /**
      * Returns the object result for the operation.
+     *
      * @return extractorResult.
      */
     public Result getResult() {

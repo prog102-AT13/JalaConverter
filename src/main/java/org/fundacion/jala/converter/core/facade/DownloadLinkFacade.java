@@ -17,10 +17,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
  * Class to do link to download.
  */
 public class DownloadLinkFacade {
+    private static String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
+
     private DownloadLinkFacade() {
     }
-
-    private static String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
 
     /**
      *  Generator link to download to convert.

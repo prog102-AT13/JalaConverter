@@ -19,7 +19,6 @@ import org.fundacion.jala.converter.core.metadata.TypeFileExport;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
-import java.util.Locale;
 
 /**
  * This class calls facade of extract.
@@ -32,9 +31,11 @@ public class ExtractFacade {
     /**
      * Extracts text from image.
      *
-     * @param extractTextParameter is a object with parameter of extractText to convert.
+     * @param file file is image file to extract text.
+     * @param  language is a type of language of the text.
+     * @throws IOException is a exception when invalid input is provided.
      */
-    public static void getTextExtract(final MultipartFile file,final String language) throws IOException {
+    public static void getTextExtract(final MultipartFile file, final String language) throws IOException {
         FileStorageService fileStorageService = new FileStorageService();
         String fileOut = file.getOriginalFilename();
         String outputFileName = fileOut.substring(0, fileOut.lastIndexOf("."));
@@ -57,7 +58,7 @@ public class ExtractFacade {
      */
     public static String getMetadataExtract(final MultipartFile file, final Boolean isMoreInfo,
                                             final String nameExport, final String format)
-            throws IOException, IllegalArgumentException{
+            throws IOException, IllegalArgumentException {
         FileStorageService fileStorageService = new FileStorageService();
         String pathFile = fileStorageService.uploadFile(file);
         String outPath = FileStorageService.getOutputPathWithoutFileName(pathFile);
