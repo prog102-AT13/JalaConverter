@@ -53,7 +53,7 @@ public class AudioParameter extends Parameter {
      */
     public String formatVolume() {
         if (!getVolume().equals("") && !getVolume().equals("1")) {
-            return " -filter:a 'volume=" + getVolume() + "' ";
+            return " -filter:a \"volume=" + getVolume() + "\" ";
         }
         return "";
     }

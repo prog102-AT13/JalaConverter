@@ -13,7 +13,6 @@ package org.fundacion.jala.converter.core.facade;
 import java.io.IOException;
 import java.util.ArrayList;
 import static org.fundacion.jala.converter.models.AssetSQL.insertAssetData;
-import static org.fundacion.jala.converter.core.ZipService.zipFile;
 import static org.fundacion.jala.converter.core.ZipService.zipFiles;
 
 /**
@@ -71,27 +70,23 @@ public class ZipFileFacade {
         String outputFilename = parameterOutputChecksum.getOutputFilename();
         int resultTitleSize = parameterOutputChecksum.getResultTitleSize();
         String filename = parameterOutputChecksum.getFileName();
-        final int WAIT_TIME = 6000;
+        final int WAIT_TIME = 1000;
         final int USER_ID = 1;
-        String nameWithoutExtension = outputFilename.substring(0, outputFilename.lastIndexOf(".") + 1);
-        String pathFile = storagePath.substring(0, storagePath.lastIndexOf(System.getProperty("file.separator")) + 1);
+        String nameWithoutExtension = outputFilename.substring(outputFilename.lastIndexOf(System.getProperty("file.separator")) + 1, outputFilename.lastIndexOf(".") + 1);
+        String pathFile = outputFilename.substring(0, outputFilename.lastIndexOf(System.getProperty("file.separator")) + 1);
         if (!(resultTitleSize > 0)) {
             insertAssetData(filename, pathFile, checksumLocal, USER_ID);
         }
-        if (metadata.equals("true") || thumbnail) {
-            ArrayList<String> zipList = new ArrayList<>();
-            zipList.add(pathFile + outputFilename);
-            if (metadata.equals("true")) {
-                zipList.add(pathFile + nameWithoutExtension + "txt");
-            }
-            if (thumbnail) {
-                zipList.add(pathFile + nameWithoutExtension + "png");
-            }
-            Thread.sleep(WAIT_TIME);
-            zipFiles(zipList, pathFile + nameWithoutExtension + "zip");
-        } else {
-            Thread.sleep(WAIT_TIME);
-            zipFile(pathFile + outputFilename, pathFile + nameWithoutExtension + "zip");
+        ArrayList<String> zipList = new ArrayList<>();
+        zipList.add(pathFile + storagePath);
+        if ("true".equals(metadata)) {
+            zipList.add(pathFile + nameWithoutExtension + "txt");
         }
+        if (thumbnail) {
+            zipList.add(pathFile + nameWithoutExtension + "png");
+        }
+        Thread.sleep(WAIT_TIME);
+        zipFiles(zipList, pathFile + nameWithoutExtension + "zip");
+        Thread.sleep(WAIT_TIME);
     }
 }
