@@ -22,6 +22,7 @@ import java.awt.GridLayout;
  * This class defines the interface for output settings for audio to convert.
  */
 class OutputSettingsAudio extends JPanel {
+    private JComboBox qualitySelect;
     private JComboBox volumeSelect;
     private JComboBox hzSelect;
     private JComboBox audioChannelSelect;
@@ -33,16 +34,22 @@ class OutputSettingsAudio extends JPanel {
     private final int dimensionHeight = 30;
     private final int fontStyle = 0;
     private final int fontSize = 12;
-    private final int gridLayoutRows = 4;
+    private final int gridLayoutRows = 5;
     private final int gridLayoutCols = 2;
 
     protected OutputSettingsAudio() {
+        JLabelStyle qualityLabel = new JLabelStyle("Select Quality: ", "h3",
+                alignLabelStyle, widthLabelStyle, heightLabelStyle);
         JLabelStyle volumeLabel = new JLabelStyle("Select Volume: ", "h3",
                 alignLabelStyle, widthLabelStyle, heightLabelStyle);
         JLabelStyle hzLabel = new JLabelStyle("Select Hz: ", "h3",
                 alignLabelStyle, widthLabelStyle, heightLabelStyle);
         JLabelStyle audioChannelLabel = new JLabelStyle("Select Audio Channel: ", "h3",
                 alignLabelStyle, widthLabelStyle, heightLabelStyle);
+        qualitySelect = new JComboBox();
+        qualitySelect.setFont(new Font("Barlow", fontStyle, fontSize));
+        qualitySelect.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
+        setQualitySelect();
         volumeSelect = new JComboBox();
         volumeSelect.setFont(new Font("Barlow", fontStyle, fontSize));
         volumeSelect.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
@@ -58,6 +65,8 @@ class OutputSettingsAudio extends JPanel {
         metadataOption = new JCheckBox("With metadata");
         metadataOption.setFont(new Font("Barlow", fontStyle, fontSize));
         setLayout(new GridLayout(gridLayoutRows, gridLayoutCols));
+        add(qualityLabel.getTextLabel());
+        add(qualitySelect);
         add(volumeLabel.getTextLabel());
         add(volumeSelect);
         add(hzLabel.getTextLabel());
@@ -68,10 +77,22 @@ class OutputSettingsAudio extends JPanel {
     }
 
     /**
+     * Sets all possible quality for Audio converter.
+     */
+    protected void setQualitySelect() {
+        qualitySelect.addItem("");
+        qualitySelect.addItem("64");
+        qualitySelect.addItem("128");
+        qualitySelect.addItem("192");
+        qualitySelect.addItem("320");
+        qualitySelect.setSelectedIndex(2);
+    }
+
+    /**
      * Sets all possible volume for Audio converter.
      */
     protected void setVolumeSelect() {
-        volumeSelect.addItem(" ");
+        volumeSelect.addItem("");
         volumeSelect.addItem("1");
         volumeSelect.addItem("2");
         volumeSelect.addItem("3");
@@ -102,6 +123,15 @@ class OutputSettingsAudio extends JPanel {
         audioChannelSelect.addItem("5.1");
         audioChannelSelect.addItem("6.1");
         audioChannelSelect.addItem("7.1");
+    }
+
+    /**
+     * Gets selected quality for Audio converter.
+     *
+     * @return a String, option selected of quality.
+     */
+    protected String getQuality() {
+        return qualitySelect.getSelectedItem().toString();
     }
 
     /**

@@ -78,7 +78,6 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         add(file);
         add(audioSettings.getTextLabel());
         add(audioSelect);
-        add(quality);
         add(settings);
         add(convertAudio);
     }
@@ -99,7 +98,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
                     + "\nConvert to: "
                     + audioSelect.getConvertTo()
                     + "\nQuality: "
-                    + quality.getQualityAudio()
+                    + settings.getQuality()
                     + "\nVolume: "
                     + settings.getVolume()
                     + "\nAudio Channel: "
@@ -131,12 +130,10 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");
-            String[] s = quality.getQualityAudio().split(" ");
-            String bitrate = s[0];
             AudioRequestForm audioRequestForm = new AudioRequestForm();
             audioRequestForm.addFilepath(file.getOriginFilePath());
             audioRequestForm.addFormat(audioSelect.getConvertTo());
-            audioRequestForm.addBitrate(bitrate);
+            audioRequestForm.addBitrate(settings.getQuality());
             audioRequestForm.addVolume(settings.getVolume());
             audioRequestForm.addHz(settings.getHz());
             audioRequestForm.addAudiochannel(settings.getAudioChannel());
