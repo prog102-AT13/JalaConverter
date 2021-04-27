@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
-import static org.fundacion.jala.converter.core.ExtractMetadata.extractMetadata;
+import static org.fundacion.jala.converter.core.facade.UtilitiesFacade.extractMetadata;
 
 /**
  * This class calls endpoint of the audio.

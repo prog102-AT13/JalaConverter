@@ -24,6 +24,7 @@ import java.io.IOException;
  * This class calls facade of extract.
  */
 public class ExtractFacade {
+    private static FileStorageService fileStorageService = new FileStorageService();
 
     private ExtractFacade() {
     }
@@ -36,7 +37,7 @@ public class ExtractFacade {
      * @throws IOException is a exception when invalid input is provided.
      */
     public static void getTextExtract(final MultipartFile file, final String language) throws IOException {
-        FileStorageService fileStorageService = new FileStorageService();
+
         String fileOut = file.getOriginalFilename();
         String outputFileName = fileOut.substring(0, fileOut.lastIndexOf("."));
         ExtractTextParameter extractTextParameter;
@@ -59,7 +60,6 @@ public class ExtractFacade {
     public static String getMetadataExtract(final MultipartFile file, final Boolean isMoreInfo,
                                             final String nameExport, final String format)
             throws IOException, IllegalArgumentException {
-        FileStorageService fileStorageService = new FileStorageService();
         String pathFile = fileStorageService.uploadFile(file);
         String outPath = FileStorageService.getOutputPathWithoutFileName(pathFile);
         File fileToExtract = new File(pathFile);
