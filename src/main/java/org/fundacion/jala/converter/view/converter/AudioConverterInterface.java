@@ -38,29 +38,29 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
     private OutputSettingsAudio settings;
     private ClientRequest clientRequest = new ClientRequest();
     private static final Logger LOGGER = LogManager.getLogger();
-    private final int alignLabelStyle = 2;
-    private final int widthLabelStyle = 70;
-    private final int heightLabelStyle = 30;
-    private final int topBorder = 40;
-    private final int leftBorder = 40;
-    private final int bottomBorder = 100;
-    private final int rightBorder = 0;
-    private final int fontStyle = 0;
-    private final int fontSize = 12;
+    private final int ALIGN_LABEL_STYLE = 2;
+    private final int WIDTH_LABEL_STYLE = 70;
+    private final int HEIGHT_LABEL_STYLE = 30;
+    private final int TOP_BORDER = 40;
+    private final int LEFT_BORDER = 40;
+    private final int BOTTOM_BORDER = 100;
+    private final int RIGHT_BORDER = 0;
+    private final int FONT_STYLE = 0;
+    private final int FONT_SIZE = 12;
     private String token;
     private String checksumLocal;
 
     public AudioConverterInterface(final String newToken) {
         token = newToken;
-        JLabelStyle audioTitle = new JLabelStyle("Audio converter", "h1",
-                alignLabelStyle, widthLabelStyle, heightLabelStyle);
-        JLabelStyle audioSettings = new JLabelStyle("Audio settings", "h1",
-                alignLabelStyle, widthLabelStyle, heightLabelStyle);
+        JLabelStyle audioTitle = new JLabelStyle("Audio converter", "h1", ALIGN_LABEL_STYLE, WIDTH_LABEL_STYLE,
+                HEIGHT_LABEL_STYLE);
+        JLabelStyle audioSettings = new JLabelStyle("Audio settings", "h1", ALIGN_LABEL_STYLE, WIDTH_LABEL_STYLE,
+                HEIGHT_LABEL_STYLE);
         audioTitle.setAlignmentX(LEFT_ALIGNMENT);
         audioSettings.setAlignmentX(LEFT_ALIGNMENT);
         JButton convertAudio = new JButton("Convert");
         convertAudio.setAlignmentX(LEFT_ALIGNMENT);
-        convertAudio.setFont(new Font("Barlow", fontStyle, fontSize));
+        convertAudio.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
         convertAudio.addActionListener(this::actionPerformed);
         file = new SelectFile();
         file.setAlignmentX(LEFT_ALIGNMENT);
@@ -69,14 +69,13 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         quality = new QualityAudio();
         quality.setAlignmentX(LEFT_ALIGNMENT);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBorder(new EmptyBorder(topBorder, leftBorder, bottomBorder, rightBorder));
+        setBorder(new EmptyBorder(TOP_BORDER, LEFT_BORDER, BOTTOM_BORDER, RIGHT_BORDER));
         settings = new OutputSettingsAudio();
         settings.setAlignmentX(LEFT_ALIGNMENT);
         add(audioTitle.getTextLabel());
         add(file);
         add(audioSettings.getTextLabel());
         add(audioSelect);
-        add(quality);
         add(settings);
         add(convertAudio);
     }
@@ -92,21 +91,10 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         try {
             LOGGER.info("Execute Try");
             checksumLocal = getFileChecksum(file.getOriginFilePath());
-            JOptionPane.showMessageDialog(this, "File Path: "
-                    + file.getOriginFilePath()
-                    + "\nConvert to: "
-                    + audioSelect.getConvertTo()
-                    + "\nQuality: "
-                    + quality.getQualityAudio()
-                    + "\nVolume: "
-                    + settings.getVolume()
-                    + "\nAudio Channel: "
-                    + settings.getAudioChannel()
-                    + "\nHz: "
-                    + settings.getHz()
-                    + "\nwith metadata: "
-                    + settings.isMetadata()
-                    + "\nChecksum: "
+            JOptionPane.showMessageDialog(this, "File Path: " + file.getOriginFilePath()
+                    + "\nConvert to: " + audioSelect.getConvertTo() + "\nQuality: " + settings.getQuality()
+                    + "\nVolume: " + settings.getVolume() + "\nAudio Channel: " + settings.getAudioChannel()
+                    + "\nHz: " + settings.getHz() + "\nwith metadata: " + settings.isMetadata() + "\nChecksum: "
                     + checksumLocal);
             callRequest();
             LOGGER.info("finish");
@@ -129,12 +117,10 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");
-            String[] s = quality.getQualityAudio().split(" ");
-            String bitrate = s[0];
             AudioRequestForm audioRequestForm = new AudioRequestForm();
             audioRequestForm.addFilepath(file.getOriginFilePath());
             audioRequestForm.addFormat(audioSelect.getConvertTo());
-            audioRequestForm.addBitrate(bitrate);
+            audioRequestForm.addBitrate(settings.getQuality());
             audioRequestForm.addVolume(settings.getVolume());
             audioRequestForm.addHz(settings.getHz());
             audioRequestForm.addAudiochannel(settings.getAudioChannel());

@@ -56,7 +56,6 @@ public class ZipFileFacade {
 
     /**
      * Compresses any files.
-     * Builds the files in order to compress.
      *
      * @param parameterOutputChecksum object of ParameterOutputChecksum.
      * @param metadata is a parameter if add metadata of video into zip.

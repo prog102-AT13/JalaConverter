@@ -33,7 +33,9 @@ public class ExtractMetadata {
 
     public ExtractMetadata(final ObjectMetadata extractMetadata) {
         this.fileToExtract = extractMetadata.getFileToExtract();
-        if (extractMetadata.getMoreInfo()) setMoreInformation();
+        if (extractMetadata.getMoreInfo()) {
+            setMoreInformation();
+        }
         exportTypeFile = new ExportTypeFile(fileToExtract.getName(), extractMetadata.getNameExport(),
                          extractMetadata.getTypeFileExport(), extractMetadata.getFileToExport());
         exportFile = exportTypeFile.getNameFileCompleteToExport();
@@ -60,7 +62,7 @@ public class ExtractMetadata {
             String command = "cmd /c " + addressExiftool + " && exiftool.exe " + "\""
                              + fileToExtract.getAbsolutePath() + "\"" + moreInformation + exportFile;
             Process process = Runtime.getRuntime().exec(command);
-            result= new Result();
+            result = new Result();
             result.setFilename(this.filename);
         } catch (IOException e) {
             LOGGER.error("Execute Exception to Safe text in a file");
