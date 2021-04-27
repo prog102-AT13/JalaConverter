@@ -4,8 +4,8 @@ import org.fundacion.jala.converter.core.ExtractMetadata;
 import org.fundacion.jala.converter.core.FileStorageService;
 import java.io.File;
 
-public class UtilitiesFacade {
-    private UtilitiesFacade(){};
+public class MetadataFacade {
+    private MetadataFacade(){};
 
     /**
      * Extracts metadata from a file.
