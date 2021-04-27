@@ -93,7 +93,6 @@ class OutputSettingsAudio extends JPanel {
      */
     protected void setVolumeSelect() {
         volumeSelect.addItem("");
-        volumeSelect.addItem("1");
         volumeSelect.addItem("2");
         volumeSelect.addItem("3");
         volumeSelect.addItem("4");

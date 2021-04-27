@@ -26,11 +26,9 @@ public class VideoConverter {
     private String output;
     private String pathOutput;
     private String outputFileName;
-    private static final int WAIT_TIME = 7000;
     private static final int INIT_NUMBER = 20;
     private static final Logger LOGGER = LogManager.getLogger();
     private Result result;
-    private String thumbnailFilename;
     private final String PNG_FORMAT = ".png";
 
     public VideoConverter(final VideoParameter videoParameter) {
@@ -48,17 +46,22 @@ public class VideoConverter {
         pathOutput = adaptPath.substring(0, (adaptPath.lastIndexOf("archive"))) + "archive\\";
         String ffmpegCommand = startFirstCommand + adaptPath + " ";
         String parameters = changeResolution() + changeFrameRate() + removeAudio();
-        String theCommand = ffmpegCommand + parameters + pathOutput + output  + "\"";
+        String theCommand = ffmpegCommand + parameters + pathOutput + output  + "\" -y";
         Process process = Runtime.getRuntime().exec("cmd /c " + theCommand);
         ThreadHandler errorHandler = new ThreadHandler(process.getErrorStream(), "Error Stream");
         errorHandler.start();
         ThreadHandler threadHandler = new ThreadHandler(process.getInputStream(), "Output Stream");
         threadHandler.start();
+        LOGGER.info("start");
         try {
+            LOGGER.info("Execute Try");
             process.waitFor();
+            LOGGER.info("finish");
         } catch (InterruptedException e) {
+            LOGGER.error("Execute Exception");
             throw new IOException("process interrupted");
         }
+        LOGGER.info("finish");
         System.out.println("exit code: " + process.exitValue());
         if (parameter.hasThumbnail()) {
             generateAThumbnail();
@@ -81,8 +84,7 @@ public class VideoConverter {
         if (width > 0 && height > 0) {
             scale = width + ":" + height;
             aspectRatio = ":force_original_aspect_ratio=decrease,pad=";
-            resolutionCommand = "-vf \"scale=" + scale + aspectRatio + scale +
-                                ":-1:-1:color=white\"";
+            resolutionCommand = "-vf \"scale=" + scale + aspectRatio + scale + ":-1:-1:color=white\"";
             return resolutionCommand;
         }
         return "";
@@ -91,22 +93,27 @@ public class VideoConverter {
     /**
      * Generates a input video thumbnail.
      */
-    private void generateAThumbnail() throws IOException{
+    private void generateAThumbnail() throws IOException {
         String name = getOutputFileName().substring(0, getOutputFileName().lastIndexOf("."));
         String startCommand = "ffmpeg -i ";
-        String outputCommand = pathOutput + output + "\"" + " -ss 00:00:01 -vframes 1 -s 128x128 " +
-                               pathOutput + name + PNG_FORMAT;
+        String outputCommand = pathOutput + output + "\"" + " -ss 00:00:01 -vframes 1 -s 128x128 "
+                + pathOutput + name + PNG_FORMAT + " -y";
         String thumbnailCommand = startCommand + outputCommand;
         Process process = Runtime.getRuntime().exec("cmd /c " + thumbnailCommand);
         ThreadHandler errorHandler = new ThreadHandler(process.getErrorStream(), "Error Stream");
         errorHandler.start();
         ThreadHandler threadHandler = new ThreadHandler(process.getInputStream(), "Output Stream");
         threadHandler.start();
+        LOGGER.info("start");
         try {
+            LOGGER.info("Execute Try");
             process.waitFor();
+            LOGGER.info("finish");
         } catch (InterruptedException e) {
+            LOGGER.error("Execute Exception");
             throw new IOException("process interrupted");
         }
+        LOGGER.info("Finish");
     }
 
     /**

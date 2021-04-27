@@ -73,7 +73,7 @@ public class ObjectMetadata {
      *
      * @param nameExport is file's name which the metadata is exported.
      */
-    public void setNameExport(String nameExport) {
+    public void setNameExport(final String nameExport) {
         this.nameExport = nameExport;
     }
 
@@ -91,7 +91,7 @@ public class ObjectMetadata {
      *
      * @param typeFileExport is type of file which the metadata is extracted.
      */
-    public void setTypeFileExport(TypeFileExport typeFileExport) {
+    public void setTypeFileExport(final TypeFileExport typeFileExport) {
         this.typeFileExport = typeFileExport;
     }
 
@@ -109,7 +109,7 @@ public class ObjectMetadata {
      *
      * @param moreInfo of file which the metadata is extracted.
      */
-    public void setMoreInfo(boolean moreInfo) {
+    public void setMoreInfo(final boolean moreInfo) {
         this.moreInfo = moreInfo;
     }
 }

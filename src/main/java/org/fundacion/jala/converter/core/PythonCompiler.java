@@ -44,7 +44,7 @@ public class PythonCompiler {
                              + pythonParameter.getFilePath() + "\"";
             Process process = Runtime.getRuntime().exec(command);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String resultOfExecution = null;
+            String resultOfExecution;
             String result = "";
             while ((resultOfExecution = bufferedReader.readLine()) != null) {
                 result += resultOfExecution + "\n";
