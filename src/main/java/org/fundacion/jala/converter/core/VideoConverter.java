@@ -97,7 +97,7 @@ public class VideoConverter {
         String name = getOutputFileName().substring(0, getOutputFileName().lastIndexOf("."));
         String startCommand = "ffmpeg -i ";
         String outputCommand = pathOutput + output + "\"" + " -ss 00:00:01 -vframes 1 -s 128x128 "
-                + pathOutput + name + PNG_FORMAT + " -y";
+                + pathOutput + name + PNG_FORMAT + "\" -y";
         String thumbnailCommand = startCommand + outputCommand;
         Process process = Runtime.getRuntime().exec("cmd /c " + thumbnailCommand);
         ThreadHandler errorHandler = new ThreadHandler(process.getErrorStream(), "Error Stream");

@@ -79,7 +79,7 @@ public class ZipFileFacade {
         }
         ArrayList<String> zipList = new ArrayList<>();
         zipList.add(pathFile + storagePath);
-        if (metadata.equals("true")) {
+        if ("true".equals(metadata)) {
             zipList.add(pathFile + nameWithoutExtension + "txt");
         }
         if (thumbnail) {
