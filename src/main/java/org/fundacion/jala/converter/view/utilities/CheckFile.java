@@ -18,10 +18,10 @@ import javax.swing.JOptionPane;
 public class CheckFile {
 
     /**
-     * Verify that a file is selected
+     * Verify that a file is selected.
      *
-     * @param file Path String
-     * @return a boolean with the confirmation
+     * @param file Path String.
+     * @return a boolean with the confirmation.
      */
     public static boolean checkFileSelect(final String file) {
         if (file != null) {
