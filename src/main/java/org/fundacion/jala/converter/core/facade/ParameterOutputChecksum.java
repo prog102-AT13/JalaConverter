@@ -30,7 +30,7 @@ public class ParameterOutputChecksum {
     /**
      * Gets checksum local.
      *
-     * @return string with checksum Local.
+     * @return a String with checksum Local.
      */
     public String getChecksumLocal() {
         return checksumLocal;
@@ -39,7 +39,7 @@ public class ParameterOutputChecksum {
     /**
      * Gets Out put Filename.
      *
-     * @return string with out put Filename.
+     * @return a String with out put Filename.
      */
     public String getOutputFilename() {
         return outputFilename;

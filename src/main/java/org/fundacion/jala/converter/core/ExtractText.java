@@ -125,7 +125,7 @@ public class ExtractText {
             printWriter.write(text);
             printWriter.close();
             bufferedWriter.close();
-            result.setFilename(name + TXT_EXTENSION);
+            result.setFilename(name + TXT_EXTENSION + "  ");
         } catch (IOException exception) {
             LOGGER.error("Execute Exception to Safe text in a file");
             throw new TextExtractorException(exception);
@@ -135,9 +135,10 @@ public class ExtractText {
 
     /**
      * Returns the object result for the operation.
+     *
      * @return extractorResult.
      */
-    private Result getResult() {
+    public Result getResult() {
         return result;
     }
 }
