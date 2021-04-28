@@ -15,8 +15,12 @@ import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.view.Models.VideoRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import java.awt.event.ActionEvent;

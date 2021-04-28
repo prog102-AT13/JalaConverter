@@ -11,7 +11,6 @@
 package org.fundacion.jala.converter.core.facade;
 
 import org.fundacion.jala.converter.core.RunCommand;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import static org.fundacion.jala.converter.models.AssetSQL.insertAssetData;

@@ -11,8 +11,9 @@
 package org.fundacion.jala.converter.view.converter;
 
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JComboBox;
+import javax.swing.JCheckBox;
 import java.awt.Font;
 import java.awt.Dimension;
 import java.awt.GridLayout;
