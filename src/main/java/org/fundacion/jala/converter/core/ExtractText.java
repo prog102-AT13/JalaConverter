@@ -17,7 +17,11 @@ import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.core.exceptions.TextExtractorException;
 import org.fundacion.jala.converter.core.parameter.ExtractTextParameter;
 import org.fundacion.jala.converter.core.results.Result;
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.IOException;
 
 /**
  * This class extracts the text of a image.
