@@ -58,7 +58,7 @@ public class VideoConverterController {
      * @throws InterruptedException is exception if process is interrupted.
      */
     @PostMapping("/convertVideo")
-    @ApiOperation(value = "Compiles python code", notes = "Provide the code to compile",
+    @ApiOperation(value = "Converts video file", notes = "Provide the video file to convert",
             authorizations = {@Authorization(value = "JWT")})
     public String uploadFile(final @RequestPart("file") MultipartFile file,
                              final @RequestParam("outputformat") String outputFormat,

@@ -41,7 +41,7 @@ public class PythonCompilerController {
      * @throws IOException is a exception when invalid input is provided.
      */
     @PostMapping("/compilePython")
-    @ApiOperation(value = "Compiles python code", notes = "Provide the code to compile",
+    @ApiOperation(value = "Compiles python code", notes = "Provide the python code to compile",
             authorizations = {@Authorization(value = "JWT")})
     public String compilePython(final @RequestParam("code") String code) throws IllegalStateException, IOException {
         LOGGER.info("start");

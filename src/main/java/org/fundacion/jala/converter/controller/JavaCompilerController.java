@@ -10,6 +10,8 @@
  */
 package org.fundacion.jala.converter.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.core.parameter.JavaParameter;
@@ -38,6 +40,8 @@ public class JavaCompilerController {
      * @throws IOException is a exception when invalid input is provided.
      */
     @PostMapping("/compileJava")
+    @ApiOperation(value = "Compiles java code", notes = "Provide the java code to compile",
+            authorizations = {@Authorization(value = "JWT")})
     public String compileJava(final @RequestParam("code") String code) throws IllegalStateException, IOException {
         LOGGER.info("start");
         if (!code.isBlank() || !code.equals(null)) {

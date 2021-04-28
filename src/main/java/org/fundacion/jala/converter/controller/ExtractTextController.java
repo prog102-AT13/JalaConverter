@@ -46,7 +46,7 @@ public class ExtractTextController {
      * @throws IOException is a exception when invalid input is provided.
      */
     @PostMapping(value = "/extractText")
-    @ApiOperation(value = "Compiles python code", notes = "Provide the code to compile",
+    @ApiOperation(value = "Extracts text from an image", notes = "Provide the image to extract its text",
             authorizations = {@Authorization(value = "JWT")})
     public String uploadFile(final @RequestPart("file") MultipartFile file,
                              final @RequestParam("language") String language) throws IllegalStateException,
