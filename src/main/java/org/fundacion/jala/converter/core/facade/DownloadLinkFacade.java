@@ -26,7 +26,7 @@ public class DownloadLinkFacade {
      *  Generator link to download to convert.
      *
      * @param outputFilename is path of file which are converted.
-     * @return path which permit download the result process.
+     * @returna a String of path which permit download the result process.
      */
     public static String getLinkConverter(final String outputFilename) {
         String nameWithoutExtension = outputFilename.substring(0, outputFilename.lastIndexOf(".") + 1);
@@ -37,7 +37,7 @@ public class DownloadLinkFacade {
      *  Generator link to download.
      *
      * @param file is path of file which are extracted text.
-     * @return path which permit download the result process.
+     * @return a String of path which permit download the result process.
      */
     public static String getLinkExtractText(final MultipartFile file) {
         String fileOut = file.getOriginalFilename();
@@ -49,7 +49,7 @@ public class DownloadLinkFacade {
      *
      * @param filename is name of file which are extracted metadata.
      * @param format is format which the result process do.
-     * @return path which permit download the result process.
+     * @return a String of path which permit download the result process.
      */
     public static String getLinkMetadata(final String filename, final String format) {
         return baseUrl + "/api/download/" + filename + "." + format;

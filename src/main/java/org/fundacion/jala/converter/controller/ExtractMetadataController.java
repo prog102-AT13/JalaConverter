@@ -36,7 +36,7 @@ public class ExtractMetadataController {
      * @param isMoreInfo is more information about the file.
      * @param nameExport is a name of file to export.
      * @param format is the format to file.
-     * @return path to download files.
+     * @return a string of path to download files.
      * @throws IllegalStateException is a exception if process is Illegal.
      * @throws IOException is a exception when invalid input is provided.
      */

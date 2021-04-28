@@ -50,7 +50,7 @@ public class VideoConverterController {
      * @param audio if video has audio.
      * @param checksum is the checksum of video file.
      * @param metadata if metadata is extracted from the video.
-     * @return path to download files.
+     * @return a string of path to download files.
      * @throws IOException is a exception when invalid input is provided.
      * @throws InterruptedException is exception if process is interrupted.
      */
@@ -59,10 +59,8 @@ public class VideoConverterController {
                              final @RequestParam("outputformat") String outputFormat,
                              final @RequestParam("resolution") String resolution,
                              final @RequestParam("thumbnail") boolean thumbnail,
-                             final @RequestParam("framerate") int frameRate,
-                             final @RequestParam("width") int width,
-                             final @RequestParam("height") int height,
-                             final @RequestParam("audio") boolean audio,
+                             final @RequestParam("framerate") int frameRate, final @RequestParam("width") int width,
+                             final @RequestParam("height") int height, final @RequestParam("audio") boolean audio,
                              final @RequestParam("checksum") String checksum,
                              final @RequestParam("metadata") boolean metadata)
             throws IOException, InterruptedException {

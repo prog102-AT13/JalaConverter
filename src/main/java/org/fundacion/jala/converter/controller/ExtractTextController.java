@@ -36,7 +36,7 @@ public class ExtractTextController {
      *
      * @param file is image file to extract text.
      * @param language is a type of language of the text.
-     * @return path to download files.
+     * @return a string of path to download files.
      * @throws IllegalStateException is a exception if process is Illegal.
      * @throws IOException is a exception when invalid input is provided.
      */

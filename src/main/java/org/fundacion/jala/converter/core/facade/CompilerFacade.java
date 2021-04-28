@@ -35,7 +35,7 @@ public class CompilerFacade {
      * Compiles a Java file.
      *
      * @param code is string with code in java.
-     * @return a string of the result on runtime console.
+     * @return a String of the result on runtime console.
      */
     public static String facadeJavaCompile(final String code) {
         if (!code.isBlank() || !code.equals(null)) {
@@ -50,7 +50,7 @@ public class CompilerFacade {
      * Compiles a Python file.
      *
      * @param code is string with code in Python.
-     * @return a string of the result on runtime console.
+     * @return a String of the result on runtime console.
      */
     public static String facadePythonCompile(final String code) {
         if (!code.isBlank() || !code.equals(null)) {

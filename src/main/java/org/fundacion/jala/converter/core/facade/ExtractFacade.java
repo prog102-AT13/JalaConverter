@@ -53,7 +53,7 @@ public class ExtractFacade {
      * @param isMoreInfo is get more info of file.
      * @param nameExport  is the name of file where metadata are extracted.
      * @param format is the format of file where metadata are extracted.
-     * @return string with name of file which contains metadata.
+     * @return a String with name of file which contains metadata.
      * @throws IOException is exception when invalid path.
      * @throws IllegalArgumentException is exception when string not correspond enum.
      */

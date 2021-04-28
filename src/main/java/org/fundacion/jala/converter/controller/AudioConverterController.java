@@ -35,7 +35,7 @@ import static org.fundacion.jala.converter.core.facade.MetadataFacade.extractMet
 public class AudioConverterController {
     private static final Logger LOGGER = LogManager.getLogger();
     private ParameterOutputChecksum parameterOutputChecksum;
-    private final FileStorageService fileStorageService = new FileStorageService();
+    private FileStorageService fileStorageService = new FileStorageService();
 
     /**
      * Calls endpoint to audio converter.
@@ -48,20 +48,17 @@ public class AudioConverterController {
      * @param audioChannel is the audioChannel with are converted of audio.
      * @param checksum is checksum of audio.
      * @param metadata if metadata is extracted from the audio.
-     * @return path to download files.
+     * @return a string of path to download files.
      * @throws IOException is a exception when invalid input is provided.
      * @throws InterruptedException is exception if process is interrupted.
      */
     @PostMapping("/convertAudio")
-    public String uploadFile(final @RequestParam("file") MultipartFile file,
-                             final @RequestParam("format") String format,
-                             final @RequestParam("bitrate") String bitrate,
-                             final @RequestParam("volume") String volume,
+    public String uploadFile(final @RequestParam("file") MultipartFile file, final @RequestParam("format") String format,
+                             final @RequestParam("bitrate") String bitrate, final @RequestParam("volume") String volume,
                              final @RequestParam("hz") String hz,
                              final @RequestParam("audiochannel") String audioChannel,
                              final @RequestParam("checksum") String checksum,
-                             final @RequestParam("metadata") boolean metadata)
-            throws IOException, InterruptedException {
+                             final @RequestParam("metadata") boolean metadata) throws IOException, InterruptedException {
         LOGGER.info("start");
         parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
         String outputFilename = ConverterFacade.getAudioConverter(
