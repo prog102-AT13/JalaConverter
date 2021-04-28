@@ -14,10 +14,12 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.core.exceptions.PaoPaoException;
 import org.fundacion.jala.converter.core.facade.ChecksumFacade;
 import org.fundacion.jala.converter.core.facade.ConverterFacade;
 import org.fundacion.jala.converter.core.facade.ParameterOutputChecksum;
 import org.fundacion.jala.converter.core.facade.ZipFileFacade;
+import org.fundacion.jala.converter.core.facade.DownloadLinkFacade;
 import org.fundacion.jala.converter.core.parameter.AudioParameter;
 import org.fundacion.jala.converter.core.FileStorageService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,9 +28,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
-import static org.fundacion.jala.converter.core.ExtractMetadata.extractMetadata;
+import static org.fundacion.jala.converter.core.facade.MetadataFacade.extractMetadata;
 
 /**
  * This class calls endpoint of the audio.
@@ -37,7 +38,7 @@ import static org.fundacion.jala.converter.core.ExtractMetadata.extractMetadata;
 @RequestMapping("/api")
 public class AudioConverterController {
     private static final Logger LOGGER = LogManager.getLogger();
-    private ParameterOutputChecksum paramChecksum;
+    private ParameterOutputChecksum parameterOutputChecksum;
     private FileStorageService fileStorageService = new FileStorageService();
 
     /**
@@ -51,34 +52,32 @@ public class AudioConverterController {
      * @param audioChannel is the audioChannel with are converted of audio.
      * @param checksum is checksum of audio.
      * @param metadata if metadata is extracted from the audio.
-     * @return path to download files.
+     * @return a string of path to download files.
      * @throws IOException is a exception when invalid input is provided.
      * @throws InterruptedException is exception if process is interrupted.
      */
     @PostMapping("/convertAudio")
     @ApiOperation(value = "Converts audio file", notes = "Provide the audio file to convert",
             authorizations = {@Authorization(value = "JWT")})
-    public String uploadFile(final @RequestPart("file") MultipartFile file,
-                             final @RequestParam("format") String format,
-                             final @RequestParam("bitrate") String bitrate,
-                             final @RequestParam("volume") String volume,
+    public String uploadFile(final @RequestPart("file") MultipartFile file, final @RequestParam("format") String format,
+                             final @RequestParam("bitrate") String bitrate, final @RequestParam("volume") String volume,
                              final @RequestParam("hz") String hz,
                              final @RequestParam("audiochannel") String audioChannel,
                              final @RequestParam("checksum") String checksum,
-                             final @RequestParam("metadata") String metadata) throws IOException, InterruptedException {
-        final String baseUrl;
-        String downloadLink;
-        String nameWithoutExtension;
-        String outputFilename;
-        paramChecksum = ChecksumFacade.getChecksum(checksum, file);
-        AudioParameter audioParam;
-        audioParam = new AudioParameter(paramChecksum.getOutputFilename(), format, bitrate, hz, volume, audioChannel);
-        outputFilename = ConverterFacade.getAudioConverter(audioParam);
-        extractMetadata(metadata, outputFilename, fileStorageService);
-        ZipFileFacade.getZipFileAudio(paramChecksum, metadata, outputFilename);
-        nameWithoutExtension = outputFilename.substring(0, outputFilename.lastIndexOf(".") + 1);
-        baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-        downloadLink = baseUrl + "/api/download/" + nameWithoutExtension + "zip";
-        return downloadLink;
+                             final @RequestParam("metadata") boolean metadata)
+            throws IOException, InterruptedException {
+        LOGGER.info("start");
+        parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
+        String outputFilename = ConverterFacade.getAudioConverter(
+                new AudioParameter(parameterOutputChecksum.getOutputFilename(), format, bitrate, hz, volume,
+                        audioChannel));
+        try {
+            extractMetadata(metadata, outputFilename, fileStorageService);
+        } catch (PaoPaoException exception) {
+            exception.printStackTrace();
+        }
+        ZipFileFacade.getZipFileAudio(parameterOutputChecksum, metadata, outputFilename);
+        LOGGER.info("finish");
+        return DownloadLinkFacade.getLinkConverter(outputFilename);
     }
 }

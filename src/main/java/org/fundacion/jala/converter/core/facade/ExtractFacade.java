@@ -10,6 +10,8 @@
  */
 package org.fundacion.jala.converter.core.facade;
 
+import org.fundacion.jala.converter.core.exceptions.MetadataException;
+import org.fundacion.jala.converter.core.exceptions.TextExtractorException;
 import org.fundacion.jala.converter.core.parameter.ExtractTextParameter;
 import org.fundacion.jala.converter.core.ExtractMetadata;
 import org.fundacion.jala.converter.core.ExtractText;
@@ -24,9 +26,7 @@ import java.io.IOException;
  * This class calls facade of extract.
  */
 public class ExtractFacade {
-    public static final String TXT_FILE_EXTENSION = ".txt";
-    public static final String HTML_FILE_EXTENSION = ".html";
-    public static final String XMP_FILE_EXTENSION = ".xmp";
+    private static FileStorageService fileStorageService = new FileStorageService();
 
     private ExtractFacade() {
     }
@@ -34,9 +34,17 @@ public class ExtractFacade {
     /**
      * Extracts text from image.
      *
-     * @param extractTextParameter is a object with parameter of extractText to convert.
+     * @param file file is image file to extract text.
+     * @param  language is a type of language of the text.
+     * @throws IOException is a exception when invalid input is provided.
+     * @throws TextExtractorException if process is interrupted.
      */
-    public static void getTextExtract(final ExtractTextParameter extractTextParameter) {
+    public static void getTextExtract(final MultipartFile file, final String language) throws IOException, TextExtractorException {
+
+        String fileOut = file.getOriginalFilename();
+        String outputFileName = fileOut.substring(0, fileOut.lastIndexOf("."));
+        ExtractTextParameter extractTextParameter;
+        extractTextParameter = new ExtractTextParameter(fileStorageService.uploadFile(file), language, outputFileName);
         ExtractText extractText = new ExtractText(extractTextParameter);
         extractText.extractText();
     }
@@ -48,46 +56,29 @@ public class ExtractFacade {
      * @param isMoreInfo is get more info of file.
      * @param nameExport  is the name of file where metadata are extracted.
      * @param format is the format of file where metadata are extracted.
-     * @return string with name of file which contains metadata.
+     * @return a String with name of file which contains metadata.
+     * @throws IOException is exception when invalid path.
+     * @throws IllegalArgumentException is exception when string not correspond enum.
+     * @throws MetadataException if process is interrupted.
      */
     public static String getMetadataExtract(final MultipartFile file, final Boolean isMoreInfo,
-                                            final String nameExport, final String format) throws IOException {
-        FileStorageService fileStorageService = new FileStorageService();
+                                            final String nameExport, final String format)
+                                            throws IOException, IllegalArgumentException, MetadataException {
         String pathFile = fileStorageService.uploadFile(file);
-        TypeFileExport typeFileExport = stringToEnum(format);
-        String outPath = fileStorageService.getOutputPathWithoutFileName(fileStorageService.getOutputPath(pathFile));
+        String outPath = FileStorageService.getOutputPathWithoutFileName(pathFile);
         File fileToExtract = new File(pathFile);
         ObjectMetadata objectMetadata = new ObjectMetadata();
-        objectMetadata.setNameExport(nameExport + "");
+        objectMetadata.setNameExport(nameExport);
         objectMetadata.setFileToExtract(fileToExtract);
         objectMetadata.setFileToExport(new File(outPath));
         objectMetadata.setMoreInfo(isMoreInfo);
-        objectMetadata.setTypeFileExport(typeFileExport);
+        objectMetadata.setTypeFileExport(TypeFileExport.valueOf(format.toUpperCase()));
         ExtractMetadata extractMetadata = new ExtractMetadata(objectMetadata);
         extractMetadata.extractMetadata();
-        if ("Default".equals(nameExport)) {
+        if ("".equals(nameExport)) {
             return fileToExtract.getName().substring(0, fileToExtract.getName().lastIndexOf(".") + 0);
         } else {
             return nameExport;
         }
-    }
-
-    /**
-     * Converts string to enum for metadata.
-     *
-     * @param format define type of file which it is exported.
-     * @return format type TypeFileExport.
-     */
-    private static TypeFileExport stringToEnum(final String format) {
-        if (TXT_FILE_EXTENSION.equals(format)) {
-            return TypeFileExport.TXT;
-        }
-        if (HTML_FILE_EXTENSION.equals(format)) {
-            return TypeFileExport.HTML;
-        }
-        if (XMP_FILE_EXTENSION.equals(format)) {
-            return TypeFileExport.XMP;
-        }
-        return TypeFileExport.TXT;
     }
 }

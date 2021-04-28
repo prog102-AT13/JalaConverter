@@ -14,6 +14,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.core.exceptions.PaoPaoException;
+import org.fundacion.jala.converter.core.facade.DownloadLinkFacade;
 import org.fundacion.jala.converter.core.facade.ExtractFacade;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
 
 /**
@@ -39,7 +40,7 @@ public class ExtractMetadataController {
      * @param isMoreInfo is more information about the file.
      * @param nameExport is a name of file to export.
      * @param format is the format to file.
-     * @return path to download files.
+     * @return a string of path to download files.
      * @throws IllegalStateException is a exception if process is Illegal.
      * @throws IOException is a exception when invalid input is provided.
      */
@@ -51,10 +52,13 @@ public class ExtractMetadataController {
                              final @RequestParam("nameExport") String nameExport,
                              final @RequestParam("format") String format) throws IllegalStateException, IOException {
         LOGGER.info("start");
-        String filename = ExtractFacade.getMetadataExtract(fileToExtract, isMoreInfo, nameExport, format);
-        final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-        String downloadLink = baseUrl + "/api/download/" + filename + "." + format;
+        String filename = null;
+        try {
+            filename = ExtractFacade.getMetadataExtract(fileToExtract, isMoreInfo, nameExport, format);
+        } catch (PaoPaoException exception) {
+            exception.printStackTrace();
+        }
         LOGGER.info("finish");
-        return downloadLink;
+        return DownloadLinkFacade.getLinkMetadata(filename, format);
     }
 }

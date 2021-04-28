@@ -14,17 +14,16 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.core.exceptions.PaoPaoException;
+import org.fundacion.jala.converter.core.facade.DownloadLinkFacade;
 import org.fundacion.jala.converter.core.facade.ExtractFacade;
-import org.fundacion.jala.converter.core.parameter.ExtractTextParameter;
 import org.fundacion.jala.converter.core.FileStorageService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
 
 /**
@@ -41,7 +40,7 @@ public class ExtractTextController {
      *
      * @param file is image file to extract text.
      * @param language is a type of language of the text.
-     * @return path to download files.
+     * @return a string of path to download files.
      * @throws IllegalStateException is a exception if process is Illegal.
      * @throws IOException is a exception when invalid input is provided.
      */
@@ -52,15 +51,12 @@ public class ExtractTextController {
                              final @RequestParam("language") String language) throws IllegalStateException,
             IOException {
         LOGGER.info("start");
-        String fileOut = file.getOriginalFilename();
-        String outputFileName = fileOut.substring(0, fileOut.lastIndexOf("."));
-        ExtractTextParameter extractTextParameter;
-        extractTextParameter = new ExtractTextParameter(fileStorageService.uploadFile(file), language, outputFileName);
-        ExtractFacade.getTextExtract(extractTextParameter);
-        final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-        String outFilename = outputFileName + ".txt";
-        String downloadLink = baseUrl + "/api/download/" + outFilename;
+        try {
+            ExtractFacade.getTextExtract(file, language);
+        } catch (PaoPaoException exception) {
+            exception.printStackTrace();
+        }
         LOGGER.info("finish");
-        return downloadLink;
+        return DownloadLinkFacade.getLinkExtractText(file);
     }
 }

@@ -12,6 +12,7 @@ package org.fundacion.jala.converter.core;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.core.exceptions.MetadataException;
 import org.fundacion.jala.converter.core.results.Result;
 import org.fundacion.jala.converter.core.metadata.ExportTypeFile;
 import org.fundacion.jala.converter.core.metadata.TypeFileExport;
@@ -31,7 +32,7 @@ public class ExtractMetadata {
     private Result result;
     private String filename;
 
-    public ExtractMetadata(final ObjectMetadata extractMetadata) {
+    public ExtractMetadata(final ObjectMetadata extractMetadata) throws MetadataException {
         this.fileToExtract = extractMetadata.getFileToExtract();
         if (extractMetadata.getMoreInfo()) {
             setMoreInformation();
@@ -42,7 +43,7 @@ public class ExtractMetadata {
         extractMetadata();
     }
 
-    public ExtractMetadata(final File fileExtract, final File fileExport) {
+    public ExtractMetadata(final File fileExtract, final File fileExport) throws MetadataException {
         this.fileToExtract = fileExtract;
         filename = fileToExtract.getName();
         setMoreInformation();
@@ -54,8 +55,10 @@ public class ExtractMetadata {
 
     /**
      * Assembles the command to run in Exiftool.
+     *
+     * @throws MetadataException if process is interrupted.
      */
-    public void extractMetadata() {
+    public void extractMetadata() throws MetadataException {
         LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");
@@ -64,9 +67,9 @@ public class ExtractMetadata {
             Process process = Runtime.getRuntime().exec(command);
             result = new Result();
             result.setFilename(this.filename);
-        } catch (IOException e) {
+        } catch (IOException exception) {
             LOGGER.error("Execute Exception to Safe text in a file");
-            e.printStackTrace();
+            throw new MetadataException(exception);
         }
         LOGGER.info("finish");
     }
@@ -76,24 +79,6 @@ public class ExtractMetadata {
      */
     private void setMoreInformation() {
         this.moreInformation = " -api largefilesupport=1 -" + "ee";
-    }
-
-    /**
-     * Extracts metadata from a file.
-     *
-     * @param metadata a String with metadata request.
-     * @param outputFileName a String with the new file's name.
-     * @param fileStorageService an object to create the path.
-     */
-    public static void extractMetadata(final String metadata, final String outputFileName,
-                                       final FileStorageService fileStorageService) {
-        String outputPath = fileStorageService.getOutputPath(outputFileName);
-        String outputPathWithoutFileName = fileStorageService.getOutputPathWithoutFileName(outputFileName);
-        if (metadata.equals("true")) {
-            ExtractMetadata extractMetadata = new ExtractMetadata(new File(outputPath),
-                    new File(outputPathWithoutFileName));
-            extractMetadata.extractMetadata();
-        }
     }
 
     /**
