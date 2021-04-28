@@ -10,11 +10,13 @@
  */
 package org.fundacion.jala.converter.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.fundacion.jala.converter.models.parameter.JavaParameter;
-import org.fundacion.jala.converter.models.facade.CompilerFacade;
-import org.fundacion.jala.converter.service.javacompiler.JavaVersion;
+import org.fundacion.jala.converter.core.parameter.JavaParameter;
+import org.fundacion.jala.converter.core.facade.CompilerFacade;
+import org.fundacion.jala.converter.core.javacompiler.JavaVersion;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,6 +40,8 @@ public class JavaCompilerController {
      * @throws IOException is a exception when invalid input is provided.
      */
     @PostMapping("/compileJava")
+    @ApiOperation(value = "Compiles java code", notes = "Provide the java code to compile",
+            authorizations = {@Authorization(value = "JWT")})
     public String compileJava(final @RequestParam("code") String code) throws IllegalStateException, IOException {
         LOGGER.info("start");
         if (!code.isBlank() || !code.equals(null)) {

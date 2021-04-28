@@ -10,16 +10,19 @@
  */
 package org.fundacion.jala.converter.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.fundacion.jala.converter.models.facade.ExtractFacade;
-import org.fundacion.jala.converter.models.parameter.ExtractTextParameter;
-import org.fundacion.jala.converter.service.FileStorageService;
+import org.fundacion.jala.converter.core.facade.ExtractFacade;
+import org.fundacion.jala.converter.core.parameter.ExtractTextParameter;
+import org.fundacion.jala.converter.core.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
@@ -31,9 +34,7 @@ import java.io.IOException;
 @RequestMapping("/api")
 public class ExtractTextController {
     private static final Logger LOGGER = LogManager.getLogger();
-
-    @Autowired
-    private FileStorageService fileStorageService;
+    private FileStorageService fileStorageService = new FileStorageService();
 
     /**
      * Creates endpoint to extract text.
@@ -44,9 +45,12 @@ public class ExtractTextController {
      * @throws IllegalStateException is a exception if process is Illegal.
      * @throws IOException is a exception when invalid input is provided.
      */
-    @PostMapping("/extractText")
-    public String uploadFile(final @RequestParam("file") MultipartFile file,
-                             final @RequestParam("language") String language) throws IllegalStateException, IOException {
+    @PostMapping(value = "/extractText")
+    @ApiOperation(value = "Extracts text from an image", notes = "Provide the image to extract its text",
+            authorizations = {@Authorization(value = "JWT")})
+    public String uploadFile(final @RequestPart("file") MultipartFile file,
+                             final @RequestParam("language") String language) throws IllegalStateException,
+            IOException {
         LOGGER.info("start");
         String fileOut = file.getOriginalFilename();
         String outputFileName = fileOut.substring(0, fileOut.lastIndexOf("."));

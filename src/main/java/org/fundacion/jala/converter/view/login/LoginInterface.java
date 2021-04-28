@@ -61,9 +61,6 @@ public class LoginInterface extends JFrame implements ActionListener {
     private final int REGISTER_BUTTON_X_POSITION = 75;
     private Boolean passwordShowStatus = true;
 
-    /**
-     * Initializes the graphics components for the Login interface.
-     */
     public LoginInterface() {
         setTitle("LOGIN");
         setVisible(true);
@@ -128,8 +125,8 @@ public class LoginInterface extends JFrame implements ActionListener {
     /**
      * Sends a request with given information.
      *
-     * @param username a String with username
-     * @param password a String with password
+     * @param username a String with username.
+     * @param password a String with password.
      */
     public void callRequest(final String username, final String password) {
         PaoPaoResponse result;
@@ -153,7 +150,7 @@ public class LoginInterface extends JFrame implements ActionListener {
     /**
      * Defines the operation after an action is done.
      *
-     * @param e an action performed by user
+     * @param e an action performed by user.
      */
     @Override
     public void actionPerformed(final ActionEvent e) {

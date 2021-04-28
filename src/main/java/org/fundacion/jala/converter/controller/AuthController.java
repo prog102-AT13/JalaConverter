@@ -10,14 +10,15 @@
  */
 package org.fundacion.jala.converter.controller;
 
+import io.swagger.annotations.ApiOperation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.controller.response.ErrorResponse;
 import org.fundacion.jala.converter.controller.response.PaoPaoResponse;
 import org.fundacion.jala.converter.controller.response.SuccessAuthenticationResponse;
 import org.fundacion.jala.converter.models.AuthenticationRequest;
-import org.fundacion.jala.converter.security.util.JwtUtil;
-import org.fundacion.jala.converter.service.MyUserDetailsService;
+import org.fundacion.jala.converter.controller.security.util.JwtUtil;
+import org.fundacion.jala.converter.controller.security.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -51,12 +52,11 @@ public class AuthController {
      * @param username is a String with the username.
      * @param password is a String with the password.
      * @return response entity with the token.
-     * @throws Exception when invalid username or password is given.
      */
     @PostMapping("/authenticate")
+    @ApiOperation(value = "Authenticates a user into the API", notes = "Provide a username and a password to login")
     public ResponseEntity<PaoPaoResponse> createAuthenticationToken(final @RequestParam String username,
-                                                                    final @RequestParam String password)
-            throws Exception {
+                                                       final @RequestParam String password) {
         final UserDetails userDetails;
         final String jwt;
         AuthenticationRequest authenticationRequest = new AuthenticationRequest(username, password);

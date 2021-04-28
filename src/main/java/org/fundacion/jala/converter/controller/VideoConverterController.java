@@ -10,23 +10,25 @@
  */
 package org.fundacion.jala.converter.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.fundacion.jala.converter.models.facade.ChecksumFacade;
-import org.fundacion.jala.converter.models.facade.ConverterFacade;
-import org.fundacion.jala.converter.models.facade.ParameterOutputChecksum;
-import org.fundacion.jala.converter.models.facade.ZipFileFacade;
-import org.fundacion.jala.converter.service.FileStorageService;
-import org.fundacion.jala.converter.models.parameter.VideoParameter;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.fundacion.jala.converter.core.facade.ChecksumFacade;
+import org.fundacion.jala.converter.core.facade.ConverterFacade;
+import org.fundacion.jala.converter.core.facade.ParameterOutputChecksum;
+import org.fundacion.jala.converter.core.facade.ZipFileFacade;
+import org.fundacion.jala.converter.core.FileStorageService;
+import org.fundacion.jala.converter.core.parameter.VideoParameter;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
-import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetadata;
+import static org.fundacion.jala.converter.core.ExtractMetadata.extractMetadata;
 
 /**
  * This class calls endpoint for video.
@@ -36,9 +38,7 @@ import static org.fundacion.jala.converter.service.ExtractMetadata.extractMetada
 public class VideoConverterController {
     private static final Logger LOGGER = LogManager.getLogger();
     private ParameterOutputChecksum paramChecksum;
-
-    @Autowired
-    private FileStorageService fileStorageService;
+    private FileStorageService fileStorageService = new FileStorageService();
 
     /**
      * Calls endpoint to convertVideo.
@@ -58,7 +58,9 @@ public class VideoConverterController {
      * @throws InterruptedException is exception if process is interrupted.
      */
     @PostMapping("/convertVideo")
-    public String uploadFile(final @RequestParam("file") MultipartFile file,
+    @ApiOperation(value = "Converts video file", notes = "Provide the video file to convert",
+            authorizations = {@Authorization(value = "JWT")})
+    public String uploadFile(final @RequestPart("file") MultipartFile file,
                              final @RequestParam("outputformat") String outputFormat,
                              final @RequestParam("resolution") String resolution,
                              final @RequestParam("thumbnail") boolean thumbnail,

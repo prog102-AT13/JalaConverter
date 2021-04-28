@@ -48,16 +48,16 @@ class CodeTextArea extends JPanel implements DocumentListener {
     }
 
     /**
-     * Gives us content of codeArea textarea.
+     * Gives users content of codeArea and textarea.
      *
-     * @return a string.
+     * @return a string on the codeArea.
      */
     public String getText() {
         return codeArea.getText();
     }
 
     /**
-     * Counts how many lines has codArea
+     * Counts how many lines has the codArea.
      *
      * @return a string that is the number of codArea lines.
      */
