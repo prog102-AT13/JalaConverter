@@ -46,7 +46,7 @@ public class ExportTypeFile {
      * @param nameExport define name of file which it is exported.
      */
     private void buildFileName(final String nameExport) {
-        if ("Default" == nameExport || "" == nameExport || "Default".equals(nameExport)) {
+        if ("".equals(nameExport) || "Default".equals(nameExport)) {
             setDefaultNameFileWithTypeOfFile();
             return;
         }
@@ -92,7 +92,7 @@ public class ExportTypeFile {
      */
     private void exportFileTxt() {
         nameFileCompleteToExport = " > " + "\"" + addressExportFile.getAbsolutePath() + "\\"
-                                   + nameFileExport + ".txt" + "\"";
+                + nameFileExport + ".txt" + "\"";
     }
 
     /**
@@ -100,7 +100,7 @@ public class ExportTypeFile {
      */
     private void exportFileHtml() {
         nameFileCompleteToExport = " -h > " + "\"" + addressExportFile.getAbsolutePath() + "\\"
-                                   + nameFileExport + ".html" + "\"";
+                + nameFileExport + ".html" + "\"";
     }
 
     /**
@@ -108,6 +108,6 @@ public class ExportTypeFile {
      */
     private void exportFileXMP() {
         nameFileCompleteToExport = " -X > " + "\"" + addressExportFile.getAbsolutePath() + "\\"
-                                   + nameFileExport + ".xmp" + "\"";
+                + nameFileExport + ".xmp" + "\"";
     }
 }
