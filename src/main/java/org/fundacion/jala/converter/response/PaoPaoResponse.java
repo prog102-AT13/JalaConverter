@@ -16,7 +16,7 @@ package org.fundacion.jala.converter.response;
 public class PaoPaoResponse {
     private String status;
 
-    public PaoPaoResponse(String initialStatus) {
+    public PaoPaoResponse(final String initialStatus) {
         this.status = initialStatus;
     }
 
@@ -34,7 +34,7 @@ public class PaoPaoResponse {
      *
      * @param newStatus is a String to change the status.
      */
-    public void setStatus(String newStatus) {
+    public void setStatus(final String newStatus) {
         this.status = status;
     }
 }

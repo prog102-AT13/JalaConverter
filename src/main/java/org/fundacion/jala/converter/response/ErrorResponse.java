@@ -16,7 +16,7 @@ package org.fundacion.jala.converter.response;
 public class ErrorResponse extends PaoPaoResponse {
     private String errorMessage;
 
-    public ErrorResponse(String initialStatus, String initialErrorMessage) {
+    public ErrorResponse(final String initialStatus, final String initialErrorMessage) {
         super(initialStatus);
         this.errorMessage = initialErrorMessage;
     }
@@ -35,7 +35,7 @@ public class ErrorResponse extends PaoPaoResponse {
      *
      * @param newErrorMessage is a String to change the error message.
      */
-    public void setErrorMessage(String newErrorMessage) {
+    public void setErrorMessage(final String newErrorMessage) {
         this.errorMessage = newErrorMessage;
     }
 }
