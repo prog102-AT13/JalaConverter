@@ -32,6 +32,7 @@ public class CompilerFacade {
      *
      * @param javaParameter the version to be used in the compiler.
      * @return a string of the result on runtime console.
+     * @throws CompilerException if process is interrupted.
      */
     public static String facadeJavaCompile(final JavaParameter javaParameter) throws CompilerException {
         javaCompiler = new JavaCompiler();

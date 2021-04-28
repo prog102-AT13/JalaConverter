@@ -75,6 +75,8 @@ public class ExtractText {
 
     /**
      *  Extracts the text of an image.
+     *
+     * @throws TextExtractorException if process is interrupted.
      */
     public void extractText() throws TextExtractorException {
         LOGGER.info("start");
@@ -102,6 +104,7 @@ public class ExtractText {
      *
      * @param name a String with the name with which the file will be created.
      * @param text a String containing the text extracted from the image.
+     * @throws TextExtractorException if process is interrupted.
      */
     private void safeInfo(final String name, final String text) throws TextExtractorException {
         LOGGER.info("start");

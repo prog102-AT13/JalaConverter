@@ -52,7 +52,6 @@ public class PythonCompiler {
             return result;
         } catch (IOException exception) {
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
-//            throw new ConverterException(exception);
             return String.valueOf(new CompilerException(exception));
         }
     }

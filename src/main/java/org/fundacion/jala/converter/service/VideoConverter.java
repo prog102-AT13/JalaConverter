@@ -37,6 +37,8 @@ public class VideoConverter {
 
     /**
      * Converts the input video.
+     *
+     * @throws ConverterException if process is interrupted.
      */
     public void convertVideo() throws ConverterException {
         String adaptPath = "\"" + parameter.getFilePath() + "\"";

@@ -49,6 +49,8 @@ public class ExtractMetadata {
 
     /**
      * Assembles the command to run in Exiftool.
+     *
+     * @throws MetadataException if process is interrupted.
      */
     public void extractMetadata() throws MetadataException {
         LOGGER.info("start");
@@ -77,6 +79,7 @@ public class ExtractMetadata {
      * @param metadata a String with metadata request.
      * @param outputFileName a String with the new file's name.
      * @param fileStorageService an object to create the path.
+     * @throws MetadataException if process is interrupted.
      */
     public static void extractMetadata(final String metadata, final String outputFileName,
                                        final FileStorageService fileStorageService) throws MetadataException {

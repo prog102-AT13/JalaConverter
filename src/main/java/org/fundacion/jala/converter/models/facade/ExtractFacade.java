@@ -37,6 +37,7 @@ public class ExtractFacade {
      * Extracts text from image.
      *
      * @param extractTextParameter is a object with parameter of extractText to convert.
+     * @throws TextExtractorException if process is interrupted.
      */
     public static void getTextExtract(final ExtractTextParameter extractTextParameter) throws TextExtractorException {
         ExtractText extractText = new ExtractText(extractTextParameter);
@@ -51,6 +52,8 @@ public class ExtractFacade {
      * @param nameExport  is the name of file where metadata are extracted.
      * @param format is the format of file where metadata are extracted.
      * @return string with name of file which contains metadata.
+     * @throws IOException when invalid path is given in zipFiles.
+     * @throws MetadataException if process is interrupted.
      */
     public static String getMetadataExtract(final MultipartFile file, final Boolean isMoreInfo,
                                             final String nameExport, final String format) throws IOException, MetadataException {

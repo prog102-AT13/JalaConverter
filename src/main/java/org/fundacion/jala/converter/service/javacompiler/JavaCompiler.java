@@ -31,6 +31,7 @@ public class JavaCompiler {
      *
      * @param newJavaParameter for all the parameters needed for Java Compiler.
      * @return the result of execution in console.
+     * @throws CompilerException if process is interrupted.
      */
     public String javaCompiler(final JavaParameter newJavaParameter) throws CompilerException {
         LOGGER.info("start");

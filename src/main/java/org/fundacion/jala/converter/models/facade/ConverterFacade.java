@@ -41,6 +41,7 @@ public class ConverterFacade {
      *
      * @param videoParameter is a object with parameter of video to convert.
      * @return string of output filename.
+     * @throws ConverterException if process is interrupted.
      */
     public static String getVideoConverter(final VideoParameter videoParameter) throws ConverterException {
         VideoConverter converter = new VideoConverter(videoParameter);
