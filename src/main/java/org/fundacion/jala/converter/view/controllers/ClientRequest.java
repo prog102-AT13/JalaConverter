@@ -10,6 +10,7 @@
  */
 package org.fundacion.jala.converter.view.controllers;
 
+import com.google.gson.Gson;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -26,6 +27,7 @@ import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.controller.response.ErrorResponse;
 import org.fundacion.jala.converter.controller.response.PaoPaoResponse;
 import org.fundacion.jala.converter.controller.response.SuccessAuthenticationResponse;
+import org.fundacion.jala.converter.controller.response.SuccessRegistrationResponse;
 import org.fundacion.jala.converter.view.Models.IRequestForm;
 import org.fundacion.jala.converter.view.Models.Parameter;
 import java.io.File;
@@ -36,6 +38,8 @@ import java.io.InputStream;
 import java.io.BufferedInputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Properties;
+
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 
 /**
@@ -51,6 +55,7 @@ public class ClientRequest {
     private static final Logger LOGGER = LogManager.getLogger();
     private final String DOWNLOAD_URL = "http://localhost:8080/api/download/";
     private final String AUTHENTICATE_URL = "http://localhost:8080/authenticate";
+    private final int SUCCESS_REGISTRATION_RESPONSE_SIZE = 3;
 
     public ClientRequest() {
         this.httpClient = HttpClients.createDefault();
@@ -96,23 +101,21 @@ public class ClientRequest {
         CloseableHttpResponse response = httpClient.execute(httpPost);
         HttpEntity responseEntity = response.getEntity();
         String sResponse = EntityUtils.toString(responseEntity, "UTF-8");
-        PaoPaoResponse paoPaoResponse = createResponseWithString(sResponse);
-        return paoPaoResponse;
-    }
-
-    /**
-     * Transforms a String to a PaoPaoResponse.
-     * @param response a String with entity response.
-     * @return a PaoPao response with values from entity response.
-     */
-    public PaoPaoResponse createResponseWithString(final String response) {
-        String status = response.substring(11, 14);
-        if ("200".equals(status)) {
-            String jwt = response.substring(23, response.length() - 2);
-            return new SuccessAuthenticationResponse(status, jwt);
+        Gson gson = new Gson();
+        Properties properties = gson.fromJson(sResponse, Properties.class);
+        if (properties.size() == SUCCESS_REGISTRATION_RESPONSE_SIZE) {
+            SuccessRegistrationResponse successRegistrationResponse = gson
+                    .fromJson(sResponse, SuccessRegistrationResponse.class);
+            return successRegistrationResponse;
         } else {
-            String errorMessage = response.substring(27, response.length() - 2);
-            return new ErrorResponse(status, errorMessage);
+            if ("200".equals(properties.getProperty("status"))) {
+                SuccessAuthenticationResponse successAuthenticationResponse = gson
+                        .fromJson(sResponse, SuccessAuthenticationResponse.class);
+                return successAuthenticationResponse;
+            } else {
+                ErrorResponse errorResponse = gson.fromJson(sResponse, ErrorResponse.class);
+                return errorResponse;
+            }
         }
     }
 
