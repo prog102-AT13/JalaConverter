@@ -11,14 +11,11 @@
 package org.fundacion.jala.converter.core.facade;
 
 import org.fundacion.jala.converter.controller.Transform;
-import org.fundacion.jala.converter.core.AudioConverter;
-import org.fundacion.jala.converter.core.VideoConverter;
+import org.fundacion.jala.converter.core.exceptions.CompilerException;
 import org.fundacion.jala.converter.core.parameter.*;
 import org.fundacion.jala.converter.core.javacompiler.JavaCompiler;
 import org.fundacion.jala.converter.core.PythonCompiler;
 import org.fundacion.jala.converter.core.javacompiler.JavaVersion;
-
-import java.io.IOException;
 
 /**
  * This class calls facade of compiler.
@@ -37,7 +34,7 @@ public class CompilerFacade {
      * @param code is string with code in java.
      * @return a String of the result on runtime console.
      */
-    public static String facadeJavaCompile(final String code) {
+    public static String facadeJavaCompile(final String code) throws CompilerException {
         if (!code.isBlank() || !code.equals(null)) {
             javaCompiler = new JavaCompiler();
             String filePath = Transform.toFile(code, "Main", "java");
@@ -66,8 +63,9 @@ public class CompilerFacade {
      *
      * @param javaParameter the version to be used in the compiler.
      * @return a string of the result on runtime console.
+     * @throws CompilerException if process is interrupted.
      */
-    public static String facadeJavaProjectCompile(final JavaParameter javaParameter) {
+    public static String facadeJavaProjectCompile(final JavaParameter javaParameter) throws CompilerException {
         javaCompiler = new JavaCompiler();
         result = javaCompiler.javaCompiler(javaParameter);
         return result;

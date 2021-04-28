@@ -12,6 +12,7 @@ package org.fundacion.jala.converter.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.core.exceptions.PaoPaoException;
 import org.fundacion.jala.converter.core.facade.ChecksumFacade;
 import org.fundacion.jala.converter.core.facade.ConverterFacade;
 import org.fundacion.jala.converter.core.facade.ParameterOutputChecksum;
@@ -63,13 +64,22 @@ public class VideoConverterController {
                              final @RequestParam("height") int height, final @RequestParam("audio") boolean audio,
                              final @RequestParam("checksum") String checksum,
                              final @RequestParam("metadata") boolean metadata)
-            throws IOException, InterruptedException {
+                            throws IOException, InterruptedException {
         LOGGER.info("start");
         parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
-        String outputFilename = ConverterFacade.getVideoConverter(
-                new VideoParameter(parameterOutputChecksum.getOutputFilename(), outputFormat, resolution, thumbnail,
-                        frameRate, width, height, audio));
-        extractMetadata(metadata, outputFilename, fileStorageService);
+        String outputFilename = null;
+        try {
+            outputFilename = ConverterFacade.getVideoConverter(
+                    new VideoParameter(parameterOutputChecksum.getOutputFilename(), outputFormat, resolution, thumbnail,
+                            frameRate, width, height, audio));
+        } catch (PaoPaoException exception) {
+            exception.printStackTrace();
+        }
+        try {
+            extractMetadata(metadata, outputFilename, fileStorageService);
+        } catch (PaoPaoException exception) {
+            exception.printStackTrace();
+        }
         ZipFileFacade.getZipFileVideo(parameterOutputChecksum, metadata, thumbnail, outputFilename);
         LOGGER.info("finish");
         return DownloadLinkFacade.getLinkConverter(outputFilename);
