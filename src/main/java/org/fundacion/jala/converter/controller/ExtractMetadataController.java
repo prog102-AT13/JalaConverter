@@ -12,13 +12,13 @@ package org.fundacion.jala.converter.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.core.facade.DownloadLinkFacade;
 import org.fundacion.jala.converter.core.facade.ExtractFacade;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
 
 /**
@@ -36,20 +36,18 @@ public class ExtractMetadataController {
      * @param isMoreInfo is more information about the file.
      * @param nameExport is a name of file to export.
      * @param format is the format to file.
-     * @return path to download files.
+     * @return a string of path to download files.
      * @throws IllegalStateException is a exception if process is Illegal.
      * @throws IOException is a exception when invalid input is provided.
      */
     @PostMapping("/extractMetadata")
-    public String uploadFile(final @RequestParam("fileToExtract") MultipartFile fileToExtract,
+    public String extractMetadata(final @RequestParam("fileToExtract") MultipartFile fileToExtract,
                              final @RequestParam("moreInfo") Boolean isMoreInfo,
                              final @RequestParam("nameExport") String nameExport,
                              final @RequestParam("format") String format) throws IllegalStateException, IOException {
         LOGGER.info("start");
         String filename = ExtractFacade.getMetadataExtract(fileToExtract, isMoreInfo, nameExport, format);
-        final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-        String downloadLink = baseUrl + "/api/download/" + filename + "." + format;
         LOGGER.info("finish");
-        return downloadLink;
+        return DownloadLinkFacade.getLinkMetadata(filename, format);
     }
 }
