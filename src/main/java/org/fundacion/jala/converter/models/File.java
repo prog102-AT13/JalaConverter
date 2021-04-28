@@ -89,5 +89,13 @@ public class File {
         this.pathFile = newPathFile;
     }
 
+    /**
+     * Obtains Object Project of the File
+     * @return a Project of the File
+     */
+    public Project getProject() {
+        return project;
+    }
+
 }
 

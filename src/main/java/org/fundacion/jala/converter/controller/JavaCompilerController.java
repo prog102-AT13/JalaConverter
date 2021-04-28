@@ -42,8 +42,9 @@ public class JavaCompilerController {
         LOGGER.info("start");
         if (!code.isBlank() || !code.equals(null)) {
             String filePath = Transform.toFile(code, "Main", "java");
+            System.out.println("RUTA DE TRANSFORM "+ filePath);
             LOGGER.info("finish");
-            return CompilerFacade.facadeJavaCompile(new JavaParameter(JavaVersion.JAVA_11, filePath));
+            return CompilerFacade.facadeJavaCompile(new JavaParameter(JavaVersion.JAVA_11, filePath, "Main.java"));
         }
         return "";
     }

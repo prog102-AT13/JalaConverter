@@ -40,6 +40,7 @@ public class PythonCompiler {
             LOGGER.info("Execute Try");
             String command = pythonParameter.getPythonEnum().getVersion() + " " + "\""
                              + pythonParameter.getFilePath() + "\"";
+            System.out.println("LA RUTA DEL COMANDO " + command);
             Process process = Runtime.getRuntime().exec(command);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String resultOfExecution = null;
