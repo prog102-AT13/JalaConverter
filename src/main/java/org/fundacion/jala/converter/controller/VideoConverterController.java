@@ -64,7 +64,7 @@ public class VideoConverterController {
                              final @RequestParam("height") int height, final @RequestParam("audio") boolean audio,
                              final @RequestParam("checksum") String checksum,
                              final @RequestParam("metadata") boolean metadata)
-            throws IOException, InterruptedException {
+                            throws IOException, InterruptedException {
         LOGGER.info("start");
         parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
         String outputFilename = null;

@@ -17,7 +17,6 @@ import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.core.exceptions.TextExtractorException;
 import org.fundacion.jala.converter.core.parameter.ExtractTextParameter;
 import org.fundacion.jala.converter.core.results.Result;
-
 import java.io.*;
 
 /**

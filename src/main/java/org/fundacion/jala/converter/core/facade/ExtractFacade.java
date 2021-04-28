@@ -63,7 +63,7 @@ public class ExtractFacade {
      */
     public static String getMetadataExtract(final MultipartFile file, final Boolean isMoreInfo,
                                             final String nameExport, final String format)
-            throws IOException, IllegalArgumentException, MetadataException {
+                                            throws IOException, IllegalArgumentException, MetadataException {
         String pathFile = fileStorageService.uploadFile(file);
         String outPath = FileStorageService.getOutputPathWithoutFileName(pathFile);
         File fileToExtract = new File(pathFile);
