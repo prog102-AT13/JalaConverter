@@ -10,7 +10,6 @@
  */
 package org.fundacion.jala.converter.view.compiler;
 
-import org.fundacion.jala.converter.view.Models.FileRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
@@ -48,10 +47,10 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
     public void start(final String filetype) {
         extension = filetype;
         CodeTextArea codeArea = new CodeTextArea();
-        codeArea.setName("Main");
-        codeArea.getCodeArea().setText(InitialCode.genetare("Main", extension));
+        codeArea.setName(InitialCode.getNameMain(extension));
+        codeArea.getCodeArea().setText(InitialCode.generate(InitialCode.getNameMain(extension), extension));
         add(codeArea);
-        setTabComponentAt(getTabCount() - 1, createTabHeaderWithTitle("Main"));
+        setTabComponentAt(getTabCount() - 1, createTabHeaderWithTitle(InitialCode.getNameMain(extension)));
         tabList = new ArrayList<>();
         setFont(new Font("Barlow", 0, sizeFont));
         button = new PlusButton();
@@ -79,16 +78,17 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
         String title = (String) JOptionPane.showInputDialog(null,
                 "Write file name", "Create file",
                 JOptionPane.PLAIN_MESSAGE, null, null, "file1");
-        if (title.isBlank()) {
-            title = "file1";
-        }
-        if (!tabList.contains(title)) {
-            CodeTextArea codeArea = new CodeTextArea();
-            codeArea.setName(title);
-            codeArea.getCodeArea().setText(InitialCode.genetare(title, extension));
-            add(codeArea, getTabCount() - 1);
-            setTabComponentAt(getTabCount() - 2, createTabHeader(title));
-            setSelectedIndex(getTabCount() - 2);
+
+        if (!title.isEmpty() && tabList.size() < 7) {
+            if (!tabList.contains(title)) {
+                tabList.add(title);
+                CodeTextArea codeArea = new CodeTextArea();
+                codeArea.setName(title);
+                codeArea.getCodeArea().setText(InitialCode.generate(title, extension));
+                add(codeArea, getTabCount() - 1);
+                setTabComponentAt(getTabCount() - 2, createTabHeader(title));
+                setSelectedIndex(getTabCount() - 2);
+            }
         }
     }
 
@@ -182,33 +182,18 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
     }
 
     /**
+     * Gets the list of all tab names.
      *
-     * @param title
-     */
-    public void createFile(final String title) {
-        tabList.add(title);
-        FileRequestForm fileRequestForm = new FileRequestForm();
-        fileRequestForm.addFileTitle(title);
-        fileRequestForm.setUrl(CompilerInterface.projectId);
-        fileRequestForm.addFileExtension("java");
-        fileRequestForm.addCode("");
-        try {
-            clientRequest.executeRequest(fileRequestForm, token);
-        } catch (Exception e) {
-        }
-    }
-
-    /**
-     *
-     * @return
+     * @return a array list of strings.
      */
     public ArrayList<String> getTabList() {
         return tabList;
     }
 
     /**
+     * Sets type of extension.
      *
-     * @param fileType
+     * @param fileType represents new type of extension.
      */
     public void setExtension(final String fileType) {
         extension = fileType;

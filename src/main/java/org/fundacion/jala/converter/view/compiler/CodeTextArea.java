@@ -57,8 +57,9 @@ class CodeTextArea extends JPanel implements DocumentListener {
     }
 
     /**
+     * Gets tex tarea to have access to its content.
      *
-     * @return
+     * @return a JtextArea.
      */
     public JTextArea getCodeArea() {
         return codeArea;

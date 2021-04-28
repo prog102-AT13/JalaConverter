@@ -58,7 +58,9 @@ public class CompilerInterface extends JPanel {
         add(buttonsCompiler, setConstraints(panelConstraint, 3, 7, 1, 2));
         add(consoleOutput, setConstraints(panelConstraint, 1, 8, 2, 4));
         buttonsCompiler.getRunButton().addActionListener(addListenerToRunButton());
-        buttonsCompiler.getSelectFile().addActionListener(addListenerSaveButton());
+        buttonsCompiler.getSaveFiles().addActionListener(addListenerSaveButton());
+        buttonsCompiler.getClearConsole().addActionListener(addListenerCleanButton());
+        buttonsCompiler.getRunButton().setEnabled(false);
         langButtons.getJava().addActionListener(addListenerToJavaButton());
         langButtons.getPython().addActionListener(addListenerToPythonButton());
         JButton project = new JButton("Create Project");
@@ -181,8 +183,9 @@ public class CompilerInterface extends JPanel {
     }
 
     /**
+     * Creates files and their content according tab names and their conntet.
      *
-     * @return
+     * @return an action listener that executes the event.
      */
     public ActionListener addListenerSaveButton() {
         ActionListener actionListener = new ActionListener() {
@@ -199,9 +202,25 @@ public class CompilerInterface extends JPanel {
                     fileRequestForm.addCode(code);
                     try {
                         clientRequest.executeRequest(fileRequestForm, token);
+                        buttonsCompiler.getRunButton().setEnabled(true);
                     } catch (Exception exception) {
                     }
                 }
+            }
+        };
+        return actionListener;
+    }
+
+    /**
+     * Cleans content of selected tab.
+     *
+     * @return a action listener that actives the event.
+     */
+    public ActionListener addListenerCleanButton() {
+        ActionListener actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                projectTab.getSelectedPane().getCodeArea().setText("");
             }
         };
         return actionListener;

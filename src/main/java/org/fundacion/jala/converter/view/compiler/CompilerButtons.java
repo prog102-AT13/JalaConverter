@@ -24,7 +24,7 @@ import java.awt.event.ActionListener;
 class CompilerButtons extends JPanel implements ActionListener {
     private JButton runCode;
     private JButton clearConsole;
-    private JButton selectFile;
+    private JButton saveFiles;
     private final int DIMENSION_WIDTH = 80;
     private final int DIMENSION_HEIGHT = 20;
     private final int FONT_STYLE = 0;
@@ -35,9 +35,9 @@ class CompilerButtons extends JPanel implements ActionListener {
     protected CompilerButtons() {
         runCode = makeButton("Run");
         clearConsole = makeButton("Clear");
-        selectFile = makeButton("Open File");
+        saveFiles = makeButton("Save");
         setLayout(new FlowLayout(FlowLayout.RIGHT, HGAP, VGAP));
-        add(selectFile);
+        add(saveFiles);
         add(runCode);
         add(clearConsole);
     }
@@ -73,8 +73,22 @@ class CompilerButtons extends JPanel implements ActionListener {
         return button;
     }
 
-    public JButton getSelectFile() {
-        return selectFile;
+    /**
+     * Gets selectFile button to manipulate it.
+     *
+     * @return a JButton to save files.
+     */
+    public JButton getSaveFiles() {
+        return saveFiles;
+    }
+
+    /**
+     * Gets clearConsole button to manipulate it.
+     *
+     * @return a JButton to clean text zone code.
+     */
+    public JButton getClearConsole() {
+        return clearConsole;
     }
 }
 
