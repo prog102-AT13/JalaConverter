@@ -10,6 +10,8 @@
  */
 package org.fundacion.jala.converter.core.facade;
 
+import org.fundacion.jala.converter.core.exceptions.MetadataException;
+import org.fundacion.jala.converter.core.exceptions.TextExtractorException;
 import org.fundacion.jala.converter.core.parameter.ExtractTextParameter;
 import org.fundacion.jala.converter.core.ExtractMetadata;
 import org.fundacion.jala.converter.core.ExtractText;
@@ -35,8 +37,9 @@ public class ExtractFacade {
      * @param file file is image file to extract text.
      * @param  language is a type of language of the text.
      * @throws IOException is a exception when invalid input is provided.
+     * @throws TextExtractorException if process is interrupted.
      */
-    public static void getTextExtract(final MultipartFile file, final String language) throws IOException {
+    public static void getTextExtract(final MultipartFile file, final String language) throws IOException, TextExtractorException {
 
         String fileOut = file.getOriginalFilename();
         String outputFileName = fileOut.substring(0, fileOut.lastIndexOf("."));
@@ -56,10 +59,11 @@ public class ExtractFacade {
      * @return a String with name of file which contains metadata.
      * @throws IOException is exception when invalid path.
      * @throws IllegalArgumentException is exception when string not correspond enum.
+     * @throws MetadataException if process is interrupted.
      */
     public static String getMetadataExtract(final MultipartFile file, final Boolean isMoreInfo,
                                             final String nameExport, final String format)
-            throws IOException, IllegalArgumentException {
+                                            throws IOException, IllegalArgumentException, MetadataException {
         String pathFile = fileStorageService.uploadFile(file);
         String outPath = FileStorageService.getOutputPathWithoutFileName(pathFile);
         File fileToExtract = new File(pathFile);

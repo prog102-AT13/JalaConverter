@@ -12,6 +12,7 @@ package org.fundacion.jala.converter.core;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.core.exceptions.ConverterException;
 import org.fundacion.jala.converter.core.parameter.VideoParameter;
 import org.fundacion.jala.converter.core.results.Result;
 import java.io.IOException;
@@ -37,8 +38,10 @@ public class VideoConverter {
 
     /**
      * Converts the input video.
+     *
+     * @throws ConverterException if process is interrupted.
      */
-    public void convertVideo() throws IOException {
+    public void convertVideo() throws ConverterException, IOException {
         String adaptPath = "\"" + parameter.getFilePath() + "\"";
         format = parameter.getOutputFormat();
         output = adaptPath.substring((adaptPath.lastIndexOf("\\") + 1), adaptPath.lastIndexOf(".") + 1) + format;
@@ -57,14 +60,15 @@ public class VideoConverter {
             LOGGER.info("Execute Try");
             process.waitFor();
             LOGGER.info("finish");
-        } catch (InterruptedException e) {
-            LOGGER.error("Execute Exception");
-            throw new IOException("process interrupted");
+        } catch (InterruptedException exception) {
+            LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
+            throw new ConverterException(exception);
         }
         LOGGER.info("finish");
         System.out.println("exit code: " + process.exitValue());
         if (parameter.hasThumbnail()) {
             generateAThumbnail();
+            LOGGER.info("finish");
         }
         result = new Result();
         result.setFilename(outputFileName);
@@ -92,8 +96,10 @@ public class VideoConverter {
 
     /**
      * Generates a input video thumbnail.
+     *
+     * @throws ConverterException if process is interrupted.
      */
-    private void generateAThumbnail() throws IOException {
+    private void generateAThumbnail() throws ConverterException, IOException {
         String name = getOutputFileName().substring(0, getOutputFileName().lastIndexOf("."));
         String startCommand = "ffmpeg -i ";
         String outputCommand = pathOutput + output + "\"" + " -ss 00:00:01 -vframes 1 -s 128x128 "
@@ -109,9 +115,9 @@ public class VideoConverter {
             LOGGER.info("Execute Try");
             process.waitFor();
             LOGGER.info("finish");
-        } catch (InterruptedException e) {
-            LOGGER.error("Execute Exception");
-            throw new IOException("process interrupted");
+        } catch (InterruptedException exception) {
+            LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
+            throw new ConverterException(exception);
         }
         LOGGER.info("Finish");
     }

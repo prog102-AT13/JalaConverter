@@ -12,6 +12,7 @@ package org.fundacion.jala.converter.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.core.exceptions.PaoPaoException;
 import org.fundacion.jala.converter.core.facade.ChecksumFacade;
 import org.fundacion.jala.converter.core.facade.ConverterFacade;
 import org.fundacion.jala.converter.core.facade.ParameterOutputChecksum;
@@ -64,7 +65,11 @@ public class AudioConverterController {
         String outputFilename = ConverterFacade.getAudioConverter(
                 new AudioParameter(parameterOutputChecksum.getOutputFilename(), format, bitrate, hz, volume,
                         audioChannel));
-        extractMetadata(metadata, outputFilename, fileStorageService);
+        try {
+            extractMetadata(metadata, outputFilename, fileStorageService);
+        } catch (PaoPaoException exception) {
+            exception.printStackTrace();
+        }
         ZipFileFacade.getZipFileAudio(parameterOutputChecksum, metadata, outputFilename);
         LOGGER.info("finish");
         return DownloadLinkFacade.getLinkConverter(outputFilename);

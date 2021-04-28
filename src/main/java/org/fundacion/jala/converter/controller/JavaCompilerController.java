@@ -12,6 +12,7 @@ package org.fundacion.jala.converter.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.core.exceptions.PaoPaoException;
 import org.fundacion.jala.converter.core.facade.CompilerFacade;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +38,11 @@ public class JavaCompilerController {
      */
     @PostMapping("/compileJava")
     public String compileJava(final @RequestParam("code") String code) throws IllegalStateException {
-        return CompilerFacade.facadeJavaCompile(code);
+        try {
+            return CompilerFacade.facadeJavaCompile(code);
+        } catch (PaoPaoException exception) {
+            exception.printStackTrace();
+            return exception.getMessage();
+        }
     }
 }

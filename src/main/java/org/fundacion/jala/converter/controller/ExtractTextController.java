@@ -12,6 +12,7 @@ package org.fundacion.jala.converter.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.core.exceptions.PaoPaoException;
 import org.fundacion.jala.converter.core.facade.DownloadLinkFacade;
 import org.fundacion.jala.converter.core.facade.ExtractFacade;
 import org.fundacion.jala.converter.core.FileStorageService;
@@ -44,7 +45,11 @@ public class ExtractTextController {
     public String extractText(final @RequestParam("file") MultipartFile file,
                               final @RequestParam("language") String language) throws IllegalStateException, IOException {
         LOGGER.info("start");
-        ExtractFacade.getTextExtract(file, language);
+        try {
+            ExtractFacade.getTextExtract(file, language);
+        } catch (PaoPaoException exception) {
+            exception.printStackTrace();
+        }
         LOGGER.info("finish");
         return DownloadLinkFacade.getLinkExtractText(file);
     }
