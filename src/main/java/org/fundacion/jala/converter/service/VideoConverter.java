@@ -15,6 +15,7 @@ import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.exceptions.ConverterException;
 import org.fundacion.jala.converter.models.parameter.VideoParameter;
 import org.springframework.stereotype.Service;
+import java.io.IOException;
 
 /**
  * This class converts a video to an specified format.
@@ -54,7 +55,7 @@ public class VideoConverter {
             LOGGER.info("Execute Try");
             Process petition = Runtime.getRuntime().exec("cmd /c " + theCommand);
             LOGGER.info("finish");
-        } catch (Exception exception) {
+        } catch (IOException exception) {
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
             throw new ConverterException(exception);
         }
@@ -64,8 +65,8 @@ public class VideoConverter {
             generateAThumbnail();
             LOGGER.info("finish");
         } catch (InterruptedException exception) {
-            exception.printStackTrace();
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
+            throw new ConverterException(exception);
         }
     }
 
@@ -92,8 +93,10 @@ public class VideoConverter {
 
     /**
      * Generates a input video thumbnail.
+     *
+     * @throws ConverterException if process is interrupted.
      */
-    private void generateAThumbnail() {
+    private void generateAThumbnail() throws ConverterException {
         String name = getOutputFileName().substring(0, getOutputFileName().lastIndexOf("."));
         String startCommand = "ffmpeg -i ";
         String outputCommand = pathOutput + output + "\"" + " -ss 00:00:01 -vframes 1 -s 128x128 " +
@@ -103,9 +106,9 @@ public class VideoConverter {
             LOGGER.info("Execute Try");
             Process petition = Runtime.getRuntime().exec("cmd /c" + thumbnailCommand);
             LOGGER.info("finish");
-        } catch (Exception exception) {
-            exception.printStackTrace();
+        } catch (IOException exception) {
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
+            throw new ConverterException(exception);
         }
     }
 
