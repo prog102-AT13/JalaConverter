@@ -12,8 +12,8 @@ package org.fundacion.jala.converter.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.fundacion.jala.converter.exceptions.PaoPaoException;
-import org.fundacion.jala.converter.models.facade.ExtractFacade;
+import org.fundacion.jala.converter.core.exceptions.PaoPaoException;
+import org.fundacion.jala.converter.core.facade.ExtractFacade;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

@@ -23,7 +23,7 @@ public class AuthenticationResponse {
     /**
      * Gets the java web token (jwt).
      *
-     * @return the jwt
+     * @return String that is the jwt.
      */
     public String getJwt() {
         return jwt;
