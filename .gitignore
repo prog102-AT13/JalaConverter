@@ -35,7 +35,6 @@ out/
 /dist/
 /nbdist/
 /.nb-gradle/
-/thirdparty/windows/javabin/jdk-11.0.11_windows-x64_bin.zip
 ### VS Code ###
 .vscode/
 .gradle/
