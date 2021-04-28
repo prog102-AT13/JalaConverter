@@ -17,10 +17,12 @@ import org.fundacion.jala.converter.core.javacompiler.JavaVersion;
  */
 public class JavaParameter extends Parameter {
     private JavaVersion javaVersion;
+    private String nameFile;
 
-    public JavaParameter(final JavaVersion newJavaVersion, final String filePath) {
+    public JavaParameter(final JavaVersion newJavaVersion, final String filePath, final String newNameFile) {
         super(filePath);
         this.javaVersion = newJavaVersion;
+        this.nameFile = newNameFile;
     }
 
     /**
@@ -30,5 +32,14 @@ public class JavaParameter extends Parameter {
      */
     public JavaVersion getJavaVersion() {
         return javaVersion;
+    }
+
+    /**
+     * Gets the file's name.
+     *
+     * @return a String with file's name.
+     */
+    public String getNameFile() {
+        return nameFile;
     }
 }

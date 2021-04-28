@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- *
+ * <p>
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -10,6 +10,11 @@
  */
 package org.fundacion.jala.converter.controller;
 
+import org.fundacion.jala.converter.core.facade.CompilerFacade;
+import org.fundacion.jala.converter.core.javacompiler.JavaVersion;
+import org.fundacion.jala.converter.core.parameter.JavaParameter;
+import org.fundacion.jala.converter.core.parameter.PythonEnum;
+import org.fundacion.jala.converter.core.parameter.PythonParameter;
 import org.fundacion.jala.converter.models.File;
 import org.fundacion.jala.converter.models.FileSQL;
 import org.fundacion.jala.converter.models.Project;
@@ -22,6 +27,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * This class creates a project and saves it in the database.
@@ -34,7 +40,7 @@ public class ProjectController {
      * Creates a project in data base.
      *
      * @param projectName is a String with the project's name.
-     * @param userId is an integer with the user's id.
+     * @param userId      is an integer with the user's id.
      * @return integer with the id of the project.
      * @throws IllegalStateException when method invoked at an illegal time.
      */
@@ -52,13 +58,13 @@ public class ProjectController {
     /**
      * Endpoint for creating a project in data base.
      *
-     * @param fileName is a String with the file's name.
+     * @param fileName  is a String with the file's name.
      * @param idProject is an integer with the project's id.
      * @param extension is a String with file's extension.
-     * @param code is a String with the code for the file.
+     * @param code      is a String with the code for the file.
      * @return String with the path of files.
      * @throws IllegalStateException when method invoked at an illegal time.
-     * @throws IOException is a exception when invalid input is provided.
+     * @throws IOException           is a exception when invalid input is provided.
      */
     @PostMapping("/projects/{id}/file")
     public String createFiles(final @RequestParam("fileName") String fileName,
@@ -85,5 +91,39 @@ public class ProjectController {
         RunCommand runCommand = new RunCommand();
         runCommand.run(command);
         FileSQL.deleteFile(idFile);
+    }
+
+    /**
+     * Endpoint for creating a project in data base.
+     *
+     * @param idProject is an integer with the project's id.
+     * @return String with the path of files.
+     * @throws IllegalStateException when method invoked at an illegal time.
+     */
+    @PostMapping("/projects/{id}")
+    public String runProject(final @PathVariable("id") int idProject) throws IllegalStateException {
+        Project project = ProjectSQL.findProjectById(idProject);
+        List<File> fileList = FileSQL.listFileById(idProject);
+        File mainFife = null;
+        for (File file : fileList) {
+            if (file.getName().toLowerCase().contains("main")) {
+                mainFife = file;
+                System.out.println("ARCHIVO MAIN " + mainFife.getName());
+            }
+        }
+        if (mainFife != null) {
+            String[] extesion = mainFife.getName().split("[.]");
+            if ("py".equals(extesion[extesion.length - 1])) {
+                System.out.println("ENTRO A PY");
+                System.out.println("RUTA PROYECTO " + mainFife.getPathFile());
+                return CompilerFacade.facadePythonCompile(new PythonParameter(mainFife.getPathFile(), PythonEnum.V3));
+            }
+            if ("java".equals(extesion[extesion.length - 1])) {
+                System.out.println("ENTRO A JAVA");
+                System.out.println("RUTA ARCHIVO " + mainFife.getPathFile() + "\\" + mainFife.getName());
+                return CompilerFacade.facadeJavaCompile(new JavaParameter(JavaVersion.JAVA_11, mainFife.getPathFile(), mainFife.getName()));
+            }
+        }
+        return "main file not found";
     }
 }

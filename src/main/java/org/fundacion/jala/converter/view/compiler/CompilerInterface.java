@@ -98,8 +98,8 @@ public class CompilerInterface extends JPanel {
             public void actionPerformed(final ActionEvent e) {
                 LOGGER.info("start");
                 String inputCode = projectTab.getSelectedPane().getText();
-                CompileRequestForm compileRequestForm = new CompileRequestForm(choose);
-                compileRequestForm.addCode(inputCode);
+                CompileRequestForm compileRequestForm = new CompileRequestForm(projectId);
+//                compileRequestForm.addCode(inputCode);
                 try {
                     LOGGER.info("Execute Try");
                     String sResponse = clientRequest.executeRequest(compileRequestForm, token);
@@ -183,7 +183,7 @@ public class CompilerInterface extends JPanel {
     }
 
     /**
-     * Creates files and their content according tab names and their conntet.
+     * Creates files and their content according tab names and their content.
      *
      * @return an action listener that executes the event.
      */

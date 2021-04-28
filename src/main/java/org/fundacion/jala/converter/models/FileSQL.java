@@ -13,6 +13,8 @@ package org.fundacion.jala.converter.models;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class is to query to database.
@@ -64,5 +66,36 @@ public class FileSQL {
         manager.remove(deleteFile);
         manager.getTransaction().commit();
         manager.close();
+    }
+
+    /**
+     * Gets the userId from the database.
+     *
+     * @param idProject a int with project Id
+     * @return a List<File> with all project's files
+     */
+    public static List<File> listFileById(final int idProject) {
+        List<File> list = listFile();
+        List<File> newList = new ArrayList<>();
+        for (File file : list) {
+            if (idProject == file.getProject().getId()) {
+                newList.add(file);
+            }
+        }
+        return newList;
+    }
+
+    /**
+     * Lists all files in the db.
+     *
+     * @return a List<File> with all files.
+     */
+    public static List<File> listFile() {
+        EntityManager manager = emf.createEntityManager();
+        manager.getTransaction().begin();
+        List<File> filesList = manager.createQuery("from File", File.class).getResultList();
+        manager.getTransaction().commit();
+        manager.close();
+        return filesList;
     }
 }

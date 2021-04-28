@@ -78,7 +78,6 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
         String title = (String) JOptionPane.showInputDialog(null,
                 "Write file name", "Create file",
                 JOptionPane.PLAIN_MESSAGE, null, null, "file1");
-
         if (!title.isEmpty() && tabList.size() < 7) {
             if (!tabList.contains(title)) {
                 tabList.add(title);
