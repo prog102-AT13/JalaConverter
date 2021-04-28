@@ -10,15 +10,13 @@
  */
 package org.fundacion.jala.converter.view.compiler;
 
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JScrollPane;
+import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Element;
-import java.awt.Color;
-import java.awt.BorderLayout;
+import java.awt.*;
 
 /**
  * This class customizes a panel with custom text areas.
@@ -31,19 +29,27 @@ class CodeTextArea extends JPanel implements DocumentListener {
     private final int BOTTOM_BORDER = 0;
     private final int RIGHT_BORDER = 10;
 
+    final String[] toppings = {"Project1", "Main.java", "subclass.java"};
+    private JTree treeOne;
+    private String[] options;
+
     protected CodeTextArea() {
-        codeArea = new JTextArea();
+        codeArea = new JTextArea(18,30);
         codeArea.setBorder(new EmptyBorder(TOP_BORDER, LEFT_BORDER, BOTTOM_BORDER, RIGHT_BORDER));
+        codeArea.setFont(new Font("Courier New", Font.PLAIN, 12));
         lineCode = new JTextArea("1");
         lineCode.setBorder(new EmptyBorder(TOP_BORDER, LEFT_BORDER, BOTTOM_BORDER, RIGHT_BORDER));
-        lineCode.setBackground(Color.darkGray);
+        lineCode.setBackground(new Color(28, 28, 28));
         lineCode.setForeground(Color.white);
         JScrollPane textCodeArea = new JScrollPane();
         textCodeArea.setBorder(new EmptyBorder(0, 0, 0, 0));
         codeArea.getDocument().addDocumentListener(this);
         setLayout(new BorderLayout());
+        JTreePanelOne(toppings);
+        treeOne.setBorder(new EmptyBorder(10,5,10,20));
         textCodeArea.getViewport().add(codeArea);
         textCodeArea.setRowHeaderView(lineCode);
+        add(treeOne, BorderLayout.LINE_START);
         add(textCodeArea, BorderLayout.CENTER);
     }
 
@@ -100,5 +106,9 @@ class CodeTextArea extends JPanel implements DocumentListener {
     public void removeUpdate(final DocumentEvent de) {
         lineCode.setText(getLinesOfText());
     }
-}
 
+    public void JTreePanelOne(String vals[]) {
+        options = vals;
+        treeOne = new JTree(options);
+    }
+}

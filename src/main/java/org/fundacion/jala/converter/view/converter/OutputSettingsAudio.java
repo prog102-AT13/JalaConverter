@@ -11,9 +11,8 @@
 package org.fundacion.jala.converter.view.converter;
 
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-import javax.swing.JComboBox;
-import javax.swing.JPanel;
-import javax.swing.JCheckBox;
+
+import javax.swing.*;
 import java.awt.Font;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -27,12 +26,8 @@ class OutputSettingsAudio extends JPanel {
     private JComboBox hzSelect;
     private JComboBox audioChannelSelect;
     private JCheckBox metadataOption;
-    private final int ALIGN_LABEL_STYLE = 2;
-    private final int WIDTH_LABEL_STYLE = 70;
-    private final int HEIGHT_LABEL_STYLE = 30;
     private final int DIMENSION_WIDTH = 70;
     private final int DIMENSION_HEIGHT = 30;
-    private final int FONT_STYLE = 0;
     private final int FONT_SIZE = 12;
     private final int GRID_LAYOUT_ROWS = 5;
     private final int GRID_LAYOUT_COLS = 2;
@@ -42,32 +37,29 @@ class OutputSettingsAudio extends JPanel {
     private final String QUALITY_320KBPS = "320";
 
     protected OutputSettingsAudio() {
-        JLabelStyle qualityLabel = new JLabelStyle("Select Quality (Kbps): ", "h3",
-                ALIGN_LABEL_STYLE, WIDTH_LABEL_STYLE, HEIGHT_LABEL_STYLE);
-        JLabelStyle volumeLabel = new JLabelStyle("Select Volume: ", "h3",
-                ALIGN_LABEL_STYLE, WIDTH_LABEL_STYLE, HEIGHT_LABEL_STYLE);
-        JLabelStyle hzLabel = new JLabelStyle("Select Frequency (Hz): ", "h3",
-                ALIGN_LABEL_STYLE, WIDTH_LABEL_STYLE, HEIGHT_LABEL_STYLE);
-        JLabelStyle audioChannelLabel = new JLabelStyle("Select Audio Channel: ", "h3",
-                ALIGN_LABEL_STYLE, WIDTH_LABEL_STYLE, HEIGHT_LABEL_STYLE);
+        JLabelStyle qualityLabel = new JLabelStyle("Select Quality (Kbps): ", "h4");
+        JLabelStyle volumeLabel = new JLabelStyle("Select Volume: ", "h4");
+        JLabelStyle hzLabel = new JLabelStyle("Select Frequency (Hz): ", "h4");
+        JLabelStyle audioChannelLabel = new JLabelStyle("Select Audio Channel: ", "h4");
         qualitySelect = new JComboBox();
-        qualitySelect.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
+        qualitySelect.setFont(new Font("Barlow", Font.PLAIN, FONT_SIZE));
         qualitySelect.setPreferredSize(new Dimension(DIMENSION_WIDTH, DIMENSION_HEIGHT));
         setQualitySelect();
         volumeSelect = new JComboBox();
-        volumeSelect.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
+        volumeSelect.setFont(new Font("Barlow", Font.PLAIN, FONT_SIZE));
         volumeSelect.setPreferredSize(new Dimension(DIMENSION_WIDTH, DIMENSION_HEIGHT));
         setVolumeSelect();
         hzSelect = new JComboBox();
-        hzSelect.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
+        hzSelect.setFont(new Font("Barlow", Font.PLAIN, FONT_SIZE));
         hzSelect.setPreferredSize(new Dimension(DIMENSION_WIDTH, DIMENSION_HEIGHT));
         setHzSelect();
         audioChannelSelect = new JComboBox();
-        audioChannelSelect.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
+        audioChannelSelect.setFont(new Font("Barlow", Font.PLAIN, FONT_SIZE));
         audioChannelSelect.setPreferredSize(new Dimension(DIMENSION_WIDTH, DIMENSION_HEIGHT));
         setAudioChannelSelect();
         metadataOption = new JCheckBox("With metadata");
-        metadataOption.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
+        metadataOption.setFont(new Font("Barlow", Font.PLAIN, FONT_SIZE));
+
         setLayout(new GridLayout(GRID_LAYOUT_ROWS, GRID_LAYOUT_COLS));
         add(qualityLabel.getTextLabel());
         add(qualitySelect);

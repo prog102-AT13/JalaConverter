@@ -14,9 +14,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.view.Models.CompileRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
-import javax.swing.JPanel;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -26,21 +26,30 @@ import java.awt.event.ActionListener;
 public class CompilerInterface extends JPanel {
     private static final Logger LOGGER = LogManager.getLogger();
     private Console consoleOutput;
-    private LanguageButtons langButtons;
+    private CompilerMainButtons langButtons;
     private CompilerButtons buttonsCompiler;
     private String token;
     private ProjectTab projectTab;
     private ClientRequest clientRequest = new ClientRequest();
     private int choose;
 
-    public CompilerInterface(final String newToken) {
-        token = newToken;
+    public CompilerInterface(/*final String newToken*/) {
+        //token = newToken;
         choose = 1;
         buttonsCompiler = new CompilerButtons();
         consoleOutput = new Console();
-        langButtons = new LanguageButtons();
+        langButtons = new CompilerMainButtons();
         langButtons.getJava().setEnabled(false);
         projectTab = new ProjectTab();
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setBorder(new EmptyBorder(15,15,15,15));
+        //setBackground(Color.WHITE);
+        add(langButtons);
+        add(projectTab);
+        add(buttonsCompiler);
+        add(consoleOutput);
+
+        /*
         setLayout(new GridBagLayout());
         GridBagConstraints panelConstraint = new GridBagConstraints();
         panelConstraint.weighty = 1;
@@ -50,9 +59,12 @@ public class CompilerInterface extends JPanel {
         panelConstraint.weighty = 0;
         add(buttonsCompiler, setConstraints(panelConstraint, 3, 7, 1, 2));
         add(consoleOutput, setConstraints(panelConstraint, 1, 8, 2, 4));
+        */
+
         buttonsCompiler.getRunButton().addActionListener(addListenerToRunButton());
         langButtons.getJava().addActionListener(addListenerToJavaButton());
         langButtons.getPython().addActionListener(addListenerToPythonButton());
+
     }
 
     /**
@@ -134,4 +146,3 @@ public class CompilerInterface extends JPanel {
         return actionListener;
     }
 }
-

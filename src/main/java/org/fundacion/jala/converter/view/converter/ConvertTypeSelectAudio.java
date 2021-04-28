@@ -33,8 +33,7 @@ public class ConvertTypeSelectAudio extends JPanel {
     private final int flowLayoutVgap = 10;
 
     protected ConvertTypeSelectAudio() {
-        JLabelStyle labelConvertTo = new JLabelStyle("Convert to: ", "h3",
-                alignLabelStyle, widthLabelStyle, heightLabelStyle);
+        JLabelStyle labelConvertTo = new JLabelStyle("Convert to: ", "h3");
         convertTo = new JComboBox();
         convertTo.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
         convertTo.setFont(new Font("Barlow", fontStyle, fontSize));

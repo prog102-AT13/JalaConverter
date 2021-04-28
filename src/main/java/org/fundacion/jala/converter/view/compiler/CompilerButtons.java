@@ -10,11 +10,10 @@
  */
 package org.fundacion.jala.converter.view.compiler;
 
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FlowLayout;
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,20 +23,19 @@ import java.awt.event.ActionListener;
 class CompilerButtons extends JPanel implements ActionListener {
     private JButton runCode;
     private JButton clearConsole;
-    private JButton selectFile;
     private final int DIMENSION_WIDTH = 80;
     private final int DIMENSION_HEIGHT = 20;
     private final int FONT_STYLE = 0;
     private final int FONT_SIZE = 11;
-    private final int HGAP = 15;
+    private final int HGAP = 10;
     private final int VGAP = 15;
 
     protected CompilerButtons() {
         runCode = makeButton("Run");
+        Icon buttonIcon = new ImageIcon("img/compilerBtn/BtnRunCode.png");
+        runCode.setIcon(buttonIcon);
         clearConsole = makeButton("Clear");
-        selectFile = makeButton("Open File");
         setLayout(new FlowLayout(FlowLayout.RIGHT, HGAP, VGAP));
-        add(selectFile);
         add(runCode);
         add(clearConsole);
     }
@@ -68,9 +66,17 @@ class CompilerButtons extends JPanel implements ActionListener {
      */
     public JButton makeButton(final String text) {
         JButton button = new JButton(text);
-        button.setPreferredSize(new Dimension(DIMENSION_WIDTH, DIMENSION_HEIGHT));
-        button.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
+        button.setFont(new Font("Barlow", Font.PLAIN, 12));
+        button.setPreferredSize(new Dimension(70, 20));
+        //button.setHorizontalAlignment(SwingConstants.LEFT);
+        //button.setHorizontalTextPosition(SwingConstants.RIGHT);
+
+        button.setOpaque(true);
+        button.setBackground(new Color(86,139,77));
+        button.setFocusPainted(false);
+        button.setForeground(Color.WHITE);
+        Border border = new LineBorder(Color.WHITE, 0);
+        button.setBorder(border);
         return button;
     }
 }
-

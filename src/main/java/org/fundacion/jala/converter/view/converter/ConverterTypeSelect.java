@@ -24,28 +24,21 @@ import java.awt.FlowLayout;
  */
 class ConverterTypeSelect extends JPanel {
     private JComboBox convertTo;
-    private final int alignLabelStyle = 2;
-    private final int widthLabelStyle = 70;
-    private final int heightLabelStyle = 30;
-    private final int dimensionWidth = 100;
-    private final int dimensionHeight = 30;
-    private final int fontStyle = 0;
-    private final int fontSize = 12;
-    private final int flowLayoutHgap = 10;
-    private final int flowLayoutVgap = 10;
+    private final int DIMENSION_WIDTH = 100;
+    private final int DIMENSION_HEIGHT = 30;
+    private final int FONT_SIZE = 12;
 
     protected ConverterTypeSelect() {
-        JLabelStyle labelConvertTo = new JLabelStyle("Convert to: ", "h3",
-                alignLabelStyle, widthLabelStyle, heightLabelStyle);
+        JLabelStyle labelConvertTo = new JLabelStyle("Convert to: ", "h3");
         convertTo = new JComboBox();
-        convertTo.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
-        convertTo.setFont(new Font("Barlow", fontStyle, fontSize));
+        convertTo.setPreferredSize(new Dimension(DIMENSION_WIDTH, DIMENSION_HEIGHT));
+        convertTo.setFont(new Font("Barlow", Font.PLAIN, FONT_SIZE));
         convertTo.addItem("AVI");
         convertTo.addItem("mp4");
         convertTo.addItem("mpeg");
         convertTo.addItem("mov");
         convertTo.addItem("wmv");
-        setLayout(new FlowLayout(FlowLayout.LEFT, flowLayoutHgap, flowLayoutVgap));
+        setLayout(new FlowLayout(FlowLayout.LEFT));
         add(labelConvertTo.getTextLabel());
         add(convertTo);
     }

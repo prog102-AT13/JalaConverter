@@ -39,10 +39,8 @@ class OutputSettings extends JPanel {
     private final int gridLayoutCols = 2;
 
     protected OutputSettings() {
-        JLabelStyle resolutionLabel = new JLabelStyle("Select resolution: ", "h3",
-                alignLabelStyle, widthLabelStyle, heightLabelStyle);
-        JLabelStyle frameLabel = new JLabelStyle("Select frame: ", "h3",
-                alignLabelStyle, widthLabelStyle, heightLabelStyle);
+        JLabelStyle resolutionLabel = new JLabelStyle("Select resolution: ", "h3");
+        JLabelStyle frameLabel = new JLabelStyle("Select frame: ", "h3");
         setResolutionSelect();
         resolutionComboBox.setFont(new Font("Barlow", fontStyle, fontSize));
         resolutionComboBox.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));

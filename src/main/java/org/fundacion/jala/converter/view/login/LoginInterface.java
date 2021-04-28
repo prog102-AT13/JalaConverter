@@ -141,7 +141,7 @@ public class LoginInterface extends JFrame implements ActionListener {
         }
         result = result.substring(8, result.length() - 2);
         this.dispose();
-        new MainInterface().initInterface(result);
+        //new MainInterface().initInterface(result);
     }
 
     /**

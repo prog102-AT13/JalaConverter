@@ -14,13 +14,16 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.view.Models.VideoRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
+import org.fundacion.jala.converter.view.utilities.BtnStyle;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
+import org.fundacion.jala.converter.view.utilities.SelectFile;
+
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -49,27 +52,48 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
     private String token;
     private String checksumLocal;
 
-    public VideoConverterInterface(final String newToken) {
-        token = newToken;
-        JLabelStyle videoTitle = new JLabelStyle("Select Video:", "h2",
-                alignLabelStyle, widthLabelStyle, heightLabelStyle);
+    public VideoConverterInterface(/*final String newToken*/) {
+        final int MARGIN_SPACE = 30;
+        final int MARGIN_BOTTOM_MAIN_CONTAINER = 200;
+        final int MARGIN_BOTTOM_BTN_CONTAINER = 100;
+        //token = newToken;
+        JLabelStyle videoTitle = new JLabelStyle("Select Video:", "h2");
         videoTitle.setAlignmentX(LEFT_ALIGNMENT);
         file = new SelectFile();
         file.setAlignmentX(LEFT_ALIGNMENT);
         menuConverterType = new ConverterTypeSelect();
         menuConverterType.setAlignmentX(LEFT_ALIGNMENT);
-        JButton converterVideoButton = new JButton("Convert");
+        BtnStyle converterVideoButton = new BtnStyle("Convert", 2);
         converterVideoButton.setFont(new Font("Barlow", fontStyle, fontSize));
         converterVideoButton.addActionListener(this::actionPerformed);
         settings = new OutputSettings();
         settings.setAlignmentX(LEFT_ALIGNMENT);
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBorder(new EmptyBorder(topBorder, leftBorder, bottomBorder, rightBorder));
-        add(videoTitle.getTextLabel());
-        add(file);
-        add(menuConverterType);
-        add(settings);
-        add(converterVideoButton);
+
+        JPanel btnContainer = new JPanel();
+        btnContainer.setLayout(new FlowLayout(FlowLayout.CENTER));
+        btnContainer.add(converterVideoButton);
+
+        JPanel container = new JPanel();
+        container.setBorder(new EmptyBorder(MARGIN_SPACE, 0, MARGIN_BOTTOM_BTN_CONTAINER, 0));
+        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+        container.add(file);
+        container.add(menuConverterType);
+        container.add(settings);
+
+        setLayout(new BorderLayout());
+        setBorder(new EmptyBorder(0, MARGIN_SPACE, MARGIN_BOTTOM_MAIN_CONTAINER, MARGIN_SPACE));
+        add(videoTitle.getTextLabel(), BorderLayout.NORTH);
+        add(container, BorderLayout.CENTER);
+        add(btnContainer, BorderLayout.SOUTH);
+
+
+        //setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        //setBorder(new EmptyBorder(topBorder, leftBorder, bottomBorder, rightBorder));
+        //add(videoTitle.getTextLabel());
+        //add(file);
+        //add(menuConverterType);
+        //add(settings);
+        //add(converterVideoButton);
     }
 
     /**

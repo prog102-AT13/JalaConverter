@@ -9,6 +9,7 @@
  */
 package org.fundacion.jala.converter;
 
+import org.fundacion.jala.converter.view.MainInterface;
 import org.fundacion.jala.converter.view.login.LoginInterface;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.SpringApplication;
@@ -28,7 +29,9 @@ public class ConverterApplication {
         LOGGER.info("start");
         SpringApplication.run(ConverterApplication.class, args);
         System.setProperty("java.awt.headless", "false");
-        SwingUtilities.invokeLater(LoginInterface::new);
+        MainInterface main = new MainInterface();
+        //SwingUtilities.invokeLater(LoginInterface::new);
+        main.initInterface();
         LOGGER.info("finish");
     }
 }

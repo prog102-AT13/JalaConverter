@@ -43,8 +43,7 @@ class QualityAudio extends JPanel implements ChangeListener {
     private final int qualitySliderMinorTickSpacing = 64;
 
     protected QualityAudio() {
-        JLabelStyle sliderTitle = new JLabelStyle("Select quality: ", "h2",
-                alignLabelStyle, widthLabelStyle, heightLabelStyle);
+        JLabelStyle sliderTitle = new JLabelStyle("Select quality: ", "h2");
         sliderTitle.setAlignmentX(LEFT_ALIGNMENT);
         qualitySlider = new JSlider(JSlider.HORIZONTAL, qualitySliderMin, qualitySliderMax, qualitySliderValue);
         qualitySlider.setPaintTrack(true);

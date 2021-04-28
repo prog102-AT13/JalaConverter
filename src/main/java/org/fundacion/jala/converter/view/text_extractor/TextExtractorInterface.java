@@ -14,17 +14,18 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.view.Models.ExtractTextRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
+import org.fundacion.jala.converter.view.utilities.BtnStyle;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
+import org.fundacion.jala.converter.view.utilities.SelectFile;
 import javax.swing.JPanel;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.BoxLayout;
 import javax.swing.border.EmptyBorder;
-import java.awt.Font;
+import java.awt.FlowLayout;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 
 /**
@@ -35,40 +36,31 @@ public class TextExtractorInterface extends JPanel implements ActionListener {
     private SelectLanguage languageSelect;
     private ClientRequest clientRequest = new ClientRequest();
     private final Logger LOGGER = LogManager.getLogger();
-    private final int ALIGN_LABEL_STYLE = 2;
-    private final int WIDTH_LABEL_STYLE = 70;
-    private final int HEIGHT_LABEL_STYLE = 30;
-    private final int TOP_BORDER = 40;
-    private final int LEFT_BORDER = 40;
-    private final int BOTTOM_BORDER = 100;
-    private final int RIGHT_BORDER = 0;
-    private final int FONT_STYLE = 0;
-    private final int FONT_SIZE = 12;
     private String token;
 
-    public TextExtractorInterface(final String newToken) {
-        token = newToken;
-        JLabelStyle audioTitle = new JLabelStyle("Text extractor", "h1",
-                ALIGN_LABEL_STYLE, WIDTH_LABEL_STYLE, HEIGHT_LABEL_STYLE);
-        JLabelStyle audioSettings = new JLabelStyle("Image settings", "h1",
-                ALIGN_LABEL_STYLE, WIDTH_LABEL_STYLE, HEIGHT_LABEL_STYLE);
-        audioTitle.setAlignmentX(LEFT_ALIGNMENT);
-        audioSettings.setAlignmentX(LEFT_ALIGNMENT);
-        JButton convertAudio = new JButton("Extract");
-        convertAudio.setAlignmentX(LEFT_ALIGNMENT);
-        convertAudio.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
-        convertAudio.addActionListener(this::actionPerformed);
+    public TextExtractorInterface(/*final String newToken*/) {
+        final int MARGIN_SPACE = 30;
+        final int MARGIN_BOTTOM_MAIN_CONTAINER = 200;
+        final int MARGIN_BOTTOM_BTN_CONTAINER = 200;
+        //token = newToken;
+        JLabelStyle lblTxtExtractor = new JLabelStyle("Text extractor", "h2");
+        BtnStyle convertTxtExtract = new BtnStyle("Extract", 2);
+        convertTxtExtract.addActionListener(this::actionPerformed);
         file = new SelectFile();
-        file.setAlignmentX(LEFT_ALIGNMENT);
         languageSelect = new SelectLanguage();
-        languageSelect.setAlignmentX(LEFT_ALIGNMENT);
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBorder(new EmptyBorder(TOP_BORDER, LEFT_BORDER, BOTTOM_BORDER, RIGHT_BORDER));
-        add(audioTitle.getTextLabel());
-        add(file);
-        add(audioSettings.getTextLabel());
-        add(languageSelect);
-        add(convertAudio);
+        JPanel btnContainer = new JPanel();
+        btnContainer.setLayout(new FlowLayout(FlowLayout.CENTER));
+        btnContainer.add(convertTxtExtract);
+        JPanel container = new JPanel();
+        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+        container.add(file);
+        container.add(languageSelect);
+        container.setBorder(new EmptyBorder(MARGIN_SPACE, 0, MARGIN_BOTTOM_BTN_CONTAINER, 0));
+        setLayout(new BorderLayout());
+        setBorder(new EmptyBorder(0, MARGIN_SPACE, MARGIN_BOTTOM_MAIN_CONTAINER, MARGIN_SPACE));
+        add(lblTxtExtractor.getTextLabel(), BorderLayout.NORTH);
+        add(container, BorderLayout.CENTER);
+        add(btnContainer, BorderLayout.SOUTH);
     }
 
     /**

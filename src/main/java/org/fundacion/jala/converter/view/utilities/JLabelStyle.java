@@ -21,20 +21,18 @@ import java.awt.Dimension;
  */
 public class JLabelStyle extends JLabel {
     private JLabel textLabel;
-    private final int FONT_STYLE_TITLE = 1;
-    private final int FONT_SIZE_TITLE = 18;
-    private final int FONT_STYLE_SUBTITLE = 1;
-    private final int FONT_SIZE_SUBTITLE = 16;
-    private final int FONT_STYLE_CONTENT = 0;
-    private final int FONT_SIZE_CONTENT = 12;
 
-    public JLabelStyle(final String text, final String type, final int align, final int width, final int height) {
+    public JLabelStyle(final String text, final String type) {
         if (type == "h1") {
-            setTitle(text, align, width, height);
+            setTitle(text);
         } else if (type == "h2") {
-            setSubtitle(text, align, width, height);
+            setSubtitle(text);
         } else if (type == "h3") {
-            setContent(text, align, width, height);
+            setSecondSubtitle(text);
+        } else if (type == "h4") {
+            setContent(text);
+        } else if (type == "h5") {
+            setFooter(text);
         }
     }
 
@@ -42,63 +40,55 @@ public class JLabelStyle extends JLabel {
      * Sets JLabel format for Titles.
      *
      * @param text String to format.
-     * @param align Align the text 0 center, 1 right, 2 left (defect).
-     * @param width Width size of the JLabel.
-     * @param height Height size of the JLabel.
      */
-    private void setTitle(final String text, final int align, final int width, final int height) {
-        if (align == 0) {
-            this.textLabel = new JLabel(text, SwingConstants.CENTER);
-        } else if (align == 1) {
-            this.textLabel =  new JLabel(text, SwingConstants.RIGHT);
-        } else if (align == 2) {
-            this.textLabel = new JLabel(text);
-        }
-        textLabel.setFont(new Font("Barlow", FONT_STYLE_TITLE, FONT_SIZE_TITLE));
+    private void setTitle(final String text) {
+        textLabel = new JLabel(text, SwingConstants.CENTER);
+        textLabel.setFont(new Font("Barlow", Font.BOLD, 20));
         textLabel.setForeground(Color.DARK_GRAY);
-        textLabel.setPreferredSize(new Dimension(width, height));
     }
 
     /**
      * Sets JLabel format for Subtitles.
      *
      * @param text String to format.
-     * @param align Align the text 0 center, 1 right, 2 left (defect).
-     * @param width Width size of the JLabel.
-     * @param height Height size of the JLabel.
      */
-    private void setSubtitle(final String text, final int align, final int width, final int height) {
-        if (align == 0) {
-            this.textLabel = new JLabel(text, SwingConstants.CENTER);
-        } else if (align == 1) {
-            this.textLabel =  new JLabel(text, SwingConstants.RIGHT);
-        } else {
-            this.textLabel = new JLabel(text);
-        }
-        textLabel.setFont(new Font("Barlow", FONT_STYLE_SUBTITLE, FONT_SIZE_SUBTITLE));
+    private void setSubtitle(final String text) {
+        textLabel = new JLabel(text, SwingConstants.CENTER);
+        textLabel.setFont(new Font("Barlow", Font.BOLD, 16));
         textLabel.setForeground(Color.DARK_GRAY);
-        textLabel.setPreferredSize(new Dimension(width, height));
+    }
+
+    /**
+     * Sets JLabel format for Second Subtitle Text.
+     *
+     * @param text String to format.
+     */
+    private void setSecondSubtitle(final String text) {
+        textLabel = new JLabel(text, SwingConstants.LEFT);
+        textLabel.setFont(new Font("Barlow", Font.BOLD, 12));
+        textLabel.setForeground(Color.DARK_GRAY);
     }
 
     /**
      * Sets JLabel format for General Text.
      *
      * @param text String to format.
-     * @param align Align the text 0 center, 1 right, 2 left (defect).
-     * @param width Width size of the JLabel.
-     * @param height Height size of the JLabel.
      */
-    private void setContent(final String text, final int align, final int width, final int height) {
-        if (align == 0) {
-            this.textLabel = new JLabel(text, SwingConstants.CENTER);
-        } else if (align == 1) {
-            this.textLabel =  new JLabel(text, SwingConstants.RIGHT);
-        } else {
-            this.textLabel = new JLabel(text);
-        }
-        textLabel.setFont(new Font("Barlow", FONT_STYLE_CONTENT, FONT_SIZE_CONTENT));
+    private void setContent(final String text) {
+        textLabel = new JLabel(text, SwingConstants.LEFT);
+        textLabel.setFont(new Font("Barlow", Font.PLAIN, 12));
         textLabel.setForeground(Color.DARK_GRAY);
-        textLabel.setPreferredSize(new Dimension(width, height));
+    }
+
+    /**
+     * Sets JLabel format for footer Text.
+     *
+     * @param text String to format.
+     */
+    private void setFooter(final String text) {
+        textLabel = new JLabel(text, SwingConstants.CENTER);
+        textLabel.setFont(new Font("Barlow", Font.PLAIN, 10));
+        textLabel.setForeground(Color.DARK_GRAY);
     }
 
     /**

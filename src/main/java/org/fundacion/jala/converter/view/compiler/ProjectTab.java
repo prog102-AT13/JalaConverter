@@ -10,13 +10,10 @@
  */
 package org.fundacion.jala.converter.view.compiler;
 
-import javax.swing.JTabbedPane;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -35,6 +32,10 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
         CodeTextArea codeArea = new CodeTextArea();
         codeArea.setName("Main");
         add(codeArea);
+        setFont(new Font("Barlow", Font.PLAIN, 12));
+        setOpaque(false);
+        setBackground(Color.LIGHT_GRAY);
+        setBorder(null);
         setTabComponentAt(getTabCount() - 1, createTabHeaderWithTitle("Main"));
         start();
     }
@@ -44,11 +45,25 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
      */
     public void start() {
         setFont(new Font("Barlow", 0, sizeFont));
-        button = new PlusButton();
-        button.setPreferredSize(new Dimension(dimension, dimension));
-        button.addActionListener(this);
+        ImageIcon addIcon = new ImageIcon("img/compilerBtn/BtnAddTab.png");
+        JButton addBtn = new JButton(addIcon);
+
+
+        addBtn.setOpaque(true);
+        addBtn.setBackground(null);
+        addBtn.setFocusPainted(false);
+        Border border = new LineBorder(Color.WHITE, 0);
+        addBtn.setBorder(border);
+        addBtn.addActionListener(this);
+
+
+        //button = new PlusButton();
+        //button.setPreferredSize(new Dimension(dimension, dimension));
+        //button.addActionListener(this);
+
+
         add(new JPanel());
-        setTabComponentAt(getTabCount() - 1, button);
+        setTabComponentAt(getTabCount() - 1, addBtn);
         counter = 0;
         addMouseListener(new MouseAdapter() {
             @Override
@@ -108,14 +123,24 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
      * @return a JPanel with complete title.
      */
     public JPanel createTabHeader(final String title) {
-        CloseButton tabButton = new CloseButton();
-        tabButton.setPreferredSize(new Dimension(dimension, dimension));
-        tabButton.addActionListener(e1 -> {
+
+        ImageIcon addIcon = new ImageIcon("img/compilerBtn/BtnCloseTab.png");
+        JButton closeBtn = new JButton(addIcon);
+
+        closeBtn.setOpaque(true);
+        closeBtn.setBackground(Color.WHITE);
+        closeBtn.setFocusPainted(false);
+        Border border = new LineBorder(Color.WHITE, 0);
+        closeBtn.setBorder(border);
+
+        //CloseButton tabButton = new CloseButton();
+        //tabButton.setPreferredSize(new Dimension(dimension, dimension));
+        closeBtn.addActionListener(e1 -> {
             removeTab(title);
             setSelectedIndex(getTabCount() - 2);
         });
         JPanel tabHeader = createTabHeaderWithTitle(title);
-        tabHeader.add(tabButton);
+        tabHeader.add(closeBtn);
         return tabHeader;
     }
 
@@ -153,4 +178,3 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
         }
     }
 }
-
