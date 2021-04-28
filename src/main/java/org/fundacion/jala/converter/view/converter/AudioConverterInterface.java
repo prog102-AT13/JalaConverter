@@ -15,11 +15,9 @@ import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import org.fundacion.jala.converter.view.Models.AudioRequestForm;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.BoxLayout;
-import javax.swing.JOptionPane;
-import java.awt.Font;
+
+import javax.swing.*;
+import java.awt.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -49,6 +47,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
     private final int FONT_SIZE = 12;
     private String token;
     private String checksumLocal;
+    private JLabel label;
 
     public AudioConverterInterface(final String newToken) {
         token = newToken;
@@ -72,12 +71,17 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         setBorder(new EmptyBorder(TOP_BORDER, LEFT_BORDER, BOTTOM_BORDER, RIGHT_BORDER));
         settings = new OutputSettingsAudio();
         settings.setAlignmentX(LEFT_ALIGNMENT);
+        ImageIcon icon = new ImageIcon("img/loading.gif");
+        label = new JLabel();
+        label.setIcon(new ImageIcon(icon.getImage()));
+        label.setVisible(false);
         add(audioTitle.getTextLabel());
         add(file);
         add(audioSettings.getTextLabel());
         add(audioSelect);
         add(settings);
         add(convertAudio);
+        add(label);
     }
 
     /**
@@ -88,15 +92,20 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(final ActionEvent e) {
         LOGGER.info("start");
+        label.setVisible(true);
         try {
             LOGGER.info("Execute Try");
             checksumLocal = getFileChecksum(file.getOriginFilePath());
-            JOptionPane.showMessageDialog(this, "File Path: " + file.getOriginFilePath()
+            int option = JOptionPane.showConfirmDialog(this, "File Path: " + file.getOriginFilePath()
                     + "\nConvert to: " + audioSelect.getConvertTo() + "\nQuality: " + settings.getQuality()
                     + "\nVolume: " + settings.getVolume() + "\nAudio Channel: " + settings.getAudioChannel()
                     + "\nHz: " + settings.getHz() + "\nwith metadata: " + settings.isMetadata() + "\nChecksum: "
-                    + checksumLocal);
-            callRequest();
+                    + checksumLocal, "Message confirm", JOptionPane.YES_NO_OPTION);
+            if (option == 0) {
+                callRequest();
+            } else {
+                label.setVisible(false);
+            }
             LOGGER.info("finish");
         } catch (IOException ioException) {
             ioException.printStackTrace();
@@ -120,7 +129,8 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
             AudioRequestForm audioRequestForm = new AudioRequestForm();
             audioRequestForm.addFilepath(file.getOriginFilePath());
             audioRequestForm.addFormat(audioSelect.getConvertTo());
-            audioRequestForm.addBitrate(settings.getQuality());
+            String getNumberQuality [] = settings.getQuality().split(" ");
+            audioRequestForm.addBitrate(getNumberQuality[0]);
             audioRequestForm.addVolume(settings.getVolume());
             audioRequestForm.addHz(settings.getHz());
             audioRequestForm.addAudiochannel(settings.getAudioChannel());
@@ -130,6 +140,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
             clientRequest.downloadFile(result);
             JOptionPane.showMessageDialog(this, "Download in :\n"
                     + System.getProperty("user.home") + dotenv.get("DIR_DOWNLOAD"));
+            label.setVisible(false);
             System.out.println(result);
             LOGGER.info("finish");
         } catch (IOException ioException) {
@@ -137,5 +148,20 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
             LOGGER.error("Execute Exception");
         }
         LOGGER.info("Finish");
+    }
+    public class _charge implements Runnable {
+        public void show() {
+            new Thread(this).start();
+        }
+        public void run() {
+
+            try {
+                callRequest();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        }
     }
 }
