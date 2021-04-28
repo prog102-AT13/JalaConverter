@@ -22,42 +22,55 @@ import java.awt.GridLayout;
  * This class defines the interface for output settings for audio to convert.
  */
 class OutputSettingsAudio extends JPanel {
+    private JComboBox qualitySelect;
     private JComboBox volumeSelect;
     private JComboBox hzSelect;
     private JComboBox audioChannelSelect;
     private JCheckBox metadataOption;
-    private final int alignLabelStyle = 2;
-    private final int widthLabelStyle = 70;
-    private final int heightLabelStyle = 30;
-    private final int dimensionWidth = 70;
-    private final int dimensionHeight = 30;
-    private final int fontStyle = 0;
-    private final int fontSize = 12;
-    private final int gridLayoutRows = 4;
-    private final int gridLayoutCols = 2;
+    private final int ALIGN_LABEL_STYLE = 2;
+    private final int WIDTH_LABEL_STYLE = 70;
+    private final int HEIGHT_LABEL_STYLE = 30;
+    private final int DIMENSION_WIDTH = 70;
+    private final int DIMENSION_HEIGHT = 30;
+    private final int FONT_STYLE = 0;
+    private final int FONT_SIZE = 12;
+    private final int GRID_LAYOUT_ROWS = 5;
+    private final int GRID_LAYOUT_COLS = 2;
+    private final String QUALITY_64KBPS = "64";
+    private final String QUALITY_128KBPS = "128";
+    private final String QUALITY_192KBPS = "192";
+    private final String QUALITY_320KBPS = "320";
 
     protected OutputSettingsAudio() {
+        JLabelStyle qualityLabel = new JLabelStyle("Select Quality (Kbps): ", "h3",
+                ALIGN_LABEL_STYLE, WIDTH_LABEL_STYLE, HEIGHT_LABEL_STYLE);
         JLabelStyle volumeLabel = new JLabelStyle("Select Volume: ", "h3",
-                alignLabelStyle, widthLabelStyle, heightLabelStyle);
-        JLabelStyle hzLabel = new JLabelStyle("Select Hz: ", "h3",
-                alignLabelStyle, widthLabelStyle, heightLabelStyle);
+                ALIGN_LABEL_STYLE, WIDTH_LABEL_STYLE, HEIGHT_LABEL_STYLE);
+        JLabelStyle hzLabel = new JLabelStyle("Select Frequency (Hz): ", "h3",
+                ALIGN_LABEL_STYLE, WIDTH_LABEL_STYLE, HEIGHT_LABEL_STYLE);
         JLabelStyle audioChannelLabel = new JLabelStyle("Select Audio Channel: ", "h3",
-                alignLabelStyle, widthLabelStyle, heightLabelStyle);
+                ALIGN_LABEL_STYLE, WIDTH_LABEL_STYLE, HEIGHT_LABEL_STYLE);
+        qualitySelect = new JComboBox();
+        qualitySelect.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
+        qualitySelect.setPreferredSize(new Dimension(DIMENSION_WIDTH, DIMENSION_HEIGHT));
+        setQualitySelect();
         volumeSelect = new JComboBox();
-        volumeSelect.setFont(new Font("Barlow", fontStyle, fontSize));
-        volumeSelect.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
+        volumeSelect.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
+        volumeSelect.setPreferredSize(new Dimension(DIMENSION_WIDTH, DIMENSION_HEIGHT));
         setVolumeSelect();
         hzSelect = new JComboBox();
-        hzSelect.setFont(new Font("Barlow", fontStyle, fontSize));
-        hzSelect.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
+        hzSelect.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
+        hzSelect.setPreferredSize(new Dimension(DIMENSION_WIDTH, DIMENSION_HEIGHT));
         setHzSelect();
         audioChannelSelect = new JComboBox();
-        audioChannelSelect.setFont(new Font("Barlow", fontStyle, fontSize));
-        audioChannelSelect.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
+        audioChannelSelect.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
+        audioChannelSelect.setPreferredSize(new Dimension(DIMENSION_WIDTH, DIMENSION_HEIGHT));
         setAudioChannelSelect();
         metadataOption = new JCheckBox("With metadata");
-        metadataOption.setFont(new Font("Barlow", fontStyle, fontSize));
-        setLayout(new GridLayout(gridLayoutRows, gridLayoutCols));
+        metadataOption.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
+        setLayout(new GridLayout(GRID_LAYOUT_ROWS, GRID_LAYOUT_COLS));
+        add(qualityLabel.getTextLabel());
+        add(qualitySelect);
         add(volumeLabel.getTextLabel());
         add(volumeSelect);
         add(hzLabel.getTextLabel());
@@ -68,11 +81,22 @@ class OutputSettingsAudio extends JPanel {
     }
 
     /**
+     * Sets all possible quality for Audio converter.
+     */
+    protected void setQualitySelect() {
+        qualitySelect.addItem("");
+        qualitySelect.addItem(QUALITY_64KBPS);
+        qualitySelect.addItem(QUALITY_128KBPS);
+        qualitySelect.addItem(QUALITY_192KBPS);
+        qualitySelect.addItem(QUALITY_320KBPS);
+        qualitySelect.setSelectedIndex(2);
+    }
+
+    /**
      * Sets all possible volume for Audio converter.
      */
     protected void setVolumeSelect() {
-        volumeSelect.addItem(" ");
-        volumeSelect.addItem("1");
+        volumeSelect.addItem("");
         volumeSelect.addItem("2");
         volumeSelect.addItem("3");
         volumeSelect.addItem("4");
@@ -102,6 +126,15 @@ class OutputSettingsAudio extends JPanel {
         audioChannelSelect.addItem("5.1");
         audioChannelSelect.addItem("6.1");
         audioChannelSelect.addItem("7.1");
+    }
+
+    /**
+     * Gets selected quality for Audio converter.
+     *
+     * @return a String, option selected of quality.
+     */
+    protected String getQuality() {
+        return qualitySelect.getSelectedItem().toString();
     }
 
     /**

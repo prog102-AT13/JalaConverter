@@ -18,10 +18,10 @@ import java.util.List;
  */
 public class ProjectRequestForm implements IRequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
-    private final String url = "http://localhost:8080/api/makeProject";
-    private final String projectId = "projectID";
-    private final String projectName = "projectName";
-    private final String type = "type";
+    private final String URL = "http://localhost:8080/api/makeProject";
+    private final String PROJECT_ID = "projectID";
+    private final String PROJECT_NANE = "projectName";
+    private final String TYPE = "type";
 
     public ProjectRequestForm() {
     }
@@ -32,7 +32,7 @@ public class ProjectRequestForm implements IRequestForm {
      * @param id is project id.
      */
     public void addProjectId(final String id) {
-        addParameters(new Parameter(projectId, id, false));
+        addParameters(new Parameter(PROJECT_ID, id, false));
     }
 
     /**
@@ -41,7 +41,7 @@ public class ProjectRequestForm implements IRequestForm {
      * @param name is project name.
      */
     public void addProjectName(final String name) {
-        addParameters(new Parameter(projectName, name, false));
+        addParameters(new Parameter(PROJECT_NANE, name, false));
     }
 
     /**
@@ -50,13 +50,13 @@ public class ProjectRequestForm implements IRequestForm {
      * @param projectType represents what kind of files project has.
      */
     public void addType(final String projectType) {
-        addParameters(new Parameter(type, projectType, false));
+        addParameters(new Parameter(TYPE, projectType, false));
     }
 
     /**
      * Gets the body parameters.
      *
-     * @return a list that contains all parameters of project.
+     * @return a List<Parameter> that contains all parameters of project.
      */
     @Override
     public List<Parameter> getBodyParameters() {
@@ -76,11 +76,11 @@ public class ProjectRequestForm implements IRequestForm {
     /**
      * Gets the url.
      *
-     * @return the url of project.
+     * @return a String with the project's url.
      */
     @Override
     public String getURL() {
-        return url;
+        return URL;
     }
 }
 

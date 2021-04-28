@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Paola Aguilar Quiñones
+ * @author Paola Ximena Aguilar Quiñones
  */
 package org.fundacion.jala.converter.view.compiler;
 
@@ -44,6 +44,7 @@ class CompilerButtons extends JPanel implements ActionListener {
 
     /**
      * Selects a file (Action of JButton).
+     *
      * @param e event of the JButton.
      */
     @Override
@@ -52,16 +53,18 @@ class CompilerButtons extends JPanel implements ActionListener {
 
     /**
      * Gets runCode to manipulate.
-     * @return a JButton.
+     *
+     * @return a JButton to run the compiler.
      */
     public JButton getRunButton() {
-        return  runCode;
+        return runCode;
     }
 
     /**
      * Makes a custom button.
+     *
      * @param text represents title that the button has.
-     * @return a JButton.
+     * @return a JButton to run the compiler.
      */
     public JButton makeButton(final String text) {
         JButton button = new JButton(text);
