@@ -83,12 +83,11 @@ class OutputSettingsAudio extends JPanel {
      * Sets all possible quality for Audio converter.
      */
     protected void setQualitySelect() {
-        qualitySelect.addItem("");
         qualitySelect.addItem(QUALITY_64KBPS);
         qualitySelect.addItem(QUALITY_128KBPS);
         qualitySelect.addItem(QUALITY_192KBPS);
         qualitySelect.addItem(QUALITY_320KBPS);
-        qualitySelect.setSelectedIndex(2);
+        qualitySelect.setSelectedIndex(1);
     }
 
     /**
