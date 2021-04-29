@@ -75,7 +75,7 @@ public class SwaggerConfig {
      */
     private ApiInfo apiDetails() {
         return new ApiInfo(
-                "Jala Converter",
+                "PaoPao's Application",
                 "Application that provides the following services:\n"
                         + "\t• Convert audio files.\n"
                         + "\t• Convert video files.\n"
