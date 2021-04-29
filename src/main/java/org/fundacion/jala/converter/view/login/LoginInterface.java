@@ -13,6 +13,7 @@ package org.fundacion.jala.converter.view.login;
 import org.fundacion.jala.converter.view.MainInterface;
 import org.fundacion.jala.converter.view.Models.AuthenticateRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
+import org.fundacion.jala.converter.view.utilities.BtnStyle;
 import org.springframework.security.authentication.BadCredentialsException;
 
 import javax.swing.*;
@@ -33,32 +34,32 @@ import java.io.IOException;
 public class LoginInterface extends JFrame implements ActionListener {
     private final JLabel USERNAME_LABEL = new JLabel("Username: ");
     private final JLabel PASSWORD_LABEL = new JLabel("Password: ");
-    private final JTextField USERNAME_TEXT_FIELD = new JTextField(15);
-    private final JPasswordField PASSWORD_FIELD = new JPasswordField(15);
+    private final JTextField USERNAME_TEXT_FIELD = new JTextField(19);
+    private final JPasswordField PASSWORD_FIELD = new JPasswordField(19);
     private final Icon EYE_ICON = new ImageIcon("img/EyeIcon.png");
-    private final JButton LOGIN_BUTTON = new JButton("Login");
+    private final BtnStyle LOGIN_BUTTON = new BtnStyle("Login", 3);
     private final JButton SHOW_PASSWORD_BUTTON = new JButton(EYE_ICON);
-    private final JButton REGISTER_BUTTON = new JButton("Register");
+    private JButton CLOSE_BTN;
+    private final BtnStyle REGISTER_BUTTON = new BtnStyle("Register", 4);
     private final ClientRequest CLIENT_REQUEST = new ClientRequest();
     private final int LOGIN_X_POSITION = 500;
     private final int LOGIN_Y_POSITION = 200;
     private final int LOGIN_WIDTH = 400;
     private final int LOGIN_HEIGHT = 250;
     private final int MARGIN_SPACE = 50;
-    private final int VERTICAL_SPACE_FLOW = 15;
-    private final int HORIZONTAL_SPACE_FLOW = 10;
+    private final int VERTICAL_SPACE_FLOW = 10;
+    private final int HORIZONTAL_SPACE_FLOW = 5;
     private Boolean passwordShowStatus = true;
 
     public LoginInterface() {
         ImageIcon image = new ImageIcon("img/loginImg.png");
         JLabel loginImg = new JLabel(image);
-        setProperties();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(LOGIN_X_POSITION, LOGIN_Y_POSITION, LOGIN_WIDTH, LOGIN_HEIGHT);
         setUndecorated(true);
         setMinimumSize(new Dimension(LOGIN_WIDTH, LOGIN_HEIGHT));
         JPanel userPanel = new JPanel();
-        userPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        userPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         userPanel.setBorder(new EmptyBorder(0, MARGIN_SPACE, 0, MARGIN_SPACE));
         userPanel.setLayout(new FlowLayout(FlowLayout.LEFT, HORIZONTAL_SPACE_FLOW, VERTICAL_SPACE_FLOW));
         userPanel.add(USERNAME_LABEL);
@@ -70,6 +71,7 @@ public class LoginInterface extends JFrame implements ActionListener {
         passPanel.setBackground(Color.DARK_GRAY);
         passPanel.add(PASSWORD_LABEL);
         passPanel.add(PASSWORD_FIELD);
+        passPanel.add(SHOW_PASSWORD_BUTTON);
         JPanel btnPanel = new JPanel();
         btnPanel.setBorder(new EmptyBorder(0, MARGIN_SPACE, 0, MARGIN_SPACE));
         btnPanel.setLayout(new FlowLayout(FlowLayout.CENTER, HORIZONTAL_SPACE_FLOW, VERTICAL_SPACE_FLOW));
@@ -79,12 +81,14 @@ public class LoginInterface extends JFrame implements ActionListener {
         JPanel container = new JPanel();
         container.setLayout(new FlowLayout(FlowLayout.RIGHT));
         container.setBackground(Color.DARK_GRAY);
-        container.add(new JButton(new AbstractAction("X") {
+        CLOSE_BTN = new JButton(new AbstractAction("X") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
-        }));
+        });
+        container.add(CLOSE_BTN);
+        setProperties();
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.add(container);
@@ -102,7 +106,9 @@ public class LoginInterface extends JFrame implements ActionListener {
      */
     public void setProperties() {
         USERNAME_LABEL.setForeground(Color.WHITE);
+        USERNAME_LABEL.setFont(new Font("Barlow", Font.PLAIN, 12));
         PASSWORD_LABEL.setForeground(Color.WHITE);
+        PASSWORD_LABEL.setFont(new Font("Barlow", Font.PLAIN, 12));
         USERNAME_TEXT_FIELD.setFont(new Font("Barlow", Font.PLAIN, 12));
         USERNAME_TEXT_FIELD.setForeground(Color.DARK_GRAY);
         PASSWORD_FIELD.setForeground(Color.DARK_GRAY);
@@ -110,23 +116,18 @@ public class LoginInterface extends JFrame implements ActionListener {
         LOGIN_BUTTON.addActionListener(this);
         SHOW_PASSWORD_BUTTON.addActionListener(this);
         REGISTER_BUTTON.addActionListener(this);
-
-        LOGIN_BUTTON.setFont(new Font("Barlow", Font.PLAIN, 12));
-        LOGIN_BUTTON.setPreferredSize(new Dimension(100, 30));
-        LOGIN_BUTTON.setOpaque(true);
-        LOGIN_BUTTON.setBackground(new Color(242, 156, 85));
-        LOGIN_BUTTON.setFocusPainted(false);
-        LOGIN_BUTTON.setForeground(Color.WHITE);
+        CLOSE_BTN.setFont(new Font("Barlow", Font.BOLD, 12));
+        CLOSE_BTN.setOpaque(true);
+        CLOSE_BTN.setFocusPainted(false);
+        CLOSE_BTN.setBackground(null);
+        CLOSE_BTN.setForeground(Color.WHITE);
         Border border = new LineBorder(Color.WHITE, 0);
-        LOGIN_BUTTON.setBorder(border);
-
-        REGISTER_BUTTON.setFont(new Font("Barlow", Font.PLAIN, 12));
-        REGISTER_BUTTON.setPreferredSize(new Dimension(100, 30));
-        REGISTER_BUTTON.setOpaque(true);
-        REGISTER_BUTTON.setBackground(new Color(198, 198, 198));
-        REGISTER_BUTTON.setFocusPainted(false);
-        REGISTER_BUTTON.setForeground(Color.DARK_GRAY);
-        REGISTER_BUTTON.setBorder(border);
+        CLOSE_BTN.setBorder(border);
+        SHOW_PASSWORD_BUTTON.setPreferredSize(new Dimension(20, 20));
+        SHOW_PASSWORD_BUTTON.setOpaque(true);
+        SHOW_PASSWORD_BUTTON.setFocusPainted(false);
+        SHOW_PASSWORD_BUTTON.setBackground(null);
+        SHOW_PASSWORD_BUTTON.setBorder(border);
     }
 
     /**
