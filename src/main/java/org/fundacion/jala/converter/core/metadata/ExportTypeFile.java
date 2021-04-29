@@ -78,9 +78,10 @@ public class ExportTypeFile {
         for (int i = spellName.length - 1; i >= 0; i--) {
             if (spellName[i] == '.' && !write) {
                 write = true;
-            }
-            if (write) {
-                name = spellName[i] + name;
+            } else {
+                if (write) {
+                    name = spellName[i] + name;
+                }
             }
         }
         nameFileExport = name;
