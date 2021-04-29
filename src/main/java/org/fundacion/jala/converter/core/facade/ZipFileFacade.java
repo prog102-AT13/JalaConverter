@@ -73,7 +73,6 @@ public class ZipFileFacade {
         String storagePath = parameterOutputChecksum.getOutputFilename();
         int resultTitleSize = parameterOutputChecksum.getResultTitleSize();
         String filename = parameterOutputChecksum.getFileName();
-        final int WAIT_TIME = 1000;
         String nameWithoutExtension = outputFilename.substring(0, outputFilename.lastIndexOf(".") + 1);
         String pathFile = storagePath.substring(0, storagePath.lastIndexOf(System.getProperty("file.separator")) + 1);
         if (!(resultTitleSize > 0)) {
@@ -96,7 +95,7 @@ public class ZipFileFacade {
     private static void createZip(final boolean metadata, final boolean thumbnail, final String pathFile,
                                   final String outputFilename, final String nameWithoutExtension)
             throws InterruptedException, IOException {
-        final int WAIT_TIME = 6000;
+        final int WAIT_TIME = 1000;
         if (!metadata && !thumbnail) {
             Thread.sleep(WAIT_TIME);
             zipFile(pathFile + outputFilename, pathFile + nameWithoutExtension + "zip");
@@ -113,7 +112,12 @@ public class ZipFileFacade {
         Thread.sleep(WAIT_TIME);
         zipFiles(zipList, pathFile + nameWithoutExtension + "zip");
         Thread.sleep(WAIT_TIME);
+        boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
         RunCommand runCommand = new RunCommand();
-        zipList.stream().forEach(value -> runCommand.run("rm \"" + value + "\""));
+        if (isWindows) {
+            zipList.stream().forEach(value -> runCommand.run("del \"" + value + "\""));
+        } else {
+            zipList.stream().forEach(value -> runCommand.run("rm \"" + value + "\""));
+        }
     }
 }
