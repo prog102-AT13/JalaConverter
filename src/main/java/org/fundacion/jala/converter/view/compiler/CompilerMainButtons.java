@@ -10,10 +10,17 @@
  */
 package org.fundacion.jala.converter.view.compiler;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Dimension;
+import java.awt.Insets;
 
 /**
  *  * This class customizes a panel with custom buttons to change language.
@@ -23,15 +30,13 @@ class CompilerMainButtons extends JPanel {
     private JButton python;
     private JButton newProject;
     private JButton uploadFile;
-    private final int MAXIMUM_SIZE_WIDTH = 50;
-    private final int MAXIMUM_SIZE_HEIGHT = 50;
-    private final int PREFERRED_SIZE_WIDTH = 70;
-    private final int PREFERRED_SIZE_HEIGHT = 30;
-    private final int FONT_STYLE = 0;
-    private final int FONT_SIZE = 11;
+    private final int WIDTH_BTN = 110;
+    private final int HEIGHT_BTN = 25;
+    private final int MARGIN = 10;
+    private final int FONT_SIZE_12 = 12;
+    private final Color BLUE_COLOR = new Color(67, 116, 171);
 
     protected CompilerMainButtons() {
-        //setPreferredSize(new Dimension(PREFERRED_SIZE_WIDTH, PREFERRED_SIZE_HEIGHT));
         newProject = createButton("New Project", "BtnCompilerProject.png");
         uploadFile = createButton("Open File", "BtnCompilerProject.png");
         java = createButton("Java", "BtnCompilerJava.png");
@@ -69,22 +74,19 @@ class CompilerMainButtons extends JPanel {
      */
     public JButton createButton(final String text, String icon) {
         ImageIcon btnIcon = new ImageIcon("img/compilerBtn/" + icon);
-
         JButton button = new JButton(text);
         button.setIcon(btnIcon);
-        button.setFont(new Font("Barlow", Font.PLAIN, 12));
-        button.setPreferredSize(new Dimension(110, 25));
+        button.setFont(new Font("Barlow", Font.PLAIN, FONT_SIZE_12));
+        button.setPreferredSize(new Dimension(WIDTH_BTN, HEIGHT_BTN));
         button.setHorizontalAlignment(SwingConstants.LEFT);
         button.setHorizontalTextPosition(SwingConstants.RIGHT);
-
         button.setOpaque(true);
-        button.setBackground(new Color(67, 116, 171));
+        button.setBackground(BLUE_COLOR);
         button.setFocusPainted(false);
         button.setForeground(Color.WHITE);
         Border border = new LineBorder(Color.WHITE, 0);
         button.setBorder(border);
-        button.setMargin(new Insets(10,0,0,0));
-
+        button.setMargin(new Insets(MARGIN,0,0,0));
         return button;
     }
 }

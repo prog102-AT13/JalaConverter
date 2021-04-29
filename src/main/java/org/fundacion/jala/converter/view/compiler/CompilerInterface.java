@@ -14,9 +14,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.view.Models.CompileRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.BoxLayout;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,6 +24,7 @@ import java.awt.event.ActionListener;
  * This class creates the compiler's UI.
  */
 public class CompilerInterface extends JPanel {
+    private final int MARGIN = 15;
     private static final Logger LOGGER = LogManager.getLogger();
     private Console consoleOutput;
     private CompilerMainButtons langButtons;
@@ -42,48 +43,14 @@ public class CompilerInterface extends JPanel {
         langButtons.getJava().setEnabled(false);
         projectTab = new ProjectTab();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBorder(new EmptyBorder(15,15,15,15));
-        //setBackground(Color.WHITE);
+        setBorder(new EmptyBorder(MARGIN, MARGIN, MARGIN, MARGIN));
         add(langButtons);
         add(projectTab);
         add(buttonsCompiler);
         add(consoleOutput);
-
-        /*
-        setLayout(new GridBagLayout());
-        GridBagConstraints panelConstraint = new GridBagConstraints();
-        panelConstraint.weighty = 1;
-        panelConstraint.fill = GridBagConstraints.BOTH;
-        add(langButtons, setConstraints(panelConstraint, 0, 1, 3, 1));
-        add(projectTab, setConstraints(panelConstraint, 1, 1, 2, 4));
-        panelConstraint.weighty = 0;
-        add(buttonsCompiler, setConstraints(panelConstraint, 3, 7, 1, 2));
-        add(consoleOutput, setConstraints(panelConstraint, 1, 8, 2, 4));
-        */
-
         buttonsCompiler.getRunButton().addActionListener(addListenerToRunButton());
         langButtons.getJava().addActionListener(addListenerToJavaButton());
         langButtons.getPython().addActionListener(addListenerToPythonButton());
-
-    }
-
-    /**
-     * Sets all grids to a GridBagConstraints.
-     *
-     * @param panelConstraint is the GridBagConstraints that sets.
-     * @param gx represents x grid.
-     * @param gy represents y grid.
-     * @param gh represents height grid.
-     * @param gw represents width grid.
-     * @return a GridBagConstraints for the compiler.
-     */
-    public GridBagConstraints setConstraints(final GridBagConstraints panelConstraint, final int gx, final int gy,
-                                             final int gh, final int gw) {
-        panelConstraint.gridx = gx;
-        panelConstraint.gridy = gy;
-        panelConstraint.gridheight = gh;
-        panelConstraint.gridwidth = gw;
-        return panelConstraint;
     }
 
     /**

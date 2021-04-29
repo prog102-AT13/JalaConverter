@@ -10,16 +10,22 @@
  */
 package org.fundacion.jala.converter.view.compiler;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import java.awt.*;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.BorderLayout;
 
 /**
  * This class customizes a panel as a console.
  */
 class Console extends JPanel {
+    private final int MARGIN = 10;
+    private final int FONT_SIZE = 12;
     private JTextArea console;
 
     protected Console() {
@@ -27,15 +33,13 @@ class Console extends JPanel {
         console.setBackground(Color.black);
         console.setForeground(Color.white);
         console.setEditable(true);
-        console.setBorder(new EmptyBorder(10, 10, 10, 10));
-        console.setFont(new Font("Courier New", Font.PLAIN, 12));
+        console.setBorder(new EmptyBorder(MARGIN, MARGIN, MARGIN, MARGIN));
+        console.setFont(new Font("Courier New", Font.PLAIN, FONT_SIZE));
         Border border = new LineBorder(Color.WHITE, 0);
-
         JScrollPane sp = new JScrollPane(console);
         sp.setBorder(border);
-
         setLayout(new BorderLayout());
-        setBorder(new EmptyBorder(0, 10, 0, 10));
+        setBorder(new EmptyBorder(0, MARGIN, 0, MARGIN));
         add(sp, BorderLayout.CENTER);
     }
 

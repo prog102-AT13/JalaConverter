@@ -10,10 +10,16 @@
  */
 package org.fundacion.jala.converter.view.compiler;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,12 +27,12 @@ import java.awt.event.ActionListener;
  * This class customizes a panel with custom buttons to compile.
  */
 class CompilerButtons extends JPanel implements ActionListener {
+    private final int FONT_SIZE = 12;
+    private final Color BTN_COLOR = new Color(86,139,77);
+    private final int BTN_WIDTH = 70;
+    private final int BTN_HEIGHT = 20;
     private JButton runCode;
     private JButton clearConsole;
-    private final int DIMENSION_WIDTH = 80;
-    private final int DIMENSION_HEIGHT = 20;
-    private final int FONT_STYLE = 0;
-    private final int FONT_SIZE = 11;
     private final int HGAP = 10;
     private final int VGAP = 15;
 
@@ -66,13 +72,10 @@ class CompilerButtons extends JPanel implements ActionListener {
      */
     public JButton makeButton(final String text) {
         JButton button = new JButton(text);
-        button.setFont(new Font("Barlow", Font.PLAIN, 12));
-        button.setPreferredSize(new Dimension(70, 20));
-        //button.setHorizontalAlignment(SwingConstants.LEFT);
-        //button.setHorizontalTextPosition(SwingConstants.RIGHT);
-
+        button.setFont(new Font("Barlow", Font.PLAIN, FONT_SIZE));
+        button.setPreferredSize(new Dimension(BTN_WIDTH, BTN_HEIGHT));
         button.setOpaque(true);
-        button.setBackground(new Color(86,139,77));
+        button.setBackground(BTN_COLOR);
         button.setFocusPainted(false);
         button.setForeground(Color.WHITE);
         Border border = new LineBorder(Color.WHITE, 0);

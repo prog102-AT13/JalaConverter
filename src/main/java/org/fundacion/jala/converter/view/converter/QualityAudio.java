@@ -27,9 +27,6 @@ import java.util.Hashtable;
 class QualityAudio extends JPanel implements ChangeListener {
     private JSlider qualitySlider;
     private String qualityAudio;
-    private final int alignLabelStyle = 2;
-    private final int widthLabelStyle = 70;
-    private final int heightLabelStyle = 30;
     private final int qualitySliderMin = 64;
     private final int qualitySliderMax = 320;
     private final int qualitySliderValue = 64;
@@ -37,8 +34,6 @@ class QualityAudio extends JPanel implements ChangeListener {
     private final int leftBorder = 0;
     private final int bottomBorder = 100;
     private final int rightBorder = 70;
-    private final int fontStyle = 0;
-    private final int fontSize = 11;
     private final int qualitySliderMajorTickSpacing = 128;
     private final int qualitySliderMinorTickSpacing = 64;
 
@@ -53,19 +48,9 @@ class QualityAudio extends JPanel implements ChangeListener {
         qualitySlider.setMajorTickSpacing(qualitySliderMajorTickSpacing);
         qualitySlider.setMinorTickSpacing(qualitySliderMinorTickSpacing);
         qualitySlider.addChangeListener(this::stateChanged);
-        Hashtable positionJSlide = new Hashtable();
-        JLabel labelSlide = new JLabel();
-        labelSlide.setFont(new Font("Barlow", fontStyle, fontSize));
-        positionJSlide.put(64, new JLabel("64"));
-        positionJSlide.put(128, new JLabel("128"));
-        positionJSlide.put(192, new JLabel("192"));
-        positionJSlide.put(256, new JLabel("256"));
-        positionJSlide.put(320, new JLabel("320"));
-        qualitySlider.setLabelTable(positionJSlide);
-        qualitySlider.setAlignmentX(LEFT_ALIGNMENT);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(new EmptyBorder(topBorder, leftBorder, bottomBorder, rightBorder));
-        add(sliderTitle.getTextLabel());
+        add(sliderTitle);
         add(qualitySlider);
     }
 

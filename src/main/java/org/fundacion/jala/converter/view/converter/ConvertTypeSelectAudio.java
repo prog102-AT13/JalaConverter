@@ -43,7 +43,7 @@ public class ConvertTypeSelectAudio extends JPanel {
         convertTo.addItem("flac");
         convertTo.addItem("ogg");
         setLayout(new FlowLayout(FlowLayout.LEFT, flowLayoutHgap, flowLayoutVgap));
-        add(labelConvertTo.getTextLabel());
+        add(labelConvertTo);
         add(convertTo);
     }
 

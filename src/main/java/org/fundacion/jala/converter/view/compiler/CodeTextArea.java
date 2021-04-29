@@ -10,13 +10,17 @@
  */
 package org.fundacion.jala.converter.view.compiler;
 
-import javax.swing.*;
-import javax.swing.border.Border;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTree;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Element;
-import java.awt.*;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.BorderLayout;
 
 /**
  * This class customizes a panel with custom text areas.

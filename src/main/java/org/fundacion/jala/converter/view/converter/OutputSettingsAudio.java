@@ -59,15 +59,14 @@ class OutputSettingsAudio extends JPanel {
         setAudioChannelSelect();
         metadataOption = new JCheckBox("With metadata");
         metadataOption.setFont(new Font("Barlow", Font.PLAIN, FONT_SIZE));
-
         setLayout(new GridLayout(GRID_LAYOUT_ROWS, GRID_LAYOUT_COLS));
-        add(qualityLabel.getTextLabel());
+        add(qualityLabel);
         add(qualitySelect);
-        add(volumeLabel.getTextLabel());
+        add(volumeLabel);
         add(volumeSelect);
-        add(hzLabel.getTextLabel());
+        add(hzLabel);
         add(hzSelect);
-        add(audioChannelLabel.getTextLabel());
+        add(audioChannelLabel);
         add(audioChannelSelect);
         add(metadataOption);
     }

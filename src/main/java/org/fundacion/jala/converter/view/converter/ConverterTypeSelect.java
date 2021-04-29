@@ -39,7 +39,7 @@ class ConverterTypeSelect extends JPanel {
         convertTo.addItem("mov");
         convertTo.addItem("wmv");
         setLayout(new FlowLayout(FlowLayout.LEFT));
-        add(labelConvertTo.getTextLabel());
+        add(labelConvertTo);
         add(convertTo);
     }
 

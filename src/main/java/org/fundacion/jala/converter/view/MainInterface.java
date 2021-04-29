@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- * <p>
+ *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -15,37 +15,53 @@ import org.fundacion.jala.converter.view.converter.AudioConverterInterface;
 import org.fundacion.jala.converter.view.converter.VideoConverterInterface;
 import org.fundacion.jala.converter.view.metadata.MetaDataInterface;
 import org.fundacion.jala.converter.view.text_extractor.TextExtractorInterface;
-import javax.swing.*;
-import javax.swing.border.Border;
+import org.fundacion.jala.converter.view.utilities.BtnStyle;
+import org.fundacion.jala.converter.view.utilities.JLabelStyle;
+import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Dimension;
+import java.awt.Component;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+/**
+ * This class defines the Main Interface for the project.
+ */
 public class MainInterface extends JFrame implements ActionListener {
+    private final JLabelStyle TITLE_APP = new JLabelStyle("PaoPao's Application", "h1");
+    private final JLabelStyle COPYRIGHT = new JLabelStyle("© Copyright AT13 - 2021", "h5");
+    private final Color DARK_BACKGROUND_BTN = new Color(28, 28, 28);
+    private final Color OVER_BACKGROUND_BTN = new Color(48, 48, 48);
+    private final EmptyBorder MARGIN_SPACE = new EmptyBorder(20, 10, 15, 10);
+    private final int APP_WIDTH = 1000;
+    private final int APP_HEIGHT = 820;
     private CompilerInterface compilerPanel;
     private VideoConverterInterface videoPanel;
     private MetaDataInterface metaDataPanel;
     private AudioConverterInterface audioPanel;
     private TextExtractorInterface textExtractorPanel;
-
-    private JButton compilerBtn;
-    private JButton videoConverterBtn;
-    private JButton audioConverterBtn;
-    private JButton textExtractorBtn;
-    private JButton metaDataBtn;
-
+    private BtnStyle compilerBtn;
+    private BtnStyle videoConverterBtn;
+    private BtnStyle audioConverterBtn;
+    private BtnStyle textExtractorBtn;
+    private BtnStyle metaDataBtn;
     private int positionXMainBtn = 0;
     private int positionYMainBtn = 0;
-
-    private final Color DARK_BACKGROUND_BTN = new Color(28, 28, 28);
-    private final Color OVER_BACKGROUND_BTN = new Color(48, 48, 48);
-    private final EmptyBorder MARGIN_SPACE = new EmptyBorder(20, 10, 15, 10);
-
     private JLayeredPane mainPanel;
-
     private String token;
-
+    private JPanel containerPanel;
+    private JPanel buttonsPanel;
 
     /**
      * Initializes all the graphic components in the main Frame.
@@ -54,37 +70,55 @@ public class MainInterface extends JFrame implements ActionListener {
      */
     public void initInterface(final String newToken) {
         token = newToken;
+        setComponents();
+        setPanels();
+        setLayout(new BorderLayout());
+        add(buttonsPanel, BorderLayout.LINE_START);
+        add(containerPanel, BorderLayout.CENTER);
+        setSize(APP_WIDTH, APP_HEIGHT);
+        setMinimumSize(new Dimension(APP_WIDTH, APP_HEIGHT));
+        setTitle("Prog102 - PaoPao Application");
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+    /**
+     * Sets all components format for Main frame.
+     */
+    public void setComponents() {
         compilerPanel = new CompilerInterface(token);
         videoPanel = new VideoConverterInterface(token);
         audioPanel = new AudioConverterInterface(token);
         metaDataPanel = new MetaDataInterface(token);
         textExtractorPanel = new TextExtractorInterface(token);
-        JPanel containerPanel = new JPanel();
-        containerPanel.setLayout(new BorderLayout());
-        containerPanel.setBorder(MARGIN_SPACE);
-
         mainPanel = new JLayeredPane();
         mainPanel.setLayout(new CardLayout());
         mainPanel.setBorder(MARGIN_SPACE);
         mainPanel.add(compilerPanel);
+        compilerBtn = new BtnStyle("Compiler", "MainIconCompiler.png");
+        videoConverterBtn = new BtnStyle("Video converter", "MainIconVideo.png");
+        audioConverterBtn = new BtnStyle("Audio converter", "MainIconAudio.png");
+        textExtractorBtn = new BtnStyle("Text extractor", "MainIconText.png");
+        metaDataBtn = new BtnStyle("Metadata extractor", "MainIconMeta.png");
+        mainButtonAction(compilerBtn);
+        mainButtonAction(videoConverterBtn);
+        mainButtonAction(audioConverterBtn);
+        mainButtonAction(textExtractorBtn);
+        mainButtonAction(metaDataBtn);
+    }
 
-        JLabel titleApp = new JLabel("PaoPao's Application", SwingConstants.CENTER);
-        titleApp.setFont(new Font("Barlow", Font.BOLD, 20));
-        titleApp.setForeground(Color.DARK_GRAY);
-        containerPanel.add(titleApp, BorderLayout.NORTH);
+    /**
+     * Sets Panels and positions for elements in Main frame.
+     */
+    public void setPanels() {
+        containerPanel = new JPanel();
+        containerPanel.setLayout(new BorderLayout());
+        containerPanel.setBorder(MARGIN_SPACE);
+        containerPanel.add(TITLE_APP, BorderLayout.NORTH);
         containerPanel.add(mainPanel, BorderLayout.CENTER);
-        JLabel copyrightAT13 = new JLabel("© Copyright AT13 - 2021", SwingConstants.CENTER);
-        copyrightAT13.setFont(new Font("Barlow", Font.PLAIN, 10));
-        copyrightAT13.setForeground(Color.DARK_GRAY);
-        containerPanel.add(copyrightAT13, BorderLayout.SOUTH);
-
-        compilerBtn = mainButton("Compiler", "MainIconCompiler.png");
-        videoConverterBtn = mainButton("Video converter", "MainIconVideo.png");
-        audioConverterBtn = mainButton("Audio converter", "MainIconAudio.png");
-        textExtractorBtn = mainButton("Text extractor", "MainIconText.png");
-        metaDataBtn = mainButton("Metadata extractor", "MainIconMeta.png");
-
-        JPanel buttonsPanel = new JPanel();
+        containerPanel.add(COPYRIGHT, BorderLayout.SOUTH);
+        buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new GridBagLayout());
         buttonsPanel.setBackground(DARK_BACKGROUND_BTN);
         setPosition(buttonsPanel, compilerBtn, false);
@@ -92,22 +126,12 @@ public class MainInterface extends JFrame implements ActionListener {
         setPosition(buttonsPanel, audioConverterBtn, false);
         setPosition(buttonsPanel, textExtractorBtn, false);
         setPosition(buttonsPanel, metaDataBtn, true);
-        setLayout(new BorderLayout());
-        add(buttonsPanel, BorderLayout.LINE_START);
-        add(containerPanel, BorderLayout.CENTER);
-        setSize(1000, 820);
-        setMinimumSize(new Dimension(1000, 820));
-        setTitle("Prog102 - PaoPao Application");
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
     }
 
-    public ImageIcon createImage(String path) {
-        return new ImageIcon(java.awt.Toolkit.getDefaultToolkit().getClass().getResource(path));
-    }
-
-    public void setPosition(JPanel mainPanel, JButton mainBtn, boolean lastBtn) {
+    /**
+     * Sets positions for FlowLayout.
+     */
+    public void setPosition(JPanel mainPanel, BtnStyle mainBtn, boolean lastBtn) {
         GridBagConstraints positionConstraint = new GridBagConstraints();
         positionConstraint.gridx = positionXMainBtn;
         positionConstraint.gridy = positionYMainBtn;
@@ -122,6 +146,9 @@ public class MainInterface extends JFrame implements ActionListener {
         positionYMainBtn += 1;
     }
 
+    /**
+     * Sets the correct panel according to selected Button.
+     */
     public void switchPanels(JPanel panel) {
         mainPanel.removeAll();
         mainPanel.add(panel);
@@ -129,6 +156,11 @@ public class MainInterface extends JFrame implements ActionListener {
         mainPanel.revalidate();
     }
 
+    /**
+     * Call the panel for the Button option.
+     *
+     * @param e Action of selected JButton.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == compilerBtn) {
@@ -148,29 +180,12 @@ public class MainInterface extends JFrame implements ActionListener {
         }
     }
 
-    public JButton mainButton(String btnText, String icon) {
-        int marginIcon = 20;
-        int widthBtn = 200;
-        int heightBtn = 50;
-
-        Icon buttonIcon = new ImageIcon("img/mainButtons/" + icon);
-
-        JButton button = new JButton(btnText);
-        button.setIcon(buttonIcon);
-        button.setIconTextGap(marginIcon);
-
-        button.setHorizontalAlignment(SwingConstants.LEFT);
-        button.setHorizontalTextPosition(SwingConstants.RIGHT);
-
-        button.setOpaque(true);
-        button.setBackground(DARK_BACKGROUND_BTN);
-        button.setFocusPainted(false);
-        button.setForeground(Color.WHITE);
-        Border border = new LineBorder(Color.WHITE, 0);
-        button.setBorder(border);
-        button.setFont(new Font("Barlow", Font.PLAIN, 13));
-        button.setPreferredSize(new Dimension(widthBtn, heightBtn));
-
+    /**
+     * Adds the style hover and out for JButton.
+     *
+     * @param button to add style.
+     */
+    public BtnStyle mainButtonAction(BtnStyle button) {
         MouseListener ml = new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -187,32 +202,5 @@ public class MainInterface extends JFrame implements ActionListener {
         button.addActionListener(this::actionPerformed);
         button.addMouseListener(ml);
         return button;
-    }
-
-    private static class RoundedBorder implements Border {
-
-        private int radius = 10;
-        private Color color;
-
-        private RoundedBorder(Color color, int radius) {
-            this.color = color;
-            this.radius = radius;
-        }
-
-        @Override
-        public Insets getBorderInsets(Component c) {
-            return new Insets(this.radius + 1, this.radius + 1, this.radius + 1, this.radius + 1);
-        }
-
-        @Override
-        public boolean isBorderOpaque() {
-            return true;
-        }
-
-        @Override
-        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-            g.setColor(color);
-            g.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
-        }
     }
 }

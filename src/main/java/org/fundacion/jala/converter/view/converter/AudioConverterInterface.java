@@ -17,9 +17,7 @@ import org.fundacion.jala.converter.view.Models.AudioRequestForm;
 import org.fundacion.jala.converter.view.utilities.BtnStyle;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
 import org.fundacion.jala.converter.view.utilities.SelectFile;
-
 import javax.swing.JPanel;
-import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import java.awt.*;
@@ -41,13 +39,6 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
     private OutputSettingsAudio settings;
     private ClientRequest clientRequest = new ClientRequest();
     private static final Logger LOGGER = LogManager.getLogger();
-    private final int ALIGN_LABEL_STYLE = 2;
-    private final int WIDTH_LABEL_STYLE = 70;
-    private final int HEIGHT_LABEL_STYLE = 30;
-    private final int TOP_BORDER = 40;
-    private final int LEFT_BORDER = 40;
-    private final int BOTTOM_BORDER = 100;
-    private final int RIGHT_BORDER = 0;
     private final int FONT_STYLE = 0;
     private final int FONT_SIZE = 12;
     private String token;
@@ -74,37 +65,21 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         quality.setAlignmentX(LEFT_ALIGNMENT);
         settings = new OutputSettingsAudio();
         settings.setAlignmentX(LEFT_ALIGNMENT);
-
         JPanel btnContainer = new JPanel();
         btnContainer.setLayout(new FlowLayout(FlowLayout.CENTER));
         btnContainer.add(convertAudio);
-
         JPanel container = new JPanel();
         container.setBorder(new EmptyBorder(MARGIN_SPACE, 0, MARGIN_BOTTOM_BTN_CONTAINER, 0));
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
         container.add(file);
-        container.add(audioSettings.getTextLabel());
+        container.add(audioSettings);
         container.add(audioSelect);
         container.add(settings);
         setLayout(new BorderLayout());
         setBorder(new EmptyBorder(0, MARGIN_SPACE, MARGIN_BOTTOM_MAIN_CONTAINER, MARGIN_SPACE));
-        add(audioTitle.getTextLabel(), BorderLayout.NORTH);
+        add(audioTitle, BorderLayout.NORTH);
         add(container, BorderLayout.CENTER);
         add(btnContainer, BorderLayout.SOUTH);
-
-
-        /*
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBorder(new EmptyBorder(TOP_BORDER, LEFT_BORDER, BOTTOM_BORDER, RIGHT_BORDER));
-        settings = new OutputSettingsAudio();
-        settings.setAlignmentX(LEFT_ALIGNMENT);
-        add(audioTitle.getTextLabel());
-        add(file);
-        add(audioSettings.getTextLabel());
-        add(audioSelect);
-        add(settings);
-        add(convertAudio);
-        */
     }
 
     /**
