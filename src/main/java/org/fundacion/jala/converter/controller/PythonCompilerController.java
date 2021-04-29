@@ -10,17 +10,15 @@
  */
 package org.fundacion.jala.converter.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.core.facade.CompilerFacade;
-import org.fundacion.jala.converter.core.parameter.PythonEnum;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.fundacion.jala.converter.core.parameter.PythonParameter;
-import org.fundacion.jala.converter.core.PythonCompiler;
-import java.io.IOException;
 
 /**
  * This class compiles a Python project.
@@ -34,18 +32,13 @@ public class PythonCompilerController {
      * Creates endpoint to compile Python code.
      *
      * @param code is a String with the code to compile.
-     * @return String with the compilation result.
+     * @return a String with the compilation result.
      * @throws IllegalStateException when method invoked at an illegal time.
-     * @throws IOException is a exception when invalid input is provided.
      */
     @PostMapping("/compilePython")
-    public String compilePython(final @RequestParam("code") String code) throws IllegalStateException, IOException {
-        LOGGER.info("start");
-        if (!code.isBlank() || !code.equals(null)) {
-            PythonCompiler pythonCompiler = new PythonCompiler();
-            LOGGER.info("finish");
-            return CompilerFacade.facadePythonCompile(new PythonParameter("C:\\Users\\juamp\\Desktop\\Prog102\\proyecto102\\JalaConverter\\archive\\storage\\Main.py", PythonEnum.V3));
-        }
-        return "";
+    @ApiOperation(value = "Compiles python code", notes = "Provide the python code to compile",
+            authorizations = {@Authorization(value = "JWT")})
+    public String compilePython(final @RequestParam("code") String code) throws IllegalStateException {
+        return CompilerFacade.facadePythonCompile(code);
     }
 }

@@ -10,10 +10,11 @@
  */
 package org.fundacion.jala.converter.view.login;
 
+import org.fundacion.jala.converter.controller.response.PaoPaoResponse;
+import org.fundacion.jala.converter.controller.response.SuccessAuthenticationResponse;
 import org.fundacion.jala.converter.view.MainInterface;
 import org.fundacion.jala.converter.view.Models.AuthenticateRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
-import org.springframework.security.authentication.BadCredentialsException;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -127,21 +128,22 @@ public class LoginInterface extends JFrame implements ActionListener {
      * @param password a String with password.
      */
     public void callRequest(final String username, final String password) {
-        String result = "";
+        PaoPaoResponse result;
         AuthenticateRequestForm authenticateRequestForm = new AuthenticateRequestForm();
         authenticateRequestForm.addUsername(username);
         authenticateRequestForm.addPassword(password);
         try {
             result = CLIENT_REQUEST.executeRequestWithoutToken(authenticateRequestForm);
-        } catch (BadCredentialsException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Invalid username or password");
+            if ("200".equals(result.getStatus())) {
+                this.dispose();
+                SuccessAuthenticationResponse successAuthenticationResponse = (SuccessAuthenticationResponse) result;
+                new MainInterface().initInterface(successAuthenticationResponse.getJwt());
+            } else {
+                JOptionPane.showMessageDialog(this, "Invalid username or password");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        result = result.substring(8, result.length() - 2);
-        this.dispose();
-        new MainInterface().initInterface(result);
     }
 
     /**

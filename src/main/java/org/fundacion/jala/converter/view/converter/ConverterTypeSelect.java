@@ -40,7 +40,7 @@ class ConverterTypeSelect extends JPanel {
         convertTo = new JComboBox();
         convertTo.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
         convertTo.setFont(new Font("Barlow", fontStyle, fontSize));
-        convertTo.addItem("AVI");
+        convertTo.addItem("avi");
         convertTo.addItem("mp4");
         convertTo.addItem("mpeg");
         convertTo.addItem("mov");

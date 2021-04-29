@@ -12,11 +12,14 @@ package org.fundacion.jala.converter.controller.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.ApiKey;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import java.util.Arrays;
 import java.util.Collections;
 
 /**
@@ -26,28 +29,53 @@ import java.util.Collections;
 public class SwaggerConfig {
 
     /**
-     * Creates a Docket.
+     * Creates the API Docket.
      *
      * @return a Docket with Swagger configuration.
      */
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .select()
+                .groupName("API").securitySchemes(Arrays.asList(apiKey())).select()
                 .paths(PathSelectors.ant("/api/*"))
                 .apis(RequestHandlerSelectors.basePackage("org.fundacion.jala.converter"))
-                .build()
-                .apiInfo(apiDetails());
+                .build().apiInfo(apiDetails());
+    }
+
+    /**
+     * Creates the authentication Docket.
+     *
+     * @return a Docket with Swagger configuration.
+     */
+    @Bean
+    public Docket apiAuthentication() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("AUTHENTICATION").select().paths(PathSelectors.ant("/authenticate"))
+                .apis(RequestHandlerSelectors.basePackage("org.fundacion.jala.converter"))
+                .build().apiInfo(apiDetails());
+    }
+
+    /**
+     * Creates the registration Docket.
+     *
+     * @return a Docket with Swagger configuration.
+     */
+    @Bean
+    public Docket apiRegistration() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("REGISTRATION").select().paths(PathSelectors.ant("/register"))
+                .apis(RequestHandlerSelectors.basePackage("org.fundacion.jala.converter"))
+                .build().apiInfo(apiDetails());
     }
 
     /**
      * Customizes the API Information.
      *
-     * @return the ApiInfo with the customization values.
+     * @return the ApiInfo with the custom values.
      */
     private ApiInfo apiDetails() {
         return new ApiInfo(
-                "Jala Converter",
+                "PaoPao's Application",
                 "Application that provides the following services:\n"
                         + "\t• Convert audio files.\n"
                         + "\t• Convert video files.\n"
@@ -62,5 +90,24 @@ public class SwaggerConfig {
                 "API license",
                 "localhost:8080/api/license",
                 Collections.emptyList());
+    }
+
+    /**
+     * Creates an API key.
+     *
+     * @return the API key.
+     */
+    private ApiKey apiKey() {
+        return new ApiKey("JWT", "Authorization", "header");
+    }
+
+    /**
+     * Creates a Multipart resolver.
+     *
+     * @return an object CommonsMultipartResolver.
+     */
+    @Bean(name = "multipartResolver")
+    public CommonsMultipartResolver commonsMultipartResolver() {
+        return new CommonsMultipartResolver();
     }
 }

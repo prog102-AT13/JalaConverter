@@ -10,6 +10,7 @@
  */
 package org.fundacion.jala.converter.controller;
 
+import org.fundacion.jala.converter.core.exceptions.CompilerException;
 import org.fundacion.jala.converter.core.facade.CompilerFacade;
 import org.fundacion.jala.converter.core.javacompiler.JavaVersion;
 import org.fundacion.jala.converter.core.parameter.JavaParameter;
@@ -67,8 +68,7 @@ public class ProjectController {
      * @throws IOException           is a exception when invalid input is provided.
      */
     @PostMapping("/projects/{id}/file")
-    public String createFiles(final @RequestParam("fileName") String fileName,
-                              final @PathVariable("id") int idProject,
+    public String createFiles(final @RequestParam("fileName") String fileName,  final @PathVariable("id") int idProject,
                               final @RequestParam("extension") String extension,
                               final @RequestParam("code") String code) throws IllegalStateException, IOException {
         Project project = ProjectSQL.findProjectById(idProject);
@@ -113,11 +113,15 @@ public class ProjectController {
         if (mainFife != null) {
             String[] extesion = mainFife.getName().split("[.]");
             if ("py".equals(extesion[extesion.length - 1])) {
-                return CompilerFacade.facadePythonCompile(new PythonParameter(mainFife.getPathFile(), PythonEnum.V3));
+                return CompilerFacade.facadePythonProjectCompile(new PythonParameter(mainFife.getPathFile(), PythonEnum.V3));
             }
             if ("java".equals(extesion[extesion.length - 1])) {
-                return CompilerFacade.facadeJavaCompile(new JavaParameter(JavaVersion.JAVA_11, mainFife.getPathFile(),
-                        mainFife.getName()));
+                try {
+                    return CompilerFacade.facadeJavaProjectCompile(new JavaParameter(JavaVersion.JAVA_11, mainFife.getPathFile(),
+                            mainFife.getName()));
+                } catch (CompilerException e) {
+                    e.printStackTrace();
+                }
             }
         }
         return "main file not found";

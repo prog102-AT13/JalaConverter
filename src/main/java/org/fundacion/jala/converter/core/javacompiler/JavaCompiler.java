@@ -12,6 +12,7 @@ package org.fundacion.jala.converter.core.javacompiler;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.core.exceptions.CompilerException;
 import org.fundacion.jala.converter.core.parameter.JavaParameter;
 import org.fundacion.jala.converter.core.results.Result;
 import java.io.BufferedReader;
@@ -33,8 +34,9 @@ public class JavaCompiler {
      *
      * @param newJavaParameter for all the parameters needed for Java Compiler.
      * @return the result of execution in console.
+     * @throws CompilerException if process is interrupted.
      */
-    public String javaCompiler(final JavaParameter newJavaParameter) {
+    public String javaCompiler(final JavaParameter newJavaParameter) throws CompilerException {
         LOGGER.info("start");
         try {
             javaParameter = newJavaParameter;
@@ -58,13 +60,14 @@ public class JavaCompiler {
             return result;
         } catch (IOException exception) {
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
-            return exception.getMessage();
+            return String.valueOf(new CompilerException(exception));
         } finally {
             try {
                 LOGGER.info("Close bufferedReader Stream");
                 bufferedReader.close();
-            } catch (IOException e) {
-                LOGGER.error("Close Stream error" + e.getLocalizedMessage());
+            } catch (IOException exception) {
+                LOGGER.error("Close Stream error" + exception.getLocalizedMessage());
+                throw new CompilerException(exception);
             }
         }
     }

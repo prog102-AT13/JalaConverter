@@ -16,11 +16,11 @@ import java.io.InputStream;
  * This class runs an input stream in a single thread.
  */
 class ThreadHandler extends Thread {
-    InputStream input;
+    private InputStream input;
 
-    ThreadHandler(final InputStream input, final String name) {
+    ThreadHandler(final InputStream newInput, final String name) {
         super(name);
-        this.input = input;
+        this.input = newInput;
     }
 
     /**
