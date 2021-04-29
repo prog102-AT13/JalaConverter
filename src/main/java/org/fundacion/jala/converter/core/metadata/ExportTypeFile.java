@@ -21,9 +21,7 @@ public class ExportTypeFile {
     private String nameFileExport;
     private String nameFileCompleteToExport;
 
-    public ExportTypeFile(final String newNameFileComplete,
-                          final String nameExport,
-                          final TypeFileExport typeExport,
+    public ExportTypeFile(final String newNameFileComplete, final String nameExport,  final TypeFileExport typeExport,
                           final File addressFileExport) {
         this.nameFileComplete = newNameFileComplete;
         this.addressExportFile = addressFileExport;
@@ -80,10 +78,9 @@ public class ExportTypeFile {
         for (int i = spellName.length - 1; i >= 0; i--) {
             if (spellName[i] == '.' && !write) {
                 write = true;
-            } else {
-                if (write) {
-                    name = spellName[i] + name;
-                }
+            }
+            if (write) {
+                name = spellName[i] + name;
             }
         }
         nameFileExport = name;
