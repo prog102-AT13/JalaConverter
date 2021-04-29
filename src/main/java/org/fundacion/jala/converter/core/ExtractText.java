@@ -40,15 +40,15 @@ public class ExtractText {
         this.nameOutputFile = extractTextParameter.getResultFile();
     }
 
-    public ExtractText(final String language, final String pathFile) {
-        this.language = language;
-        this.pathFile = pathFile;
+    public ExtractText(final String newLanguage, final String newPathFile) {
+        this.language = newLanguage;
+        this.pathFile = newPathFile;
     }
 
-    public ExtractText(final String language, final String pathFile, final String nameOutputFile) {
-        this.language = language;
-        this.pathFile = pathFile;
-        this.nameOutputFile = nameOutputFile;
+    public ExtractText(final String newLanguage, final String newPathFile, final String newNameOutputFile) {
+        this.language = newLanguage;
+        this.pathFile = newPathFile;
+        this.nameOutputFile = newNameOutputFile;
     }
 
     /**
@@ -128,6 +128,7 @@ public class ExtractText {
             printWriter.write(text);
             printWriter.close();
             bufferedWriter.close();
+            result = new Result();
             result.setFilename(name + TXT_EXTENSION + "  ");
         } catch (IOException exception) {
             LOGGER.error("Execute Exception to Safe text in a file");
