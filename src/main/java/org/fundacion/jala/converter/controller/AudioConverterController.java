@@ -56,8 +56,7 @@ public class AudioConverterController {
     @PostMapping("/convertAudio")
     public String uploadFile(final @RequestParam("file") MultipartFile file, final @RequestParam("format") String format,
                              final @RequestParam("bitrate") String bitrate, final @RequestParam("volume") String volume,
-                             final @RequestParam("hz") String hz,
-                             final @RequestParam("audiochannel") String audioChannel,
+                             final @RequestParam("hz") String hz, final @RequestParam("audiochannel") String audioChannel,
                              final @RequestParam("checksum") String checksum,
                              final @RequestParam("metadata") boolean metadata) throws IOException, InterruptedException {
         LOGGER.info("start");

@@ -31,7 +31,7 @@ public class PythonCompilerController {
      * Creates endpoint to compile Python code.
      *
      * @param code is a String with the code to compile.
-     * @return String with the compilation result.
+     * @return a String with the compilation result.
      * @throws IllegalStateException when method invoked at an illegal time.
      * @throws IOException is a exception when invalid input is provided.
      */

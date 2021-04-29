@@ -51,6 +51,7 @@ public class VideoConverter {
         String parameters = changeResolution() + changeFrameRate() + removeAudio();
         String theCommand = ffmpegCommand + parameters + pathOutput + output  + "\" -y";
         Process process = Runtime.getRuntime().exec("cmd /c " + theCommand);
+        System.out.println(theCommand);
         ThreadHandler errorHandler = new ThreadHandler(process.getErrorStream(), "Error Stream");
         errorHandler.start();
         ThreadHandler threadHandler = new ThreadHandler(process.getInputStream(), "Output Stream");
@@ -88,7 +89,7 @@ public class VideoConverter {
         if (width > 0 && height > 0) {
             scale = width + ":" + height;
             aspectRatio = ":force_original_aspect_ratio=decrease,pad=";
-            resolutionCommand = "-vf \"scale=" + scale + aspectRatio + scale + ":-1:-1:color=white\"";
+            resolutionCommand = " -b:v 5000k -vf \"scale=" + scale + aspectRatio + scale + ":-1:-1:color=gray\"";
             return resolutionCommand;
         }
         return "";
@@ -105,6 +106,7 @@ public class VideoConverter {
         String outputCommand = pathOutput + output + "\"" + " -ss 00:00:01 -vframes 1 -s 128x128 "
                 + pathOutput + name + PNG_FORMAT + "\" -y";
         String thumbnailCommand = startCommand + outputCommand;
+        System.out.println(thumbnailCommand);
         Process process = Runtime.getRuntime().exec("cmd /c " + thumbnailCommand);
         ThreadHandler errorHandler = new ThreadHandler(process.getErrorStream(), "Error Stream");
         errorHandler.start();
@@ -146,7 +148,7 @@ public class VideoConverter {
         int frameRate = parameter.getFrameRate();
         String frameCommand;
         if (frameRate > INIT_NUMBER) {
-            frameCommand = " -filter:v fps=" + frameRate + " ";
+            frameCommand = " -r " + frameRate + " -y ";
             return frameCommand;
         }
         return "";
