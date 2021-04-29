@@ -20,18 +20,15 @@ import java.awt.Component;
  * This class customizes a panel with custom buttons to change language.
  */
 class LanguageButtons extends JPanel {
-    private JButton cPlusPlus;
     private JButton java;
     private JButton python;
     private final int FONT_STYLE = 0;
     private final int FONT_SIZE = 11;
 
     protected LanguageButtons() {
-        cPlusPlus = createButton("C++");
         java = createButton("Java");
         python = createButton("Python");
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        add(cPlusPlus);
         add(java);
         add(python);
     }

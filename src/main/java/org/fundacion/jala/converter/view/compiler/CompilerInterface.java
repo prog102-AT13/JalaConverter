@@ -226,7 +226,7 @@ public class CompilerInterface extends JPanel {
      * @return a integer that represents the choice.
      */
     public int changeLanguage() {
-        int selection = JOptionPane.showOptionDialog(null, "Your code is not saved. Are "
+        int selection = JOptionPane.showOptionDialog(null, "Are "
                         + "you sure you want to leave this project", "Changing language",
                 JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
                 null, new Object[] {"Yes", "No"}, "Yes");
@@ -241,7 +241,7 @@ public class CompilerInterface extends JPanel {
         ProjectRequestForm projectRequestForm = new ProjectRequestForm();
         String result = (String) JOptionPane.showInputDialog(null,
                 "Write project name", "Project Name",
-                JOptionPane.PLAIN_MESSAGE, null, null, "project 1");
+                JOptionPane.PLAIN_MESSAGE, null, null, "project1");
         projectRequestForm.addProjectName(result);
         projectRequestForm.addUserId("1");
         try {
