@@ -11,7 +11,7 @@
 package org.fundacion.jala.converter.controller.response;
 
 /**
- * This class creates an SuccessAuthenticationResponse that extends from PaoPaoResponse
+ * This class creates an SuccessAuthenticationResponse that extends from PaoPaoResponse.
  */
 public class SuccessAuthenticationResponse extends PaoPaoResponse {
     private String jwt;

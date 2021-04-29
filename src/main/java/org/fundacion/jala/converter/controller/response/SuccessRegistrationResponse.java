@@ -11,7 +11,7 @@
 package org.fundacion.jala.converter.controller.response;
 
 /**
- * This class creates an SuccessRegistrationResponse that extends from PaoPaoResponse
+ * This class creates an SuccessRegistrationResponse that extends from PaoPaoResponse.
  */
 public class SuccessRegistrationResponse extends PaoPaoResponse {
     private String username;
