@@ -48,6 +48,15 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
 
     public ProjectTab(final String newToken) {
         token = newToken;
+        CodeTextArea codeArea = new CodeTextArea();
+        codeArea.setName("Main");
+        add(codeArea);
+        setFont(new Font("Barlow", Font.PLAIN, SIZE_FONT_12));
+        setOpaque(false);
+        setBackground(Color.LIGHT_GRAY);
+        setBorder(null);
+        setTabComponentAt(getTabCount() - 1, createTabHeaderWithTitle("Main"));
+        //start(token);
     }
 
     /**
