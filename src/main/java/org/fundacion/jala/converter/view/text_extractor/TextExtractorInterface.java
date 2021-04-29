@@ -24,8 +24,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
+import static org.fundacion.jala.converter.view.utilities.CheckFile.checkFileSelect;
 
 /**
  * This class shows the extractText interface.
@@ -78,16 +78,18 @@ public class TextExtractorInterface extends JPanel implements ActionListener {
      */
     @Override
     public void actionPerformed(final ActionEvent e) {
-        JOptionPane.showMessageDialog(this, "File Path: "
-                + file.getOriginFilePath()
-                + "\nConvert to: "
-                + languageSelect.getConvertTo());
-        try {
-            LOGGER.info("Execute Try");
-            callRequest();
-        } catch (Exception ex) {
-            LOGGER.error("Execute Exception to text extraction");
-            ex.printStackTrace();
+        if (checkFileSelect(file.getOriginFilePath())) {
+            JOptionPane.showMessageDialog(this, "File Path: "
+                    + file.getOriginFilePath()
+                    + "\nConvert to: "
+                    + languageSelect.getConvertTo());
+            try {
+                LOGGER.info("Execute Try");
+                callRequest();
+            } catch (Exception ex) {
+                LOGGER.error("Execute Exception to text extraction");
+                ex.printStackTrace();
+            }
         }
         LOGGER.info("Finish");
     }

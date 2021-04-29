@@ -10,6 +10,7 @@
  */
 package org.fundacion.jala.converter.core.facade;
 
+import org.fundacion.jala.converter.core.RunCommand;
 import java.io.IOException;
 import java.util.ArrayList;
 import static org.fundacion.jala.converter.models.AssetSQL.insertAssetData;
@@ -110,5 +111,8 @@ public class ZipFileFacade {
         }
         Thread.sleep(WAIT_TIME);
         zipFiles(zipList, pathFile + nameWithoutExtension + "zip");
+        Thread.sleep(WAIT_TIME);
+        RunCommand runCommand = new RunCommand();
+        zipList.stream().forEach(value -> runCommand.run("rm \"" + value + "\""));
     }
 }

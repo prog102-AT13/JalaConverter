@@ -128,6 +128,7 @@ public class ExtractText {
             printWriter.write(text);
             printWriter.close();
             bufferedWriter.close();
+            result = new Result();
             result.setFilename(name + TXT_EXTENSION + "  ");
         } catch (IOException exception) {
             LOGGER.error("Execute Exception to Safe text in a file");
