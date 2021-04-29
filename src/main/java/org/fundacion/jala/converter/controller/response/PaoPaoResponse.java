@@ -9,6 +9,9 @@
  */
 package org.fundacion.jala.converter.controller.response;
 
+/**
+ * This class creates a PaoPaoResponse
+ */
 public class PaoPaoResponse {
     private String status;
 

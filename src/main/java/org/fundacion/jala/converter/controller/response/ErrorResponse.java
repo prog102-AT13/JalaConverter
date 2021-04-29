@@ -9,6 +9,9 @@
  */
 package org.fundacion.jala.converter.controller.response;
 
+/**
+ * This class creates an ErrorResponse that extends from PaoPaoResponse
+ */
 public class ErrorResponse extends PaoPaoResponse {
     private String message;
 
