@@ -86,12 +86,15 @@ public class JavaCompiler {
      */
     public String projectJavaCompiler(final JavaParameter newJavaParameter) {
         LOGGER.info("start");
-        final String JAVA_COMPILER = System.getProperty("user.dir") + "\\" + newJavaParameter.getJavaVersion().getCompiler();
-        final String JAVA_EXE = System.getProperty("user.dir") + "\\" + newJavaParameter.getJavaVersion().getExecutor();
+        final String JAVA_COMPILER = System.getProperty("user.dir") + "\\" + newJavaParameter.
+                getJavaVersion().getCompiler();
+        final String JAVA_EXE = System.getProperty("user.dir") + "\\" + newJavaParameter
+                .getJavaVersion().getExecutor();
         try {
             javaParameter = newJavaParameter;
             LOGGER.info("Execute Try");
-            String comnand = "cd " + javaParameter.getFilePath() + " && " + JAVA_COMPILER + " Main.java && " + JAVA_EXE + " Main";
+            String comnand = "cd " + javaParameter.getFilePath() + " && " + JAVA_COMPILER
+                    + " Main.java && " + JAVA_EXE + " Main";
             ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", comnand);
             Process process = processBuilder.start();
             bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));

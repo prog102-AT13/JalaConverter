@@ -108,20 +108,16 @@ public class ProjectController {
         for (File file : fileList) {
             if (file.getName().toLowerCase().contains("main")) {
                 mainFife = file;
-                System.out.println("ARCHIVO MAIN " + mainFife.getName());
             }
         }
         if (mainFife != null) {
             String[] extesion = mainFife.getName().split("[.]");
             if ("py".equals(extesion[extesion.length - 1])) {
-                System.out.println("ENTRO A PY");
-                System.out.println("RUTA PROYECTO " + mainFife.getPathFile());
                 return CompilerFacade.facadePythonCompile(new PythonParameter(mainFife.getPathFile(), PythonEnum.V3));
             }
             if ("java".equals(extesion[extesion.length - 1])) {
-                System.out.println("ENTRO A JAVA");
-                System.out.println("RUTA ARCHIVO " + mainFife.getPathFile() + "\\" + mainFife.getName());
-                return CompilerFacade.facadeJavaCompile(new JavaParameter(JavaVersion.JAVA_11, mainFife.getPathFile(), mainFife.getName()));
+                return CompilerFacade.facadeJavaCompile(new JavaParameter(JavaVersion.JAVA_11, mainFife.getPathFile(),
+                        mainFife.getName()));
             }
         }
         return "main file not found";

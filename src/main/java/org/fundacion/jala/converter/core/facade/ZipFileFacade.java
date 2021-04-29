@@ -72,8 +72,10 @@ public class ZipFileFacade {
         String filename = parameterOutputChecksum.getFileName();
         final int WAIT_TIME = 1000;
         final int USER_ID = 1;
-        String nameWithoutExtension = outputFilename.substring(outputFilename.lastIndexOf(System.getProperty("file.separator")) + 1, outputFilename.lastIndexOf(".") + 1);
-        String pathFile = outputFilename.substring(0, outputFilename.lastIndexOf(System.getProperty("file.separator")) + 1);
+        String nameWithoutExtension = outputFilename.substring(outputFilename.lastIndexOf(System
+                .getProperty("file.separator")) + 1, outputFilename.lastIndexOf(".") + 1);
+        String pathFile = outputFilename.substring(0, outputFilename
+                .lastIndexOf(System.getProperty("file.separator")) + 1);
         if (!(resultTitleSize > 0)) {
             insertAssetData(filename, pathFile, checksumLocal, USER_ID);
         }
