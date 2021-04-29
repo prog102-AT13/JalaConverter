@@ -45,7 +45,6 @@ public class JavaCompiler {
                     + javaParameter.getFilePath() + "\" " + "&& "
                     + javaParameter.getJavaVersion().getExecutor() + " "
                     + "\"" + javaParameter.getFilePath() + "\"";
-            System.out.println("COMANDO JAVA " + command);
             ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", command);
             Process process = processBuilder.start();
             bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -87,7 +86,7 @@ public class JavaCompiler {
      * @param newJavaParameter for all the parameters needed for Java Compiler.
      * @return the result of execution in console.
      */
-    public String projectJavaCompiler(final JavaParameter newJavaParameter) {
+    public String javaProjectCompiler(final JavaParameter newJavaParameter) {
         LOGGER.info("start");
         final String JAVA_COMPILER = System.getProperty("user.dir") + "\\" + newJavaParameter.
                 getJavaVersion().getCompiler();

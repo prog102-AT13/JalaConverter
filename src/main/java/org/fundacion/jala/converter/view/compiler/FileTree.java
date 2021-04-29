@@ -17,6 +17,9 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import java.io.File;
 
+/**
+ * This class creates a tree of files as a Jtree.
+ */
 public class FileTree extends JPanel {
     private DefaultMutableTreeNode root;
     private DefaultTreeModel treeModel;

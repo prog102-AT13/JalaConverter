@@ -174,7 +174,7 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
     /**
      * Gets us the plus button to access it.
      *
-     * @return a plus button
+     * @return a plus button.
      */
     public PlusButton getButton() {
         return button;

@@ -67,7 +67,7 @@ public class CompilerFacade {
      */
     public static String facadeJavaProjectCompile(final JavaParameter javaParameter) throws CompilerException {
         javaCompiler = new JavaCompiler();
-        result = javaCompiler.projectJavaCompiler(javaParameter);
+        result = javaCompiler.javaProjectCompiler(javaParameter);
         return result;
     }
 
