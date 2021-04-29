@@ -21,11 +21,9 @@ public class ExportTypeFile {
     private String nameFileExport;
     private String nameFileCompleteToExport;
 
-    public ExportTypeFile(final String nameFileComplete,
-                          final String nameExport,
-                          final TypeFileExport typeExport,
+    public ExportTypeFile(final String newNameFileComplete, final String nameExport,  final TypeFileExport typeExport,
                           final File addressFileExport) {
-        this.nameFileComplete = nameFileComplete;
+        this.nameFileComplete = newNameFileComplete;
         this.addressExportFile = addressFileExport;
         buildFileName(nameExport);
         buildFileType(typeExport);
@@ -59,9 +57,15 @@ public class ExportTypeFile {
      * @param typeExport define type of file which it is exported.
      */
     private void buildFileType(final TypeFileExport typeExport) {
-        if (typeExport == TypeFileExport.TXT) exportFileTxt();
-        if (typeExport == TypeFileExport.HTML) exportFileHtml();
-        if (typeExport == TypeFileExport.XMP) exportFileXMP();
+        if (typeExport == TypeFileExport.TXT) {
+            exportFileTxt();
+        }
+        if (typeExport == TypeFileExport.HTML) {
+            exportFileHtml();
+        }
+        if (typeExport == TypeFileExport.XMP) {
+            exportFileXMP();
+        }
     }
 
     /**
@@ -72,8 +76,12 @@ public class ExportTypeFile {
         String name = "";
         boolean write = false;
         for (int i = spellName.length - 1; i >= 0; i--) {
-            if (spellName[i] == '.' && !write) write = true;
-            else if (write) name = spellName[i] + name;
+            if (spellName[i] == '.' && !write) {
+                write = true;
+            }
+            if (write) {
+                name = spellName[i] + name;
+            }
         }
         nameFileExport = name;
     }

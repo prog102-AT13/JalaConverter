@@ -26,8 +26,8 @@ public class VideoParameter extends Parameter {
     public VideoParameter() { }
 
     public VideoParameter(final String filePath, final String newOutputFormat, final String newResolution,
-                          final boolean newThumbnail, final int newFrameRate, final int newWidth,
-                          final int newHeight, final boolean newAudio) {
+                          final boolean newThumbnail, final int newFrameRate, final int newWidth, final int newHeight,
+                          final boolean newAudio) {
         super(filePath);
         this.outputFormat = newOutputFormat;
         this.resolution = newResolution;
