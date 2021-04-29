@@ -10,6 +10,10 @@
  */
 package org.fundacion.jala.converter.controller;
 
+import org.fundacion.jala.converter.controller.response.ErrorResponse;
+import org.fundacion.jala.converter.controller.response.PaoPaoResponse;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.fundacion.jala.converter.controller.security.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,13 +36,15 @@ public class RegisterController {
      * @param username is a String with the username.
      * @param password is a String with the password.
      * @return an entity response with the user.
-     * @throws Exception when invalid username or password is given.
      */
     @PostMapping("/register")
-    public ResponseEntity<?> insertUser(final @RequestParam("username") String username,
-                                        final @RequestParam("password") String password) throws Exception {
+    @ApiOperation(value = "Inserts users to the database", notes = "Provide username and password to register")
+    public ResponseEntity<PaoPaoResponse> insertUser(final @ApiParam(value = "Introduce the username", required = true)
+                                            @RequestParam("username") String username,
+                                        final @ApiParam(value = "Introduce the password", required = true)
+                                        @RequestParam("password") String password) {
         if (usernameExists(username) || username.trim().isEmpty()) {
-            throw new Exception("Invalid Username");
+            return ResponseEntity.badRequest().body(new ErrorResponse("400", "Invalid username"));
         }
         return ResponseEntity.ok(myUserDetailsService.save(username, password));
     }

@@ -10,6 +10,8 @@
  */
 package org.fundacion.jala.converter.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.core.exceptions.PaoPaoException;
@@ -18,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import java.io.IOException;
 
 /**
  * This class compiles a Java project.
@@ -34,9 +35,10 @@ public class JavaCompilerController {
      * @param code is a String with the code to compile.
      * @return String with the compilation result.
      * @throws IllegalStateException when method invoked at an illegal time.
-     * @throws IOException is a exception when invalid input is provided.
      */
     @PostMapping("/compileJava")
+    @ApiOperation(value = "Compiles java code", notes = "Provide the java code to compile",
+            authorizations = {@Authorization(value = "JWT")})
     public String compileJava(final @RequestParam("code") String code) throws IllegalStateException {
         try {
             return CompilerFacade.facadeJavaCompile(code);

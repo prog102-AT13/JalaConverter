@@ -10,6 +10,8 @@
  */
 package org.fundacion.jala.converter.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.core.facade.CompilerFacade;
@@ -17,7 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import java.io.IOException;
 
 /**
  * This class compiles a Python project.
@@ -33,9 +34,10 @@ public class PythonCompilerController {
      * @param code is a String with the code to compile.
      * @return a String with the compilation result.
      * @throws IllegalStateException when method invoked at an illegal time.
-     * @throws IOException is a exception when invalid input is provided.
      */
     @PostMapping("/compilePython")
+    @ApiOperation(value = "Compiles python code", notes = "Provide the python code to compile",
+            authorizations = {@Authorization(value = "JWT")})
     public String compilePython(final @RequestParam("code") String code) throws IllegalStateException {
         return CompilerFacade.facadePythonCompile(code);
     }

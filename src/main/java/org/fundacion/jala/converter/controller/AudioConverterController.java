@@ -10,6 +10,8 @@
  */
 package org.fundacion.jala.converter.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.core.exceptions.PaoPaoException;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import static org.fundacion.jala.converter.core.facade.MetadataFacade.extractMetadata;
@@ -54,11 +57,14 @@ public class AudioConverterController {
      * @throws InterruptedException is exception if process is interrupted.
      */
     @PostMapping("/convertAudio")
-    public String uploadFile(final @RequestParam("file") MultipartFile file, final @RequestParam("format") String format,
+    @ApiOperation(value = "Converts audio file", notes = "Provide the audio file to convert",
+            authorizations = {@Authorization(value = "JWT")})
+    public String uploadFile(final @RequestPart("file") MultipartFile file, final @RequestParam("format") String format,
                              final @RequestParam("bitrate") String bitrate, final @RequestParam("volume") String volume,
                              final @RequestParam("hz") String hz, final @RequestParam("audiochannel") String audioChannel,
                              final @RequestParam("checksum") String checksum,
-                             final @RequestParam("metadata") boolean metadata) throws IOException, InterruptedException {
+                             final @RequestParam("metadata") boolean metadata)
+            throws IOException, InterruptedException {
         LOGGER.info("start");
         parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
         String outputFilename = ConverterFacade.getAudioConverter(

@@ -10,6 +10,8 @@
  */
 package org.fundacion.jala.converter.view.login;
 
+import org.apache.http.client.ClientProtocolException;
+import org.fundacion.jala.converter.controller.response.PaoPaoResponse;
 import org.fundacion.jala.converter.view.Models.RegisterRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import javax.swing.JFrame;
@@ -23,6 +25,7 @@ import javax.swing.ImageIcon;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 /**
  * This class creates the Register UI.
@@ -145,13 +148,17 @@ public class RegisterInterface extends JFrame implements ActionListener {
         registerRequestForm.addUsername(username);
         registerRequestForm.addPassword(password);
         try {
-            String result = CLIENT_REQUEST.executeRequestWithoutToken(registerRequestForm);
-            System.out.println(result);
-        } catch (Exception e) {
+            PaoPaoResponse result = CLIENT_REQUEST.executeRequestWithoutToken(registerRequestForm);
+            if ("200".equals(result.getStatus())) {
+                JOptionPane.showMessageDialog(this, "Register successful");
+            } else {
+                JOptionPane.showMessageDialog(this, "Invalid username");
+            }
+        } catch (ClientProtocolException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Invalid username");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        JOptionPane.showMessageDialog(this, "Register successful");
     }
 
     /**

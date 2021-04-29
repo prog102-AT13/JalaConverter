@@ -10,6 +10,8 @@
  */
 package org.fundacion.jala.converter.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.core.exceptions.PaoPaoException;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
@@ -42,7 +45,9 @@ public class ExtractMetadataController {
      * @throws IOException is a exception when invalid input is provided.
      */
     @PostMapping("/extractMetadata")
-    public String extractMetadata(final @RequestParam("fileToExtract") MultipartFile fileToExtract,
+    @ApiOperation(value = "Extracts a file's metadata", notes = "Provide the file to extract its metadata",
+            authorizations = {@Authorization(value = "JWT")})
+    public String uploadFile(final @RequestPart("fileToExtract") MultipartFile fileToExtract,
                              final @RequestParam("moreInfo") Boolean isMoreInfo,
                              final @RequestParam("nameExport") String nameExport,
                              final @RequestParam("format") String format) throws IllegalStateException, IOException {

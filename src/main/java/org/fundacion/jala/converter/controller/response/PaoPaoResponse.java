@@ -6,12 +6,12 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Jessicka Moya Andrade
+ * @author Raymundo Guaraguara Sansusty
  */
-package org.fundacion.jala.converter.response;
+package org.fundacion.jala.converter.controller.response;
 
 /**
- * This class creates the application's responses.
+ * This class creates a PaoPaoResponse.
  */
 public class PaoPaoResponse {
     private String status;
@@ -23,7 +23,7 @@ public class PaoPaoResponse {
     /**
      * Gets the response status.
      *
-     * @return a String with the current status.
+     * @return a String with the status.
      */
     public String getStatus() {
         return status;
@@ -32,7 +32,7 @@ public class PaoPaoResponse {
     /**
      * Sets the response status.
      *
-     * @param newStatus is a String to change the status.
+     * @param newStatus a String to change the status.
      */
     public void setStatus(final String newStatus) {
         this.status = status;

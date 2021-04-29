@@ -10,6 +10,8 @@
  */
 package org.fundacion.jala.converter.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.core.exceptions.PaoPaoException;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import static org.fundacion.jala.converter.core.facade.MetadataFacade.extractMetadata;
@@ -56,7 +59,9 @@ public class VideoConverterController {
      * @throws InterruptedException is exception if process is interrupted.
      */
     @PostMapping("/convertVideo")
-    public String uploadFile(final @RequestParam("file") MultipartFile file,
+    @ApiOperation(value = "Converts video file", notes = "Provide the video file to convert",
+            authorizations = {@Authorization(value = "JWT")})
+    public String uploadFile(final @RequestPart("file") MultipartFile file,
                              final @RequestParam("outputformat") String outputFormat,
                              final @RequestParam("resolution") String resolution,
                              final @RequestParam("thumbnail") boolean thumbnail,
