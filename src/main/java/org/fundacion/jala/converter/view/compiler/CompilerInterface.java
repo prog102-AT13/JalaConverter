@@ -99,7 +99,6 @@ public class CompilerInterface extends JPanel {
                 LOGGER.info("start");
                 String inputCode = projectTab.getSelectedPane().getText();
                 CompileRequestForm compileRequestForm = new CompileRequestForm(projectId);
-//                compileRequestForm.addCode(inputCode);
                 try {
                     LOGGER.info("Execute Try");
                     String sResponse = clientRequest.executeRequest(compileRequestForm, token);
@@ -168,6 +167,9 @@ public class CompilerInterface extends JPanel {
         ActionListener actionListener = new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
+                if (projectTab != null && projectTab.getTabList() != null) {
+                    projectTab.cleanProjectTab();
+                }
                 createProject();
             }
         };
@@ -221,7 +223,7 @@ public class CompilerInterface extends JPanel {
     /**
      * Gets options to change or not language.
      *
-     * @return a integer that represents the choose.
+     * @return a integer that represents the choice.
      */
     public int changeLanguage() {
         int selection = JOptionPane.showOptionDialog(null, "Your code is not saved. Are "
