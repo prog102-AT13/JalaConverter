@@ -47,21 +47,21 @@ public class MainInterface extends JFrame implements ActionListener {
 
     private JLayeredPane mainPanel;
 
+    private String token;
+
 
         /**
          * Initializes all the graphic components in the main Frame.
          *
          * @param newToken String with the user's token.
          */
-        public void initInterface(/*final String newToken*/) {
-            //token = newToken;
-
-            compilerPanel = new CompilerInterface(/*token*/);
-            videoPanel = new VideoConverterInterface(/*token*/);
-            audioPanel = new AudioConverterInterface(/*token*/);
-            metaDataPanel = new MetaDataInterface(/*token*/);
-            textExtractorPanel = new TextExtractorInterface(/*token*/);
-
+        public void initInterface(final String newToken) {
+            token = newToken;
+            compilerPanel = new CompilerInterface(token);
+            videoPanel = new VideoConverterInterface(token);
+            audioPanel = new AudioConverterInterface(token);
+            metaDataPanel = new MetaDataInterface(token);
+            textExtractorPanel = new TextExtractorInterface(token);
             JPanel containerPanel = new JPanel();
             containerPanel.setLayout(new BorderLayout());
             containerPanel.setBorder(MARGIN_SPACE);
@@ -74,11 +74,8 @@ public class MainInterface extends JFrame implements ActionListener {
             JLabel titleApp = new JLabel("PaoPao's Application", SwingConstants.CENTER);
             titleApp.setFont(new Font("Barlow", Font.BOLD, 20));
             titleApp.setForeground(Color.DARK_GRAY);
-
             containerPanel.add(titleApp, BorderLayout.NORTH);
             containerPanel.add(mainPanel, BorderLayout.CENTER);
-            //containerPanel.setBackground(Color.WHITE);
-
             JLabel copyrightAT13 = new JLabel("© Copyright AT13 - 2021", SwingConstants.CENTER);
             copyrightAT13.setFont(new Font("Barlow", Font.PLAIN, 10));
             copyrightAT13.setForeground(Color.DARK_GRAY);
@@ -98,9 +95,6 @@ public class MainInterface extends JFrame implements ActionListener {
             setPosition(buttonsPanel, audioConverterBtn, false);
             setPosition(buttonsPanel, textExtractorBtn, false);
             setPosition(buttonsPanel, metaDataBtn, true);
-
-            //setIconImage(createImage("img/Logo.png").getImage());
-
             setLayout(new BorderLayout());
             add(buttonsPanel, BorderLayout.LINE_START);
             add(containerPanel, BorderLayout.CENTER);
@@ -179,10 +173,6 @@ public class MainInterface extends JFrame implements ActionListener {
                 button.setBorder(border);
                 button.setFont(new Font("Barlow", Font.PLAIN, 13));
                 button.setPreferredSize(new Dimension(widthBtn, heightBtn));
-
-                //RoundedBorder blueLineBorder = new RoundedBorder(new Color(69, 143, 253), 10);
-                //Border emptyBorder = BorderFactory.createEmptyBorder(button.getBorder().getBorderInsets(button).top, button.getBorder().getBorderInsets(button).left, button.getBorder().getBorderInsets(button).bottom, button.getBorder().getBorderInsets(button).right);
-                //button.setBorder(BorderFactory.createCompoundBorder(blueLineBorder, emptyBorder));
 
                 MouseListener ml = new MouseAdapter() {
                     @Override

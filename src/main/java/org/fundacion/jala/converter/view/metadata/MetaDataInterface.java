@@ -38,11 +38,11 @@ public class MetaDataInterface extends JPanel implements ActionListener {
     private static final Logger LOGGER = LogManager.getLogger();
     private final int WAIT_TIME = 5000;
 
-    public MetaDataInterface(/*final String newToken*/) {
+    public MetaDataInterface(final String newToken) {
         final int MARGIN_SPACE = 30;
         final int MARGIN_BOTTOM_MAIN_CONTAINER = 200;
         final int MARGIN_BOTTOM_BTN_CONTAINER = 100;
-        //token = newToken;
+        token = newToken;
         JLabelStyle metaDataTitle = new JLabelStyle("Extract Metadata", "h2");
         file = new SelectFile();
         exportingFormat = new ExportingFormat();

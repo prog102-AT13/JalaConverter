@@ -33,8 +33,8 @@ public class CompilerInterface extends JPanel {
     private ClientRequest clientRequest = new ClientRequest();
     private int choose;
 
-    public CompilerInterface(/*final String newToken*/) {
-        //token = newToken;
+    public CompilerInterface(final String newToken) {
+        token = newToken;
         choose = 1;
         buttonsCompiler = new CompilerButtons();
         consoleOutput = new Console();

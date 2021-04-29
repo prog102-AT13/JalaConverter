@@ -53,11 +53,11 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
     private String token;
     private String checksumLocal;
 
-    public AudioConverterInterface(/*final String newToken*/) {
+    public AudioConverterInterface(final String newToken) {
         final int MARGIN_SPACE = 30;
         final int MARGIN_BOTTOM_MAIN_CONTAINER = 200;
         final int MARGIN_BOTTOM_BTN_CONTAINER = 100;
-        //token = newToken;
+        token = newToken;
         JLabelStyle audioTitle = new JLabelStyle("Audio converter", "h2");
         JLabelStyle audioSettings = new JLabelStyle("Audio settings", "h3");
         audioTitle.setAlignmentX(LEFT_ALIGNMENT);

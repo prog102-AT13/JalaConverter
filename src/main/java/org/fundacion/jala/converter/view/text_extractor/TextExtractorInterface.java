@@ -38,11 +38,11 @@ public class TextExtractorInterface extends JPanel implements ActionListener {
     private final Logger LOGGER = LogManager.getLogger();
     private String token;
 
-    public TextExtractorInterface(/*final String newToken*/) {
+    public TextExtractorInterface(final String newToken) {
         final int MARGIN_SPACE = 30;
         final int MARGIN_BOTTOM_MAIN_CONTAINER = 200;
         final int MARGIN_BOTTOM_BTN_CONTAINER = 200;
-        //token = newToken;
+        token = newToken;
         JLabelStyle lblTxtExtractor = new JLabelStyle("Text extractor", "h2");
         BtnStyle convertTxtExtract = new BtnStyle("Extract", 2);
         convertTxtExtract.addActionListener(this::actionPerformed);

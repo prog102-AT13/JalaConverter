@@ -14,110 +14,119 @@ import org.fundacion.jala.converter.view.MainInterface;
 import org.fundacion.jala.converter.view.Models.AuthenticateRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import org.springframework.security.authentication.BadCredentialsException;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import java.awt.Container;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Font;
 import java.io.IOException;
 
 /**
  * This class creates the Login UI.
  */
 public class LoginInterface extends JFrame implements ActionListener {
-    private final Container LOGIN_CONTENT_PANE = getContentPane();
-    private final JLabel USERNAME_LABEL = new JLabel("USERNAME");
-    private final JLabel PASSWORD_LABEL = new JLabel("PASSWORD");
-    private final JTextField USERNAME_TEXT_FIELD = new JTextField();
-    private final JPasswordField PASSWORD_FIELD = new JPasswordField();
+    private final JLabel USERNAME_LABEL = new JLabel("Username: ");
+    private final JLabel PASSWORD_LABEL = new JLabel("Password: ");
+    private final JTextField USERNAME_TEXT_FIELD = new JTextField(15);
+    private final JPasswordField PASSWORD_FIELD = new JPasswordField(15);
     private final Icon EYE_ICON = new ImageIcon("img/EyeIcon.png");
-    private final JButton LOGIN_BUTTON = new JButton("LOGIN");
+    private final JButton LOGIN_BUTTON = new JButton("Login");
     private final JButton SHOW_PASSWORD_BUTTON = new JButton(EYE_ICON);
-    private final JButton REGISTER_BUTTON = new JButton("REGISTER");
+    private final JButton REGISTER_BUTTON = new JButton("Register");
     private final ClientRequest CLIENT_REQUEST = new ClientRequest();
-    private final int FIELDS_HEIGHT = 30;
-    private final int TEXT_FIELD_WIDTH = 150;
-    private final int LABEL_OR_BUTTON_WIDTH = 100;
-    private final int SMALL_BUTTON_SIZE = 29;
     private final int LOGIN_X_POSITION = 500;
     private final int LOGIN_Y_POSITION = 200;
     private final int LOGIN_WIDTH = 400;
-    private final int LOGIN_HEIGHT = 350;
-    private final int LABEL_X_POSITION = 50;
-    private final int TEXT_FIELD_X_POSITION = 150;
-    private final int FIRST_COMPONENTS_Y_POSITION = 50;
-    private final int SECOND_COMPONENTS_Y_POSITION = 120;
-    private final int THIRD_COMPONENTS_Y_POSITION = 190;
-    private final int LOGIN_BUTTON_X_POSITION = 225;
-    private final int SHOW_PASSWORD_BUTTON_X_POSITION = 300;
-    private final int REGISTER_BUTTON_X_POSITION = 75;
+    private final int LOGIN_HEIGHT = 250;
+    private final int MARGIN_SPACE = 50;
+    private final int VERTICAL_SPACE_FLOW = 15;
+    private final int HORIZONTAL_SPACE_FLOW = 10;
     private Boolean passwordShowStatus = true;
 
     public LoginInterface() {
-        setTitle("LOGIN");
-        setVisible(true);
-        setBounds(LOGIN_X_POSITION, LOGIN_Y_POSITION, LOGIN_WIDTH, LOGIN_HEIGHT);
+        ImageIcon image = new ImageIcon("img/loginImg.png");
+        JLabel loginImg = new JLabel(image);
+        setProperties();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
-        setLayoutManager();
-        setLocationAndSize();
-        addComponentsToContainer();
-        addActionEvent();
-    }
-
-    /**
-     * Sets the layout manager for the container.
-     */
-    public void setLayoutManager() {
-        LOGIN_CONTENT_PANE.setLayout(null);
+        setBounds(LOGIN_X_POSITION, LOGIN_Y_POSITION, LOGIN_WIDTH, LOGIN_HEIGHT);
+        setUndecorated(true);
+        setMinimumSize(new Dimension(LOGIN_WIDTH, LOGIN_HEIGHT));
+        JPanel userPanel = new JPanel();
+        userPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        userPanel.setBorder(new EmptyBorder(0, MARGIN_SPACE, 0, MARGIN_SPACE));
+        userPanel.setLayout(new FlowLayout(FlowLayout.LEFT, HORIZONTAL_SPACE_FLOW, VERTICAL_SPACE_FLOW));
+        userPanel.add(USERNAME_LABEL);
+        userPanel.add(USERNAME_TEXT_FIELD);
+        userPanel.setBackground(Color.DARK_GRAY);
+        JPanel passPanel = new JPanel();
+        passPanel.setBorder(new EmptyBorder(0, MARGIN_SPACE, 0, MARGIN_SPACE));
+        passPanel.setLayout(new FlowLayout(FlowLayout.LEFT, HORIZONTAL_SPACE_FLOW, VERTICAL_SPACE_FLOW));
+        passPanel.setBackground(Color.DARK_GRAY);
+        passPanel.add(PASSWORD_LABEL);
+        passPanel.add(PASSWORD_FIELD);
+        JPanel btnPanel = new JPanel();
+        btnPanel.setBorder(new EmptyBorder(0, MARGIN_SPACE, 0, MARGIN_SPACE));
+        btnPanel.setLayout(new FlowLayout(FlowLayout.CENTER, HORIZONTAL_SPACE_FLOW, VERTICAL_SPACE_FLOW));
+        btnPanel.add(LOGIN_BUTTON);
+        btnPanel.add(REGISTER_BUTTON);
+        btnPanel.setBackground(Color.DARK_GRAY);
+        JPanel container = new JPanel();
+        container.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        container.setBackground(Color.DARK_GRAY);
+        container.add(new JButton(new AbstractAction("X") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        }));
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.add(container);
+        mainPanel.add(loginImg);
+        mainPanel.add(userPanel);
+        mainPanel.add(passPanel);
+        mainPanel.add(btnPanel);
+        mainPanel.setBackground(Color.DARK_GRAY);
+        add(mainPanel);
+        setVisible(true);
     }
 
     /**
      * Sets all the components location and sizes.
      */
-    public void setLocationAndSize() {
-        USERNAME_LABEL.setBounds(LABEL_X_POSITION, FIRST_COMPONENTS_Y_POSITION,
-                LABEL_OR_BUTTON_WIDTH, FIELDS_HEIGHT);
-        PASSWORD_LABEL.setBounds(LABEL_X_POSITION, SECOND_COMPONENTS_Y_POSITION,
-                LABEL_OR_BUTTON_WIDTH, FIELDS_HEIGHT);
-        USERNAME_TEXT_FIELD.setBounds(TEXT_FIELD_X_POSITION, FIRST_COMPONENTS_Y_POSITION,
-                TEXT_FIELD_WIDTH, FIELDS_HEIGHT);
-        PASSWORD_FIELD.setBounds(TEXT_FIELD_X_POSITION, SECOND_COMPONENTS_Y_POSITION,
-                TEXT_FIELD_WIDTH, FIELDS_HEIGHT);
-        LOGIN_BUTTON.setBounds(LOGIN_BUTTON_X_POSITION, THIRD_COMPONENTS_Y_POSITION,
-                LABEL_OR_BUTTON_WIDTH, FIELDS_HEIGHT);
-        SHOW_PASSWORD_BUTTON.setBounds(SHOW_PASSWORD_BUTTON_X_POSITION, SECOND_COMPONENTS_Y_POSITION,
-                SMALL_BUTTON_SIZE, SMALL_BUTTON_SIZE);
-        REGISTER_BUTTON.setBounds(REGISTER_BUTTON_X_POSITION, THIRD_COMPONENTS_Y_POSITION,
-                LABEL_OR_BUTTON_WIDTH, FIELDS_HEIGHT);
-    }
-
-    /**
-     * Adds all the components to the container.
-     */
-    public void addComponentsToContainer() {
-        LOGIN_CONTENT_PANE.add(USERNAME_LABEL);
-        LOGIN_CONTENT_PANE.add(PASSWORD_LABEL);
-        LOGIN_CONTENT_PANE.add(USERNAME_TEXT_FIELD);
-        LOGIN_CONTENT_PANE.add(PASSWORD_FIELD);
-        LOGIN_CONTENT_PANE.add(LOGIN_BUTTON);
-        LOGIN_CONTENT_PANE.add(SHOW_PASSWORD_BUTTON);
-        LOGIN_CONTENT_PANE.add(REGISTER_BUTTON);
-    }
-
-    /**
-     * Adds the actions performed.
-     */
-    public void addActionEvent() {
+    public void setProperties() {
+        USERNAME_LABEL.setForeground(Color.WHITE);
+        PASSWORD_LABEL.setForeground(Color.WHITE);
+        USERNAME_TEXT_FIELD.setFont(new Font("Barlow", Font.PLAIN, 12));
+        USERNAME_TEXT_FIELD.setForeground(Color.DARK_GRAY);
+        PASSWORD_FIELD.setForeground(Color.DARK_GRAY);
+        PASSWORD_FIELD.setFont(new Font("Barlow", Font.PLAIN, 12));
         LOGIN_BUTTON.addActionListener(this);
         SHOW_PASSWORD_BUTTON.addActionListener(this);
         REGISTER_BUTTON.addActionListener(this);
+
+        LOGIN_BUTTON.setFont(new Font("Barlow", Font.PLAIN, 12));
+        LOGIN_BUTTON.setPreferredSize(new Dimension(100, 30));
+        LOGIN_BUTTON.setOpaque(true);
+        LOGIN_BUTTON.setBackground(new Color(242, 156, 85));
+        LOGIN_BUTTON.setFocusPainted(false);
+        LOGIN_BUTTON.setForeground(Color.WHITE);
+        Border border = new LineBorder(Color.WHITE, 0);
+        LOGIN_BUTTON.setBorder(border);
+
+        REGISTER_BUTTON.setFont(new Font("Barlow", Font.PLAIN, 12));
+        REGISTER_BUTTON.setPreferredSize(new Dimension(100, 30));
+        REGISTER_BUTTON.setOpaque(true);
+        REGISTER_BUTTON.setBackground(new Color(198, 198, 198));
+        REGISTER_BUTTON.setFocusPainted(false);
+        REGISTER_BUTTON.setForeground(Color.DARK_GRAY);
+        REGISTER_BUTTON.setBorder(border);
     }
 
     /**
@@ -141,7 +150,7 @@ public class LoginInterface extends JFrame implements ActionListener {
         }
         result = result.substring(8, result.length() - 2);
         this.dispose();
-        //new MainInterface().initInterface(result);
+        new MainInterface().initInterface(result);
     }
 
     /**

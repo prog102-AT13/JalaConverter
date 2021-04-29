@@ -52,11 +52,11 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
     private String token;
     private String checksumLocal;
 
-    public VideoConverterInterface(/*final String newToken*/) {
+    public VideoConverterInterface(final String newToken) {
         final int MARGIN_SPACE = 30;
         final int MARGIN_BOTTOM_MAIN_CONTAINER = 200;
         final int MARGIN_BOTTOM_BTN_CONTAINER = 100;
-        //token = newToken;
+        token = newToken;
         JLabelStyle videoTitle = new JLabelStyle("Select Video:", "h2");
         videoTitle.setAlignmentX(LEFT_ALIGNMENT);
         file = new SelectFile();
