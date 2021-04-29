@@ -19,6 +19,7 @@ public class SuccessAuthenticationResponse extends PaoPaoResponse {
 
     /**
      * Gets the json web token.
+     *
      * @return a String with the token.
      */
     public String getJwt() {
@@ -27,6 +28,7 @@ public class SuccessAuthenticationResponse extends PaoPaoResponse {
 
     /**
      * Sets the json web token.
+     *
      * @param newJwt a String to change the token.
      */
     public void setJwt(final String newJwt) {

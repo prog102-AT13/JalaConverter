@@ -39,7 +39,6 @@ import java.io.BufferedInputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
-
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 
 /**
@@ -238,15 +237,15 @@ public class ClientRequest {
      */
     public static void saveFileFromUrlWithJavaIO(final String fileName, final String fileUrl)
             throws MalformedURLException, IOException {
-        final int numberByte = 1024;
+        final int NUMBER_BYTE = 1024;
         BufferedInputStream in = null;
         FileOutputStream fout = null;
         try {
             in = new BufferedInputStream(new URL(fileUrl).openStream());
             fout = new FileOutputStream(fileName);
-            byte[] data = new byte[numberByte];
+            byte[] data = new byte[NUMBER_BYTE];
             int count;
-            while ((count = in.read(data, 0, numberByte)) != -1) {
+            while ((count = in.read(data, 0, NUMBER_BYTE)) != -1) {
                 fout.write(data, 0, count);
             }
         } finally {

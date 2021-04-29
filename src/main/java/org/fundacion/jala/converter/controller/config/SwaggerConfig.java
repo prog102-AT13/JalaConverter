@@ -36,51 +36,42 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("API")
-                .securitySchemes(Arrays.asList(apiKey()))
-                .select()
+                .groupName("API").securitySchemes(Arrays.asList(apiKey())).select()
                 .paths(PathSelectors.ant("/api/*"))
                 .apis(RequestHandlerSelectors.basePackage("org.fundacion.jala.converter"))
-                .build()
-                .apiInfo(apiDetails());
+                .build().apiInfo(apiDetails());
     }
 
     /**
      * Creates the authentication Docket.
      *
-     * @return a Docket with Swagger configuration
+     * @return a Docket with Swagger configuration.
      */
     @Bean
     public Docket apiAuthentication() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("AUTHENTICATION")
-                .select()
-                .paths(PathSelectors.ant("/authenticate"))
+                .groupName("AUTHENTICATION").select().paths(PathSelectors.ant("/authenticate"))
                 .apis(RequestHandlerSelectors.basePackage("org.fundacion.jala.converter"))
-                .build()
-                .apiInfo(apiDetails());
+                .build().apiInfo(apiDetails());
     }
 
     /**
      * Creates the registration Docket.
      *
-     * @return a Docket with Swagger configuration
+     * @return a Docket with Swagger configuration.
      */
     @Bean
     public Docket apiRegistration() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("REGISTRATION")
-                .select()
-                .paths(PathSelectors.ant("/register"))
+                .groupName("REGISTRATION").select().paths(PathSelectors.ant("/register"))
                 .apis(RequestHandlerSelectors.basePackage("org.fundacion.jala.converter"))
-                .build()
-                .apiInfo(apiDetails());
+                .build().apiInfo(apiDetails());
     }
 
     /**
      * Customizes the API Information.
      *
-     * @return the ApiInfo with the custom values
+     * @return the ApiInfo with the custom values.
      */
     private ApiInfo apiDetails() {
         return new ApiInfo(
@@ -111,8 +102,9 @@ public class SwaggerConfig {
     }
 
     /**
-     * hello
-     * @return
+     * Creates a Multipart resolver.
+     *
+     * @return an object CommonsMultipartResolver.
      */
     @Bean(name = "multipartResolver")
     public CommonsMultipartResolver commonsMultipartResolver() {

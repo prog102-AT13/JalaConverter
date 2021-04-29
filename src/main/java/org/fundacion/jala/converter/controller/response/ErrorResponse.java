@@ -19,6 +19,7 @@ public class ErrorResponse extends PaoPaoResponse {
 
     /**
      * Gets the response's message.
+     *
      * @return a String with the message.
      */
     public String getMessage() {
@@ -27,6 +28,7 @@ public class ErrorResponse extends PaoPaoResponse {
 
     /**
      * Sets the response's message.
+     *
      * @param newMessage a String to change the message.
      */
     public void setMessage(final String newMessage) {

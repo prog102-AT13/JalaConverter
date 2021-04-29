@@ -18,6 +18,7 @@ public class PaoPaoResponse {
 
     /**
      * Gets the response status.
+     *
      * @return a String with the status.
      */
     public String getStatus() {
@@ -26,6 +27,7 @@ public class PaoPaoResponse {
 
     /**
      * Sets the response status.
+     *
      * @param newStatus a String to change the status.
      */
     public void setStatus(final String newStatus) {

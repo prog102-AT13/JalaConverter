@@ -21,6 +21,7 @@ public class SuccessRegistrationResponse extends PaoPaoResponse {
 
     /**
      * Gets the username.
+     *
      * @return a String with username.
      */
     public String getUsername() {
@@ -29,6 +30,7 @@ public class SuccessRegistrationResponse extends PaoPaoResponse {
 
     /**
      * Sets the username.
+     *
      * @param newUsername a String with username to change.
      */
     public void setUsername(final String newUsername) {
@@ -37,6 +39,7 @@ public class SuccessRegistrationResponse extends PaoPaoResponse {
 
     /**
      * Gets the password.
+     *
      * @return a String with the password.
      */
     public String getPassword() {
@@ -45,6 +48,7 @@ public class SuccessRegistrationResponse extends PaoPaoResponse {
 
     /**
      * Sets the password.
+     *
      * @param newPassword a String with the password to change.
      */
     public void setPassword(final String newPassword) {
