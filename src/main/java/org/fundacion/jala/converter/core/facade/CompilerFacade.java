@@ -34,7 +34,6 @@ public class CompilerFacade {
      */
     public static String facadeJavaCompile(final JavaParameter javaParameter) {
         javaCompiler = new JavaCompiler();
-//        result = javaCompiler.javaCompiler(javaParameter);
         result = javaCompiler.projectJavaCompiler(javaParameter);
         return result;
     }

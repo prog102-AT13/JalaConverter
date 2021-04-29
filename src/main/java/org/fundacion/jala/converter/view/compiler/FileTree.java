@@ -25,7 +25,7 @@ public class FileTree extends JPanel {
     public FileTree(final String projectName) {
         root = new DefaultMutableTreeNode(projectName);
         treeModel = new DefaultTreeModel(root);
-        root.add(new DefaultMutableTreeNode("Main.java"));
+        createChild("Main.java");
         tree = new JTree(treeModel);
         tree.setShowsRootHandles(true);
         JScrollPane scrollPane = new JScrollPane(tree);
@@ -55,7 +55,8 @@ public class FileTree extends JPanel {
     /**
      * Adds a child path that represents new file of project.
      */
-    public void createChlid(final String nameFile) {
+    public void createChild(final String nameFile) {
         root.add(new DefaultMutableTreeNode(nameFile));
     }
 }
+

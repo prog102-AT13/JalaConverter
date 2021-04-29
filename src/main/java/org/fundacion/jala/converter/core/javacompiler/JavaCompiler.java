@@ -86,13 +86,8 @@ public class JavaCompiler {
      */
     public String projectJavaCompiler(final JavaParameter newJavaParameter) {
         LOGGER.info("start");
-//        final String JAVA_COMPILER = System.getProperty("user.dir") + "\\thirdparty\\windows\\javabin\\jdk-11.0.10\\bin\\javac.exe";
         final String JAVA_COMPILER = System.getProperty("user.dir") + "\\" + newJavaParameter.getJavaVersion().getCompiler();
-//        final String JAVA_EXE = System.getProperty("user.dir") + "\\thirdparty\\windows\\javabin\\jdk-11.0.10\\bin\\java.exe";
         final String JAVA_EXE = System.getProperty("user.dir") + "\\" + newJavaParameter.getJavaVersion().getExecutor();
-//        System.out.println("USER DIR " + System.getProperty("user.dir"));
-//        System.out.println("RUTA DEL THIRDPARTY COMPILER" + newJavaParameter.getJavaVersion().getCompiler());
-//        System.out.println("RUTA DEL THIRDPARTY EXECUTOR" + newJavaParameter.getJavaVersion().getExecutor());
         try {
             javaParameter = newJavaParameter;
             LOGGER.info("Execute Try");
@@ -120,3 +115,4 @@ public class JavaCompiler {
         }
     }
 }
+

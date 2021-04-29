@@ -197,5 +197,13 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
     public void setExtension(final String fileType) {
         extension = fileType;
     }
+
+    /**
+     * Cleans all tabs and names in tabList.
+     */
+    public void cleanProjectTab() {
+        removeAll();
+        tabList.clear();
+    }
 }
 

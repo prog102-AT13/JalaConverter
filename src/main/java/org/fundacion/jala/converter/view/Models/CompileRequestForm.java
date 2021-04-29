@@ -20,31 +20,10 @@ import java.util.List;
 public class CompileRequestForm implements IRequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
     private final String URL;
-//    private final String CODE = "code";
-
-//    public CompileRequestForm(final int choose) {
-//        switch (choose) {
-//            case 1:
-//                URL = "http://localhost:8080/api/compileJava";
-//                break;
-//            default:
-//                URL = "http://localhost:8080/api/compilePython";
-//                break;
-//        }
-//    }
 
     public CompileRequestForm(final String idProj) {
         URL = "http://localhost:8080/api/projects/" + idProj;
     }
-
-//    /**
-//     * Adds inputCode parameter.
-//     *
-//     * @param inputCode String with the input code.
-//     */
-//    public void addCode(final String inputCode) {
-//        addParameters(new Parameter(CODE, inputCode, false));
-//    }
 
     /**
      * Gets the body parameters.
@@ -76,3 +55,4 @@ public class CompileRequestForm implements IRequestForm {
         return URL;
     }
 }
+

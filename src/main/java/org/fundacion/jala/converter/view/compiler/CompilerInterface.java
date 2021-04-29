@@ -122,11 +122,14 @@ public class CompilerInterface extends JPanel {
         ActionListener actionListener = new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                langButtons.getJava().setEnabled(false);
-                langButtons.getPython().setEnabled(true);
-                choose = 1;
-                extension = "java";
-                projectTab.setExtension(extension);
+                if (changeLanguage() == 0) {
+                    langButtons.getJava().setEnabled(false);
+                    langButtons.getPython().setEnabled(true);
+                    choose = 1;
+                    extension = "java";
+                    createProject();
+                    projectTab.setExtension(extension);
+                }
             }
         };
         return actionListener;
@@ -141,11 +144,14 @@ public class CompilerInterface extends JPanel {
         ActionListener actionListener = new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                langButtons.getPython().setEnabled(false);
-                langButtons.getJava().setEnabled(true);
-                choose = 2;
-                extension = "py";
-                projectTab.setExtension(extension);
+                if (changeLanguage() == 0) {
+                    langButtons.getPython().setEnabled(false);
+                    langButtons.getJava().setEnabled(true);
+                    choose = 2;
+                    extension = "py";
+                    createProject();
+                    projectTab.setExtension(extension);
+                }
             }
         };
         return actionListener;
@@ -160,23 +166,7 @@ public class CompilerInterface extends JPanel {
         ActionListener actionListener = new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                LOGGER.info("start");
-                ProjectRequestForm projectRequestForm = new ProjectRequestForm();
-                String result = (String) JOptionPane.showInputDialog(null,
-                        "Write project name", "Project Name",
-                        JOptionPane.PLAIN_MESSAGE, null, null, "project 1");
-                projectRequestForm.addProjectName(result);
-                projectRequestForm.addUserId("1");
-                try {
-                    LOGGER.info("Execute Try");
-                    String sResponse = clientRequest.executeRequest(projectRequestForm, token);
-                    projectId = sResponse;
-                    consoleOutput.getConsole().setText(sResponse + " " + result);
-                    projectTab.start(extension);
-                    LOGGER.info("finish");
-                } catch (Exception exception) {
-                    LOGGER.error("Execute Exception" + exception.getMessage());
-                }
+                createProject();
             }
         };
         return actionListener;
@@ -224,6 +214,43 @@ public class CompilerInterface extends JPanel {
             }
         };
         return actionListener;
+    }
+
+    /**
+     * Gets options to change or not language.
+     *
+     * @return a integer that represents the choose.
+     */
+    public int changeLanguage() {
+        int selection = JOptionPane.showOptionDialog(null, "Your code is not saved. Are "
+                        + "you sure you want to leave this project", "Changing language",
+                JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+                null, new Object[] {"Yes", "No"}, "Yes");
+        return selection;
+    }
+
+    /**
+     * Creates a new project.
+     */
+    public void createProject() {
+        LOGGER.info("start");
+        ProjectRequestForm projectRequestForm = new ProjectRequestForm();
+        String result = (String) JOptionPane.showInputDialog(null,
+                "Write project name", "Project Name",
+                JOptionPane.PLAIN_MESSAGE, null, null, "project 1");
+        projectRequestForm.addProjectName(result);
+        projectRequestForm.addUserId("1");
+        try {
+            LOGGER.info("Execute Try");
+            String sResponse = clientRequest.executeRequest(projectRequestForm, token);
+            projectId = sResponse;
+            consoleOutput.getConsole().setText(sResponse + " " + result);
+            projectTab.cleanProjectTab();
+            projectTab.start(extension);
+            LOGGER.info("finish");
+        } catch (Exception exception) {
+            LOGGER.error("Execute Exception" + exception.getMessage());
+        }
     }
 }
 
