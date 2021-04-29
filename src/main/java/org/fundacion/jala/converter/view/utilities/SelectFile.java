@@ -10,10 +10,9 @@
  */
 package org.fundacion.jala.converter.view.utilities;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.Font;
-import java.awt.Dimension;
+import javax.swing.JPanel;
+import javax.swing.JFileChooser;
+import javax.swing.BoxLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,31 +23,35 @@ import java.io.File;
  */
 public class SelectFile extends JPanel implements ActionListener {
     private BtnStyle fileButton;
-    private JTextField textFile;
+    private TxtField textFile;
     private JFileChooser fileChooser;
     private String fileOriginPath;
+    private JPanel containerFile;
     private final int DIMENSION_WIDTH = 400;
-    private final int DIMENSION_HEIGHT = 30;
-    private final int FONT_STYLE = 0;
-    private final int FONT_SIZE = 11;
+    private final int DIMENSION_HEIGHT = 25;
+    private final int TYPE_BUTTON_FILE = 1;
 
     public SelectFile() {
         JLabelStyle lblFile = new JLabelStyle("Select a File to convert: ", "h3");
-        fileButton = new BtnStyle("Select a File", 1);
+        lblFile.setAlignmentX(LEFT_ALIGNMENT);
+        fileButton = new BtnStyle("Select a File", TYPE_BUTTON_FILE);
         fileButton.addActionListener(this::actionPerformed);
-        textFile = new JTextField();
-        textFile.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
-        textFile.setEnabled(false);
-        textFile.setPreferredSize(new Dimension(DIMENSION_WIDTH, DIMENSION_HEIGHT));
-        JPanel containerFile = new JPanel();
+        textFile = new TxtField(DIMENSION_WIDTH, DIMENSION_HEIGHT, false);
+        setPanel();
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        add(lblFile);
+        add(containerFile);
+    }
+
+    /**
+     * Sets the Panel for Button and TextField.
+     */
+    public void setPanel() {
+        containerFile = new JPanel();
         containerFile.setLayout(new FlowLayout(FlowLayout.LEFT));
         containerFile.add(fileButton);
         containerFile.add(textFile);
-        lblFile.setAlignmentX(LEFT_ALIGNMENT);
         containerFile.setAlignmentX(LEFT_ALIGNMENT);
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        add(lblFile.getTextLabel());
-        add(containerFile);
     }
 
     /**

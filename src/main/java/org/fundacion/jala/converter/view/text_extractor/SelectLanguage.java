@@ -12,35 +12,34 @@ package org.fundacion.jala.converter.view.text_extractor;
 
 import org.fundacion.jala.converter.view.utilities.ComboStyle;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
-import java.awt.Font;
 import java.awt.FlowLayout;
 
 /**
  * This class shows the select language form.
  */
 public class SelectLanguage extends JPanel {
-    private ComboStyle convertTo;
+    private final int WIDTH_COMBO_LANG = 90;
+    private final int HEIGHT_COMBO_LANG = 20;
+    private final int FLOWLAYOUT_SPACE = 10;
+    private ComboStyle langCombo;
 
     protected SelectLanguage() {
         JLabelStyle lblImageSettings = new JLabelStyle("Image settings", "h3");
         JLabelStyle labelConvertTo = new JLabelStyle("Convert to: ", "h4");
-
-        convertTo = new ComboStyle();
-        convertTo.addItem("eng");
-        convertTo.addItem("spa");
+        langCombo = new ComboStyle(WIDTH_COMBO_LANG, HEIGHT_COMBO_LANG);
+        langCombo.addItem("eng");
+        langCombo.addItem("esp");
         JPanel container = new JPanel();
-        container.setLayout(new FlowLayout(FlowLayout.LEFT));
-        container.add(labelConvertTo.getTextLabel());
-        container.add(convertTo);
+        container.setLayout(new FlowLayout(FlowLayout.LEFT, FLOWLAYOUT_SPACE, FLOWLAYOUT_SPACE));
+        container.add(labelConvertTo);
+        container.add(langCombo);
         lblImageSettings.setAlignmentX(LEFT_ALIGNMENT);
         container.setAlignmentX(LEFT_ALIGNMENT);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        add(lblImageSettings.getTextLabel());
+        add(lblImageSettings);
         add(container);
-
     }
 
     /**
@@ -49,6 +48,6 @@ public class SelectLanguage extends JPanel {
      * @return a String with the selected option.
      */
     protected String getConvertTo() {
-        return convertTo.getSelectedItem().toString();
+        return langCombo.getSelectedItem().toString();
     }
 }

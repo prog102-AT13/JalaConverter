@@ -17,10 +17,12 @@ import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import org.fundacion.jala.converter.view.utilities.BtnStyle;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
 import org.fundacion.jala.converter.view.utilities.SelectFile;
-
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.BoxLayout;
+import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
+import java.awt.FlowLayout;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -30,41 +32,50 @@ import static org.fundacion.jala.converter.ConverterApplication.dotenv;
  * This class is for the metadata UI.
  */
 public class MetaDataInterface extends JPanel implements ActionListener {
+    private static final Logger LOGGER = LogManager.getLogger();
+    private final int WAIT_TIME = 5000;
+    private final int MARGIN_SPACE = 30;
+    private final int MARGIN_BOTTOM_MAIN_CONTAINER = 200;
+    private final int MARGIN_BOTTOM_BTN_CONTAINER = 100;
+    private final int CONVERT_TYPE_BTN = 2;
     private String token;
     private SelectFile file;
     private ExportingFormat exportingFormat;
     private OutputInfo outputName;
     private ClientRequest clientRequest = new ClientRequest();
-    private static final Logger LOGGER = LogManager.getLogger();
-    private final int WAIT_TIME = 5000;
+    private JPanel btnContainer;
+    private JPanel container;
+    private BtnStyle convertMetaData;
 
     public MetaDataInterface(final String newToken) {
-        final int MARGIN_SPACE = 30;
-        final int MARGIN_BOTTOM_MAIN_CONTAINER = 200;
-        final int MARGIN_BOTTOM_BTN_CONTAINER = 100;
         token = newToken;
         JLabelStyle metaDataTitle = new JLabelStyle("Extract Metadata", "h2");
         file = new SelectFile();
         exportingFormat = new ExportingFormat();
         outputName = new OutputInfo();
-        BtnStyle convertMetaData = new BtnStyle("Extract", 2);
+        convertMetaData = new BtnStyle("Extract", CONVERT_TYPE_BTN);
         convertMetaData.addActionListener(this::actionPerformed);
-        JPanel btnContainer = new JPanel();
+        setPanels();
+        setLayout(new BorderLayout());
+        setBorder(new EmptyBorder(0, MARGIN_SPACE, MARGIN_BOTTOM_MAIN_CONTAINER, MARGIN_SPACE));
+        add(metaDataTitle, BorderLayout.NORTH);
+        add(container, BorderLayout.CENTER);
+        add(btnContainer, BorderLayout.SOUTH);
+    }
+
+    /**
+     * Sets the position in Panel of elements.
+     */
+    public void setPanels() {
+        btnContainer = new JPanel();
         btnContainer.setLayout(new FlowLayout(FlowLayout.CENTER));
         btnContainer.add(convertMetaData);
-
-        JPanel container = new JPanel();
+        container = new JPanel();
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
         container.add(file);
         container.add(exportingFormat);
         container.add(outputName);
         container.setBorder(new EmptyBorder(MARGIN_SPACE, 0, MARGIN_BOTTOM_BTN_CONTAINER, 0));
-
-        setLayout(new BorderLayout());
-        setBorder(new EmptyBorder(0, MARGIN_SPACE, MARGIN_BOTTOM_MAIN_CONTAINER, MARGIN_SPACE));
-        add(metaDataTitle.getTextLabel(), BorderLayout.NORTH);
-        add(container, BorderLayout.CENTER);
-        add(btnContainer, BorderLayout.SOUTH);
     }
 
     /**

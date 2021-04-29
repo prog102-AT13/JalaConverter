@@ -14,13 +14,16 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Color;
-import java.awt.Dimension;
 
 /**
  * This class defines the JLabel's style.
  */
 public class JLabelStyle extends JLabel {
-    private JLabel textLabel;
+    private final int FONT_SIZE_10 = 10;
+    private final int FONT_SIZE_12 = 12;
+    private final int FONT_SIZE_16 = 16;
+    private final int FONT_SIZE_20 = 20;
+
 
     public JLabelStyle(final String text, final String type) {
         if (type == "h1") {
@@ -36,15 +39,22 @@ public class JLabelStyle extends JLabel {
         }
     }
 
+    public JLabelStyle(final String text, final Color color, final int size) {
+        setText(text);
+        setFont(new Font("Barlow", Font.PLAIN, size));
+        setForeground(color);
+    }
+
     /**
      * Sets JLabel format for Titles.
      *
      * @param text String to format.
      */
     private void setTitle(final String text) {
-        textLabel = new JLabel(text, SwingConstants.CENTER);
-        textLabel.setFont(new Font("Barlow", Font.BOLD, 20));
-        textLabel.setForeground(Color.DARK_GRAY);
+        setText(text);
+        setHorizontalAlignment(SwingConstants.CENTER);
+        setFont(new Font("Barlow", Font.BOLD, FONT_SIZE_20));
+        setForeground(Color.DARK_GRAY);
     }
 
     /**
@@ -53,9 +63,10 @@ public class JLabelStyle extends JLabel {
      * @param text String to format.
      */
     private void setSubtitle(final String text) {
-        textLabel = new JLabel(text, SwingConstants.CENTER);
-        textLabel.setFont(new Font("Barlow", Font.BOLD, 16));
-        textLabel.setForeground(Color.DARK_GRAY);
+        setText(text);
+        setHorizontalAlignment(SwingConstants.CENTER);
+        setFont(new Font("Barlow", Font.BOLD, FONT_SIZE_16));
+        setForeground(Color.DARK_GRAY);
     }
 
     /**
@@ -64,9 +75,10 @@ public class JLabelStyle extends JLabel {
      * @param text String to format.
      */
     private void setSecondSubtitle(final String text) {
-        textLabel = new JLabel(text, SwingConstants.LEFT);
-        textLabel.setFont(new Font("Barlow", Font.BOLD, 12));
-        textLabel.setForeground(Color.DARK_GRAY);
+        setText(text);
+        setHorizontalAlignment(SwingConstants.LEFT);
+        setFont(new Font("Barlow", Font.BOLD, FONT_SIZE_12));
+        setForeground(Color.DARK_GRAY);
     }
 
     /**
@@ -75,9 +87,10 @@ public class JLabelStyle extends JLabel {
      * @param text String to format.
      */
     private void setContent(final String text) {
-        textLabel = new JLabel(text, SwingConstants.LEFT);
-        textLabel.setFont(new Font("Barlow", Font.PLAIN, 12));
-        textLabel.setForeground(Color.DARK_GRAY);
+        setText(text);
+        setHorizontalAlignment(SwingConstants.LEFT);
+        setFont(new Font("Barlow", Font.PLAIN, FONT_SIZE_12));
+        setForeground(Color.DARK_GRAY);
     }
 
     /**
@@ -86,17 +99,9 @@ public class JLabelStyle extends JLabel {
      * @param text String to format.
      */
     private void setFooter(final String text) {
-        textLabel = new JLabel(text, SwingConstants.CENTER);
-        textLabel.setFont(new Font("Barlow", Font.PLAIN, 10));
-        textLabel.setForeground(Color.DARK_GRAY);
-    }
-
-    /**
-     * Returns the text, formatted with the Style.
-     *
-     * @return a JLabel formatted.
-     */
-    public JLabel getTextLabel() {
-        return this.textLabel;
+        setText(text);
+        setHorizontalAlignment(SwingConstants.CENTER);
+        setFont(new Font("Barlow", Font.PLAIN, FONT_SIZE_10));
+        setForeground(Color.DARK_GRAY);
     }
 }

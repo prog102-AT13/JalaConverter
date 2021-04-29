@@ -1,33 +1,64 @@
+/**
+ * Copyright (c) 2021 Fundacion Jala.
+ *
+ * This software is the confidential and proprietary information of Fundacion Jala
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with Fundacion Jala
+ *
+ * @author Paola Ximena Aguilar Quiñones
+ */
 package org.fundacion.jala.converter.view.utilities;
 
 import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import javax.swing.Icon;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.awt.Font;
 import java.awt.Dimension;
 import java.awt.Color;
 
+/**
+ * This class defines the JButton style for the project.
+ */
 public class BtnStyle extends JButton {
     private final Color GREEN_COLOR_BTN = new Color(86, 139, 77);
     private final Color ORANGE_COLOR_BTN = new Color(242, 156, 85);
     private final Color LIGHT_GRAY_COLOR_BTN = new Color(226, 226, 226);
+    private final Color DARK_BACKGROUND_BTN = new Color(28, 28, 28);
     private final int FONT_SIZE_12 = 12;
+    private final int FONT_SIZE_13 = 13;
+    private final int FILE_BUTTON = 1;
+    private final int CONVERT_BUTTON = 2;
+    private final int LOGIN_BUTTON = 3;
+    private final int REGISTER_BUTTON = 4;
 
     public BtnStyle(final String text, final int btnType) {
-        if (btnType == 1) {
+        if (btnType == FILE_BUTTON) {
             setBtnFile(text);
         }
-        if (btnType == 2) {
+        if (btnType == CONVERT_BUTTON) {
             setBtnConvert(text);
         }
-        if (btnType == 3) {
+        if (btnType == LOGIN_BUTTON) {
             setLoginBtn(text);
         }
-        if (btnType == 4) {
+        if (btnType == REGISTER_BUTTON) {
             setRegisterBtn(text);
         }
     }
 
+    public BtnStyle(final String text, final String icon) {
+        setBtnMainMenu(text, icon);
+    }
+
+    /**
+     * Sets JButton format for Login.
+     *
+     * @param text String for the JButton.
+     */
     public void setLoginBtn(String text) {
         final int FILE_BTN_WIDTH = 100;
         final int FILE_BTN_HEIGHT = 30;
@@ -42,6 +73,11 @@ public class BtnStyle extends JButton {
         setForeground(Color.WHITE);
     }
 
+    /**
+     * Sets JButton format for Register.
+     *
+     * @param text String for the JButton.
+     */
     public void setRegisterBtn(String text) {
         final int FILE_BTN_WIDTH = 100;
         final int FILE_BTN_HEIGHT = 30;
@@ -56,6 +92,11 @@ public class BtnStyle extends JButton {
         setForeground(Color.DARK_GRAY);
     }
 
+    /**
+     * Sets JButton format for File Select.
+     *
+     * @param text String for the JButton.
+     */
     public void setBtnFile(String text) {
         final int FILE_BTN_WIDTH = 90;
         final int FILE_BTN_HEIGHT = 25;
@@ -70,11 +111,41 @@ public class BtnStyle extends JButton {
         setBorder(border);
     }
 
+    /**
+     * Sets JButton format for Convert Button.
+     *
+     * @param text String for the JButton.
+     */
     public void setBtnConvert(String text) {
         final int FILE_BTN_WIDTH = 200;
         final int FILE_BTN_HEIGHT = 45;
         setText(text);
         setFont(new Font("Barlow", Font.PLAIN, FONT_SIZE_12));
         setPreferredSize(new Dimension(FILE_BTN_WIDTH, FILE_BTN_HEIGHT));
+    }
+
+    /**
+     * Sets JButton format for Main Menu Buttons.
+     *
+     * @param text String for the JButton.
+     */
+    public void setBtnMainMenu(String text, String icon) {
+        int marginIcon = 20;
+        int widthBtn = 200;
+        int heightBtn = 50;
+        Icon buttonIcon = new ImageIcon("img/mainButtons/" + icon);
+        setText(text);
+        setIcon(buttonIcon);
+        setIconTextGap(marginIcon);
+        setHorizontalAlignment(SwingConstants.LEFT);
+        setHorizontalTextPosition(SwingConstants.RIGHT);
+        setOpaque(true);
+        setBackground(DARK_BACKGROUND_BTN);
+        setFocusPainted(false);
+        setForeground(Color.WHITE);
+        Border border = new LineBorder(Color.WHITE, 0);
+        setBorder(border);
+        setFont(new Font("Barlow", Font.PLAIN, FONT_SIZE_13));
+        setPreferredSize(new Dimension(widthBtn, heightBtn));
     }
 }

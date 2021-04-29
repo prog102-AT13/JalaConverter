@@ -14,71 +14,137 @@ import org.fundacion.jala.converter.view.MainInterface;
 import org.fundacion.jala.converter.view.Models.AuthenticateRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import org.fundacion.jala.converter.view.utilities.BtnStyle;
+import org.fundacion.jala.converter.view.utilities.JLabelStyle;
+import org.fundacion.jala.converter.view.utilities.TxtField;
 import org.springframework.security.authentication.BadCredentialsException;
-
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPasswordField;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.BoxLayout;
+import javax.swing.AbstractAction;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Font;
 import java.io.IOException;
 
 /**
  * This class creates the Login UI.
  */
 public class LoginInterface extends JFrame implements ActionListener {
-    private final JLabel USERNAME_LABEL = new JLabel("Username: ");
-    private final JLabel PASSWORD_LABEL = new JLabel("Password: ");
-    private final JTextField USERNAME_TEXT_FIELD = new JTextField(19);
-    private final JPasswordField PASSWORD_FIELD = new JPasswordField(19);
-    private final Icon EYE_ICON = new ImageIcon("img/EyeIcon.png");
-    private final BtnStyle LOGIN_BUTTON = new BtnStyle("Login", 3);
-    private final JButton SHOW_PASSWORD_BUTTON = new JButton(EYE_ICON);
-    private JButton CLOSE_BTN;
-    private final BtnStyle REGISTER_BUTTON = new BtnStyle("Register", 4);
-    private final ClientRequest CLIENT_REQUEST = new ClientRequest();
+    private final int NUMBER_COLUMNS_TEXT_FIELD = 21;
+    private final int BUTTON_EYE_SIZE = 20;
     private final int LOGIN_X_POSITION = 500;
     private final int LOGIN_Y_POSITION = 200;
     private final int LOGIN_WIDTH = 400;
     private final int LOGIN_HEIGHT = 250;
-    private final int MARGIN_SPACE = 50;
+    private final int MARGIN_SPACE = 15;
     private final int VERTICAL_SPACE_FLOW = 10;
     private final int HORIZONTAL_SPACE_FLOW = 5;
+    private final int FONT_SIZE = 12;
+    private final int LOGIN_BUTTON_TYPE = 3;
+    private final int REGITER_BUTTON_TYPE = 4;
+    private final TxtField USERNAME_TEXT_FIELD = new TxtField(NUMBER_COLUMNS_TEXT_FIELD, true);
+    private final JPasswordField PASSWORD_FIELD = new JPasswordField(NUMBER_COLUMNS_TEXT_FIELD);
+    private final Icon EYE_ICON = new ImageIcon("img/EyeIcon.png");
+    private final Icon image = new ImageIcon("img/loginImg.png");
+    private final JLabel loginImg = new JLabel(image);
+    private final BtnStyle LOGIN_BUTTON = new BtnStyle("Login", LOGIN_BUTTON_TYPE);
+    private final JButton SHOW_PASSWORD_BUTTON = new JButton(EYE_ICON);
+    private final BtnStyle REGISTER_BUTTON = new BtnStyle("Register", REGITER_BUTTON_TYPE);
+    private final ClientRequest CLIENT_REQUEST = new ClientRequest();
+    private final JLabelStyle USERNAME_LABEL = new JLabelStyle("Username: ", Color.WHITE, FONT_SIZE);
+    private final JLabelStyle PASSWORD_LABEL = new JLabelStyle("Password: ", Color.WHITE, FONT_SIZE);
     private Boolean passwordShowStatus = true;
+    private JButton CLOSE_BTN;
+    private JPanel userPanel;
+    private JPanel passPanel;
+    private JPanel btnPanel;
+    private JPanel mainContainer;
+    private JPanel container;
+    private JPanel mainPanel;
 
     public LoginInterface() {
-        ImageIcon image = new ImageIcon("img/loginImg.png");
-        JLabel loginImg = new JLabel(image);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(LOGIN_X_POSITION, LOGIN_Y_POSITION, LOGIN_WIDTH, LOGIN_HEIGHT);
         setUndecorated(true);
         setMinimumSize(new Dimension(LOGIN_WIDTH, LOGIN_HEIGHT));
-        JPanel userPanel = new JPanel();
+        setPanels();
+        setProperties();
+        add(mainPanel);
+        setVisible(true);
+    }
+
+    /**
+     * Sets all the properties for components.
+     */
+    public void setProperties() {
+        PASSWORD_FIELD.setForeground(Color.DARK_GRAY);
+        PASSWORD_FIELD.setFont(new Font("Barlow", Font.PLAIN, FONT_SIZE));
+        PASSWORD_FIELD.setBorder(new EmptyBorder(0, HORIZONTAL_SPACE_FLOW, 0, 0));
+        LOGIN_BUTTON.addActionListener(this);
+        SHOW_PASSWORD_BUTTON.addActionListener(this);
+        REGISTER_BUTTON.addActionListener(this);
+        CLOSE_BTN.setFont(new Font("Barlow", Font.BOLD, FONT_SIZE));
+        CLOSE_BTN.setOpaque(true);
+        CLOSE_BTN.setFocusPainted(false);
+        CLOSE_BTN.setBackground(null);
+        CLOSE_BTN.setForeground(Color.WHITE);
+        Border border = new LineBorder(Color.WHITE, 0);
+        CLOSE_BTN.setBorder(border);
+        SHOW_PASSWORD_BUTTON.setPreferredSize(new Dimension(BUTTON_EYE_SIZE, BUTTON_EYE_SIZE));
+        SHOW_PASSWORD_BUTTON.setOpaque(true);
+        SHOW_PASSWORD_BUTTON.setFocusPainted(false);
+        SHOW_PASSWORD_BUTTON.setBackground(null);
+        SHOW_PASSWORD_BUTTON.setBorder(border);
+    }
+
+    /**
+     * Sets all the Panels and positions for components.
+     */
+    public void setPanels() {
+        userPanel = new JPanel();
         userPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         userPanel.setBorder(new EmptyBorder(0, MARGIN_SPACE, 0, MARGIN_SPACE));
         userPanel.setLayout(new FlowLayout(FlowLayout.LEFT, HORIZONTAL_SPACE_FLOW, VERTICAL_SPACE_FLOW));
         userPanel.add(USERNAME_LABEL);
         userPanel.add(USERNAME_TEXT_FIELD);
         userPanel.setBackground(Color.DARK_GRAY);
-        JPanel passPanel = new JPanel();
+        passPanel = new JPanel();
         passPanel.setBorder(new EmptyBorder(0, MARGIN_SPACE, 0, MARGIN_SPACE));
         passPanel.setLayout(new FlowLayout(FlowLayout.LEFT, HORIZONTAL_SPACE_FLOW, VERTICAL_SPACE_FLOW));
         passPanel.setBackground(Color.DARK_GRAY);
         passPanel.add(PASSWORD_LABEL);
         passPanel.add(PASSWORD_FIELD);
         passPanel.add(SHOW_PASSWORD_BUTTON);
-        JPanel btnPanel = new JPanel();
-        btnPanel.setBorder(new EmptyBorder(0, MARGIN_SPACE, 0, MARGIN_SPACE));
+        btnPanel = new JPanel();
         btnPanel.setLayout(new FlowLayout(FlowLayout.CENTER, HORIZONTAL_SPACE_FLOW, VERTICAL_SPACE_FLOW));
         btnPanel.add(LOGIN_BUTTON);
         btnPanel.add(REGISTER_BUTTON);
         btnPanel.setBackground(Color.DARK_GRAY);
-        JPanel container = new JPanel();
+        JPanel iconContainer = new JPanel();
+        iconContainer.setLayout(new FlowLayout(FlowLayout.CENTER));
+        iconContainer.setBorder(new EmptyBorder(HORIZONTAL_SPACE_FLOW, 0, HORIZONTAL_SPACE_FLOW, 0));
+        iconContainer.add(loginImg);
+        iconContainer.setBackground(Color.DARK_GRAY);
+        mainContainer = new JPanel();
+        mainContainer.setLayout(new BoxLayout(mainContainer, BoxLayout.Y_AXIS));
+        mainContainer.add(iconContainer);
+        mainContainer.add(userPanel);
+        mainContainer.add(passPanel);
+        mainContainer.setBackground(Color.DARK_GRAY);
+        container = new JPanel();
         container.setLayout(new FlowLayout(FlowLayout.RIGHT));
         container.setBackground(Color.DARK_GRAY);
         CLOSE_BTN = new JButton(new AbstractAction("X") {
@@ -88,46 +154,13 @@ public class LoginInterface extends JFrame implements ActionListener {
             }
         });
         container.add(CLOSE_BTN);
-        setProperties();
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        mainPanel.add(container);
-        mainPanel.add(loginImg);
-        mainPanel.add(userPanel);
-        mainPanel.add(passPanel);
-        mainPanel.add(btnPanel);
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.add(container, BorderLayout.NORTH);
+        mainPanel.add(mainContainer, BorderLayout.CENTER);
+        mainPanel.add(btnPanel, BorderLayout.SOUTH);
         mainPanel.setBackground(Color.DARK_GRAY);
-        add(mainPanel);
-        setVisible(true);
-    }
-
-    /**
-     * Sets all the components location and sizes.
-     */
-    public void setProperties() {
-        USERNAME_LABEL.setForeground(Color.WHITE);
-        USERNAME_LABEL.setFont(new Font("Barlow", Font.PLAIN, 12));
-        PASSWORD_LABEL.setForeground(Color.WHITE);
-        PASSWORD_LABEL.setFont(new Font("Barlow", Font.PLAIN, 12));
-        USERNAME_TEXT_FIELD.setFont(new Font("Barlow", Font.PLAIN, 12));
-        USERNAME_TEXT_FIELD.setForeground(Color.DARK_GRAY);
-        PASSWORD_FIELD.setForeground(Color.DARK_GRAY);
-        PASSWORD_FIELD.setFont(new Font("Barlow", Font.PLAIN, 12));
-        LOGIN_BUTTON.addActionListener(this);
-        SHOW_PASSWORD_BUTTON.addActionListener(this);
-        REGISTER_BUTTON.addActionListener(this);
-        CLOSE_BTN.setFont(new Font("Barlow", Font.BOLD, 12));
-        CLOSE_BTN.setOpaque(true);
-        CLOSE_BTN.setFocusPainted(false);
-        CLOSE_BTN.setBackground(null);
-        CLOSE_BTN.setForeground(Color.WHITE);
-        Border border = new LineBorder(Color.WHITE, 0);
-        CLOSE_BTN.setBorder(border);
-        SHOW_PASSWORD_BUTTON.setPreferredSize(new Dimension(20, 20));
-        SHOW_PASSWORD_BUTTON.setOpaque(true);
-        SHOW_PASSWORD_BUTTON.setFocusPainted(false);
-        SHOW_PASSWORD_BUTTON.setBackground(null);
-        SHOW_PASSWORD_BUTTON.setBorder(border);
+        mainPanel.setBorder(new EmptyBorder(MARGIN_SPACE, MARGIN_SPACE, MARGIN_SPACE, MARGIN_SPACE));
     }
 
     /**

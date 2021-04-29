@@ -32,35 +32,46 @@ import static org.fundacion.jala.converter.ConverterApplication.dotenv;
  * This class shows the extractText interface.
  */
 public class TextExtractorInterface extends JPanel implements ActionListener {
+    private final Logger LOGGER = LogManager.getLogger();
+    private final int MARGIN_SPACE = 30;
+    private final int MARGIN_BOTTOM_MAIN_CONTAINER = 200;
+    private final int MARGIN_BOTTOM_BTN_CONTAINER = 200;
+    private final int CONVERT_TYPE_BTN = 2;
     private SelectFile file;
     private SelectLanguage languageSelect;
     private ClientRequest clientRequest = new ClientRequest();
-    private final Logger LOGGER = LogManager.getLogger();
     private String token;
+    private JPanel btnContainer;
+    private JPanel container;
+    private BtnStyle convertTxtExtract;
 
     public TextExtractorInterface(final String newToken) {
-        final int MARGIN_SPACE = 30;
-        final int MARGIN_BOTTOM_MAIN_CONTAINER = 200;
-        final int MARGIN_BOTTOM_BTN_CONTAINER = 200;
         token = newToken;
         JLabelStyle lblTxtExtractor = new JLabelStyle("Text extractor", "h2");
-        BtnStyle convertTxtExtract = new BtnStyle("Extract", 2);
+        convertTxtExtract = new BtnStyle("Extract", CONVERT_TYPE_BTN);
         convertTxtExtract.addActionListener(this::actionPerformed);
         file = new SelectFile();
         languageSelect = new SelectLanguage();
-        JPanel btnContainer = new JPanel();
+        setPanel();
+        setLayout(new BorderLayout());
+        setBorder(new EmptyBorder(0, MARGIN_SPACE, MARGIN_BOTTOM_MAIN_CONTAINER, MARGIN_SPACE));
+        add(lblTxtExtractor, BorderLayout.NORTH);
+        add(container, BorderLayout.CENTER);
+        add(btnContainer, BorderLayout.SOUTH);
+    }
+
+    /**
+     * Sets the position in Panel for elements.
+     */
+    public void setPanel() {
+        btnContainer = new JPanel();
         btnContainer.setLayout(new FlowLayout(FlowLayout.CENTER));
         btnContainer.add(convertTxtExtract);
-        JPanel container = new JPanel();
+        container = new JPanel();
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
         container.add(file);
         container.add(languageSelect);
         container.setBorder(new EmptyBorder(MARGIN_SPACE, 0, MARGIN_BOTTOM_BTN_CONTAINER, 0));
-        setLayout(new BorderLayout());
-        setBorder(new EmptyBorder(0, MARGIN_SPACE, MARGIN_BOTTOM_MAIN_CONTAINER, MARGIN_SPACE));
-        add(lblTxtExtractor.getTextLabel(), BorderLayout.NORTH);
-        add(container, BorderLayout.CENTER);
-        add(btnContainer, BorderLayout.SOUTH);
     }
 
     /**
