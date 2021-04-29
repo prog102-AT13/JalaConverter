@@ -77,9 +77,9 @@ public class MetaDataInterface extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(final ActionEvent e) {
         if (checkFileSelect(file.getOriginFilePath())) {
-            JOptionPane.showMessageDialog(this, "File Path: " + file.getOriginFilePath() +
-                    "\nConvert to: " + exportingFormat.getConvertTo() + "\nMore information: " +
-                    exportingFormat.hasMoreInfo() + "\nOutput name: " + outputName.getOutPutName());
+            JOptionPane.showMessageDialog(this, "File Path: " + file.getOriginFilePath()
+                    + "\nConvert to: " + exportingFormat.getConvertTo() + "\nMore information: "
+                    + exportingFormat.hasMoreInfo() + "\nOutput name: " + outputName.getOutPutName());
             try {
                 LOGGER.info("Execute Try");
                 callRequest();

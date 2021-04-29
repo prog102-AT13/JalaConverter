@@ -72,3 +72,4 @@ public class MainInterface extends JFrame {
         setVisible(true);
     }
 }
+

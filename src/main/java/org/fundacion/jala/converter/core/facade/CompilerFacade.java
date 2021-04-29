@@ -38,7 +38,7 @@ public class CompilerFacade {
         if (!code.isBlank() || !code.equals(null)) {
             javaCompiler = new JavaCompiler();
             String filePath = Transform.toFile(code, "Main", "java");
-            return javaCompiler.javaCompiler(new JavaParameter(JavaVersion.JAVA_11, filePath));
+            return javaCompiler.javaCompiler(new JavaParameter(JavaVersion.JAVA_11, filePath, "Main"));
         }
         return "";
     }
@@ -67,7 +67,7 @@ public class CompilerFacade {
      */
     public static String facadeJavaProjectCompile(final JavaParameter javaParameter) throws CompilerException {
         javaCompiler = new JavaCompiler();
-        result = javaCompiler.javaCompiler(javaParameter);
+        result = javaCompiler.javaProjectCompiler(javaParameter);
         return result;
     }
 

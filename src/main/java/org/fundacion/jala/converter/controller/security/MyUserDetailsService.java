@@ -11,9 +11,7 @@
 package org.fundacion.jala.converter.controller.security;
 
 import org.fundacion.jala.converter.controller.response.PaoPaoResponse;
-import org.fundacion.jala.converter.controller.response.SuccessAuthenticationResponse;
 import org.fundacion.jala.converter.controller.response.SuccessRegistrationResponse;
-import org.fundacion.jala.converter.models.AuthenticationRequest;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

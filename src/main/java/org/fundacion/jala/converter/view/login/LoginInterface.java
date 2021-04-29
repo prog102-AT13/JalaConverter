@@ -15,7 +15,6 @@ import org.fundacion.jala.converter.controller.response.SuccessAuthenticationRes
 import org.fundacion.jala.converter.view.MainInterface;
 import org.fundacion.jala.converter.view.Models.AuthenticateRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
-import org.springframework.security.authentication.BadCredentialsException;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
