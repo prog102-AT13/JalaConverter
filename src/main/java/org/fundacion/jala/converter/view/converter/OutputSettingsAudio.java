@@ -11,8 +11,8 @@
 package org.fundacion.jala.converter.view.converter;
 
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
 import java.awt.Font;
 import java.awt.Dimension;
@@ -34,12 +34,12 @@ class OutputSettingsAudio extends JPanel {
     private final int DIMENSION_HEIGHT = 30;
     private final int FONT_STYLE = 0;
     private final int FONT_SIZE = 12;
-    private final int GRID_LAYOUT_ROWS = 5;
+    private final int GRID_LAYOUT_ROWS = 6;
     private final int GRID_LAYOUT_COLS = 2;
-    private final String QUALITY_64KBPS = "64";
-    private final String QUALITY_128KBPS = "128";
-    private final String QUALITY_192KBPS = "192";
-    private final String QUALITY_320KBPS = "320";
+    private final String QUALITY_64KBPS = "64 \"Low\"";
+    private final String QUALITY_128KBPS = "128 \"Standard\"";
+    private final String QUALITY_192KBPS = "192 \"High\"";
+    private final String QUALITY_320KBPS = "320 \"Very High\"";
 
     protected OutputSettingsAudio() {
         JLabelStyle qualityLabel = new JLabelStyle("Select Quality (Kbps): ", "h3",
@@ -84,12 +84,11 @@ class OutputSettingsAudio extends JPanel {
      * Sets all possible quality for Audio converter.
      */
     protected void setQualitySelect() {
-        qualitySelect.addItem("");
         qualitySelect.addItem(QUALITY_64KBPS);
         qualitySelect.addItem(QUALITY_128KBPS);
         qualitySelect.addItem(QUALITY_192KBPS);
         qualitySelect.addItem(QUALITY_320KBPS);
-        qualitySelect.setSelectedIndex(2);
+        qualitySelect.setSelectedIndex(1);
     }
 
     /**
@@ -120,12 +119,6 @@ class OutputSettingsAudio extends JPanel {
         audioChannelSelect.addItem(" ");
         audioChannelSelect.addItem("mono");
         audioChannelSelect.addItem("stereo");
-        audioChannelSelect.addItem("2.1");
-        audioChannelSelect.addItem("4.0");
-        audioChannelSelect.addItem("5.0");
-        audioChannelSelect.addItem("5.1");
-        audioChannelSelect.addItem("6.1");
-        audioChannelSelect.addItem("7.1");
     }
 
     /**
