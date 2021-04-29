@@ -17,8 +17,13 @@ import org.fundacion.jala.converter.view.Models.AudioRequestForm;
 import org.fundacion.jala.converter.view.utilities.BtnStyle;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
 import org.fundacion.jala.converter.view.utilities.SelectFile;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JButton;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import java.awt.Font;
+import javax.swing.JOptionPane;
 import javax.swing.JOptionPane;
 import java.awt.*;
 import javax.swing.border.EmptyBorder;
@@ -28,6 +33,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import static org.fundacion.jala.converter.core.ChecksumService.getFileChecksum;
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
+import static org.fundacion.jala.converter.view.utilities.CheckFile.checkFileSelect;
 
 /**
  * This class creates the audio converter's UI.
@@ -39,10 +45,18 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
     private OutputSettingsAudio settings;
     private ClientRequest clientRequest = new ClientRequest();
     private static final Logger LOGGER = LogManager.getLogger();
+    private final int ALIGN_LABEL_STYLE = 2;
+    private final int WIDTH_LABEL_STYLE = 70;
+    private final int HEIGHT_LABEL_STYLE = 30;
+    private final int TOP_BORDER = 40;
+    private final int LEFT_BORDER = 40;
+    private final int BOTTOM_BORDER = 100;
+    private final int RIGHT_BORDER = 0;
     private final int FONT_STYLE = 0;
     private final int FONT_SIZE = 12;
     private String token;
     private String checksumLocal;
+    private JLabel label;
 
     public AudioConverterInterface(final String newToken) {
         final int MARGIN_SPACE = 30;
@@ -63,8 +77,14 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         audioSelect.setAlignmentX(LEFT_ALIGNMENT);
         quality = new QualityAudio();
         quality.setAlignmentX(LEFT_ALIGNMENT);
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setBorder(new EmptyBorder(TOP_BORDER, LEFT_BORDER, BOTTOM_BORDER, RIGHT_BORDER));
         settings = new OutputSettingsAudio();
         settings.setAlignmentX(LEFT_ALIGNMENT);
+        ImageIcon icon = new ImageIcon("img/loading.gif");
+        label = new JLabel();
+        label.setIcon(new ImageIcon(icon.getImage()));
+        label.setVisible(false);
         JPanel btnContainer = new JPanel();
         btnContainer.setLayout(new FlowLayout(FlowLayout.CENTER));
         btnContainer.add(convertAudio);
@@ -90,22 +110,29 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(final ActionEvent e) {
         LOGGER.info("start");
-        try {
-            LOGGER.info("Execute Try");
-            checksumLocal = getFileChecksum(file.getOriginFilePath());
-            JOptionPane.showMessageDialog(this, "File Path: " + file.getOriginFilePath()
-                    + "\nConvert to: " + audioSelect.getConvertTo() + "\nQuality: " + settings.getQuality()
-                    + "\nVolume: " + settings.getVolume() + "\nAudio Channel: " + settings.getAudioChannel()
-                    + "\nHz: " + settings.getHz() + "\nwith metadata: " + settings.isMetadata() + "\nChecksum: "
-                    + checksumLocal);
-            callRequest();
-            LOGGER.info("finish");
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-            LOGGER.error("Execute Exception");
-        } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
-            noSuchAlgorithmException.printStackTrace();
-            LOGGER.error("Execute Exception");
+        if (checkFileSelect(file.getOriginFilePath())) {
+            label.setVisible(true);
+            try {
+                LOGGER.info("Execute Try");
+                checksumLocal = getFileChecksum(file.getOriginFilePath());
+                int option = JOptionPane.showConfirmDialog(this, "File Path: " + file.getOriginFilePath()
+                        + "\nConvert to: " + audioSelect.getConvertTo() + "\nQuality: " + settings.getQuality()
+                        + "\nVolume: " + settings.getVolume() + "\nAudio Channel: " + settings.getAudioChannel()
+                        + "\nHz: " + settings.getHz() + "\nwith metadata: " + settings.isMetadata() + "\nChecksum: "
+                        + checksumLocal, "Message confirm", JOptionPane.YES_NO_OPTION);
+                if (option == 0) {
+                    callRequest();
+                } else {
+                    label.setVisible(false);
+                }
+                LOGGER.info("finish");
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+                LOGGER.error("Execute Exception");
+            } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
+                noSuchAlgorithmException.printStackTrace();
+                LOGGER.error("Execute Exception");
+            }
         }
         LOGGER.info("Finish");
     }
@@ -122,7 +149,8 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
             AudioRequestForm audioRequestForm = new AudioRequestForm();
             audioRequestForm.addFilepath(file.getOriginFilePath());
             audioRequestForm.addFormat(audioSelect.getConvertTo());
-            audioRequestForm.addBitrate(settings.getQuality());
+            String getNumberQuality [] = settings.getQuality().split(" ");
+            audioRequestForm.addBitrate(getNumberQuality[0]);
             audioRequestForm.addVolume(settings.getVolume());
             audioRequestForm.addHz(settings.getHz());
             audioRequestForm.addAudiochannel(settings.getAudioChannel());
@@ -132,6 +160,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
             clientRequest.downloadFile(result);
             JOptionPane.showMessageDialog(this, "Download in :\n"
                     + System.getProperty("user.home") + dotenv.get("DIR_DOWNLOAD"));
+            label.setVisible(false);
             System.out.println(result);
             LOGGER.info("finish");
         } catch (IOException ioException) {

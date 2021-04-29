@@ -16,9 +16,13 @@ import org.fundacion.jala.converter.view.Models.VideoRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import org.fundacion.jala.converter.view.utilities.BtnStyle;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
 import org.fundacion.jala.converter.view.utilities.SelectFile;
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
@@ -30,6 +34,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 import static org.fundacion.jala.converter.core.ChecksumService.getFileChecksum;
+import static org.fundacion.jala.converter.view.utilities.CheckFile.checkFileSelect;
 
 /**
  * This class creates the video converter's UI.
@@ -44,10 +49,19 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
     private OutputSettings settings;
     private ClientRequest clientRequest = new ClientRequest();
     private static final Logger LOGGER = LogManager.getLogger();
+    private final int alignLabelStyle = 0;
+    private final int widthLabelStyle = 100;
+    private final int heightLabelStyle = 30;
+    private final int topBorder = 50;
+    private final int leftBorder = 50;
+    private final int bottomBorder = 100;
+    private final int rightBorder = 70;
     private final int fontStyle = 0;
     private final int fontSize = 12;
     private String token;
     private String checksumLocal;
+    private JLabel label;
+
 
     public VideoConverterInterface(final String newToken) {
         token = newToken;
@@ -62,6 +76,10 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
         converterVideoButton.addActionListener(this::actionPerformed);
         settings = new OutputSettings();
         settings.setAlignmentX(LEFT_ALIGNMENT);
+        ImageIcon icon = new ImageIcon("img/loading.gif");
+        label = new JLabel();
+        label.setIcon(new ImageIcon(icon.getImage()));
+        label.setVisible(false);
         JPanel btnContainer = new JPanel();
         btnContainer.setLayout(new FlowLayout(FlowLayout.CENTER));
         btnContainer.add(converterVideoButton);
@@ -69,6 +87,7 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
         container.setBorder(new EmptyBorder(MARGIN_SPACE, 0, MARGIN_BOTTOM_BTN_CONTAINER, 0));
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
         container.add(file);
+        container.add(label);
         container.add(menuConverterType);
         container.add(settings);
         setLayout(new BorderLayout());
@@ -86,35 +105,31 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(final ActionEvent e) {
         LOGGER.info("start");
-        try {
-            LOGGER.info("Execute Try");
-            checksumLocal = getFileChecksum(file.getOriginFilePath());
-            JOptionPane.showMessageDialog(this, "File Path: "
-                    + file.getOriginFilePath()
-                    + "\nConvert to:"
-                    + menuConverterType.getConvertTo()
-                    + "\nResolutionWidth: "
-                    + settings.getWidthResolution()
-                    + "\nResolutionHeight: "
-                    + settings.getHeightResolution()
-                    + "\nFrames: "
-                    + settings.getFrame()
-                    + "\nSound: "
-                    + settings.isAudioSelected()
-                    + "\nThumbnail: "
-                    + settings.isThumbnailRequired()
-                    + "\nMetadata: "
-                    + settings.isMetadataRequired()
-                    + "\nChecksum: "
-                    + checksumLocal);
-            callRequest();
-            LOGGER.info("finish");
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-            LOGGER.error("Execute Exception");
-        } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
-            noSuchAlgorithmException.printStackTrace();
-            LOGGER.error("Execute Exception");
+        if (checkFileSelect(file.getOriginFilePath())) {
+            label.setVisible(true);
+            try {
+                LOGGER.info("Execute Try");
+                checksumLocal = getFileChecksum(file.getOriginFilePath());
+                int option = JOptionPane.showConfirmDialog(this, "File Path: "
+                        + file.getOriginFilePath()
+                        + "\nConvert to:" + menuConverterType.getConvertTo() + "\nResolutionWidth: "
+                        + settings.getWidthResolution() + "\nResolutionHeight: " + settings.getHeightResolution()
+                        + "\nFrames: " + settings.getFrame() + "\nSound: " + settings.isAudioSelected() + "\nThumbnail: "
+                        + settings.isThumbnailRequired() + "\nMetadata: " + settings.isMetadataRequired() + "\nChecksum: "
+                        + checksumLocal, "Message confirm", JOptionPane.YES_NO_OPTION);
+                if (option == 0) {
+                    callRequest();
+                } else {
+                    label.setVisible(false);
+                }
+                LOGGER.info("finish");
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+                LOGGER.error("Execute Exception");
+            } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
+                noSuchAlgorithmException.printStackTrace();
+                LOGGER.error("Execute Exception");
+            }
         }
         LOGGER.info("Finish");
     }
@@ -143,6 +158,7 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
             clientRequest.downloadFile(result);
             JOptionPane.showMessageDialog(this, "Download in :\n"
                     + System.getProperty("user.home") + dotenv.get("DIR_DOWNLOAD"));
+            label.setVisible(false);
             System.getProperty("file.separator");
             System.out.println(result);
             LOGGER.info("finish");

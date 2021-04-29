@@ -27,6 +27,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
+import static org.fundacion.jala.converter.view.utilities.CheckFile.checkFileSelect;
 
 /**
  * This class is for the metadata UI.
@@ -85,15 +86,17 @@ public class MetaDataInterface extends JPanel implements ActionListener {
      */
     @Override
     public void actionPerformed(final ActionEvent e) {
-        JOptionPane.showMessageDialog(this, "File Path: " + file.getOriginFilePath() +
-                "\nConvert to: " + exportingFormat.getConvertTo() + "\nMore information: " +
-                exportingFormat.hasMoreInfo() + "\nOutput name: " + outputName.getOutPutName());
-        try {
-            LOGGER.info("Execute Try");
-            callRequest();
-        } catch (Exception ex) {
-            LOGGER.error("Execute Exception to metaData conversion");
-            ex.printStackTrace();
+        if (checkFileSelect(file.getOriginFilePath())) {
+            JOptionPane.showMessageDialog(this, "File Path: " + file.getOriginFilePath()
+                    + "\nConvert to: " + exportingFormat.getConvertTo() + "\nMore information: "
+                    + exportingFormat.hasMoreInfo() + "\nOutput name: " + outputName.getOutPutName());
+            try {
+                LOGGER.info("Execute Try");
+                callRequest();
+            } catch (Exception ex) {
+                LOGGER.error("Execute Exception to metaData conversion");
+                ex.printStackTrace();
+            }
         }
         LOGGER.info("Finish");
     }

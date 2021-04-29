@@ -31,10 +31,10 @@ public class Result {
     /**
      * Sets the value for the filename attribute.
      *
-     * @param filename A String that represents the filename of the result.
+     * @param newFilename A String that represents the filename of the result.
      */
-    public void setFilename(final String filename) {
-        this.filename = filename;
+    public void setFilename(final String newFilename) {
+        this.filename = newFilename;
     }
 
     /**
@@ -49,10 +49,10 @@ public class Result {
     /**
      * Sets the path.
      *
-     * @param path A String with the path for the result.
+     * @param newPath A String with the path for the result.
      */
-    public void setPath(final String path) {
-        this.path = path;
+    public void setPath(final String newPath) {
+        this.path = newPath;
     }
 
     /**
@@ -67,10 +67,10 @@ public class Result {
     /**
      * Sets the processId.
      *
-     * @param processId
+     * @param newProcessId
      */
-    public void setProcessId(final String processId) {
-        this.processId = processId;
+    public void setProcessId(final String newProcessId) {
+        this.processId = newProcessId;
     }
 
     /**
@@ -85,9 +85,9 @@ public class Result {
     /**
      * Sets the text content for the result.
      *
-     * @param textContent A String with the text content of the result.
+     * @param newTextContent A String with the text content of the result.
      */
-    public void setTextContent(final String textContent) {
-        this.textContent = textContent;
+    public void setTextContent(final String newTextContent) {
+        this.textContent = newTextContent;
     }
 }

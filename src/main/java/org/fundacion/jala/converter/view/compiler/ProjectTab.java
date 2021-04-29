@@ -10,49 +10,61 @@
  */
 package org.fundacion.jala.converter.view.compiler;
 
+import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import javax.swing.JTabbedPane;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import java.awt.Font;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import java.awt.FlowLayout;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 /**
  * This class customizes a tabbed pane with custom tabs.
  */
 public class ProjectTab extends JTabbedPane implements ActionListener {
     public static int counter;
+    private final int sizeFont = 11;
+    private final int dimension = 20;
+    private ArrayList<String> tabList;
+    private ClientRequest clientRequest = new ClientRequest();
+    private String token;
+    private String extension;
     private final int SIZE_FONT_11 = 11;
     private final int SIZE_FONT_12 = 12;
+    private JButton addBtn;
 
-    public ProjectTab() {
-        CodeTextArea codeArea = new CodeTextArea();
-        codeArea.setName("Main");
-        add(codeArea);
-        setFont(new Font("Barlow", Font.PLAIN, SIZE_FONT_12));
-        setOpaque(false);
-        setBackground(Color.LIGHT_GRAY);
-        setBorder(null);
-        setTabComponentAt(getTabCount() - 1, createTabHeaderWithTitle("Main"));
-        start();
+    public ProjectTab(final String newToken) {
+        token = newToken;
     }
 
     /**
      * Starts required components to add new tabs.
      */
-    public void start() {
+    public void start(final String filetype) {
+        extension = filetype;
+        CodeTextArea codeArea = new CodeTextArea();
+        codeArea.setName(InitialCode.getNameMain(extension));
+        codeArea.getCodeArea().setText(InitialCode.generate(InitialCode.getNameMain(extension), extension));
+        add(codeArea);
+        setTabComponentAt(getTabCount() - 1, createTabHeaderWithTitle(InitialCode.getNameMain(extension)));
+        tabList = new ArrayList<>();
+
         setFont(new Font("Barlow", 0, SIZE_FONT_11));
         ImageIcon addIcon = new ImageIcon("img/compilerBtn/BtnAddTab.png");
-        JButton addBtn = new JButton(addIcon);
+        addBtn = new JButton(addIcon);
         addBtn.setOpaque(true);
         addBtn.setBackground(null);
         addBtn.setFocusPainted(false);
@@ -78,12 +90,20 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
     @Override
     public void actionPerformed(final ActionEvent event) {
         counter++;
-        String title = "EndGame " + counter;
-        CodeTextArea codeArea = new CodeTextArea();
-        codeArea.setName(title);
-        add(codeArea, getTabCount() - 1);
-        setTabComponentAt(getTabCount() - 2, createTabHeader(title));
-        setSelectedIndex(getTabCount() - 2);
+        String title = (String) JOptionPane.showInputDialog(null,
+                "Write file name", "Create file",
+                JOptionPane.PLAIN_MESSAGE, null, null, "file1");
+        if (!title.isEmpty() && tabList.size() < 7) {
+            if (!tabList.contains(title)) {
+                tabList.add(title);
+                CodeTextArea codeArea = new CodeTextArea();
+                codeArea.setName(title);
+                codeArea.getCodeArea().setText(InitialCode.generate(title, extension));
+                add(codeArea, getTabCount() - 1);
+                setTabComponentAt(getTabCount() - 2, createTabHeader(title));
+                setSelectedIndex(getTabCount() - 2);
+            }
+        }
     }
 
     /**
@@ -123,18 +143,15 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
 
         ImageIcon addIcon = new ImageIcon("img/compilerBtn/BtnCloseTab.png");
         JButton closeBtn = new JButton(addIcon);
-
         closeBtn.setOpaque(true);
         closeBtn.setBackground(Color.WHITE);
         closeBtn.setFocusPainted(false);
         Border border = new LineBorder(Color.WHITE, 0);
         closeBtn.setBorder(border);
-
-        //CloseButton tabButton = new CloseButton();
-        //tabButton.setPreferredSize(new Dimension(dimension, dimension));
         closeBtn.addActionListener(e1 -> {
             removeTab(title);
             setSelectedIndex(getTabCount() - 2);
+            tabList.remove(tabList.indexOf(title));
         });
         JPanel tabHeader = createTabHeaderWithTitle(title);
         tabHeader.add(closeBtn);
@@ -174,4 +191,40 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
             }
         }
     }
+
+    /**
+     * Gets us the plus button to access it.
+     *
+     * @return a plus button.
+     */
+    public JButton getButton() {
+        return addBtn;
+    }
+
+    /**
+     * Gets the list of all tab names.
+     *
+     * @return a array list of strings.
+     */
+    public ArrayList<String> getTabList() {
+        return tabList;
+    }
+
+    /**
+     * Sets type of extension.
+     *
+     * @param fileType represents new type of extension.
+     */
+    public void setExtension(final String fileType) {
+        extension = fileType;
+    }
+
+    /**
+     * Cleans all tabs and names in tabList.
+     */
+    public void cleanProjectTab() {
+        removeAll();
+        tabList.clear();
+    }
 }
+

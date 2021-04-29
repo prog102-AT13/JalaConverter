@@ -10,10 +10,13 @@
  */
 package org.fundacion.jala.converter.controller;
 
+import io.swagger.annotations.ApiOperation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.controller.response.ErrorResponse;
+import org.fundacion.jala.converter.controller.response.PaoPaoResponse;
+import org.fundacion.jala.converter.controller.response.SuccessAuthenticationResponse;
 import org.fundacion.jala.converter.models.AuthenticationRequest;
-import org.fundacion.jala.converter.models.AuthenticationResponse;
 import org.fundacion.jala.converter.controller.security.util.JwtUtil;
 import org.fundacion.jala.converter.controller.security.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,11 +52,11 @@ public class AuthController {
      * @param username is a String with the username.
      * @param password is a String with the password.
      * @return response entity with the token.
-     * @throws Exception when invalid username or password is given.
      */
     @PostMapping("/authenticate")
-    public ResponseEntity<?> createAuthenticationToken(final @RequestParam String username,
-                                                       final @RequestParam String password) throws Exception {
+    @ApiOperation(value = "Authenticates a user into the API", notes = "Provide a username and a password to login")
+    public ResponseEntity<PaoPaoResponse> createAuthenticationToken(final @RequestParam String username,
+                                                       final @RequestParam String password) {
         final UserDetails userDetails;
         final String jwt;
         AuthenticationRequest authenticationRequest = new AuthenticationRequest(username, password);
@@ -66,11 +69,11 @@ public class AuthController {
             authenticationManager.authenticate(userPassAuthTok);
         } catch (BadCredentialsException e) {
             authLogger.error("Error. " + e.getLocalizedMessage());
-            throw new Exception("Incorrect username or password", e);
+            return ResponseEntity.badRequest().body(new ErrorResponse("400", e.getMessage()));
         }
         userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         jwt = jwtTokenUtil.generateToken(userDetails);
         editToken(username, jwt);
-        return ResponseEntity.ok(new AuthenticationResponse(jwt));
+        return ResponseEntity.ok(new SuccessAuthenticationResponse("200", jwt));
     }
 }

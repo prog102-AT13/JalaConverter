@@ -10,7 +10,8 @@
  */
 package org.fundacion.jala.converter.controller.security;
 
-import org.fundacion.jala.converter.models.AuthenticationRequest;
+import org.fundacion.jala.converter.controller.response.PaoPaoResponse;
+import org.fundacion.jala.converter.controller.response.SuccessRegistrationResponse;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,6 +28,7 @@ import static org.fundacion.jala.converter.models.UserSQL.usernameExists;
  */
 @Service
 public class MyUserDetailsService implements UserDetailsService {
+
     /**
      * Gets user details with the username.
      *
@@ -54,8 +56,8 @@ public class MyUserDetailsService implements UserDetailsService {
      * @param password a String with password.
      * @return AuthenticationRequest with the given param.
      */
-    public AuthenticationRequest save(final String username, final String password) {
+    public PaoPaoResponse save(final String username, final String password) {
         insertUserData(username, password, "");
-        return new AuthenticationRequest(username, password);
+        return new SuccessRegistrationResponse("200", username, password);
     }
 }

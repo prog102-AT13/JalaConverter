@@ -39,9 +39,6 @@ public class ConvertTypeSelectAudio extends JPanel {
         convertTo.setFont(new Font("Barlow", fontStyle, fontSize));
         convertTo.addItem("mp3");
         convertTo.addItem("wav");
-        convertTo.addItem("m4a");
-        convertTo.addItem("flac");
-        convertTo.addItem("ogg");
         setLayout(new FlowLayout(FlowLayout.LEFT, flowLayoutHgap, flowLayoutVgap));
         add(labelConvertTo);
         add(convertTo);

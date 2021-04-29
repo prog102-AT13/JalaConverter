@@ -12,6 +12,7 @@ package org.fundacion.jala.converter.core.javacompiler;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.core.exceptions.CompilerException;
 import org.fundacion.jala.converter.core.parameter.JavaParameter;
 import org.fundacion.jala.converter.core.results.Result;
 import java.io.BufferedReader;
@@ -33,8 +34,9 @@ public class JavaCompiler {
      *
      * @param newJavaParameter for all the parameters needed for Java Compiler.
      * @return the result of execution in console.
+     * @throws CompilerException if process is interrupted.
      */
-    public String javaCompiler(final JavaParameter newJavaParameter) {
+    public String javaCompiler(final JavaParameter newJavaParameter) throws CompilerException {
         LOGGER.info("start");
         try {
             javaParameter = newJavaParameter;
@@ -57,13 +59,14 @@ public class JavaCompiler {
             return result;
         } catch (IOException exception) {
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
-            return exception.getMessage();
+            return String.valueOf(new CompilerException(exception));
         } finally {
             try {
                 LOGGER.info("Close bufferedReader Stream");
                 bufferedReader.close();
-            } catch (IOException e) {
-                LOGGER.error("Close Stream error" + e.getLocalizedMessage());
+            } catch (IOException exception) {
+                LOGGER.error("Close Stream error" + exception.getLocalizedMessage());
+                throw new CompilerException(exception);
             }
         }
     }
@@ -76,4 +79,45 @@ public class JavaCompiler {
     public Result getResult() {
         return result;
     }
+
+    /**
+     * Compiles a java project.
+     *
+     * @param newJavaParameter for all the parameters needed for Java Compiler.
+     * @return the result of execution in console.
+     */
+    public String javaProjectCompiler(final JavaParameter newJavaParameter) {
+        LOGGER.info("start");
+        final String JAVA_COMPILER = System.getProperty("user.dir") + "\\" + newJavaParameter.
+                getJavaVersion().getCompiler();
+        final String JAVA_EXE = System.getProperty("user.dir") + "\\" + newJavaParameter
+                .getJavaVersion().getExecutor();
+        try {
+            javaParameter = newJavaParameter;
+            LOGGER.info("Execute Try");
+            String comnand = "cd " + javaParameter.getFilePath() + " && " + JAVA_COMPILER
+                    + " Main.java && " + JAVA_EXE + " Main";
+            ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", comnand);
+            Process process = processBuilder.start();
+            bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String resultOfExecution = null;
+            String result = "";
+            while ((resultOfExecution = bufferedReader.readLine()) != null) {
+                result += resultOfExecution + "\n";
+            }
+            LOGGER.info("finish");
+            return result;
+        } catch (IOException exception) {
+            LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
+            return exception.getMessage();
+        } finally {
+            try {
+                LOGGER.info("Close bufferedReader Stream");
+                bufferedReader.close();
+            } catch (IOException e) {
+                LOGGER.error("Close Stream error" + e.getLocalizedMessage());
+            }
+        }
+    }
 }
+

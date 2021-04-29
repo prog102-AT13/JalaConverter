@@ -119,11 +119,7 @@ public class Project {
      */
     @Override
     public String toString() {
-        return "Project{"
-                + "id=" + id
-                + ", title='" + title + '\''
-                + ", path='" + path + '\''
-                + ", user=" + user + '\''
-                + '}';
+        return "Project{" + "id=" + id + ", title='" + title + '\'' + ", path='" + path + '\'' + ", user=" + user
+                + '\'' + '}';
     }
 }

@@ -34,6 +34,7 @@ class CompilerButtons extends JPanel implements ActionListener {
     private JButton runCode;
     private JButton clearConsole;
     private final int HGAP = 10;
+    private JButton saveFiles;
     private final int VGAP = 15;
 
     protected CompilerButtons() {
@@ -41,7 +42,9 @@ class CompilerButtons extends JPanel implements ActionListener {
         Icon buttonIcon = new ImageIcon("img/compilerBtn/BtnRunCode.png");
         runCode.setIcon(buttonIcon);
         clearConsole = makeButton("Clear");
+        saveFiles = makeButton("Save");
         setLayout(new FlowLayout(FlowLayout.RIGHT, HGAP, VGAP));
+        add(saveFiles);
         add(runCode);
         add(clearConsole);
     }
@@ -82,4 +85,23 @@ class CompilerButtons extends JPanel implements ActionListener {
         button.setBorder(border);
         return button;
     }
+
+    /**
+     * Gets selectFile button to manipulate it.
+     *
+     * @return a JButton to save files.
+     */
+    public JButton getSaveFiles() {
+        return saveFiles;
+    }
+
+    /**
+     * Gets clearConsole button to manipulate it.
+     *
+     * @return a JButton to clean text zone code.
+     */
+    public JButton getClearConsole() {
+        return clearConsole;
+    }
 }
+

@@ -81,6 +81,7 @@ class OutputSettings extends JPanel {
      * Sets all possible frames for video converter.
      */
     protected void setFrameSelect() {
+        final int DEFAULT_INDEX = 4;
         framesSelect = new JComboBox<FrameVideo>(
                 new FrameVideo[]{
                         new FrameVideo("21"),
@@ -89,6 +90,7 @@ class OutputSettings extends JPanel {
                         new FrameVideo("29"),
                         new FrameVideo("30"),
                         new FrameVideo("60")});
+        framesSelect.setSelectedIndex(DEFAULT_INDEX);
     }
 
     /**

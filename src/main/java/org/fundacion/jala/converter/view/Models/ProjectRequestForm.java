@@ -18,21 +18,11 @@ import java.util.List;
  */
 public class ProjectRequestForm implements IRequestForm {
     private List<Parameter> bodyParameters = new ArrayList<>();
-    private final String URL = "http://localhost:8080/api/makeProject";
-    private final String PROJECT_ID = "projectID";
+    private final String URL = "http://localhost:8080/api/projects";
     private final String PROJECT_NANE = "projectName";
-    private final String TYPE = "type";
+    private final String USER_ID = "userId";
 
     public ProjectRequestForm() {
-    }
-
-    /**
-     * Adds id parameter.
-     *
-     * @param id is project id.
-     */
-    public void addProjectId(final String id) {
-        addParameters(new Parameter(PROJECT_ID, id, false));
     }
 
     /**
@@ -45,12 +35,12 @@ public class ProjectRequestForm implements IRequestForm {
     }
 
     /**
-     * Adds type parameter.
+     * Adds id parameter.
      *
-     * @param projectType represents what kind of files project has.
+     * @param id is user id.
      */
-    public void addType(final String projectType) {
-        addParameters(new Parameter(TYPE, projectType, false));
+    public void addUserId(final String id) {
+        addParameters(new Parameter(USER_ID, id, false));
     }
 
     /**

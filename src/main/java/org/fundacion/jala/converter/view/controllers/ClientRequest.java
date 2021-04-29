@@ -10,6 +10,7 @@
  */
 package org.fundacion.jala.converter.view.controllers;
 
+import com.google.gson.Gson;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -23,6 +24,10 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.controller.response.ErrorResponse;
+import org.fundacion.jala.converter.controller.response.PaoPaoResponse;
+import org.fundacion.jala.converter.controller.response.SuccessAuthenticationResponse;
+import org.fundacion.jala.converter.controller.response.SuccessRegistrationResponse;
 import org.fundacion.jala.converter.view.Models.IRequestForm;
 import org.fundacion.jala.converter.view.Models.Parameter;
 import java.io.File;
@@ -33,6 +38,7 @@ import java.io.InputStream;
 import java.io.BufferedInputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Properties;
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 
 /**
@@ -48,6 +54,7 @@ public class ClientRequest {
     private static final Logger LOGGER = LogManager.getLogger();
     private final String DOWNLOAD_URL = "http://localhost:8080/api/download/";
     private final String AUTHENTICATE_URL = "http://localhost:8080/authenticate";
+    private final int SUCCESS_REGISTRATION_RESPONSE_SIZE = 3;
 
     public ClientRequest() {
         this.httpClient = HttpClients.createDefault();
@@ -82,7 +89,7 @@ public class ClientRequest {
      * @throws ClientProtocolException when an error on the HTTP protocol occurs.
      * @throws IOException when an invalid input is provided.
      */
-    public String executeRequestWithoutToken(final IRequestForm newRequestForm)
+    public PaoPaoResponse executeRequestWithoutToken(final IRequestForm newRequestForm)
             throws ClientProtocolException, IOException {
         requestForm = newRequestForm;
         httpPost = new HttpPost(requestForm.getURL());
@@ -93,7 +100,22 @@ public class ClientRequest {
         CloseableHttpResponse response = httpClient.execute(httpPost);
         HttpEntity responseEntity = response.getEntity();
         String sResponse = EntityUtils.toString(responseEntity, "UTF-8");
-        return sResponse;
+        Gson gson = new Gson();
+        Properties properties = gson.fromJson(sResponse, Properties.class);
+        if (properties.size() == SUCCESS_REGISTRATION_RESPONSE_SIZE) {
+            SuccessRegistrationResponse successRegistrationResponse = gson
+                    .fromJson(sResponse, SuccessRegistrationResponse.class);
+            return successRegistrationResponse;
+        } else {
+            if ("200".equals(properties.getProperty("status"))) {
+                SuccessAuthenticationResponse successAuthenticationResponse = gson
+                        .fromJson(sResponse, SuccessAuthenticationResponse.class);
+                return successAuthenticationResponse;
+            } else {
+                ErrorResponse errorResponse = gson.fromJson(sResponse, ErrorResponse.class);
+                return errorResponse;
+            }
+        }
     }
 
     /**
@@ -215,15 +237,15 @@ public class ClientRequest {
      */
     public static void saveFileFromUrlWithJavaIO(final String fileName, final String fileUrl)
             throws MalformedURLException, IOException {
-        final int numberByte = 1024;
+        final int NUMBER_BYTE = 1024;
         BufferedInputStream in = null;
         FileOutputStream fout = null;
         try {
             in = new BufferedInputStream(new URL(fileUrl).openStream());
             fout = new FileOutputStream(fileName);
-            byte[] data = new byte[numberByte];
+            byte[] data = new byte[NUMBER_BYTE];
             int count;
-            while ((count = in.read(data, 0, numberByte)) != -1) {
+            while ((count = in.read(data, 0, NUMBER_BYTE)) != -1) {
                 fout.write(data, 0, count);
             }
         } finally {
