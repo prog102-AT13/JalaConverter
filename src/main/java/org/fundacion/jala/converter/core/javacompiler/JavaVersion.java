@@ -20,9 +20,9 @@ public enum JavaVersion {
     private final String compiler;
     private final String executor;
 
-    JavaVersion(final String compiler, final String executor) {
-        this.compiler = compiler;
-        this.executor = executor;
+    JavaVersion(final String newCompiler, final String newExecutor) {
+        this.compiler = newCompiler;
+        this.executor = newExecutor;
     }
 
     /**

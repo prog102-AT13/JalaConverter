@@ -59,8 +59,7 @@ public class ProjectController {
      * @throws IOException is a exception when invalid input is provided.
      */
     @PostMapping("/projects/{id}/file")
-    public String createFiles(final @RequestParam("fileName") String fileName,
-                              final @PathVariable("id") int idProject,
+    public String createFiles(final @RequestParam("fileName") String fileName,  final @PathVariable("id") int idProject,
                               final @RequestParam("extension") String extension,
                               final @RequestParam("code") String code) throws IllegalStateException, IOException {
         Project project = ProjectSQL.findProjectById(idProject);

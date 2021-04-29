@@ -43,13 +43,11 @@ public class RunCommand {
             Process process = processBuilder.start();
             StringBuilder output = new StringBuilder();
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
             String line;
             while ((line = reader.readLine()) != null) {
                 output.append(line + "\n");
                 resultCommand.add(line);
             }
-
             int exitVal = process.waitFor();
             if (exitVal == 0) {
                 System.out.println("Success!");

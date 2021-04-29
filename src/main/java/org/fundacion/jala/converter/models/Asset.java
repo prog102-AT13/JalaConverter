@@ -152,10 +152,7 @@ public class Asset {
      */
     @Override
     public String toString() {
-        return "Project{" + "id=" + id
-                + ", titulo='" + title + '\''
-                + ", path='" + path + '\''
-                + ", type='" + checksum + '\''
-                + '}';
+        return "Project{" + "id=" + id + ", titulo='" + title + '\'' + ", path='" + path + '\'' + ", type='"
+                + checksum + '\'' + '}';
     }
 }

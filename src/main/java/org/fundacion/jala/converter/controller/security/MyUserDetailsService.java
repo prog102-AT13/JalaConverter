@@ -27,6 +27,7 @@ import static org.fundacion.jala.converter.models.UserSQL.usernameExists;
  */
 @Service
 public class MyUserDetailsService implements UserDetailsService {
+
     /**
      * Gets user details with the username.
      *

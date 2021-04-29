@@ -16,7 +16,7 @@ package org.fundacion.jala.converter.core.parameter;
 public class AudioParameter extends Parameter {
     private String format;
     private String bitrate;
-    private String frecuency;
+    private String frequency;
     private String volume;
     private String audioChannels;
     private final int ONE_HUNDRED = 1000;
@@ -35,13 +35,12 @@ public class AudioParameter extends Parameter {
     public AudioParameter() {
     }
 
-    public AudioParameter(final String newFilePath, final String newFormat,
-                          final String newBitrate, final String newFrecuency, final String newVolume,
-                          final String newAudioChannels) {
+    public AudioParameter(final String newFilePath, final String newFormat, final String newBitrate,
+                          final String newFrequency, final String newVolume, final String newAudioChannels) {
         super(newFilePath);
         this.format = newFormat;
         this.bitrate = newBitrate;
-        this.frecuency = newFrecuency;
+        this.frequency = newFrequency;
         this.volume = newVolume;
         this.audioChannels = newAudioChannels;
     }
@@ -59,19 +58,19 @@ public class AudioParameter extends Parameter {
     }
 
     /**
-     * Creates a parameter for frecuency.
+     * Creates a parameter for frequency.
      *
-     * @return a string with format for frecuency in hz.
+     * @return a string with format for frequency in hz.
      */
     public String formatHz() {
-        if (!getFrecuency().equals("")) {
-            if (getFrecuency().equals(K20_HERTZ)) {
+        if (!getFrequency().equals("")) {
+            if (getFrequency().equals(K20_HERTZ)) {
                 return " -ar 22050 ";
             }
-            if (getFrecuency().equals(K44_HERTZ)) {
+            if (getFrequency().equals(K44_HERTZ)) {
                 return " -ar 44100 ";
             }
-            if (getFrecuency().equals(K48_HERTZ)) {
+            if (getFrequency().equals(K48_HERTZ)) {
                 return " -ar 48000 ";
             }
         }
@@ -184,27 +183,27 @@ public class AudioParameter extends Parameter {
     /**
      * Sets new volume of the audio converter.
      *
-     * @param newVolume is a new volumen to the audio.
+     * @param newVolume is a new volume to the audio.
      */
     public void setVolume(final String newVolume) {
         this.volume = newVolume;
     }
 
     /**
-     * Obtains the frecuency of audio converter.
+     * Obtains the frequency of audio converter.
      *
-     * @return a string of frecuency of audio converter.
+     * @return a string of frequency of audio converter.
      */
-    public String getFrecuency() {
-        return frecuency;
+    public String getFrequency() {
+        return frequency;
     }
 
     /**
-     * Sets new frecuency of the audio converter.
+     * Sets new frequency of the audio converter.
      *
-     * @param newFrecuency is a new frecuency of the audio.
+     * @param newFrequency is a new frequency of the audio.
      */
-    public void setFrecuency(final String newFrecuency) {
-        this.frecuency = newFrecuency;
+    public void setFrequency(final String newFrequency) {
+        this.frequency = newFrequency;
     }
 }

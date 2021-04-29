@@ -71,10 +71,10 @@ public class ObjectMetadata {
     /**
      * Sets file's name which the metadata is exported.
      *
-     * @param nameExport is file's name which the metadata is exported.
+     * @param newNameExport is file's name which the metadata is exported.
      */
-    public void setNameExport(final String nameExport) {
-        this.nameExport = nameExport;
+    public void setNameExport(final String newNameExport) {
+        this.nameExport = newNameExport;
     }
 
     /**
@@ -89,16 +89,16 @@ public class ObjectMetadata {
     /**
      * Set type of file which the metadata is extracted.
      *
-     * @param typeFileExport is type of file which the metadata is extracted.
+     * @param newTypeFileExport is type of file which the metadata is extracted.
      */
-    public void setTypeFileExport(final TypeFileExport typeFileExport) {
-        this.typeFileExport = typeFileExport;
+    public void setTypeFileExport(final TypeFileExport newTypeFileExport) {
+        this.typeFileExport = newTypeFileExport;
     }
 
     /**
      * Verifies if the metadata file has more information than usual.
      *
-     * @return a boolean wiht more information of the file which the metadata is extracted.
+     * @return a boolean with more information of the file which the metadata is extracted.
      */
     public boolean getMoreInfo() {
         return moreInfo;
@@ -107,9 +107,9 @@ public class ObjectMetadata {
     /**
      * Sets if the file metadata has more information than usual.
      *
-     * @param moreInfo of file which the metadata is extracted.
+     * @param moreInformation of file which the metadata is extracted.
      */
-    public void setMoreInfo(final boolean moreInfo) {
-        this.moreInfo = moreInfo;
+    public void setMoreInfo(final boolean moreInformation) {
+        this.moreInfo = moreInformation;
     }
 }
