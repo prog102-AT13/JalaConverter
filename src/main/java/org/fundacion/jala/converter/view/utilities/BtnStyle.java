@@ -16,7 +16,10 @@ import javax.swing.Icon;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Dimension;
+import java.awt.Insets;
 
 /**
  * This class defines the JButton style for the project.
@@ -66,7 +69,7 @@ public class BtnStyle extends JButton {
      *
      * @param text String for the JButton.
      */
-    public void setLoginBtn(String text) {
+    public void setLoginBtn(final String text) {
         final int FILE_BTN_WIDTH = 100;
         final int FILE_BTN_HEIGHT = 30;
         setText(text);
@@ -85,7 +88,7 @@ public class BtnStyle extends JButton {
      *
      * @param text String for the JButton.
      */
-    public void setRegisterBtn(String text) {
+    public void setRegisterBtn(final String text) {
         final int FILE_BTN_WIDTH = 100;
         final int FILE_BTN_HEIGHT = 30;
         setText(text);
@@ -104,7 +107,7 @@ public class BtnStyle extends JButton {
      *
      * @param text String for the JButton.
      */
-    public void setBtnFile(String text) {
+    public void setBtnFile(final String text) {
         final int FILE_BTN_WIDTH = 90;
         final int FILE_BTN_HEIGHT = 25;
         setText(text);
@@ -123,7 +126,7 @@ public class BtnStyle extends JButton {
      *
      * @param text String for the JButton.
      */
-    public void setBtnConvert(String text) {
+    public void setBtnConvert(final String text) {
         final int FILE_BTN_WIDTH = 200;
         final int FILE_BTN_HEIGHT = 45;
         setText(text);
@@ -142,7 +145,7 @@ public class BtnStyle extends JButton {
      *
      * @param text String for the JButton.
      */
-    public void setBtnMainMenu(String text, String icon) {
+    public void setBtnMainMenu(final String text, final String icon) {
         int marginIcon = 20;
         int widthBtn = 200;
         int heightBtn = 50;
@@ -162,7 +165,7 @@ public class BtnStyle extends JButton {
         setPreferredSize(new Dimension(widthBtn, heightBtn));
     }
 
-    public void setBtnCompilers(String text, String icon) {
+    public void setBtnCompilers(final String text, final String icon) {
         ImageIcon btnIcon = new ImageIcon("img/compilerBtn/" + icon);
         setText(text);
         setIcon(btnIcon);

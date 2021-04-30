@@ -49,13 +49,6 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
     private OutputSettings settings;
     private ClientRequest clientRequest = new ClientRequest();
     private static final Logger LOGGER = LogManager.getLogger();
-    private final int alignLabelStyle = 0;
-    private final int widthLabelStyle = 100;
-    private final int heightLabelStyle = 30;
-    private final int topBorder = 50;
-    private final int leftBorder = 50;
-    private final int bottomBorder = 100;
-    private final int rightBorder = 70;
     private final int fontStyle = 0;
     private final int fontSize = 12;
     private String token;

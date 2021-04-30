@@ -151,7 +151,7 @@ public class LoginInterface extends JFrame implements ActionListener {
         container.setBackground(Color.DARK_GRAY);
         CLOSE_BTN = new JButton(new AbstractAction("X") {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent mouseEvent) {
                 System.exit(0);
             }
         });
@@ -193,16 +193,16 @@ public class LoginInterface extends JFrame implements ActionListener {
     /**
      * Defines the operation after an action is done.
      *
-     * @param e an action performed by user.
+     * @param mouseEvent an action performed by user.
      */
     @Override
-    public void actionPerformed(final ActionEvent e) {
-        if (e.getSource() == LOGIN_BUTTON) {
+    public void actionPerformed(final ActionEvent mouseEvent) {
+        if (mouseEvent.getSource() == LOGIN_BUTTON) {
             String usernameText = USERNAME_TEXT_FIELD.getText();
             String passwordText = String.copyValueOf(PASSWORD_FIELD.getPassword());
             callRequest(usernameText, passwordText);
         }
-        if (e.getSource() == SHOW_PASSWORD_BUTTON) {
+        if (mouseEvent.getSource() == SHOW_PASSWORD_BUTTON) {
             if (passwordShowStatus) {
                 PASSWORD_FIELD.setEchoChar((char) 0);
             } else {
@@ -210,7 +210,7 @@ public class LoginInterface extends JFrame implements ActionListener {
             }
             passwordShowStatus = !passwordShowStatus;
         }
-        if (e.getSource() == REGISTER_BUTTON) {
+        if (mouseEvent.getSource() == REGISTER_BUTTON) {
             this.dispose();
             new RegisterInterface();
         }

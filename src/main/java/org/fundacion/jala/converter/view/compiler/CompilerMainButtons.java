@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Paola Aguilar Quiñones
+ * @author Paola Ximena Aguilar Quiñones
  */
 package org.fundacion.jala.converter.view.compiler;
 
@@ -16,7 +16,7 @@ import javax.swing.JButton;
 import java.awt.FlowLayout;
 
 /**
- *  * This class customizes a panel with custom buttons to change language.
+ * This class customizes a panel with custom buttons to change language.
  */
 class CompilerMainButtons extends JPanel {
     private String newToken;
@@ -25,7 +25,7 @@ class CompilerMainButtons extends JPanel {
     private BtnStyle project;
     private final int BTN_TYPE_COMPILER = 2;
 
-    protected CompilerMainButtons(String token) {
+    protected CompilerMainButtons(final String token) {
         newToken = token;
         project = new BtnStyle("New Project", "BtnCompilerProject.png", BTN_TYPE_COMPILER);
         java = new BtnStyle("Java", "BtnCompilerJava.png", BTN_TYPE_COMPILER);
@@ -37,18 +37,18 @@ class CompilerMainButtons extends JPanel {
     }
 
     /**
-     * Button that defines or not java is selected
+     * Defines Button depending if Java is selected or not.
      *
-     * @return a JButton
+     * @return java JButton selected.
      */
     public JButton getJava() {
         return java;
     }
 
     /**
-     * Button that defines or not python is selected
+     * Defines Button depending if Python is selected or not.
      *
-     * @return a JButton
+     * @return python JButton selected.
      */
     public JButton getPython() {
         return python;

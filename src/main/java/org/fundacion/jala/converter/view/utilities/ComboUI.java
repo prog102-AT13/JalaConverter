@@ -6,14 +6,12 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Paola Aguilar Quiñones
+ * @author Paola Ximena Aguilar Quiñones
  */
 package org.fundacion.jala.converter.view.utilities;
 
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.border.LineBorder;
-import javax.swing.plaf.ComboBoxUI;
 import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.BasicComboPopup;
@@ -24,10 +22,6 @@ import java.awt.Color;
  * This class set the UI for the JCombobox.
  */
 public class ComboUI extends BasicComboBoxUI {
-
-    public static ComboBoxUI createUI(JComponent c) {
-        return new ComboUI();
-    }
 
     /**
      * Sets the type of the Arrow from JCombobox.

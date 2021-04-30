@@ -12,7 +12,9 @@ package org.fundacion.jala.converter.view.utilities;
 
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
+import java.awt.Font;
+import java.awt.Dimension;
+import java.awt.Color;
 
 /**
  * This class defines the JTextField style for the project.

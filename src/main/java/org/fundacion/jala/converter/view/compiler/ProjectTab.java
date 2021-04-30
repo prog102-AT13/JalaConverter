@@ -147,7 +147,7 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
         closeBtn.setFocusPainted(false);
         Border border = new LineBorder(Color.WHITE, 0);
         closeBtn.setBorder(border);
-        closeBtn.addActionListener(e1 -> {
+        closeBtn.addActionListener(eventMouse -> {
             removeTab(title);
             setSelectedIndex(getTabCount() - 2);
             tabList.remove(tabList.indexOf(title));
@@ -192,9 +192,9 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
     }
 
     /**
-     * Gets us the plus button to access it.
+     * Gets the add tab button.
      *
-     * @return a plus button.
+     * @return addBtn JButton that add a tab.
      */
     public JButton getButton() {
         return addBtn;

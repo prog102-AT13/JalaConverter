@@ -36,11 +36,11 @@ class Console extends JPanel {
         console.setBorder(new EmptyBorder(MARGIN, MARGIN, MARGIN, MARGIN));
         console.setFont(new Font("Courier New", Font.PLAIN, FONT_SIZE));
         Border border = new LineBorder(Color.WHITE, 0);
-        JScrollPane sp = new JScrollPane(console);
-        sp.setBorder(border);
+        JScrollPane scrollPane = new JScrollPane(console);
+        scrollPane.setBorder(border);
         setLayout(new BorderLayout());
         setBorder(new EmptyBorder(0, MARGIN, 0, MARGIN));
-        add(sp, BorderLayout.CENTER);
+        add(scrollPane, BorderLayout.CENTER);
     }
 
     /**

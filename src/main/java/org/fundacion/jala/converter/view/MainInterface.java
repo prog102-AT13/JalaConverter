@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Paola Aguilar Quiñones
+ * @author Paola Ximena Aguilar Quiñones
  */
 package org.fundacion.jala.converter.view;
 
@@ -132,7 +132,7 @@ public class MainInterface extends JFrame implements ActionListener {
     /**
      * Sets positions for FlowLayout.
      */
-    public void setPosition(JPanel mainPanel, BtnStyle mainBtn, boolean lastBtn) {
+    public void setPosition(final JPanel mainPanel, final BtnStyle mainBtn, final boolean lastBtn) {
         GridBagConstraints positionConstraint = new GridBagConstraints();
         positionConstraint.gridx = positionXMainBtn;
         positionConstraint.gridy = positionYMainBtn;
@@ -150,7 +150,7 @@ public class MainInterface extends JFrame implements ActionListener {
     /**
      * Sets the correct panel according to selected Button.
      */
-    public void switchPanels(JPanel panel) {
+    public void switchPanels(final JPanel panel) {
         mainPanel.removeAll();
         mainPanel.add(panel);
         mainPanel.repaint();
@@ -158,25 +158,25 @@ public class MainInterface extends JFrame implements ActionListener {
     }
 
     /**
-     * Call the panel for the Button option.
+     * Calls the panel for the Button option.
      *
-     * @param e Action of selected JButton.
+     * @param buttonEvent Action of selected JButton.
      */
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == compilerBtn) {
+    public void actionPerformed(final ActionEvent buttonEvent) {
+        if (buttonEvent.getSource() == compilerBtn) {
             switchPanels(compilerPanel);
         }
-        if (e.getSource() == videoConverterBtn) {
+        if (buttonEvent.getSource() == videoConverterBtn) {
             switchPanels(videoPanel);
         }
-        if (e.getSource() == audioConverterBtn) {
+        if (buttonEvent.getSource() == audioConverterBtn) {
             switchPanels(audioPanel);
         }
-        if (e.getSource() == textExtractorBtn) {
+        if (buttonEvent.getSource() == textExtractorBtn) {
             switchPanels(textExtractorPanel);
         }
-        if (e.getSource() == metaDataBtn) {
+        if (buttonEvent.getSource() == metaDataBtn) {
             switchPanels(metaDataPanel);
         }
     }
@@ -186,23 +186,22 @@ public class MainInterface extends JFrame implements ActionListener {
      *
      * @param button to add style.
      */
-    public BtnStyle mainButtonAction(BtnStyle button) {
-        MouseListener ml = new MouseAdapter() {
+    public BtnStyle mainButtonAction(final BtnStyle button) {
+        MouseListener mouseListener = new MouseAdapter() {
             @Override
-            public void mouseEntered(MouseEvent e) {
-                Component c = e.getComponent();
-                c.setBackground(OVER_BACKGROUND_BTN);
+            public void mouseEntered(final MouseEvent eventListener) {
+                Component btnComponent = eventListener.getComponent();
+                btnComponent.setBackground(OVER_BACKGROUND_BTN);
             }
 
             @Override
-            public void mouseExited(MouseEvent e) {
-                Component c = e.getComponent();
-                c.setBackground(DARK_BACKGROUND_BTN);
+            public void mouseExited(final MouseEvent eventListener) {
+                Component btnComponent = eventListener.getComponent();
+                btnComponent.setBackground(DARK_BACKGROUND_BTN);
             }
         };
         button.addActionListener(this::actionPerformed);
-        button.addMouseListener(ml);
+        button.addMouseListener(mouseListener);
         return button;
     }
 }
-

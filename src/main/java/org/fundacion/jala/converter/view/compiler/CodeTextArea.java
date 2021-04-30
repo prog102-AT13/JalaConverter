@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Paola Aguilar Quiñones
+ * @author Paola Ximena Aguilar Quiñones
  */
 package org.fundacion.jala.converter.view.compiler;
 
@@ -62,18 +62,18 @@ class CodeTextArea extends JPanel implements DocumentListener {
     }
 
     /**
-     * Gives users content of codeArea and textarea.
+     * Gets content of codeArea and textarea.
      *
-     * @return a string on the codeArea.
+     * @return codeArea the String content in Code Area.
      */
     public String getText() {
         return codeArea.getText();
     }
 
     /**
-     * Gets tex tarea to have access to its content.
+     * Gets text area to have access to its content.
      *
-     * @return a JtextArea.
+     * @return codeArea the element JTextarea.
      */
     public JTextArea getCodeArea() {
         return codeArea;
@@ -82,7 +82,7 @@ class CodeTextArea extends JPanel implements DocumentListener {
     /**
      * Counts how many lines has the codArea.
      *
-     * @return a string that is the number of codArea lines.
+     * @return text string that is the number of codArea lines.
      */
     public String getLinesOfText() {
         int caretPosition = codeArea.getDocument().getLength();
@@ -124,7 +124,7 @@ class CodeTextArea extends JPanel implements DocumentListener {
         lineCode.setText(getLinesOfText());
     }
 
-    public void JTreePanelOne(String vals[]) {
+    public void JTreePanelOne(final String vals[]) {
         options = vals;
         treeOne = new JTree(options);
     }
