@@ -13,7 +13,9 @@ package org.fundacion.jala.converter.view.utilities;
 import javax.swing.JPanel;
 import javax.swing.JFileChooser;
 import javax.swing.BoxLayout;
+import javax.swing.Box;
 import java.awt.FlowLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -30,6 +32,8 @@ public class SelectFile extends JPanel implements ActionListener {
     private final int DIMENSION_WIDTH = 400;
     private final int DIMENSION_HEIGHT = 25;
     private final int TYPE_BUTTON_FILE = 1;
+    private final int WIDTH_BOX = 5;
+    private final int HEIGHT_BOX = 20;
 
     public SelectFile() {
         JLabelStyle lblFile = new JLabelStyle("Select a File to convert: ", "h3");
@@ -40,6 +44,7 @@ public class SelectFile extends JPanel implements ActionListener {
         setPanel();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(lblFile);
+        add(Box.createRigidArea(new Dimension(WIDTH_BOX, HEIGHT_BOX)));
         add(containerFile);
     }
 

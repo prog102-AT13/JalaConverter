@@ -10,62 +10,85 @@
  */
 package org.fundacion.jala.converter.view.converter;
 
+import org.fundacion.jala.converter.view.utilities.ComboStyle;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-
 import javax.swing.JPanel;
-import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
+import javax.swing.BoxLayout;
+import javax.swing.Box;
+import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 
 /**
  * This class defines the interface for output settings to convert.
  */
 class OutputSettings extends JPanel {
-    private JComboBox<ResolutionVideo> resolutionComboBox;
-    private JComboBox<FrameVideo> framesSelect;
+    private final int FONT_SIZE = 12;
+    private final int WIDTH_BOX = 5;
+    private final int HEIGHT_BOX = 20;
+    private final int SPACE_MARGIN = 30;
+    private final int MARGIN_SPACE_TOP = 10;
+    private ComboStyle<ResolutionVideo> resolutionComboBox;
+    private ComboStyle<FrameVideo> framesSelect;
     private JCheckBox optionCSound;
     private JCheckBox thumbnailOption;
     private JCheckBox metadataOption;
-    private final int DIMENSIO_WIDTH = 70;
-    private final int DIMENSION_HEIGHT = 30;
-    private final int FONT_STYLE = 0;
-    private final int FONT_SIZE = 12;
-    private final int GRID_LAYOUT_ROWS = 4;
-    private final int GRID_LAYOUT_COLS = 2;
+    private JPanel container;
+    private JLabelStyle resolutionLabel;
+    private JLabelStyle frameLabel;
 
     protected OutputSettings() {
-        JLabelStyle resolutionLabel = new JLabelStyle("Select resolution: ", "h3");
-        JLabelStyle frameLabel = new JLabelStyle("Select frame: ", "h3");
+        resolutionLabel = new JLabelStyle("Select resolution: ", "h3");
+        frameLabel = new JLabelStyle("Select frame: ", "h3");
         setResolutionSelect();
-        resolutionComboBox.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
-        resolutionComboBox.setPreferredSize(new Dimension(DIMENSIO_WIDTH, DIMENSION_HEIGHT));
         setFrameSelect();
-        framesSelect.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
-        framesSelect.setPreferredSize(new Dimension(DIMENSIO_WIDTH, DIMENSION_HEIGHT));
         optionCSound = new JCheckBox("Without audio");
-        optionCSound.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
+        optionCSound.setFont(new Font("Barlow", Font.PLAIN, FONT_SIZE));
         optionCSound.setSelected(false);
         thumbnailOption = new JCheckBox("With Thumbnail");
-        thumbnailOption.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
+        thumbnailOption.setFont(new Font("Barlow", Font.PLAIN, FONT_SIZE));
         metadataOption = new JCheckBox("Metadata");
-        metadataOption.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
-        setLayout(new GridLayout(GRID_LAYOUT_ROWS, GRID_LAYOUT_COLS));
-        add(resolutionLabel);
-        add(resolutionComboBox);
-        add(frameLabel);
-        add(framesSelect);
-        add(optionCSound);
-        add(thumbnailOption);
-        add(metadataOption);
+        metadataOption.setFont(new Font("Barlow", Font.PLAIN, FONT_SIZE));
+        setElementsPanels();
+        setLayout(new BorderLayout(SPACE_MARGIN, SPACE_MARGIN));
+        setBorder(new EmptyBorder(MARGIN_SPACE_TOP, 0, HEIGHT_BOX, 0));
+        add(container, BorderLayout.CENTER);
+    }
+
+    /**
+     * Sets the elements in Panels.
+     */
+    public void setElementsPanels() {
+        JPanel labelContainer = new JPanel();
+        labelContainer. setLayout(new BoxLayout(labelContainer, BoxLayout.Y_AXIS));
+        labelContainer.add(resolutionLabel);
+        labelContainer.add(Box.createRigidArea(new Dimension(WIDTH_BOX, HEIGHT_BOX)));
+        labelContainer.add(frameLabel);
+        JPanel comboContainer = new JPanel();
+        comboContainer. setLayout(new BoxLayout(comboContainer, BoxLayout.Y_AXIS));
+        comboContainer.add(resolutionComboBox);
+        comboContainer.add(Box.createRigidArea(new Dimension(WIDTH_BOX, HEIGHT_BOX)));
+        comboContainer.add(framesSelect);
+        JPanel element3container = new JPanel();
+        element3container.setLayout(new FlowLayout(FlowLayout.LEFT, HEIGHT_BOX, HEIGHT_BOX));
+        element3container.add(optionCSound);
+        element3container.add(thumbnailOption);
+        element3container.add(metadataOption);
+        container = new JPanel();
+        container.setLayout(new BorderLayout(SPACE_MARGIN, 0));
+        container.add(labelContainer, BorderLayout.LINE_START);
+        container.add(comboContainer, BorderLayout.CENTER);
+        container.add(element3container, BorderLayout.SOUTH);
     }
 
     /**
      * Sets all possible resolutions for video converter.
      */
     protected void setResolutionSelect() {
-        resolutionComboBox = new JComboBox<ResolutionVideo>(
+        resolutionComboBox = new ComboStyle<>(
                 new ResolutionVideo[]{
                         new ResolutionVideo("720p(HD)", "1280", "720"),
                         new ResolutionVideo("1920p", "1080", "1920"),
@@ -82,7 +105,7 @@ class OutputSettings extends JPanel {
      */
     protected void setFrameSelect() {
         final int DEFAULT_INDEX = 4;
-        framesSelect = new JComboBox<FrameVideo>(
+        framesSelect = new ComboStyle<>(
                 new FrameVideo[]{
                         new FrameVideo("21"),
                         new FrameVideo("24"),

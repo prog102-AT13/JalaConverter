@@ -11,10 +11,9 @@
 package org.fundacion.jala.converter.view.metadata;
 
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-import javax.swing.JTextField;
+import org.fundacion.jala.converter.view.utilities.TxtField;
 import javax.swing.JPanel;
 import javax.swing.JCheckBox;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FlowLayout;
 import java.awt.event.ItemEvent;
@@ -29,7 +28,7 @@ class OutputInfo extends JPanel implements ItemListener {
     private final int DIMENSION_HEIGHT = 30;
     private final int FONT_STYLE = 0;
     private final int FONT_SIZE = 12;
-    private JTextField outputNameField;
+    private TxtField outputNameField;
     private JCheckBox checkOutputName;
     private String outPutName;
     private JPanel container;
@@ -37,9 +36,7 @@ class OutputInfo extends JPanel implements ItemListener {
 
     protected OutputInfo() {
         outputNameData = new JLabelStyle("Output name of MetaData", "h3");
-        outputNameField = new JTextField();
-        outputNameField.setPreferredSize(new Dimension(DIMENSION_WIDTH, DIMENSION_HEIGHT));
-        outputNameField.setEnabled(false);
+        outputNameField = new TxtField(DIMENSION_WIDTH, DIMENSION_HEIGHT, false);
         checkOutputName = new JCheckBox("Keep the name of output");
         checkOutputName.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
         checkOutputName.setSelected(true);

@@ -32,25 +32,29 @@ class CodeTextArea extends JPanel implements DocumentListener {
     private final int LEFT_BORDER = 10;
     private final int BOTTOM_BORDER = 0;
     private final int RIGHT_BORDER = 10;
-
+    private final int RIGHT_BORDER_SPACE = 20;
+    private final int CODE_AREA_WIDTH = 18;
+    private final int CODE_AREA_HEIGHT = 30;
+    private final int FONT_SIZE = 12;
+    private final Color LINE_COLOR = new Color(28, 28, 28);
     final String[] toppings = {"Project1", "Main.java", "subclass.java"};
     private JTree treeOne;
     private String[] options;
 
     protected CodeTextArea() {
-        codeArea = new JTextArea(18,30);
+        codeArea = new JTextArea(CODE_AREA_WIDTH, CODE_AREA_HEIGHT);
         codeArea.setBorder(new EmptyBorder(TOP_BORDER, LEFT_BORDER, BOTTOM_BORDER, RIGHT_BORDER));
-        codeArea.setFont(new Font("Courier New", Font.PLAIN, 12));
+        codeArea.setFont(new Font("Courier New", Font.PLAIN, FONT_SIZE));
         lineCode = new JTextArea("1");
         lineCode.setBorder(new EmptyBorder(TOP_BORDER, LEFT_BORDER, BOTTOM_BORDER, RIGHT_BORDER));
-        lineCode.setBackground(new Color(28, 28, 28));
+        lineCode.setBackground(LINE_COLOR);
         lineCode.setForeground(Color.white);
         JScrollPane textCodeArea = new JScrollPane();
         textCodeArea.setBorder(new EmptyBorder(0, 0, 0, 0));
         codeArea.getDocument().addDocumentListener(this);
         setLayout(new BorderLayout());
         JTreePanelOne(toppings);
-        treeOne.setBorder(new EmptyBorder(10,5,10,20));
+        treeOne.setBorder(new EmptyBorder(RIGHT_BORDER, TOP_BORDER, RIGHT_BORDER, RIGHT_BORDER_SPACE));
         textCodeArea.getViewport().add(codeArea);
         textCodeArea.setRowHeaderView(lineCode);
         add(treeOne, BorderLayout.LINE_START);

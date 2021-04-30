@@ -16,9 +16,7 @@ import javax.swing.Icon;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
-import java.awt.Font;
-import java.awt.Dimension;
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * This class defines the JButton style for the project.
@@ -28,12 +26,16 @@ public class BtnStyle extends JButton {
     private final Color ORANGE_COLOR_BTN = new Color(242, 156, 85);
     private final Color LIGHT_GRAY_COLOR_BTN = new Color(226, 226, 226);
     private final Color DARK_BACKGROUND_BTN = new Color(28, 28, 28);
+    private final Color BLUE_COLOR_BTN = new Color(67, 117, 169);
     private final int FONT_SIZE_12 = 12;
     private final int FONT_SIZE_13 = 13;
     private final int FILE_BUTTON = 1;
     private final int CONVERT_BUTTON = 2;
     private final int LOGIN_BUTTON = 3;
     private final int REGISTER_BUTTON = 4;
+    private final int WIDTH_BTN = 110;
+    private final int HEIGHT_BTN = 25;
+    private final int MARGIN = 10;
 
     public BtnStyle(final String text, final int btnType) {
         if (btnType == FILE_BUTTON) {
@@ -50,8 +52,13 @@ public class BtnStyle extends JButton {
         }
     }
 
-    public BtnStyle(final String text, final String icon) {
-        setBtnMainMenu(text, icon);
+    public BtnStyle(final String text, final String icon, final int typeBtn) {
+        if(typeBtn == 1) {
+            setBtnMainMenu(text, icon);
+        }
+        if(typeBtn == 2) {
+            setBtnCompilers(text, icon);
+        }
     }
 
     /**
@@ -122,6 +129,12 @@ public class BtnStyle extends JButton {
         setText(text);
         setFont(new Font("Barlow", Font.PLAIN, FONT_SIZE_12));
         setPreferredSize(new Dimension(FILE_BTN_WIDTH, FILE_BTN_HEIGHT));
+        setOpaque(true);
+        setBackground(BLUE_COLOR_BTN);
+        setFocusPainted(false);
+        setForeground(Color.WHITE);
+        Border border = new LineBorder(Color.WHITE, 0);
+        setBorder(border);
     }
 
     /**
@@ -147,5 +160,22 @@ public class BtnStyle extends JButton {
         setBorder(border);
         setFont(new Font("Barlow", Font.PLAIN, FONT_SIZE_13));
         setPreferredSize(new Dimension(widthBtn, heightBtn));
+    }
+
+    public void setBtnCompilers(String text, String icon) {
+        ImageIcon btnIcon = new ImageIcon("img/compilerBtn/" + icon);
+        setText(text);
+        setIcon(btnIcon);
+        setFont(new Font("Barlow", Font.PLAIN, FONT_SIZE_12));
+        setPreferredSize(new Dimension(WIDTH_BTN, HEIGHT_BTN));
+        setHorizontalAlignment(SwingConstants.LEFT);
+        setHorizontalTextPosition(SwingConstants.RIGHT);
+        setOpaque(true);
+        setBackground(BLUE_COLOR_BTN);
+        setFocusPainted(false);
+        setForeground(Color.WHITE);
+        Border border = new LineBorder(Color.WHITE, 0);
+        setBorder(border);
+        setMargin(new Insets(MARGIN,0,0,0));
     }
 }

@@ -17,14 +17,12 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import java.awt.Font;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
-import javax.swing.JLabel;
-import java.awt.FlowLayout;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -36,27 +34,19 @@ import java.util.ArrayList;
  */
 public class ProjectTab extends JTabbedPane implements ActionListener {
     public static int counter;
-    private final int sizeFont = 11;
-    private final int dimension = 20;
     private ArrayList<String> tabList;
     private ClientRequest clientRequest = new ClientRequest();
     private String token;
     private String extension;
     private final int SIZE_FONT_11 = 11;
-    private final int SIZE_FONT_12 = 12;
     private JButton addBtn;
+    private JPanel emptyInitial;
 
     public ProjectTab(final String newToken) {
         token = newToken;
-        CodeTextArea codeArea = new CodeTextArea();
-        codeArea.setName("Main");
-        add(codeArea);
-        setFont(new Font("Barlow", Font.PLAIN, SIZE_FONT_12));
-        setOpaque(false);
-        setBackground(Color.LIGHT_GRAY);
-        setBorder(null);
-        setTabComponentAt(getTabCount() - 1, createTabHeaderWithTitle("Main"));
-        //start(token);
+        setLayout(new BorderLayout());
+        emptyInitial = new JPanel();
+        add(emptyInitial);
     }
 
     /**
@@ -67,10 +57,10 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
         CodeTextArea codeArea = new CodeTextArea();
         codeArea.setName(InitialCode.getNameMain(extension));
         codeArea.getCodeArea().setText(InitialCode.generate(InitialCode.getNameMain(extension), extension));
+        remove(emptyInitial);
         add(codeArea);
         setTabComponentAt(getTabCount() - 1, createTabHeaderWithTitle(InitialCode.getNameMain(extension)));
         tabList = new ArrayList<>();
-
         setFont(new Font("Barlow", 0, SIZE_FONT_11));
         ImageIcon addIcon = new ImageIcon("img/compilerBtn/BtnAddTab.png");
         addBtn = new JButton(addIcon);

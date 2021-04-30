@@ -46,6 +46,7 @@ public class MainInterface extends JFrame implements ActionListener {
     private final EmptyBorder MARGIN_SPACE = new EmptyBorder(20, 10, 15, 10);
     private final int APP_WIDTH = 1000;
     private final int APP_HEIGHT = 820;
+    private final int BTN_TYPE_MAIN = 1;
     private CompilerInterface compilerPanel;
     private VideoConverterInterface videoPanel;
     private MetaDataInterface metaDataPanel;
@@ -96,11 +97,11 @@ public class MainInterface extends JFrame implements ActionListener {
         mainPanel.setLayout(new CardLayout());
         mainPanel.setBorder(MARGIN_SPACE);
         mainPanel.add(compilerPanel);
-        compilerBtn = new BtnStyle("Compiler", "MainIconCompiler.png");
-        videoConverterBtn = new BtnStyle("Video converter", "MainIconVideo.png");
-        audioConverterBtn = new BtnStyle("Audio converter", "MainIconAudio.png");
-        textExtractorBtn = new BtnStyle("Text extractor", "MainIconText.png");
-        metaDataBtn = new BtnStyle("Metadata extractor", "MainIconMeta.png");
+        compilerBtn = new BtnStyle("Compiler", "MainIconCompiler.png", BTN_TYPE_MAIN);
+        videoConverterBtn = new BtnStyle("Video converter", "MainIconVideo.png", BTN_TYPE_MAIN);
+        audioConverterBtn = new BtnStyle("Audio converter", "MainIconAudio.png", BTN_TYPE_MAIN);
+        textExtractorBtn = new BtnStyle("Text extractor", "MainIconText.png", BTN_TYPE_MAIN);
+        metaDataBtn = new BtnStyle("Metadata extractor", "MainIconMeta.png", BTN_TYPE_MAIN);
         mainButtonAction(compilerBtn);
         mainButtonAction(videoConverterBtn);
         mainButtonAction(audioConverterBtn);

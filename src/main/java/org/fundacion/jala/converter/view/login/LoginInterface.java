@@ -20,18 +20,14 @@ import org.fundacion.jala.converter.view.Models.AuthenticateRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.Icon;
-import javax.swing.JButton;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 import javax.swing.AbstractAction;
-import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -59,7 +55,8 @@ public class LoginInterface extends JFrame implements ActionListener {
     private final int HORIZONTAL_SPACE_FLOW = 5;
     private final int FONT_SIZE = 12;
     private final int LOGIN_BUTTON_TYPE = 3;
-    private final int REGITER_BUTTON_TYPE = 4;
+    private final int REGISTER_BUTTON_TYPE = 4;
+    private final int MARGIN_SPACE_H = 2;
     private final TxtField USERNAME_TEXT_FIELD = new TxtField(NUMBER_COLUMNS_TEXT_FIELD, true);
     private final JPasswordField PASSWORD_FIELD = new JPasswordField(NUMBER_COLUMNS_TEXT_FIELD);
     private final Icon EYE_ICON = new ImageIcon("img/EyeIcon.png");
@@ -67,7 +64,7 @@ public class LoginInterface extends JFrame implements ActionListener {
     private final JLabel loginImg = new JLabel(image);
     private final BtnStyle LOGIN_BUTTON = new BtnStyle("Login", LOGIN_BUTTON_TYPE);
     private final JButton SHOW_PASSWORD_BUTTON = new JButton(EYE_ICON);
-    private final BtnStyle REGISTER_BUTTON = new BtnStyle("Register", REGITER_BUTTON_TYPE);
+    private final BtnStyle REGISTER_BUTTON = new BtnStyle("Register", REGISTER_BUTTON_TYPE);
     private final ClientRequest CLIENT_REQUEST = new ClientRequest();
     private final JLabelStyle USERNAME_LABEL = new JLabelStyle("Username: ", Color.WHITE, FONT_SIZE);
     private final JLabelStyle PASSWORD_LABEL = new JLabelStyle("Password: ", Color.WHITE, FONT_SIZE);
@@ -97,7 +94,7 @@ public class LoginInterface extends JFrame implements ActionListener {
     public void setProperties() {
         PASSWORD_FIELD.setForeground(Color.DARK_GRAY);
         PASSWORD_FIELD.setFont(new Font("Barlow", Font.PLAIN, FONT_SIZE));
-        PASSWORD_FIELD.setBorder(new EmptyBorder(0, HORIZONTAL_SPACE_FLOW, 0, 0));
+        PASSWORD_FIELD.setBorder(new EmptyBorder(MARGIN_SPACE_H, HORIZONTAL_SPACE_FLOW, MARGIN_SPACE_H, 0));
         LOGIN_BUTTON.addActionListener(this);
         SHOW_PASSWORD_BUTTON.addActionListener(this);
         REGISTER_BUTTON.addActionListener(this);

@@ -19,8 +19,6 @@ import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
@@ -48,13 +46,11 @@ public class CompilerInterface extends JPanel {
         extension = "java";
         buttonsCompiler = new CompilerButtons();
         consoleOutput = new Console();
-        langButtons = new CompilerMainButtons();
+        langButtons = new CompilerMainButtons(token);
         langButtons.getJava().setEnabled(false);
         projectTab = new ProjectTab(token);
         JButton project = new JButton("Create Project");
         project.addActionListener(addListenerToCreateProjectButton());
-
-
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(new EmptyBorder(MARGIN, MARGIN, MARGIN, MARGIN));
         add(langButtons);
@@ -68,7 +64,6 @@ public class CompilerInterface extends JPanel {
         buttonsCompiler.getRunButton().setEnabled(false);
         langButtons.getJava().addActionListener(addListenerToJavaButton());
         langButtons.getPython().addActionListener(addListenerToPythonButton());
-
     }
 
     /**

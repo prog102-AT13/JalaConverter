@@ -12,6 +12,7 @@ package org.fundacion.jala.converter.view.utilities;
 
 import javax.swing.JComboBox;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.Dimension;
@@ -21,7 +22,7 @@ import java.awt.Font;
 /**
  * This class set the style for JComboBox.
  */
-public class ComboStyle extends JComboBox {
+public class ComboStyle<E> extends JComboBox {
     private final int THICK_BORDER = 1;
     private final int MARGIN_COMBOBOX = 5;
     private final int FONT_SIZE = 12;
@@ -50,5 +51,17 @@ public class ComboStyle extends JComboBox {
         setBackground(Color.WHITE);
         setUI(ComboUI.createUI(this));
         setVisible(true);
+    }
+
+    public ComboStyle(E[] items) {
+        setForeground(Color.DARK_GRAY);
+        setBorder(new CompoundBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, THICK_BORDER),
+                new EmptyBorder(0, MARGIN_COMBOBOX, 0, 0)));
+        setFont(DEFAULT_FONT);
+        setFocusable(false);
+        setBackground(Color.WHITE);
+        setUI(ComboUI.createUI(this));
+        setVisible(true);
+        setModel(new DefaultComboBoxModel<E>(items));
     }
 }

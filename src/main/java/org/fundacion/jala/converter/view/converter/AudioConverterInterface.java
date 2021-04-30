@@ -19,13 +19,12 @@ import org.fundacion.jala.converter.view.utilities.JLabelStyle;
 import org.fundacion.jala.converter.view.utilities.SelectFile;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.JOptionPane;
-import javax.swing.JOptionPane;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,44 +38,36 @@ import static org.fundacion.jala.converter.view.utilities.CheckFile.checkFileSel
  * This class creates the audio converter's UI.
  */
 public class AudioConverterInterface extends JPanel implements ActionListener {
-    private SelectFile file;
-    private ConvertTypeSelectAudio audioSelect;
-    private QualityAudio quality;
-    private OutputSettingsAudio settings;
-    private ClientRequest clientRequest = new ClientRequest();
     private static final Logger LOGGER = LogManager.getLogger();
-    private final int ALIGN_LABEL_STYLE = 2;
-    private final int WIDTH_LABEL_STYLE = 70;
-    private final int HEIGHT_LABEL_STYLE = 30;
     private final int TOP_BORDER = 40;
     private final int LEFT_BORDER = 40;
     private final int BOTTOM_BORDER = 100;
     private final int RIGHT_BORDER = 0;
-    private final int FONT_STYLE = 0;
     private final int FONT_SIZE = 12;
+    private final int MARGIN_SPACE = 30;
+    private final int MARGIN_BOTTOM_MAIN_CONTAINER = 200;
+    private final int MARGIN_BOTTOM_BTN_CONTAINER = 100;
+    private final int BTN_TYPE = 2;
+    private SelectFile file;
+    private ConvertTypeSelectAudio audioSelect;
+    private OutputSettingsAudio settings;
+    private ClientRequest clientRequest = new ClientRequest();
     private String token;
     private String checksumLocal;
     private JLabel label;
 
     public AudioConverterInterface(final String newToken) {
-        final int MARGIN_SPACE = 30;
-        final int MARGIN_BOTTOM_MAIN_CONTAINER = 200;
-        final int MARGIN_BOTTOM_BTN_CONTAINER = 100;
         token = newToken;
         JLabelStyle audioTitle = new JLabelStyle("Audio converter", "h2");
-        JLabelStyle audioSettings = new JLabelStyle("Audio settings", "h3");
         audioTitle.setAlignmentX(LEFT_ALIGNMENT);
-        audioSettings.setAlignmentX(LEFT_ALIGNMENT);
-        BtnStyle convertAudio = new BtnStyle("Convert", 2);
+        BtnStyle convertAudio = new BtnStyle("Convert", BTN_TYPE);
         convertAudio.setAlignmentX(LEFT_ALIGNMENT);
-        convertAudio.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
+        convertAudio.setFont(new Font("Barlow", Font.PLAIN, FONT_SIZE));
         convertAudio.addActionListener(this::actionPerformed);
         file = new SelectFile();
         file.setAlignmentX(LEFT_ALIGNMENT);
         audioSelect = new ConvertTypeSelectAudio();
         audioSelect.setAlignmentX(LEFT_ALIGNMENT);
-        quality = new QualityAudio();
-        quality.setAlignmentX(LEFT_ALIGNMENT);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(new EmptyBorder(TOP_BORDER, LEFT_BORDER, BOTTOM_BORDER, RIGHT_BORDER));
         settings = new OutputSettingsAudio();
@@ -92,7 +83,6 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         container.setBorder(new EmptyBorder(MARGIN_SPACE, 0, MARGIN_BOTTOM_BTN_CONTAINER, 0));
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
         container.add(file);
-        container.add(audioSettings);
         container.add(audioSelect);
         container.add(settings);
         setLayout(new BorderLayout());
