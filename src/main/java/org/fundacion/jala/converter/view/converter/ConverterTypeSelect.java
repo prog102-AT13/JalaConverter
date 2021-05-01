@@ -8,45 +8,32 @@
  *
  * @author Paola Ximena Aguilar Quiñones
  */
-
 package org.fundacion.jala.converter.view.converter;
 
+import org.fundacion.jala.converter.view.utilities.ComboStyle;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-
 import javax.swing.JPanel;
-import javax.swing.JComboBox;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.FlowLayout;
 
 /**
  * This class defines the interface for selecting the type of video to convert.
  */
 class ConverterTypeSelect extends JPanel {
-    private JComboBox convertTo;
-    private final int alignLabelStyle = 2;
-    private final int widthLabelStyle = 70;
-    private final int heightLabelStyle = 30;
-    private final int dimensionWidth = 100;
-    private final int dimensionHeight = 30;
-    private final int fontStyle = 0;
-    private final int fontSize = 12;
-    private final int flowLayoutHgap = 10;
-    private final int flowLayoutVgap = 10;
+    private ComboStyle convertTo;
+    private final int DIMENSION_WIDTH = 100;
+    private final int DIMENSION_HEIGHT = 20;
+    private final int MARGIN_SPACE = 20;
 
     protected ConverterTypeSelect() {
-        JLabelStyle labelConvertTo = new JLabelStyle("Convert to: ", "h3",
-                alignLabelStyle, widthLabelStyle, heightLabelStyle);
-        convertTo = new JComboBox();
-        convertTo.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
-        convertTo.setFont(new Font("Barlow", fontStyle, fontSize));
+        JLabelStyle labelConvertTo = new JLabelStyle("Convert to: ", "h3");
+        convertTo = new ComboStyle(DIMENSION_WIDTH, DIMENSION_HEIGHT);
         convertTo.addItem("avi");
         convertTo.addItem("mp4");
         convertTo.addItem("mpeg");
         convertTo.addItem("mov");
         convertTo.addItem("wmv");
-        setLayout(new FlowLayout(FlowLayout.LEFT, flowLayoutHgap, flowLayoutVgap));
-        add(labelConvertTo.getTextLabel());
+        setLayout(new FlowLayout(FlowLayout.LEFT, 0, MARGIN_SPACE));
+        add(labelConvertTo);
         add(convertTo);
     }
 

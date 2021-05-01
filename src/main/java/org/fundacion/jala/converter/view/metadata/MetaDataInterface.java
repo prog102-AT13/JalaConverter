@@ -14,13 +14,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.view.Models.MetaDataRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
+import org.fundacion.jala.converter.view.utilities.BtnStyle;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
+import org.fundacion.jala.converter.view.utilities.SelectFile;
 import javax.swing.JPanel;
-import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
-import java.awt.Font;
+import java.awt.FlowLayout;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -31,42 +33,50 @@ import static org.fundacion.jala.converter.view.utilities.CheckFile.checkFileSel
  * This class is for the metadata UI.
  */
 public class MetaDataInterface extends JPanel implements ActionListener {
+    private static final Logger LOGGER = LogManager.getLogger();
+    private final int WAIT_TIME = 5000;
+    private final int MARGIN_SPACE = 30;
+    private final int MARGIN_BOTTOM_MAIN_CONTAINER = 200;
+    private final int MARGIN_BOTTOM_BTN_CONTAINER = 100;
+    private final int CONVERT_TYPE_BTN = 2;
     private String token;
     private SelectFile file;
     private ExportingFormat exportingFormat;
     private OutputInfo outputName;
-    private JButton convertMetaData;
     private ClientRequest clientRequest = new ClientRequest();
-    private static final Logger LOGGER = LogManager.getLogger();
-    private final int WAIT_TIME = 5000;
-    private final int ALIGN_LABEL_STYLE = 0;
-    private final int WIDTH_LABEL_STYLE = 70;
-    private final int HEIGHT_LABEL_STYLE = 30;
-    private final int TOP_BORDER = 20;
-    private final int LEFT_BORDER = 0;
-    private final int BOTTOM_BORDER = 100;
-    private final int RIGHT_BORDER = 0;
-    private final int FONT_STYLE = 0;
-    private final int FONT_SIZE = 11;
+    private JPanel btnContainer;
+    private JPanel container;
+    private BtnStyle convertMetaData;
 
     public MetaDataInterface(final String newToken) {
         token = newToken;
-        JLabelStyle metaDataTitle = new JLabelStyle("Extract Metadata", "h1",
-                ALIGN_LABEL_STYLE, WIDTH_LABEL_STYLE, HEIGHT_LABEL_STYLE);
+        JLabelStyle metaDataTitle = new JLabelStyle("Extract Metadata", "h2");
         file = new SelectFile();
         exportingFormat = new ExportingFormat();
         outputName = new OutputInfo();
-        convertMetaData = new JButton("Extract");
-        convertMetaData.setAlignmentX(RIGHT_ALIGNMENT);
+        convertMetaData = new BtnStyle("Extract", CONVERT_TYPE_BTN);
         convertMetaData.addActionListener(this::actionPerformed);
-        convertMetaData.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBorder(new EmptyBorder(TOP_BORDER, LEFT_BORDER, BOTTOM_BORDER, RIGHT_BORDER));
-        add(metaDataTitle.getTextLabel());
-        add(file);
-        add(exportingFormat);
-        add(outputName);
-        add(convertMetaData);
+        setPanels();
+        setLayout(new BorderLayout());
+        setBorder(new EmptyBorder(0, MARGIN_SPACE, MARGIN_BOTTOM_MAIN_CONTAINER, MARGIN_SPACE));
+        add(metaDataTitle, BorderLayout.NORTH);
+        add(container, BorderLayout.CENTER);
+        add(btnContainer, BorderLayout.SOUTH);
+    }
+
+    /**
+     * Sets the position in Panel of elements.
+     */
+    public void setPanels() {
+        btnContainer = new JPanel();
+        btnContainer.setLayout(new FlowLayout(FlowLayout.CENTER));
+        btnContainer.add(convertMetaData);
+        container = new JPanel();
+        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+        container.add(file);
+        container.add(exportingFormat);
+        container.add(outputName);
+        container.setBorder(new EmptyBorder(MARGIN_SPACE, 0, MARGIN_BOTTOM_BTN_CONTAINER, 0));
     }
 
     /**

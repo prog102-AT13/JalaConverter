@@ -14,15 +14,20 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.view.Models.VideoRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
+import org.fundacion.jala.converter.view.utilities.BtnStyle;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import org.fundacion.jala.converter.view.utilities.SelectFile;
+import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
+import java.awt.FlowLayout;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -35,18 +40,15 @@ import static org.fundacion.jala.converter.view.utilities.CheckFile.checkFileSel
  * This class creates the video converter's UI.
  */
 public class VideoConverterInterface extends JPanel implements ActionListener {
+    private final int CONVERT_TYPE_BTN = 2;
+    final int MARGIN_SPACE = 30;
+    final int MARGIN_BOTTOM_MAIN_CONTAINER = 200;
+    final int MARGIN_BOTTOM_BTN_CONTAINER = 100;
     private SelectFile file;
     private ConverterTypeSelect menuConverterType;
     private OutputSettings settings;
     private ClientRequest clientRequest = new ClientRequest();
     private static final Logger LOGGER = LogManager.getLogger();
-    private final int alignLabelStyle = 0;
-    private final int widthLabelStyle = 100;
-    private final int heightLabelStyle = 30;
-    private final int topBorder = 50;
-    private final int leftBorder = 50;
-    private final int bottomBorder = 100;
-    private final int rightBorder = 70;
     private final int fontStyle = 0;
     private final int fontSize = 12;
     private String token;
@@ -56,30 +58,36 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
 
     public VideoConverterInterface(final String newToken) {
         token = newToken;
-        JLabelStyle videoTitle = new JLabelStyle("Select Video:", "h2",
-                alignLabelStyle, widthLabelStyle, heightLabelStyle);
+        JLabelStyle videoTitle = new JLabelStyle("Select Video:", "h2");
         videoTitle.setAlignmentX(LEFT_ALIGNMENT);
         file = new SelectFile();
         file.setAlignmentX(LEFT_ALIGNMENT);
         menuConverterType = new ConverterTypeSelect();
         menuConverterType.setAlignmentX(LEFT_ALIGNMENT);
-        JButton converterVideoButton = new JButton("Convert");
+        BtnStyle converterVideoButton = new BtnStyle("Convert", CONVERT_TYPE_BTN);
         converterVideoButton.setFont(new Font("Barlow", fontStyle, fontSize));
         converterVideoButton.addActionListener(this::actionPerformed);
         settings = new OutputSettings();
         settings.setAlignmentX(LEFT_ALIGNMENT);
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBorder(new EmptyBorder(topBorder, leftBorder, bottomBorder, rightBorder));
         ImageIcon icon = new ImageIcon("img/loading.gif");
         label = new JLabel();
         label.setIcon(new ImageIcon(icon.getImage()));
         label.setVisible(false);
-        add(videoTitle.getTextLabel());
-        add(file);
-        add(menuConverterType);
-        add(settings);
-        add(converterVideoButton);
-        add(label);
+        JPanel btnContainer = new JPanel();
+        btnContainer.setLayout(new FlowLayout(FlowLayout.CENTER));
+        btnContainer.add(converterVideoButton);
+        JPanel container = new JPanel();
+        container.setBorder(new EmptyBorder(MARGIN_SPACE, 0, MARGIN_BOTTOM_BTN_CONTAINER, 0));
+        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+        container.add(file);
+        container.add(label);
+        container.add(menuConverterType);
+        container.add(settings);
+        setLayout(new BorderLayout());
+        setBorder(new EmptyBorder(0, MARGIN_SPACE, MARGIN_BOTTOM_MAIN_CONTAINER, MARGIN_SPACE));
+        add(videoTitle, BorderLayout.NORTH);
+        add(container, BorderLayout.CENTER);
+        add(btnContainer, BorderLayout.SOUTH);
     }
 
     /**

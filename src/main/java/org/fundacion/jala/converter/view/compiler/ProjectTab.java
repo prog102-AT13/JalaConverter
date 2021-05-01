@@ -12,12 +12,17 @@ package org.fundacion.jala.converter.view.compiler;
 
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import javax.swing.JTabbedPane;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import java.awt.Font;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Dimension;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -29,16 +34,19 @@ import java.util.ArrayList;
  */
 public class ProjectTab extends JTabbedPane implements ActionListener {
     public static int counter;
-    private PlusButton button;
-    private final int sizeFont = 11;
-    private final int dimension = 20;
     private ArrayList<String> tabList;
     private ClientRequest clientRequest = new ClientRequest();
     private String token;
     private String extension;
+    private final int SIZE_FONT_11 = 11;
+    private JButton addBtn;
+    private JPanel emptyInitial;
 
     public ProjectTab(final String newToken) {
         token = newToken;
+        setLayout(new BorderLayout());
+        emptyInitial = new JPanel();
+        add(emptyInitial);
     }
 
     /**
@@ -49,15 +57,21 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
         CodeTextArea codeArea = new CodeTextArea();
         codeArea.setName(InitialCode.getNameMain(extension));
         codeArea.getCodeArea().setText(InitialCode.generate(InitialCode.getNameMain(extension), extension));
+        remove(emptyInitial);
         add(codeArea);
         setTabComponentAt(getTabCount() - 1, createTabHeaderWithTitle(InitialCode.getNameMain(extension)));
         tabList = new ArrayList<>();
-        setFont(new Font("Barlow", 0, sizeFont));
-        button = new PlusButton();
-        button.setPreferredSize(new Dimension(dimension, dimension));
-        button.addActionListener(this);
+        setFont(new Font("Barlow", 0, SIZE_FONT_11));
+        ImageIcon addIcon = new ImageIcon("img/compilerBtn/BtnAddTab.png");
+        addBtn = new JButton(addIcon);
+        addBtn.setOpaque(true);
+        addBtn.setBackground(null);
+        addBtn.setFocusPainted(false);
+        Border border = new LineBorder(Color.WHITE, 0);
+        addBtn.setBorder(border);
+        addBtn.addActionListener(this);
         add(new JPanel());
-        setTabComponentAt(getTabCount() - 1, button);
+        setTabComponentAt(getTabCount() - 1, addBtn);
         counter = 0;
         addMouseListener(new MouseAdapter() {
             @Override
@@ -125,15 +139,21 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
      * @return a JPanel with complete title.
      */
     public JPanel createTabHeader(final String title) {
-        CloseButton tabButton = new CloseButton();
-        tabButton.setPreferredSize(new Dimension(dimension, dimension));
-        tabButton.addActionListener(e1 -> {
+
+        ImageIcon addIcon = new ImageIcon("img/compilerBtn/BtnCloseTab.png");
+        JButton closeBtn = new JButton(addIcon);
+        closeBtn.setOpaque(true);
+        closeBtn.setBackground(Color.WHITE);
+        closeBtn.setFocusPainted(false);
+        Border border = new LineBorder(Color.WHITE, 0);
+        closeBtn.setBorder(border);
+        closeBtn.addActionListener(eventMouse -> {
             removeTab(title);
             setSelectedIndex(getTabCount() - 2);
             tabList.remove(tabList.indexOf(title));
         });
         JPanel tabHeader = createTabHeaderWithTitle(title);
-        tabHeader.add(tabButton);
+        tabHeader.add(closeBtn);
         return tabHeader;
     }
 
@@ -148,7 +168,7 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
         headerTab.setLayout(new FlowLayout());
         headerTab.setOpaque(false);
         JLabel headerLabel = new JLabel(title);
-        headerLabel.setFont(new Font("Barlow", 0, sizeFont));
+        headerLabel.setFont(new Font("Barlow", 0, SIZE_FONT_11));
         headerTab.add(headerLabel);
         return headerTab;
     }
@@ -172,12 +192,12 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
     }
 
     /**
-     * Gets us the plus button to access it.
+     * Gets the add tab button.
      *
-     * @return a plus button.
+     * @return addBtn JButton that add a tab.
      */
-    public PlusButton getButton() {
-        return button;
+    public JButton getButton() {
+        return addBtn;
     }
 
     /**

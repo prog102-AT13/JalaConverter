@@ -27,7 +27,7 @@ public class CheckFile {
         if (file != null) {
             return true;
         } else {
-            JOptionPane.showMessageDialog(null, "You need select a file", "Error Message", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "You need to select a file", "Error Message", JOptionPane.ERROR_MESSAGE);
             return false;
         }
     }
