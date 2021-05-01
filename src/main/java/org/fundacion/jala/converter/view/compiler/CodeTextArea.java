@@ -124,6 +124,11 @@ class CodeTextArea extends JPanel implements DocumentListener {
         lineCode.setText(getLinesOfText());
     }
 
+    /**
+     * Creates the JtreePanel.
+     *
+     * @param vals String of values to set in JtreePanel.
+     */
     public void JTreePanelOne(final String vals[]) {
         options = vals;
         treeOne = new JTree(options);

@@ -165,6 +165,12 @@ public class BtnStyle extends JButton {
         setPreferredSize(new Dimension(widthBtn, heightBtn));
     }
 
+    /**
+     * Sets JButton format for the Compilers Menu Buttons.
+     *
+     * @param text String for the JButton.
+     * @param icon String that defines the path of icon image.
+     */
     public void setBtnCompilers(final String text, final String icon) {
         ImageIcon btnIcon = new ImageIcon("img/compilerBtn/" + icon);
         setText(text);
