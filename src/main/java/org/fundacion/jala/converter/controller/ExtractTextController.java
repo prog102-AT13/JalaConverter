@@ -54,7 +54,7 @@ public class ExtractTextController {
         try {
             ExtractFacade.getTextExtract(file, language);
         } catch (PaoPaoException exception) {
-            exception.printStackTrace();
+            return exception.getMessage();
         }
         LOGGER.info("finish");
         return DownloadLinkFacade.getLinkExtractText(file);

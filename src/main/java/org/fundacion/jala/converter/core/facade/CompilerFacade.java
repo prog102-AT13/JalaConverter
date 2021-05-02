@@ -49,7 +49,7 @@ public class CompilerFacade {
      * @param code is string with code in Python.
      * @return a String of the result on runtime console.
      */
-    public static String facadePythonCompile(final String code) {
+    public static String facadePythonCompile(final String code) throws CompilerException {
         if (!code.isBlank() || !code.equals(null)) {
             pythonCompiler=new PythonCompiler();
             String filePath = Transform.toFile(code, "filetocompile", "py");
@@ -77,7 +77,7 @@ public class CompilerFacade {
      * @param pythonParameter the version to be used in the compiler.
      * @return a string of the result on runtime console.
      */
-    public static String facadePythonProjectCompile(final PythonParameter pythonParameter) {
+    public static String facadePythonProjectCompile(final PythonParameter pythonParameter) throws CompilerException {
         pythonCompiler = new PythonCompiler();
         result = pythonCompiler.compiler(pythonParameter);
         return result;

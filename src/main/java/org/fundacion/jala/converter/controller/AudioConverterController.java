@@ -73,7 +73,7 @@ public class AudioConverterController {
         try {
             extractMetadata(metadata, outputFilename, fileStorageService);
         } catch (PaoPaoException exception) {
-            exception.printStackTrace();
+            return exception.getMessage();
         }
         ZipFileFacade.getZipFileAudio(parameterOutputChecksum, metadata, outputFilename);
         LOGGER.info("finish");

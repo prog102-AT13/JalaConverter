@@ -36,7 +36,7 @@ public class PythonCompiler {
      * @param newPythonParameter gets all the parameters needed for Python.
      * @return a String with the result of execution in console.
      */
-    public String compiler(final PythonParameter newPythonParameter) {
+    public String compiler(final PythonParameter newPythonParameter) throws CompilerException {
         LOGGER.info("start");
         try {
             this.pythonParameter = newPythonParameter;
@@ -56,7 +56,7 @@ public class PythonCompiler {
             return result;
         } catch (IOException exception) {
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
-            return String.valueOf(new CompilerException(exception));
+            throw new CompilerException(exception);
         }
     }
 
@@ -66,7 +66,7 @@ public class PythonCompiler {
      * @param code a string ready to be converted.
      * @return a String with the path where will be created the file.
      */
-    public String makePythonFile(final String code) {
+    public String makePythonFile(final String code) throws CompilerException {
         LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");
@@ -84,7 +84,7 @@ public class PythonCompiler {
             return file.getAbsolutePath();
         } catch (IOException exception) {
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
-            return String.valueOf(new CompilerException(exception));
+            throw new CompilerException(exception);
         }
     }
 

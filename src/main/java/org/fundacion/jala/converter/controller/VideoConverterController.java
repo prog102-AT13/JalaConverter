@@ -83,7 +83,7 @@ public class VideoConverterController {
         try {
             extractMetadata(metadata, outputFilename, fileStorageService);
         } catch (PaoPaoException exception) {
-            exception.printStackTrace();
+            return exception.getMessage();
         }
         ZipFileFacade.getZipFileVideo(parameterOutputChecksum, metadata, thumbnail, outputFilename);
         LOGGER.info("finish");

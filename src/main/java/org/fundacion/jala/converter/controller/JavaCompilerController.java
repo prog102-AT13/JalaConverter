@@ -43,7 +43,6 @@ public class JavaCompilerController {
         try {
             return CompilerFacade.facadeJavaCompile(code);
         } catch (PaoPaoException exception) {
-            exception.printStackTrace();
             return exception.getMessage();
         }
     }

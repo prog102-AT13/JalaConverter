@@ -11,6 +11,7 @@
 package org.fundacion.jala.converter.controller;
 
 import org.fundacion.jala.converter.core.exceptions.CompilerException;
+import org.fundacion.jala.converter.core.exceptions.PaoPaoException;
 import org.fundacion.jala.converter.core.facade.CompilerFacade;
 import org.fundacion.jala.converter.core.javacompiler.JavaVersion;
 import org.fundacion.jala.converter.core.parameter.JavaParameter;
@@ -113,14 +114,18 @@ public class ProjectController {
         if (mainFife != null) {
             String[] extesion = mainFife.getName().split("[.]");
             if ("py".equals(extesion[extesion.length - 1])) {
-                return CompilerFacade.facadePythonProjectCompile(new PythonParameter(mainFife.getPathFile(), PythonEnum.V3));
+                try {
+                    return CompilerFacade.facadePythonProjectCompile(new PythonParameter(mainFife.getPathFile(), PythonEnum.V3));
+                } catch (PaoPaoException exception) {
+                    return exception.getMessage();
+                }
             }
             if ("java".equals(extesion[extesion.length - 1])) {
                 try {
                     return CompilerFacade.facadeJavaProjectCompile(new JavaParameter(JavaVersion.JAVA_11, mainFife.getPathFile(),
                             mainFife.getName()));
-                } catch (CompilerException e) {
-                    e.printStackTrace();
+                } catch (PaoPaoException exception) {
+                    return exception.getMessage();
                 }
             }
         }

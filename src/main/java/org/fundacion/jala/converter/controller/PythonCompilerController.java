@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.core.exceptions.PaoPaoException;
 import org.fundacion.jala.converter.core.facade.CompilerFacade;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +40,10 @@ public class PythonCompilerController {
     @ApiOperation(value = "Compiles python code", notes = "Provide the python code to compile",
             authorizations = {@Authorization(value = "JWT")})
     public String compilePython(final @RequestParam("code") String code) throws IllegalStateException {
-        return CompilerFacade.facadePythonCompile(code);
+        try {
+            return CompilerFacade.facadePythonCompile(code);
+        } catch (PaoPaoException exception) {
+            return exception.getMessage();
+        }
     }
 }

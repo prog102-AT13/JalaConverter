@@ -56,7 +56,7 @@ public class ExtractMetadataController {
         try {
             filename = ExtractFacade.getMetadataExtract(fileToExtract, isMoreInfo, nameExport, format);
         } catch (PaoPaoException exception) {
-            exception.printStackTrace();
+            return exception.getMessage();
         }
         LOGGER.info("finish");
         return DownloadLinkFacade.getLinkMetadata(filename, format);
