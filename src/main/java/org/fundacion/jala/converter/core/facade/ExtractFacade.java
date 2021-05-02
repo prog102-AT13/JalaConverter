@@ -39,14 +39,18 @@ public class ExtractFacade {
      * @throws IOException is a exception when invalid input is provided.
      * @throws TextExtractorException if process is interrupted.
      */
-    public static void getTextExtract(final MultipartFile file, final String language) throws IOException, TextExtractorException {
+    public static void getTextExtract(final MultipartFile file, final String language) throws TextExtractorException {
 
         String fileOut = file.getOriginalFilename();
         String outputFileName = fileOut.substring(0, fileOut.lastIndexOf("."));
         ExtractTextParameter extractTextParameter;
-        extractTextParameter = new ExtractTextParameter(fileStorageService.uploadFile(file), language, outputFileName);
-        ExtractText extractText = new ExtractText(extractTextParameter);
-        extractText.extractText();
+        try {
+            extractTextParameter = new ExtractTextParameter(fileStorageService.uploadFile(file), language, outputFileName);
+            ExtractText extractText = new ExtractText(extractTextParameter);
+            extractText.extractText();
+        } catch (IOException exception) {
+            throw new TextExtractorException(exception);
+        }
     }
 
     /**
@@ -63,8 +67,13 @@ public class ExtractFacade {
      */
     public static String getMetadataExtract(final MultipartFile file, final Boolean isMoreInfo,
                                             final String nameExport, final String format)
-                                            throws IOException, IllegalArgumentException, MetadataException {
-        String pathFile = fileStorageService.uploadFile(file);
+                                            throws MetadataException {
+        String pathFile = null;
+        try {
+            pathFile = fileStorageService.uploadFile(file);
+        } catch (IOException exception) {
+            throw new MetadataException(exception);
+        }
         String outPath = FileStorageService.getOutputPathWithoutFileName(pathFile);
         File fileToExtract = new File(pathFile);
         ObjectMetadata objectMetadata = new ObjectMetadata();

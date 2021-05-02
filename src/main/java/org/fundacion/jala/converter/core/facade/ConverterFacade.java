@@ -44,7 +44,7 @@ public class ConverterFacade {
      * @return a String of output filename.
      * @throws ConverterException if process is interrupted.
      */
-    public static String getVideoConverter(final VideoParameter videoParameter) throws IOException, ConverterException {
+    public static String getVideoConverter(final VideoParameter videoParameter) throws ConverterException {
         VideoConverter converter = new VideoConverter(videoParameter);
         converter.convertVideo();
         return converter.getOutputFileName();

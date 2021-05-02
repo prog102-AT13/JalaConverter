@@ -78,7 +78,7 @@ public class VideoConverterController {
                     new VideoParameter(parameterOutputChecksum.getOutputFilename(), outputFormat, resolution, thumbnail,
                             frameRate, width, height, audio));
         } catch (PaoPaoException exception) {
-            exception.printStackTrace();
+            return exception.getMessage();
         }
         try {
             extractMetadata(metadata, outputFilename, fileStorageService);

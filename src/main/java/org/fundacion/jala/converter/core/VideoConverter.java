@@ -41,7 +41,7 @@ public class VideoConverter {
      *
      * @throws ConverterException if process is interrupted.
      */
-    public void convertVideo() throws ConverterException, IOException {
+    public void convertVideo() throws ConverterException {
         String adaptPath = "\"" + parameter.getFilePath() + "\"";
         format = parameter.getOutputFormat();
         output = adaptPath.substring((adaptPath.lastIndexOf("\\") + 1), adaptPath.lastIndexOf(".") + 1) + format;
@@ -50,6 +50,7 @@ public class VideoConverter {
         String ffmpegCommand = startFirstCommand + adaptPath + " ";
         String parameters = changeResolution() + changeFrameRate() + removeAudio();
         String theCommand = ffmpegCommand + parameters + pathOutput + output  + "\" -y";
+        try {
         Process process = Runtime.getRuntime().exec("cmd /c " + theCommand);
         System.out.println(theCommand);
         ThreadHandler errorHandler = new ThreadHandler(process.getErrorStream(), "Error Stream");
@@ -57,19 +58,18 @@ public class VideoConverter {
         ThreadHandler threadHandler = new ThreadHandler(process.getInputStream(), "Output Stream");
         threadHandler.start();
         LOGGER.info("start");
-        try {
             LOGGER.info("Execute Try");
             process.waitFor();
             LOGGER.info("finish");
-        } catch (InterruptedException exception) {
-            LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
-            throw new ConverterException(exception);
-        }
         LOGGER.info("finish");
         System.out.println("exit code: " + process.exitValue());
         if (parameter.hasThumbnail()) {
             generateAThumbnail();
             LOGGER.info("finish");
+        }
+        } catch (InterruptedException | IOException exception) {
+            LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
+            throw new ConverterException(exception);
         }
         result = new Result();
         result.setFilename(outputFileName);
@@ -100,24 +100,24 @@ public class VideoConverter {
      *
      * @throws ConverterException if process is interrupted.
      */
-    private void generateAThumbnail() throws ConverterException, IOException {
+    private void generateAThumbnail() throws ConverterException {
         String name = getOutputFileName().substring(0, getOutputFileName().lastIndexOf("."));
         String startCommand = "ffmpeg -i ";
         String outputCommand = pathOutput + output + "\"" + " -ss 00:00:01 -vframes 1 -s 128x128 "
                 + pathOutput + name + PNG_FORMAT + "\" -y";
         String thumbnailCommand = startCommand + outputCommand;
         System.out.println(thumbnailCommand);
+        try {
         Process process = Runtime.getRuntime().exec("cmd /c " + thumbnailCommand);
         ThreadHandler errorHandler = new ThreadHandler(process.getErrorStream(), "Error Stream");
         errorHandler.start();
         ThreadHandler threadHandler = new ThreadHandler(process.getInputStream(), "Output Stream");
         threadHandler.start();
         LOGGER.info("start");
-        try {
             LOGGER.info("Execute Try");
             process.waitFor();
             LOGGER.info("finish");
-        } catch (InterruptedException exception) {
+        } catch (InterruptedException | IOException exception) {
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
             throw new ConverterException(exception);
         }
