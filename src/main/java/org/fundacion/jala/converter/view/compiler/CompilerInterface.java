@@ -16,9 +16,9 @@ import org.fundacion.jala.converter.view.Models.CompileRequestForm;
 import org.fundacion.jala.converter.view.Models.FileRequestForm;
 import org.fundacion.jala.converter.view.Models.ProjectRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
-
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import javax.swing.BoxLayout;
+import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.border.EmptyBorder;
@@ -210,11 +210,6 @@ public class CompilerInterface extends JPanel {
     public void createProject() {
         LOGGER.info("start");
         ProjectRequestForm projectRequestForm = new ProjectRequestForm();
-        UIManager UI = new UIManager();
-        UI.put("OptionPane.background", Color.DARK_GRAY);
-        UI.put("Panel.background", Color.DARK_GRAY);
-        UI.put("Button.background", Color.ORANGE);
-        UI.put("Button.foreground", Color.WHITE);
         String projectTitle = (String) JOptionPane.showInputDialog(null,
                 "Write project name", "Project Name",
                 JOptionPane.PLAIN_MESSAGE, null, null, "project1");
@@ -225,7 +220,7 @@ public class CompilerInterface extends JPanel {
                 String endpointResponse = clientRequest.executeRequest(projectRequestForm, token);
                 projectId = endpointResponse;
                 consoleOutput.getConsole().setText("Project " + projectTitle + " was created successfully");
-                projectTab.start(extension);
+                projectTab.start(extension, projectTitle);
                 LOGGER.info("finish");
             } catch (Exception exception) {
                 LOGGER.error("Execute Exception" + exception.getMessage());

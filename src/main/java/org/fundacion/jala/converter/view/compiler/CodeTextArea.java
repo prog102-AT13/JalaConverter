@@ -18,9 +18,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Element;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.BorderLayout;
+import java.util.ArrayList;
 
 /**
  * This class customizes a panel with custom text areas.
@@ -39,9 +42,11 @@ class CodeTextArea extends JPanel implements DocumentListener {
     private final Color LINE_COLOR = new Color(28, 28, 28);
     final String[] toppings = {"Project1", "Main.java", "subclass.java"};
     private JTree treeOne;
+    private DefaultMutableTreeNode root;
+    private DefaultTreeModel treeModel;
     private String[] options;
 
-    protected CodeTextArea() {
+    protected CodeTextArea(final String projectName, final ArrayList<String> fileNames) {
         codeArea = new JTextArea(CODE_AREA_WIDTH, CODE_AREA_HEIGHT);
         codeArea.setBorder(new EmptyBorder(TOP_BORDER, LEFT_BORDER, BOTTOM_BORDER, RIGHT_BORDER));
         codeArea.setFont(new Font("Courier New", Font.PLAIN, FONT_SIZE));
@@ -53,7 +58,7 @@ class CodeTextArea extends JPanel implements DocumentListener {
         textCodeArea.setBorder(new EmptyBorder(0, 0, 0, 0));
         codeArea.getDocument().addDocumentListener(this);
         setLayout(new BorderLayout());
-        JTreePanelOne(toppings);
+        createFileTree(projectName, fileNames);
         treeOne.setBorder(new EmptyBorder(RIGHT_BORDER, TOP_BORDER, RIGHT_BORDER, RIGHT_BORDER_SPACE));
         textCodeArea.getViewport().add(codeArea);
         textCodeArea.setRowHeaderView(lineCode);
@@ -132,5 +137,31 @@ class CodeTextArea extends JPanel implements DocumentListener {
     public void JTreePanelOne(final String vals[]) {
         options = vals;
         treeOne = new JTree(options);
+    }
+
+    /**
+     * Creates a file tree with a project name and a list with file names.
+     *
+     * @param projectName represents project name.
+     * @param fileNames represents a list with file names.
+     */
+    public void createFileTree(final String projectName, final ArrayList<String> fileNames) {
+        root = null;
+        treeModel = null;
+        treeOne = null;
+        root = new DefaultMutableTreeNode(projectName);
+        treeModel = new DefaultTreeModel(root);
+        treeOne = new JTree(treeModel);
+        for (String fileName : fileNames) {
+            root.add(new DefaultMutableTreeNode(fileName));
+        }
+        treeOne.setShowsRootHandles(true);
+    }
+
+    /**
+     * Adds a child path that represents new file of project.
+     */
+    public void createChild(final String nameFile) {
+        root.add(new DefaultMutableTreeNode(nameFile));
     }
 }
