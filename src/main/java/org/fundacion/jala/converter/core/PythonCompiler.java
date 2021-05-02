@@ -35,6 +35,7 @@ public class PythonCompiler {
      *
      * @param newPythonParameter gets all the parameters needed for Python.
      * @return a String with the result of execution in console.
+     * @throws CompilerException if process is interrupted.
      */
     public String compiler(final PythonParameter newPythonParameter) throws CompilerException {
         LOGGER.info("start");
@@ -65,6 +66,7 @@ public class PythonCompiler {
      *
      * @param code a string ready to be converted.
      * @return a String with the path where will be created the file.
+     * @throws CompilerException if process is interrupted.
      */
     public String makePythonFile(final String code) throws CompilerException {
         LOGGER.info("start");

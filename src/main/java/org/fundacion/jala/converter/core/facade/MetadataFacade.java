@@ -28,6 +28,7 @@ public class MetadataFacade {
      * @param metadata a String with metadata request.
      * @param outputFileName a String with the new file's name.
      * @param fileStorageService an object to create the path.
+     * @throws MetadataException if process is interrupted.
      */
     public static void extractMetadata(final boolean metadata, final String outputFileName,
                                        final FileStorageService fileStorageService) throws MetadataException {

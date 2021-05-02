@@ -15,7 +15,6 @@ import org.fundacion.jala.converter.core.parameter.AudioParameter;
 import org.fundacion.jala.converter.core.parameter.VideoParameter;
 import org.fundacion.jala.converter.core.AudioConverter;
 import org.fundacion.jala.converter.core.VideoConverter;
-import java.io.IOException;
 
 /**
  * This class calls facade of converter.

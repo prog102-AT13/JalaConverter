@@ -36,7 +36,6 @@ public class ExtractFacade {
      *
      * @param file file is image file to extract text.
      * @param  language is a type of language of the text.
-     * @throws IOException is a exception when invalid input is provided.
      * @throws TextExtractorException if process is interrupted.
      */
     public static void getTextExtract(final MultipartFile file, final String language) throws TextExtractorException {
@@ -61,8 +60,6 @@ public class ExtractFacade {
      * @param nameExport  is the name of file where metadata are extracted.
      * @param format is the format of file where metadata are extracted.
      * @return a String with name of file which contains metadata.
-     * @throws IOException is exception when invalid path.
-     * @throws IllegalArgumentException is exception when string not correspond enum.
      * @throws MetadataException if process is interrupted.
      */
     public static String getMetadataExtract(final MultipartFile file, final Boolean isMoreInfo,
