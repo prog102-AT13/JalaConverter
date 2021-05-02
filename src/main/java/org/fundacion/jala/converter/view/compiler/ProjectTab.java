@@ -17,7 +17,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import javax.swing.border.Border;
@@ -33,20 +32,19 @@ import java.util.ArrayList;
  * This class customizes a tabbed pane with custom tabs.
  */
 public class ProjectTab extends JTabbedPane implements ActionListener {
-    public static int counter;
+//    public static int counter;
     private ArrayList<String> tabList;
     private ClientRequest clientRequest = new ClientRequest();
     private String token;
     private String extension;
     private final int SIZE_FONT_11 = 11;
     private JButton addBtn;
-    private JPanel emptyInitial;
+//    private JPanel emptyInitial;
 
     public ProjectTab(final String newToken) {
         token = newToken;
-        setLayout(new BorderLayout());
-        emptyInitial = new JPanel();
-        add(emptyInitial);
+        tabList = new ArrayList<>();
+        addInitialProjectTab("Initial", "Create a Project");
     }
 
     /**
@@ -54,13 +52,11 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
      */
     public void start(final String filetype) {
         extension = filetype;
-        CodeTextArea codeArea = new CodeTextArea();
-        codeArea.setName(InitialCode.getNameMain(extension));
-        codeArea.getCodeArea().setText(InitialCode.generate(InitialCode.getNameMain(extension), extension));
-        remove(emptyInitial);
-        add(codeArea);
-        setTabComponentAt(getTabCount() - 1, createTabHeaderWithTitle(InitialCode.getNameMain(extension)));
-        tabList = new ArrayList<>();
+        if (this != null && getTabList() != null) {
+            cleanProjectTab();
+        }
+        addInitialProjectTab(InitialCode.getNameMain(extension),
+                InitialCode.generate(InitialCode.getNameMain(extension), extension));
         setFont(new Font("Barlow", 0, SIZE_FONT_11));
         ImageIcon addIcon = new ImageIcon("img/compilerBtn/BtnAddTab.png");
         addBtn = new JButton(addIcon);
@@ -72,7 +68,7 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
         addBtn.addActionListener(this);
         add(new JPanel());
         setTabComponentAt(getTabCount() - 1, addBtn);
-        counter = 0;
+//        counter = 0;
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(final MouseEvent mouseEvent) {
@@ -88,19 +84,13 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
      */
     @Override
     public void actionPerformed(final ActionEvent event) {
-        counter++;
+//        counter++;
         String title = (String) JOptionPane.showInputDialog(null,
                 "Write file name", "Create file",
                 JOptionPane.PLAIN_MESSAGE, null, null, "file1");
         if (!title.isEmpty() && tabList.size() < 7) {
             if (!tabList.contains(title)) {
-                tabList.add(title);
-                CodeTextArea codeArea = new CodeTextArea();
-                codeArea.setName(title);
-                codeArea.getCodeArea().setText(InitialCode.generate(title, extension));
-                add(codeArea, getTabCount() - 1);
-                setTabComponentAt(getTabCount() - 2, createTabHeader(title));
-                setSelectedIndex(getTabCount() - 2);
+                addProjectTab(title, InitialCode.generate(title, extension));
             }
         }
     }
@@ -224,6 +214,45 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
     public void cleanProjectTab() {
         removeAll();
         tabList.clear();
+    }
+
+    /**
+     * Adds a initial tab to tabbed pane.
+     *
+     * @param title represents title of tab that is added.
+     * @param initialCode represents initial code that tab has.
+     */
+    public void addInitialProjectTab(final String title, final String initialCode) {
+        add(createProjectTab(title, initialCode));
+        setTabComponentAt(getTabCount() - 1, createTabHeaderWithTitle(title));
+        tabList.add(title);
+    }
+
+    /**
+     * Adds a new tab to tabbed pane.
+     *
+     * @param title represents title of tab that is added.
+     * @param initialCode represents initial code that tab has.
+     */
+    public void addProjectTab(final String title, final String initialCode) {
+        add(createProjectTab(title, initialCode), getTabCount() - 1);
+        setTabComponentAt(getTabCount() - 2, createTabHeader(title));
+        setSelectedIndex(getTabCount() - 2);
+        tabList.add(title);
+    }
+
+    /**
+     * Creates a new codeTexArea.
+     *
+     * @param title represents title of codeTexArea.
+     * @param initialCode represents initial code of codeTexArea.
+     * @return a CodeTexArea to get access to it.
+     */
+    public CodeTextArea createProjectTab(final String title, final String initialCode) {
+        CodeTextArea codeArea = new CodeTextArea();
+        codeArea.setName(title);
+        codeArea.getCodeArea().setText(initialCode);
+        return codeArea;
     }
 }
 

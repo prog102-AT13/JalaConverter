@@ -93,6 +93,7 @@ public class MainInterface extends JFrame implements ActionListener {
         audioPanel = new AudioConverterInterface(token);
         metaDataPanel = new MetaDataInterface(token);
         textExtractorPanel = new TextExtractorInterface(token);
+        compilerPanel.setVisible(true);
         mainPanel = new JLayeredPane();
         mainPanel.setLayout(new CardLayout());
         mainPanel.setBorder(MARGIN_SPACE);
@@ -203,5 +204,9 @@ public class MainInterface extends JFrame implements ActionListener {
         button.addActionListener(this::actionPerformed);
         button.addMouseListener(mouseListener);
         return button;
+    }
+
+    public static void main(String[] args) {
+        new MainInterface().initInterface("hoa");
     }
 }
