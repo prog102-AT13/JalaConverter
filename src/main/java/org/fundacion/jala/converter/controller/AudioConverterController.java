@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
-import java.io.IOException;
 import static org.fundacion.jala.converter.core.facade.MetadataFacade.extractMetadata;
 
 /**
@@ -53,8 +52,6 @@ public class AudioConverterController {
      * @param checksum is checksum of audio.
      * @param metadata if metadata is extracted from the audio.
      * @return a string of path to download files.
-     * @throws IOException is a exception when invalid input is provided.
-     * @throws InterruptedException is exception if process is interrupted.
      */
     @PostMapping("/convertAudio")
     @ApiOperation(value = "Converts audio file", notes = "Provide the audio file to convert",
@@ -63,10 +60,8 @@ public class AudioConverterController {
                              final @RequestParam("bitrate") String bitrate, final @RequestParam("volume") String volume,
                              final @RequestParam("hz") String hz, final @RequestParam("audiochannel") String audioChannel,
                              final @RequestParam("checksum") String checksum,
-                             final @RequestParam("metadata") boolean metadata)
-            throws IOException, InterruptedException {
+                             final @RequestParam("metadata") boolean metadata) {
         LOGGER.info("start");
-
         try {
             parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
             String outputFilename = ConverterFacade.getAudioConverter(

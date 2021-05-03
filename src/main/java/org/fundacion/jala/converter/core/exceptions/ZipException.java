@@ -13,7 +13,7 @@ package org.fundacion.jala.converter.core.exceptions;
 /**
  * This class creates the zip's exceptions.
  */
-public class ZipException extends PaoPaoException{
+public class ZipException extends PaoPaoException {
     private static final String DEFAULT_MESSAGE = "Zip Error";
 
     public ZipException() {

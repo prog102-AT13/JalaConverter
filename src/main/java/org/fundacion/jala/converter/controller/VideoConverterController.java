@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
-import java.io.IOException;
 import static org.fundacion.jala.converter.core.facade.MetadataFacade.extractMetadata;
 
 /**
@@ -55,8 +54,6 @@ public class VideoConverterController {
      * @param checksum is the checksum of video file.
      * @param metadata if metadata is extracted from the video.
      * @return a string of path to download files.
-     * @throws IOException is a exception when invalid input is provided.
-     * @throws InterruptedException is exception if process is interrupted.
      */
     @PostMapping("/convertVideo")
     @ApiOperation(value = "Converts video file", notes = "Provide the video file to convert",
@@ -68,8 +65,7 @@ public class VideoConverterController {
                              final @RequestParam("framerate") int frameRate, final @RequestParam("width") int width,
                              final @RequestParam("height") int height, final @RequestParam("audio") boolean audio,
                              final @RequestParam("checksum") String checksum,
-                             final @RequestParam("metadata") boolean metadata)
-                            throws IOException, InterruptedException {
+                             final @RequestParam("metadata") boolean metadata) {
         LOGGER.info("start");
         try {
             parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);

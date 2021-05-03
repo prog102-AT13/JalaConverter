@@ -13,7 +13,7 @@ package org.fundacion.jala.converter.core.exceptions;
 /**
  * This class creates the checksum exceptions.
  */
-public class ChecksumException extends PaoPaoException{
+public class ChecksumException extends PaoPaoException {
     private static final String DEFAULT_MESSAGE = "Checksum Error";
 
     public ChecksumException() {

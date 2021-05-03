@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
-import java.io.IOException;
 
 /**
  * This class extracts the text from an image.
@@ -41,15 +40,12 @@ public class ExtractTextController {
      * @param file is image file to extract text.
      * @param language is a type of language of the text.
      * @return a string of path to download files.
-     * @throws IllegalStateException is a exception if process is Illegal.
-     * @throws IOException is a exception when invalid input is provided.
      */
     @PostMapping(value = "/extractText")
     @ApiOperation(value = "Extracts text from an image", notes = "Provide the image to extract its text",
             authorizations = {@Authorization(value = "JWT")})
     public String uploadFile(final @RequestPart("file") MultipartFile file,
-                             final @RequestParam("language") String language) throws IllegalStateException,
-            IOException {
+                             final @RequestParam("language") String language) {
         LOGGER.info("start");
         try {
             ExtractFacade.getTextExtract(file, language);

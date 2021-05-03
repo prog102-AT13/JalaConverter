@@ -34,12 +34,11 @@ public class PythonCompilerController {
      *
      * @param code is a String with the code to compile.
      * @return a String with the compilation result.
-     * @throws IllegalStateException when method invoked at an illegal time.
      */
     @PostMapping("/compilePython")
     @ApiOperation(value = "Compiles python code", notes = "Provide the python code to compile",
             authorizations = {@Authorization(value = "JWT")})
-    public String compilePython(final @RequestParam("code") String code) throws IllegalStateException {
+    public String compilePython(final @RequestParam("code") String code) {
         try {
             return CompilerFacade.facadePythonCompile(code);
         } catch (PaoPaoException exception) {

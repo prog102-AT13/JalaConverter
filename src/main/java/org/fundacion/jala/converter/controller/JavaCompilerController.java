@@ -34,12 +34,11 @@ public class JavaCompilerController {
      *
      * @param code is a String with the code to compile.
      * @return String with the compilation result.
-     * @throws IllegalStateException when method invoked at an illegal time.
      */
     @PostMapping("/compileJava")
     @ApiOperation(value = "Compiles java code", notes = "Provide the java code to compile",
             authorizations = {@Authorization(value = "JWT")})
-    public String compileJava(final @RequestParam("code") String code) throws IllegalStateException {
+    public String compileJava(final @RequestParam("code") String code) {
         try {
             return CompilerFacade.facadeJavaCompile(code);
         } catch (PaoPaoException exception) {
