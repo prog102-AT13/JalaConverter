@@ -11,6 +11,7 @@
 package org.fundacion.jala.converter.controller;
 
 import org.fundacion.jala.converter.core.exceptions.CompilerException;
+import org.fundacion.jala.converter.core.exceptions.PaoPaoException;
 import org.fundacion.jala.converter.core.facade.CompilerFacade;
 import org.fundacion.jala.converter.core.javacompiler.JavaVersion;
 import org.fundacion.jala.converter.core.parameter.JavaParameter;
@@ -27,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -43,11 +43,10 @@ public class ProjectController {
      * @param projectName is a String with the project's name.
      * @param userId is an integer with the user's id.
      * @return integer with the id of the project.
-     * @throws IllegalStateException when method invoked at an illegal time.
      */
     @PostMapping("/projects")
     public int createProject(final @RequestParam("projectName") String projectName,
-                             final @RequestParam("userId") int userId) throws IllegalStateException {
+                             final @RequestParam("userId") int userId) {
         String command = "mkdir " + System.getProperty("user.dir") + "\\" + projectName;
         RunCommand runCommand = new RunCommand();
         runCommand.run(command);
@@ -64,13 +63,11 @@ public class ProjectController {
      * @param extension is a String with file's extension.
      * @param code is a String with the code for the file.
      * @return String with the path of files.
-     * @throws IllegalStateException when method invoked at an illegal time.
-     * @throws IOException is a exception when invalid input is provided.
      */
     @PostMapping("/projects/{id}/file")
     public String createFiles(final @RequestParam("fileName") String fileName,  final @PathVariable("id") int idProject,
                               final @RequestParam("extension") String extension,
-                              final @RequestParam("code") String code) throws IllegalStateException, IOException {
+                              final @RequestParam("code") String code) {
         Project project = ProjectSQL.findProjectById(idProject);
         String pathFile = project.getPath();
         FileSQL.insertFileData(fileName + "." + extension, pathFile, idProject);
@@ -82,10 +79,9 @@ public class ProjectController {
      * Endpoint for deleting a file in data base.
      *
      * @param idFile is a String with the file's name.
-     * @throws IllegalStateException when method is invoked at an illegal time.
      */
     @DeleteMapping("/projects/file/{id}")
-    public void deleteFile(final @PathVariable("id") int idFile) throws IllegalStateException {
+    public void deleteFile(final @PathVariable("id") int idFile) {
         File file = FileSQL.findFileById(idFile);
         String command = "del " + file.getPathFile() + "\\" + file.getName();
         RunCommand runCommand = new RunCommand();
@@ -98,10 +94,9 @@ public class ProjectController {
      *
      * @param idProject is an integer with the project's id.
      * @return String with the path of files.
-     * @throws IllegalStateException when method is invoked at an illegal time.
      */
     @PostMapping("/projects/{id}")
-    public String runProject(final @PathVariable("id") int idProject) throws IllegalStateException {
+    public String runProject(final @PathVariable("id") int idProject) {
         Project project = ProjectSQL.findProjectById(idProject);
         List<File> fileList = FileSQL.listFileById(idProject);
         File mainFife = null;
@@ -113,14 +108,18 @@ public class ProjectController {
         if (mainFife != null) {
             String[] extesion = mainFife.getName().split("[.]");
             if ("py".equals(extesion[extesion.length - 1])) {
-                return CompilerFacade.facadePythonProjectCompile(new PythonParameter(mainFife.getPathFile(), PythonEnum.V3));
+                try {
+                    return CompilerFacade.facadePythonProjectCompile(new PythonParameter(mainFife.getPathFile(), PythonEnum.V3));
+                } catch (PaoPaoException exception) {
+                    return exception.getMessage();
+                }
             }
             if ("java".equals(extesion[extesion.length - 1])) {
                 try {
                     return CompilerFacade.facadeJavaProjectCompile(new JavaParameter(JavaVersion.JAVA_11, mainFife.getPathFile(),
                             mainFife.getName()));
-                } catch (CompilerException e) {
-                    e.printStackTrace();
+                } catch (PaoPaoException exception) {
+                    return exception.getMessage();
                 }
             }
         }

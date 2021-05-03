@@ -98,9 +98,9 @@ public class ExtractText {
             result = new Result();
             result.setTextContent(text);
             System.out.println(text);
-        } catch (TesseractException e) {
-            LOGGER.error("Execute Tesseract Exception" + e.getLocalizedMessage());
-            e.printStackTrace();
+        } catch (TesseractException exception) {
+            LOGGER.error("Execute Tesseract Exception" + exception.getLocalizedMessage());
+            throw new TextExtractorException(exception);
         }
         System.out.println("finished");
         LOGGER.info("finish");
