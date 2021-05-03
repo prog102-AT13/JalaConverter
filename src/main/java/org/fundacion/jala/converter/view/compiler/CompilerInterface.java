@@ -17,11 +17,10 @@ import org.fundacion.jala.converter.view.Models.FileRequestForm;
 import org.fundacion.jala.converter.view.Models.ProjectRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import javax.swing.JPanel;
-import javax.swing.JButton;
+import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.BoxLayout;
 import javax.swing.border.EmptyBorder;
 
 /**
@@ -49,21 +48,19 @@ public class CompilerInterface extends JPanel {
         langButtons = new CompilerMainButtons(token);
         langButtons.getJava().setEnabled(false);
         projectTab = new ProjectTab(token);
-        JButton project = new JButton("Create Project");
-        project.addActionListener(addListenerToCreateProjectButton());
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(new EmptyBorder(MARGIN, MARGIN, MARGIN, MARGIN));
         add(langButtons);
         add(projectTab);
         add(buttonsCompiler);
         add(consoleOutput);
-        add(project);
         buttonsCompiler.getRunButton().addActionListener(addListenerToRunButton());
         buttonsCompiler.getSaveFiles().addActionListener(addListenerSaveButton());
         buttonsCompiler.getClearConsole().addActionListener(addListenerCleanButton());
         buttonsCompiler.getRunButton().setEnabled(false);
         langButtons.getJava().addActionListener(addListenerToJavaButton());
         langButtons.getPython().addActionListener(addListenerToPythonButton());
+        langButtons.getProject().addActionListener(addListenerToCreateProjectButton());
     }
 
     /**
@@ -105,7 +102,6 @@ public class CompilerInterface extends JPanel {
                     langButtons.getPython().setEnabled(true);
                     choose = 1;
                     extension = "java";
-                    projectTab.cleanProjectTab();
                     createProject();
                     projectTab.setExtension(extension);
                 }
@@ -128,9 +124,7 @@ public class CompilerInterface extends JPanel {
                     langButtons.getJava().setEnabled(true);
                     choose = 2;
                     extension = "py";
-                    projectTab.cleanProjectTab();
                     createProject();
-                    projectTab.setExtension(extension);
                 }
             }
         };
@@ -146,10 +140,8 @@ public class CompilerInterface extends JPanel {
         ActionListener actionListener = new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                if (projectTab != null && projectTab.getTabList() != null) {
-                    projectTab.cleanProjectTab();
-                }
                 createProject();
+                buttonsCompiler.getRunButton().setEnabled(false);
             }
         };
         return actionListener;
@@ -218,17 +210,17 @@ public class CompilerInterface extends JPanel {
     public void createProject() {
         LOGGER.info("start");
         ProjectRequestForm projectRequestForm = new ProjectRequestForm();
-        String result = (String) JOptionPane.showInputDialog(null,
+        String projectTitle = (String) JOptionPane.showInputDialog(null,
                 "Write project name", "Project Name",
                 JOptionPane.PLAIN_MESSAGE, null, null, "project1");
-        projectRequestForm.addProjectName(result);
+        projectRequestForm.addProjectName(projectTitle);
         projectRequestForm.addUserId("1");
         try {
             LOGGER.info("Execute Try");
-            String sResponse = clientRequest.executeRequest(projectRequestForm, token);
-            projectId = sResponse;
-            consoleOutput.getConsole().setText(sResponse + " " + result);
-            projectTab.start(extension);
+            String endpointResponse = clientRequest.executeRequest(projectRequestForm, token);
+            projectId = endpointResponse;
+            consoleOutput.getConsole().setText("Project " + projectTitle + " was created successfully");
+            projectTab.start(extension, projectTitle);
             LOGGER.info("finish");
         } catch (Exception exception) {
             LOGGER.error("Execute Exception" + exception.getMessage());
