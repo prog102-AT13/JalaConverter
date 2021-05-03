@@ -55,4 +55,3 @@ public class DownloadLinkFacade {
         return baseUrl + "/api/download/" + filename + "." + format;
     }
 }
-

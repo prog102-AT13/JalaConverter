@@ -49,4 +49,3 @@ bin/
 *.class
 logs/
 *.log
-.env.develop

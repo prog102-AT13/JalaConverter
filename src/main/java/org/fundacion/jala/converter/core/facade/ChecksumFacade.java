@@ -12,6 +12,7 @@ package org.fundacion.jala.converter.core.facade;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.core.RunCommand;
 import org.fundacion.jala.converter.models.Asset;
 import org.fundacion.jala.converter.core.FileStorageService;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,6 +21,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.stream.Collectors;
 import static org.fundacion.jala.converter.core.ChecksumService.getFileChecksum;
+import static org.fundacion.jala.converter.core.parameter.Utils.cleanFileNameParameter;
 import static org.fundacion.jala.converter.models.AssetSQL.*;
 
 /**
@@ -40,7 +42,7 @@ public class ChecksumFacade {
      * @throws IOException is a exception when invalid file's path.
      */
     public static ParameterOutputChecksum getChecksum(final String checksum, final MultipartFile file)
-            throws IOException {
+            throws IOException, InterruptedException {
         FileStorageService fileStorageService = new FileStorageService();
         String filename;
         String storagePath;
@@ -65,6 +67,15 @@ public class ChecksumFacade {
                 LOGGER.error("Execute Exception" + e.getLocalizedMessage());
             }
         }
+        boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
+        RunCommand runCommand = new RunCommand();
+        filename = cleanFileNameParameter(filename);
+        if (isWindows) {
+            runCommand.run("cd archive && ren " + "\"" + storagePath + "\"" + " " + filename);
+        } else {
+            runCommand.run("cd archive && mv " + "\"" + storagePath + "\"" + " " + filename);
+        }
+        storagePath = storagePath.substring(0,storagePath.lastIndexOf(System.getProperty("file.separator"))+1) + filename;
         return new ParameterOutputChecksum(checksumLocal, storagePath, resultTitle.size(), filename);
     }
 
