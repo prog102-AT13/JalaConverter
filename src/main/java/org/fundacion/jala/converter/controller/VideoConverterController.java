@@ -82,10 +82,10 @@ public class VideoConverterController {
         }
         try {
             extractMetadata(metadata, outputFilename, fileStorageService);
+            ZipFileFacade.getZipFileVideo(parameterOutputChecksum, metadata, thumbnail, outputFilename);
         } catch (PaoPaoException exception) {
             return exception.getMessage();
         }
-        ZipFileFacade.getZipFileVideo(parameterOutputChecksum, metadata, thumbnail, outputFilename);
         LOGGER.info("finish");
         return DownloadLinkFacade.getLinkConverter(outputFilename);
     }

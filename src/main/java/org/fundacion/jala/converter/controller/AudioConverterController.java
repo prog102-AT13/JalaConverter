@@ -72,10 +72,10 @@ public class AudioConverterController {
                         audioChannel));
         try {
             extractMetadata(metadata, outputFilename, fileStorageService);
+            ZipFileFacade.getZipFileAudio(parameterOutputChecksum, metadata, outputFilename);
         } catch (PaoPaoException exception) {
             return exception.getMessage();
         }
-        ZipFileFacade.getZipFileAudio(parameterOutputChecksum, metadata, outputFilename);
         LOGGER.info("finish");
         return DownloadLinkFacade.getLinkConverter(outputFilename);
     }
