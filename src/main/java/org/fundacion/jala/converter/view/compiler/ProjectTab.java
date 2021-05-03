@@ -94,6 +94,7 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
             if (!tabList.contains(title)) {
                 addProjectTab(title, InitialCode.generate(title, extension));
                 updateCodeTextAreas(title);
+//                codeTextAreas.get(0).createChild(title);
             }
         }
     }
@@ -111,6 +112,7 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
             if (temp.equals(title)) {
                 removeTabAt(index);
                 codeTextAreas.remove(index);
+                deleteCodeTextAreas(index);
                 return true;
             }
         }
@@ -263,8 +265,17 @@ public class ProjectTab extends JTabbedPane implements ActionListener {
      * Updates file tree of all tabs.
      */
     public void updateCodeTextAreas(final String fileName) {
-        for (int i = 0; i < codeTextAreas.size() - 2; i++) {
+        for (int i = 0; i < codeTextAreas.size() - 1; i++) {
             codeTextAreas.get(i).createChild(fileName);
+        }
+    }
+
+    /**
+     * Deletes a file form all tree tabs.
+     */
+    public void deleteCodeTextAreas(final int index) {
+        for (int i = 0; i < codeTextAreas.size(); i++) {
+            codeTextAreas.get(i).removeChild(index);
         }
     }
 }

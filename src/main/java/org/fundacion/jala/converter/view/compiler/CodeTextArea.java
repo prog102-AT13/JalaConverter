@@ -163,5 +163,14 @@ class CodeTextArea extends JPanel implements DocumentListener {
      */
     public void createChild(final String nameFile) {
         root.add(new DefaultMutableTreeNode(nameFile));
+        treeModel.reload();
+    }
+
+    /**
+     * Removes a child path that represents new file of project.
+     */
+    public void removeChild(final int index) {
+        root.remove(index);
+        treeModel.reload();
     }
 }
