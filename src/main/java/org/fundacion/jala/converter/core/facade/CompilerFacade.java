@@ -16,6 +16,7 @@ import org.fundacion.jala.converter.core.parameter.*;
 import org.fundacion.jala.converter.core.javacompiler.JavaCompiler;
 import org.fundacion.jala.converter.core.PythonCompiler;
 import org.fundacion.jala.converter.core.javacompiler.JavaVersion;
+import org.fundacion.jala.converter.core.NodeJsCompiler;
 
 /**
  * This class calls facade of compiler.
@@ -24,6 +25,7 @@ public class CompilerFacade {
     private static String result;
     private static JavaCompiler javaCompiler;
     private static PythonCompiler pythonCompiler;
+    private static NodeJsCompiler nodeJsCompiler;
 
     public CompilerFacade() {
     }
@@ -54,6 +56,14 @@ public class CompilerFacade {
             pythonCompiler=new PythonCompiler();
             String filePath = Transform.toFile(code, "filetocompile", "py");
             return pythonCompiler.compiler(new PythonParameter(filePath, PythonEnum.V3));
+        }
+        return "";
+    }
+    public static String facadeNodejsCompile(final String code) {
+        if (!code.isBlank() || !code.equals(null)) {
+            nodeJsCompiler=new NodeJsCompiler();
+            String filePath = Transform.toFile(code, "nodeFile", "js");
+            return nodeJsCompiler.nodeCompiler(new NodeJsParameter(filePath));
         }
         return "";
     }
