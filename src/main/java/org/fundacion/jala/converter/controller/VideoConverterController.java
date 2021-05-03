@@ -71,22 +71,18 @@ public class VideoConverterController {
                              final @RequestParam("metadata") boolean metadata)
                             throws IOException, InterruptedException {
         LOGGER.info("start");
-        parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
-        String outputFilename = null;
         try {
+            parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
+            String outputFilename = null;
             outputFilename = ConverterFacade.getVideoConverter(
                     new VideoParameter(parameterOutputChecksum.getOutputFilename(), outputFormat, resolution, thumbnail,
                             frameRate, width, height, audio));
-        } catch (PaoPaoException exception) {
-            return exception.getMessage();
-        }
-        try {
             extractMetadata(metadata, outputFilename, fileStorageService);
             ZipFileFacade.getZipFileVideo(parameterOutputChecksum, metadata, thumbnail, outputFilename);
+            LOGGER.info("finish");
+            return DownloadLinkFacade.getLinkConverter(outputFilename);
         } catch (PaoPaoException exception) {
             return exception.getMessage();
         }
-        LOGGER.info("finish");
-        return DownloadLinkFacade.getLinkConverter(outputFilename);
     }
 }

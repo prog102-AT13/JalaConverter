@@ -66,17 +66,18 @@ public class AudioConverterController {
                              final @RequestParam("metadata") boolean metadata)
             throws IOException, InterruptedException {
         LOGGER.info("start");
-        parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
-        String outputFilename = ConverterFacade.getAudioConverter(
-                new AudioParameter(parameterOutputChecksum.getOutputFilename(), format, bitrate, hz, volume,
-                        audioChannel));
+
         try {
+            parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
+            String outputFilename = ConverterFacade.getAudioConverter(
+                    new AudioParameter(parameterOutputChecksum.getOutputFilename(), format, bitrate, hz, volume,
+                            audioChannel));
             extractMetadata(metadata, outputFilename, fileStorageService);
             ZipFileFacade.getZipFileAudio(parameterOutputChecksum, metadata, outputFilename);
+            LOGGER.info("finish");
+            return DownloadLinkFacade.getLinkConverter(outputFilename);
         } catch (PaoPaoException exception) {
             return exception.getMessage();
         }
-        LOGGER.info("finish");
-        return DownloadLinkFacade.getLinkConverter(outputFilename);
     }
 }

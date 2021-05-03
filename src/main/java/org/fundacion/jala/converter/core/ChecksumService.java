@@ -10,6 +10,7 @@
  */
 package org.fundacion.jala.converter.core;
 
+import org.fundacion.jala.converter.core.exceptions.ChecksumException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -31,19 +32,23 @@ public class ChecksumService {
      *
      * @param filePath a String with the file's direction.
      * @return a String with the checksum.
-     * @throws IOException when invalid file's path.
-     * @throws NoSuchAlgorithmException when invalid algorithm is provided.
+     * @throws ChecksumException if process is interrupted.
      */
-    public static String getFileChecksum(final String filePath) throws IOException, NoSuchAlgorithmException {
+    public static String getFileChecksum(final String filePath) throws ChecksumException {
         File file = new File(filePath);
-        MessageDigest md5Digest = MessageDigest.getInstance(MD5_ALGORITHM);
-        FileInputStream fileInputStream = new FileInputStream(file);
-        byte[] byteArray = new byte[BYTES];
-        int bytesCount = 0;
-        while ((bytesCount = fileInputStream.read(byteArray)) != -1) {
-            md5Digest.update(byteArray, 0, bytesCount);
+        MessageDigest md5Digest = null;
+        try {
+            md5Digest = MessageDigest.getInstance(MD5_ALGORITHM);
+            FileInputStream fileInputStream = new FileInputStream(file);
+            byte[] byteArray = new byte[BYTES];
+            int bytesCount = 0;
+            while ((bytesCount = fileInputStream.read(byteArray)) != -1) {
+                md5Digest.update(byteArray, 0, bytesCount);
+            }
+            fileInputStream.close();
+        } catch (IOException | NoSuchAlgorithmException exception) {
+            throw new ChecksumException(exception);
         }
-        fileInputStream.close();
         byte[] bytes = md5Digest.digest();
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < bytes.length; i++) {
@@ -59,11 +64,10 @@ public class ChecksumService {
      * @param firstFilePath a Strinng with the first file's path.
      * @param checksum a String with the checksum.
      * @return a Boolean with the response.
-     * @throws IOException when invalid path.
-     * @throws NoSuchAlgorithmException when invalid algorithm provided.
+     * @throws ChecksumException if process is interrupted.
      */
     private static Boolean repeatedChecksum(final String firstFilePath, final String checksum)
-            throws IOException, NoSuchAlgorithmException {
+            throws ChecksumException {
         return (checksum.equals(getFileChecksum(firstFilePath)));
     }
 }
