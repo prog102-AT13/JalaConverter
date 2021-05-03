@@ -39,7 +39,6 @@ public class ExtractFacade {
      * @throws TextExtractorException if process is interrupted.
      */
     public static void getTextExtract(final MultipartFile file, final String language) throws TextExtractorException {
-
         String fileOut = file.getOriginalFilename();
         String outputFileName = fileOut.substring(0, fileOut.lastIndexOf("."));
         ExtractTextParameter extractTextParameter;

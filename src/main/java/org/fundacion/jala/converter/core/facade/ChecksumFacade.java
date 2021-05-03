@@ -56,9 +56,7 @@ public class ChecksumFacade {
                 storagePath = resultPath.get(0) + filename;
             } else {
                 filename = file.getOriginalFilename();
-
                     storagePath = fileStorageService.uploadFile(file);
-
                 LOGGER.info("Execute Try");
                 checksumLocal = getFileChecksum(storagePath);
                 LOGGER.info("finish");

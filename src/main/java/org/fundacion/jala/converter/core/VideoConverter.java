@@ -50,23 +50,21 @@ public class VideoConverter {
         String ffmpegCommand = startFirstCommand + adaptPath + " ";
         String parameters = changeResolution() + changeFrameRate() + removeAudio();
         String theCommand = ffmpegCommand + parameters + pathOutput + output  + "\" -y";
-        try {
-        Process process = Runtime.getRuntime().exec("cmd /c " + theCommand);
-        System.out.println(theCommand);
-        ThreadHandler errorHandler = new ThreadHandler(process.getErrorStream(), "Error Stream");
-        errorHandler.start();
-        ThreadHandler threadHandler = new ThreadHandler(process.getInputStream(), "Output Stream");
-        threadHandler.start();
         LOGGER.info("start");
+        try {
             LOGGER.info("Execute Try");
+            Process process = Runtime.getRuntime().exec("cmd /c " + theCommand);
+            System.out.println(theCommand);
+            ThreadHandler errorHandler = new ThreadHandler(process.getErrorStream(), "Error Stream");
+            errorHandler.start();
+            ThreadHandler threadHandler = new ThreadHandler(process.getInputStream(), "Output Stream");
+            threadHandler.start();
             process.waitFor();
+            System.out.println("exit code: " + process.exitValue());
+            if (parameter.hasThumbnail()) {
+                generateAThumbnail();
+            }
             LOGGER.info("finish");
-        LOGGER.info("finish");
-        System.out.println("exit code: " + process.exitValue());
-        if (parameter.hasThumbnail()) {
-            generateAThumbnail();
-            LOGGER.info("finish");
-        }
         } catch (InterruptedException | IOException exception) {
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
             throw new ConverterException(exception);
@@ -107,21 +105,20 @@ public class VideoConverter {
                 + pathOutput + name + PNG_FORMAT + "\" -y";
         String thumbnailCommand = startCommand + outputCommand;
         System.out.println(thumbnailCommand);
-        try {
-        Process process = Runtime.getRuntime().exec("cmd /c " + thumbnailCommand);
-        ThreadHandler errorHandler = new ThreadHandler(process.getErrorStream(), "Error Stream");
-        errorHandler.start();
-        ThreadHandler threadHandler = new ThreadHandler(process.getInputStream(), "Output Stream");
-        threadHandler.start();
         LOGGER.info("start");
+        try {
             LOGGER.info("Execute Try");
+            Process process = Runtime.getRuntime().exec("cmd /c " + thumbnailCommand);
+            ThreadHandler errorHandler = new ThreadHandler(process.getErrorStream(), "Error Stream");
+            errorHandler.start();
+            ThreadHandler threadHandler = new ThreadHandler(process.getInputStream(), "Output Stream");
+            threadHandler.start();
             process.waitFor();
             LOGGER.info("finish");
         } catch (InterruptedException | IOException exception) {
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
             throw new ConverterException(exception);
         }
-        LOGGER.info("Finish");
     }
 
     /**
