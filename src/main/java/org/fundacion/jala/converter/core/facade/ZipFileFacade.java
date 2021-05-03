@@ -56,6 +56,21 @@ public class ZipFileFacade {
     }
 
     /**
+     * Compresses files of Image.
+     *
+     * @param parameterOutputChecksum is a object of Parameter Checksum.
+     * @param metadata is a parameter if add metadata of image into zip.
+     * @param outputFilename is the path's name of file to compress.
+     * @throws IOException when invalid path is given in zipFiles.
+     * @throws InterruptedException is exception if process is interrupted.
+     */
+    public static void getZipFileImage(final ParameterOutputChecksum parameterOutputChecksum, final boolean metadata,
+                                       final String outputFilename)
+            throws IOException, InterruptedException {
+        builtZipFile(parameterOutputChecksum, metadata, outputFilename, false);
+    }
+
+    /**
      * Compresses any files.
      *
      * @param parameterOutputChecksum object of ParameterOutputChecksum.
