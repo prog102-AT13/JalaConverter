@@ -205,8 +205,4 @@ public class MainInterface extends JFrame implements ActionListener {
         button.addMouseListener(mouseListener);
         return button;
     }
-
-    public static void main(String[] args) {
-        new MainInterface().initInterface("hoa");
-    }
 }

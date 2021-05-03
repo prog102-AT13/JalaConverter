@@ -213,17 +213,17 @@ public class CompilerInterface extends JPanel {
         String projectTitle = (String) JOptionPane.showInputDialog(null,
                 "Write project name", "Project Name",
                 JOptionPane.PLAIN_MESSAGE, null, null, "project1");
-            projectRequestForm.addProjectName(projectTitle);
-            projectRequestForm.addUserId("1");
-            try {
-                LOGGER.info("Execute Try");
-                String endpointResponse = clientRequest.executeRequest(projectRequestForm, token);
-                projectId = endpointResponse;
-                consoleOutput.getConsole().setText("Project " + projectTitle + " was created successfully");
-                projectTab.start(extension, projectTitle);
-                LOGGER.info("finish");
-            } catch (Exception exception) {
-                LOGGER.error("Execute Exception" + exception.getMessage());
-            }
+        projectRequestForm.addProjectName(projectTitle);
+        projectRequestForm.addUserId("1");
+        try {
+            LOGGER.info("Execute Try");
+            String endpointResponse = clientRequest.executeRequest(projectRequestForm, token);
+            projectId = endpointResponse;
+            consoleOutput.getConsole().setText("Project " + projectTitle + " was created successfully");
+            projectTab.start(extension, projectTitle);
+            LOGGER.info("finish");
+        } catch (Exception exception) {
+            LOGGER.error("Execute Exception" + exception.getMessage());
+        }
     }
 }
