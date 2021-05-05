@@ -13,6 +13,7 @@ package org.fundacion.jala.converter.core;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -49,17 +50,17 @@ public class FileStorageService {
      * @return a String with the resource from a file name.
      */
     public Resource downloadFile(final String fileName) {
-        Path path = Paths.get(getArchivePath(fileName));
-        Resource resource;
         try {
+            Path path = Paths.get(getArchivePath(fileName));
+            Resource resource;
             resource = new UrlResource(path.toUri());
+            if (resource.exists()) {
+                return resource;
+            } else {
+                throw new RuntimeException("File doesn't exist");
+            }
         } catch (MalformedURLException e) {
             throw new RuntimeException("Url malformed", e);
-        }
-        if (resource.exists()) {
-            return resource;
-        } else {
-            throw new RuntimeException("File doesn't exist");
         }
     }
 
