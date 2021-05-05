@@ -6,66 +6,71 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Paola Ximena Aguilar Quiñones
+ * @author Daniela Santa Cruz Andrade
  */
 package org.fundacion.jala.converter.view.converter;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.fundacion.jala.converter.view.Models.VideoRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
+import org.fundacion.jala.converter.view.Models.ImageRequestForm;
 import org.fundacion.jala.converter.view.utilities.BtnStyle;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
 import org.fundacion.jala.converter.view.utilities.SelectFile;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import javax.swing.border.EmptyBorder;
 import java.awt.Font;
-import java.awt.FlowLayout;
+import javax.swing.JOptionPane;
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 import static org.fundacion.jala.converter.core.ChecksumService.getFileChecksum;
+import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 import static org.fundacion.jala.converter.view.utilities.CheckFile.checkFileSelect;
 
 /**
- * This class creates the video converter's UI.
+ * This class creates the image converter's UI.
  */
-public class VideoConverterInterface extends JPanel implements ActionListener {
-    private final int CONVERT_TYPE_BTN = 2;
-    final int MARGIN_SPACE = 30;
-    final int MARGIN_BOTTOM_MAIN_CONTAINER = 200;
-    final int MARGIN_BOTTOM_BTN_CONTAINER = 100;
-    private SelectFile file;
-    private ConverterTypeSelect menuConverterType;
-    private OutputSettings settings;
-    private ClientRequest clientRequest = new ClientRequest();
+public class ImageConverterInterface extends JPanel implements ActionListener {
     private static final Logger LOGGER = LogManager.getLogger();
-    private final int FONT_STYLE = 0;
+    private final int TOP_BORDER = 40;
+    private final int LEFT_BORDER = 40;
+    private final int BOTTOM_BORDER = 100;
+    private final int RIGHT_BORDER = 0;
     private final int FONT_SIZE = 12;
+    private final int MARGIN_SPACE = 30;
+    private final int MARGIN_BOTTOM_MAIN_CONTAINER = 200;
+    private final int MARGIN_BOTTOM_BTN_CONTAINER = 100;
+    private final int BTN_TYPE = 2;
+    private SelectFile file;
+    private ConvertTypeSelectImage imageSelect;
+    private OutputSettingsImage settings;
+    private ClientRequest clientRequest = new ClientRequest();
     private String token;
     private String checksumLocal;
     private JLabel label;
 
-
-    public VideoConverterInterface(final String newToken) {
-        token = newToken;
-        JLabelStyle videoTitle = new JLabelStyle("Select Video:", "h2");
-        videoTitle.setAlignmentX(LEFT_ALIGNMENT);
+    public ImageConverterInterface(final String newToken) {
+        this.token = newToken;
+        JLabelStyle imageTitle = new JLabelStyle("Image converter", "h2");
+        imageTitle.setAlignmentX(LEFT_ALIGNMENT);
+        BtnStyle convertImage = new BtnStyle("Convert", BTN_TYPE);
+        convertImage.setAlignmentX(LEFT_ALIGNMENT);
+        convertImage.setFont(new Font("Barlow", Font.PLAIN, FONT_SIZE));
+        convertImage.addActionListener(this::actionPerformed);
         file = new SelectFile();
         file.setAlignmentX(LEFT_ALIGNMENT);
-        menuConverterType = new ConverterTypeSelect();
-        menuConverterType.setAlignmentX(LEFT_ALIGNMENT);
-        BtnStyle converterVideoButton = new BtnStyle("Convert", CONVERT_TYPE_BTN);
-        converterVideoButton.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
-        converterVideoButton.addActionListener(this::actionPerformed);
-        settings = new OutputSettings();
+        imageSelect = new ConvertTypeSelectImage();
+        imageSelect.setAlignmentX(LEFT_ALIGNMENT);
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setBorder(new EmptyBorder(TOP_BORDER, LEFT_BORDER, BOTTOM_BORDER, RIGHT_BORDER));
+        settings = new OutputSettingsImage();
         settings.setAlignmentX(LEFT_ALIGNMENT);
         ImageIcon icon = new ImageIcon("img/loading.gif");
         label = new JLabel();
@@ -73,25 +78,24 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
         label.setVisible(false);
         JPanel btnContainer = new JPanel();
         btnContainer.setLayout(new FlowLayout(FlowLayout.CENTER));
-        btnContainer.add(converterVideoButton);
+        btnContainer.add(convertImage);
         JPanel container = new JPanel();
         container.setBorder(new EmptyBorder(MARGIN_SPACE, 0, MARGIN_BOTTOM_BTN_CONTAINER, 0));
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
         container.add(file);
-        container.add(label);
-        container.add(menuConverterType);
+        container.add(imageSelect);
         container.add(settings);
         setLayout(new BorderLayout());
         setBorder(new EmptyBorder(0, MARGIN_SPACE, MARGIN_BOTTOM_MAIN_CONTAINER, MARGIN_SPACE));
-        add(videoTitle, BorderLayout.NORTH);
+        add(imageTitle, BorderLayout.NORTH);
         add(container, BorderLayout.CENTER);
         add(btnContainer, BorderLayout.SOUTH);
     }
 
     /**
-     * Converts and sends information for metadataClass conversion then Shows a Dialog with the information.
+     * Invoked when an action occurs.
      *
-     * @param e event of the JButton.
+     * @param e the event to be processed
      */
     @Override
     public void actionPerformed(final ActionEvent e) {
@@ -102,12 +106,10 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
                 LOGGER.info("Execute Try");
                 checksumLocal = getFileChecksum(file.getOriginFilePath());
                 int option = JOptionPane.showConfirmDialog(this, "File Path: "
-                        + file.getOriginFilePath()
-                        + "\nConvert to:" + menuConverterType.getConvertTo() + "\nResolutionWidth: "
-                        + settings.getWidthResolution() + "\nResolutionHeight: " + settings.getHeightResolution()
-                        + "\nFrames: " + settings.getFrame() + "\nSound: " + settings.isAudioSelected() + "\nThumbnail: "
-                        + settings.isThumbnailRequired() + "\nMetadata: " + settings.isMetadataRequired() + "\nChecksum: "
-                        + checksumLocal, "Message confirm", JOptionPane.YES_NO_OPTION);
+                        + file.getOriginFilePath() + "\nConvert to: " + imageSelect.getConvertTo()
+                        + "\nWidth size: " + settings.getWidthSize() + "\nWith metadata: " + settings.isMetadata()
+                        + "\nGray scale: " + settings.isGrayScale() + "\nChecksum: " + checksumLocal,
+                        "Message confirm", JOptionPane.YES_NO_OPTION);
                 if (option == 0) {
                     callRequest();
                 } else {
@@ -128,29 +130,24 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
     /**
      * Obtains the request.
      *
-     * @throws IOException when problems on inputs and outputs.
+     * @throws IOException when problems on inputs.
      */
     private void callRequest() throws IOException {
         LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");
-            VideoRequestForm videoRequestForm = new VideoRequestForm();
-            videoRequestForm.addFilepath(file.getOriginFilePath());
-            videoRequestForm.addOutputFormat(menuConverterType.getConvertTo());
-            videoRequestForm.addThumbnail(String.valueOf(settings.isThumbnailRequired()));
-            videoRequestForm.addFrameRate(settings.getFrame());
-            videoRequestForm.addWidth(settings.getWidthResolution());
-            videoRequestForm.addHeight(settings.getHeightResolution());
-            videoRequestForm.addAudio(String.valueOf(settings.isAudioSelected()));
-            videoRequestForm.addResolution(settings.getWidthResolution());
-            videoRequestForm.addChecksum(checksumLocal);
-            videoRequestForm.addMetadata(String.valueOf(settings.isMetadataRequired()));
-            String result = clientRequest.executeRequest(videoRequestForm, token);
+            ImageRequestForm imageRequestForm = new ImageRequestForm();
+            imageRequestForm.addFilepath(file.getOriginFilePath());
+            imageRequestForm.addFormat(imageSelect.getConvertTo());
+            imageRequestForm.addWidthSize(settings.getWidthSize());
+            imageRequestForm.addChecksum(checksumLocal);
+            imageRequestForm.addMetadata(String.valueOf(settings.isMetadata()));
+            imageRequestForm.addGrayScale(String.valueOf(settings.isGrayScale()));
+            String result = clientRequest.executeRequest(imageRequestForm, token);
             clientRequest.downloadFile(result);
             JOptionPane.showMessageDialog(this, "Download in :\n"
                     + System.getProperty("user.home") + dotenv.get("DIR_DOWNLOAD"));
             label.setVisible(false);
-            System.getProperty("file.separator");
             System.out.println(result);
             LOGGER.info("finish");
         } catch (IOException ioException) {

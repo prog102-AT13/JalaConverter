@@ -12,6 +12,7 @@ package org.fundacion.jala.converter.view;
 
 import org.fundacion.jala.converter.view.compiler.CompilerInterface;
 import org.fundacion.jala.converter.view.converter.AudioConverterInterface;
+import org.fundacion.jala.converter.view.converter.ImageConverterInterface;
 import org.fundacion.jala.converter.view.converter.VideoConverterInterface;
 import org.fundacion.jala.converter.view.metadata.MetaDataInterface;
 import org.fundacion.jala.converter.view.text_extractor.TextExtractorInterface;
@@ -47,16 +48,19 @@ public class MainInterface extends JFrame implements ActionListener {
     private final int APP_WIDTH = 1000;
     private final int APP_HEIGHT = 820;
     private final int BTN_TYPE_MAIN = 1;
+    private final int NUMBER_TEN = 10;
     private CompilerInterface compilerPanel;
     private VideoConverterInterface videoPanel;
     private MetaDataInterface metaDataPanel;
     private AudioConverterInterface audioPanel;
     private TextExtractorInterface textExtractorPanel;
+    private ImageConverterInterface imagePanel;
     private BtnStyle compilerBtn;
     private BtnStyle videoConverterBtn;
     private BtnStyle audioConverterBtn;
     private BtnStyle textExtractorBtn;
     private BtnStyle metaDataBtn;
+    private BtnStyle imageConverterBtn;
     private int positionXMainBtn = 0;
     private int positionYMainBtn = 0;
     private JLayeredPane mainPanel;
@@ -93,6 +97,7 @@ public class MainInterface extends JFrame implements ActionListener {
         audioPanel = new AudioConverterInterface(token);
         metaDataPanel = new MetaDataInterface(token);
         textExtractorPanel = new TextExtractorInterface(token);
+        imagePanel = new ImageConverterInterface(token);
         mainPanel = new JLayeredPane();
         mainPanel.setLayout(new CardLayout());
         mainPanel.setBorder(MARGIN_SPACE);
@@ -102,11 +107,13 @@ public class MainInterface extends JFrame implements ActionListener {
         audioConverterBtn = new BtnStyle("Audio converter", "MainIconAudio.png", BTN_TYPE_MAIN);
         textExtractorBtn = new BtnStyle("Text extractor", "MainIconText.png", BTN_TYPE_MAIN);
         metaDataBtn = new BtnStyle("Metadata extractor", "MainIconMeta.png", BTN_TYPE_MAIN);
+        imageConverterBtn = new BtnStyle("Image converter", "MainIconMeta.png", BTN_TYPE_MAIN);
         mainButtonAction(compilerBtn);
         mainButtonAction(videoConverterBtn);
         mainButtonAction(audioConverterBtn);
         mainButtonAction(textExtractorBtn);
         mainButtonAction(metaDataBtn);
+        mainButtonAction(imageConverterBtn);
     }
 
     /**
@@ -127,6 +134,7 @@ public class MainInterface extends JFrame implements ActionListener {
         setPosition(buttonsPanel, audioConverterBtn, false);
         setPosition(buttonsPanel, textExtractorBtn, false);
         setPosition(buttonsPanel, metaDataBtn, true);
+        setPosition(buttonsPanel, imageConverterBtn, true);
     }
 
     /**
@@ -139,7 +147,7 @@ public class MainInterface extends JFrame implements ActionListener {
         positionConstraint.fill = GridBagConstraints.HORIZONTAL;
         mainPanel.add(mainBtn, positionConstraint);
         if (lastBtn) {
-            positionConstraint.gridy = 10;
+            positionConstraint.gridy = NUMBER_TEN;
             positionConstraint.gridwidth = GridBagConstraints.REMAINDER;
             positionConstraint.weighty = 1;
             mainPanel.add(new JLabel(), positionConstraint);
@@ -178,6 +186,9 @@ public class MainInterface extends JFrame implements ActionListener {
         }
         if (buttonEvent.getSource() == metaDataBtn) {
             switchPanels(metaDataPanel);
+        }
+        if (buttonEvent.getSource() == imageConverterBtn) {
+            switchPanels(imagePanel);
         }
     }
 

@@ -27,6 +27,7 @@ public class ImageConverter {
     private String output;
     private String pathOutput;
     private String outputFileName;
+    private final int HIGH_LIMIT = 1000;
     private static final Logger LOGGER = LogManager.getLogger();
     private Result result;
 
@@ -46,7 +47,7 @@ public class ImageConverter {
         setOutputFileName(output);
         pathOutput = adaptPath.substring(0, (adaptPath.lastIndexOf("archive"))) + "archive\\";
         String ffmpegCommand = startFirstCommand + adaptPath + " ";
-        String parameters = changeResolution() + grayScale() + "\" ";
+        String parameters = changeSize() + grayScale() + "\" ";
         String theCommand = ffmpegCommand + parameters + pathOutput + output  + "\" -y";
         Process process = Runtime.getRuntime().exec("cmd /c " + theCommand);
         System.out.println(theCommand);
@@ -74,16 +75,11 @@ public class ImageConverter {
      *
      * @return a String with the resolution command.
      */
-    private String changeResolution() {
+    private String changeSize() {
         int width = parameter.getWidth();
-        int height = parameter.getHeight();
-        String scale;
-        String aspectRatio;
         String resolutionCommand;
-        if (width > 0 && height > 0) {
-            scale = width + ":" + height;
-            aspectRatio = ":force_original_aspect_ratio=decrease,pad=";
-            resolutionCommand = " -vf \"scale=" + scale + aspectRatio + scale + ":(ow-iw)/2:(oh-ih)/2:color=pink";
+        if (width > 0 && width < HIGH_LIMIT) {
+            resolutionCommand = " -vf \"scale=" + width + ":-1";
             return resolutionCommand;
         }
         return "";

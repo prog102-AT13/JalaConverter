@@ -15,18 +15,14 @@ package org.fundacion.jala.converter.core.parameter;
  */
 public class ImageParameter extends Parameter {
     private String outputFormat;
-    private String resolution;
     private int width;
-    private int height;
     private boolean grayScale;
 
-    public ImageParameter(final String newFilePath, final String newOutputFormat, final String newResolution,
-                          final int newWidth, final int newHeight, final boolean newGrayScale) {
+    public ImageParameter(final String newFilePath, final String newOutputFormat, final int newWidth,
+                          final boolean newGrayScale) {
         super(newFilePath);
         this.outputFormat = newOutputFormat;
-        this.resolution = newResolution;
         this.width = newWidth;
-        this.height = newHeight;
         this.grayScale = newGrayScale;
     }
 
@@ -40,30 +36,12 @@ public class ImageParameter extends Parameter {
     }
 
     /**
-     * Sets the resolution of the output image.
-     *
-     * @param newResolution is a String with the image resolution.
-     */
-    public void setResolution(final String newResolution) {
-        this.resolution = newResolution;
-    }
-
-    /**
      * Sets the width of the output image.
      *
      * @param newWidth is a int with the image width.
      */
     public void setWidth(final int newWidth) {
         this.width = newWidth;
-    }
-
-    /**
-     * Sets the height of the output image.
-     *
-     * @param newHeight is a int with the image height
-     */
-    public void setHeight(final int newHeight) {
-        this.height = newHeight;
     }
 
     /**
@@ -85,30 +63,12 @@ public class ImageParameter extends Parameter {
     }
 
     /**
-     * Gets the resolution of the output image.
-     *
-     * @return resolution of the image file.
-     */
-    public String getResolution() {
-        return resolution;
-    }
-
-    /**
      * Gets the width of the output image.
      *
      * @return width of the image file.
      */
     public int getWidth() {
         return width;
-    }
-
-    /**
-     * Gets the height of the output image.
-     *
-     * @return height of the image file.
-     */
-    public int getHeight() {
-        return height;
     }
 
     /**

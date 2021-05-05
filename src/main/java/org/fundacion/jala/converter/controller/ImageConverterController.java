@@ -46,9 +46,7 @@ public class ImageConverterController {
      *
      * @param file is a path of file which will be converted.
      * @param outputFormat is the format with are converted of image.
-     * @param resolution is the resolution with are converted of image.
      * @param width is the width with are converted of image.
-     * @param height is the height with are converted of image.
      * @param grayScale if image has grayScale.
      * @param checksum is the checksum of image file.
      * @param metadata if metadata is extracted from the image.
@@ -61,8 +59,7 @@ public class ImageConverterController {
             authorizations = {@Authorization(value = "JWT")})
     public String uploadFile(final @RequestPart("file") MultipartFile file,
                              final @RequestParam("outputformat") String outputFormat,
-                             final @RequestParam("resolution") String resolution,
-                             final @RequestParam("width") int width, final @RequestParam("height") int height,
+                             final @RequestParam("width") int width,
                              final @RequestParam("grayscale") boolean grayScale,
                              final @RequestParam("checksum") String checksum,
                              final @RequestParam("metadata") boolean metadata)
@@ -72,8 +69,7 @@ public class ImageConverterController {
         String outputFilename = null;
         try {
             outputFilename = ConverterFacade.getImageConverter(
-                    new ImageParameter(parameterOutputChecksum.getOutputFilename(), outputFormat, resolution, width,
-                            height, grayScale));
+                    new ImageParameter(parameterOutputChecksum.getOutputFilename(), outputFormat, width, grayScale));
         } catch (PaoPaoException exception) {
             exception.printStackTrace();
         }
