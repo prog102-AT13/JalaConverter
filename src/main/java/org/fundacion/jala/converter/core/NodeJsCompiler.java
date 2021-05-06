@@ -28,13 +28,13 @@ public class NodeJsCompiler {
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**
-     * Compiles a java file.
+     * Compiles a NodeJs file.
      *
      * @param newNodeJsParameter for all the parameters needed for NodeJs Compiler.
      * @return the result of execution in console.
      * @throws CompilerException if process is interrupted.
      */
-    public String nodeCompiler(final NodeJsParameter newNodeJsParameter) throws CompilerException{
+    public String nodeCompiler(final NodeJsParameter newNodeJsParameter) throws CompilerException {
         try {
             nodeJsParameter = newNodeJsParameter;
             String nodeFilePath = "\"" + nodeJsParameter.getFilePath() + "\"";
@@ -50,7 +50,7 @@ public class NodeJsCompiler {
         } catch (IOException exception) {
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
             return String.valueOf(new CompilerException(exception));
-        }finally {
+        } finally {
             try {
                 LOGGER.info("Close bufferedReader Stream");
                 bufferedReader.close();
