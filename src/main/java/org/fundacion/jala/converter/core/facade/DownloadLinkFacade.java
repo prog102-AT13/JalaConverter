@@ -13,6 +13,8 @@ package org.fundacion.jala.converter.core.facade;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import static org.fundacion.jala.converter.core.parameter.Utils.cleanFileNameParameter;
+
 /**
  * Class to do link to download.
  */
@@ -52,6 +54,7 @@ public class DownloadLinkFacade {
      * @return a String of path which permit download the result process.
      */
     public static String getLinkMetadata(final String filename, final String format) {
-        return baseUrl + "/api/download/" + filename + "." + format;
+        String filenameWithoutSpaces = cleanFileNameParameter(filename);
+        return baseUrl + "/api/download/" + filenameWithoutSpaces + "." + format;
     }
 }

@@ -10,6 +10,8 @@
  */
 package org.fundacion.jala.converter.core.parameter;
 
+import org.fundacion.jala.converter.core.RunCommand;
+
 /**
  * This class contains utilities for the core.
  */
@@ -25,11 +27,20 @@ public class Utils {
         String cleanedFileName = "";
         final int asciiSpace = 32;
         for (int i = 0; i < fileName.length(); i++) {
-            System.out.println(fileName.charAt(i) + " " + (int) fileName.charAt(i));
             if ((int) fileName.charAt(i) != asciiSpace) {
                 cleanedFileName += fileName.charAt(i);
             }
         }
         return cleanedFileName;
+    }
+
+    public static void changeNameFile(final String storagePath, final String fileName) {
+        boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
+        RunCommand runCommand = new RunCommand();
+        if (isWindows) {
+            runCommand.run("cd archive && ren " + "\"" + storagePath + "\"" + " " + fileName);
+        } else {
+            runCommand.run("cd archive && mv " + "\"" + storagePath + "\"" + " " + fileName);
+        }
     }
 }

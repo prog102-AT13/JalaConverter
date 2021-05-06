@@ -22,6 +22,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 
+import static org.fundacion.jala.converter.core.parameter.Utils.changeNameFile;
+import static org.fundacion.jala.converter.core.parameter.Utils.cleanFileNameParameter;
+
 /**
  * This class calls facade of extract.
  */
@@ -66,9 +69,15 @@ public class ExtractFacade {
                                             throws IOException, IllegalArgumentException, MetadataException {
         String pathFile = fileStorageService.uploadFile(file);
         String outPath = FileStorageService.getOutputPathWithoutFileName(pathFile);
-        File fileToExtract = new File(pathFile);
+        String nameExportWithoutSpaces = cleanFileNameParameter(nameExport);
+        String nameFile = pathFile.substring(pathFile.lastIndexOf(System.getProperty("file.separator")) + 1, pathFile.length());
+        nameFile = cleanFileNameParameter(nameFile);
+        String storagePath = outPath.substring(0,outPath.length()-1);
+        String fullPath = storagePath + nameFile;
+        changeNameFile(pathFile, nameFile);
+        File fileToExtract = new File(fullPath);
         ObjectMetadata objectMetadata = new ObjectMetadata();
-        objectMetadata.setNameExport(nameExport);
+        objectMetadata.setNameExport(nameExportWithoutSpaces);
         objectMetadata.setFileToExtract(fileToExtract);
         objectMetadata.setFileToExport(new File(outPath));
         objectMetadata.setMoreInfo(isMoreInfo);

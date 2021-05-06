@@ -21,6 +21,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.stream.Collectors;
 import static org.fundacion.jala.converter.core.ChecksumService.getFileChecksum;
+import static org.fundacion.jala.converter.core.parameter.Utils.changeNameFile;
 import static org.fundacion.jala.converter.core.parameter.Utils.cleanFileNameParameter;
 import static org.fundacion.jala.converter.models.AssetSQL.*;
 
@@ -67,14 +68,8 @@ public class ChecksumFacade {
                 LOGGER.error("Execute Exception" + e.getLocalizedMessage());
             }
         }
-        boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
-        RunCommand runCommand = new RunCommand();
         filename = cleanFileNameParameter(filename);
-        if (isWindows) {
-            runCommand.run("cd archive && ren " + "\"" + storagePath + "\"" + " " + filename);
-        } else {
-            runCommand.run("cd archive && mv " + "\"" + storagePath + "\"" + " " + filename);
-        }
+        changeNameFile(storagePath, filename);
         storagePath = storagePath.substring(0,storagePath.lastIndexOf(System.getProperty("file.separator"))+1) + filename;
         return new ParameterOutputChecksum(checksumLocal, storagePath, resultTitle.size(), filename);
     }
