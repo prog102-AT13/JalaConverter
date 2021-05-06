@@ -35,38 +35,42 @@ public class ChecksumService {
      * @throws ChecksumException if process is interrupted.
      */
     public static String getFileChecksum(final String filePath) throws ChecksumException {
-        File file = new File(filePath);
-        MessageDigest md5Digest = null;
-        try {
-            md5Digest = MessageDigest.getInstance(MD5_ALGORITHM);
-            FileInputStream fileInputStream = new FileInputStream(file);
-            byte[] byteArray = new byte[BYTES];
-            int bytesCount = 0;
-            while ((bytesCount = fileInputStream.read(byteArray)) != -1) {
-                md5Digest.update(byteArray, 0, bytesCount);
+        if (filePath == null) {
+            throw new ChecksumException("Invalid filepath, filepath must not be null");
+        } else {
+            File file = new File(filePath);
+            MessageDigest md5Digest = null;
+            try {
+                md5Digest = MessageDigest.getInstance(MD5_ALGORITHM);
+                FileInputStream fileInputStream = new FileInputStream(file);
+                byte[] byteArray = new byte[BYTES];
+                int bytesCount = 0;
+                while ((bytesCount = fileInputStream.read(byteArray)) != -1) {
+                    md5Digest.update(byteArray, 0, bytesCount);
+                }
+                fileInputStream.close();
+            } catch (IOException | NoSuchAlgorithmException exception) {
+                throw new ChecksumException(exception);
             }
-            fileInputStream.close();
-        } catch (IOException | NoSuchAlgorithmException exception) {
-            throw new ChecksumException(exception);
+            byte[] bytes = md5Digest.digest();
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                stringBuilder.append(Integer.toString((bytes[i] & HEXADECIMAL_NUMBER_255)
+                        + HEXADECIMAL_NUMBER, HEXADECIMAL_RADIX).substring(1));
+            }
+            return stringBuilder.toString();
         }
-        byte[] bytes = md5Digest.digest();
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < bytes.length; i++) {
-            stringBuilder.append(Integer.toString((bytes[i] & HEXADECIMAL_NUMBER_255)
-                    + HEXADECIMAL_NUMBER, HEXADECIMAL_RADIX).substring(1));
-        }
-        return stringBuilder.toString();
     }
 
     /**
      * Verifies if two file's have the same checksum.
      *
-     * @param firstFilePath a Strinng with the first file's path.
+     * @param firstFilePath a String with the first file's path.
      * @param checksum a String with the checksum.
      * @return a Boolean with the response.
      * @throws ChecksumException if process is interrupted.
      */
-    private static Boolean repeatedChecksum(final String firstFilePath, final String checksum)
+    public static Boolean repeatedChecksum(final String firstFilePath, final String checksum)
             throws ChecksumException {
         return (checksum.equals(getFileChecksum(firstFilePath)));
     }
