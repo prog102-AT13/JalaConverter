@@ -55,15 +55,23 @@ public class CompilerFacade {
      */
     public static String facadePythonCompile(final String code) throws CompilerException {
         if (!code.isBlank() || !code.equals(null)) {
-            pythonCompiler=new PythonCompiler();
+            pythonCompiler = new PythonCompiler();
             String filePath = Transform.toFile(code, "filetocompile", "py");
             return pythonCompiler.compiler(new PythonParameter(filePath, PythonEnum.V3));
         }
         return "";
     }
-    public static String facadeNodejsCompile(final String code) {
+
+    /**
+     * Compiles a NodeJS file.
+     *
+     * @param code is string with code in NodeJs.
+     * @return a String of the result on runtime console.
+     * @throws CompilerException if process is interrupted.
+     */
+    public static String facadeNodejsCompile(final String code) throws CompilerException {
         if (!code.isBlank() || !code.equals(null)) {
-            nodeJsCompiler=new NodeJsCompiler();
+            nodeJsCompiler = new NodeJsCompiler();
             String filePath = Transform.toFile(code, "nodeFile", "js");
             return nodeJsCompiler.nodeCompiler(new NodeJsParameter(filePath));
         }
