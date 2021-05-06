@@ -12,7 +12,6 @@ package org.fundacion.jala.converter.core;
 
 import org.fundacion.jala.converter.core.exceptions.CompilerException;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  * This class executes test for nodeJs.
