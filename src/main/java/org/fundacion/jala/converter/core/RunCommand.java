@@ -29,7 +29,8 @@ public class RunCommand {
      *
      * @param command a string with the command.
      */
-    public void run(final String command) {
+    public int run(final String command) {
+        int exitVal = 0;
         boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
         ProcessBuilder processBuilder = new ProcessBuilder();
         if (isWindows) {
@@ -48,7 +49,7 @@ public class RunCommand {
                 output.append(line + "\n");
                 resultCommand.add(line);
             }
-            int exitVal = process.waitFor();
+            exitVal = process.waitFor();
             if (exitVal == 0) {
                 System.out.println("Success!");
                 System.out.println(resultCommand);
@@ -64,5 +65,6 @@ public class RunCommand {
             LOGGER.error("Execute Exception" + e.getLocalizedMessage());
             e.printStackTrace();
         }
+        return exitVal;
     }
 }
