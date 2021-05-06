@@ -43,7 +43,6 @@ public class ZipServiceTest {
         zipArchive.delete();
         zipFail.delete();
         zipProcess.delete();
-
     }
 
     @Test
@@ -90,5 +89,4 @@ public class ZipServiceTest {
         zipList.add(rutePath() + "archive2.txt");
         zipFiles(zipList, "\\resource34Test\\archivesFailt.zip");
     }
-
 }
