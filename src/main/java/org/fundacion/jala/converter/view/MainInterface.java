@@ -107,7 +107,7 @@ public class MainInterface extends JFrame implements ActionListener {
         audioConverterBtn = new BtnStyle("Audio converter", "MainIconAudio.png", BTN_TYPE_MAIN);
         textExtractorBtn = new BtnStyle("Text extractor", "MainIconText.png", BTN_TYPE_MAIN);
         metaDataBtn = new BtnStyle("Metadata extractor", "MainIconMeta.png", BTN_TYPE_MAIN);
-        imageConverterBtn = new BtnStyle("Image converter", "MainIconMeta.png", BTN_TYPE_MAIN);
+        imageConverterBtn = new BtnStyle("Image converter", "MainIconImage.png", BTN_TYPE_MAIN);
         mainButtonAction(compilerBtn);
         mainButtonAction(videoConverterBtn);
         mainButtonAction(audioConverterBtn);

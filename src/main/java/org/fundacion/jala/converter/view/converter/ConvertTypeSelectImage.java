@@ -13,7 +13,9 @@ package org.fundacion.jala.converter.view.converter;
 import org.fundacion.jala.converter.view.utilities.ComboStyle;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
 import javax.swing.JPanel;
-import java.awt.*;
+import java.awt.Font;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 /**
  * This class defines the interface for selecting the type of image to convert.

@@ -107,9 +107,8 @@ public class ImageConverterInterface extends JPanel implements ActionListener {
                 checksumLocal = getFileChecksum(file.getOriginFilePath());
                 int option = JOptionPane.showConfirmDialog(this, "File Path: "
                         + file.getOriginFilePath() + "\nConvert to: " + imageSelect.getConvertTo()
-                        + "\nWidth size: " + settings.getWidthSize() + "\nWith metadata: " + settings.isMetadata()
-                        + "\nGray scale: " + settings.isGrayScale() + "\nChecksum: " + checksumLocal,
-                        "Message confirm", JOptionPane.YES_NO_OPTION);
+                        + "\nWidth size: " + settings.getWidthSize() + "\nGray scale: " + settings.isGrayScale()
+                        + "\nChecksum: " + checksumLocal, "Message confirm", JOptionPane.YES_NO_OPTION);
                 if (option == 0) {
                     callRequest();
                 } else {
@@ -141,7 +140,6 @@ public class ImageConverterInterface extends JPanel implements ActionListener {
             imageRequestForm.addFormat(imageSelect.getConvertTo());
             imageRequestForm.addWidthSize(settings.getWidthSize());
             imageRequestForm.addChecksum(checksumLocal);
-            imageRequestForm.addMetadata(String.valueOf(settings.isMetadata()));
             imageRequestForm.addGrayScale(String.valueOf(settings.isGrayScale()));
             String result = clientRequest.executeRequest(imageRequestForm, token);
             clientRequest.downloadFile(result);

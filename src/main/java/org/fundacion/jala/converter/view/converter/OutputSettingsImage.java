@@ -33,7 +33,6 @@ public class OutputSettingsImage extends JPanel {
     private final int MARGIN_SPACE_TOP = 10;
     private ComboStyle widthSizeSelect;
     private JCheckBox grayScaleOption;
-    private JCheckBox metadataOption;
     private JPanel container;
     private final int FONT_SIZE = 12;
     private JLabelStyle sizeLabel;
@@ -42,8 +41,6 @@ public class OutputSettingsImage extends JPanel {
         sizeLabel = new JLabelStyle("Select width size: ", "h4");
         widthSizeSelect = new ComboStyle();
         setWidthSizeSelect();
-        metadataOption = new JCheckBox("With metadata");
-        metadataOption.setFont(new Font("Barlow", Font.PLAIN, FONT_SIZE));
         grayScaleOption = new JCheckBox("Gray scale");
         grayScaleOption.setFont(new Font("Barlow", Font.PLAIN, FONT_SIZE));
         setElementsPanels();
@@ -66,7 +63,6 @@ public class OutputSettingsImage extends JPanel {
         comboContainer.add(Box.createRigidArea(new Dimension(WIDTH_BOX, HEIGHT_BOX)));
         JPanel element3container = new JPanel();
         element3container.setLayout(new FlowLayout(FlowLayout.LEFT, HEIGHT_BOX, HEIGHT_BOX));
-        element3container.add(metadataOption);
         element3container.add(grayScaleOption);
         container = new JPanel();
         container.setLayout(new BorderLayout(SPACE_MARGIN, 0));
@@ -96,15 +92,6 @@ public class OutputSettingsImage extends JPanel {
      */
     protected String getWidthSize() {
         return widthSizeSelect.getSelectedItem().toString();
-    }
-
-    /**
-     * Gets if metadata is required for Image converter.
-     *
-     * @return a true if metadata is required, false if not.
-     */
-    protected boolean isMetadata() {
-        return metadataOption.isSelected();
     }
 
     /**

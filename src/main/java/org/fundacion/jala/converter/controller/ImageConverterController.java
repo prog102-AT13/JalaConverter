@@ -29,7 +29,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
-import static org.fundacion.jala.converter.core.facade.MetadataFacade.extractMetadata;
 
 /**
  * This class calls endpoint for image.
@@ -49,7 +48,6 @@ public class ImageConverterController {
      * @param width is the width with are converted of image.
      * @param grayScale if image has grayScale.
      * @param checksum is the checksum of image file.
-     * @param metadata if metadata is extracted from the image.
      * @return a string of path to download files.
      * @throws IOException is a exception when invalid input is provided.
      * @throws InterruptedException is exception if process is interrupted.
@@ -61,8 +59,7 @@ public class ImageConverterController {
                              final @RequestParam("outputformat") String outputFormat,
                              final @RequestParam("width") int width,
                              final @RequestParam("grayscale") boolean grayScale,
-                             final @RequestParam("checksum") String checksum,
-                             final @RequestParam("metadata") boolean metadata)
+                             final @RequestParam("checksum") String checksum)
             throws IOException, InterruptedException {
         LOGGER.info("start");
         parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
@@ -73,12 +70,7 @@ public class ImageConverterController {
         } catch (PaoPaoException exception) {
             exception.printStackTrace();
         }
-        try {
-            extractMetadata(metadata, outputFilename, fileStorageService);
-        } catch (PaoPaoException exception) {
-            exception.printStackTrace();
-        }
-        ZipFileFacade.getZipFileImage(parameterOutputChecksum, metadata, outputFilename);
+        ZipFileFacade.getZipFileImage(parameterOutputChecksum, false, outputFilename);
         LOGGER.info("finish");
         return DownloadLinkFacade.getLinkConverter(outputFilename);
     }
