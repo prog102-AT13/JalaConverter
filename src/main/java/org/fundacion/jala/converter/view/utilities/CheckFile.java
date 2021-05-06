@@ -31,4 +31,24 @@ public class CheckFile {
             return false;
         }
     }
+
+    /**
+     * Verify that an output name was placed for the file.
+     *
+     * @param nameOutput String of name.
+     * @return a boolean with the confirmation.
+     */
+    public static boolean checkOutputNameMetadata(final boolean checkHasMoreInfo, final String nameOutput) {
+        if (!checkHasMoreInfo) {
+            String nameOutputLocal = nameOutput.trim();
+            if (!nameOutputLocal.equals("")) {
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "You need to specify an output name ", "Error Message", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
 }
