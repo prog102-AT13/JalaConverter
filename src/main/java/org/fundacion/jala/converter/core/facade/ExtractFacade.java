@@ -10,6 +10,7 @@
  */
 package org.fundacion.jala.converter.core.facade;
 
+import org.fundacion.jala.converter.core.exceptions.FileStorageException;
 import org.fundacion.jala.converter.core.exceptions.MetadataException;
 import org.fundacion.jala.converter.core.exceptions.TextExtractorException;
 import org.fundacion.jala.converter.core.parameter.ExtractTextParameter;
@@ -20,7 +21,6 @@ import org.fundacion.jala.converter.core.ObjectMetadata;
 import org.fundacion.jala.converter.core.metadata.TypeFileExport;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
-import java.io.IOException;
 
 /**
  * This class calls facade of extract.
@@ -46,7 +46,7 @@ public class ExtractFacade {
             extractTextParameter = new ExtractTextParameter(fileStorageService.uploadFile(file), language, outputFileName);
             ExtractText extractText = new ExtractText(extractTextParameter);
             extractText.extractText();
-        } catch (IOException exception) {
+        } catch (FileStorageException exception) {
             throw new TextExtractorException(exception);
         }
     }
@@ -67,7 +67,7 @@ public class ExtractFacade {
         String pathFile = null;
         try {
             pathFile = fileStorageService.uploadFile(file);
-        } catch (IOException exception) {
+        } catch (FileStorageException exception) {
             throw new MetadataException(exception);
         }
         String outPath = FileStorageService.getOutputPathWithoutFileName(pathFile);

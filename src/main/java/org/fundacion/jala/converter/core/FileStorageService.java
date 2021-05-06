@@ -10,10 +10,10 @@
  */
 package org.fundacion.jala.converter.core;
 
+import org.fundacion.jala.converter.core.exceptions.FileStorageException;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -26,8 +26,6 @@ import java.nio.file.Paths;
 public class FileStorageService {
     public static final String PATH = System.getProperty("user.dir");
     public static final String ARCHIVE = "archive";
-    public static final String STORAGE = "storage";
-    public static final String OUTPUT = "output";
 
     /**
      * Uploads a file to designed storage path.
@@ -35,11 +33,15 @@ public class FileStorageService {
      * @param file a MultipartFile file to be updated.
      * @return a String with the storageDir.
      */
-    public String uploadFile(final MultipartFile file) throws IllegalStateException, IOException {
-        String filename = file.getOriginalFilename();
-        String storageDir = PATH + File.separator + ARCHIVE + File.separator + filename;
-        file.transferTo(new File(storageDir));
-        return storageDir;
+    public String uploadFile(final MultipartFile file) throws FileStorageException {
+        try {
+            String filename = file.getOriginalFilename();
+            String storageDir = PATH + File.separator + ARCHIVE + File.separator + filename;
+            file.transferTo(new File(storageDir));
+            return storageDir;
+        }catch (IOException | NullPointerException exception){
+            throw new FileStorageException(exception);
+        }
     }
 
     /**
@@ -49,7 +51,7 @@ public class FileStorageService {
      * @throws RuntimeException if the file does not exist.
      * @return a String with the resource from a file name.
      */
-    public Resource downloadFile(final String fileName) {
+    public Resource downloadFile(final String fileName) throws FileStorageException {
         try {
             Path path = Paths.get(getArchivePath(fileName));
             Resource resource;
@@ -57,10 +59,10 @@ public class FileStorageService {
             if (resource.exists()) {
                 return resource;
             } else {
-                throw new RuntimeException("File doesn't exist");
+                throw new MalformedURLException();
             }
-        } catch (MalformedURLException e) {
-            throw new RuntimeException("Url malformed", e);
+        } catch (Exception exception) {
+            throw new FileStorageException(exception);
         }
     }
 
