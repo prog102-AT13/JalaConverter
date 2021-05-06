@@ -98,6 +98,7 @@ public class MainInterface extends JFrame implements ActionListener {
         metaDataPanel = new MetaDataInterface(token);
         textExtractorPanel = new TextExtractorInterface(token);
         imagePanel = new ImageConverterInterface(token);
+        compilerPanel.setVisible(true);
         mainPanel = new JLayeredPane();
         mainPanel.setLayout(new CardLayout());
         mainPanel.setBorder(MARGIN_SPACE);

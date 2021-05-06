@@ -53,4 +53,13 @@ class CompilerMainButtons extends JPanel {
     public JButton getPython() {
         return python;
     }
+
+    /**
+     * Gets the button that creates a new project.
+     *
+     * @return a JButton with name "New Project".
+     */
+    public BtnStyle getProject() {
+        return project;
+    }
 }

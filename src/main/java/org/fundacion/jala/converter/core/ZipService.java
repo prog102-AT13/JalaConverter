@@ -10,10 +10,8 @@
  */
 package org.fundacion.jala.converter.core;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import org.fundacion.jala.converter.core.exceptions.ZipException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -29,19 +27,25 @@ public class ZipService {
      *
      * @param filePath ta String with the file's direction.
      * @param zipOutputStream Object with an output stream filter to write the zip file.
-     * @throws IOException when invalid path is given.
+     * @throws ZipException when invalid path is given.
      */
-    public static void zipProcess(final String filePath, final ZipOutputStream zipOutputStream) throws IOException {
+    public static void zipProcess(final String filePath, final ZipOutputStream zipOutputStream) throws ZipException {
         File file = new File(filePath);
-        FileInputStream fileInputStream = new FileInputStream(file);
-        ZipEntry zipEntry = new ZipEntry(file.getName());
-        zipOutputStream.putNextEntry(zipEntry);
-        byte[] bytes = new byte[BYTES];
-        int length;
-        while ((length = fileInputStream.read(bytes)) >= 0) {
-            zipOutputStream.write(bytes, 0, length);
+        FileInputStream fileInputStream = null;
+        try {
+            fileInputStream = new FileInputStream(file);
+            ZipEntry zipEntry = new ZipEntry(file.getName());
+            zipOutputStream.putNextEntry(zipEntry);
+            byte[] bytes = new byte[BYTES];
+            int length;
+            while ((length = fileInputStream.read(bytes)) >= 0) {
+                zipOutputStream.write(bytes, 0, length);
+            }
+            fileInputStream.close();
+        } catch (IOException exception) {
+            throw new ZipException(exception);
         }
-        fileInputStream.close();
+
     }
 
     /**
@@ -49,14 +53,19 @@ public class ZipService {
      *
      * @param filePath a String with the file's direction.
      * @param outputPath a String with the destination's direction.
-     * @throws IOException when invalid path is given.
+     * @throws ZipException if process is interrupted.
      */
-    public static void zipFile(final String filePath, final String outputPath) throws IOException {
-        FileOutputStream fileOutputStream = new FileOutputStream(outputPath);
-        ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream);
-        zipProcess(filePath, zipOutputStream);
-        zipOutputStream.close();
-        fileOutputStream.close();
+    public static void zipFile(final String filePath, final String outputPath) throws ZipException {
+        FileOutputStream fileOutputStream = null;
+        try {
+            fileOutputStream = new FileOutputStream(outputPath);
+            ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream);
+            zipProcess(filePath, zipOutputStream);
+            zipOutputStream.close();
+            fileOutputStream.close();
+        } catch (IOException exception) {
+            throw new ZipException(exception);
+        }
     }
 
     /**
@@ -64,15 +73,20 @@ public class ZipService {
      *
      * @param filesPaths an arraylist with the files paths.
      * @param outputPath the destination's direction.
-     * @throws IOException when invalid path is given.
+     * @throws ZipException if process is interrupted.
      */
-    public static void zipFiles(final ArrayList<String> filesPaths, final String outputPath) throws IOException {
-        FileOutputStream fileOutputStream = new FileOutputStream(outputPath);
-        ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream);
-        for (String filePath : filesPaths) {
-            zipProcess(filePath, zipOutputStream);
+    public static void zipFiles(final ArrayList<String> filesPaths, final String outputPath) throws ZipException {
+        FileOutputStream fileOutputStream = null;
+        try {
+            fileOutputStream = new FileOutputStream(outputPath);
+            ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream);
+            for (String filePath : filesPaths) {
+                zipProcess(filePath, zipOutputStream);
+            }
+            zipOutputStream.close();
+            fileOutputStream.close();
+        } catch (IOException exception) {
+            throw new ZipException(exception);
         }
-        zipOutputStream.close();
-        fileOutputStream.close();
     }
 }

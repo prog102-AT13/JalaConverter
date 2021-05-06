@@ -14,7 +14,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.core.exceptions.ChecksumException;
 import org.fundacion.jala.converter.core.exceptions.PaoPaoException;
+import org.fundacion.jala.converter.core.exceptions.ZipException;
 import org.fundacion.jala.converter.core.facade.ChecksumFacade;
 import org.fundacion.jala.converter.core.facade.ConverterFacade;
 import org.fundacion.jala.converter.core.facade.ParameterOutputChecksum;
@@ -60,7 +62,7 @@ public class ImageConverterController {
                              final @RequestParam("width") int width,
                              final @RequestParam("grayscale") boolean grayScale,
                              final @RequestParam("checksum") String checksum)
-            throws IOException, InterruptedException {
+            throws IOException, ChecksumException, ZipException {
         LOGGER.info("start");
         parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
         String outputFilename = null;

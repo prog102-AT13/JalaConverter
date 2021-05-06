@@ -12,6 +12,7 @@ package org.fundacion.jala.converter.view.converter;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.core.exceptions.ChecksumException;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import org.fundacion.jala.converter.view.Models.ImageRequestForm;
 import org.fundacion.jala.converter.view.utilities.BtnStyle;
@@ -29,7 +30,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 import static org.fundacion.jala.converter.core.ChecksumService.getFileChecksum;
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 import static org.fundacion.jala.converter.view.utilities.CheckFile.checkFileSelect;
@@ -115,11 +115,8 @@ public class ImageConverterInterface extends JPanel implements ActionListener {
                     label.setVisible(false);
                 }
                 LOGGER.info("finish");
-            } catch (IOException ioException) {
+            } catch (IOException | ChecksumException ioException) {
                 ioException.printStackTrace();
-                LOGGER.error("Execute Exception");
-            } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
-                noSuchAlgorithmException.printStackTrace();
                 LOGGER.error("Execute Exception");
             }
         }

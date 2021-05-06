@@ -12,6 +12,7 @@ package org.fundacion.jala.converter.view.converter;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.core.exceptions.ChecksumException;
 import org.fundacion.jala.converter.view.Models.VideoRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import org.fundacion.jala.converter.view.utilities.BtnStyle;
@@ -29,7 +30,6 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 import static org.fundacion.jala.converter.core.ChecksumService.getFileChecksum;
 import static org.fundacion.jala.converter.view.utilities.CheckFile.checkFileSelect;
@@ -114,11 +114,8 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
                     label.setVisible(false);
                 }
                 LOGGER.info("finish");
-            } catch (IOException ioException) {
+            } catch (ChecksumException ioException) {
                 ioException.printStackTrace();
-                LOGGER.error("Execute Exception");
-            } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
-                noSuchAlgorithmException.printStackTrace();
                 LOGGER.error("Execute Exception");
             }
         }
@@ -128,9 +125,9 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
     /**
      * Obtains the request.
      *
-     * @throws IOException when problems on inputs and outputs.
+     * @throws ChecksumException if process is interrupted.
      */
-    private void callRequest() throws IOException {
+    private void callRequest() throws ChecksumException {
         LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");
@@ -154,8 +151,8 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
             System.out.println(result);
             LOGGER.info("finish");
         } catch (IOException ioException) {
-            ioException.printStackTrace();
             LOGGER.error("Execute Exception");
+            throw new ChecksumException(ioException);
         }
         LOGGER.info("Finish");
     }

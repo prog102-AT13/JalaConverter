@@ -59,7 +59,7 @@ public class InitialCode {
      * @return a string that is generated python code.
      */
     public static String generatePythonCode(final String className) {
-        if ("Main".equals(className)) {
+        if ("__main__".equals(className)) {
             return "print(\"Hello World\")";
         } else {
             return "";
