@@ -44,7 +44,8 @@ public class DownloadLinkFacade {
     public static String getLinkExtractText(final MultipartFile file) {
         String fileOut = file.getOriginalFilename();
         String outputFileName = fileOut.substring(0, fileOut.lastIndexOf("."));
-        return baseUrl + "/api/download/" + outputFileName + ".txt";
+        String filenameWithoutSpaces = cleanFileNameParameter(outputFileName);
+        return baseUrl + "/api/download/" + filenameWithoutSpaces + ".txt";
     }
 
     /**

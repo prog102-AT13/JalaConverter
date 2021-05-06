@@ -45,9 +45,13 @@ public class ExtractFacade {
     public static void getTextExtract(final MultipartFile file, final String language) throws IOException, TextExtractorException {
 
         String fileOut = file.getOriginalFilename();
+        String fileUpload = fileStorageService.uploadFile(file);
+        fileOut = cleanFileNameParameter(fileOut);
+        changeNameFile(fileUpload, fileOut);
+        fileUpload = fileUpload.substring(0,fileUpload.lastIndexOf(System.getProperty("file.separator"))+1) + fileOut;
         String outputFileName = fileOut.substring(0, fileOut.lastIndexOf("."));
         ExtractTextParameter extractTextParameter;
-        extractTextParameter = new ExtractTextParameter(fileStorageService.uploadFile(file), language, outputFileName);
+        extractTextParameter = new ExtractTextParameter(fileUpload, language, outputFileName);
         ExtractText extractText = new ExtractText(extractTextParameter);
         extractText.extractText();
     }

@@ -34,6 +34,12 @@ public class Utils {
         return cleanedFileName;
     }
 
+    /**
+     * Rename, removing whitespace in original file.
+     *
+     * @param storagePath Path of original file.
+     * @param fileName Final file name.
+     */
     public static void changeNameFile(final String storagePath, final String fileName) {
         boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
         RunCommand runCommand = new RunCommand();
