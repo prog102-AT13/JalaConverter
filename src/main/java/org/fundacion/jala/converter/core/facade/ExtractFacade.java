@@ -61,9 +61,8 @@ public class ExtractFacade {
      * @return a String with name of file which contains metadata.
      * @throws MetadataException if process is interrupted.
      */
-    public static String getMetadataExtract(final MultipartFile file, final Boolean isMoreInfo,
-                                            final String nameExport, final String format)
-                                            throws MetadataException {
+    public static String getMetadataExtract(final MultipartFile file, final Boolean isMoreInfo, final String nameExport,
+                                            final String format) throws MetadataException {
         String pathFile = null;
         try {
             pathFile = fileStorageService.uploadFile(file);
