@@ -15,7 +15,6 @@ public class FrameVideo {
     private String frame;
 
     public FrameVideo(final String newFrame) {
-        this.name = name;
         this.frame = newFrame;
     }
 

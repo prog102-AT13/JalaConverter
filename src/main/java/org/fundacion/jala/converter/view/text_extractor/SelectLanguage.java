@@ -10,39 +10,36 @@
  */
 package org.fundacion.jala.converter.view.text_extractor;
 
+import org.fundacion.jala.converter.view.utilities.ComboStyle;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
 import javax.swing.JPanel;
-import javax.swing.JComboBox;
-import java.awt.Font;
-import java.awt.Dimension;
+import javax.swing.BoxLayout;
 import java.awt.FlowLayout;
 
 /**
  * This class shows the select language form.
  */
 public class SelectLanguage extends JPanel {
-    private JComboBox convertTo;
-    private final int alignLabelStyle = 2;
-    private final int widthLabelStyle = 70;
-    private final int heightLabelStyle = 30;
-    private final int dimensionWidth = 100;
-    private final int dimensionHeight = 30;
-    private final int fontStyle = 0;
-    private final int fontSize = 12;
-    private final int flowLayoutHgap = 10;
-    private final int flowLayoutVgap = 10;
+    private final int WIDTH_COMBO_LANG = 90;
+    private final int HEIGHT_COMBO_LANG = 20;
+    private final int FLOWLAYOUT_SPACE = 10;
+    private ComboStyle langCombo;
 
     protected SelectLanguage() {
-        JLabelStyle labelConvertTo = new JLabelStyle("Convert to: ", "h3",
-                alignLabelStyle, widthLabelStyle, heightLabelStyle);
-        convertTo = new JComboBox();
-        convertTo.setPreferredSize(new Dimension(dimensionWidth, dimensionHeight));
-        convertTo.setFont(new Font("Barlow", fontStyle, fontSize));
-        convertTo.addItem("eng");
-        convertTo.addItem("spa");
-        setLayout(new FlowLayout(FlowLayout.LEFT, flowLayoutHgap, flowLayoutVgap));
-        add(labelConvertTo.getTextLabel());
-        add(convertTo);
+        JLabelStyle lblImageSettings = new JLabelStyle("Image settings", "h3");
+        JLabelStyle labelConvertTo = new JLabelStyle("Convert to: ", "h4");
+        langCombo = new ComboStyle(WIDTH_COMBO_LANG, HEIGHT_COMBO_LANG);
+        langCombo.addItem("eng");
+        langCombo.addItem("esp");
+        JPanel container = new JPanel();
+        container.setLayout(new FlowLayout(FlowLayout.LEFT, FLOWLAYOUT_SPACE, FLOWLAYOUT_SPACE));
+        container.add(labelConvertTo);
+        container.add(langCombo);
+        lblImageSettings.setAlignmentX(LEFT_ALIGNMENT);
+        container.setAlignmentX(LEFT_ALIGNMENT);
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        add(lblImageSettings);
+        add(container);
     }
 
     /**
@@ -51,6 +48,6 @@ public class SelectLanguage extends JPanel {
      * @return a String with the selected option.
      */
     protected String getConvertTo() {
-        return convertTo.getSelectedItem().toString();
+        return langCombo.getSelectedItem().toString();
     }
 }

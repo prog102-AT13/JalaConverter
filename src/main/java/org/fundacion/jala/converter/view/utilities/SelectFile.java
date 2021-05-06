@@ -8,45 +8,55 @@
  *
  * @author Paola Ximena Aguilar Quiñones
  */
-package org.fundacion.jala.converter.view.metadata;
+package org.fundacion.jala.converter.view.utilities;
 
 import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JTextField;
 import javax.swing.JFileChooser;
-import java.awt.Font;
-import java.awt.Dimension;
+import javax.swing.BoxLayout;
+import javax.swing.Box;
 import java.awt.FlowLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
 /**
- * This class is for the select file option in metadata UI.
+ * This class is for the select file option.
  */
-class SelectFile extends JPanel implements ActionListener {
-    private JButton selectFile;
-    private JTextField textFile;
+public class SelectFile extends JPanel implements ActionListener {
+    private BtnStyle fileButton;
+    private TxtField textFile;
     private JFileChooser fileChooser;
     private String fileOriginPath;
-    private final int FLOW_LAYOUT_HGAP = 30;
-    private final int FLOW_LAYOUT_VGAP = 10;
-    private final int DIMENSION_WIDTH = 350;
-    private final int DIMENSION_HEIGHT = 30;
-    private final int FONT_STYLE = 0;
-    private final int FONT_SIZE = 11;
+    private JPanel containerFile;
+    private final int DIMENSION_WIDTH = 400;
+    private final int DIMENSION_HEIGHT = 25;
+    private final int TYPE_BUTTON_FILE = 1;
+    private final int WIDTH_BOX = 5;
+    private final int HEIGHT_BOX = 20;
 
-    protected SelectFile() {
-        selectFile = new JButton("Open File");
-        selectFile.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
-        selectFile.addActionListener(this);
-        textFile = new JTextField();
-        textFile.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
-        textFile.setPreferredSize(new Dimension(DIMENSION_WIDTH, DIMENSION_HEIGHT));
-        textFile.setEnabled(false);
-        setLayout(new FlowLayout(FlowLayout.LEFT, FLOW_LAYOUT_HGAP, FLOW_LAYOUT_VGAP));
-        add(selectFile);
-        add(textFile);
+    public SelectFile() {
+        JLabelStyle lblFile = new JLabelStyle("Select a File to convert: ", "h3");
+        lblFile.setAlignmentX(LEFT_ALIGNMENT);
+        fileButton = new BtnStyle("Select a File", TYPE_BUTTON_FILE);
+        fileButton.addActionListener(this::actionPerformed);
+        textFile = new TxtField(DIMENSION_WIDTH, DIMENSION_HEIGHT, false);
+        setPanel();
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        add(lblFile);
+        add(Box.createRigidArea(new Dimension(WIDTH_BOX, HEIGHT_BOX)));
+        add(containerFile);
+    }
+
+    /**
+     * Sets the Panel for Button and TextField.
+     */
+    public void setPanel() {
+        containerFile = new JPanel();
+        containerFile.setLayout(new FlowLayout(FlowLayout.LEFT));
+        containerFile.add(fileButton);
+        containerFile.add(textFile);
+        containerFile.setAlignmentX(LEFT_ALIGNMENT);
     }
 
     /**
@@ -75,7 +85,7 @@ class SelectFile extends JPanel implements ActionListener {
      *
      * @return a String with the fileOriginPath.
      */
-    protected String getOriginFilePath() {
+    public String getOriginFilePath() {
         return fileOriginPath;
     }
 }

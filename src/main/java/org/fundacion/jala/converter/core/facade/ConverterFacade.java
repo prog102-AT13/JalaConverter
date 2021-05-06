@@ -15,7 +15,6 @@ import org.fundacion.jala.converter.core.parameter.AudioParameter;
 import org.fundacion.jala.converter.core.parameter.VideoParameter;
 import org.fundacion.jala.converter.core.AudioConverter;
 import org.fundacion.jala.converter.core.VideoConverter;
-import java.io.IOException;
 
 /**
  * This class calls facade of converter.
@@ -44,7 +43,7 @@ public class ConverterFacade {
      * @return a String of output filename.
      * @throws ConverterException if process is interrupted.
      */
-    public static String getVideoConverter(final VideoParameter videoParameter) throws IOException, ConverterException {
+    public static String getVideoConverter(final VideoParameter videoParameter) throws ConverterException {
         VideoConverter converter = new VideoConverter(videoParameter);
         converter.convertVideo();
         return converter.getOutputFileName();

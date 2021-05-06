@@ -6,19 +6,24 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Paola Aguilar Quiñones
+ * @author Paola Ximena Aguilar Quiñones
  */
 package org.fundacion.jala.converter.view.compiler;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTree;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Element;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import java.awt.Font;
 import java.awt.Color;
 import java.awt.BorderLayout;
+import java.util.ArrayList;
 
 /**
  * This class customizes a panel with custom text areas.
@@ -30,36 +35,50 @@ class CodeTextArea extends JPanel implements DocumentListener {
     private final int LEFT_BORDER = 10;
     private final int BOTTOM_BORDER = 0;
     private final int RIGHT_BORDER = 10;
+    private final int RIGHT_BORDER_SPACE = 20;
+    private final int CODE_AREA_WIDTH = 18;
+    private final int CODE_AREA_HEIGHT = 30;
+    private final int FONT_SIZE = 12;
+    private final Color LINE_COLOR = new Color(28, 28, 28);
+    final String[] toppings = {"Project1", "Main.java", "subclass.java"};
+    private JTree treeOne;
+    private DefaultMutableTreeNode root;
+    private DefaultTreeModel treeModel;
+    private String[] options;
 
-    protected CodeTextArea() {
-        codeArea = new JTextArea();
+    protected CodeTextArea(final String projectName, final ArrayList<String> fileNames) {
+        codeArea = new JTextArea(CODE_AREA_WIDTH, CODE_AREA_HEIGHT);
         codeArea.setBorder(new EmptyBorder(TOP_BORDER, LEFT_BORDER, BOTTOM_BORDER, RIGHT_BORDER));
+        codeArea.setFont(new Font("Courier New", Font.PLAIN, FONT_SIZE));
         lineCode = new JTextArea("1");
         lineCode.setBorder(new EmptyBorder(TOP_BORDER, LEFT_BORDER, BOTTOM_BORDER, RIGHT_BORDER));
-        lineCode.setBackground(Color.darkGray);
+        lineCode.setBackground(LINE_COLOR);
         lineCode.setForeground(Color.white);
         JScrollPane textCodeArea = new JScrollPane();
         textCodeArea.setBorder(new EmptyBorder(0, 0, 0, 0));
         codeArea.getDocument().addDocumentListener(this);
         setLayout(new BorderLayout());
+        createFileTree(projectName, fileNames);
+        treeOne.setBorder(new EmptyBorder(RIGHT_BORDER, TOP_BORDER, RIGHT_BORDER, RIGHT_BORDER_SPACE));
         textCodeArea.getViewport().add(codeArea);
         textCodeArea.setRowHeaderView(lineCode);
+        add(treeOne, BorderLayout.LINE_START);
         add(textCodeArea, BorderLayout.CENTER);
     }
 
     /**
-     * Gives users content of codeArea and textarea.
+     * Gets content of codeArea and textarea.
      *
-     * @return a string on the codeArea.
+     * @return codeArea the String content in Code Area.
      */
     public String getText() {
         return codeArea.getText();
     }
 
     /**
-     * Gets tex tarea to have access to its content.
+     * Gets text area to have access to its content.
      *
-     * @return a JtextArea.
+     * @return codeArea the element JTextarea.
      */
     public JTextArea getCodeArea() {
         return codeArea;
@@ -68,7 +87,7 @@ class CodeTextArea extends JPanel implements DocumentListener {
     /**
      * Counts how many lines has the codArea.
      *
-     * @return a string that is the number of codArea lines.
+     * @return text string that is the number of codArea lines.
      */
     public String getLinesOfText() {
         int caretPosition = codeArea.getDocument().getLength();
@@ -109,5 +128,53 @@ class CodeTextArea extends JPanel implements DocumentListener {
     public void removeUpdate(final DocumentEvent de) {
         lineCode.setText(getLinesOfText());
     }
-}
 
+    /**
+     * Creates the JtreePanel.
+     *
+     * @param vals String of values to set in JtreePanel.
+     */
+    public void JTreePanelOne(final String vals[]) {
+        options = vals;
+        treeOne = new JTree(options);
+    }
+
+    /**
+     * Creates a file tree with a project name and a list with file names.
+     *
+     * @param projectName represents project name.
+     * @param fileNames represents a list with file names.
+     */
+    public void createFileTree(final String projectName, final ArrayList<String> fileNames) {
+        root = null;
+        treeModel = null;
+        treeOne = null;
+        root = new DefaultMutableTreeNode(projectName);
+        treeModel = new DefaultTreeModel(root);
+        treeOne = new JTree(treeModel);
+        for (String fileName : fileNames) {
+            root.add(new DefaultMutableTreeNode(fileName));
+        }
+        treeOne.setShowsRootHandles(true);
+    }
+
+    /**
+     * Adds a child path that represents new file of project.
+     *
+     * @param fileName represents the new file name.
+     */
+    public void createChild(final String fileName) {
+        root.add(new DefaultMutableTreeNode(fileName));
+        treeModel.reload();
+    }
+
+    /**
+     * Removes a child path that represents new file of project.
+     *
+     * @param index represents index of a file name.
+     */
+    public void removeChild(final int index) {
+        root.remove(index);
+        treeModel.reload();
+    }
+}

@@ -10,11 +10,16 @@
  */
 package org.fundacion.jala.converter.view.compiler;
 
-import javax.swing.JPanel;
 import javax.swing.JButton;
-import java.awt.Dimension;
-import java.awt.Font;
+import javax.swing.JPanel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,18 +27,20 @@ import java.awt.event.ActionListener;
  * This class customizes a panel with custom buttons to compile.
  */
 class CompilerButtons extends JPanel implements ActionListener {
+    private final int FONT_SIZE = 12;
+    private final Color BTN_COLOR = new Color(86,139,77);
+    private final int BTN_WIDTH = 70;
+    private final int BTN_HEIGHT = 20;
     private JButton runCode;
     private JButton clearConsole;
+    private final int HGAP = 10;
     private JButton saveFiles;
-    private final int DIMENSION_WIDTH = 80;
-    private final int DIMENSION_HEIGHT = 20;
-    private final int FONT_STYLE = 0;
-    private final int FONT_SIZE = 11;
-    private final int HGAP = 15;
     private final int VGAP = 15;
 
     protected CompilerButtons() {
         runCode = makeButton("Run");
+        Icon buttonIcon = new ImageIcon("img/compilerBtn/BtnRunCode.png");
+        runCode.setIcon(buttonIcon);
         clearConsole = makeButton("Clear");
         saveFiles = makeButton("Save");
         setLayout(new FlowLayout(FlowLayout.RIGHT, HGAP, VGAP));
@@ -68,8 +75,14 @@ class CompilerButtons extends JPanel implements ActionListener {
      */
     public JButton makeButton(final String text) {
         JButton button = new JButton(text);
-        button.setPreferredSize(new Dimension(DIMENSION_WIDTH, DIMENSION_HEIGHT));
-        button.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
+        button.setFont(new Font("Barlow", Font.PLAIN, FONT_SIZE));
+        button.setPreferredSize(new Dimension(BTN_WIDTH, BTN_HEIGHT));
+        button.setOpaque(true);
+        button.setBackground(BTN_COLOR);
+        button.setFocusPainted(false);
+        button.setForeground(Color.WHITE);
+        Border border = new LineBorder(Color.WHITE, 0);
+        button.setBorder(border);
         return button;
     }
 

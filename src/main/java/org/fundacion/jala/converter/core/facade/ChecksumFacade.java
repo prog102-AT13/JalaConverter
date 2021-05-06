@@ -12,11 +12,11 @@ package org.fundacion.jala.converter.core.facade;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.core.exceptions.ChecksumException;
 import org.fundacion.jala.converter.models.Asset;
 import org.fundacion.jala.converter.core.FileStorageService;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.stream.Collectors;
 import static org.fundacion.jala.converter.core.ChecksumService.getFileChecksum;
@@ -37,35 +37,34 @@ public class ChecksumFacade {
      * @param checksum is a date of file, it is unique for each file.
      * @param file is a file which is applied.
      * @return object of ParameterOutputChecksum.
-     * @throws IOException is a exception when invalid file's path.
+     * @throws ChecksumException if process is interrupted.
      */
     public static ParameterOutputChecksum getChecksum(final String checksum, final MultipartFile file)
-            throws IOException {
-        FileStorageService fileStorageService = new FileStorageService();
-        String filename;
-        String storagePath;
-        String checksumLocal = checksum;
-        boolean exist = false;
-        List<Asset> assets = listAsset();
-        List<String> resultTitle = getTitles(checksum, assets);
-        List<String> resultPath = getPath(checksum, assets);
-        exist = resultTitle.size() > 0;
-        if (exist) {
-            filename = resultTitle.get(0);
-            storagePath = resultPath.get(0) + filename;
-        } else {
-            filename = file.getOriginalFilename();
-            storagePath = fileStorageService.uploadFile(file);
-            try {
+            throws ChecksumException {
+        try {
+            FileStorageService fileStorageService = new FileStorageService();
+            String filename;
+            String storagePath;
+            String checksumLocal = checksum;
+            boolean exist = false;
+            List<Asset> assets = listAsset();
+            List<String> resultTitle = getTitles(checksum, assets);
+            List<String> resultPath = getPath(checksum, assets);
+            exist = resultTitle.size() > 0;
+            if (exist) {
+                filename = resultTitle.get(0);
+                storagePath = resultPath.get(0) + filename;
+            } else {
+                filename = file.getOriginalFilename();
+                    storagePath = fileStorageService.uploadFile(file);
                 LOGGER.info("Execute Try");
                 checksumLocal = getFileChecksum(storagePath);
                 LOGGER.info("finish");
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-                LOGGER.error("Execute Exception" + e.getLocalizedMessage());
             }
+            return new ParameterOutputChecksum(checksumLocal, storagePath, resultTitle.size(), filename);
+        } catch (IOException exception) {
+            throw new ChecksumException(exception);
         }
-        return new ParameterOutputChecksum(checksumLocal, storagePath, resultTitle.size(), filename);
     }
 
     /**
