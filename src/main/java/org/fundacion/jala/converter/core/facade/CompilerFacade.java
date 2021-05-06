@@ -16,6 +16,7 @@ import org.fundacion.jala.converter.core.parameter.*;
 import org.fundacion.jala.converter.core.javacompiler.JavaCompiler;
 import org.fundacion.jala.converter.core.PythonCompiler;
 import org.fundacion.jala.converter.core.javacompiler.JavaVersion;
+import org.fundacion.jala.converter.core.NodeJsCompiler;
 
 /**
  * This class calls facade of compiler.
@@ -24,6 +25,7 @@ public class CompilerFacade {
     private static String result;
     private static JavaCompiler javaCompiler;
     private static PythonCompiler pythonCompiler;
+    private static NodeJsCompiler nodeJsCompiler;
 
     public CompilerFacade() {
     }
@@ -53,9 +55,25 @@ public class CompilerFacade {
      */
     public static String facadePythonCompile(final String code) throws CompilerException {
         if (!code.isBlank() || !code.equals(null)) {
-            pythonCompiler=new PythonCompiler();
+            pythonCompiler = new PythonCompiler();
             String filePath = Transform.toFile(code, "filetocompile", "py");
             return pythonCompiler.compiler(new PythonParameter(filePath, PythonEnum.V3));
+        }
+        return "";
+    }
+
+    /**
+     * Compiles a NodeJS file.
+     *
+     * @param code is string with code in NodeJs.
+     * @return a String of the result on runtime console.
+     * @throws CompilerException if process is interrupted.
+     */
+    public static String facadeNodejsCompile(final String code) throws CompilerException {
+        if (!code.isBlank() || !code.equals(null)) {
+            nodeJsCompiler = new NodeJsCompiler();
+            String filePath = Transform.toFile(code, "nodeFile", "js");
+            return nodeJsCompiler.nodeCompiler(new NodeJsParameter(filePath));
         }
         return "";
     }
