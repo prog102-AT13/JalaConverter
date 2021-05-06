@@ -79,6 +79,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
         JPanel btnContainer = new JPanel();
         btnContainer.setLayout(new FlowLayout(FlowLayout.CENTER));
         btnContainer.add(convertAudio);
+        btnContainer.add(label);
         JPanel container = new JPanel();
         container.setBorder(new EmptyBorder(MARGIN_SPACE, 0, MARGIN_BOTTOM_BTN_CONTAINER, 0));
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));

@@ -76,11 +76,11 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
         JPanel btnContainer = new JPanel();
         btnContainer.setLayout(new FlowLayout(FlowLayout.CENTER));
         btnContainer.add(converterVideoButton);
+        btnContainer.add(label);
         JPanel container = new JPanel();
         container.setBorder(new EmptyBorder(MARGIN_SPACE, 0, MARGIN_BOTTOM_BTN_CONTAINER, 0));
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
         container.add(file);
-        container.add(label);
         container.add(menuConverterType);
         container.add(settings);
         setLayout(new BorderLayout());
