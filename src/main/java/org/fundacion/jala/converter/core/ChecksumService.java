@@ -35,31 +35,27 @@ public class ChecksumService {
      * @throws ChecksumException if process is interrupted.
      */
     public static String getFileChecksum(final String filePath) throws ChecksumException {
-        if (filePath == null) {
-            throw new ChecksumException("Invalid filepath, filepath must not be null");
-        } else {
-            File file = new File(filePath);
-            MessageDigest md5Digest = null;
-            try {
-                md5Digest = MessageDigest.getInstance(MD5_ALGORITHM);
-                FileInputStream fileInputStream = new FileInputStream(file);
-                byte[] byteArray = new byte[BYTES];
-                int bytesCount = 0;
-                while ((bytesCount = fileInputStream.read(byteArray)) != -1) {
-                    md5Digest.update(byteArray, 0, bytesCount);
-                }
-                fileInputStream.close();
-            } catch (IOException | NoSuchAlgorithmException exception) {
-                throw new ChecksumException(exception);
+        File file = new File(filePath);
+        MessageDigest md5Digest = null;
+        try {
+            md5Digest = MessageDigest.getInstance(MD5_ALGORITHM);
+            FileInputStream fileInputStream = new FileInputStream(file);
+            byte[] byteArray = new byte[BYTES];
+            int bytesCount = 0;
+            while ((bytesCount = fileInputStream.read(byteArray)) != -1) {
+                md5Digest.update(byteArray, 0, bytesCount);
             }
-            byte[] bytes = md5Digest.digest();
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int i = 0; i < bytes.length; i++) {
-                stringBuilder.append(Integer.toString((bytes[i] & HEXADECIMAL_NUMBER_255)
-                        + HEXADECIMAL_NUMBER, HEXADECIMAL_RADIX).substring(1));
-            }
-            return stringBuilder.toString();
+            fileInputStream.close();
+        } catch (IOException | NoSuchAlgorithmException exception) {
+            throw new ChecksumException(exception);
         }
+        byte[] bytes = md5Digest.digest();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < bytes.length; i++) {
+            stringBuilder.append(Integer.toString((bytes[i] & HEXADECIMAL_NUMBER_255)
+                    + HEXADECIMAL_NUMBER, HEXADECIMAL_RADIX).substring(1));
+        }
+        return stringBuilder.toString();
     }
 
     /**

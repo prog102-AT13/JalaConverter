@@ -11,6 +11,7 @@
 package org.fundacion.jala.converter.core;
 
 import org.fundacion.jala.converter.core.exceptions.CompilerException;
+import org.fundacion.jala.converter.core.parameter.NodeJsParameter;
 import org.junit.Test;
 
 /**
@@ -18,10 +19,21 @@ import org.junit.Test;
  */
 public class NodeJsCompilerTest {
 
-    @Test(expected = NullPointerException.class)
-    public void nodeJsTest() throws CompilerException {
+    @Test(expected = CompilerException.class)
+    public void nodeJsTestShouldReturnCompilerExceptionWithNullParameter() throws CompilerException {
         NodeJsCompiler nodeJsCompiler = new NodeJsCompiler();
         nodeJsCompiler.nodeCompiler(null);
     }
 
+    @Test(expected = CompilerException.class)
+    public void nodeJsTestShouldReturnCompilerExceptionWithDefaultParameterConstructor() throws CompilerException {
+        NodeJsCompiler nodeJsCompiler = new NodeJsCompiler();
+        nodeJsCompiler.nodeCompiler(new NodeJsParameter());
+    }
+
+    @Test(expected = CompilerException.class)
+    public void nodeJsTestShouldReturnCompilerExceptionWithInvalidFilePath() throws CompilerException {
+        NodeJsCompiler nodeJsCompiler = new NodeJsCompiler();
+        nodeJsCompiler.nodeCompiler(new NodeJsParameter("Invalid"));
+    }
 }
