@@ -3,7 +3,6 @@ package org.fundacion.jala.converter.core;
 import org.fundacion.jala.converter.core.exceptions.CompilerException;
 import org.fundacion.jala.converter.core.parameter.NodeJsParameter;
 import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
 
 public class NodeJsCompilerTest {
@@ -16,8 +15,7 @@ public class NodeJsCompilerTest {
 
     @Test
     public void shouldCompileAJavaFile() throws CompilerException {
-        String filePath = System.getProperty("user.dir")
-                + "/src/test/resources/CompilersResources/NodeJs/test.js";
+        String filePath = System.getProperty("user.dir") + "/src/test/resources/CompilersResources/NodeJs/test.js";
         NodeJsParameter nodeJsParameter = new NodeJsParameter(filePath);
         NodeJsCompiler nodeJsCompiler = new NodeJsCompiler();
         String expected = "Hola Mundo" + "\n";
