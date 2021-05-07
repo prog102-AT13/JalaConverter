@@ -34,7 +34,10 @@ public class ExtractText {
     private final String TXT_EXTENSION = ".txt";
     private static final Logger LOGGER = LogManager.getLogger();
 
-    public ExtractText(final ExtractTextParameter extractTextParameter) {
+    public ExtractText(final ExtractTextParameter extractTextParameter) throws TextExtractorException {
+        if (extractTextParameter == null) {
+            throw new TextExtractorException();
+        }
         this.language = extractTextParameter.getLanguage();
         this.pathFile = extractTextParameter.getFilePath();
         this.nameOutputFile = extractTextParameter.getResultFile();

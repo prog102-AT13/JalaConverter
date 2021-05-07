@@ -18,7 +18,7 @@ public enum PythonEnum {
     V2("\"" + System.getProperty("user.dir") + "/thirdparty/python3/python.exe" + "\""),
     V3("\"" + System.getProperty("user.dir") + "/thirdparty/python3/python.exe" + "\"");
 
-    private String version;
+    public String version;
 
     private PythonEnum(final String versionCommand) {
         this.version = versionCommand;

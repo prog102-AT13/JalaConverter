@@ -75,8 +75,6 @@ public class OutputSettingsImage extends JPanel {
      * Sets all possible width size for Image converter.
      */
     protected void setWidthSizeSelect() {
-        widthSizeSelect.addItem("1280");
-        widthSizeSelect.addItem("1080");
         widthSizeSelect.addItem("854");
         widthSizeSelect.addItem("426");
         widthSizeSelect.addItem("720");

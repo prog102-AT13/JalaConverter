@@ -20,7 +20,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import java.util.stream.Collectors;
 import static org.fundacion.jala.converter.core.ChecksumService.getFileChecksum;
-import static org.fundacion.jala.converter.models.AssetSQL.*;
+import static org.fundacion.jala.converter.core.parameter.Utils.changeNameFile;
+import static org.fundacion.jala.converter.core.parameter.Utils.cleanFileNameParameter;
+import static org.fundacion.jala.converter.models.AssetSQL.listAsset;
 
 /**
  * This class calls facade of checksum.
@@ -61,6 +63,9 @@ public class ChecksumFacade {
                 checksumLocal = getFileChecksum(storagePath);
                 LOGGER.info("finish");
             }
+            filename = cleanFileNameParameter(filename);
+            changeNameFile(storagePath, filename);
+            storagePath = storagePath.substring(0, storagePath.lastIndexOf(System.getProperty("file.separator")) + 1) + filename;
             return new ParameterOutputChecksum(checksumLocal, storagePath, resultTitle.size(), filename);
         } catch (FileStorageException exception) {
             throw new ChecksumException(exception);
