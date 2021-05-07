@@ -26,7 +26,13 @@ public class PythonCompilerTest {
     }
 
     @Test
-    public void makePythonFile() {
+    public void makePythonFile() throws CompilerException{
+        String fileName = "filetocompile.py";
+        String path = "\\archive\\storage\\" + fileName;
+        PythonCompiler pythonCompiler = new PythonCompiler();
+        String actual = pythonCompiler.makePythonFile("print(\"Hello world\")");
+        String expected = System.getProperty("user.dir") + path;
+        assertEquals(expected, actual);
     }
 
     @Test
