@@ -119,4 +119,14 @@ public class ExportTypeFile {
         nameFileCompleteToExport = " -X > " + "\"" + addressExportFile.getAbsolutePath() + "\\"
                 + nameFileExport + ".xmp" + "\"";
     }
+
+    /**
+     * Gets parameter nameFileCompleteToExport.
+     *
+     * @return nameFileToExport with code in order to run in Exiftool.
+     */
+    public String getNameFileExport() {
+        return nameFileExport;
+    }
+
 }
