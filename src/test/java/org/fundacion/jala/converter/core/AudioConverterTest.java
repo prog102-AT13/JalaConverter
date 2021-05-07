@@ -4,7 +4,8 @@ import org.fundacion.jala.converter.core.parameter.AudioParameter;
 import org.junit.AfterClass;
 import org.junit.Test;
 import java.io.File;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class AudioConverterTest {
 
