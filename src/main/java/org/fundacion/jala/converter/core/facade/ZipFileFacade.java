@@ -59,7 +59,6 @@ public class ZipFileFacade {
      * @param metadata is a parameter if add metadata of image into zip.
      * @param outputFilename is the path's name of file to compress.
      * @throws ZipException when invalid path is given in zipFiles.
-     * @throws InterruptedException is exception if process is interrupted.
      */
     public static void getZipFileImage(final ParameterOutputChecksum parameterOutputChecksum, final boolean metadata,
                                        final String outputFilename)

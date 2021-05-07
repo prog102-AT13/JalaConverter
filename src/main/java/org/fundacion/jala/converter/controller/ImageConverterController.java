@@ -51,8 +51,6 @@ public class ImageConverterController {
      * @param grayScale if image has grayScale.
      * @param checksum is the checksum of image file.
      * @return a string of path to download files.
-     * @throws IOException is a exception when invalid input is provided.
-     * @throws InterruptedException is exception if process is interrupted.
      */
     @PostMapping("/convertImage")
     @ApiOperation(value = "Converts image file", notes = "Provide the image file to convert",
@@ -61,19 +59,18 @@ public class ImageConverterController {
                              final @RequestParam("outputformat") String outputFormat,
                              final @RequestParam("width") int width,
                              final @RequestParam("grayscale") boolean grayScale,
-                             final @RequestParam("checksum") String checksum)
-            throws IOException, ChecksumException, ZipException {
+                             final @RequestParam("checksum") String checksum) {
+        try {
         LOGGER.info("start");
         parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
         String outputFilename = null;
-        try {
             outputFilename = ConverterFacade.getImageConverter(
                     new ImageParameter(parameterOutputChecksum.getOutputFilename(), outputFormat, width, grayScale));
+            ZipFileFacade.getZipFileImage(parameterOutputChecksum, false, outputFilename);
+            LOGGER.info("finish");
+            return DownloadLinkFacade.getLinkConverter(outputFilename);
         } catch (PaoPaoException exception) {
-            exception.printStackTrace();
+            return exception.getMessage();
         }
-        ZipFileFacade.getZipFileImage(parameterOutputChecksum, false, outputFilename);
-        LOGGER.info("finish");
-        return DownloadLinkFacade.getLinkConverter(outputFilename);
     }
 }

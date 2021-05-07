@@ -59,7 +59,7 @@ public class ConverterFacade {
      * @return a String of output filename.
      * @throws ConverterException if process is interrupted.
      */
-    public static String getImageConverter(final ImageParameter imageParameter) throws IOException, ConverterException {
+    public static String getImageConverter(final ImageParameter imageParameter) throws ConverterException {
         ImageConverter converter = new ImageConverter(imageParameter);
         converter.convertImage();
         return converter.getOutputFileName();

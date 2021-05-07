@@ -48,6 +48,7 @@ public class ImageConverterInterface extends JPanel implements ActionListener {
     private final int MARGIN_BOTTOM_MAIN_CONTAINER = 200;
     private final int MARGIN_BOTTOM_BTN_CONTAINER = 100;
     private final int BTN_TYPE = 2;
+    private final int NUMBER_ZERO = 0;
     private SelectFile file;
     private ConvertTypeSelectImage imageSelect;
     private OutputSettingsImage settings;
@@ -106,16 +107,16 @@ public class ImageConverterInterface extends JPanel implements ActionListener {
                 LOGGER.info("Execute Try");
                 checksumLocal = getFileChecksum(file.getOriginFilePath());
                 int option = JOptionPane.showConfirmDialog(this, "File Path: "
-                        + file.getOriginFilePath() + "\nConvert to: " + imageSelect.getConvertTo()
-                        + "\nWidth size: " + settings.getWidthSize() + "\nGray scale: " + settings.isGrayScale()
-                        + "\nChecksum: " + checksumLocal, "Message confirm", JOptionPane.YES_NO_OPTION);
-                if (option == 0) {
+                        + file.getOriginFilePath() + "\nConvert to: " + imageSelect.getConvertTo() + "\nWidth size: "
+                        + settings.getWidthSize() + "\nGray scale: " + settings.isGrayScale() + "\nChecksum: "
+                        + checksumLocal, "Message confirm", JOptionPane.YES_NO_OPTION);
+                if (option == NUMBER_ZERO) {
                     callRequest();
                 } else {
                     label.setVisible(false);
                 }
                 LOGGER.info("finish");
-            } catch (IOException | ChecksumException ioException) {
+            } catch (ChecksumException ioException) {
                 ioException.printStackTrace();
                 LOGGER.error("Execute Exception");
             }
@@ -128,7 +129,7 @@ public class ImageConverterInterface extends JPanel implements ActionListener {
      *
      * @throws IOException when problems on inputs.
      */
-    private void callRequest() throws IOException {
+    private void callRequest() throws ChecksumException {
         LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");
@@ -146,8 +147,8 @@ public class ImageConverterInterface extends JPanel implements ActionListener {
             System.out.println(result);
             LOGGER.info("finish");
         } catch (IOException ioException) {
-            ioException.printStackTrace();
             LOGGER.error("Execute Exception");
+            throw new ChecksumException(ioException);
         }
         LOGGER.info("Finish");
     }

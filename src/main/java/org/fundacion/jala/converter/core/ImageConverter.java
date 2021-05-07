@@ -40,7 +40,7 @@ public class ImageConverter {
      *
      * @throws ConverterException if process is interrupted.
      */
-    public void convertImage() throws ConverterException, IOException {
+    public void convertImage() throws ConverterException {
         String adaptPath = "\"" + parameter.getFilePath() + "\"";
         format = parameter.getOutputFormat();
         output = adaptPath.substring((adaptPath.lastIndexOf("\\") + 1), adaptPath.lastIndexOf(".") + 1) + format;
@@ -49,6 +49,7 @@ public class ImageConverter {
         String ffmpegCommand = startFirstCommand + adaptPath + " ";
         String parameters = changeSize() + grayScale() + "\" ";
         String theCommand = ffmpegCommand + parameters + pathOutput + output  + "\" -y";
+        try {
         Process process = Runtime.getRuntime().exec("cmd /c " + theCommand);
         System.out.println(theCommand);
         ThreadHandler errorHandler = new ThreadHandler(process.getErrorStream(), "Error Stream");
@@ -56,16 +57,14 @@ public class ImageConverter {
         ThreadHandler threadHandler = new ThreadHandler(process.getInputStream(), "Output Stream");
         threadHandler.start();
         LOGGER.info("start");
-        try {
             LOGGER.info("Execute Try");
             process.waitFor();
             LOGGER.info("finish");
-        } catch (InterruptedException exception) {
+            System.out.println("exit code: " + process.exitValue());
+        } catch (InterruptedException | IOException exception) {
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
             throw new ConverterException(exception);
         }
-        LOGGER.info("finish");
-        System.out.println("exit code: " + process.exitValue());
         result = new Result();
         result.setFilename(outputFileName);
     }
