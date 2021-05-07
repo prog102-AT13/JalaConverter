@@ -13,10 +13,10 @@ package org.fundacion.jala.converter.core.facade;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.core.exceptions.ChecksumException;
+import org.fundacion.jala.converter.core.exceptions.FileStorageException;
 import org.fundacion.jala.converter.models.Asset;
 import org.fundacion.jala.converter.core.FileStorageService;
 import org.springframework.web.multipart.MultipartFile;
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 import static org.fundacion.jala.converter.core.ChecksumService.getFileChecksum;
@@ -62,7 +62,7 @@ public class ChecksumFacade {
                 LOGGER.info("finish");
             }
             return new ParameterOutputChecksum(checksumLocal, storagePath, resultTitle.size(), filename);
-        } catch (IOException exception) {
+        } catch (FileStorageException exception) {
             throw new ChecksumException(exception);
         }
     }
