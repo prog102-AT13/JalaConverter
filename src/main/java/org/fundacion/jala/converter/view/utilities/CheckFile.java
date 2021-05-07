@@ -68,9 +68,7 @@ public class CheckFile {
             if (arrayFormatSupports[i].equals(fileNameLocal)) {
                 return true;
             }
-            System.out.println(arrayFormatSupports[i]);
         }
-        System.out.println(fileNameLocal);
         messageError("Unsupported format ");
         return false;
     }

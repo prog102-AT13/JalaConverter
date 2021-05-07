@@ -33,6 +33,7 @@ import java.io.IOException;
 import static org.fundacion.jala.converter.core.ChecksumService.getFileChecksum;
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 import static org.fundacion.jala.converter.view.utilities.CheckFile.checkFileSelect;
+import static org.fundacion.jala.converter.view.utilities.CheckFile.checkFormatAudioSupport;
 
 /**
  * This class creates the image converter's UI.
@@ -102,23 +103,25 @@ public class ImageConverterInterface extends JPanel implements ActionListener {
     public void actionPerformed(final ActionEvent e) {
         LOGGER.info("start");
         if (checkFileSelect(file.getOriginFilePath())) {
-            label.setVisible(true);
-            try {
-                LOGGER.info("Execute Try");
-                checksumLocal = getFileChecksum(file.getOriginFilePath());
-                int option = JOptionPane.showConfirmDialog(this, "File Path: "
-                        + file.getOriginFilePath() + "\nConvert to: " + imageSelect.getConvertTo() + "\nWidth size: "
-                        + settings.getWidthSize() + "\nGray scale: " + settings.isGrayScale() + "\nChecksum: "
-                        + checksumLocal, "Message confirm", JOptionPane.YES_NO_OPTION);
-                if (option == NUMBER_ZERO) {
-                    callRequest();
-                } else {
-                    label.setVisible(false);
+            if(checkFormatAudioSupport(file.getOriginFilePath(), dotenv.get("IMAGE_FORMAT_SUPPORT"))) {
+                label.setVisible(true);
+                try {
+                    LOGGER.info("Execute Try");
+                    checksumLocal = getFileChecksum(file.getOriginFilePath());
+                    int option = JOptionPane.showConfirmDialog(this, "File Path: "
+                            + file.getOriginFilePath() + "\nConvert to: " + imageSelect.getConvertTo() + "\nWidth size: "
+                            + settings.getWidthSize() + "\nGray scale: " + settings.isGrayScale() + "\nChecksum: "
+                            + checksumLocal, "Message confirm", JOptionPane.YES_NO_OPTION);
+                    if (option == NUMBER_ZERO) {
+                        callRequest();
+                    } else {
+                        label.setVisible(false);
+                    }
+                    LOGGER.info("finish");
+                } catch (ChecksumException ioException) {
+                    ioException.printStackTrace();
+                    LOGGER.error("Execute Exception");
                 }
-                LOGGER.info("finish");
-            } catch (ChecksumException ioException) {
-                ioException.printStackTrace();
-                LOGGER.error("Execute Exception");
             }
         }
         LOGGER.info("Finish");
