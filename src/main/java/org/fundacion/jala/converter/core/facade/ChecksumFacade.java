@@ -64,14 +64,13 @@ public class ChecksumFacade {
                 checksumLocal = getFileChecksum(storagePath);
                 LOGGER.info("finish");
             }
+            filename = cleanFileNameParameter(filename);
+            changeNameFile(storagePath, filename);
+            storagePath = storagePath.substring(0,storagePath.lastIndexOf(System.getProperty("file.separator"))+1) + filename;
             return new ParameterOutputChecksum(checksumLocal, storagePath, resultTitle.size(), filename);
         } catch (FileStorageException exception) {
             throw new ChecksumException(exception);
         }
-        filename = cleanFileNameParameter(filename);
-        changeNameFile(storagePath, filename);
-        storagePath = storagePath.substring(0,storagePath.lastIndexOf(System.getProperty("file.separator"))+1) + filename;
-        return new ParameterOutputChecksum(checksumLocal, storagePath, resultTitle.size(), filename);
     }
 
     /**

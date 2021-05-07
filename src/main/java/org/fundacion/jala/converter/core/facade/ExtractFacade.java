@@ -41,7 +41,7 @@ public class ExtractFacade {
      * @param  language is a type of language of the text.
      * @throws TextExtractorException if process is interrupted.
      */
-    public static void getTextExtract(final MultipartFile file, final String language) throws TextExtractorException {
+    public static void getTextExtract(final MultipartFile file, final String language) throws TextExtractorException, FileStorageException {
         String fileOut = file.getOriginalFilename();
         String fileUpload = fileStorageService.uploadFile(file);
         fileOut = cleanFileNameParameter(fileOut);
@@ -49,13 +49,9 @@ public class ExtractFacade {
         fileUpload = fileUpload.substring(0,fileUpload.lastIndexOf(System.getProperty("file.separator"))+1) + fileOut;
         String outputFileName = fileOut.substring(0, fileOut.lastIndexOf("."));
         ExtractTextParameter extractTextParameter;
-        try {
-            extractTextParameter = new ExtractTextParameter(fileUpload, language, outputFileName);
-            ExtractText extractText = new ExtractText(extractTextParameter);
-            extractText.extractText();
-        } catch (FileStorageException exception) {
-            throw new TextExtractorException(exception);
-        }
+        extractTextParameter = new ExtractTextParameter(fileUpload, language, outputFileName);
+        ExtractText extractText = new ExtractText(extractTextParameter);
+        extractText.extractText();
     }
 
     /**
