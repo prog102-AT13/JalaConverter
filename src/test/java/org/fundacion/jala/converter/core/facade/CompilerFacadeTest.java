@@ -21,5 +21,4 @@ public class CompilerFacadeTest {
     public void facadeNodejsCompile() throws CompilerException {
         assertEquals("", CompilerFacade.facadeNodejsCompile(""));
     }
-
 }
