@@ -25,7 +25,7 @@ public class ChecksumServiceTest {
         assertEquals(expected, actual);
     }
 
-    @Test(expected = ChecksumException.class)
+    @Test(expected = NullPointerException.class)
     public void getFileChecksumShouldThrowChecksumExceptionWithNullInput() throws ChecksumException {
         String actual = getFileChecksum(null);
     }
@@ -54,7 +54,7 @@ public class ChecksumServiceTest {
         assertFalse(actual);
     }
 
-    @Test(expected = ChecksumException.class)
+    @Test(expected = NullPointerException.class)
     public void repeatedChecksumShouldReturnChecksumExceptionWithNullFilepath() throws IOException, ChecksumException {
         Boolean actual = repeatedChecksum(null, "d41d8cd98f00b204e9800998ecf8427e");
     }

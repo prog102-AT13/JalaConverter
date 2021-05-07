@@ -23,7 +23,7 @@ public class VideoConverterTest {
         assertEquals(expected, actual);
     }
 
-    @Test(expected = ConverterException.class)
+    @Test(expected = NullPointerException.class)
     public void convertVideoShouldThrowConverterExceptionWithNullParameter() throws ConverterException {
         VideoConverter videoConverter = new VideoConverter(null);
         videoConverter.convertVideo();
