@@ -49,6 +49,13 @@ dependencies {
 
 jacocoTestReport {
 	dependsOn test
+	afterEvaluate {
+		classDirectories.setFrom(files(classDirectories.files.collect {
+			fileTree(dir: it, exclude: ['org/fundacion/jala/converter/controller/**',
+										'org/fundacion/jala/converter/models/**',
+										'org/fundacion/jala/converter/view/**'])
+		}))
+	}
 }
 
 check.dependsOn jacocoTestReport
