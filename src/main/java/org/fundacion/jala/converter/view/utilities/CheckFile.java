@@ -19,7 +19,7 @@ import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 public class CheckFile {
 
     /**
-     * Verify that a file is selected.
+     * Verifies that a file is selected.
      *
      * @param file Path String.
      * @return a boolean with the confirmation.
@@ -34,7 +34,7 @@ public class CheckFile {
     }
 
     /**
-     * Verify that an output name was placed for the file.
+     * Verifies that an output name was placed for the file.
      *
      * @param nameOutput String of name.
      * @return a boolean with the confirmation.
@@ -54,7 +54,7 @@ public class CheckFile {
     }
 
     /**
-     * Checks if the format is supported.
+     * Verifies if the format is supported.
      *
      * @param fileName a string with de name of file.
      * @param supportedFormats a string with the all formats supported.

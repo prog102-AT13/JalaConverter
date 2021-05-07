@@ -24,7 +24,7 @@ public class DownloadLinkFacade {
     }
 
     /**
-     *  Generator link to download to convert.
+     *  Generators link to download to convert.
      *
      * @param outputFilename is path of file which are converted.
      * @returna a String of path which permit download the result process.
@@ -35,7 +35,7 @@ public class DownloadLinkFacade {
     }
 
     /**
-     *  Generator link to download.
+     *  Generators link to download.
      *
      * @param file is path of file which are extracted text.
      * @return a String of path which permit download the result process.
@@ -48,6 +48,7 @@ public class DownloadLinkFacade {
     }
 
     /**
+     * Gets the metadata link.
      *
      * @param filename is name of file which are extracted metadata.
      * @param format is format which the result process do.

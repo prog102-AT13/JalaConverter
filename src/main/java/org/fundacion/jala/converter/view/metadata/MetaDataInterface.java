@@ -88,7 +88,7 @@ public class MetaDataInterface extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(final ActionEvent e) {
         if (checkFileSelect(file.getOriginFilePath())) {
-            if(checkOutputNameMetadata(outputName.isSameName(), outputName.getOutPutName())) {
+            if (checkOutputNameMetadata(outputName.isSameName(), outputName.getOutPutName())) {
                 int option = JOptionPane.showConfirmDialog(this, "File Path: "
                         + file.getOriginFilePath() + "\nConvert to: " + exportingFormat.getConvertTo()
                         + "\nMore information: " + exportingFormat.hasMoreInfo() + "\nOutput name: "
