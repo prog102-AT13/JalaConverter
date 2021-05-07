@@ -11,7 +11,6 @@
 package org.fundacion.jala.converter.view.utilities;
 
 import javax.swing.JOptionPane;
-
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 
 /**

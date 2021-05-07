@@ -12,7 +12,6 @@ package org.fundacion.jala.converter.core.facade;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.fundacion.jala.converter.core.RunCommand;
 import org.fundacion.jala.converter.core.exceptions.ChecksumException;
 import org.fundacion.jala.converter.core.exceptions.FileStorageException;
 import org.fundacion.jala.converter.models.Asset;
@@ -66,7 +65,7 @@ public class ChecksumFacade {
             }
             filename = cleanFileNameParameter(filename);
             changeNameFile(storagePath, filename);
-            storagePath = storagePath.substring(0,storagePath.lastIndexOf(System.getProperty("file.separator"))+1) + filename;
+            storagePath = storagePath.substring(0, storagePath.lastIndexOf(System.getProperty("file.separator")) + 1) + filename;
             return new ParameterOutputChecksum(checksumLocal, storagePath, resultTitle.size(), filename);
         } catch (FileStorageException exception) {
             throw new ChecksumException(exception);

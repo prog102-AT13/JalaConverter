@@ -21,7 +21,6 @@ import org.fundacion.jala.converter.core.ObjectMetadata;
 import org.fundacion.jala.converter.core.metadata.TypeFileExport;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
-
 import static org.fundacion.jala.converter.core.parameter.Utils.changeNameFile;
 import static org.fundacion.jala.converter.core.parameter.Utils.cleanFileNameParameter;
 
@@ -41,12 +40,13 @@ public class ExtractFacade {
      * @param  language is a type of language of the text.
      * @throws TextExtractorException if process is interrupted.
      */
-    public static void getTextExtract(final MultipartFile file, final String language) throws TextExtractorException, FileStorageException {
+    public static void getTextExtract(final MultipartFile file,
+                                      final String language) throws TextExtractorException, FileStorageException {
         String fileOut = file.getOriginalFilename();
         String fileUpload = fileStorageService.uploadFile(file);
         fileOut = cleanFileNameParameter(fileOut);
         changeNameFile(fileUpload, fileOut);
-        fileUpload = fileUpload.substring(0,fileUpload.lastIndexOf(System.getProperty("file.separator"))+1) + fileOut;
+        fileUpload = fileUpload.substring(0, fileUpload.lastIndexOf(System.getProperty("file.separator")) + 1) + fileOut;
         String outputFileName = fileOut.substring(0, fileOut.lastIndexOf("."));
         ExtractTextParameter extractTextParameter;
         extractTextParameter = new ExtractTextParameter(fileUpload, language, outputFileName);
@@ -76,7 +76,7 @@ public class ExtractFacade {
         String nameExportWithoutSpaces = cleanFileNameParameter(nameExport);
         String nameFile = pathFile.substring(pathFile.lastIndexOf(System.getProperty("file.separator")) + 1, pathFile.length());
         nameFile = cleanFileNameParameter(nameFile);
-        String storagePath = outPath.substring(0,outPath.length()-1);
+        String storagePath = outPath.substring(0, outPath.length() - 1);
         String fullPath = storagePath + nameFile;
         changeNameFile(pathFile, nameFile);
         File fileToExtract = new File(fullPath);

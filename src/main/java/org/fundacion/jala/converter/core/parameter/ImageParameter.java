@@ -72,9 +72,9 @@ public class ImageParameter extends Parameter {
     }
 
     /**
-     * Gets the audio of the output image.
+     * Gets the image of the output image.
      *
-     * @return audio of the image file.
+     * @return image of the image file.
      */
     public boolean hasGrayScale() {
         return grayScale;

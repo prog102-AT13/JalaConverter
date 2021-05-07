@@ -103,7 +103,7 @@ public class ImageConverterInterface extends JPanel implements ActionListener {
     public void actionPerformed(final ActionEvent e) {
         LOGGER.info("start");
         if (checkFileSelect(file.getOriginFilePath())) {
-            if(checkFormatAudioSupport(file.getOriginFilePath(), dotenv.get("IMAGE_FORMAT_SUPPORT"))) {
+            if (checkFormatAudioSupport(file.getOriginFilePath(), dotenv.get("IMAGE_FORMAT_SUPPORT"))) {
                 label.setVisible(true);
                 try {
                     LOGGER.info("Execute Try");

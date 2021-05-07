@@ -30,8 +30,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-
 import static org.fundacion.jala.converter.core.ChecksumService.getFileChecksum;
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 import static org.fundacion.jala.converter.view.utilities.CheckFile.checkFileSelect;
@@ -105,7 +103,7 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
     public void actionPerformed(final ActionEvent e) {
         LOGGER.info("start");
         if (checkFileSelect(file.getOriginFilePath())) {
-            if(checkFormatAudioSupport(file.getOriginFilePath(), dotenv.get("AUDIO_FORMAT_SUPPORT"))) {
+            if (checkFormatAudioSupport(file.getOriginFilePath(), dotenv.get("AUDIO_FORMAT_SUPPORT"))) {
                 label.setVisible(true);
                 try {
                     LOGGER.info("Execute Try");
@@ -127,7 +125,6 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
                 LOGGER.info("finish");
             }
         }
-
         LOGGER.info("Finish");
     }
 

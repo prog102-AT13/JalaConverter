@@ -18,7 +18,7 @@ import org.fundacion.jala.converter.core.RunCommand;
 public class Utils {
 
     /**
-     * Clear the name of blanks
+     * Clears the name of blanks
      *
      * @param fileName with spaces of blanks
      * @return a String of fileName without spaces of blanks
@@ -35,7 +35,7 @@ public class Utils {
     }
 
     /**
-     * Rename, removing whitespace in original file.
+     * Renames, removing whitespace in original file.
      *
      * @param storagePath Path of original file.
      * @param fileName Final file name.

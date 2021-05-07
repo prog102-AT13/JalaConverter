@@ -84,7 +84,7 @@ public class TextExtractorInterface extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(final ActionEvent e) {
         if (checkFileSelect(file.getOriginFilePath())) {
-            if(checkFormatAudioSupport(file.getOriginFilePath(), dotenv.get("TEXT_FORMAT_SUPPORT"))) {
+            if (checkFormatAudioSupport(file.getOriginFilePath(), dotenv.get("TEXT_FORMAT_SUPPORT"))) {
                 int option = JOptionPane.showConfirmDialog(this, "File Path: "
                         + file.getOriginFilePath()
                         + "\nConvert to: "
