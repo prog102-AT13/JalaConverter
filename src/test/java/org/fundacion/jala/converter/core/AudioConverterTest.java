@@ -1,26 +1,10 @@
 package org.fundacion.jala.converter.core;
 
-import org.checkerframework.checker.units.qual.A;
 import org.fundacion.jala.converter.core.parameter.AudioParameter;
 import org.junit.AfterClass;
 import org.junit.Test;
-import org.mockito.Mockito;
-
 import java.io.File;
-
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
-
-/**
- * Copyright (c) 2021 Fundacion Jala.
- *
- * This software is the confidential and proprietary information of Fundacion Jala
- * ("Confidential Information"). You shall not disclose such Confidential
- * Information and shall use it only in accordance with the terms of the
- * license agreement you entered into with Fundacion Jala
- *
- * @author Saul Caspa Miranda
- */
 
 public class AudioConverterTest {
 
