@@ -11,6 +11,8 @@
 package org.fundacion.jala.converter.controller;
 
 import org.fundacion.jala.converter.core.FileStorageService;
+import org.fundacion.jala.converter.core.exceptions.FileStorageException;
+import org.fundacion.jala.converter.core.exceptions.PaoPaoException;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +37,12 @@ public class DownloadController {
      */
     @GetMapping("/download/{fileName}")
     ResponseEntity<Resource> downloadFile(final @PathVariable String fileName) {
-        Resource resource = fileStorageService.downloadFile(fileName);
+        Resource resource = null;
+        try {
+            resource = fileStorageService.downloadFile(fileName);
+        } catch (PaoPaoException exception) {
+            exception.getMessage();
+        }
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + resource.getFilename())
                 .body(resource);
