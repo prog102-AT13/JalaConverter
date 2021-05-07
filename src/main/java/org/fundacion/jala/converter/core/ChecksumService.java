@@ -61,12 +61,12 @@ public class ChecksumService {
     /**
      * Verifies if two file's have the same checksum.
      *
-     * @param firstFilePath a Strinng with the first file's path.
+     * @param firstFilePath a String with the first file's path.
      * @param checksum a String with the checksum.
      * @return a Boolean with the response.
      * @throws ChecksumException if process is interrupted.
      */
-    private static Boolean repeatedChecksum(final String firstFilePath, final String checksum)
+    public static Boolean repeatedChecksum(final String firstFilePath, final String checksum)
             throws ChecksumException {
         return (checksum.equals(getFileChecksum(firstFilePath)));
     }
