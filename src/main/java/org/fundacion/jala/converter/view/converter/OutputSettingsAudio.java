@@ -73,7 +73,7 @@ class OutputSettingsAudio extends JPanel {
      */
     public void setElementsPanels() {
         JPanel labelContainer = new JPanel();
-        labelContainer. setLayout(new BoxLayout(labelContainer, BoxLayout.Y_AXIS));
+        labelContainer.setLayout(new BoxLayout(labelContainer, BoxLayout.Y_AXIS));
         labelContainer.add(qualityLabel);
         labelContainer.add(Box.createRigidArea(new Dimension(WIDTH_BOX, MARGIN_SPACE_LABEL)));
         labelContainer.add(volumeLabel);
@@ -82,7 +82,7 @@ class OutputSettingsAudio extends JPanel {
         labelContainer.add(Box.createRigidArea(new Dimension(WIDTH_BOX, MARGIN_SPACE_LABEL)));
         labelContainer.add(audioChannelLabel);
         JPanel comboContainer = new JPanel();
-        comboContainer. setLayout(new BoxLayout(comboContainer, BoxLayout.Y_AXIS));
+        comboContainer.setLayout(new BoxLayout(comboContainer, BoxLayout.Y_AXIS));
         comboContainer.add(qualitySelect);
         comboContainer.add(Box.createRigidArea(new Dimension(WIDTH_BOX, HEIGHT_BOX)));
         comboContainer.add(volumeSelect);
