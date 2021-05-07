@@ -1,13 +1,3 @@
-/**
- * Copyright (c) 2021 Fundacion Jala.
- *
- * This software is the confidential and proprietary information of Fundacion Jala
- * ("Confidential Information"). You shall not disclose such Confidential
- * Information and shall use it only in accordance with the terms of the
- * license agreement you entered into with Fundacion Jala
- *
- * @author Gustavo Zacarias Huanca Alconz
- */
 package org.fundacion.jala.converter.core;
 
 import org.apache.commons.io.IOUtils;
@@ -24,9 +14,6 @@ import static org.fundacion.jala.converter.core.FileStorageService.getOutputPath
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-/**
- * This class is unit test for FileStorageService class
- */
 public class FileStorageServiceTest {
     FileStorageService fileStorageService = new FileStorageService();
 
