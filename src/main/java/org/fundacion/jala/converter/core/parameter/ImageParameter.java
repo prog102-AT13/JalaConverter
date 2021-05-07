@@ -18,6 +18,9 @@ public class ImageParameter extends Parameter {
     private int width;
     private boolean grayScale;
 
+    public ImageParameter() {
+    }
+
     public ImageParameter(final String newFilePath, final String newOutputFormat, final int newWidth,
                           final boolean newGrayScale) {
         super(newFilePath);
