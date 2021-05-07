@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 
 public class JavaCompilerTest {
 
-    @Test(expected = CompilerException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldReturnException() throws CompilerException {
         JavaCompiler javaCompiler = new JavaCompiler();
         javaCompiler.javaCompiler(null);
