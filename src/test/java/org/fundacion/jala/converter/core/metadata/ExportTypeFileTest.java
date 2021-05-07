@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 public class ExportTypeFileTest {
 
     @Test
-    public void getNameFileCompleteToExport() {
+    public void ItShouldNameFileCompleteToExport() {
         ExportTypeFile exportTypeFile = Mockito.mock(ExportTypeFile.class);
         Mockito.when(exportTypeFile.getNameFileCompleteToExport()).thenReturn("fileName");
         String actual = exportTypeFile.getNameFileCompleteToExport();
@@ -21,7 +21,7 @@ public class ExportTypeFileTest {
 
 
     @Test
-    public void getEmptyNameExportTypeFile() {
+    public void ItShouldEmptyNameExportTypeFile() {
         ExportTypeFile exportTypeFile = new ExportTypeFile("","",TypeFileExport.TXT,new File("path"));
         String actual = exportTypeFile.getNameFileExport();
         String expected = "";

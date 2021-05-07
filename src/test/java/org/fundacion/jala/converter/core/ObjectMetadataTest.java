@@ -50,14 +50,14 @@ public class ObjectMetadataTest {
     }
 
     @Test
-    public void getTypeFileExport() {
+    public void ItShouldTypeFileExport() {
         Mockito.when(objectMetadata.getTypeFileExport()).thenReturn(TypeFileExport.XMP);
         TypeFileExport expected = objeto.getTypeFileExport();
         assertEquals(expected, objectMetadata.getTypeFileExport());
     }
 
     @Test
-    public void getMoreInfo() {
+    public void ItShouldMoreInfo() {
         Mockito.when(objectMetadata.getMoreInfo()).thenReturn(true);
         boolean expected = objeto.getMoreInfo();
         assertEquals(expected, objectMetadata.getMoreInfo());
