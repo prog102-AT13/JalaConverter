@@ -18,8 +18,9 @@ public class VideoConverterTest {
                 "720", true, 30, 1280, 720, false);
         VideoConverter videoConverter = new VideoConverter(videoParameter);
         videoConverter.convertVideo();
-        System.out.println(videoConverter.getResult());
-        assertEquals(1, 1);
+        String actual = videoConverter.getOutputFileName();
+        String expected = "Perrito.mpeg";
+        assertEquals(expected, actual);
     }
 
     @Test(expected = ConverterException.class)
