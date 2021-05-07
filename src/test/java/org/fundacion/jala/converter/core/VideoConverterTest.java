@@ -11,19 +11,6 @@ import static org.junit.Assert.*;
 
 public class VideoConverterTest {
 
-    private static String rutePath() {
-        String path = System.getProperty("user.dir");
-        String pathResource = "\\archive";
-        String resourceDir = path + File.separator + pathResource + File.separator;
-        return resourceDir;
-    }
-
-    @AfterClass
-    public static void deleteFile() {
-        File audioTest = new File(rutePath() + "audioTest.avi");
-        audioTest.delete();
-    }
-
     @Test
     public void convertVideoShouldCreateConvertedFile() throws ConverterException {
         String filePath = System.getProperty("user.dir")
