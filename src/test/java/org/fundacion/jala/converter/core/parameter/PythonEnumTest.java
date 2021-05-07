@@ -9,6 +9,7 @@ public class PythonEnumTest {
 
     @Test
     public void getVersion() {
-        assertThat(PythonEnum.V3.getVersion(), is("\"" + System.getProperty("user.dir") + "/thirdparty/python3/python.exe" + "\""));
+        String path = "\"" + System.getProperty("user.dir") + "/thirdparty/python3/python.exe" + "\"";
+        assertThat(PythonEnum.V3.getVersion(), is(path));
     }
 }

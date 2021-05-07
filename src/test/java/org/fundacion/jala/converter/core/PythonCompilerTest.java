@@ -4,8 +4,7 @@ import org.fundacion.jala.converter.core.exceptions.CompilerException;
 import org.fundacion.jala.converter.core.parameter.PythonEnum;
 import org.fundacion.jala.converter.core.parameter.PythonParameter;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class PythonCompilerTest {
 
@@ -26,16 +25,12 @@ public class PythonCompilerTest {
     }
 
     @Test
-    public void makePythonFile() throws CompilerException{
+    public void shouldMakePythonFile() throws CompilerException{
         String fileName = "filetocompile.py";
         String path = "\\archive\\storage\\" + fileName;
         PythonCompiler pythonCompiler = new PythonCompiler();
         String actual = pythonCompiler.makePythonFile("print(\"Hello world\")");
         String expected = System.getProperty("user.dir") + path;
         assertEquals(expected, actual);
-    }
-
-    @Test
-    public void getResult() {
     }
 }
