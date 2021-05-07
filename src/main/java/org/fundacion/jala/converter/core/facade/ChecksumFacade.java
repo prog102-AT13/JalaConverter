@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 import static org.fundacion.jala.converter.core.ChecksumService.getFileChecksum;
 import static org.fundacion.jala.converter.core.parameter.Utils.changeNameFile;
 import static org.fundacion.jala.converter.core.parameter.Utils.cleanFileNameParameter;
-import static org.fundacion.jala.converter.models.AssetSQL.*;
+import static org.fundacion.jala.converter.models.AssetSQL.listAsset;
 
 /**
  * This class calls facade of checksum.

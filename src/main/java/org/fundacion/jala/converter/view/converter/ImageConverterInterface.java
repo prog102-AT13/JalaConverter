@@ -95,7 +95,7 @@ public class ImageConverterInterface extends JPanel implements ActionListener {
     }
 
     /**
-     * Invoked when an action occurs.
+     * Invokes when an action occurs.
      *
      * @param e the event to be processed
      */

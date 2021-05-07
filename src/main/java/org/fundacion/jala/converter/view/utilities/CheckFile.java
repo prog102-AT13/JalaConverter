@@ -54,7 +54,7 @@ public class CheckFile {
     }
 
     /**
-     * Check if the format is supported.
+     * Checks if the format is supported.
      *
      * @param fileName a string with de name of file.
      * @param supportedFormats a string with the all formats supported.
@@ -73,7 +73,7 @@ public class CheckFile {
     }
 
     /**
-     * Show error message in UI.
+     * Shows error message in UI.
      *
      * @param message a string with the custom message for the error.
      */
