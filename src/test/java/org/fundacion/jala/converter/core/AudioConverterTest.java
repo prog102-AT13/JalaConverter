@@ -2,8 +2,11 @@ package org.fundacion.jala.converter.core;
 
 import org.checkerframework.checker.units.qual.A;
 import org.fundacion.jala.converter.core.parameter.AudioParameter;
+import org.junit.AfterClass;
 import org.junit.Test;
 import org.mockito.Mockito;
+
+import java.io.File;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -21,6 +24,19 @@ import static org.mockito.Mockito.*;
 
 public class AudioConverterTest {
 
+    private static String rutePath() {
+        String path = System.getProperty("user.dir");
+        String pathResource = "\\archive";
+        String resourceDir = path + File.separator + pathResource + File.separator;
+        return resourceDir;
+    }
+
+    @AfterClass
+    public static void deleteFile() {
+        File audioTest = new File(rutePath() + "audioTest.avi");
+        audioTest.delete();
+    }
+
     @Test
     public void getOutputFilenameTest() {
         AudioParameter audioParameter = new AudioParameter();
@@ -32,6 +48,14 @@ public class AudioConverterTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void convertAudioTest() {
+        AudioParameter audioParameter = new AudioParameter(rutePath() + "audioTest.mp3", "avi", "164", "44", "2", "mono");
+        AudioConverter audioConverter = new AudioConverter(audioParameter);
+        audioConverter.audioConverter();
+        File file = new File(rutePath() + "audioTest.avi");
+        assertTrue(file.exists());
+    }
 //    @Test
 //    public void convertAudioTest() {
 //        RunCommand runCommand = new RunCommand();
