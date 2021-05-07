@@ -1,12 +1,8 @@
 package org.fundacion.jala.converter.core.facade;
 
-import org.fundacion.jala.converter.core.exceptions.ChecksumException;
 import org.fundacion.jala.converter.core.exceptions.CompilerException;
-import org.fundacion.jala.converter.core.javacompiler.JavaVersion;
-import org.fundacion.jala.converter.core.parameter.JavaParameter;
-import org.fundacion.jala.converter.core.parameter.PythonParameter;
 import org.junit.Test;
-import org.mockito.Mockito;
+
 
 import static org.junit.Assert.*;
 
