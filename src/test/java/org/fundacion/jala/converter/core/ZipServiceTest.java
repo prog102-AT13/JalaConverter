@@ -1,18 +1,9 @@
-/**
- * Copyright (c) 2021 Fundacion Jala.
- *
- * This software is the confidential and proprietary information of Fundacion Jala
- * ("Confidential Information"). You shall not disclose such Confidential
- * Information and shall use it only in accordance with the terms of the
- * license agreement you entered into with Fundacion Jala
- *
- * @author Gustavo Zacarias Huanca Alconz
- */
 package org.fundacion.jala.converter.core;
 
 import org.fundacion.jala.converter.core.exceptions.ZipException;
 import org.junit.AfterClass;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -27,7 +18,7 @@ public class ZipServiceTest {
 
     private static String rutePath() {
         String path = System.getProperty("user.dir");
-        String pathResource = "\\src\\test\\resource";
+        String pathResource = "\\src\\test\\resources\\ZipResources";
         String resourceDir = path + File.separator + pathResource + File.separator;
         return resourceDir;
     }
@@ -40,6 +31,14 @@ public class ZipServiceTest {
         File zipArchives = new File(rutePath() + "archives.zip");
         zipArchives.delete();
         zipArchive.delete();
+        zipFail.delete();
+        zipProcess.delete();
+    }
+
+    @BeforeAll
+    public static void cleanEnvironment() {
+        File zipProcess = new File(rutePath() + "process.zip");
+        File zipFail = new File(rutePath() + "fail.zip");
         zipFail.delete();
         zipProcess.delete();
     }

@@ -18,6 +18,7 @@ thirdparty/windows/javabin/jdk-11.0.10
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
+/src/test/resources/ZipResources/*.zip
 
 ### IntelliJ IDEA ###
 .idea
