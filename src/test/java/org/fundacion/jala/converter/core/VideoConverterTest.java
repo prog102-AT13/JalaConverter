@@ -8,13 +8,15 @@ import static org.junit.Assert.*;
 
 public class VideoConverterTest {
 
-//    @Test
-//    public void convertVideoShouldCreateConvertedFile() {
-//        VideoConverter videoConverter = new VideoConverter(new VideoParameter("C:\\Ray\\JalaConverter\\src\\test\\resources\\Perrito.mp4", "mpeg", "720", true, 30, 1280, 720, false));
-//        String actual = videoConverter.getResult().getFilename();
-//        String expected = "Perrito.mpeg";
-//        assertEquals(expected, actual);
-//    }
+    @Test
+    public void convertVideoShouldCreateConvertedFile() {
+        String filePath = System.getProperty("user.dir")
+                + "/src/test/resources/Perrito.mp4";
+        VideoConverter videoConverter = new VideoConverter(new VideoParameter(filePath, "mpeg", "720", true, 30, 1280, 720, false));
+        String actual = videoConverter.getResult().getFilename();
+        String expected = "Perrito.mpeg";
+        assertEquals(expected, actual);
+    }
 
     @Test(expected = ConverterException.class)
     public void convertVideoShouldThrowConverterExceptionWithNullParameter() throws ConverterException {
