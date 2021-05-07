@@ -2,9 +2,7 @@ package org.fundacion.jala.converter.core.metadata;
 
 import org.junit.Test;
 import org.mockito.Mockito;
-
 import java.io.File;
-
 import static org.junit.Assert.assertEquals;
 
 public class ExportTypeFileTest {
@@ -17,8 +15,6 @@ public class ExportTypeFileTest {
         String expected = "fileName";
         assertEquals(expected, actual);
     }
-
-
 
     @Test
     public void ItShouldEmptyNameExportTypeFile() {

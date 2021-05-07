@@ -3,7 +3,6 @@ package org.fundacion.jala.converter.core;
 import org.fundacion.jala.converter.core.exceptions.MetadataException;
 import org.fundacion.jala.converter.core.metadata.TypeFileExport;
 import org.junit.Test;
-
 import java.io.File;
 
 public class ExtractMetadataTest {
