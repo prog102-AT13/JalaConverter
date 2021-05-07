@@ -33,6 +33,7 @@ import java.security.NoSuchAlgorithmException;
 import static org.fundacion.jala.converter.core.ChecksumService.getFileChecksum;
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 import static org.fundacion.jala.converter.view.utilities.CheckFile.checkFileSelect;
+import static org.fundacion.jala.converter.view.utilities.CheckFile.checkFormatAudioSupport;
 
 /**
  * This class creates the audio converter's UI.
@@ -102,29 +103,32 @@ public class AudioConverterInterface extends JPanel implements ActionListener {
     public void actionPerformed(final ActionEvent e) {
         LOGGER.info("start");
         if (checkFileSelect(file.getOriginFilePath())) {
-            label.setVisible(true);
-            try {
-                LOGGER.info("Execute Try");
-                checksumLocal = getFileChecksum(file.getOriginFilePath());
-                int option = JOptionPane.showConfirmDialog(this, "File Path: " + file.getOriginFilePath()
-                        + "\nConvert to: " + audioSelect.getConvertTo() + "\nQuality: " + settings.getQuality()
-                        + "\nVolume: " + settings.getVolume() + "\nAudio Channel: " + settings.getAudioChannel()
-                        + "\nHz: " + settings.getHz() + "\nwith metadata: " + settings.isMetadata() + "\nChecksum: "
-                        + checksumLocal, "Message confirm", JOptionPane.YES_NO_OPTION);
-                if (option == 0) {
-                    callRequest();
-                } else {
-                    label.setVisible(false);
+            if(checkFormatAudioSupport(file.getOriginFilePath(), dotenv.get("AUDIO_FORMAT_SUPPORT"))) {
+                label.setVisible(true);
+                try {
+                    LOGGER.info("Execute Try");
+                    checksumLocal = getFileChecksum(file.getOriginFilePath());
+                    int option = JOptionPane.showConfirmDialog(this, "File Path: " + file.getOriginFilePath()
+                            + "\nConvert to: " + audioSelect.getConvertTo() + "\nQuality: " + settings.getQuality()
+                            + "\nVolume: " + settings.getVolume() + "\nAudio Channel: " + settings.getAudioChannel()
+                            + "\nHz: " + settings.getHz() + "\nwith metadata: " + settings.isMetadata() + "\nChecksum: "
+                            + checksumLocal, "Message confirm", JOptionPane.YES_NO_OPTION);
+                    if (option == 0) {
+                        callRequest();
+                    } else {
+                        label.setVisible(false);
+                    }
+                    LOGGER.info("finish");
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                    LOGGER.error("Execute Exception");
+                } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
+                    noSuchAlgorithmException.printStackTrace();
+                    LOGGER.error("Execute Exception");
                 }
-                LOGGER.info("finish");
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-                LOGGER.error("Execute Exception");
-            } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
-                noSuchAlgorithmException.printStackTrace();
-                LOGGER.error("Execute Exception");
             }
         }
+
         LOGGER.info("Finish");
     }
 

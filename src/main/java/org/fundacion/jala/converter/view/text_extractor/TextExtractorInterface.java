@@ -28,6 +28,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 import static org.fundacion.jala.converter.view.utilities.CheckFile.checkFileSelect;
+import static org.fundacion.jala.converter.view.utilities.CheckFile.checkFormatAudioSupport;
 
 /**
  * This class shows the extractText interface.
@@ -83,16 +84,20 @@ public class TextExtractorInterface extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(final ActionEvent e) {
         if (checkFileSelect(file.getOriginFilePath())) {
-            JOptionPane.showMessageDialog(this, "File Path: "
-                    + file.getOriginFilePath()
-                    + "\nConvert to: "
-                    + languageSelect.getConvertTo());
-            try {
-                LOGGER.info("Execute Try");
-                callRequest();
-            } catch (Exception ex) {
-                LOGGER.error("Execute Exception to text extraction");
-                ex.printStackTrace();
+            if(checkFormatAudioSupport(file.getOriginFilePath(), dotenv.get("TEXT_FORMAT_SUPPORT"))) {
+                int option = JOptionPane.showConfirmDialog(this, "File Path: "
+                        + file.getOriginFilePath()
+                        + "\nConvert to: "
+                        + languageSelect.getConvertTo(), "Message confirm", JOptionPane.YES_NO_OPTION);
+                try {
+                    LOGGER.info("Execute Try");
+                    if (option == 0) {
+                        callRequest();
+                    }
+                } catch (Exception ex) {
+                    LOGGER.error("Execute Exception to text extraction");
+                    ex.printStackTrace();
+                }
             }
         }
         LOGGER.info("Finish");
