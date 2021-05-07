@@ -31,7 +31,7 @@ public class FileStorageServiceTest {
     FileStorageService fileStorageService = new FileStorageService();
 
     @Test
-    public void uploadFile_MultipartFileRight_path() throws IOException, FileStorageException {
+    public void ItShouldUploadsFileToDesignedStoragePath() throws IOException, FileStorageException {
         File file = new File("archive//archive.txt");
         FileInputStream input = new FileInputStream(file);
         MultipartFile multipartFile = new MockMultipartFile("archive", file.getName(), "text/archive",
@@ -42,17 +42,17 @@ public class FileStorageServiceTest {
     }
 
     @Test(expected = FileStorageException.class)
-    public void uploadFile_MultipartFileEmpty_throwException() throws FileStorageException {
+    public void ItShouldThrowsFileStorageExceptionWhenInputNull() throws FileStorageException {
         String result = fileStorageService.uploadFile(null);
     }
 
     @Test(expected = FileStorageException.class)
-    public void downloadFile_InvalidPath_throwsRuntimeException() throws FileStorageException {
+    public void downloadFileShouldThrowsRuntimeExceptionWhenInvalidPathInput() throws FileStorageException {
         Resource actual = fileStorageService.downloadFile("fileName");
     }
 
     @Test
-    public void downloadFile_validPath_objectResource() throws FileStorageException {
+    public void downloadFileShouldReturnResourceWhenValidPathInput() throws FileStorageException {
         Resource actual = fileStorageService.downloadFile("archive.txt");
         assertNotNull(actual);
     }

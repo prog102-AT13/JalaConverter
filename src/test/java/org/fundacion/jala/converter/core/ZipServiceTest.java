@@ -23,7 +23,6 @@ import static org.fundacion.jala.converter.core.ZipService.zipFile;
 import static org.fundacion.jala.converter.core.ZipService.zipFiles;
 import static org.junit.Assert.assertTrue;
 
-
 public class ZipServiceTest {
 
     private static String rutePath() {
@@ -46,7 +45,7 @@ public class ZipServiceTest {
     }
 
     @Test
-    public void zipProcess_makeProcessZip_fileZipExist() throws FileNotFoundException, ZipException {
+    public void itShouldCreateZip() throws FileNotFoundException, ZipException {
         ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(rutePath() + "process.zip"));
         zipProcess(rutePath() + "archive1.txt", zipOutputStream);
         File file = new File(rutePath() + "process.zip");
@@ -54,26 +53,26 @@ public class ZipServiceTest {
     }
 
     @Test(expected = ZipException.class)
-    public void zipProcess_fileIsZip_throwException() throws FileNotFoundException, ZipException {
+    public void itShouldThrowExceptionToZipProcess() throws FileNotFoundException, ZipException {
         ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(rutePath() + "fail.zip"));
         zipProcess("\\resource&Test\\ archive1.txt", zipOutputStream);
     }
 
     @Test
-    public void zipFile_fileIsZip_fileZipExist() throws ZipException {
+    public void itShouldCreateZipWithOnlyFileInside() throws ZipException {
         zipFile(rutePath() + "archive1.txt", rutePath() + "archive1.zip");
         File file = new File(rutePath() + "archive1.zip");
         assertTrue(file.exists());
     }
 
     @Test(expected = ZipException.class)
-    public void zipFile_fileIsZip_throwException() throws ZipException {
+    public void itShouldThrowsZipExceptionWhenCreateZipWithOnlyFileWithInvalidPath() throws ZipException {
         ZipService zipService = new ZipService();
         zipService.zipFile(rutePath() + "archive1.txt", "\\resourceTest");
     }
 
     @Test
-    public void zipFiles_filesToZip_fileZipExist() throws ZipException {
+    public void itShouldCreateZipWithTwoFileInside() throws ZipException {
         ArrayList<String> zipList = new ArrayList<>();
         zipList.add(rutePath() + "archive1.txt");
         zipList.add(rutePath() + "archive2.txt");
@@ -83,10 +82,18 @@ public class ZipServiceTest {
     }
 
     @Test(expected = ZipException.class)
-    public void zipFiles_filesToZip_throwZipException() throws ZipException {
+    public void itShouldThrowsZipExceptionWhenCreateZipWithTwoFileWithInvalidOutPutPath() throws ZipException {
         ArrayList<String> zipList = new ArrayList<>();
         zipList.add(rutePath() + "archive1.txt");
         zipList.add(rutePath() + "archive2.txt");
+        zipFiles(zipList, "\\resource34Test\\archivesFailt.zip");
+    }
+
+    @Test(expected = ZipException.class)
+    public void itShouldThrowsZipExceptionWhenCreateZipWithTwoFileWithInvalidPathFile() throws ZipException {
+        ArrayList<String> zipList = new ArrayList<>();
+        zipList.add(rutePath() + "archive1.txt");
+        zipList.add(rutePath() + "archive2d.txt");
         zipFiles(zipList, "\\resource34Test\\archivesFailt.zip");
     }
 }
