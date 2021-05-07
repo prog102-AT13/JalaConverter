@@ -23,10 +23,4 @@ public class VideoConverterTest {
         VideoConverter videoConverter = new VideoConverter(null);
         videoConverter.convertVideo();
     }
-
-    @Test(expected = ConverterException.class)
-    public void convertVideoShouldThrowConverterExceptionWithEmptyFilePath() throws ConverterException {
-        VideoConverter videoConverter = new VideoConverter(new VideoParameter("", "mpeg", "720", true, 30, 1280, 720, false));
-        videoConverter.convertVideo();
-    }
 }
