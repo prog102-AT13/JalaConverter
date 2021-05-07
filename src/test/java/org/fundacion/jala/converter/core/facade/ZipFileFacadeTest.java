@@ -3,18 +3,19 @@ package org.fundacion.jala.converter.core.facade;
 import org.fundacion.jala.converter.core.exceptions.ZipException;
 import org.junit.After;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import static org.fundacion.jala.converter.core.facade.ZipFileFacade.getZipFileAudio;
 import static org.fundacion.jala.converter.core.facade.ZipFileFacade.getZipFileVideo;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class ZipFileFacadeTest {
 
     private static String rutePath() {
         String path = System.getProperty("user.dir");
-        String pathResource = "\\src\\test\\resource";
+        String pathResource = "\\src\\test\\resources\\ZipResources\\";
         return path + File.separator + pathResource + File.separator;
     }
 
@@ -32,6 +33,12 @@ public class ZipFileFacadeTest {
         zipAguinaldo.delete();
         AguinaldoMp3.delete();
         AguinaldoMp4.delete();
+    }
+
+    @BeforeAll
+    public static void cleanEnvironment() {
+        File zipAguinaldo = new File(rutePath() + "aguinaldo.zip");
+        zipAguinaldo.delete();
     }
 
     @Test(expected = ZipException.class)
