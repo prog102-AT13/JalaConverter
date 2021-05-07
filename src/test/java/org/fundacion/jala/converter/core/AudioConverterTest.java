@@ -10,8 +10,8 @@ import static org.mockito.Mockito.*;
 
 /**
  * Copyright (c) 2021 Fundacion Jala.
- * <p>
- * *  This software is the confidential and proprietary information of Fundacion Jala
+ *
+ * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
@@ -31,4 +31,15 @@ public class AudioConverterTest {
         String actual = audioConverter.getOutputFileName();
         assertEquals(expected, actual);
     }
+
+//    @Test
+//    public void convertAudioTest() {
+//        RunCommand runCommand = new RunCommand();
+//        AudioConverter audioConverter = mock(AudioConverter.class);
+//        //Person person = ObjectCreator.getPerson();
+//        String command = "command";
+//        doNothing().when(runCommand).run(command);
+//        audioConverter.audioConverter();
+//        verify(runCommand,times(1)).run(command);
+//    }
 }
