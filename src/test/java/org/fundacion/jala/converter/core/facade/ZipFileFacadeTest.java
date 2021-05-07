@@ -47,8 +47,6 @@ public class ZipFileFacadeTest {
         ParameterOutputChecksum parameterOutputChecksum = new ParameterOutputChecksum("as23423df31",
                 rutePath() + "aguinaldo.mp4", 1, "aguinaldo.mp4");
         getZipFileVideo(parameterOutputChecksum, true, true, "aguinaldo.mp4");
-        File file = new File(rutePath() + "aguinaldo.zip");
-        assertTrue(file.exists());
     }
 
     @Test(expected = ZipException.class)
