@@ -1,0 +1,27 @@
+ExifTool Version Number         : 12.22
+File Name                       : aguinaldo.mp3
+Directory                       : F:/GitHubCode/prog102-AT13-JalaConverter/JalaConverter/archive
+File Size                       : 236 KiB
+File Modification Date/Time     : 2021:04:29 16:48:38-04:00
+File Access Date/Time           : 2021:04:29 16:48:38-04:00
+File Creation Date/Time         : 2021:04:28 22:45:44-04:00
+File Permissions                : -rw-rw-rw-
+File Type                       : MP3
+File Type Extension             : mp3
+MIME Type                       : audio/mpeg
+MPEG Audio Version              : 1
+Audio Layer                     : 3
+Audio Bitrate                   : 128 kbps
+Sample Rate                     : 44100
+Channel Mode                    : Stereo
+MS Stereo                       : Off
+Intensity Stereo                : Off
+Copyright Flag                  : False
+Original Media                  : False
+Emphasis                        : None
+ID3 Size                        : 138
+User Defined Text               : (major_brand) mp42
+User Defined Text               : (minor_version) 0
+User Defined Text               : (compatible_brands) mp42isom
+Encoder Settings                : Lavf58.77.100
+Duration                        : 15.12 s (approx)
