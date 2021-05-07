@@ -11,7 +11,7 @@
 package org.fundacion.jala.converter.core.parameter;
 
 /**
- * This class are the options for the audio parameters.
+ * This class is for the video parameters.
  */
 public class VideoParameter extends Parameter {
     private String outputFormat;
