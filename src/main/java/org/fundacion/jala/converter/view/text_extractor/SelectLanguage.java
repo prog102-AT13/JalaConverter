@@ -30,7 +30,7 @@ public class SelectLanguage extends JPanel {
         JLabelStyle labelConvertTo = new JLabelStyle("Convert to: ", "h4");
         langCombo = new ComboStyle(WIDTH_COMBO_LANG, HEIGHT_COMBO_LANG);
         langCombo.addItem("eng");
-        langCombo.addItem("esp");
+        langCombo.addItem("spa");
         JPanel container = new JPanel();
         container.setLayout(new FlowLayout(FlowLayout.LEFT, FLOWLAYOUT_SPACE, FLOWLAYOUT_SPACE));
         container.add(labelConvertTo);
