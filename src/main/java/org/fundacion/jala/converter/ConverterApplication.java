@@ -10,7 +10,6 @@
  */
 package org.fundacion.jala.converter;
 
-import org.fundacion.jala.converter.view.MainInterface;
 import org.fundacion.jala.converter.view.login.LoginInterface;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.SpringApplication;

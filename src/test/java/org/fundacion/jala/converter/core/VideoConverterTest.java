@@ -2,12 +2,9 @@ package org.fundacion.jala.converter.core;
 
 import org.fundacion.jala.converter.core.exceptions.ConverterException;
 import org.fundacion.jala.converter.core.parameter.VideoParameter;
-import org.junit.AfterClass;
 import org.junit.Test;
-
 import java.io.File;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class VideoConverterTest {
 
