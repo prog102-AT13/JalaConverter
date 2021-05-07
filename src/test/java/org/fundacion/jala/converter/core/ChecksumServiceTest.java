@@ -18,7 +18,7 @@ public class ChecksumServiceTest {
     public TemporaryFolder folder = new TemporaryFolder();
     
     @Test
-    public void getFileChecksumShouldReturnFileChecksum() throws IOException, ChecksumException {
+    public void shouldReturnFileChecksum() throws IOException, ChecksumException {
         File tempFile = folder.newFile("myFile.txt");
         String actual = getFileChecksum(tempFile.getPath());
         String expected = "d41d8cd98f00b204e9800998ecf8427e";
@@ -26,46 +26,46 @@ public class ChecksumServiceTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void getFileChecksumShouldThrowChecksumExceptionWithNullInput() throws ChecksumException {
+    public void shouldThrowChecksumExceptionWithNullInput() throws ChecksumException {
         String actual = getFileChecksum(null);
     }
 
     @Test(expected = ChecksumException.class)
-    public void getFileChecksumShouldThrowChecksumExceptionWithEmptyFilePath() throws ChecksumException {
+    public void shouldThrowChecksumExceptionWithEmptyFilePath() throws ChecksumException {
         String actual = getFileChecksum("");
     }
 
     @Test(expected = ChecksumException.class)
-    public void getFileChecksumShouldThrowChecksumExceptionWithInvalidFilePath() throws ChecksumException {
+    public void shouldThrowChecksumExceptionWithInvalidFilePath() throws ChecksumException {
         String actual = getFileChecksum("invalid file path");
     }
 
     @Test
-    public void repeatedChecksumShouldReturnTrueWithCorrectChecksum() throws IOException, ChecksumException {
+    public void shouldReturnTrueWithCorrectChecksum() throws IOException, ChecksumException {
         File tempFile = folder.newFile("myFile.txt");
         Boolean actual = repeatedChecksum(tempFile.getPath(), "d41d8cd98f00b204e9800998ecf8427e");
         assertTrue(actual);
     }
 
     @Test
-    public void repeatedChecksumShouldReturnFalseWithIncorrectChecksum() throws IOException, ChecksumException {
+    public void shouldReturnFalseWithIncorrectChecksum() throws IOException, ChecksumException {
         File tempFile = folder.newFile("myFile.txt");
         Boolean actual = repeatedChecksum(tempFile.getPath(), "fail");
         assertFalse(actual);
     }
 
     @Test(expected = NullPointerException.class)
-    public void repeatedChecksumShouldReturnChecksumExceptionWithNullFilepath() throws IOException, ChecksumException {
+    public void shouldReturnChecksumExceptionWithNullFilepath() throws ChecksumException {
         Boolean actual = repeatedChecksum(null, "d41d8cd98f00b204e9800998ecf8427e");
     }
 
     @Test(expected = ChecksumException.class)
-    public void repeatedChecksumShouldReturnChecksumExceptionWithEmptyFilepath() throws IOException, ChecksumException {
+    public void shouldReturnChecksumExceptionWithEmptyFilepath() throws ChecksumException {
         Boolean actual = repeatedChecksum("", "d41d8cd98f00b204e9800998ecf8427e");
     }
 
     @Test(expected = ChecksumException.class)
-    public void repeatedChecksumShouldReturnChecksumExceptionWithInvalidFilepath() throws IOException, ChecksumException {
+    public void shouldReturnChecksumExceptionWithInvalidFilepath() throws ChecksumException {
         Boolean actual = repeatedChecksum("invalid file path", "d41d8cd98f00b204e9800998ecf8427e");
     }
 }

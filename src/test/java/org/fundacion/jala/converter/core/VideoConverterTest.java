@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 public class VideoConverterTest {
 
     @Test
-    public void convertVideoShouldCreateConvertedFile() throws ConverterException {
+    public void shouldCreateConvertedFile() throws ConverterException {
         String filePath = System.getProperty("user.dir")
                 + "/src/test/resources/archive";
         String videoPath = filePath + "/Perrito.mp4";
@@ -25,7 +25,7 @@ public class VideoConverterTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void convertVideoShouldThrowConverterExceptionWithNullParameter() throws ConverterException {
+    public void shouldThrowConverterExceptionWithNullParameter() throws ConverterException {
         VideoConverter videoConverter = new VideoConverter(null);
         videoConverter.convertVideo();
     }

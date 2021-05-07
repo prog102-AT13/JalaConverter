@@ -8,7 +8,7 @@ import static org.junit.Assert.assertFalse;
 public class VideoParameterTest {
 
     @Test
-    public void setOutputFormatShouldChangeOutputValue() {
+    public void shouldChangeOutputValue() {
         VideoParameter videoParameter = new VideoParameter("resources/archive/Perrito.mp4", "mpeg",
                 "720", true, 30, 1280, 720, false);
         videoParameter.setOutputFormat("avi");
@@ -18,7 +18,7 @@ public class VideoParameterTest {
     }
 
     @Test
-    public void setResolutionShouldChangeResolutionValue() {
+    public void shouldChangeResolutionValue() {
         VideoParameter videoParameter = new VideoParameter("resources/archive/Perrito.mp4", "mpeg",
                 "720", true, 30, 1280, 720, false);
         videoParameter.setResolution("1080");
@@ -28,7 +28,7 @@ public class VideoParameterTest {
     }
 
     @Test
-    public void setWidthShouldChangeWidthValue() {
+    public void shouldChangeWidthValue() {
         VideoParameter videoParameter = new VideoParameter("resources/archive/Perrito.mp4", "mpeg",
                 "720", true, 30, 1280, 720, false);
         videoParameter.setWidth(720);
@@ -38,7 +38,7 @@ public class VideoParameterTest {
     }
 
     @Test
-    public void setHeightShouldChangeHeightValue() {
+    public void shouldChangeHeightValue() {
         VideoParameter videoParameter = new VideoParameter("resources/archive/Perrito.mp4", "mpeg",
                 "720", true, 30, 1280, 720, false);
         videoParameter.setHeight(360);
@@ -48,7 +48,7 @@ public class VideoParameterTest {
     }
 
     @Test
-    public void setFrameRateShouldChangeFrameRateValue() {
+    public void shouldChangeFrameRateValue() {
         VideoParameter videoParameter = new VideoParameter("resources/archive/Perrito.mp4", "mpeg",
                 "720", true, 30, 1280, 720, false);
         videoParameter.setFrameRate(60);
@@ -58,7 +58,7 @@ public class VideoParameterTest {
     }
 
     @Test
-    public void getOutputFormatShouldReturnOutputFormat() {
+    public void shouldReturnOutputFormat() {
         VideoParameter videoParameter = new VideoParameter("resources/archive/Perrito.mp4", "mpeg",
                 "720", true, 30, 1280, 720, false);
         String actual = videoParameter.getOutputFormat();
@@ -67,7 +67,7 @@ public class VideoParameterTest {
     }
 
     @Test
-    public void getResolutionShouldReturnResolution() {
+    public void shouldReturnResolution() {
         VideoParameter videoParameter = new VideoParameter("resources/archive/Perrito.mp4", "mpeg",
                 "720", true, 30, 1280, 720, false);
         String actual = videoParameter.getResolution();
@@ -76,7 +76,7 @@ public class VideoParameterTest {
     }
 
     @Test
-    public void getWidthShouldReturnWidth() {
+    public void shouldReturnWidth() {
         VideoParameter videoParameter = new VideoParameter("resources/archive/Perrito.mp4", "mpeg",
                 "720", true, 30, 1280, 720, false);
         int actual = videoParameter.getWidth();
@@ -85,7 +85,7 @@ public class VideoParameterTest {
     }
 
     @Test
-    public void getHeightShouldReturnHeight() {
+    public void shouldReturnHeight() {
         VideoParameter videoParameter = new VideoParameter("resources/archive/Perrito.mp4", "mpeg",
                 "720", true, 30, 1280, 720, false);
         int actual = videoParameter.getHeight();
@@ -94,7 +94,7 @@ public class VideoParameterTest {
     }
 
     @Test
-    public void hasAudioShouldReturnAudio() {
+    public void shouldReturnAudio() {
         VideoParameter videoParameter = new VideoParameter("resources/archive/Perrito.mp4", "mpeg",
                 "720", true, 30, 1280, 720, false);
         boolean actual = videoParameter.hasAudio();
@@ -102,7 +102,7 @@ public class VideoParameterTest {
     }
 
     @Test
-    public void getFrameRateShouldReturnFrameRate() {
+    public void shouldReturnFrameRate() {
         VideoParameter videoParameter = new VideoParameter("resources/archive/Perrito.mp4", "mpeg",
                 "720", true, 30, 1280, 720, false);
         int actual = videoParameter.getFrameRate();
@@ -111,7 +111,7 @@ public class VideoParameterTest {
     }
 
     @Test
-    public void hasThumbnailShouldReturnThumbnail() {
+    public void shouldReturnThumbnail() {
         VideoParameter videoParameter = new VideoParameter("resources/archive/Perrito.mp4", "mpeg",
                 "720", true, 30, 1280, 720, false);
         boolean actual = videoParameter.hasThumbnail();
