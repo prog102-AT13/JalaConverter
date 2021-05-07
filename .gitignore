@@ -2,6 +2,7 @@ HELP.md
 .gradle
 build/
 archive/
+!archive/audioTest.mp3
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
@@ -50,4 +51,3 @@ bin/
 *.class
 logs/
 *.log
-.env.develop
