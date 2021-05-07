@@ -1,5 +1,6 @@
 package org.fundacion.jala.converter.core.facade;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
 import static org.junit.Assert.assertEquals;
@@ -7,8 +8,8 @@ import static org.junit.Assert.assertEquals;
 public class ParameterOutputChecksumTest {
     private static ParameterOutputChecksum parameterOutputChecksum;
 
-    @BeforeAll
-    public static void setParameterOutputChecksum() {
+    @Before
+    public void setParameterOutputChecksum() {
         parameterOutputChecksum = new ParameterOutputChecksum("83a59b9445c3b9c58e2ca8611ad8fec9",
                 "G:\\jalaConverter", 0, "aguinaldo.mp4");
     }
