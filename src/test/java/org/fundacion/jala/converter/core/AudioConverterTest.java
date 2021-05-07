@@ -49,21 +49,11 @@ public class AudioConverterTest {
     }
 
     @Test
-    public void convertAudioTest() {
+    public void ItShouldCreateTheConvertedFile() {
         AudioParameter audioParameter = new AudioParameter(rutePath() + "audioTest.mp3", "avi", "164", "44", "2", "mono");
         AudioConverter audioConverter = new AudioConverter(audioParameter);
         audioConverter.audioConverter();
         File file = new File(rutePath() + "audioTest.avi");
         assertTrue(file.exists());
     }
-//    @Test
-//    public void convertAudioTest() {
-//        RunCommand runCommand = new RunCommand();
-//        AudioConverter audioConverter = mock(AudioConverter.class);
-//        //Person person = ObjectCreator.getPerson();
-//        String command = "command";
-//        doNothing().when(runCommand).run(command);
-//        audioConverter.audioConverter();
-//        verify(runCommand,times(1)).run(command);
-//    }
 }
