@@ -11,7 +11,7 @@
 package org.fundacion.jala.converter.core.facade;
 
 import org.fundacion.jala.converter.core.RunCommand;
-import java.io.IOException;
+import org.fundacion.jala.converter.core.exceptions.ZipException;
 import java.util.ArrayList;
 import static org.fundacion.jala.converter.models.AssetSQL.insertAssetData;
 import static org.fundacion.jala.converter.core.ZipService.zipFile;
@@ -31,11 +31,10 @@ public class ZipFileFacade {
      * @param parameterOutputChecksum is a object of Parameter Checksum.
      * @param metadata is a parameter if add metadata of video into zip.
      * @param outputFilename is the path's name of file to compress.
-     * @throws IOException when invalid path is given in zipFiles.
-     * @throws InterruptedException is exception if process is interrupted.
+     * @throws ZipException if process is interrupted.
      */
     public static void getZipFileAudio(final ParameterOutputChecksum parameterOutputChecksum, final boolean metadata,
-                                       final String outputFilename) throws IOException, InterruptedException {
+                                       final String outputFilename) throws ZipException {
         builtZipFile(parameterOutputChecksum, metadata, outputFilename, false);
     }
 
@@ -46,13 +45,25 @@ public class ZipFileFacade {
      * @param metadata is a parameter if add metadata of video into zip.
      * @param outputFilename is the path's name of file to compress.
      * @param thumbnail is a parameter if add thumbnail of video into zip.
-     * @throws IOException when invalid path is given in zipFiles.
-     * @throws InterruptedException is exception if process is interrupted.
+     * @throws ZipException if process is interrupted.
      */
     public static void getZipFileVideo(final ParameterOutputChecksum parameterOutputChecksum, final boolean metadata,
-                                       final boolean thumbnail, final String outputFilename)
-            throws IOException, InterruptedException {
+                                       final boolean thumbnail, final String outputFilename) throws ZipException {
         builtZipFile(parameterOutputChecksum, metadata, outputFilename, thumbnail);
+    }
+
+    /**
+     * Compresses files of Image.
+     *
+     * @param parameterOutputChecksum is a object of Parameter Checksum.
+     * @param metadata is a parameter if add metadata of image into zip.
+     * @param outputFilename is the path's name of file to compress.
+     * @throws ZipException when invalid path is given in zipFiles.
+     */
+    public static void getZipFileImage(final ParameterOutputChecksum parameterOutputChecksum, final boolean metadata,
+                                       final String outputFilename)
+            throws ZipException {
+        builtZipFile(parameterOutputChecksum, metadata, outputFilename, false);
     }
 
     /**
@@ -62,12 +73,10 @@ public class ZipFileFacade {
      * @param metadata is a parameter if add metadata of video into zip.
      * @param outputFilename is the path's name of file to compress.
      * @param thumbnail if add thumbnail of video into zip.
-     * @throws IOException when invalid path is given in zipFiles.
-     * @throws InterruptedException is exception if process is interrupted.
+     * @throws ZipException if process is interrupted.
      */
     private static void builtZipFile(final ParameterOutputChecksum parameterOutputChecksum, final boolean metadata,
-                                     final String outputFilename, final boolean thumbnail)
-            throws IOException, InterruptedException {
+                                     final String outputFilename, final boolean thumbnail) throws ZipException {
         final int USER_ID = 1;
         String checksumLocal = parameterOutputChecksum.getChecksumLocal();
         String storagePath = parameterOutputChecksum.getOutputFilename();
@@ -89,35 +98,38 @@ public class ZipFileFacade {
      * @param pathFile is path where zip are downloaded
      * @param outputFilename path of file to compress.
      * @param nameWithoutExtension name's zip.
-     * @throws IOException when invalid path is given in zipFiles.
-     * @throws InterruptedException is exception if process is interrupted.
+     * @throws ZipException if process is interrupted.
      */
     private static void createZip(final boolean metadata, final boolean thumbnail, final String pathFile,
                                   final String outputFilename, final String nameWithoutExtension)
-            throws InterruptedException, IOException {
-        final int WAIT_TIME = 1000;
-        if (!metadata && !thumbnail) {
+                                  throws ZipException {
+        try {
+            final int WAIT_TIME = 1000;
+            if (!metadata && !thumbnail) {
+                Thread.sleep(WAIT_TIME);
+                zipFile(pathFile + outputFilename, pathFile + nameWithoutExtension + "zip");
+                return;
+            }
+            ArrayList<String> zipList = new ArrayList<>();
+            zipList.add(pathFile + outputFilename);
+            if (metadata) {
+                zipList.add(pathFile + nameWithoutExtension + "txt");
+            }
+            if (thumbnail) {
+                zipList.add(pathFile + nameWithoutExtension + "png");
+            }
             Thread.sleep(WAIT_TIME);
-            zipFile(pathFile + outputFilename, pathFile + nameWithoutExtension + "zip");
-            return;
-        }
-        ArrayList<String> zipList = new ArrayList<>();
-        zipList.add(pathFile + outputFilename);
-        if (metadata) {
-            zipList.add(pathFile + nameWithoutExtension + "txt");
-        }
-        if (thumbnail) {
-            zipList.add(pathFile + nameWithoutExtension + "png");
-        }
-        Thread.sleep(WAIT_TIME);
-        zipFiles(zipList, pathFile + nameWithoutExtension + "zip");
-        Thread.sleep(WAIT_TIME);
-        boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
-        RunCommand runCommand = new RunCommand();
-        if (isWindows) {
-            zipList.stream().forEach(value -> runCommand.run("del \"" + value + "\""));
-        } else {
-            zipList.stream().forEach(value -> runCommand.run("rm \"" + value + "\""));
+            zipFiles(zipList, pathFile + nameWithoutExtension + "zip");
+            Thread.sleep(WAIT_TIME);
+            boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
+            RunCommand runCommand = new RunCommand();
+            if (isWindows) {
+                zipList.stream().forEach(value -> runCommand.run("del \"" + value + "\""));
+            } else {
+                zipList.stream().forEach(value -> runCommand.run("rm \"" + value + "\""));
+            }
+        } catch (InterruptedException exception) {
+            throw new ZipException(exception);
         }
     }
 }

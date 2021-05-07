@@ -44,6 +44,9 @@ public class ExtractMetadata {
     }
 
     public ExtractMetadata(final File fileExtract, final File fileExport) throws MetadataException {
+        if (fileExport == null || fileExtract == null) {
+            throw new MetadataException();
+        }
         this.fileToExtract = fileExtract;
         filename = fileToExtract.getName();
         setMoreInformation();

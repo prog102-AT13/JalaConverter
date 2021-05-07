@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
-import java.io.IOException;
 
 /**
  * This class calls endpoint to extract metadata.
@@ -41,8 +40,6 @@ public class ExtractMetadataController {
      * @param nameExport is a name of file to export.
      * @param format is the format to file.
      * @return a string of path to download files.
-     * @throws IllegalStateException is a exception if process is Illegal.
-     * @throws IOException is a exception when invalid input is provided.
      */
     @PostMapping("/extractMetadata")
     @ApiOperation(value = "Extracts a file's metadata", notes = "Provide the file to extract its metadata",
@@ -50,13 +47,13 @@ public class ExtractMetadataController {
     public String uploadFile(final @RequestPart("fileToExtract") MultipartFile fileToExtract,
                              final @RequestParam("moreInfo") Boolean isMoreInfo,
                              final @RequestParam("nameExport") String nameExport,
-                             final @RequestParam("format") String format) throws IllegalStateException, IOException {
+                             final @RequestParam("format") String format) {
         LOGGER.info("start");
         String filename = null;
         try {
             filename = ExtractFacade.getMetadataExtract(fileToExtract, isMoreInfo, nameExport, format);
         } catch (PaoPaoException exception) {
-            exception.printStackTrace();
+            return exception.getMessage();
         }
         LOGGER.info("finish");
         return DownloadLinkFacade.getLinkMetadata(filename, format);

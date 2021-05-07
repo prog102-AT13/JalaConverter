@@ -12,15 +12,14 @@ package org.fundacion.jala.converter.view.converter;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fundacion.jala.converter.core.exceptions.ChecksumException;
 import org.fundacion.jala.converter.view.Models.VideoRequestForm;
 import org.fundacion.jala.converter.view.controllers.ClientRequest;
 import org.fundacion.jala.converter.view.utilities.BtnStyle;
 import org.fundacion.jala.converter.view.utilities.JLabelStyle;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import org.fundacion.jala.converter.view.utilities.SelectFile;
-import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -31,7 +30,6 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 import static org.fundacion.jala.converter.ConverterApplication.dotenv;
 import static org.fundacion.jala.converter.core.ChecksumService.getFileChecksum;
 import static org.fundacion.jala.converter.view.utilities.CheckFile.checkFileSelect;
@@ -50,8 +48,8 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
     private OutputSettings settings;
     private ClientRequest clientRequest = new ClientRequest();
     private static final Logger LOGGER = LogManager.getLogger();
-    private final int fontStyle = 0;
-    private final int fontSize = 12;
+    private final int FONT_STYLE = 0;
+    private final int FONT_SIZE = 12;
     private String token;
     private String checksumLocal;
     private JLabel label;
@@ -66,7 +64,7 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
         menuConverterType = new ConverterTypeSelect();
         menuConverterType.setAlignmentX(LEFT_ALIGNMENT);
         BtnStyle converterVideoButton = new BtnStyle("Convert", CONVERT_TYPE_BTN);
-        converterVideoButton.setFont(new Font("Barlow", fontStyle, fontSize));
+        converterVideoButton.setFont(new Font("Barlow", FONT_STYLE, FONT_SIZE));
         converterVideoButton.addActionListener(this::actionPerformed);
         settings = new OutputSettings();
         settings.setAlignmentX(LEFT_ALIGNMENT);
@@ -125,6 +123,10 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
                     noSuchAlgorithmException.printStackTrace();
                     LOGGER.error("Execute Exception");
                 }
+                LOGGER.info("finish");
+            } catch (ChecksumException ioException) {
+                ioException.printStackTrace();
+                LOGGER.error("Execute Exception");
             }
         }
         LOGGER.info("Finish");
@@ -133,9 +135,9 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
     /**
      * Obtains the request.
      *
-     * @throws IOException when problems on inputs and outputs.
+     * @throws ChecksumException if process is interrupted.
      */
-    private void callRequest() throws IOException {
+    private void callRequest() throws ChecksumException {
         LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");
@@ -159,8 +161,8 @@ public class VideoConverterInterface extends JPanel implements ActionListener {
             System.out.println(result);
             LOGGER.info("finish");
         } catch (IOException ioException) {
-            ioException.printStackTrace();
             LOGGER.error("Execute Exception");
+            throw new ChecksumException(ioException);
         }
         LOGGER.info("Finish");
     }
