@@ -16,6 +16,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.core.exceptions.PaoPaoException;
 import org.fundacion.jala.converter.core.facade.CompilerFacade;
+import org.fundacion.jala.converter.core.facade.strategy.compiles.JavaCompilerStrategy;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,7 +41,7 @@ public class JavaCompilerController {
             authorizations = {@Authorization(value = "JWT")})
     public String compileJava(final @RequestParam("code") String code) {
         try {
-            return CompilerFacade.facadeJavaCompile(code);
+            return CompilerFacade.callCompiler(new JavaCompilerStrategy(code));
         } catch (PaoPaoException exception) {
             return exception.getMessage();
         }

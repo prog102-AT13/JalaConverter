@@ -12,6 +12,7 @@ package org.fundacion.jala.converter.core.facade;
 
 import org.fundacion.jala.converter.controller.Transform;
 import org.fundacion.jala.converter.core.exceptions.CompilerException;
+import org.fundacion.jala.converter.core.facade.strategy.compiles.ICompiles;
 import org.fundacion.jala.converter.core.parameter.*;
 import org.fundacion.jala.converter.core.javacompiler.JavaCompiler;
 import org.fundacion.jala.converter.core.PythonCompiler;
@@ -28,6 +29,10 @@ public class CompilerFacade {
     private static NodeJsCompiler nodeJsCompiler;
 
     public CompilerFacade() {
+    }
+
+    public static String callCompiler(ICompiles iCompiles) throws CompilerException {
+        return iCompiles.compiler();
     }
 
     /**
