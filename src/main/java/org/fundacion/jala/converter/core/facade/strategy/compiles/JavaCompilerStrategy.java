@@ -6,7 +6,7 @@ import org.fundacion.jala.converter.core.javacompiler.JavaCompiler;
 import org.fundacion.jala.converter.core.javacompiler.JavaVersion;
 import org.fundacion.jala.converter.core.parameter.JavaParameter;
 
-public class JavaCompilerStrategy implements ICompiles{
+public class JavaCompilerStrategy implements ICompilesStrategy {
     private JavaCompiler javaCompiler;
     private String code;
     public JavaCompilerStrategy(String code){

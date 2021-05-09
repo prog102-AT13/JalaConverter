@@ -6,7 +6,7 @@ import org.fundacion.jala.converter.core.exceptions.CompilerException;
 import org.fundacion.jala.converter.core.parameter.PythonEnum;
 import org.fundacion.jala.converter.core.parameter.PythonParameter;
 
-public class PythonCompileStrategy implements ICompiles{
+public class PythonCompileStrategy implements ICompilesStrategy {
     private PythonCompiler pythonCompiler;
     private String code;
 

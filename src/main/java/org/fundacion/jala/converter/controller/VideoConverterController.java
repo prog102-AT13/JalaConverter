@@ -21,6 +21,7 @@ import org.fundacion.jala.converter.core.facade.ParameterOutputChecksum;
 import org.fundacion.jala.converter.core.facade.DownloadLinkFacade;
 import org.fundacion.jala.converter.core.facade.ZipFileFacade;
 import org.fundacion.jala.converter.core.FileStorageService;
+import org.fundacion.jala.converter.core.facade.strategy.converters.VideoConverterStrategy;
 import org.fundacion.jala.converter.core.parameter.VideoParameter;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -70,9 +71,9 @@ public class VideoConverterController {
         try {
             parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
             String outputFilename = null;
-            outputFilename = ConverterFacade.getVideoConverter(
+            outputFilename = ConverterFacade.callConverter(new VideoConverterStrategy(
                     new VideoParameter(parameterOutputChecksum.getOutputFilename(), outputFormat, resolution, thumbnail,
-                            frameRate, width, height, audio));
+                            frameRate, width, height, audio)));
             extractMetadata(metadata, outputFilename, fileStorageService);
             ZipFileFacade.getZipFileVideo(parameterOutputChecksum, metadata, thumbnail, outputFilename);
             LOGGER.info("finish");

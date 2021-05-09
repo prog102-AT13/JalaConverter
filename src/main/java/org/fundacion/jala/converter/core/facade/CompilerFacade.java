@@ -12,7 +12,7 @@ package org.fundacion.jala.converter.core.facade;
 
 import org.fundacion.jala.converter.controller.Transform;
 import org.fundacion.jala.converter.core.exceptions.CompilerException;
-import org.fundacion.jala.converter.core.facade.strategy.compiles.ICompiles;
+import org.fundacion.jala.converter.core.facade.strategy.compiles.ICompilesStrategy;
 import org.fundacion.jala.converter.core.parameter.*;
 import org.fundacion.jala.converter.core.javacompiler.JavaCompiler;
 import org.fundacion.jala.converter.core.PythonCompiler;
@@ -31,8 +31,8 @@ public class CompilerFacade {
     public CompilerFacade() {
     }
 
-    public static String callCompiler(ICompiles iCompiles) throws CompilerException {
-        return iCompiles.compiler();
+    public static String callCompiler(ICompilesStrategy iCompilesStrategy) throws CompilerException {
+        return iCompilesStrategy.compiler();
     }
 
     /**

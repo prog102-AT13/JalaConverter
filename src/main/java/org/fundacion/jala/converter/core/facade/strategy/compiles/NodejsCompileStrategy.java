@@ -5,7 +5,7 @@ import org.fundacion.jala.converter.core.NodeJsCompiler;
 import org.fundacion.jala.converter.core.exceptions.CompilerException;
 import org.fundacion.jala.converter.core.parameter.NodeJsParameter;
 
-public class NodejsCompileStrategy implements ICompiles{
+public class NodejsCompileStrategy implements ICompilesStrategy {
     private static NodeJsCompiler nodeJsCompiler;
 private String code;
 

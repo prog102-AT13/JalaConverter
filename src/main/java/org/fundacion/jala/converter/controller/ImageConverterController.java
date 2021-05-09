@@ -23,6 +23,7 @@ import org.fundacion.jala.converter.core.facade.ParameterOutputChecksum;
 import org.fundacion.jala.converter.core.facade.DownloadLinkFacade;
 import org.fundacion.jala.converter.core.facade.ZipFileFacade;
 import org.fundacion.jala.converter.core.FileStorageService;
+import org.fundacion.jala.converter.core.facade.strategy.converters.ImageConverterStrategy;
 import org.fundacion.jala.converter.core.parameter.ImageParameter;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,8 +65,8 @@ public class ImageConverterController {
         LOGGER.info("start");
         parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
         String outputFilename = null;
-            outputFilename = ConverterFacade.getImageConverter(
-                    new ImageParameter(parameterOutputChecksum.getOutputFilename(), outputFormat, width, grayScale));
+            outputFilename = ConverterFacade.callConverter(new ImageConverterStrategy(
+                    new ImageParameter(parameterOutputChecksum.getOutputFilename(), outputFormat, width, grayScale)));
             ZipFileFacade.getZipFileImage(parameterOutputChecksum, false, outputFilename);
             LOGGER.info("finish");
             return DownloadLinkFacade.getLinkConverter(outputFilename);

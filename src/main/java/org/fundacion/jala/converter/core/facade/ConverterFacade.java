@@ -11,6 +11,7 @@
 package org.fundacion.jala.converter.core.facade;
 
 import org.fundacion.jala.converter.core.exceptions.ConverterException;
+import org.fundacion.jala.converter.core.facade.strategy.converters.IConverterStrategy;
 import org.fundacion.jala.converter.core.parameter.AudioParameter;
 import org.fundacion.jala.converter.core.parameter.VideoParameter;
 import org.fundacion.jala.converter.core.parameter.ImageParameter;
@@ -25,6 +26,10 @@ import java.io.IOException;
 public class ConverterFacade {
 
     private ConverterFacade() {
+    }
+
+    public static String callConverter(IConverterStrategy iConverterStrategy) throws ConverterException {
+        return iConverterStrategy.converter();
     }
 
     /**

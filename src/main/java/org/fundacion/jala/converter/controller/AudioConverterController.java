@@ -20,6 +20,7 @@ import org.fundacion.jala.converter.core.facade.ConverterFacade;
 import org.fundacion.jala.converter.core.facade.ParameterOutputChecksum;
 import org.fundacion.jala.converter.core.facade.ZipFileFacade;
 import org.fundacion.jala.converter.core.facade.DownloadLinkFacade;
+import org.fundacion.jala.converter.core.facade.strategy.converters.AudioConverterStrategy;
 import org.fundacion.jala.converter.core.parameter.AudioParameter;
 import org.fundacion.jala.converter.core.FileStorageService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,9 +65,9 @@ public class AudioConverterController {
         LOGGER.info("start");
         try {
             parameterOutputChecksum = ChecksumFacade.getChecksum(checksum, file);
-            String outputFilename = ConverterFacade.getAudioConverter(
+            String outputFilename = ConverterFacade.callConverter(new AudioConverterStrategy(
                     new AudioParameter(parameterOutputChecksum.getOutputFilename(), format, bitrate, hz, volume,
-                            audioChannel));
+                            audioChannel)));
             extractMetadata(metadata, outputFilename, fileStorageService);
             ZipFileFacade.getZipFileAudio(parameterOutputChecksum, metadata, outputFilename);
             LOGGER.info("finish");
