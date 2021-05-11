@@ -24,7 +24,8 @@ import java.io.InputStreamReader;
 public class NodeJsCompiler {
     private NodeJsParameter nodeJsParameter;
     private BufferedReader bufferedReader;
-    private String nodeExe = "\"" + "thirdparty\\windows\\nodebin\\node-v16.0.0-win-x64\\node.exe" + "\"";
+//    private String nodeExe = "\"" + "thirdparty\\windows\\nodebin\\node-v16.0.0-win-x64\\node.exe" + "\"";
+private String nodeExe = "thirdparty/linux/node-v14.16.1-linux-x64/bin/./node ";
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**
@@ -38,14 +39,30 @@ public class NodeJsCompiler {
         try {
             nodeJsParameter = newNodeJsParameter;
             String nodeFilePath = "\"" + nodeJsParameter.getFilePath() + "\"";
-            ProcessBuilder processBuilder = new ProcessBuilder(nodeExe, nodeFilePath);
-            Process process = processBuilder.start();
+            System.out.println("-/*************************************************");
+            System.out.println("-/*************************************************");
+            System.out.println("-/*************************************************");
+            System.out.println("-/*************************************************");
+            System.out.println("-/*************************************************");
+            System.out.println(nodeFilePath);
+            System.out.println(nodeExe + nodeFilePath);
+//            ProcessBuilder processBuilder = new ProcessBuilder(nodeExe, nodeFilePath);
+//            Process process = processBuilder.start();
+            String command = nodeExe + nodeJsParameter.getFilePath();
+            Process process = Runtime.getRuntime().exec(command);
             bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String resultOfExecution = null;
             String result = "";
             while ((resultOfExecution = bufferedReader.readLine()) != null) {
                 result += resultOfExecution + "\n";
             }
+            System.out.println("-/*************************************************");
+            System.out.println("-/*************************************************");
+            System.out.println("-/*************************************************");
+            System.out.println("-/*************************************************");
+            System.out.println("-/*************************************************");
+            System.out.println(nodeFilePath);
+            System.out.println(nodeFilePath + nodeJsParameter.getFilePath());
             return result;
         } catch (IOException exception) {
             LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
