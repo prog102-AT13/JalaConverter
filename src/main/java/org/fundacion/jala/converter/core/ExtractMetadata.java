@@ -65,7 +65,7 @@ public class ExtractMetadata {
         LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");
-            String command = "cmd /c " + addressExiftool + " && exiftool.exe " + "\""
+            String command = "exiftool" + "\""
                              + fileToExtract.getAbsolutePath() + "\"" + moreInformation + exportFile;
             Process process = Runtime.getRuntime().exec(command);
             result = new Result();
