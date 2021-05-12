@@ -47,10 +47,10 @@ public class ProjectController {
     @PostMapping("/projects")
     public int createProject(final @RequestParam("projectName") String projectName,
                              final @RequestParam("userId") int userId) {
-        String command = "mkdir " + System.getProperty("user.dir") + "\\" + projectName;
+        String command = "mkdir " + System.getProperty("user.dir") + System.getProperty("file.separator") + projectName;
         RunCommand runCommand = new RunCommand();
         runCommand.run(command);
-        String pathProject = (System.getProperty("user.dir") + "\\" + projectName);
+        String pathProject = (System.getProperty("user.dir") + System.getProperty("file.separator") + projectName);
         Project project = ProjectSQL.insertProjectData(projectName, pathProject, userId);
         return project.getId();
     }

@@ -62,11 +62,16 @@ public class Transform {
         LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");
-            String path = pathProject + "\\" + fileName + "." + extension;
+            String path = pathProject + System.getProperty("file.separator") + fileName + "." + extension;
             File file = new File(path);
             if (!file.exists()) {
                 file.createNewFile();
             }
+            System.out.println("********************************");
+            System.out.println("********************************");
+            System.out.println("********************************");
+            System.out.println("********************************");
+            System.out.println(path);
             FileWriter fileWriter = new FileWriter(file);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(code);
