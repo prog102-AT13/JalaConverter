@@ -61,3 +61,12 @@ jacocoTestReport {
 check.dependsOn jacocoTestReport
 
 test.finalizedBy("jacocoTestReport")
+
+jar {
+	manifest {
+		attributes "Main-Class": "org.fundacion.jala.converter.ConverterApplication"
+	}
+	from {
+		configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+	}
+}
