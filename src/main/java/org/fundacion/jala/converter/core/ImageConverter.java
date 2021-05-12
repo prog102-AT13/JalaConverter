@@ -30,6 +30,7 @@ public class ImageConverter {
     private final int HIGH_LIMIT = 1000;
     private static final Logger LOGGER = LogManager.getLogger();
     private Result result;
+    private Process process;
 
     public ImageConverter(final ImageParameter imageParameter) {
         this.parameter = imageParameter;
@@ -49,8 +50,13 @@ public class ImageConverter {
         String ffmpegCommand = startFirstCommand + adaptPath + " ";
         String parameters = changeSize() + grayScale() + "\" ";
         String theCommand = ffmpegCommand + parameters + pathOutput + output  + "\" -y";
+        boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
         try {
-        Process process = Runtime.getRuntime().exec("cmd /c " + theCommand);
+            if (isWindows) {
+                process = Runtime.getRuntime().exec("cmd /c " + theCommand);
+            } else {
+                process = Runtime.getRuntime().exec("bash -c " + theCommand);
+            }
         System.out.println(theCommand);
         ThreadHandler errorHandler = new ThreadHandler(process.getErrorStream(), "Error Stream");
         errorHandler.start();

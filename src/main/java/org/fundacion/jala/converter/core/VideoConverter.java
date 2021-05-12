@@ -31,6 +31,7 @@ public class VideoConverter {
     private static final Logger LOGGER = LogManager.getLogger();
     private Result result;
     private final String PNG_FORMAT = ".png";
+    private Process process;
 
     public VideoConverter(final VideoParameter videoParameter) {
         this.parameter = videoParameter;
@@ -50,10 +51,15 @@ public class VideoConverter {
         String ffmpegCommand = startFirstCommand + adaptPath + " ";
         String parameters = changeResolution() + changeFrameRate() + removeAudio();
         String theCommand = ffmpegCommand + parameters + pathOutput + output  + "\" -y";
+        boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
         LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");
-            Process process = Runtime.getRuntime().exec("cmd /c " + theCommand);
+            if (isWindows) {
+                process = Runtime.getRuntime().exec("cmd /c " + theCommand);
+            } else {
+                process = Runtime.getRuntime().exec("bash -c " + theCommand);
+            }
             System.out.println(theCommand);
             ThreadHandler errorHandler = new ThreadHandler(process.getErrorStream(), "Error Stream");
             errorHandler.start();
