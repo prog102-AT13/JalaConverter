@@ -88,9 +88,9 @@ public class JavaCompiler {
      */
     public String javaProjectCompiler(final JavaParameter newJavaParameter) {
         LOGGER.info("start");
-        final String JAVA_COMPILER = System.getProperty("user.dir") + "\\" + newJavaParameter.
-                getJavaVersion().getCompiler();
-        final String JAVA_EXE = System.getProperty("user.dir") + "\\" + newJavaParameter
+        final String JAVA_COMPILER = System.getProperty("user.dir") + System.getProperty("file.separator")
+                + newJavaParameter.getJavaVersion().getCompiler();
+        final String JAVA_EXE = System.getProperty("user.dir") + System.getProperty("file.separator") + newJavaParameter
                 .getJavaVersion().getExecutor();
         try {
             javaParameter = newJavaParameter;
