@@ -9,14 +9,12 @@
  * @author Daniela Santa Cruz Andrade
  */
 package org.fundacion.jala.converter.core;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.core.exceptions.ConverterException;
 import org.fundacion.jala.converter.core.parameter.VideoParameter;
 import org.fundacion.jala.converter.core.results.Result;
 import java.io.IOException;
-
 /**
  * This class converts a video to an specified format.
  */
@@ -31,12 +29,9 @@ public class VideoConverter {
     private static final Logger LOGGER = LogManager.getLogger();
     private Result result;
     private final String PNG_FORMAT = ".png";
-    private Process process;
-
     public VideoConverter(final VideoParameter videoParameter) {
         this.parameter = videoParameter;
     }
-
     /**
      * Converts the input video.
      *
@@ -51,15 +46,10 @@ public class VideoConverter {
         String ffmpegCommand = startFirstCommand + adaptPath + " ";
         String parameters = changeResolution() + changeFrameRate() + removeAudio();
         String theCommand = ffmpegCommand + parameters + pathOutput + output  + "\" -y";
-        boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
         LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");
-            if (isWindows) {
-                process = Runtime.getRuntime().exec("cmd /c " + theCommand);
-            } else {
-                process = Runtime.getRuntime().exec("bash -c " + theCommand);
-            }
+            Process process = Runtime.getRuntime().exec("cmd /c " + theCommand);
             System.out.println(theCommand);
             ThreadHandler errorHandler = new ThreadHandler(process.getErrorStream(), "Error Stream");
             errorHandler.start();
@@ -78,7 +68,6 @@ public class VideoConverter {
         result = new Result();
         result.setFilename(outputFileName);
     }
-
     /**
      * Changes the resolution and aspect ratio of the input video.
      *
@@ -98,7 +87,6 @@ public class VideoConverter {
         }
         return "";
     }
-
     /**
      * Generates a input video thumbnail.
      *
@@ -126,7 +114,6 @@ public class VideoConverter {
             throw new ConverterException(exception);
         }
     }
-
     /**
      * Removes the audio of the input video.
      *
@@ -141,7 +128,6 @@ public class VideoConverter {
         }
         return "";
     }
-
     /**
      * Changes the input video frame rate.
      *
@@ -156,7 +142,6 @@ public class VideoConverter {
         }
         return "";
     }
-
     /**
      * Sets the output file name.
      *
@@ -165,7 +150,6 @@ public class VideoConverter {
     public void setOutputFileName(final String newOutputFileName) {
         this.outputFileName = newOutputFileName;
     }
-
     /**
      * Gets the output file name.
      *
@@ -174,7 +158,6 @@ public class VideoConverter {
     public String getOutputFileName() {
         return outputFileName;
     }
-
     /**
      * Returns the object result for the operation.
      *
