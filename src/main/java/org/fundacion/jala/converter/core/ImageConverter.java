@@ -10,12 +10,9 @@
  */
 package org.fundacion.jala.converter.core;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.fundacion.jala.converter.core.exceptions.ConverterException;
 import org.fundacion.jala.converter.core.parameter.ImageParameter;
 import org.fundacion.jala.converter.core.results.Result;
-import java.io.IOException;
 
 /**
  * This class converts a image to an specified format.
@@ -28,9 +25,8 @@ public class ImageConverter {
     private String pathOutput;
     private String outputFileName;
     private final int HIGH_LIMIT = 1000;
-    private static final Logger LOGGER = LogManager.getLogger();
     private Result result;
-    private Process process;
+    private RunCommand runCommand = new RunCommand();
 
     public ImageConverter(final ImageParameter imageParameter) {
         this.parameter = imageParameter;
@@ -38,39 +34,17 @@ public class ImageConverter {
 
     /**
      * Converts the input image.
-     *
-     * @throws ConverterException if process is interrupted.
      */
-    public void convertImage() throws ConverterException {
+    public void convertImage() {
         String adaptPath = "\"" + parameter.getFilePath() + "\"";
         format = parameter.getOutputFormat();
-        output = adaptPath.substring((adaptPath.lastIndexOf("\\") + 1), adaptPath.lastIndexOf(".") + 1) + format;
+        output = adaptPath.substring((adaptPath.lastIndexOf(System.getProperty("file.separator")) + 1), adaptPath.lastIndexOf(".") + 1) + format;
         setOutputFileName(output);
-        pathOutput = adaptPath.substring(0, (adaptPath.lastIndexOf("archive"))) + "archive\\";
+        pathOutput = adaptPath.substring(0, (adaptPath.lastIndexOf("archive"))) + "archive" + System.getProperty("file.separator");
         String ffmpegCommand = startFirstCommand + adaptPath + " ";
         String parameters = changeSize() + grayScale() + "\" ";
         String theCommand = ffmpegCommand + parameters + pathOutput + output  + "\" -y";
-        boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
-        try {
-            if (isWindows) {
-                process = Runtime.getRuntime().exec("cmd /c " + theCommand);
-            } else {
-                process = Runtime.getRuntime().exec("bash -c " + theCommand);
-            }
-        System.out.println(theCommand);
-        ThreadHandler errorHandler = new ThreadHandler(process.getErrorStream(), "Error Stream");
-        errorHandler.start();
-        ThreadHandler threadHandler = new ThreadHandler(process.getInputStream(), "Output Stream");
-        threadHandler.start();
-        LOGGER.info("start");
-            LOGGER.info("Execute Try");
-            process.waitFor();
-            LOGGER.info("finish");
-            System.out.println("exit code: " + process.exitValue());
-        } catch (InterruptedException | IOException exception) {
-            LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
-            throw new ConverterException(exception);
-        }
+        runCommand.run(theCommand);
         result = new Result();
         result.setFilename(outputFileName);
     }

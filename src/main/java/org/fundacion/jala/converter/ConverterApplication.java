@@ -29,7 +29,7 @@ public class ConverterApplication {
         LOGGER.info("start");
         SpringApplication.run(ConverterApplication.class, args);
         System.setProperty("java.awt.headless", "false");
-        SwingUtilities.invokeLater(LoginInterface::new);
+//        SwingUtilities.invokeLater(LoginInterface::new);
         LOGGER.info("finish");
     }
 }
