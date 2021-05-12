@@ -42,8 +42,15 @@ public class PythonCompiler {
         try {
             this.pythonParameter = newPythonParameter;
             LOGGER.info("Execute Try");
-            String command = pythonParameter.getPythonEnum().getVersion() + " " + "\""
-                             + pythonParameter.getFilePath() + "\"";
+            boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
+            String command = "";
+            if (isWindows) {
+                command = pythonParameter.getPythonEnum().getVersion() + " " + "\""
+                        + pythonParameter.getFilePath() + "\"";
+            } else {
+                command = "python3 "
+                        + pythonParameter.getFilePath();
+            }
             Process process = Runtime.getRuntime().exec(command);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String resultOfExecution;

@@ -49,7 +49,7 @@ public class VideoConverter {
         pathOutput = adaptPath.substring(0, (adaptPath.lastIndexOf("archive"))) + "archive\\";
         String ffmpegCommand = startFirstCommand + adaptPath + " ";
         String parameters = changeResolution() + changeFrameRate() + removeAudio();
-        String theCommand = ffmpegCommand + parameters + pathOutput + output  + "\" -y";
+        String theCommand = ffmpegCommand + parameters + pathOutput + output + "\" -y";
         LOGGER.info("start");
         try {
             LOGGER.info("Execute Try");
