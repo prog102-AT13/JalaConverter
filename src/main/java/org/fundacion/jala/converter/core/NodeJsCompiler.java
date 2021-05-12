@@ -24,7 +24,7 @@ import java.io.InputStreamReader;
 public class NodeJsCompiler {
     private NodeJsParameter nodeJsParameter;
     private BufferedReader bufferedReader;
-    private String nodeExe = "\"" + "thirdparty\\windows\\nodebin\\node-v16.0.0-win-x64\\node.exe" + "\"";
+    private String nodeExe = "sudo node ";
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**
@@ -37,9 +37,8 @@ public class NodeJsCompiler {
     public String nodeCompiler(final NodeJsParameter newNodeJsParameter) throws CompilerException {
         try {
             nodeJsParameter = newNodeJsParameter;
-            String nodeFilePath = "\"" + nodeJsParameter.getFilePath() + "\"";
-            ProcessBuilder processBuilder = new ProcessBuilder(nodeExe, nodeFilePath);
-            Process process = processBuilder.start();
+            String command = nodeExe + nodeJsParameter.getFilePath();
+            Process process = Runtime.getRuntime().exec(command);
             bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String resultOfExecution = null;
             String result = "";
