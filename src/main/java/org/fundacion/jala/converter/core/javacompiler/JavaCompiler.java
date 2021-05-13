@@ -38,21 +38,41 @@ public class JavaCompiler {
      */
     public String javaCompiler(final JavaParameter newJavaParameter) throws CompilerException {
         LOGGER.info("start");
+        javaParameter = newJavaParameter;
+        LOGGER.info("Execute Try");
+        String commandCompile = "";
+        String commandExecute = "";
+        String osName = System.getProperty("os.name").toLowerCase();
+        if (osName.contains("windows")) {
+            commandCompile = javaParameter.getJavaVersion().getCompiler() + " "
+                    + javaParameter.getFilePath();
+            commandExecute = javaParameter.getJavaVersion().getExecutor() + " "
+                    + javaParameter.getFilePath();
+        } else {
+            commandCompile = "sudo " + javaParameter.getJavaVersion().getCompiler() + " "
+                    + javaParameter.getFilePath();
+            commandExecute ="sudo " + javaParameter.getJavaVersion().getExecutor() + " "
+                    + javaParameter.getFilePath();
+        }
+        System.out.println(commandCompile);
+        System.out.println(commandExecute);
         try {
-            javaParameter = newJavaParameter;
-            LOGGER.info("Execute Try");
-            String command = javaParameter.getJavaVersion().getCompiler() + " " + "\""
-                    + javaParameter.getFilePath() + ".java" + "\" " + "&& "
-                    + javaParameter.getJavaVersion().getExecutor() + " "
-                    + "\"" + javaParameter.getFilePath() + "\"";
-            ProcessBuilder processBuilder = null;
-            String osName = System.getProperty("os.name").toLowerCase();
-            if (osName.contains("windows")) {
-                processBuilder = new ProcessBuilder("cmd.exe", "/c", command);
-            } else {
-                processBuilder = new ProcessBuilder("bash", "-c", command);
+            Process process = Runtime.getRuntime().exec(commandCompile);;
+            bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        } catch (IOException exception) {
+            LOGGER.error("Execute Exception" + exception.getLocalizedMessage());
+            return String.valueOf(new CompilerException(exception));
+        } finally {
+            try {
+                LOGGER.info("Close bufferedReader Stream");
+                bufferedReader.close();
+            } catch (IOException exception) {
+                LOGGER.error("Close Stream error" + exception.getLocalizedMessage());
+                throw new CompilerException(exception);
             }
-            Process process = processBuilder.start();
+        }
+        try {
+            Process process = Runtime.getRuntime().exec(commandExecute);;
             bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String resultOfExecution = null;
             String result = "";
@@ -130,4 +150,3 @@ public class JavaCompiler {
         }
     }
 }
-
