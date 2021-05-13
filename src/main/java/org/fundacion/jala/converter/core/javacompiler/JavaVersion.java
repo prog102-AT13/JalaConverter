@@ -14,8 +14,7 @@ package org.fundacion.jala.converter.core.javacompiler;
  * This enum defines possible Java versions.
  */
 public enum JavaVersion {
-    JAVA_11("thirdparty\\windows\\javabin\\jdk-11.0.10\\bin\\javac.exe",
-            "thirdparty\\windows\\javabin\\jdk-11.0.10\\bin\\java.exe");
+    JAVA_11("javac", "java");
 
     private final String compiler;
     private final String executor;
