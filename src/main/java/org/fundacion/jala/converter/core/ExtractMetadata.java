@@ -68,6 +68,7 @@ public class ExtractMetadata {
             String command = "exiftool" + "\""
                              + fileToExtract.getAbsolutePath() + "\"" + moreInformation + exportFile;
             Process process = Runtime.getRuntime().exec(command);
+            System.out.println(command);
             result = new Result();
             result.setFilename(this.filename);
         } catch (IOException exception) {
